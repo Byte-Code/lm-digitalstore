@@ -2,8 +2,17 @@ import { app, BrowserWindow, Menu, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
+let menu;
+let template;
+let mainWindow = null;
+
+//-------------------------------------------------------------------
+// AUTO-UPDATE AND LOGGING
+//-------------------------------------------------------------------
+
 autoUpdater.logger = log;
 // autoUpdater.logger.transport.file.level = 'info';
+log.info('App starting...');
 autoUpdater.on('update-downloaded', (ev, info) => {
   log.info(info);
   setTimeout(() => {
@@ -11,15 +20,7 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   }, 5000);
 });
 
-//-------------------------------------------------------------------
-// Open a window that displays the version
-//
-// THIS SECTION IS NOT REQUIRED
-//
-// This isn't required for auto-updates to work, but it's easier
-// for the app to show a window than to have to click "About" to see
-// that updates are working.
-//-------------------------------------------------------------------
+
 function sendStatusToWindow(text) {
   log.info(text);
   console.log(text);
@@ -50,10 +51,6 @@ autoUpdater.on('download-progress', (ev, progressObj) => {
 autoUpdater.on('update-downloaded', (ev, info) => {
   sendStatusToWindow('Update downloaded; will install in 5 seconds');
 });
-
-let menu;
-let template;
-let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
@@ -94,7 +91,6 @@ const installExtensions = async () => {
 
 app.on('ready', async () => {
   await installExtensions();
-  sendStatusToWindow('app starting');
 
   if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
