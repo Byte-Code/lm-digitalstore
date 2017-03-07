@@ -11,6 +11,46 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   }, 5000);
 });
 
+//-------------------------------------------------------------------
+// Open a window that displays the version
+//
+// THIS SECTION IS NOT REQUIRED
+//
+// This isn't required for auto-updates to work, but it's easier
+// for the app to show a window than to have to click "About" to see
+// that updates are working.
+//-------------------------------------------------------------------
+function sendStatusToWindow(text) {
+  log.info(text);
+  console.log(text);
+  mainWindow.webContents.send('message', text);
+}
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+
+autoUpdater.on('update-available', (ev, info) => {
+  sendStatusToWindow('Update available.');
+});
+
+autoUpdater.on('update-not-available', (ev, info) => {
+  sendStatusToWindow('Update not available.');
+});
+
+autoUpdater.on('error', (ev, err) => {
+  sendStatusToWindow(err);
+  sendStatusToWindow('Error in auto-updater.');
+});
+
+autoUpdater.on('download-progress', (ev, progressObj) => {
+  sendStatusToWindow('Download progress...');
+});
+
+autoUpdater.on('update-downloaded', (ev, info) => {
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+});
+
 let menu;
 let template;
 let mainWindow = null;
@@ -54,6 +94,7 @@ const installExtensions = async () => {
 
 app.on('ready', async () => {
   await installExtensions();
+  sendStatusToWindow('app starting');
 
   if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();

@@ -28,5 +28,15 @@
         document.body.appendChild(script);
       }
     </script>
+    <script>
+      // Listen for messages
+      const {ipcRenderer} = require('electron');
+      ipcRenderer.on('message', function(event, text) {
+      var container = document.getElementById('messages');
+      var message = document.createElement('div');
+      message.innerText = text;
+      container.appendChild(message);
+      })
+    </script>
   </body>
 </html>
