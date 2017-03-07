@@ -91,6 +91,8 @@ const installExtensions = async () => {
 
 app.on('ready', async () => {
   await installExtensions();
+  autoUpdater.checkForUpdates();
+
 
   if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
@@ -103,6 +105,8 @@ app.on('ready', async () => {
     fullscreenable: true,
     frame: false
   });
+
+  sendStatusToWindow('app starting');
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
