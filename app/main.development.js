@@ -1,4 +1,15 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
+
+autoUpdater.logger = log;
+// autoUpdater.logger.transport.file.level = 'info';
+autoUpdater.on('update-downloaded', (ev, info) => {
+  log.info(info);
+  setTimeout(() => {
+    autoUpdater.quitAndInstall();
+  }, 5000);
+});
 
 let menu;
 let template;
@@ -43,6 +54,10 @@ const installExtensions = async () => {
 
 app.on('ready', async () => {
   await installExtensions();
+
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.checkForUpdates();
+  }
 
   mainWindow = new BrowserWindow({
     show: false,
