@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, process as pe } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
@@ -111,6 +111,8 @@ app.on('ready', async () => {
     mainWindow.setFullScreen(true);
     mainWindow.focus();
     sendStatusToWindow('app starting');
+    const electronVersion = process.versions.electron;
+    sendStatusToWindow(`Electron v${electronVersion}`);
   });
 
   mainWindow.on('closed', () => {

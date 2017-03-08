@@ -8,7 +8,7 @@ export default class Home extends Component {
       <div>
         <div className={styles.container}>
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Leroy_Merlin.svg" alt="logo" />
-          <h1>Digital Store 1.0.2</h1>
+          <h1>Digital Store</h1>
         </div>
       </div>
     );
