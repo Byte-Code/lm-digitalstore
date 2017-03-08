@@ -91,8 +91,6 @@ const installExtensions = async () => {
 
 app.on('ready', async () => {
   await installExtensions();
-  autoUpdater.checkForUpdates();
-
 
   if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
@@ -106,14 +104,13 @@ app.on('ready', async () => {
     frame: false
   });
 
-  sendStatusToWindow('app starting');
-
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.setFullScreen(true);
     mainWindow.focus();
+    sendStatusToWindow('app starting');
   });
 
   mainWindow.on('closed', () => {
