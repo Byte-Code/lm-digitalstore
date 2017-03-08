@@ -2707,9 +2707,9 @@ electron-updater@^1.8.2:
     semver "^5.3.0"
     source-map-support "^0.4.11"
 
-electron@^1.5.0:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.6.3.tgz#95fc62899e50838563fa768baa2011ea860d04b1"
+electron@1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.4.5.tgz#829c4884d641d88398805a7f94a37ec432a00bf3"
   dependencies:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
