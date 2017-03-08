@@ -46,17 +46,17 @@ app.on('ready', async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
-    fullscreenable: true,
-    frame: false
+    width: 1080,
+    height: 1918,
+    // fullscreenable: true,
+    // frame: false
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
-    mainWindow.setFullScreen(true);
+    // mainWindow.setFullScreen(true);
     mainWindow.focus();
   });
 
