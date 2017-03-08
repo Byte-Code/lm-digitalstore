@@ -1,0 +1,68 @@
+{
+  "worldName": "Giardino e Terrazzo",
+  "title": "Scopri le soluzioni per Giardino e Terrazzo",
+  "trailingText": "[Numerosità prodotti]",
+  "trailingImage": "",
+  "banner": {
+    "text": "Scopri come nuovo spazio alle tue",
+    "highlightedText": "piante",
+    "image": "./assets/00_PropostaPeriodo.png"
+  },
+  "families": [
+    {
+      "familyName": "Set di tavoli e sedie",
+      "image": "./assets/01_TavoliSedie.png",
+      "areaId": 0
+    },
+    {
+      "familyName": "Sedie e Poltrone",
+      "image": "./assets/04_SediePoltrone.png",
+      "areaId": 1
+    },
+    {
+      "familyName": "Tavoli",
+      "image": "./assets/05_Tavoli.png",
+      "areaId": 2
+    },
+    {
+      "familyName": "Carport",
+      "image": "./assets/02_Carport.png",
+      "areaId": 3
+    },
+    {
+      "familyName": "Panchine",
+      "image": "./assets/03_Panchine.png",
+      "areaId": 4
+    },
+    {
+      "familyName": "Dondoli e Amache",
+      "image": "./assets/06_DondoliAmache.png",
+      "areaId": 5
+    },
+    {
+      "familyName": "Pergole",
+      "image": "./assets/07_Pergole.png",
+      "areaId": 6
+    },
+    {
+      "familyName": "Divisori Giardino",
+      "image": "./assets/08_DivisoriGiardino.png",
+      "areaId": 7
+    },
+    {
+      "familyName": "Gazebo",
+      "image": "./assets/10_Gazebo.png",
+      "areaId": 8
+    },
+    {
+      "familyName": "Ombrelloni e Basi",
+      "image": "./assets/09_OmbrelloniBasi.png",
+      "areaId": 9
+    },
+    {
+      "familyName": "Sdraio e Lettini",
+      "image": "./assets/11_SdraioLettini.png",
+      "areaId": 10
+    }
+  ]
+}
