@@ -28,7 +28,7 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronLM",
+    "productName": "LMDigitalStore",
     "appId": "org.develar.ElectronReact",
     "category": "public.app-category.tools",
     "dmg": {
