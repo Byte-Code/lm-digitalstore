@@ -57,6 +57,10 @@
     "squirrelWindows": {
       "msi": true
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true
+    },
     "win": {
       "target": "nsis"
     },
