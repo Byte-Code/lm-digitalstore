@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import reducer from './reducer';
+import worldReducer from './worldReducer';
 
 const rootReducer = combineReducers({
-  reducer,
+  worldReducer,
   routing
 });
 
