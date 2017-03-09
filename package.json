@@ -58,7 +58,7 @@
       "msi": true
     },
     "nsis": {
-      "oneClick": false,
+      "oneClick": true,
       "perMachine": true
     },
     "win": {
