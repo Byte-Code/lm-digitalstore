@@ -1,4 +1,4 @@
-const world = require('./world.json');
+import world from './world';
 
 export default function fetchWorld() {
   return new Promise((resolve) => {
