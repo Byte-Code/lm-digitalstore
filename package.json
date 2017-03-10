@@ -24,7 +24,7 @@
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
     "cleanup": "mop -v",
-    "release": "build --win -p always"
+    "release": "npm run build && build --win -p always"
   },
   "browserslist": "electron 1.4",
   "build": {
