@@ -9,7 +9,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const world = this.props.fetchWorld();
+    this.props.fetchWorld();
   }
 
   render() {
