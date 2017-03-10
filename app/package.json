@@ -1,13 +1,11 @@
 {
   "name": "LMDigitalStore",
-  "productName": "LMDigitalStore",
-  "version": "1.1.9",
+  "productName": "LM Digital Store",
+  "version": "1.2.0",
   "description": "Electron application demo for Leroy Merlin",
   "main": "./main.js",
   "author": {
-    "name": "Byte-Code S.p.A.",
-    "email": "info@byte-code.com",
-    "url": "https://www.byte-code.com"
+    "name": "Leroy Merlin Italia s.r.l."
   },
   "license": "MIT",
   "dependencies": {
