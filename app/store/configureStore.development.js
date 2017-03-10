@@ -2,8 +2,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { hashHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
+import { Map } from 'immutable';
 import createLogger from 'redux-logger';
-import rootReducer from '../reducers';
+import rootReducer from '../reducers/reducers';
 
 const actionCreators = {
   push,
@@ -29,12 +30,12 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunk, router, logger)
 );
 
-export default function configureStore(initialState? = {}) {
+export default function configureStore(initialState? = Map()) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+    module.hot.accept('../reducers/reducers', () =>
+      store.replaceReducer(require('../reducers/reducers')) // eslint-disable-line global-require
     );
   }
 
