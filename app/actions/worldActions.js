@@ -1,5 +1,5 @@
 import * as actions from './actionTypes';
 
-export function fetchWorld() {
+export default function fetchWorld() {
   return ({ type: actions.REQUEST_FETCH_WORLD });
 }
