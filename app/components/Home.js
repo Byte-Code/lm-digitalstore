@@ -1,6 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Home extends Component {
+
+  static propTypes = {
+    fetchWorld: PropTypes.func.isRequired
+  }
+
+  componentDidMount() {
+    this.props.fetchWorld();
+  }
+
   render() {
     return (
       <div>
