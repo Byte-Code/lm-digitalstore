@@ -3,8 +3,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+
 import routes from './routes';
-import configureStore from './store/configureStore';
+import configureStore, { sagaMiddleware } from './store/configureStore';
+import rootSaga from './sagas/sagas';
 import './app.global.css';
 
 const store = configureStore();
@@ -13,6 +15,8 @@ const history = syncHistoryWithStore(hashHistory, store, {
     return state.get('routing').toJS();
   }
 });
+
+sagaMiddleware.run(rootSaga);
 
 render(
   <Provider store={store}>

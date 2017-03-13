@@ -1,10 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import { hashHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
 import { Map } from 'immutable';
 import createLogger from 'redux-logger';
+
 import rootReducer from '../reducers/reducers';
+
+export const sagaMiddleware = createSagaMiddleware();
 
 const actionCreators = {
   push,
@@ -27,7 +30,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, router, logger)
+  applyMiddleware(sagaMiddleware, router, logger)
 );
 
 export default function configureStore(initialState? = Map()) {
