@@ -5,7 +5,25 @@ import styled from 'styled-components';
 
 import FamilyBadge from './FamilyBadge';
 
-const InnerWrapper = styled.div`
+const FlexWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  &>div {
+    width: calc(50% - 10px);
+  }
+`;
+
+const Column = styled.div`
+  &>div {
+    margin-bottom: 20px;
+  }
+`;
+
+const DoubleVertical = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export default class Home extends Component {
@@ -33,9 +51,19 @@ export default class Home extends Component {
 
     return (
       <div>
-        <InnerWrapper>
-          <FamilyBadge family={families.get(0)} size="square-big" />
-        </InnerWrapper>
+        <FlexWrapper>
+          <Column>
+            <FamilyBadge family={families.get(0)} size="square-big" />
+            <FlexWrapper>
+              <DoubleVertical>
+                <FamilyBadge family={families.get(1)} size="square-small" />
+                <FamilyBadge family={families.get(2)} size="square-small" />
+              </DoubleVertical>
+              <FamilyBadge family={families.get(5)} size="vertical" />
+            </FlexWrapper>
+            <FamilyBadge family={families.get(8)} size="horizontal" />
+          </Column>
+        </FlexWrapper>
       </div>
     );
   }

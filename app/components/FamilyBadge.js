@@ -17,6 +17,7 @@ const NameWrapper = styled.div`
   background-color: #ffffff;
   padding: 15px 10px;
   color: #333333;
+  height: 70px;
 `;
 
 const FamilyName = styled.div`
@@ -50,7 +51,7 @@ export default class FamilyBadge extends Component {
       case 'square-small':
         return { height: 235, width: 235 };
       case 'vertical':
-        return { height: 550, width: 235 };
+        return { height: 560, width: 235 };
       case 'horizontal':
         return { height: 235, width: 490 };
     }
@@ -66,7 +67,12 @@ export default class FamilyBadge extends Component {
 
     return (
       <Wrapper width={width}>
-        <ImageWrapper src={image} alt="alt" height={height} />
+        <ImageWrapper
+          src={image}
+          alt="alt"
+          width={width}
+          height={height}
+        />
         <NameWrapper>
           <FamilyName>{familyName}</FamilyName>
           <ItemCount>{itemCount} prodotti</ItemCount>
