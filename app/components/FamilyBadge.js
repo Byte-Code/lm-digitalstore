@@ -40,16 +40,33 @@ export default class FamilyBadge extends Component {
     size: PropTypes.string.isRequired
   }
 
+  getSize() {
+    const { size } = this.props;
+
+    switch (size) {
+      case 'square-big':
+      default:
+        return { height: 490, width: 490 };
+      case 'square-small':
+        return { height: 235, width: 235 };
+      case 'vertical':
+        return { height: 550, width: 235 };
+      case 'horizontal':
+        return { height: 235, width: 490 };
+    }
+  }
+
   render() {
     const { family } = this.props;
 
     const familyName = family.get('familyName');
     const image = family.get('image');
     const itemCount = family.get('itemCount');
+    const { height, width } = this.getSize();
 
     return (
-      <Wrapper width={490}>
-        <ImageWrapper src={image} alt="alt" height={490} />
+      <Wrapper width={width}>
+        <ImageWrapper src={image} alt="alt" height={height} />
         <NameWrapper>
           <FamilyName>{familyName}</FamilyName>
           <ItemCount>{itemCount} prodotti</ItemCount>

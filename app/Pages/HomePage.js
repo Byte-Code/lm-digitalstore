@@ -5,7 +5,10 @@ import Home from '../containers/Home';
 
 export default function HomePage() {
   return (
-    <Page>
+    <Page
+      backgroundColor="#f7f7f7"
+      padding="42px 40px 0"
+    >
       <Home />
     </Page>
   );

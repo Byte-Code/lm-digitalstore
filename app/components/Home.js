@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import FamilyBadge from './FamilyBadge';
 
 const InnerWrapper = styled.div`
-  margin: 42px 40px 0;
 `;
 
 export default class Home extends Component {
@@ -35,7 +34,7 @@ export default class Home extends Component {
     return (
       <div>
         <InnerWrapper>
-          <FamilyBadge family={families.get(0)} />
+          <FamilyBadge family={families.get(0)} size="square-big" />
         </InnerWrapper>
       </div>
     );
