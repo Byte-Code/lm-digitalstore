@@ -22,7 +22,7 @@ const NameWrapper = styled.div`
 
 const FamilyName = styled.div`
   height: 28px;
-  font-weight: bold;
+  font-family: LeroyMerlinSans Bold;
   font-size: 20px;
   line-height: 1.4;
   text-transform: uppercase;
@@ -32,7 +32,7 @@ const ItemCount = styled.div`
   height: 20px;
   font-size: 16px;
   line-height: 1.4;
-  font-style: italic;
+  font-family: LeroyMerlinSans Light-Italic;
 `;
 
 export default class FamilyBadge extends Component {

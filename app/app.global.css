@@ -1,5 +1,30 @@
 @import "~font-awesome/css/font-awesome.css";
 
+@font-face {
+   font-family: "LeroyMerlinSans";
+   src: url("./assets/LM_Font/LeroyMerlinSansOffice-Regular.ttf");
+}
+
+@font-face {
+   font-family: "LeroyMerlinSans Bold";
+   src: url("./assets/LM_Font/LeroyMerlinSansOffice-Bold.ttf");
+}
+
+@font-face {
+   font-family: "LeroyMerlinSans Italic";
+   src: url("./assets/LM_Font/LeroyMerlinSansOffice-Italic.ttf");
+}
+
+@font-face {
+   font-family: "LeroyMerlinSans Bold-Italic";
+   src: url("./assets/LM_Font/LeroyMerlinSansOffice-BoldItalic.ttf");
+}
+
+@font-face {
+   font-family: "LeroyMerlinSans Light-Italic";
+   src: url("./assets/LM_Font/LeroyMerlinSansOfficeLight-Italic.ttf");
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -9,7 +34,7 @@
 body {
   position: relative;
   height: 100vh;
-  font-family: Arial, Helvetica, Helvetica Neue, serif;
+  font-family: LeroyMerlinSans, Arial, Helvetica, Helvetica Neue, serif;
   /*overflow-y: hidden;*/
 }
 

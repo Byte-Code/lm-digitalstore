@@ -1,8 +1,7 @@
 {
   "worldName": "Giardino e Terrazzo",
   "title": "Scopri le soluzioni per Giardino e Terrazzo",
-  "trailingText": "[Numerosità prodotti]",
-  "trailingImage": "",
+  "trailingImage": "./assets/00_Footer.png",
   "banner": {
     "text": "Scopri i prodotti per dare nuovo spazio alle tue piante",
     "image": "./assets/texture.png"
