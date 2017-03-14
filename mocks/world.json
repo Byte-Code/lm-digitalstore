@@ -4,76 +4,69 @@
   "trailingText": "[Numerosità prodotti]",
   "trailingImage": "",
   "banner": {
-    "text": "Scopri come nuovo spazio alle tue",
-    "highlightedText": "piante",
-    "image": "./assets/00_PropostaPeriodo.png"
+    "text": "Scopri come nuovo spazio alle tue piante",
+    "image": "./assets/texture.png"
   },
   "families": [
     {
       "familyName": "Set di tavoli e sedie",
       "image": "./assets/01_TavoliSedie.png",
       "areaId": 0,
-      "itemCount": 12
+      "itemCount": 73
     },
     {
       "familyName": "Sedie e Poltrone",
       "image": "./assets/04_SediePoltrone.png",
       "areaId": 1,
-      "itemCount": 12
+      "itemCount": 208
     },
     {
       "familyName": "Tavoli",
       "image": "./assets/05_Tavoli.png",
       "areaId": 2,
-      "itemCount": 12
-    },
-    {
-      "familyName": "Carport",
-      "image": "./assets/02_Carport.png",
-      "areaId": 3,
-      "itemCount": 12
+      "itemCount": 182
     },
     {
       "familyName": "Panchine",
       "image": "./assets/03_Panchine.png",
-      "areaId": 4,
-      "itemCount": 12
+      "areaId": 3,
+      "itemCount": 37
     },
     {
       "familyName": "Dondoli e Amache",
       "image": "./assets/06_DondoliAmache.png",
-      "areaId": 5,
-      "itemCount": 12
+      "areaId": 4,
+      "itemCount": 16
     },
     {
       "familyName": "Pergole",
       "image": "./assets/07_Pergole.png",
-      "areaId": 6,
-      "itemCount": 12
+      "areaId": 5,
+      "itemCount": 36
     },
     {
       "familyName": "Divisori Giardino",
       "image": "./assets/08_DivisoriGiardino.png",
-      "areaId": 7,
-      "itemCount": 12
+      "areaId": 6,
+      "itemCount": 139
     },
     {
       "familyName": "Gazebo",
       "image": "./assets/10_Gazebo.png",
-      "areaId": 8,
-      "itemCount": 12
+      "areaId": 7,
+      "itemCount": 34
     },
     {
       "familyName": "Ombrelloni e Basi",
       "image": "./assets/09_OmbrelloniBasi.png",
-      "areaId": 9,
-      "itemCount": 12
+      "areaId": 8,
+      "itemCount": 103
     },
     {
       "familyName": "Sdraio e Lettini",
       "image": "./assets/11_SdraioLettini.png",
-      "areaId": 10,
-      "itemCount": 12
+      "areaId": 9,
+      "itemCount": 99
     }
   ]
 }
