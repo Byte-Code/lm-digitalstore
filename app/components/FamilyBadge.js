@@ -69,7 +69,7 @@ export default class FamilyBadge extends Component {
       <Wrapper width={width}>
         <ImageWrapper
           src={image}
-          alt="alt"
+          alt="alt1"
           width={width}
           height={height}
         />
