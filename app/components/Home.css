@@ -1,17 +1,11 @@
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px 0;
-  height: 100vh;
-}
-
-.container > img {
-  width: 60%;
-}
-
-.container > h1 {
-  margin-top: 32px;
-  font-weight: lighter;
+.bgvid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
 }

@@ -15,6 +15,12 @@ export default validate({
     }, {
       test: /\.json$/,
       loader: 'json-loader'
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader?attrs[]=video:src'
+    }, {
+      test: /\.mp4$/,
+      loader: 'url?limit=3500000&mimetype=video/mp4'
     }]
   },
 
@@ -30,7 +36,7 @@ export default validate({
    * Determine the array of extensions that should be used to resolve modules.
    */
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['', '.js', '.jsx', '.json', '.html', '.mp4'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
 
