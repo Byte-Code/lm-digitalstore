@@ -1,16 +1,16 @@
 import footer from '../app/assets/00_Footer.png';
+import tavoliSedie from '../app/assets/01_TavoliSedie.png';
+import carport from '../app/assets/02_Carport.png';
+import panchine from '../app/assets/03_Panchine.png';
+import sedie from '../app/assets/04_SediePoltrone.png';
+import tavoli from '../app/assets/05_Tavoli.png';
+import dondoli from '../app/assets/06_DondoliAmache.png';
+import pergole from '../app/assets/07_Pergole.png';
+import divisori from '../app/assets/08_DivisoriGiardino.png';
+import ombrelloni from '../app/assets/09_OmbrelloniBasi.png';
+import gazebo from '../app/assets/10_Gazebo.png';
+import sdraio from '../app/assets/11_SdraioLettini.png';
 import texture from '../app/assets/texture.png';
-
-const image0 = require('../app/assets/01_TavoliSedie.png');
-const image1 = require('../app/assets/03_Panchine.png');
-const image2 = require('../app/assets/04_SediePoltrone.png');
-const image3 = require('../app/assets/05_Tavoli.png');
-const image4 = require('../app/assets/06_DondoliAmache.png');
-const image5 = require('../app/assets/07_Pergole.png');
-const image6 = require('../app/assets/08_DivisoriGiardino.png');
-const image7 = require('../app/assets/09_OmbrelloniBasi.png');
-const image8 = require('../app/assets/10_Gazebo.png');
-const image9 = require('../app/assets/11_SdraioLettini.png');
 
 const world = {
   worldName: 'Giardino e Terrazzo',
@@ -23,63 +23,69 @@ const world = {
   families: [
     {
       familyName: 'Set di tavoli e sedie',
-      image: image0,
+      image: tavoliSedie,
       areaId: 0,
       itemCount: 73
     },
     {
       familyName: 'Sedie e Poltrone',
-      image: image1,
+      image: sedie,
       areaId: 1,
       itemCount: 208
     },
     {
       familyName: 'Tavoli',
-      image: image2,
+      image: tavoli,
       areaId: 2,
       itemCount: 182
     },
     {
       familyName: 'Panchine',
-      image: image3,
+      image: panchine,
       areaId: 3,
       itemCount: 37
     },
     {
       familyName: 'Dondoli e Amache',
-      image: image4,
+      image: dondoli,
       areaId: 4,
       itemCount: 16
     },
     {
       familyName: 'Pergole',
-      image: image5,
+      image: pergole,
       areaId: 5,
       itemCount: 36
     },
     {
       familyName: 'Divisori Giardino',
-      image: image6,
+      image: divisori,
       areaId: 6,
       itemCount: 139
     },
     {
       familyName: 'Gazebo',
-      image: image7,
+      image: gazebo,
       areaId: 7,
       itemCount: 34
     },
     {
       familyName: 'Ombrelloni e Basi',
-      image: image8,
+      image: ombrelloni,
       areaId: 8,
       itemCount: 103
     },
     {
       familyName: 'Sdraio e Lettini',
-      image: image9,
+      image: sdraio,
       areaId: 9,
       itemCount: 99
+    },
+    {
+      familyName: 'Carport',
+      image: carport,
+      areaId: 10,
+      itemCount: 3
     }
   ]
 };

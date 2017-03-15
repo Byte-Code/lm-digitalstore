@@ -19,12 +19,6 @@ const GridWrapper = styled(FlexWrapper)`
   padding: 47px 40px 0;
 `;
 
-const Column = styled.div`
-  &>div {
-    margin-bottom: 20px;
-  }
-`;
-
 const DoubleVertical = styled.div`
   display: flex;
   flex-direction: column;
@@ -91,7 +85,7 @@ export default class Home extends Component {
     return (
       <div>
         <GridWrapper>
-          <Column>
+          <div>
             <FamilyBadge family={families.get(0)} size="square-big" />
             <FlexWrapper>
               <DoubleVertical>
@@ -101,21 +95,20 @@ export default class Home extends Component {
               <FamilyBadge family={families.get(4)} size="vertical" />
             </FlexWrapper>
             <FamilyBadge family={families.get(7)} size="horizontal" />
-          </Column>
-          <Column>
+          </div>
+          <div>
             <FlexWrapper>
               <FamilyBadge family={families.get(6)} size="square-small" />
               <Banner url={bannerImg}>{bannerText}</Banner>
             </FlexWrapper>
             <FamilyBadge family={families.get(3)} size="square-big" />
             <FlexWrapper>
-              <DoubleVertical>
-                <FamilyBadge family={families.get(9)} size="square-small" />
-                <FamilyBadge family={families.get(5)} size="square-small" />
-              </DoubleVertical>
-              <FamilyBadge family={families.get(8)} size="vertical" />
+              <FamilyBadge family={families.get(9)} size="square-small" />
+              <FamilyBadge family={families.get(8)} size="square-small" />
+              <FamilyBadge family={families.get(5)} size="square-small" />
+              <FamilyBadge family={families.get(10)} size="square-small" />
             </FlexWrapper>
-          </Column>
+          </div>
           <WorldTitle>
             <div>Esplora le soluzioni Leroy Merlin per
             <span>&nbsp;{worldName}</span></div>

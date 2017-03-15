@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   width: ${props => props.width}px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 const ImageWrapper = styled.img`
