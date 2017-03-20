@@ -3,6 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
+import * as Icons from './Icons';
+
 export default class Page extends Component {
   static propTypes = {
     weather: ImmutablePropTypes.map.isRequired,
@@ -20,7 +22,15 @@ export default class Page extends Component {
   render() {
 
     return (
-      <div>hola hola</div>
+      <div>
+        <h1>Animated Weather Icons</h1>
+        <Icons.sunnyIcon />
+        <Icons.sunShowerIcon />
+        <Icons.cloudyIcon />
+        <Icons.flurriesIcon />
+        <Icons.rainyIcon />
+        <Icons.thunderStormIcon />
+      </div>
     );
   }
 }
