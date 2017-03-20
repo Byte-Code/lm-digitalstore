@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Home from '../components/Home';
-import fetchWorld from '../actions/worldActions';
+import { requestFetchWorld } from '../actions/worldActions';
 import getWorld from '../reducers/selectors';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchWorld
+  requestFetchWorld
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
