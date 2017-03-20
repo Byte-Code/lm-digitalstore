@@ -57,7 +57,7 @@ const WorldTitle = styled.section`
 
 export default class Home extends Component {
   static propTypes = {
-    fetchWorld: PropTypes.func.isRequired,
+    requestFetchWorld: PropTypes.func.isRequired,
     world: ImmutablePropTypes.map
   }
 
@@ -66,7 +66,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchWorld();
+    this.props.requestFetchWorld();
   }
 
   render() {
