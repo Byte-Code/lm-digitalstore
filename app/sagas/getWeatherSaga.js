@@ -8,9 +8,9 @@ import { fetchWeather } from '../../mocks/apiMock';
 export function* callFetchWeather() {
   try {
     const result = fromJS(yield call(fetchWeather));
-    yield put(weatherActions.successFetchWorld(result))
+    yield put(weatherActions.successFetchWeather(result));
   } catch (error) {
-    yield put(weatherActions.failureFetchWorld())
+    yield put(weatherActions.failureFetchWeather());
   }
 }
 

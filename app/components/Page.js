@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const PageWrapper = styled.div`
   background-color: ${props => props.backgroundColor};
   padding: ${props => props.padding};
+  height: 1920px;
 `;
 
 export default class Page extends Component {
