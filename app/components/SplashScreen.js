@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import LocationBadge from './LocationBadge';
+import ForecastBadge from './ForecastBadge';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,10 +19,15 @@ const TopDiv = styled.div`
 
 const BottomDiv = styled.div`
   width: 100%;
-  height: 150px;
   align-self: flex-end;
   display: flex;
-  margin: 0 40px 70px;
+  flex-direction: column;
+`;
+
+const TodayInfo = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 0 40px 70px;
   &>div {
     width: 50%;
   }
@@ -80,6 +86,7 @@ export default class Page extends Component {
     const country = forecast.getIn(['city', 'country']);
     const weather = forecast.getIn(['list', 0, 'weather', 0, 'main']);
     const temp = Math.floor(forecast.getIn(['list', 0, 'temp', 'day']));
+    const dailyForecast = forecast.getIn(['list', 0]);
 
     return (
       <Wrapper>
@@ -88,13 +95,16 @@ export default class Page extends Component {
           <Banner>Entra nel mondo giardino</Banner>
         </TopDiv>
         <BottomDiv>
-          <LocationBadge
-            city={city}
-            country={country}
-            weather={weather}
-            temp={temp}
-          />
-          <Temp>{temp} &#176;</Temp>
+          <TodayInfo>
+            <LocationBadge
+              city={city}
+              country={country}
+              weather={weather}
+              temp={temp}
+            />
+            <Temp>{temp} &#176;</Temp>
+          </TodayInfo>
+          <ForecastBadge dailyForecast={dailyForecast} />
         </BottomDiv>
       </Wrapper>
     );

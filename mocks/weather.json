@@ -15,9 +15,9 @@
 	"list": [{
 		"dt": 1487242800,
 		"temp": {
-			"day": 286.67,
-			"min": 272.78,
-			"max": 286.67,
+			"day": 28,
+			"min": 27,
+			"max": 28,
 			"night": 273.34,
 			"eve": 277.05,
 			"morn": 281.56
@@ -36,9 +36,9 @@
 	}, {
 		"dt": 1487329200,
 		"temp": {
-			"day": 278.25,
-			"min": 275.04,
-			"max": 278.25,
+			"day": 27,
+			"min": 27,
+			"max": 27,
 			"night": 275.04,
 			"eve": 275.64,
 			"morn": 276.48
@@ -47,7 +47,7 @@
 		"humidity": 95,
 		"weather": [{
 			"id": 600,
-			"main": "Snow",
+			"main": "thunderstorm",
 			"description": "light snow",
 			"icon": "13d"
 		}],
@@ -59,9 +59,9 @@
 	}, {
 		"dt": 1487415600,
 		"temp": {
-			"day": 277.93,
-			"min": 269.55,
-			"max": 278.37,
+			"day": 27,
+			"min": 26,
+			"max": 27,
 			"night": 269.55,
 			"eve": 273.8,
 			"morn": 274.56
@@ -81,9 +81,9 @@
 	}, {
 		"dt": 1487502000,
 		"temp": {
-			"day": 276.41,
-			"min": 267.97,
-			"max": 276.41,
+			"day": 27,
+			"min": 26,
+			"max": 27,
 			"night": 269.77,
 			"eve": 273.57,
 			"morn": 267.97
@@ -92,7 +92,7 @@
 		"humidity": 0,
 		"weather": [{
 			"id": 800,
-			"main": "Clear",
+			"main": "mist",
 			"description": "sky is clear",
 			"icon": "01d"
 		}],
@@ -102,9 +102,9 @@
 	}, {
 		"dt": 1487588400,
 		"temp": {
-			"day": 276.28,
-			"min": 271.12,
-			"max": 276.28,
+			"day": 27,
+			"min": 27,
+			"max": 27,
 			"night": 273.12,
 			"eve": 274.52,
 			"morn": 271.12
@@ -113,7 +113,7 @@
 		"humidity": 0,
 		"weather": [{
 			"id": 600,
-			"main": "Snow",
+			"main": "Rain",
 			"description": "light snow",
 			"icon": "13d"
 		}],
