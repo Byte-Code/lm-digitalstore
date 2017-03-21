@@ -5,6 +5,7 @@ import IconSelector from './Icons';
 
 const Wrapper = styled.div`
   display: flex;
+  align-items: flex-end;
 `;
 
 const IconWrapper = styled.div`
