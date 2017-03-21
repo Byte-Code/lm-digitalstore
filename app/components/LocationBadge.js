@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 import IconSelector from './Icons';
+import DateBadge from './DateBadge';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 48px;
+  justify-content: flex-end;
 `;
 
 const Location = styled.p`
@@ -30,7 +32,8 @@ const LocationBadge = ({ city, country, weather }) => (
       <IconSelector weather={weather} />
     </IconWrapper>
     <InfoWrapper>
-      <Location>{city}, ({country})</Location>
+      <Location>{city} ({country})</Location>
+      <DateBadge />
     </InfoWrapper>
   </Wrapper>
 );
