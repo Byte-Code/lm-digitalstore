@@ -8,14 +8,19 @@ const Wrapper = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  height: 100px;
-  width: 100px;
-  background: red;
+  padding: 10px;
 `;
 
-const LocationWrapper = styled.div`
+const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 48px;
+`;
+
+const Location = styled.p`
+  font-size: 32px;
+  font-family: LeroyMerlinSans;
+  color: #fff;
 `;
 
 const LocationBadge = ({ location, weather }) => (
@@ -23,7 +28,9 @@ const LocationBadge = ({ location, weather }) => (
     <IconWrapper>
       <IconSelector weather={weather} />
     </IconWrapper>
-    <LocationWrapper>{location}</LocationWrapper>
+    <InfoWrapper>
+      <Location>{location}</Location>
+    </InfoWrapper>
   </Wrapper>
 );
 
