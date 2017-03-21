@@ -24,19 +24,20 @@ const Location = styled.p`
   color: #fff;
 `;
 
-const LocationBadge = ({ location, weather }) => (
+const LocationBadge = ({ city, country, weather }) => (
   <Wrapper>
     <IconWrapper>
       <IconSelector weather={weather} />
     </IconWrapper>
     <InfoWrapper>
-      <Location>{location}</Location>
+      <Location>{city}, ({country})</Location>
     </InfoWrapper>
   </Wrapper>
 );
 
 LocationBadge.propTypes = {
-  location: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
   weather: PropTypes.string.isRequired
 };
 

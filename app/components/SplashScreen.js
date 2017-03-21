@@ -76,7 +76,8 @@ export default class Page extends Component {
       return null;
     }
 
-    const location = forecast.getIn(['city', 'name']);
+    const city = forecast.getIn(['city', 'name']);
+    const country = forecast.getIn(['city', 'country']);
     const weather = forecast.getIn(['list', 0, 'weather', 0, 'main']);
     const temp = Math.floor(forecast.getIn(['list', 0, 'temp', 'day']));
 
@@ -88,7 +89,8 @@ export default class Page extends Component {
         </TopDiv>
         <BottomDiv>
           <LocationBadge
-            location={location}
+            city={city}
+            country={country}
             weather={weather}
             temp={temp}
           />
