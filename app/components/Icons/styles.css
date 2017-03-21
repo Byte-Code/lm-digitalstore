@@ -1,8 +1,8 @@
 .icon {
   position: relative;
   display: inline-block;
-  width: 12rem;
-  height: 10rem;
+  width: 100px;
+  height: 100px;
 }
 
 .cloud {

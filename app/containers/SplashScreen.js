@@ -5,7 +5,7 @@ import { requestFetchWeather } from '../actions/weatherActions';
 import { getWeather } from '../reducers/selectors';
 
 const mapStateToProps = (state) => ({
-  weather: getWeather(state)
+  forecast: getWeather(state)
 });
 
 const mapDispatchToProps = {

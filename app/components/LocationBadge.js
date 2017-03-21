@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
+import IconSelector from './Icons';
+
 const Wrapper = styled.div`
   display: flex;
 `;
@@ -18,7 +20,9 @@ const LocationWrapper = styled.div`
 
 const LocationBadge = ({ location, weather }) => (
   <Wrapper>
-    <IconWrapper />
+    <IconWrapper>
+      <IconSelector weather={weather} />
+    </IconWrapper>
     <LocationWrapper>{location}</LocationWrapper>
   </Wrapper>
 );
@@ -27,3 +31,5 @@ LocationBadge.propTypes = {
   location: PropTypes.string.isRequired,
   weather: PropTypes.string.isRequired
 };
+
+export default LocationBadge;

@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
-import * as Icons from './Icons';
+import LocationBadge from './LocationBadge';
 
 const Header = styled.h1`
   padding: 101px 295px 60px 40px;
@@ -27,12 +27,12 @@ const Banner = styled.div`
 
 export default class Page extends Component {
   static propTypes = {
-    weather: ImmutablePropTypes.map.isRequired,
+    forecast: ImmutablePropTypes.map.isRequired,
     requestFetchWeather: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    weather: Map()
+    forecast: Map()
   }
 
   componentDidMount() {
@@ -40,16 +40,15 @@ export default class Page extends Component {
   }
 
   render() {
+    const { forecast } = this.props;
+    const location = forecast.getIn(['city', 'name']);
+    const weather = forecast.getIn(['list', 0, 'weather', 'main']);
+
     return (
       <div>
         <Header>Accendi la tua voglia di Estate</Header>
         <Banner>Entra nel mondo giardino</Banner>
-        <Icons.sunnyIcon />
-        <Icons.sunShowerIcon />
-        <Icons.cloudyIcon />
-        <Icons.flurriesIcon />
-        <Icons.rainyIcon />
-        <Icons.thunderStormIcon />
+        <LocationBadge location={location} weather={weather} />
       </div>
     );
   }

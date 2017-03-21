@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
+import * as conditions from '../../utils/weatherConditions';
 import styles from './styles.css';
 
-export function sunShowerIcon() {
+function sunShowerIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.cloud} />
@@ -13,7 +15,7 @@ export function sunShowerIcon() {
   );
 }
 
-export function thunderStormIcon() {
+function thunderStormIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.cloud} />
@@ -25,7 +27,7 @@ export function thunderStormIcon() {
   );
 }
 
-export function cloudyIcon() {
+function cloudyIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.cloud} />
@@ -34,7 +36,7 @@ export function cloudyIcon() {
   );
 }
 
-export function flurriesIcon() {
+function flurriesIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.cloud} />
@@ -46,7 +48,7 @@ export function flurriesIcon() {
   );
 }
 
-export function sunnyIcon() {
+function sunnyIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.sun}>
@@ -56,7 +58,7 @@ export function sunnyIcon() {
   );
 }
 
-export function rainyIcon() {
+function rainyIcon() {
   return (
     <div className={styles.icon}>
       <div className={styles.cloud} />
@@ -64,3 +66,30 @@ export function rainyIcon() {
     </div>
   );
 }
+
+const IconSelector = ({ weather }) => {
+  switch (weather) {
+    case conditions.clearSky:
+    default:
+      return sunnyIcon();
+    case conditions.fewClouds:
+    case conditions.scatteredClouds:
+    case conditions.brokenClouds:
+    case conditions.mist:
+      return cloudyIcon();
+    case conditions.showerRain:
+      return rainyIcon();
+    case conditions.rain:
+      return sunShowerIcon();
+    case conditions.snow:
+      return flurriesIcon();
+    case conditions.thunderstorm:
+      return thunderStormIcon();
+  }
+};
+
+IconSelector.propTypes = {
+  weather: PropTypes.string.isRequired
+};
+
+export default IconSelector;
