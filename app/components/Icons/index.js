@@ -68,7 +68,7 @@ function rainyIcon() {
 }
 
 const IconSelector = ({ weather }) => {
-  switch (weather) {
+  switch (weather.toLowerCase()) {
     case conditions.clearSky:
     default:
       return sunnyIcon();

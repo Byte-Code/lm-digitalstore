@@ -6,7 +6,7 @@ import IconSelector from './Icons';
 
 const Wrapper = styled.div`
   width: 235px;
-  height: 330px;
+  height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -41,7 +41,6 @@ const WhiteText = styled.span`
 `;
 
 const IconWrapper = styled.div`
-  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

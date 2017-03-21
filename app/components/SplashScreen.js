@@ -61,6 +61,13 @@ const Temp = styled.div`
   line-height: 0.94;
 `;
 
+const ForecastList = styled.div`
+  display: flex;
+  padding: 50px 40px;
+  background: #333333;
+  justify-content: space-between;
+`;
+
 export default class Page extends Component {
   static propTypes = {
     forecast: ImmutablePropTypes.map.isRequired,
@@ -86,7 +93,10 @@ export default class Page extends Component {
     const country = forecast.getIn(['city', 'country']);
     const weather = forecast.getIn(['list', 0, 'weather', 0, 'main']);
     const temp = Math.floor(forecast.getIn(['list', 0, 'temp', 'day']));
-    const dailyForecast = forecast.getIn(['list', 0]);
+    const dailyForecast1 = forecast.getIn(['list', 1]);
+    const dailyForecast2 = forecast.getIn(['list', 2]);
+    const dailyForecast3 = forecast.getIn(['list', 3]);
+    const dailyForecast4 = forecast.getIn(['list', 4]);
 
     return (
       <Wrapper>
@@ -104,7 +114,12 @@ export default class Page extends Component {
             />
             <Temp>{temp} &#176;</Temp>
           </TodayInfo>
-          <ForecastBadge dailyForecast={dailyForecast} />
+          <ForecastList>
+            <ForecastBadge dailyForecast={dailyForecast1} />
+            <ForecastBadge dailyForecast={dailyForecast2} />
+            <ForecastBadge dailyForecast={dailyForecast3} />
+            <ForecastBadge dailyForecast={dailyForecast4} />
+          </ForecastList>
         </BottomDiv>
       </Wrapper>
     );
