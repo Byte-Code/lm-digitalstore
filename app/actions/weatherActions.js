@@ -7,6 +7,7 @@ export function requestFetchWeather() {
 export function successFetchWeather(result) {
   return ({ type: actions.SUCCESS_FETCH_WEATHER, result });
 }
+
 export function failureFetchWeather() {
   return ({ type: actions.FAILURE_FETCH_WEATHER });
 }

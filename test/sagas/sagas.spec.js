@@ -2,6 +2,7 @@ import { call } from 'redux-saga/effects';
 
 import { callFetchWorld } from '../../app/sagas/getWorldSaga';
 import { callFetchWeather } from '../../app/sagas/getWeatherSaga';
+import { callFetchCategoryDisplay, api } from '../../app/sagas/getCategoryDisplaySaga';
 import { fetchWorld, fetchWeather } from '../../mocks/apiMock';
 
 describe('getWorldSaga ', () => {
@@ -17,5 +18,13 @@ describe('getWeatherSaga', () => {
 
   it('should call fetchWeather', () => {
     expect(gen.next().value).toEqual(call(fetchWeather));
+  });
+});
+
+describe('getCategoryDisplaySaga', () => {
+  const gen = callFetchCategoryDisplay('CAT655');
+
+  it('should call fetchCategoryDisplay', () => {
+    expect(gen.next().value).toEqual(call(api.getCategoryDisplay, 'CAT655'));
   });
 });

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import SplashScreen from '../components/SplashScreen';
 import { requestFetchWeather } from '../actions/weatherActions';
+import { requestFetchCategoryDisplay } from '../actions/categoryDisplayActions';
 import { getWeather } from '../reducers/selectors';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +10,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  requestFetchWeather
+  requestFetchWeather,
+  requestFetchCategoryDisplay
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashScreen);
