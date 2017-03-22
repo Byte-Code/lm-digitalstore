@@ -81,7 +81,7 @@ export default class Page extends Component {
 
   componentDidMount() {
     this.props.requestFetchWeather();
-    this.props.requestFetchCategoryDisplay('CAT655');
+    this.props.requestFetchCategory('CAT655');
   }
 
   render() {
