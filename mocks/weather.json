@@ -1,126 +1,57 @@
 {
 	"city": {
-		"id": 6940463,
 		"name": "Altstadt",
-		"coord": {
-			"lon": 11.5752,
-			"lat": 48.137
-		},
-		"country": "DE",
-		"population": 0
+		"country": "DE"
 	},
-	"cod": "200",
-	"message": 0.1094425,
-	"cnt": 7,
 	"list": [{
 		"dt": 1487242800,
 		"temp": {
 			"day": 28,
 			"min": 27,
-			"max": 28,
-			"night": 273.34,
-			"eve": 277.05,
-			"morn": 281.56
+			"max": 28
 		},
-		"pressure": 972.73,
-		"humidity": 75,
 		"weather": [{
-			"id": 800,
-			"main": "Clear",
-			"description": "sky is clear",
-			"icon": "01d"
-		}],
-		"speed": 1.81,
-		"deg": 248,
-		"clouds": 0
+			"main": "Clear"
+		}]
 	}, {
 		"dt": 1487329200,
 		"temp": {
 			"day": 27,
 			"min": 27,
-			"max": 27,
-			"night": 275.04,
-			"eve": 275.64,
-			"morn": 276.48
+			"max": 27
 		},
-		"pressure": 966.98,
-		"humidity": 95,
 		"weather": [{
-			"id": 600,
-			"main": "thunderstorm",
-			"description": "light snow",
-			"icon": "13d"
-		}],
-		"speed": 3.17,
-		"deg": 262,
-		"clouds": 92,
-		"rain": 11.74,
-		"snow": 0.31
+			"main": "thunderstorm"
+		}]
 	}, {
 		"dt": 1487415600,
 		"temp": {
 			"day": 27,
 			"min": 26,
-			"max": 27,
-			"night": 269.55,
-			"eve": 273.8,
-			"morn": 274.56
+			"max": 27
 		},
-		"pressure": 966.06,
-		"humidity": 95,
 		"weather": [{
-			"id": 600,
-			"main": "Snow",
-			"description": "light snow",
-			"icon": "13d"
-		}],
-		"speed": 0.86,
-		"deg": 244,
-		"clouds": 8,
-		"snow": 0.09
+			"main": "Snow"
+		}]
 	}, {
 		"dt": 1487502000,
 		"temp": {
 			"day": 27,
 			"min": 26,
-			"max": 27,
-			"night": 269.77,
-			"eve": 273.57,
-			"morn": 267.97
+			"max": 27
 		},
-		"pressure": 933.27,
-		"humidity": 0,
 		"weather": [{
-			"id": 800,
-			"main": "mist",
-			"description": "sky is clear",
-			"icon": "01d"
-		}],
-		"speed": 1.57,
-		"deg": 142,
-		"clouds": 74
+			"main": "mist"
+		}]
 	}, {
 		"dt": 1487588400,
 		"temp": {
 			"day": 27,
 			"min": 27,
-			"max": 27,
-			"night": 273.12,
-			"eve": 274.52,
-			"morn": 271.12
+			"max": 27
 		},
-		"pressure": 938.21,
-		"humidity": 0,
 		"weather": [{
-			"id": 600,
-			"main": "Rain",
-			"description": "light snow",
-			"icon": "13d"
-		}],
-		"speed": 1.79,
-		"deg": 248,
-		"clouds": 88,
-		"rain": 0.93,
-		"snow": 0.38
+			"main": "Rain"
+		}]
 	}]
 }
