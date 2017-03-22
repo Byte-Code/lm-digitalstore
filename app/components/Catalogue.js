@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-const Catalogue = () => {
-  return (
-    <div>
-      Catalogue
-    </div>
-  );
-};
+export default class Catalogue extends Component {
+  static propTypes = {
+    params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
+    requestFetchCategory: PropTypes.func.isRequired
+  }
 
-export default Catalogue;
+  componentDidMount() {
+    const {
+      params: { categoryCode },
+      requestFetchCategory
+    } = this.props;
+    requestFetchCategory(categoryCode);
+  }
+
+  render() {
+    return (
+      <div>
+        {this.props.params.categoryCode}
+      </div>
+    );
+  }
+}

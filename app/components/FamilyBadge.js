@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -64,21 +65,24 @@ export default class FamilyBadge extends Component {
     const familyName = family.get('familyName');
     const image = family.get('image');
     const itemCount = family.get('itemCount');
+    const categoryCode = family.get('categoryCode');
     const { height, width } = this.getSize();
 
     return (
-      <Wrapper width={width}>
-        <ImageWrapper
-          src={image}
-          alt="alt1"
-          width={width}
-          height={height}
-        />
-        <NameWrapper>
-          <FamilyName>{familyName}</FamilyName>
-          <ItemCount>{itemCount} prodotti</ItemCount>
-        </NameWrapper>
-      </Wrapper>
+      <Link to={`/catalogue/${categoryCode}`}>
+        <Wrapper width={width}>
+          <ImageWrapper
+            src={image}
+            alt="alt1"
+            width={width}
+            height={height}
+          />
+          <NameWrapper>
+            <FamilyName>{familyName}</FamilyName>
+            <ItemCount>{itemCount} prodotti</ItemCount>
+          </NameWrapper>
+        </Wrapper>
+      </Link>
     );
   }
 }
