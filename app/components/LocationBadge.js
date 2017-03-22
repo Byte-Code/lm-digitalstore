@@ -9,10 +9,6 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-const IconWrapper = styled.div`
-  padding: 10px;
-`;
-
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,9 +24,7 @@ const Location = styled.p`
 
 const LocationBadge = ({ city, country, weather }) => (
   <Wrapper>
-    <IconWrapper>
-      <IconSelector weather={weather} />
-    </IconWrapper>
+    <IconSelector weather={weather} />
     <InfoWrapper>
       <Location>{city} ({country})</Location>
       <DateBadge />
