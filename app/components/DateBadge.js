@@ -15,20 +15,27 @@ export default class DateBadge extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentTime: ''
+      currentTime: '',
+      intID: ''
     };
   }
 
-  componentDidMount() {
-    this.updateTime();
+  componentWillMount() {
+    const intID = this.updateTime();
+    this.setState({ intID });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.currentTime !== this.state.currentTime;
   }
 
+  componentWillUnmount() {
+    const { intID } = this.state;
+    clearInterval(intID);
+  }
+
   updateTime() {
-    setInterval(() => {
+    return setInterval(() => {
       const currentTime = moment().format('ddd HH:mm');
       this.setState({ currentTime });
     }, 1000);
