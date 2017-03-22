@@ -7,7 +7,7 @@ import SplashScreenPage from './Pages/SplashScreenPage';
 
 export default (
   <Route path="/" component={App}>
-    <Route component={HomePage} />
     <IndexRoute component={SplashScreenPage} />
+    <Route path="/world" component={HomePage} />
   </Route>
 );

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Link } from 'react-router';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
@@ -99,29 +100,31 @@ export default class Page extends Component {
     const dailyForecast4 = forecast.getIn(['list', 4]);
 
     return (
-      <Wrapper>
-        <TopDiv>
-          <Header>Accendi la tua voglia di estate</Header>
-          <Banner>Entra nel mondo giardino</Banner>
-        </TopDiv>
-        <BottomDiv>
-          <TodayInfo>
-            <LocationBadge
-              city={city}
-              country={country}
-              weather={weather}
-              temp={temp}
-            />
-            <Temp>{temp} &#176;</Temp>
-          </TodayInfo>
-          <ForecastList>
-            <ForecastBadge dailyForecast={dailyForecast1} />
-            <ForecastBadge dailyForecast={dailyForecast2} />
-            <ForecastBadge dailyForecast={dailyForecast3} />
-            <ForecastBadge dailyForecast={dailyForecast4} />
-          </ForecastList>
-        </BottomDiv>
-      </Wrapper>
+      <Link to="/world">
+        <Wrapper>
+          <TopDiv>
+            <Header>Accendi la tua voglia di estate</Header>
+            <Banner>Entra nel mondo giardino</Banner>
+          </TopDiv>
+          <BottomDiv>
+            <TodayInfo>
+              <LocationBadge
+                city={city}
+                country={country}
+                weather={weather}
+                temp={temp}
+              />
+              <Temp>{temp} &#176;</Temp>
+            </TodayInfo>
+            <ForecastList>
+              <ForecastBadge dailyForecast={dailyForecast1} />
+              <ForecastBadge dailyForecast={dailyForecast2} />
+              <ForecastBadge dailyForecast={dailyForecast3} />
+              <ForecastBadge dailyForecast={dailyForecast4} />
+            </ForecastList>
+          </BottomDiv>
+        </Wrapper>
+      </Link>
     );
   }
 }
