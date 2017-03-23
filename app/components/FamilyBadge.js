@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  box-shadow: 0 0 8px 0 #e4e4e4;
 `;
 
 const ImageWrapper = styled.img`
