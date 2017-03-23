@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
+import ProductSlider from './ProductSlider';
 
 const Header = styled.div`
   width: 100%;
@@ -16,6 +17,11 @@ const Header = styled.div`
     font-size: 48px;
     color: #333333;
   }
+`;
+
+const Slide = styled.div`
+  margin-right: 20px;
+  width: 405px;
 `;
 
 export default class Catalogue extends Component {
@@ -37,6 +43,11 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode);
   }
 
+  renderProducts() {
+    const itemList = this.props.categoryInfo.get('itemList');
+    return itemList.map(item => <Slide><ProductBadge productInfo={item} /></Slide>);
+  }
+
   render() {
     const { categoryInfo } = this.props;
 
@@ -45,14 +56,15 @@ export default class Catalogue extends Component {
     }
 
     const catName = categoryInfo.get('name');
-    const productInfo = categoryInfo.getIn(['itemList', 0]);
 
     return (
       <div>
         <Header>
           <h1>{catName}</h1>
         </Header>
-        <ProductBadge productInfo={productInfo} />
+        <ProductSlider>
+          {this.renderProducts()}
+        </ProductSlider>
       </div>
     );
   }
