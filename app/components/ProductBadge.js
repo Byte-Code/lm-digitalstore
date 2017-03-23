@@ -8,6 +8,16 @@ const Wrapper = styled.div`
   height: 605px;
   width: 405px;
   color: #333333;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  &>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 33px;
+  }
 `;
 
 const Title = styled.div`
@@ -20,10 +30,17 @@ const Title = styled.div`
 const Name = styled.div`
   line-height: 32px;
   font-size: 20px;
-  text-align: center;
   font-family: LeroyMerlinSans Bold;
-  margin: 10px 0;
   text-transform: uppercase;
+  margin: 10px 0;
+`;
+
+const Price = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 40px;
 `;
 
 const ProductBadge = ({ productInfo }) => {
@@ -31,6 +48,9 @@ const ProductBadge = ({ productInfo }) => {
   const imageOptions = { width: 405, height: 405 };
   const name = productInfo.get('name');
   const title = 'FACILE DA RIPORRE';
+  const price = productInfo.getIn(['price', 'selling', 'gross']).toFixed(2);
+  const currency = productInfo.getIn(['price', 'currency']);
+  const displayPrice = `${price} ${currency}`;
 
   return (
     <Wrapper>
@@ -41,6 +61,7 @@ const ProductBadge = ({ productInfo }) => {
         alt={name}
       />
       <Name>{name}</Name>
+      <Price>{displayPrice}</Price>
     </Wrapper>
   );
 };
