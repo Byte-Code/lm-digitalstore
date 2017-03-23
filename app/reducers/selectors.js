@@ -10,6 +10,6 @@ export function getWeather(state) {
   return getWeatherSelector(state.get('weatherReducer'));
 }
 
-export function getCategory(state) {
-  return getCategorySelector(state.get('categoryReducer'));
+export function getCategory(state, categoryCode) {
+  return getCategorySelector(state.get('categoryReducer'), categoryCode);
 }

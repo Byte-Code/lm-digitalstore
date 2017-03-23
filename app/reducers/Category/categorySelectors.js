@@ -1,3 +1,3 @@
-export default function getCategory(state) {
-  return state;
+export default function getCategory(state, categoryCode) {
+  return state.get(categoryCode);
 }
