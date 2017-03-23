@@ -11,14 +11,12 @@ export default function getUrl(imageId, options = {}) {
           ? imageId.substr(1)
           : imageId;
 
-  let url = cl.url(cleanImageId, {
+  const url = cl.url(cleanImageId, {
     crop: 'pad',
     default_image: 'no_image_available',
     flags: 'progressive',
     ...options,
   });
-
-  if (url) url = url.replace(/^(https?):\/\//, '//');
 
   return url;
 }

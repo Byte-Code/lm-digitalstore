@@ -11,19 +11,19 @@ export default class Image extends Component {
   static propTypes = {
     imageID: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    options: PropTypes.shape({
+    imageOptions: PropTypes.shape({
       height: PropTypes.number,
       width: PropTypes.number
     })
   }
 
   static defaultProps = {
-    options: {}
+    imageOptions: {}
   }
 
   render() {
-    const { imageID, alt, options } = this.props;
-    const url = getUrl(imageID, options);
+    const { imageID, alt, imageOptions } = this.props;
+    const url = getUrl(imageID, imageOptions);
 
     return (
       <Img

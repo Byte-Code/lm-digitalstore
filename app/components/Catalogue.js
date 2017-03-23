@@ -3,6 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
+import ProductBadge from './ProductBadge';
+
 const Header = styled.div`
   width: 100%;
   height: 230px;
@@ -37,13 +39,20 @@ export default class Catalogue extends Component {
 
   render() {
     const { categoryInfo } = this.props;
+
+    if (categoryInfo.isEmpty()) {
+      return null;
+    }
+
     const catName = categoryInfo.get('name');
+    const productInfo = categoryInfo.getIn(['itemList', 0]);
 
     return (
       <div>
         <Header>
           <h1>{catName}</h1>
         </Header>
+        <ProductBadge productInfo={productInfo} />
       </div>
     );
   }
