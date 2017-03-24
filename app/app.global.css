@@ -62,3 +62,66 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+.slickDots {
+    position: absolute;
+    bottom: 45px;
+    list-style: none;
+    display: block;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+}
+
+.slickDots li {
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+ }
+
+.slickDots li button {
+    border: 0;
+    background: transparent;
+    display: block;
+    height: 20px;
+    width: 20px;
+    outline: none;
+    line-height: 0;
+    font-size: 0;
+    color: transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+.slickDots li button:hover, .slickDots li button:focus {
+    outline: none;
+}
+
+.slickDots li button:hover:before, .slickDots li button:focus:before {
+    opacity: 1;
+}
+
+.slickDots li button:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "•";
+    width: 20px;
+    height: 20px;
+    font-family: "slick";
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #333333;
+    opacity: 0.25;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+li.slick-active button:before {
+    color: #333333;
+    opacity: 0.75;
+}

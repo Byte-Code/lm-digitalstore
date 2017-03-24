@@ -58,7 +58,7 @@ export default class Product extends Component {
     const name = productInfo.get('name');
     const code = productInfo.get('code');
     const imageIDList = productInfo.get('images');
-    const imageOptions = { width: 1080 };
+    const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
     console.log(productInfo.toJS());
 

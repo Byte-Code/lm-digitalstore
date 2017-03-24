@@ -9,7 +9,10 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   speed: 100,
-  arrows: false
+  arrows: false,
+  dots: true,
+  dotsClass: 'slickDots',
+
 };
 
 export default class ImageSlider extends Component {
