@@ -3,6 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
+import ImageSlider from './ImageSlider';
+
 const Wrapper = styled.div`
 
 `;
@@ -22,6 +24,10 @@ const Ref = styled.h3`
   line-height: 24px;
   text-align: center;
   margin-bottom: 16px;
+`;
+
+const SliderWrapper = styled.div`
+  width: 100%;
 `;
 
 export default class Product extends Component {
@@ -51,6 +57,8 @@ export default class Product extends Component {
 
     const name = productInfo.get('name');
     const code = productInfo.get('code');
+    const imageIDList = productInfo.get('images');
+    const imageOptions = { width: 1080 };
 
     console.log(productInfo.toJS());
 
@@ -58,6 +66,13 @@ export default class Product extends Component {
       <Wrapper>
         <Title>{name}</Title>
         <Ref>{`REF. ${code}`}</Ref>
+        <SliderWrapper>
+          <ImageSlider
+            imageIDList={imageIDList}
+            imageOptions={imageOptions}
+            alt={name}
+          />
+        </SliderWrapper>
       </Wrapper>
     );
   }
