@@ -14,7 +14,8 @@ export const api = new LmApi(baseUrl, spaceId, storeCode, apiKey);
 export function* callFetchProduct(action) {
   try {
     const { productCode } = action;
-    const result = fromJS(yield call(api.getProductListDisplay.bind(api), productCode));
+    const result = fromJS(yield call(api.getProductDisplay.bind(api), productCode))
+      .get('content');
     yield put(productActions.successFetchProduct(productCode, result));
   } catch (error) {
     yield put(productActions.failureFetchProduct(error));
