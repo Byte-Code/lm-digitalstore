@@ -22,8 +22,16 @@ const Header = styled.div`
 const Slide = styled.div`
   margin-right: 20px;
   width: 405px;
-  display: flex;
   flex-direction: column;
+  &>div:first-child {
+    margin-bottom: 60px;
+  }
+`;
+
+const Filters = styled.div`
+  height: 75px;
+  background: #efefef;
+  margin-bottom: 115px;
 `;
 
 export default class Catalogue extends Component {
@@ -76,6 +84,7 @@ export default class Catalogue extends Component {
         <Header>
           <h1>{catName}</h1>
         </Header>
+        <Filters>Filters here</Filters>
         <ProductSlider>
           {sliderItems}
         </ProductSlider>

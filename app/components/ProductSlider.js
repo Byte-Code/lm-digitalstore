@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Slider from 'react-slick';
+import styled from 'styled-components';
 
 const settings = {
   infinite: false,
@@ -10,12 +11,16 @@ const settings = {
   arrows: false
 };
 
+const Wrapper = styled.div`
+  margin-left: 40px;
+`;
+
 const ProductSlider = ({ children }) => (
-  <div style={{ width: 1000, margin: 'auto' }}>
+  <Wrapper>
     <Slider {...settings}>
       {children}
     </Slider>
-  </div>
+  </Wrapper>
 
 );
 

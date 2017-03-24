@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  cursor: pointer;
   &>div {
     width: 100%;
     display: flex;
@@ -32,6 +33,7 @@ const Name = styled.div`
   font-size: 20px;
   font-family: LeroyMerlinSans Bold;
   text-transform: uppercase;
+  text-align: center;
   margin: 10px 0;
 `;
 
