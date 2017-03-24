@@ -1,6 +1,7 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import { Link } from 'react-router';
 
 import Image from './Image';
 
@@ -49,22 +50,25 @@ const ProductBadge = ({ productInfo }) => {
   const imageID = productInfo.get('mainImage');
   const imageOptions = { width: 405, height: 405 };
   const name = productInfo.get('name');
+  const code = productInfo.get('code');
   const title = 'FACILE DA RIPORRE';
   const price = productInfo.getIn(['price', 'selling', 'gross']).toFixed(2);
   const currency = productInfo.getIn(['price', 'currency']);
   const displayPrice = `${price} ${currency}`;
 
   return (
-    <Wrapper>
-      <Title>{title}</Title>
-      <Image
-        imageID={imageID}
-        imageOptions={imageOptions}
-        alt={name}
-      />
-      <Name>{name}</Name>
-      <Price>{displayPrice}</Price>
-    </Wrapper>
+    <Link to={`/product/${code}`}>
+      <Wrapper>
+        <Title>{title}</Title>
+        <Image
+          imageID={imageID}
+          imageOptions={imageOptions}
+          alt={name}
+        />
+        <Name>{name}</Name>
+        <Price>{displayPrice}</Price>
+      </Wrapper>
+    </Link>
   );
 };
 
