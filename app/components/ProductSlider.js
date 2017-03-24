@@ -7,6 +7,7 @@ const settings = {
   slidesToScroll: 1,
   variableWidth: true,
   speed: 100,
+  arrows: false
 };
 
 const ProductSlider = ({ children }) => (

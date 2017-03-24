@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
+import { Map, Range } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
@@ -22,6 +22,8 @@ const Header = styled.div`
 const Slide = styled.div`
   margin-right: 20px;
   width: 405px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default class Catalogue extends Component {
@@ -43,9 +45,10 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode);
   }
 
-  renderProducts() {
+  chunkItemList(chunkSize) {
     const itemList = this.props.categoryInfo.get('itemList');
-    return itemList.map(item => <Slide><ProductBadge productInfo={item} /></Slide>);
+    return Range(0, itemList.count(), chunkSize)
+      .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
   }
 
   render() {
@@ -56,6 +59,17 @@ export default class Catalogue extends Component {
     }
 
     const catName = categoryInfo.get('name');
+    const itemList = this.chunkItemList(2);
+    const sliderItems = itemList.map(item => {
+      const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
+      return (
+        <Slide key={key}>
+          <ProductBadge productInfo={item.get(0)} />
+          <ProductBadge productInfo={item.get(1)} />
+        </Slide>
+      );
+    }
+  );
 
     return (
       <div>
@@ -63,7 +77,7 @@ export default class Catalogue extends Component {
           <h1>{catName}</h1>
         </Header>
         <ProductSlider>
-          {this.renderProducts()}
+          {sliderItems}
         </ProductSlider>
       </div>
     );
