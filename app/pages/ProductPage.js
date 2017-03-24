@@ -5,7 +5,7 @@ import Product from '../containers/Product';
 
 export default function ProductPage(props) {
   return (
-    <Page backgroundColor="#f7f7f7">
+    <Page>
       <Product params={props.params} />
     </Page>
   );
