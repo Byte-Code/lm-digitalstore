@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import routes from './routes';
 import configureStore, { sagaMiddleware } from './store/configureStore';
@@ -15,7 +16,7 @@ const history = syncHistoryWithStore(hashHistory, store, {
     return state.get('routing').toJS();
   }
 });
-
+injectTapEventPlugin();
 sagaMiddleware.run(rootSaga);
 
 render(

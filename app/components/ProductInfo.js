@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   background: #f7f7f7;
   display: flex;
+  flex-wrap: wrap;
   padding: 69px 125px 57px;
   &>div:first-child {
     margin-right: 100px;
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const Column = styled.div`
-  width: 50%;
+  width: calc((100% - 100px) /2);
   &>div:first-child {
     margin-bottom: 30px;
   }

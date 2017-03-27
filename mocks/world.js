@@ -26,7 +26,7 @@ const world = {
       image: tavoliSedie,
       areaId: 0,
       itemCount: 73,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT656'
     },
     {
       familyName: 'Sedie e Poltrone',
