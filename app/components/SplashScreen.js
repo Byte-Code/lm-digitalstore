@@ -25,15 +25,6 @@ const BottomDiv = styled.div`
   flex-direction: column;
 `;
 
-const TodayInfo = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 0 40px 70px;
-  &>div {
-    width: 50%;
-  }
-`;
-
 const Header = styled.h1`
   padding: 101px 295px 60px 40px;
   line-height: 1.07;
@@ -52,14 +43,6 @@ const Banner = styled.div`
   display: flex;
   align-items: center;
   padding-left: 40px;
-`;
-
-const Temp = styled.div`
-  text-align: right;
-  color: #fff;
-  font-family: LeroyMerlinSans Bold;
-  font-size: 160px;
-  line-height: 0.94;
 `;
 
 const ForecastList = styled.div`
@@ -107,15 +90,12 @@ export default class Page extends Component {
             <Banner>Entra nel mondo giardino</Banner>
           </TopDiv>
           <BottomDiv>
-            <TodayInfo>
-              <LocationBadge
-                city={city}
-                country={country}
-                weather={weather}
-                temp={temp}
-              />
-              <Temp>{temp} &#176;</Temp>
-            </TodayInfo>
+            <LocationBadge
+              city={city}
+              country={country}
+              weather={weather}
+              temp={temp}
+            />
             <ForecastList>
               <ForecastBadge dailyForecast={dailyForecast1} />
               <ForecastBadge dailyForecast={dailyForecast2} />
