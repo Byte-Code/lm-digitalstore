@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 
 import { titleFormatter } from '../utils/stringUtils';
+import Card from './Card';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -85,6 +86,10 @@ export default class ProductInfo extends Component {
       <Wrapper>
         <Column>{this.renderBenefits()}</Column>
         <Column>{this.renderBlocks()}</Column>
+        <Card CardTitle={Title}>
+          <Column>{this.renderBenefits()}</Column>
+          <Column>{this.renderBlocks()}</Column>
+        </Card>
       </Wrapper>
     );
   }
