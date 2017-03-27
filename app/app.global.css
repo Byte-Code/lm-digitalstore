@@ -63,6 +63,10 @@ a:hover {
   cursor: pointer;
 }
 
+.slick-slider {
+  margin-bottom: 0;
+}
+
 .slickDots {
     position: absolute;
     bottom: 45px;

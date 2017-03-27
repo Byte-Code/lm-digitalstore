@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import ImageSlider from './ImageSlider';
+import ProductInfo from './ProductInfo';
 
 const Wrapper = styled.div`
 
@@ -57,6 +58,7 @@ export default class Product extends Component {
 
     const name = productInfo.get('name');
     const code = productInfo.get('code');
+    const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -73,6 +75,7 @@ export default class Product extends Component {
             alt={name}
           />
         </SliderWrapper>
+        <ProductInfo marketingDescriptions={marketingDescriptions} />
       </Wrapper>
     );
   }
