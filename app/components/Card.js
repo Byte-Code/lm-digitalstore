@@ -34,7 +34,7 @@ export default class Card extends Component {
         <div onTouchTap={this.toggleCard.bind(this)}>
           <CardTitle>Hello</CardTitle>
         </div>
-        <CardBody isVisible={isVisible}>
+        <CardBody isVisible={isVisible} className="animated slideInLeft">
           {children}
         </CardBody>
       </div>
