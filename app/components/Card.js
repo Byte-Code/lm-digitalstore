@@ -7,8 +7,9 @@ const CardBody = styled.div`
 
 export default class Card extends Component {
   static propTypes = {
-    CardTitle: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired
+    TitleComponent: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    titleText: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -25,14 +26,14 @@ export default class Card extends Component {
   }
 
   render() {
-    const { CardTitle, children } = this.props;
+    const { TitleComponent, children, titleText } = this.props;
     const { expanded } = this.state;
     const isVisible = expanded ? 'block' : 'none';
 
     return (
       <div>
         <div onTouchTap={this.toggleCard.bind(this)}>
-          <CardTitle>Hello</CardTitle>
+          <TitleComponent>{titleText}</TitleComponent>
         </div>
         <CardBody isVisible={isVisible} className="animated slideInLeft">
           {children}

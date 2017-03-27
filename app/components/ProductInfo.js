@@ -6,8 +6,13 @@ import { titleFormatter } from '../utils/stringUtils';
 import Card from './Card';
 
 const Wrapper = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   background: #f7f7f7;
+`;
+
+const Row = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   padding: 69px 125px 57px;
@@ -29,6 +34,13 @@ const Section = styled.div`
     color: #333333;
     margin-bottom: 17px;
   }
+`;
+
+const CardTitle = styled.div`
+  color: #333333;
+  font-size: 16px;
+  line-height: 32px;
+  padding: 19px 170px;
 `;
 
 const Title = styled.div`
@@ -84,11 +96,15 @@ export default class ProductInfo extends Component {
   render() {
     return (
       <Wrapper>
-        <Column>{this.renderBenefits()}</Column>
-        <Column>{this.renderBlocks()}</Column>
-        <Card CardTitle={Title}>
+        <Row>
           <Column>{this.renderBenefits()}</Column>
           <Column>{this.renderBlocks()}</Column>
+        </Row>
+        <Card TitleComponent={CardTitle} titleText="Maggiori informazioni">
+          <Row>
+            <Column>{this.renderBenefits()}</Column>
+            <Column>{this.renderBlocks()}</Column>
+          </Row>
         </Card>
       </Wrapper>
     );
