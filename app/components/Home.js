@@ -15,6 +15,16 @@ const FlexWrapper = styled.div`
   }
 `;
 
+const Logo = styled.div`
+  margin-top: 70px;
+  margin-bottom: 27px;
+  text-align: center;
+  &>img {
+    width: 180px;
+    height: 130px;
+  }
+`;
+
 const GridWrapper = styled(FlexWrapper)`
   padding: 47px 40px 0;
 `;
@@ -37,21 +47,16 @@ const Banner = styled.div`
 const WorldTitle = styled.section`
   height: 140px;
   color: black;
-  font-family: LeroyMerlinSans Bold;
-  margin: 53px 0 30px;
+  font-family: LeroyMerlinSans Italic;
+  margin: 0 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  &>div {
-    font-size: 54px;
-    width: calc(100% - 200px);
+  &>h1 {
+    font-size: 36px;
     &>span{
       color: #58c527;
     }
-  }
-  &>img {
-    height: 128px;
-    width: 213px;
   }
 `;
 
@@ -84,6 +89,13 @@ export default class Home extends Component {
 
     return (
       <div>
+        <Logo>
+          <img src="./assets/logo.png" alt="logo" />
+        </Logo>
+        <WorldTitle>
+          <h1>Esplora le soluzioni Leroy Merlin per
+          <span>&nbsp;{worldName}</span></h1>
+        </WorldTitle>
         <GridWrapper>
           <div>
             <FamilyBadge family={families.get(0)} size="square-big" />
@@ -109,11 +121,6 @@ export default class Home extends Component {
               <FamilyBadge family={families.get(10)} size="square-small" />
             </FlexWrapper>
           </div>
-          <WorldTitle>
-            <div>Esplora le soluzioni Leroy Merlin per
-            <span>&nbsp;{worldName}</span></div>
-            <img src="./assets/logo.png" alt="logo" />
-          </WorldTitle>
         </GridWrapper>
         <img src={trailingImage} alt="alt" />
       </div>

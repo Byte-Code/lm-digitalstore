@@ -5,7 +5,7 @@ import Home from '../containers/Home';
 
 export default function HomePage() {
   return (
-    <Page backgroundColor="#f7f7f7">
+    <Page background="linear-gradient(0, #efefef, #ffffff)">
       <Home />
     </Page>
   );

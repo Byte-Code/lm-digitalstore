@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 export default function CataloguePage(props) {
   return (
-    <Page backgroundColor="#f7f7f7">
+    <Page background="#f7f7f7">
       <Catalogue params={props.params} />
       <Footer />
     </Page>

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 
 const PageWrapper = styled.div`
-  background-color: ${props => props.backgroundColor};
+  background: ${props => props.background};
   padding: ${props => props.padding};
   height: 1920px;
 `;
@@ -10,21 +10,21 @@ const PageWrapper = styled.div`
 export default class Page extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    backgroundColor: PropTypes.string,
+    background: PropTypes.string,
     padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
-    backgroundColor: '#ffffff',
+    background: '#ffffff',
     padding: 0
   }
 
   render() {
-    const { children, backgroundColor, padding } = this.props;
+    const { children, background, padding } = this.props;
 
     return (
       <PageWrapper
-        backgroundColor={backgroundColor}
+        background={background}
         padding={padding}
       >
         {children}

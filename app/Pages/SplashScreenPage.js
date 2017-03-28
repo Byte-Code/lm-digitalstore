@@ -5,7 +5,7 @@ import SplashScreen from '../containers/SplashScreen';
 
 export default function SplashScreenPage() {
   return (
-    <Page backgroundColor="teal">
+    <Page background="teal">
       <SplashScreen />
     </Page>
   );
