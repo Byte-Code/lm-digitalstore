@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
   box-shadow: 0 0 8px 0 #e4e4e4;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled.img`
@@ -18,7 +19,7 @@ const ImageWrapper = styled.img`
 const NameWrapper = styled.div`
   width: 100%;
   background-color: #ffffff;
-  padding: 15px 10px;
+  padding: 10px 15px 15px;
   height: 70px;
 `;
 
@@ -49,11 +50,9 @@ export default class FamilyBadge extends Component {
     switch (size) {
       case 'square-big':
       default:
-        return { height: 490, width: 490 };
+        return { height: 561, width: 490 };
       case 'square-small':
         return { height: 235, width: 235 };
-      case 'vertical':
-        return { height: 560, width: 235 };
       case 'horizontal':
         return { height: 235, width: 490 };
     }

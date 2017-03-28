@@ -5,14 +5,11 @@ import styled from 'styled-components';
 
 import FamilyBadge from './FamilyBadge';
 
-const FlexWrapper = styled.div`
+const Row = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   width: 100%;
-  &>div {
-    width: calc(50% - 10px);
-  }
 `;
 
 const Logo = styled.div`
@@ -25,8 +22,8 @@ const Logo = styled.div`
   }
 `;
 
-const GridWrapper = styled(FlexWrapper)`
-  padding: 47px 40px 0;
+const GridWrapper = styled.div`
+  padding: 15px 40px 0;
 `;
 
 const DoubleVertical = styled.div`
@@ -45,8 +42,7 @@ const Banner = styled.div`
 `;
 
 const WorldTitle = styled.section`
-  height: 140px;
-  color: black;
+  line-height: 88px;
   font-family: LeroyMerlinSans Italic;
   margin: 0 40px;
   display: flex;
@@ -97,30 +93,27 @@ export default class Home extends Component {
           <span>&nbsp;{worldName}</span></h1>
         </WorldTitle>
         <GridWrapper>
-          <div>
-            <FamilyBadge family={families.get(0)} size="square-big" />
-            <FlexWrapper>
-              <DoubleVertical>
-                <FamilyBadge family={families.get(1)} size="square-small" />
-                <FamilyBadge family={families.get(2)} size="square-small" />
-              </DoubleVertical>
-              <FamilyBadge family={families.get(4)} size="vertical" />
-            </FlexWrapper>
-            <FamilyBadge family={families.get(7)} size="horizontal" />
-          </div>
-          <div>
-            <FlexWrapper>
-              <FamilyBadge family={families.get(6)} size="square-small" />
-              <Banner url={bannerImg}>{bannerText}</Banner>
-            </FlexWrapper>
-            <FamilyBadge family={families.get(3)} size="square-big" />
-            <FlexWrapper>
-              <FamilyBadge family={families.get(9)} size="square-small" />
-              <FamilyBadge family={families.get(8)} size="square-small" />
-              <FamilyBadge family={families.get(5)} size="square-small" />
-              <FamilyBadge family={families.get(10)} size="square-small" />
-            </FlexWrapper>
-          </div>
+          <Row>
+            <FamilyBadge family={families.get(2)} size="square-big" />
+            <DoubleVertical>
+              <FamilyBadge family={families.get(7)} size="square-small" />
+              <FamilyBadge family={families.get(3)} size="square-small" />
+            </DoubleVertical>
+            <DoubleVertical>
+              <FamilyBadge family={families.get(1)} size="square-small" />
+              <FamilyBadge family={families.get(4)} size="square-small" />
+            </DoubleVertical>
+          </Row>
+          <Row>
+            <FamilyBadge family={families.get(8)} size="square-small" />
+            <FamilyBadge family={families.get(0)} size="horizontal" />
+            <FamilyBadge family={families.get(9)} size="square-small" />
+          </Row>
+          <Row>
+            <FamilyBadge family={families.get(5)} size="square-small" />
+            <FamilyBadge family={families.get(10)} size="square-small" />
+            <FamilyBadge family={families.get(6)} size="horizontal" />
+          </Row>
         </GridWrapper>
         <img src={trailingImage} alt="alt" />
       </div>
