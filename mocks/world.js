@@ -17,7 +17,7 @@ const world = {
   title: 'Scopri le soluzioni per Giardino e Terrazzo',
   trailingImage: footer,
   banner: {
-    text: 'Scopri i prodotti per dare nuovo spazio alle tue piante',
+    text: 'Scopri le funzioni del Digital Store',
     image: texture
   },
   families: [

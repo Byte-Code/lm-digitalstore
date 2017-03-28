@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
+import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 
 import FamilyBadge from './FamilyBadge';
 
@@ -13,9 +14,11 @@ const Row = styled.div`
 `;
 
 const Logo = styled.div`
-  margin-top: 70px;
+  padding-top: 70px;
   margin-bottom: 27px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &>img {
     width: 180px;
     height: 130px;
@@ -23,7 +26,7 @@ const Logo = styled.div`
 `;
 
 const GridWrapper = styled.div`
-  padding: 15px 40px 0;
+  padding: 16px 40px 40px;
 `;
 
 const DoubleVertical = styled.div`
@@ -34,11 +37,22 @@ const DoubleVertical = styled.div`
 
 const Banner = styled.div`
   background: url(${props => props.url}) center no-repeat border-box padding-box;
-  height: 305px;
+  width: 100%;
+  height: 120px;
   font-size: 32px;
-  padding: 30px 60px 47px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 30px;
   color: #fff;
-  font-family: LeroyMerlinSans Italic;
+  cursor: pointer;
+  font-family: LeroyMerlinSans Bold-Italic;
+`;
+
+const TrailingImage = styled.img`
+  width: 100%;
+  height: 100px;
 `;
 
 const WorldTitle = styled.section`
@@ -114,8 +128,12 @@ export default class Home extends Component {
             <FamilyBadge family={families.get(10)} size="square-small" />
             <FamilyBadge family={families.get(6)} size="horizontal" />
           </Row>
+          <Banner url={bannerImg}>
+            {bannerText}
+            <HelpIcon color="#fff" style={{ height: 65, width: 65 }} />
+          </Banner>
         </GridWrapper>
-        <img src={trailingImage} alt="alt" />
+        <TrailingImage src={trailingImage} alt="alt" />
       </div>
     );
   }
