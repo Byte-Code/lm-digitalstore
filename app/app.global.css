@@ -41,6 +41,7 @@
 body {
   position: relative;
   height: 100vh;
+  color: #333333;
   font-family: LeroyMerlinSans, Arial, Helvetica, Helvetica Neue, serif;
 }
 
@@ -62,6 +63,7 @@ li {
 
 a {
   text-decoration: none;
+  color: #333333;
 }
 
 a:hover {

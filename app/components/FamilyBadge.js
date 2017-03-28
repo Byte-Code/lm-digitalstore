@@ -19,7 +19,6 @@ const NameWrapper = styled.div`
   width: 100%;
   background-color: #ffffff;
   padding: 15px 10px;
-  color: #333333;
   height: 70px;
 `;
 

@@ -8,7 +8,6 @@ import Image from './Image';
 const Wrapper = styled.div`
   height: 605px;
   width: 405px;
-  color: #333333;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

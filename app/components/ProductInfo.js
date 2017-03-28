@@ -35,7 +35,6 @@ const Column = styled.div`
 const Section = styled.div`
   &>p{
     font-size: 14px;
-    color: #333333;
     margin-bottom: 17px;
     font-family: LeroyMerlinSans Light;
     &>span{
@@ -50,7 +49,6 @@ const CardTitle = styled.div`
   padding: 19px 125px;
   background: #f7f7f7;
   &>h3{
-    color: #333333;
     margin-left: 20px;
     font-size: 16px;
     line-height: 32px;

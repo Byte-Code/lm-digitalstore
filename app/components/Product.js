@@ -5,17 +5,17 @@ import styled from 'styled-components';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
+import PriceBadge from './PriceBadge';
 
 const Wrapper = styled.div`
-
+  position: relative;
 `;
 
 const Title = styled.h1`
-  margin: 90px 40px 0;
+  margin: 40px 40px 0;
   text-align: center;
   font-size: 48px;
   line-height: 70px;
-  color: #333333;
   text-transform: capitalize;
 `;
 
@@ -29,6 +29,12 @@ const Ref = styled.h3`
 
 const SliderWrapper = styled.div`
   width: 100%;
+`;
+
+const PriceWrapper = styled.div`
+  position: absolute;
+  right: 30px;
+  top: 234px;
 `;
 
 export default class Product extends Component {
@@ -60,6 +66,7 @@ export default class Product extends Component {
     const code = productInfo.get('code');
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
+    const pricingInfo = productInfo.getIn(['price', 'selling']);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -80,6 +87,9 @@ export default class Product extends Component {
           marketingDescriptions={marketingDescriptions}
           descriptions={descriptions}
         />
+        <PriceWrapper>
+          <PriceBadge pricingInfo={pricingInfo} />
+        </PriceWrapper>
       </Wrapper>
     );
   }

@@ -15,7 +15,6 @@ const Header = styled.div`
   align-items: center;
   &>h1 {
     font-size: 48px;
-    color: #333333;
   }
 `;
 
