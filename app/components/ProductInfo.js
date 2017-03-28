@@ -84,34 +84,18 @@ export default class ProductInfo extends Component {
     descriptions: ImmutablePropTypes.list.isRequired
   }
 
-  renderBenefits() {
-    const { marketingDescriptions } = this.props;
-    const benefits = marketingDescriptions.get('benefits');
-
-    if (!benefits) {
-      return null;
-    }
-
-    return (
-      <Section>
-        <Title>Vantaggi</Title>
-        {benefits.map(b => <p key={b}>{b}</p>)}
-        <Divider />
-      </Section>
-    );
-  }
-
   renderBlocks() {
     const { marketingDescriptions } = this.props;
-    const blocks = marketingDescriptions.get('chooseBlocks').reverse();
+    const blocks = marketingDescriptions.get('chooseBlocks');
 
     return blocks.map(block => (
-      <Section key={block.get('title')}>
-        <Title>{titleFormatter(block.get('title'))}</Title>
-        {block.get('customerChooses').map(c =>
-          <p key={c.get('description')}>{c.get('description')}</p>)}
-        {!block.equals(blocks.last()) && <Divider />}
-      </Section>
+      <Column key={block.get('title')}>
+        <Section>
+          <Title>{titleFormatter(block.get('title'))}</Title>
+          {block.get('customerChooses').map(c =>
+            <p key={c.get('description')}>{c.get('description')}</p>)}
+        </Section>
+      </Column>
     ));
   }
 
@@ -140,8 +124,7 @@ export default class ProductInfo extends Component {
     return (
       <Wrapper>
         <Row pTop="69px" bgColor="#efefef">
-          <Column>{this.renderBenefits()}</Column>
-          <Column>{this.renderBlocks()}</Column>
+          {this.renderBlocks()}
         </Row>
         <Card TitleComponent={CardTitleComponent}>
           <Row pTop="31px" bgColor="#f7f7f7">
