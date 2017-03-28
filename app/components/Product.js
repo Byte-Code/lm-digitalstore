@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
 import PriceBadge from './PriceBadge';
+import { chunkItemList } from '../utils/utils';
 
 const Wrapper = styled.div`
   position: relative;
@@ -66,11 +67,11 @@ export default class Product extends Component {
     const code = productInfo.get('code');
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
+    const halfDescriptionsSize = Math.ceil(descriptions.size / 2);
+    const chunkedDescriptions = chunkItemList(descriptions, halfDescriptionsSize);
     const pricingInfo = productInfo.getIn(['price', 'selling']);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
-
-    console.log(productInfo.toJS());
 
     return (
       <Wrapper>
@@ -85,7 +86,7 @@ export default class Product extends Component {
         </SliderWrapper>
         <ProductInfo
           marketingDescriptions={marketingDescriptions}
-          descriptions={descriptions}
+          descriptions={chunkedDescriptions}
         />
         <PriceWrapper>
           <PriceBadge pricingInfo={pricingInfo} />

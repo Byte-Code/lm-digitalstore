@@ -39,6 +39,7 @@ const Button = styled.div`
   text-align: center;
   color: #fff;
   box-shadow:  0 0 8px 0 rgba(51, 51, 51, 0.1);
+  cursor: pointer;
 `;
 
 export default class PriceBadge extends Component {

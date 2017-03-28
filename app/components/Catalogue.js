@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map, Range } from 'immutable';
+import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
 import ProductSlider from './ProductSlider';
+import { chunkItemList } from '../utils/utils';
 
 const Header = styled.div`
   width: 100%;
@@ -52,12 +53,6 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode);
   }
 
-  chunkItemList(chunkSize) {
-    const itemList = this.props.categoryInfo.get('itemList');
-    return Range(0, itemList.count(), chunkSize)
-      .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
-  }
-
   render() {
     const { categoryInfo } = this.props;
 
@@ -66,7 +61,7 @@ export default class Catalogue extends Component {
     }
 
     const catName = categoryInfo.get('name');
-    const itemList = this.chunkItemList(2);
+    const itemList = chunkItemList(this.props.categoryInfo.get('itemList'), 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
       return (

@@ -34,7 +34,10 @@ export default class Card extends Component {
         <div onTouchTap={this.toggleCard.bind(this)}>
           <TitleComponent />
         </div>
-        <CardBody isVisible={isVisible} className="animated fadeIn">
+        <CardBody
+          isVisible={isVisible}
+          className="animated fadeIn"
+        >
           {children}
         </CardBody>
       </div>
