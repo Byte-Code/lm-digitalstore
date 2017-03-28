@@ -9,7 +9,6 @@ export default class Card extends Component {
   static propTypes = {
     TitleComponent: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    titleText: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -26,16 +25,16 @@ export default class Card extends Component {
   }
 
   render() {
-    const { TitleComponent, children, titleText } = this.props;
+    const { TitleComponent, children } = this.props;
     const { expanded } = this.state;
     const isVisible = expanded ? 'block' : 'none';
 
     return (
       <div>
         <div onTouchTap={this.toggleCard.bind(this)}>
-          <TitleComponent>{titleText}</TitleComponent>
+          <TitleComponent />
         </div>
-        <CardBody isVisible={isVisible} className="animated slideInLeft">
+        <CardBody isVisible={isVisible} className="animated fadeIn">
           {children}
         </CardBody>
       </div>

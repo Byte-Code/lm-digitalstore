@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
 import { titleFormatter } from '../utils/stringUtils';
 import Card from './Card';
@@ -8,14 +9,17 @@ import Card from './Card';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background: #f7f7f7;
 `;
 
 const Row = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 69px 125px 57px;
+  background-color: ${props => props.bgColor}
+  padding-top: ${props => props.pTop};
+  padding-left: 125px;
+  padding-right: 125px;
+  padding-bottom: 57px;
   &>div:first-child {
     margin-right: 100px;
   }
@@ -33,14 +37,24 @@ const Section = styled.div`
     font-size: 14px;
     color: #333333;
     margin-bottom: 17px;
+    font-family: LeroyMerlinSans Light;
+    &>span{
+      font-family: LeroyMerlinSans;
+    }
   }
 `;
 
 const CardTitle = styled.div`
-  color: #333333;
-  font-size: 16px;
-  line-height: 32px;
-  padding: 19px 170px;
+  display: flex;
+  align-items: center;
+  padding: 19px 125px;
+  background: #f7f7f7;
+  &>h3{
+    color: #333333;
+    margin-left: 20px;
+    font-size: 16px;
+    line-height: 32px;
+  }
 `;
 
 const Title = styled.div`
@@ -57,9 +71,19 @@ const Divider = styled.div`
   margin-top: 18px;
 `;
 
+function CardTitleComponent() {
+  return (
+    <CardTitle>
+      <AddIcon color="#333333" />
+      <h3>Maggiori informazioni</h3>
+    </CardTitle>
+  );
+}
+
 export default class ProductInfo extends Component {
   static propTypes = {
-    marketingDescriptions: ImmutablePropTypes.map.isRequired
+    marketingDescriptions: ImmutablePropTypes.map.isRequired,
+    descriptions: ImmutablePropTypes.list.isRequired
   }
 
   renderBenefits() {
@@ -93,17 +117,41 @@ export default class ProductInfo extends Component {
     ));
   }
 
+  renderDescriptions(code) {
+    const { descriptions } = this.props;
+    const category = descriptions.find(d => d.get('code') === code);
+    const categoryTitle = category.get('title');
+    const categoryItems = category.get('description');
+
+    // should I map all of them?
+    return (
+      <Section>
+        <Title>{titleFormatter(categoryTitle)}</Title>
+        {categoryItems.map(item => (
+          <p key={`${item.get('label')}${item.get('value')}`}>
+            <span>{item.get('label') && `${item.get('label')}: `}</span>
+            {item.get('value')}
+          </p>
+        ))}
+        {category.get('code') === 'DIMENSIONI' && <Divider />}
+      </Section>
+    );
+  }
+
   render() {
     return (
       <Wrapper>
-        <Row>
+        <Row pTop="69px" bgColor="#efefef">
           <Column>{this.renderBenefits()}</Column>
           <Column>{this.renderBlocks()}</Column>
         </Row>
-        <Card TitleComponent={CardTitle} titleText="Maggiori informazioni">
-          <Row>
-            <Column>{this.renderBenefits()}</Column>
-            <Column>{this.renderBlocks()}</Column>
+        <Card TitleComponent={CardTitleComponent}>
+          <Row pTop="31px" bgColor="#f7f7f7">
+            <Column>{this.renderDescriptions('MATERIALE')}</Column>
+            <Column>
+              {this.renderDescriptions('DIMENSIONI')}
+              {this.renderDescriptions('UTILE_DA_SAPERE')}
+            </Column>
           </Row>
         </Card>
       </Wrapper>

@@ -8,6 +8,11 @@
 }
 
 @font-face {
+   font-family: "LeroyMerlinSans Light";
+   src: url("./assets/LM_Font/LeroyMerlinSansOfficeLight-Regular.ttf");
+}
+
+@font-face {
    font-family: "LeroyMerlinSans Bold";
    src: url("./assets/LM_Font/LeroyMerlinSansOffice-Bold.ttf");
 }

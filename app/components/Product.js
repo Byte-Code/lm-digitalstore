@@ -59,6 +59,7 @@ export default class Product extends Component {
     const name = productInfo.get('name');
     const code = productInfo.get('code');
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
+    const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -75,7 +76,10 @@ export default class Product extends Component {
             alt={name}
           />
         </SliderWrapper>
-        <ProductInfo marketingDescriptions={marketingDescriptions} />
+        <ProductInfo
+          marketingDescriptions={marketingDescriptions}
+          descriptions={descriptions}
+        />
       </Wrapper>
     );
   }
