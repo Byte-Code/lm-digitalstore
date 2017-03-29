@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Drawer from 'material-ui/Drawer';
 
@@ -9,7 +9,7 @@ const DivWithProps = (props) => <div {...props} />;
 const Button = styled(DivWithProps)`
   width: 90px
   height: 120px;
-  background: #67cb33;
+  background: #339900;
   position: fixed;
   left: ${props => (props.pLeft || 0)};
   top: 70px;
