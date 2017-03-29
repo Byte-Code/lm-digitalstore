@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
+import LinkBack from './LinkBack';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -37,12 +38,12 @@ const Button = styled.div`
 
 const Footer = () => (
   <Wrapper>
-    <Link>
+    <LinkBack>
       <Button>
         <ArrowIcon color="#fff" style={{ height: 50, width: 50 }} />
         <p>Indietro</p>
       </Button>
-    </Link>
+    </LinkBack>
     <Link to="/world">
       <Button>
         <HomeIcon color="#fff" style={{ height: 50, width: 50 }} />
