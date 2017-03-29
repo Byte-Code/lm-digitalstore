@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Drawer from 'material-ui/Drawer';
 
 import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
+import FamilySideBar from '../containers/FamilySideBar';
 
 const DivWithProps = (props) => <div {...props} />;
 
@@ -31,6 +32,7 @@ const Column = styled.div`
   background: ${props => props.bgColor || '#fff'};
   width: ${props => props.width || 'auto'};
   box-shadow: ${props => props.bShadow || 'none'};
+  overflow: auto;
 `;
 
 export default class SideMenu extends Component {
@@ -64,7 +66,7 @@ export default class SideMenu extends Component {
             width="275px"
             bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
           >
-            yoyoyo
+            <FamilySideBar />
           </Column>
           <Column bgColor="transparent">
             <Button

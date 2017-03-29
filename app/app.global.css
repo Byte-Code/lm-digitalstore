@@ -45,6 +45,12 @@ body {
   font-family: LeroyMerlinSans, Arial, Helvetica, Helvetica Neue, serif;
 }
 
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+
 h2 {
   margin: 0;
   font-size: 2.25rem;
