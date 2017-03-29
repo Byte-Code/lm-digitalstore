@@ -18,7 +18,7 @@ const Button = styled(DivWithProps)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  display: ${props => props.isVisible || 'flex'};
+  display: flex;
   &>p {
     text-align: center;
     color: #fff;
@@ -70,7 +70,6 @@ export default class SideMenu extends Component {
             <Button
               onTouchTap={this.toggleMenu}
               pLeft="275px"
-              open={this.state.open}
             >
               <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
               <p>Giardino & Terrazzo</p>
