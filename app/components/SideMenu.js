@@ -19,7 +19,8 @@ const Button = styled(DivWithProps)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+  display: ${props => (props.isVisible ? 'flex' : 'none')};
   &>p {
     text-align: center;
     color: #fff;
@@ -48,17 +49,19 @@ export default class SideMenu extends Component {
   }
 
   render() {
+    const { open } = this.state;
+
     return (
       <div>
-        <Button onTouchTap={this.toggleMenu}>
+        <Button onTouchTap={this.toggleMenu} isVisible={!open}>
           <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
           <p>Giardino & Terrazzo</p>
         </Button>
         <Drawer
           docked={false}
           width={365}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({ open })}
+          open={open}
+          onRequestChange={(value) => this.setState({ value })}
           containerStyle={{ background: 'transparent', boxShadow: 'none', display: 'flex' }}
         >
           <Column
@@ -72,6 +75,7 @@ export default class SideMenu extends Component {
             <Button
               onTouchTap={this.toggleMenu}
               pLeft="275px"
+              isVisible={open}
             >
               <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
               <p>Giardino & Terrazzo</p>
