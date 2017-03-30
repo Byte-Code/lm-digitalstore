@@ -1,8 +1,58 @@
+
 import { app, BrowserWindow, Menu, shell } from 'electron';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
 
 let menu;
 let template;
 let mainWindow = null;
+
+//-------------------------------------------------------------------
+// AUTO-UPDATE AND LOGGING
+//-------------------------------------------------------------------
+
+autoUpdater.logger = log;
+// autoUpdater.logger.transport.file.level = 'info';
+log.info('App starting...');
+autoUpdater.on('update-downloaded', (ev, info) => {
+  log.info(info);
+  setTimeout(() => {
+    autoUpdater.quitAndInstall();
+  }, 5000);
+});
+
+
+function sendStatusToWindow(text) {
+  log.info(text);
+  console.log(text);
+  mainWindow.webContents.send('message', text);
+}
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+
+autoUpdater.on('update-available', (ev, info) => {
+  sendStatusToWindow('Update available.');
+});
+
+autoUpdater.on('update-not-available', (ev, info) => {
+  sendStatusToWindow('Update not available.');
+});
+
+autoUpdater.on('error', (ev, err) => {
+  sendStatusToWindow(err);
+  sendStatusToWindow('Error in auto-updater.');
+});
+
+autoUpdater.on('download-progress', (ev, progressObj) => {
+  sendStatusToWindow('Download progress...');
+});
+
+autoUpdater.on('update-downloaded', (ev, info) => {
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+});
+
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support'); // eslint-disable-line
@@ -44,10 +94,14 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.checkForUpdates();
+  }
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1080,
-    height: 1918,
+    height: 1920,
     fullscreenable: true,
     frame: false
   });

@@ -15,6 +15,12 @@ export default validate({
     }, {
       test: /\.json$/,
       loader: 'json-loader'
+    }, {
+      test: /\.html$/,
+      loader: 'html-loader?attrs[]=video:src'
+    }, {
+      test: /\.mp4$/,
+      loader: 'url?limit=3500000&mimetype=video/mp4'
     }]
   },
 

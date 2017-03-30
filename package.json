@@ -23,7 +23,8 @@
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "cleanup": "mop -v"
+    "cleanup": "mop -v",
+    "release": "npm run build && build --win -p always"
   },
   "browserslist": "electron 1.4",
   "build": {
@@ -53,6 +54,12 @@
       "main.js.map",
       "package.json"
     ],
+    "nsis": {
+      "oneClick": true,
+      "perMachine": true,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": false
+    },
     "win": {
       "target": "nsis"
     },
