@@ -1,4 +1,4 @@
-import LmApi from 'lm-sdk';
+import LmApi from '@byte-code/lm-sdk';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
