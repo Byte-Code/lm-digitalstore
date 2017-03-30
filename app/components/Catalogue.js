@@ -4,7 +4,6 @@ import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
-import ProductSlider from './ProductSlider';
 import { chunkItemList } from '../utils/utils';
 
 const Header = styled.div`
@@ -17,6 +16,12 @@ const Header = styled.div`
   &>h1 {
     font-size: 48px;
   }
+`;
+
+const ProductSlider = styled.div`
+  margin: 0 40px;
+  display: flex;
+  overflow-x: auto;
 `;
 
 const Slide = styled.div`
