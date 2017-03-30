@@ -6,7 +6,10 @@ import Footer from '../components/Footer';
 
 export default function CataloguePage(props) {
   return (
-    <Page background="#f7f7f7">
+    <Page
+      background="#f7f7f7"
+      padding="0 0 140px"
+    >
       <Catalogue params={props.params} />
       <Footer />
     </Page>

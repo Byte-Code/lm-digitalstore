@@ -7,7 +7,7 @@ import SideMenu from '../components/SideMenu';
 
 export default function ProductPage(props) {
   return (
-    <Page>
+    <Page padding="0 0 140px">
       <SideMenu />
       <Product params={props.params} />
       <Footer />
