@@ -5,6 +5,7 @@ const PageWrapper = styled.div`
   background: ${props => props.background};
   padding: ${props => props.padding};
   height: ${props => props.height};
+  min-height: 1920px;
 `;
 
 export default class Page extends Component {
