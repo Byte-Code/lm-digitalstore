@@ -1,3 +1,4 @@
+import LmApi from '@byte-code/lm-sdk';
 import world from './world';
 import weather from './weather.json';
 
@@ -16,3 +17,11 @@ export function fetchWeather() {
     );
   });
 }
+
+const baseUrl = 'https://api-gw-qa.leroymerlin.it/api/v1';
+const spaceId = 'web-prd';
+const apiKey = 'testToken';
+const storeCode = 89;
+export const apiV1 = new LmApi(baseUrl, spaceId, storeCode, apiKey);
+
+export const apiMicro = new LmApi(baseUrl, spaceId, storeCode, 'W7bWcKx6Vc');

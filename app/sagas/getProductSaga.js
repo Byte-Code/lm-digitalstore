@@ -1,20 +1,15 @@
-import LmApi from '@byte-code/lm-sdk';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
+import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
 
-const baseUrl = 'https://api-gw-qa.leroymerlin.it/api/v1';
-const spaceId = 'web-prd';
-const apiKey = 'testToken';
-const storeCode = 89;
-export const api = new LmApi(baseUrl, spaceId, storeCode, apiKey);
 
 export function* callFetchProduct(action) {
   try {
     const { productCode } = action;
-    const result = fromJS(yield call(api.getProductDisplay.bind(api), productCode))
+    const result = fromJS(yield call(apiV1.getProductDisplay.bind(apiV1), productCode))
       .get('content');
     yield put(productActions.successFetchProduct(productCode, result));
   } catch (error) {
