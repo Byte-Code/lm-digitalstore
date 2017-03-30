@@ -11,7 +11,7 @@ export default validate({
     loaders: [{
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
-      exclude: /node_modules/,
+      exclude: /node_modules/
     }, {
       test: /\.json$/,
       loader: 'json-loader'
@@ -36,12 +36,9 @@ export default validate({
    * Determine the array of extensions that should be used to resolve modules.
    */
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
-    fallback: path.join(__dirname, 'node_modules')
+    extensions: ['', '.js', '.jsx', '.json', '.html', '.mp4'],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
-
-  resolveLoader: { fallback: path.join(__dirname, 'node_modules') },
 
   plugins: [],
 
