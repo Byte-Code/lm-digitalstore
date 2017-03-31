@@ -1,6 +1,6 @@
 {
   "name": "LMDigitalStore",
-  "productName": "LMDigitalStore",
+  "productName": "LM Digital Store",
   "version": "2.0.0",
   "description": "Electron application demo for Leroy Merlin",
   "main": "./main.js",

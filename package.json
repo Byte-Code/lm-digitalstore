@@ -1,6 +1,6 @@
 {
   "name": "LMDigitalStore",
-  "productName": "LMDigitalStore",
+  "productName": "LM Digital Store",
   "version": "0.10.0",
   "description": "Electron application demo for Leroy Merlin",
   "main": "main.js",
@@ -28,7 +28,7 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronLM",
+    "productName": "LMDigitalStore",
     "appId": "org.develar.ElectronReact",
     "category": "public.app-category.tools",
     "dmg": {
