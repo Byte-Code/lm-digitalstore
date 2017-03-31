@@ -8,7 +8,6 @@ import ProductBadge from './ProductBadge';
 const Wrapper = styled.div`
   padding-left: 40px;
   display: flex;
-  overflow-x: auto;
 `;
 
 const Header = styled.div`
@@ -22,6 +21,7 @@ const Header = styled.div`
 
 const Slider = styled.div`
   display: flex;
+  overflow-x: auto;
   &>a {
     margin-right: 20px;
   }
