@@ -19,6 +19,12 @@ export default class Card extends Component {
     };
   }
 
+  componentWillUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({ expanded: false });
+    }
+  }
+
   toggleCard() {
     const currentState = this.state.expanded;
     this.setState({ expanded: !currentState });
