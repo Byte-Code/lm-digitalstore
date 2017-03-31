@@ -7,7 +7,6 @@ import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
 import PriceBadge from './PriceBadge';
 import SimilarProducts from './SimilarProducts';
-import { chunkItemList } from '../utils/utils';
 
 const Wrapper = styled.div`
   position: relative;
@@ -79,11 +78,10 @@ export default class Product extends Component {
 
     const name = productInfo.get('name');
     const code = productInfo.get('code');
+    const productType = productInfo.getIn(['productDetail', 'descriptionType']);
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
-    const halfDescriptionsSize = Math.ceil(descriptions.size / 2);
-    const chunkedDescriptions = chunkItemList(descriptions, halfDescriptionsSize);
     const pricingInfo = productInfo.getIn(['price', 'selling']);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
@@ -100,8 +98,9 @@ export default class Product extends Component {
           />
         </SliderWrapper>
         <ProductInfo
+          productType={productType}
           marketingDescriptions={marketingDescriptions}
-          descriptions={chunkedDescriptions}
+          descriptions={descriptions}
         />
         <SimilarProductsWrapper>
           <SimilarProducts similarProducts={similarProducts} />
