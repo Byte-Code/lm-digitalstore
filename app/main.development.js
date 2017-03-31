@@ -94,9 +94,9 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
-  if (process.env.NODE_ENV === 'production') {
-    autoUpdater.checkForUpdates();
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   autoUpdater.checkForUpdates();
+  // }
 
   mainWindow = new BrowserWindow({
     show: false,
