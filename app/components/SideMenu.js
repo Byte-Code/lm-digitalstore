@@ -61,7 +61,7 @@ export default class SideMenu extends Component {
           docked={false}
           width={365}
           open={open}
-          onRequestChange={(value) => this.setState({ value })}
+          onRequestChange={(value) => this.setState({ open: value })}
           containerStyle={{ background: 'transparent', boxShadow: 'none', display: 'flex' }}
         >
           <Column
