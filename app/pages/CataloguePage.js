@@ -10,7 +10,7 @@ export default function CataloguePage(props) {
       background="#f7f7f7"
       padding="0 0 140px"
     >
-      <Catalogue params={props.params} query={props.location.query} />
+      <Catalogue params={props.params} router={props.router} />
       <Footer />
     </Page>
   );
@@ -18,5 +18,5 @@ export default function CataloguePage(props) {
 
 CataloguePage.propTypes = {
   params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
-  location: PropTypes.shape({ query: PropTypes.object.isRequired }).isRequired
+  router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired
 };

@@ -8,7 +8,7 @@ import { buildFilters } from '../utils/utils';
 const mapStateToProps = (state, ownProps) => ({
   categoryInfo: getCategory(state, ownProps.params.categoryCode),
   products: getProductsToShow(state),
-  activeFilters: buildFilters(ownProps.query)
+  activeFilters: buildFilters(ownProps.router.location.query)
 });
 
 const mapDispatchToProps = {
