@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
+import SellingAidsBadge from './SellingAidsBadge';
 import { chunkItemList } from '../utils/utils';
 
 const Header = styled.div`
@@ -33,12 +34,6 @@ const Slide = styled.div`
   }
 `;
 
-const Filters = styled.div`
-  height: 75px;
-  background: #efefef;
-  margin-bottom: 115px;
-`;
-
 export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
@@ -66,6 +61,7 @@ export default class Catalogue extends Component {
     }
 
     const catName = categoryInfo.get('name');
+    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
     const itemList = chunkItemList(this.props.categoryInfo.get('itemList'), 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
@@ -83,7 +79,7 @@ export default class Catalogue extends Component {
         <Header>
           <h1>{catName}</h1>
         </Header>
-        <Filters>Filters here</Filters>
+        <SellingAidsBadge sellingAids={sellingAids} />
         <ProductSlider>
           {sliderItems}
         </ProductSlider>
