@@ -1,4 +1,4 @@
-import { Range, List } from 'immutable';
+import { Range } from 'immutable';
 
 export function titleFormatter(text) {
   return text.charAt(0) + text.slice(1).toLowerCase();
@@ -9,7 +9,7 @@ export function chunkItemList(itemList, chunkSize) {
     .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
 }
 
-export function buildAids(query) {
-  const aids = query.aids ? List(query.aids.split(',')) : List();
-  return aids.map(f => decodeURIComponent(f));
+export function buildAid(query) {
+  const aids = query.aids ? decodeURIComponent(query.aids) : '';
+  return aids;
 }

@@ -40,9 +40,8 @@ export default class Catalogue extends Component {
     requestFetchCategory: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
-    activeAids: ImmutablePropTypes.list.isRequired,
+    activeAid: PropTypes.string.isRequired,
     router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
-    filterCatalogueByAids: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -56,13 +55,6 @@ export default class Catalogue extends Component {
       requestFetchCategory
     } = this.props;
     requestFetchCategory(categoryCode);
-  }
-
-  componentWillUpdate(nextProps) {
-    const filtersChanged = !this.props.activeAids.equals(nextProps.activeAids);
-    if (filtersChanged) {
-      this.props.filterCatalogueByAids(this.props.categoryInfo.getIn(['sellingAidsProducts', 0, 'aids']), nextProps.activeAids);
-    }
   }
 
   toggleAid(newAid) {

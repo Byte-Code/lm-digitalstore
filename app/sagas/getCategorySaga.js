@@ -11,7 +11,7 @@ export function* callFetchCategory(action) {
     const { categoryCode } = action;
     const categoryList = fromJS(yield call(apiV1.getCategoryDisplay.bind(apiV1), categoryCode));
     const idList = categoryList.getIn(['content', 'orderedProducts']).map(p => p.get('code'));
-    yield put(catalogueActions.initCatalogue(idList));
+    yield put(catalogueActions.updateCatalogue(idList));
     const productList = fromJS(yield call(apiV1.getProductListDisplay.bind(apiV1), idList.toJS()));
     const result = categoryList
       .setIn(['content', 'itemList'], productList.getIn(['content', 'itemlist']))
