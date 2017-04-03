@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
-import { getCategory } from '../reducers/selectors';
+import { getCategory, getProductsToShow } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  categoryInfo: getCategory(state, ownProps.params.categoryCode)
+  categoryInfo: getCategory(state, ownProps.params.categoryCode),
+  products: getProductsToShow(state)
 });
 
 const mapDispatchToProps = {

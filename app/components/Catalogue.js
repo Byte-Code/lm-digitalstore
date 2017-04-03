@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import styled from 'styled-components';
 
 import ProductBadge from './ProductBadge';
@@ -38,11 +38,13 @@ export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
-    categoryInfo: ImmutablePropTypes.map
+    categoryInfo: ImmutablePropTypes.map,
+    products: ImmutablePropTypes.list
   }
 
   static defaultProps = {
-    categoryInfo: Map()
+    categoryInfo: Map(),
+    products: List()
   }
 
   componentDidMount() {
@@ -54,7 +56,7 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo } = this.props;
+    const { categoryInfo, products } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -62,7 +64,8 @@ export default class Catalogue extends Component {
 
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
-    const itemList = chunkItemList(this.props.categoryInfo.get('itemList'), 2);
+    const productsToShow = categoryInfo.get('itemList').filter(p => products.includes(p.get('code')));
+    const itemList = chunkItemList(productsToShow, 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
       return (

@@ -1,6 +1,7 @@
 import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
-import getCategorySelector from './Category/categorySelectors';
+import * as categorySelectors from './Category/categorySelectors';
+import * as catalogueSelectors from './Catalogue/catalogueSelectors';
 import getProductSelector from './Product/productSelectors';
 
 export function getWorld(state) {
@@ -12,9 +13,21 @@ export function getWeather(state) {
 }
 
 export function getCategory(state, categoryCode) {
-  return getCategorySelector(state.get('categoryReducer'), categoryCode);
+  return categorySelectors.getCategory(state.get('categoryReducer'), categoryCode);
+}
+
+export function getSellingAids(state, categoryCode) {
+  return categorySelectors.getSellingAids(state.get('categoryReducer'), categoryCode);
+}
+
+export function getFilters(state, categoryCode) {
+  return categorySelectors.getFilters(state.get('categoryReducer'), categoryCode);
 }
 
 export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
+}
+
+export function getProductsToShow(state) {
+  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'));
 }
