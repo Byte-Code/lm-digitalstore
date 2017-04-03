@@ -9,7 +9,7 @@ export function chunkItemList(itemList, chunkSize) {
     .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
 }
 
-export function buildFilters(query) {
-  const filters = query.facets ? List(query.filters.split(',')) : List();
-  return filters.map(f => decodeURIComponent(f));
+export function buildAids(query) {
+  const aids = query.aids ? List(query.aids.split(',')) : List();
+  return aids.map(f => decodeURIComponent(f));
 }

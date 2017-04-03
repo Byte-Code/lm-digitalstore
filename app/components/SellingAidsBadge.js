@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
@@ -51,7 +51,8 @@ const Filter = styled.div`
 
 export default class SellingAidsBadge extends Component {
   static propTypes = {
-    sellingAids: ImmutablePropTypes.map
+    sellingAids: ImmutablePropTypes.map,
+    onToggle: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -59,11 +60,11 @@ export default class SellingAidsBadge extends Component {
   }
 
   renderAids() {
-    const { sellingAids } = this.props;
+    const { sellingAids, onToggle } = this.props;
     const aids = sellingAids.get('aids');
 
     return aids.map(aid => (
-      <Filter key={aid.get('code')}>
+      <Filter key={aid.get('code')} onClick={() => onToggle(aid.get('code'))}>
         <p>{aid.get('name')}</p>
       </Filter>
     ));

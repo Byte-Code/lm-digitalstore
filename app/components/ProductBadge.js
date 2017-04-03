@@ -1,5 +1,6 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Map } from 'immutable';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 
@@ -39,6 +40,9 @@ const Price = styled.div`
 `;
 
 const ProductBadge = ({ productInfo }) => {
+  if (productInfo.isEmpty()) {
+    return null;
+  }
   const imageID = productInfo.get('mainImage');
   const imageOptions = { width: 405, height: 405 };
   const name = productInfo.get('name');
@@ -63,7 +67,11 @@ const ProductBadge = ({ productInfo }) => {
 };
 
 ProductBadge.propTypes = {
-  productInfo: ImmutablePropTypes.map.isRequired
+  productInfo: ImmutablePropTypes.map
+};
+
+ProductBadge.defaultProps = {
+  productInfo: Map()
 };
 
 export default ProductBadge;
