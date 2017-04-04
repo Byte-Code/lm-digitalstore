@@ -37,9 +37,8 @@ const Filter = styled.div`
   width: 150px;
   height: 42px;
   border-radius: 20px;
-  background-color: ${props => (props.isActive ? '#333333' : '#efefef')};
+  background-color: ${props => (props.isActive ? '#67cb33' : '#efefef')};
   color: ${props => (props.isActive ? '#efefef' : '#333333')}
-  border: ${props => (props.isActive ? '2px solid #efefef' : 'none')}
   display: flex;
   justify-content: center;
   align-items: center;
