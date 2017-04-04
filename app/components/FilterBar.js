@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
+import FilterDialog from './FilterDialog';
+
 const Wrapper = styled.div`
   display: flex;
   height: 71px;
@@ -58,6 +60,7 @@ export default class FilterBar extends Component {
     this.setState({ open: false });
   }
 
+  // TODO separate dialog logic into dialog component?
   render() {
     return (
       <Wrapper>
@@ -73,9 +76,9 @@ export default class FilterBar extends Component {
           onRequestClose={this.handleClose}
           open={this.state.open}
           contentStyle={{ width: '100%', maxWidth: 'none' }}
-          bodyStyle={{ padding: 'none', background: 'rgba(51, 51, 51, 0.8)' }}
+          bodyStyle={{ padding: '40px', background: 'rgba(51, 51, 51, 0.8)' }}
         >
-          Hello
+          <FilterDialog filters={this.props.filters} />
         </Dialog>
       </Wrapper>
     );
