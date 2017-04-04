@@ -69,10 +69,11 @@ export default class FilterBar extends Component {
           <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
         </ActiveFilters>
         <Dialog
-          title="Dialog With Custom Width"
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.open}
+          contentStyle={{ width: '100%', maxWidth: 'none' }}
+          bodyStyle={{ padding: 'none', background: 'rgba(51, 51, 51, 0.8)' }}
         >
           Hello
         </Dialog>
