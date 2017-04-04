@@ -78,7 +78,7 @@ export default class Catalogue extends Component {
 
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
-    const filterGroups = categoryInfo.get('facetFilters');
+    const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
     const itemList = chunkItemList(products, 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;

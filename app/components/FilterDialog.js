@@ -67,7 +67,6 @@ const Filter = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding: 10px;
   &>p {
     line-height: 20px;
     font-size: 16px;
