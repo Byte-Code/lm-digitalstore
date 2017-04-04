@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
 const Wrapper = styled.div`
@@ -42,16 +43,39 @@ export default class FilterBar extends Component {
     filters: ImmutablePropTypes.list.isRequired
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  }
+
   render() {
     return (
       <Wrapper>
-        <Button>
+        <Button onClick={this.handleOpen}>
           <AddIcon color="#fff" style={{ height: 30, width: 30 }} />
           <p>Piú filtri</p>
         </Button>
         <ActiveFilters>
           <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
         </ActiveFilters>
+        <Dialog
+          title="Dialog With Custom Width"
+          modal={false}
+          onRequestClose={this.handleClose}
+          open={this.state.open}
+        >
+          Hello
+        </Dialog>
       </Wrapper>
     );
   }
