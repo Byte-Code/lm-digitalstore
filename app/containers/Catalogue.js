@@ -4,16 +4,21 @@ import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { filterCatalogueByAids } from '../actions/catalogueActions';
 import { getCategory, getProductsToShow, getSellingAid } from '../reducers/selectors';
-import { buildAid } from '../utils/utils';
+import { buildAid, buildFilters } from '../utils/utils';
 
 const mapStateToProps = (state, ownProps) => {
-  const categoryCode = ownProps.params.categoryCode;
-  const activeAid = buildAid(ownProps.router.location.query);
+  const {
+    params: { categoryCode },
+    router: { location: { query } }
+  } = ownProps;
+  const activeAid = buildAid(query);
   const idListAid = getSellingAid(state, categoryCode, activeAid);
+  const activeFilters = buildFilters(query);
   return {
     categoryInfo: getCategory(state, categoryCode),
     products: getProductsToShow(state, categoryCode, idListAid),
     activeAid,
+    activeFilters
   };
 };
 

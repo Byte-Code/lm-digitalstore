@@ -42,7 +42,8 @@ const ActiveFilters = styled.div`
 
 export default class FilterBar extends Component {
   static propTypes = {
-    filterGroups: ImmutablePropTypes.list.isRequired
+    filterGroups: ImmutablePropTypes.list.isRequired,
+    resetFilters: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -62,6 +63,8 @@ export default class FilterBar extends Component {
 
   // TODO separate dialog logic into dialog component?
   render() {
+    const { resetFilters } = this.props;
+
     return (
       <Wrapper>
         <Button onClick={this.handleOpen}>
@@ -81,6 +84,7 @@ export default class FilterBar extends Component {
           <FilterDialog
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
+            resetFilters={resetFilters}
           />
         </Dialog>
       </Wrapper>

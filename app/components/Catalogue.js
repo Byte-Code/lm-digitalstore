@@ -58,7 +58,7 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode);
   }
 
-  toggleAid(newAid) {
+  toggleAid = (newAid) => {
     const { router } = this.props;
     const newQuery = encodeURIComponent(newAid);
     router.push({
@@ -68,6 +68,29 @@ export default class Catalogue extends Component {
       }
     });
   }
+
+  toggleFilter = (newFilter) => {
+    const { router, activeFilters } = this.props;
+    let newFilters;
+    if (activeFilters.contains(newFilter)) {
+      newFilters = activeFilters.remove(newFilter);
+    } else newFilters = activeFilters.push(newFilter);
+    const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
+    router.push({
+      pathname: router.location.pathname,
+      query: Object.assign({}, router.location.query, {
+        filters: newQuery
+      })
+    });
+  }
+
+  // TODO need a different resetFilters for FiltersDialog
+  resetFilters = () => {
+    const { router } = this.props;
+    router.replace({
+      pathname: router.location.pathname
+    });
+  };
 
   render() {
     const { categoryInfo, products, activeAid } = this.props;
@@ -98,10 +121,13 @@ export default class Catalogue extends Component {
         </Header>
         <SellingAidsBadge
           sellingAids={sellingAids}
-          onToggle={this.toggleAid.bind(this)}
+          onToggle={this.toggleAid}
           activeAid={activeAid}
         />
-        <FilterBar filterGroups={filterGroups} />
+        <FilterBar
+          filterGroups={filterGroups}
+          resetFilters={this.resetFilters}
+        />
         <ProductSlider>
           {sliderItems}
         </ProductSlider>

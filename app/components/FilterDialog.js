@@ -77,7 +77,8 @@ const Filter = styled.div`
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func.isRequired,
+    resetFilters: PropTypes.func.isRequired
   }
 
   renderFilterGroups() {
@@ -97,7 +98,7 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { handleClose } = this.props;
+    const { handleClose, resetFilters } = this.props;
 
     return (
       <Wrapper>
@@ -106,7 +107,7 @@ export default class FilterDialog extends Component {
             <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Chiudi Filtri</p>
           </Button>
-          <Button tDeco="underline" fSize="16px">
+          <Button tDeco="underline" fSize="16px" onClick={resetFilters}>
             <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Reset Filtri</p>
           </Button>
