@@ -37,7 +37,9 @@ const Filter = styled.div`
   width: 150px;
   height: 42px;
   border-radius: 20px;
-  background-color: #efefef;
+  background-color: ${props => (props.isActive ? '#333333' : '#efefef')};
+  color: ${props => (props.isActive ? '#efefef' : '#333333')}
+  border: ${props => (props.isActive ? '2px solid #efefef' : 'none')}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,17 +64,24 @@ export default class SellingAidsBadge extends Component {
   }
 
   renderAids() {
-    const { sellingAids, onToggle } = this.props;
+    const { sellingAids, onToggle, activeAid } = this.props;
     const aids = sellingAids.get('aids');
 
-    return aids.map(aid => (
-      <Filter
-        key={aid.get('code')}
-        onClick={() => onToggle(aid.get('code'))}
-      >
-        <p>{aid.get('name')}</p>
-      </Filter>
-    ));
+    return aids.map(aid => {
+      const aidCode = aid.get('code');
+      const isActive = aidCode === activeAid;
+
+      // TODO add onTouchTap here
+      return (
+        <Filter
+          key={aidCode}
+          onClick={() => onToggle(aidCode)}
+          isActive={isActive}
+        >
+          <p>{aid.get('name')}</p>
+        </Filter>
+      );
+    });
   }
 
   render() {
