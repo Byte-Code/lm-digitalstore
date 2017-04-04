@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { List } from 'immutable';
 import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
@@ -85,6 +86,7 @@ export default class FilterBar extends Component {
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
             resetFilters={resetFilters}
+            activeFilters={List(['FRULE67849', 'FRULE67848'])}
           />
         </Dialog>
       </Wrapper>

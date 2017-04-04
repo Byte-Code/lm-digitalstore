@@ -77,8 +77,28 @@ const Filter = styled.div`
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
+    activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
     resetFilters: PropTypes.func.isRequired
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      active: props.activeFilters,
+      totalProducts: []
+    };
+  }
+
+  getTotalProducts() {
+    const { filterGroups } = this.props;
+    const { active } = this.state;
+    // const totalProducts = filterGroups.map(g => (
+    //   g.get('filters').filter(f => active.contains(f.get('code'))).getIn([0, 'products'])
+    // )).flatten().filter(fg => fg && true);
+    // this.setState({ totalProducts });
+    return totalProducts;
   }
 
   renderFilterGroups() {
@@ -99,6 +119,8 @@ export default class FilterDialog extends Component {
 
   render() {
     const { handleClose, resetFilters } = this.props;
+    // this.getTotalProducts();
+    // console.log(this.getTotalProducts().toJS());
 
     return (
       <Wrapper>
