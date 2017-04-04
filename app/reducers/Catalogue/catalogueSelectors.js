@@ -1,12 +1,8 @@
 import { List } from 'immutable';
 
-export function getAllProducts(state) {
-  return state.get('allProducts');
-}
-
-export function getProductsToShow(state, activeProducts) {
-  if (state.has('allProducts')) {
-    return state.get('allProducts').filter(p => activeProducts.contains(p));
+export function getProductsToShow(state, categoryCode, productIds) {
+  if (state.has(categoryCode)) {
+    return state.get(categoryCode).filter(p => productIds.includes(p.get('code')));
   }
   return List();
 }

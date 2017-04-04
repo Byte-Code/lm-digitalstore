@@ -28,6 +28,6 @@ export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }
 
-export function getProductsToShow(state, productIds) {
-  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), productIds);
+export function getProductsToShow(state, categoryCode, productIds) {
+  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode, productIds);
 }

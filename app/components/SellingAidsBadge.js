@@ -52,11 +52,13 @@ const Filter = styled.div`
 export default class SellingAidsBadge extends Component {
   static propTypes = {
     sellingAids: ImmutablePropTypes.map,
-    onToggle: PropTypes.func.isRequired
+    onToggle: PropTypes.func.isRequired,
+    activeAid: PropTypes.string
   }
 
   static defaultProps = {
-    sellingAids: Map()
+    sellingAids: Map(),
+    activeAid: ''
   }
 
   renderAids() {
@@ -64,7 +66,10 @@ export default class SellingAidsBadge extends Component {
     const aids = sellingAids.get('aids');
 
     return aids.map(aid => (
-      <Filter key={aid.get('code')} onClick={() => onToggle(aid.get('code'))}>
+      <Filter
+        key={aid.get('code')}
+        onClick={() => onToggle(aid.get('code'))}
+      >
         <p>{aid.get('name')}</p>
       </Filter>
     ));

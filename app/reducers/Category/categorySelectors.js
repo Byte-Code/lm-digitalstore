@@ -5,10 +5,11 @@ export function getCategory(state, categoryCode) {
 }
 
 export function getSellingAid(state, categoryCode, activeAid) {
+  let result;
   if (state.hasIn([categoryCode, 'sellingAidsProducts'])) {
-    return state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']).find(aid => aid.get('code') === activeAid).get('products');
+    result = state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']).find(aid => aid.get('code') === activeAid);
   }
-  return List();
+  return result ? result.get('products') : List();
 }
 
 export function getFilters(state, categoryCode) {

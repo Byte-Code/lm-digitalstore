@@ -69,7 +69,7 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo, products } = this.props;
+    const { categoryInfo, products, activeAid } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -77,8 +77,7 @@ export default class Catalogue extends Component {
 
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
-    const productsToShow = categoryInfo.get('itemList').filter(p => products.includes(p.get('code')));
-    const itemList = chunkItemList(productsToShow, 2);
+    const itemList = chunkItemList(products, 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
       return (
@@ -95,7 +94,11 @@ export default class Catalogue extends Component {
         <Header>
           <h1>{catName}</h1>
         </Header>
-        <SellingAidsBadge sellingAids={sellingAids} onToggle={this.toggleAid.bind(this)} />
+        <SellingAidsBadge
+          sellingAids={sellingAids}
+          onToggle={this.toggleAid.bind(this)}
+          activeAid={activeAid}
+        />
         <ProductSlider>
           {sliderItems}
         </ProductSlider>
