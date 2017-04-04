@@ -78,7 +78,7 @@ export default class Catalogue extends Component {
 
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
-    const filters = categoryInfo.get('facetFilters');
+    const filterGroups = categoryInfo.get('facetFilters');
     const itemList = chunkItemList(products, 2);
     const sliderItems = itemList.map(item => {
       const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
@@ -101,7 +101,7 @@ export default class Catalogue extends Component {
           onToggle={this.toggleAid.bind(this)}
           activeAid={activeAid}
         />
-        <FilterBar filters={filters} />
+        <FilterBar filterGroups={filterGroups} />
         <ProductSlider>
           {sliderItems}
         </ProductSlider>

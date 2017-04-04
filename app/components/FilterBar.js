@@ -42,7 +42,7 @@ const ActiveFilters = styled.div`
 
 export default class FilterBar extends Component {
   static propTypes = {
-    filters: ImmutablePropTypes.list.isRequired
+    filterGroups: ImmutablePropTypes.list.isRequired
   }
 
   constructor(props) {
@@ -78,7 +78,10 @@ export default class FilterBar extends Component {
           contentStyle={{ width: '100%', maxWidth: 'none' }}
           bodyStyle={{ padding: '40px', background: 'rgba(51, 51, 51, 0.8)' }}
         >
-          <FilterDialog filters={this.props.filters} />
+          <FilterDialog
+            filterGroups={this.props.filterGroups}
+            handleClose={this.handleClose}
+          />
         </Dialog>
       </Wrapper>
     );
