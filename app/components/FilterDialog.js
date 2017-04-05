@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import { List, Set } from 'immutable';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
@@ -74,6 +75,21 @@ const Filter = styled.div`
   }
 `;
 
+function getAllProducts(filterGroups) {
+  filterGroups.map(g => (g.get('filters').reduce((acc, f) => (acc.push(f.get('products'))), List())));
+}
+
+function filterProducts(filterGroups, activeFilters) {
+  return filterGroups.map(g => {
+    return g.get('filters').reduce((acc, f) => {
+      if (activeFilters.includes(f.get('code'))) {
+        return acc.push(f.get('products'));
+      }
+      return acc;
+    }, List()).flatten().toSet();
+  }).filterNot(f => f.isEmpty()).toArray();
+}
+
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
@@ -94,11 +110,12 @@ export default class FilterDialog extends Component {
   getTotalProducts() {
     const { filterGroups } = this.props;
     const { active } = this.state;
-    // const totalProducts = filterGroups.map(g => (
-    //   g.get('filters').filter(f => active.contains(f.get('code'))).getIn([0, 'products'])
-    // )).flatten().filter(fg => fg && true);
+    if (active.isEmpty()) {
+      return getAllProducts(filterGroups);
+    }
+    console.log();
+    return filterProducts(filterGroups, active);
     // this.setState({ totalProducts });
-    return totalProducts;
   }
 
   renderFilterGroups() {
@@ -120,7 +137,7 @@ export default class FilterDialog extends Component {
   render() {
     const { handleClose, resetFilters } = this.props;
     // this.getTotalProducts();
-    // console.log(this.getTotalProducts().toJS());
+    console.log(this.getTotalProducts());
 
     return (
       <Wrapper>
