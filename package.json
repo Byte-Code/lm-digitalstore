@@ -1,6 +1,6 @@
 {
-  "name": "LMDigitalStore",
-  "productName": "LM Digital Store",
+  "name": "LMDigitalStoreApp",
+  "productName": "LM Digital Store App",
   "version": "0.10.0",
   "description": "Electron application demo for Leroy Merlin",
   "main": "main.js",
@@ -28,7 +28,7 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "LMDigitalStore",
+    "productName": "LMDigitalStoreApp",
     "appId": "org.develar.ElectronReact",
     "category": "public.app-category.tools",
     "dmg": {
@@ -187,7 +187,7 @@
     "cloudinary-core": "^2.2.1",
     "electron-debug": "^1.1.0",
     "electron-log": "^2.0.2",
-    "electron-updater": "^1.11.2",
+    "electron-updater": "1.8.2",
     "font-awesome": "^4.7.0",
     "html-loader": "^0.4.5",
     "immutable": "4.0.0",

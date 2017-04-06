@@ -1,7 +1,7 @@
 {
-  "name": "LMDigitalStore",
-  "productName": "LM Digital Store",
-  "version": "2.0.0",
+  "name": "LMDigitalStoreApp",
+  "productName": "LM Digital Store App",
+  "version": "2.1.1",
   "description": "Electron application demo for Leroy Merlin",
   "main": "./main.js",
   "author": {
