@@ -70,7 +70,7 @@ export default class Catalogue extends Component {
     });
   }
 
-  applyFilters(newFilters) {
+  applyFilters = (newFilters) => {
     const { router } = this.props;
     const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
     router.push({

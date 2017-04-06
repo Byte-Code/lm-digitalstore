@@ -126,6 +126,13 @@ export default class FilterDialog extends Component {
     return Set.intersect(filterProducts(filterGroups, active));
   }
 
+  applyAndClose = () => {
+    const { applyFilters, handleClose } = this.props;
+    const { active } = this.state;
+    applyFilters(active);
+    handleClose();
+  }
+
   toggleFilter = (filterCode) => {
     const { active } = this.state;
     if (active.includes(filterCode)) {
@@ -172,7 +179,7 @@ export default class FilterDialog extends Component {
           </Button>
         </Header>
         {this.renderFilterGroups()}
-        <ApplyButton fSize="20px" onClick={handleClose}>
+        <ApplyButton fSize="20px" onClick={this.applyAndClose}>
           <p>{`Vedi tutti i ${totalProducts.size} risultati`}</p>
         </ApplyButton>
       </Wrapper>
