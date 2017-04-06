@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
-import { chunkItemList } from '../utils/utils';
 
 const Header = styled.div`
   width: 100%;
@@ -24,14 +23,13 @@ const ProductSlider = styled.div`
   margin: 100px 40px 0;
   display: flex;
   overflow-x: auto;
-`;
-
-const Slide = styled.div`
-  margin-right: 20px;
-  width: 405px;
-  flex-direction: column;
-  &>div:first-child {
-    margin-bottom: 60px;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  height: 1270px;
+  &>a {
+    width: 405px;
+    height: 605px;
+    margin-right: 20px;
   }
 `;
 
@@ -92,8 +90,13 @@ export default class Catalogue extends Component {
     });
   }
 
+  renderProducts() {
+    const { products } = this.props;
+    return products.map(p => (<ProductBadge productInfo={p} key={p.get('code')} />));
+  }
+
   render() {
-    const { categoryInfo, products, activeAid, activeFilters } = this.props;
+    const { categoryInfo, activeAid, activeFilters } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -102,17 +105,6 @@ export default class Catalogue extends Component {
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
     const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
-    const itemList = chunkItemList(products, 2);
-    const sliderItems = itemList.map(item => {
-      const key = `${item.getIn([0, 'code'])}-${item.getIn([1, 'code'])}`;
-      return (
-        <Slide key={key}>
-          <ProductBadge productInfo={item.get(0)} />
-          <ProductBadge productInfo={item.get(1)} />
-        </Slide>
-      );
-    }
-  );
 
     return (
       <div>
@@ -131,7 +123,7 @@ export default class Catalogue extends Component {
           activeFilters={activeFilters}
         />
         <ProductSlider>
-          {sliderItems}
+          {this.renderProducts()}
         </ProductSlider>
       </div>
     );

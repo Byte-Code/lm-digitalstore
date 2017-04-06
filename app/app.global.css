@@ -47,6 +47,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
+    height: 0px;
     background: transparent;  /* optional: just make scrollbar invisible */
 }
 

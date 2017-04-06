@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   cursor: pointer;
+  font-size:0;
   &>div {
     width: 100%;
     display: flex;
