@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, List } from 'immutable';
 import styled from 'styled-components';
+import Waypoint from 'react-waypoint';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
@@ -24,12 +25,14 @@ const ProductSlider = styled.div`
   display: flex;
   overflow-x: auto;
   flex-flow: column wrap;
-  justify-content: space-between;
   height: 1270px;
   &>a {
     width: 405px;
     height: 605px;
     margin-right: 20px;
+    &:nth-child(odd) {
+      margin-bottom: 60px;
+    }
   }
 `;
 
@@ -124,6 +127,7 @@ export default class Catalogue extends Component {
         />
         <ProductSlider>
           {this.renderProducts()}
+          <Waypoint onPositionChange={() => console.log('hello')} horizontal />
         </ProductSlider>
       </div>
     );
