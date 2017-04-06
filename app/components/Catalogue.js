@@ -60,8 +60,11 @@ export default class Catalogue extends Component {
   }
 
   toggleAid = (newAid) => {
-    const { router } = this.props;
-    const newQuery = encodeURIComponent(newAid);
+    const { router, activeAid } = this.props;
+    let newQuery;
+    if (activeAid === newAid) {
+      newQuery = '';
+    } else newQuery = encodeURIComponent(newAid);
     router.push({
       pathname: router.location.pathname,
       query: {
@@ -82,7 +85,7 @@ export default class Catalogue extends Component {
   }
 
   // TODO need a different resetFilters for FiltersDialog
-  resetFilters() {
+  resetFilters = () => {
     const { router } = this.props;
     router.replace({
       pathname: router.location.pathname
