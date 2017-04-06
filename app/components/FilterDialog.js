@@ -105,7 +105,6 @@ export default class FilterDialog extends Component {
     filterGroups: ImmutablePropTypes.list.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
-    resetFilters: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired
   }
 
@@ -141,6 +140,10 @@ export default class FilterDialog extends Component {
     return this.setState({ active: active.push(filterCode) });
   }
 
+  resetFilters = () => {
+    this.setState({ active: List() });
+  }
+
   renderFilterGroups = () => {
     const { filterGroups } = this.props;
     const { active } = this.state;
@@ -163,7 +166,7 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { handleClose, resetFilters } = this.props;
+    const { handleClose } = this.props;
     const totalProducts = this.getTotalProducts();
 
     return (
@@ -173,7 +176,7 @@ export default class FilterDialog extends Component {
             <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Chiudi Filtri</p>
           </Button>
-          <Button tDeco="underline" fSize="16px" onClick={resetFilters}>
+          <Button tDeco="underline" fSize="16px" onClick={this.resetFilters}>
             <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Reset Filtri</p>
           </Button>

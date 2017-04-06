@@ -86,7 +86,6 @@ export default class FilterBar extends Component {
           <FilterDialog
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
-            resetFilters={resetFilters}
             activeFilters={activeFilters}
             applyFilters={applyFilters}
           />
