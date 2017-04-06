@@ -42,6 +42,7 @@ export default class Catalogue extends Component {
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     activeAid: PropTypes.string.isRequired,
+    activeFilters: ImmutablePropTypes.list.isRequired,
     router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
   }
 
@@ -69,12 +70,8 @@ export default class Catalogue extends Component {
     });
   }
 
-  toggleFilter = (newFilter) => {
-    const { router, activeFilters } = this.props;
-    let newFilters;
-    if (activeFilters.contains(newFilter)) {
-      newFilters = activeFilters.remove(newFilter);
-    } else newFilters = activeFilters.push(newFilter);
+  applyFilters(newFilters) {
+    const { router } = this.props;
     const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
     router.push({
       pathname: router.location.pathname,
@@ -85,15 +82,15 @@ export default class Catalogue extends Component {
   }
 
   // TODO need a different resetFilters for FiltersDialog
-  resetFilters = () => {
+  resetFilters() {
     const { router } = this.props;
     router.replace({
       pathname: router.location.pathname
     });
-  };
+  }
 
   render() {
-    const { categoryInfo, products, activeAid } = this.props;
+    const { categoryInfo, products, activeAid, activeFilters } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -127,6 +124,8 @@ export default class Catalogue extends Component {
         <FilterBar
           filterGroups={filterGroups}
           resetFilters={this.resetFilters}
+          applyFilters={this.applyFilters}
+          activeFilters={activeFilters}
         />
         <ProductSlider>
           {sliderItems}

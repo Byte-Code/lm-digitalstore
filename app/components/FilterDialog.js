@@ -32,6 +32,14 @@ const Button = styled.div`
   }
 `;
 
+const ApplyButton = styled(Button)`
+  width: 320px;
+  height: 60px;
+  align-self: center;
+  background: #339900;
+  margin-top: 22px;
+`;
+
 const GroupWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -76,18 +84,20 @@ const Filter = styled.div`
 `;
 
 function getAllProducts(filterGroups) {
-  filterGroups.map(g => (g.get('filters').reduce((acc, f) => (acc.push(f.get('products'))), List())));
+  return filterGroups.map(g => (g.get('filters')
+    .reduce((acc, f) => acc.push(f.get('products')), List()))
+  ).flatten().toSet();
 }
 
 function filterProducts(filterGroups, activeFilters) {
-  return filterGroups.map(g => {
-    return g.get('filters').reduce((acc, f) => {
+  return filterGroups.map(g =>
+    g.get('filters').reduce((acc, f) => {
       if (activeFilters.includes(f.get('code'))) {
         return acc.push(f.get('products'));
       }
       return acc;
-    }, List()).flatten().toSet();
-  }).filterNot(f => f.isEmpty()).toArray();
+    }, List()).flatten().toSet()
+  ).filterNot(f => f.isEmpty()).toArray();
 }
 
 export default class FilterDialog extends Component {
@@ -95,7 +105,8 @@ export default class FilterDialog extends Component {
     filterGroups: ImmutablePropTypes.list.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
-    resetFilters: PropTypes.func.isRequired
+    resetFilters: PropTypes.func.isRequired,
+    applyFilters: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -103,7 +114,6 @@ export default class FilterDialog extends Component {
 
     this.state = {
       active: props.activeFilters,
-      totalProducts: []
     };
   }
 
@@ -113,19 +123,30 @@ export default class FilterDialog extends Component {
     if (active.isEmpty()) {
       return getAllProducts(filterGroups);
     }
-    console.log();
     return Set.intersect(filterProducts(filterGroups, active));
-    // this.setState({ totalProducts });
   }
 
-  renderFilterGroups() {
+  toggleFilter = (filterCode) => {
+    const { active } = this.state;
+    if (active.includes(filterCode)) {
+      return this.setState({ active: active.filterNot(f => f === filterCode) });
+    }
+    return this.setState({ active: active.push(filterCode) });
+  }
+
+  renderFilterGroups = () => {
     const { filterGroups } = this.props;
+    const { active } = this.state;
     return filterGroups.map(g => (
       <GroupWrapper key={g.get('code')}>
         <GroupTitle>{g.get('group')}</GroupTitle>
         <FilterWrapper>
           {g.get('filters').map(f => (
-            <Filter key={f.get('code')}>
+            <Filter
+              key={f.get('code')}
+              onClick={() => this.toggleFilter(f.get('code'))}
+              isActive={active.contains(f.get('code'))}
+            >
               <p>{f.get('name')}</p>
             </Filter>
           ))}
@@ -136,8 +157,7 @@ export default class FilterDialog extends Component {
 
   render() {
     const { handleClose, resetFilters } = this.props;
-    // this.getTotalProducts();
-    console.log(this.getTotalProducts());
+    const totalProducts = this.getTotalProducts();
 
     return (
       <Wrapper>
@@ -152,6 +172,9 @@ export default class FilterDialog extends Component {
           </Button>
         </Header>
         {this.renderFilterGroups()}
+        <ApplyButton fSize="20px" onClick={handleClose}>
+          <p>{`Vedi tutti i ${totalProducts.size} risultati`}</p>
+        </ApplyButton>
       </Wrapper>
     );
   }

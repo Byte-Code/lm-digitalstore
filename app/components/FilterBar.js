@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
 import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
@@ -44,7 +43,9 @@ const ActiveFilters = styled.div`
 export default class FilterBar extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
-    resetFilters: PropTypes.func.isRequired
+    resetFilters: PropTypes.func.isRequired,
+    applyFilters: PropTypes.func.isRequired,
+    activeFilters: ImmutablePropTypes.list.isRequired
   }
 
   constructor(props) {
@@ -64,7 +65,7 @@ export default class FilterBar extends Component {
 
   // TODO separate dialog logic into dialog component?
   render() {
-    const { resetFilters } = this.props;
+    const { resetFilters, activeFilters, applyFilters } = this.props;
 
     return (
       <Wrapper>
@@ -86,7 +87,8 @@ export default class FilterBar extends Component {
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
             resetFilters={resetFilters}
-            activeFilters={List(['FRULE108675', 'FRULE67849'])}
+            activeFilters={activeFilters}
+            applyFilters={applyFilters}
           />
         </Dialog>
       </Wrapper>
