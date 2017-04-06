@@ -114,7 +114,7 @@ export default class FilterDialog extends Component {
       return getAllProducts(filterGroups);
     }
     console.log();
-    return filterProducts(filterGroups, active);
+    return Set.intersect(filterProducts(filterGroups, active));
     // this.setState({ totalProducts });
   }
 

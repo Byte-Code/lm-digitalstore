@@ -86,7 +86,7 @@ export default class FilterBar extends Component {
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
             resetFilters={resetFilters}
-            activeFilters={List(['FRULE67846', 'FRULE67850'])}
+            activeFilters={List(['FRULE108675', 'FRULE67849'])}
           />
         </Dialog>
       </Wrapper>
