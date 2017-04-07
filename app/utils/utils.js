@@ -16,10 +16,13 @@ export function buildAid(query) {
 }
 
 export function filterProductsByAid(sellingAids, activeAid) {
-  if (!activeAid) {
-    return sellingAids.get('aids').reduce((acc, val) => acc.push(val.get('products')), List()).flatten().toSet();
+  if (sellingAids.isEmpty()) {
+    return Set();
   }
-  return sellingAids.get('aids').find(a => a.get('code') === activeAid).get('products');
+  if (!activeAid) {
+    return sellingAids.reduce((acc, val) => acc.push(val.get('products')), List()).flatten().toSet();
+  }
+  return sellingAids.find(a => a.get('code') === activeAid).get('products').toSet();
 }
 
 // FILTERS

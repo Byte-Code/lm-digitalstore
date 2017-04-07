@@ -4,14 +4,13 @@ export function getCategory(state, categoryCode) {
   return state.get(categoryCode);
 }
 
-export function getSellingAid(state, categoryCode, activeAid) {
-  let result;
+export function getSellingAids(state, categoryCode) {
   if (state.hasIn([categoryCode, 'sellingAidsProducts'])) {
-    result = state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']).find(aid => aid.get('code') === activeAid);
+    return state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']);
   }
-  return result ? result.get('products') : List();
+  return List();
 }
 
 export function getFilters(state, categoryCode) {
-  return state.getIn([categoryCode, 'facetFilters']);
+  return state.getIn([categoryCode, 'facetFilters']) || List();
 }

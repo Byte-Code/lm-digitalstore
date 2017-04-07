@@ -16,8 +16,8 @@ export function getCategory(state, categoryCode) {
   return categorySelectors.getCategory(state.get('categoryReducer'), categoryCode);
 }
 
-export function getSellingAid(state, categoryCode, activeAid) {
-  return categorySelectors.getSellingAid(state.get('categoryReducer'), categoryCode, activeAid);
+export function getSellingAids(state, categoryCode) {
+  return categorySelectors.getSellingAids(state.get('categoryReducer'), categoryCode);
 }
 
 export function getFilters(state, categoryCode) {
@@ -32,14 +32,6 @@ export function getProductsToShow(state, categoryCode, productIDList) {
   return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode, productIDList);
 }
 
-export function getProductsByAids(state, categoryCode) {
-  return catalogueSelectors.getProductsByAids(state.get('catalogueReducer'), categoryCode);
-}
-
-export function getProductsByFilters(state, categoryCode) {
-  return catalogueSelectors.getProductsByFilters(state.get('catalogueReducer'), categoryCode);
-}
-
-export function getIdsToFetch(state, categoryCode, activeFilters) {
-  return catalogueSelectors.getIdsToFetch(state.get('catalogueReducer'), categoryCode, activeFilters);
+export function getIdsToFetch(state, categoryCode, idsByFilters, idsByAids) {
+  return catalogueSelectors.getIdsToFetch(state.get('catalogueReducer'), categoryCode, idsByFilters, idsByAids);
 }

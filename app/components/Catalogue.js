@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
-import { filterProducts, filterProductsByAid } from '../utils/utils';
+import { filterProductsByAid } from '../utils/utils';
 
 const Header = styled.div`
   width: 100%;
@@ -41,8 +41,6 @@ export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
-    setSellingAids: PropTypes.func.isRequired,
-    setFilters: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     activeAid: PropTypes.string.isRequired,
@@ -58,30 +56,9 @@ export default class Catalogue extends Component {
   componentDidMount() {
     const {
       params: { categoryCode },
-      requestFetchCategory,
-      activeFilters,
-      activeAid
+      requestFetchCategory
     } = this.props;
-    requestFetchCategory(categoryCode, activeAid, activeFilters);
-  }
-
-  componentWillUpdate(nextProps) {
-    const {
-      params: { categoryCode },
-      categoryInfo,
-      activeAid,
-      activeFilters,
-      setFilters,
-      setSellingAids
-    } = nextProps;
-    if (activeAid !== this.props.activeAid || !activeFilters.equals(this.props.activeFilters)) {
-      const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
-      const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
-      const allAid = filterProductsByAid(sellingAids, activeAid);
-      const allFilters = filterProducts(filterGroups, activeFilters);
-      setFilters(categoryCode, allFilters);
-      setSellingAids(categoryCode, allAid);
-    }
+    requestFetchCategory(categoryCode);
   }
 
   toggleAid = (newAid) => {
@@ -123,7 +100,7 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo, activeAid, activeFilters, productsByAids } = this.props;
+    const { categoryInfo, activeAid, activeFilters } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -131,6 +108,7 @@ export default class Catalogue extends Component {
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
     const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
+    const productsByAids = filterProductsByAid(sellingAids.get('aids'), activeAid);
 
     return (
       <div>

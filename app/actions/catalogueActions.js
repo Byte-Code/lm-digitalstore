@@ -11,11 +11,3 @@ export function successFetchProducts(categoryCode, productList) {
 export function failureFetchProducts() {
   return ({ type: actions.FAILURE_FETCH_PRODUCTS });
 }
-
-export function setSellingAids(categoryCode, productIDList) {
-  return ({ type: actions.SET_SELLING_AIDS, categoryCode, productIDList });
-}
-
-export function setFilters(categoryCode, productIDList) {
-  return ({ type: actions.SET_FILTERS, categoryCode, productIDList });
-}
