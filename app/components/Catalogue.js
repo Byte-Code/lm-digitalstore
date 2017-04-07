@@ -109,7 +109,6 @@ export default class Catalogue extends Component {
     if (categoryInfo.isEmpty()) {
       return null;
     }
-
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
     const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
@@ -132,7 +131,11 @@ export default class Catalogue extends Component {
         />
         <ProductSlider>
           {this.renderProducts()}
-          <Waypoint onPositionChange={() => console.log('hello')} horizontal />
+          {/* <Waypoint
+            onPositionChange={() => {
+              setTimeout(
+                () => requestFetchProducts(categoryCode, productsToFetch), 2000);
+          }} horizontal /> */}
         </ProductSlider>
       </div>
     );

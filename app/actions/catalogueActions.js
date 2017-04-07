@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 
-export function requestFetchProducts(categoryCode) {
-  return ({ type: actions.REQUEST_FETCH_PRODUCTS, categoryCode });
+export function requestFetchProducts(categoryCode, productIDList) {
+  return ({ type: actions.REQUEST_FETCH_PRODUCTS, categoryCode, productIDList });
 }
 
 export function successFetchProducts(categoryCode, productList) {

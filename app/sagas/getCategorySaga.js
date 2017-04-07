@@ -18,6 +18,10 @@ export function* callFetchCategory(action) {
     const allFilters = filterProducts(filterGroups, activeFilters);
     yield put(catalogueActions.setFilters(categoryCode, allFilters));
     yield put(catalogueActions.setSellingAids(categoryCode, allAid));
+    // TODO don't fetch all the products, but fetch them in CatalogueSaga
+    const productIDList = categoryList.get('orderedProducts').map(p => p.get('code'));
+    const productList = fromJS(yield call(apiV1.getProductListDisplay.bind(apiV1), productIDList.toJS())).getIn(['content', 'itemlist']);
+    yield put(catalogueActions.successFetchProducts(categoryCode, productList));
   } catch (error) {
     yield put(categoryActions.failureFetchCategory());
   }
