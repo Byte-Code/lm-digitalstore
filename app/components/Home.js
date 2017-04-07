@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 
 import FamilyBadge from './FamilyBadge';
+import LogoLM from '../assets/logo.png';
 
 const Row = styled.div`
   display: flex;
@@ -100,7 +101,7 @@ export default class Home extends Component {
     return (
       <div>
         <Logo>
-          <img src="./assets/logo.png" alt="logo" />
+          <img src={LogoLM} alt="logo" />
         </Logo>
         <WorldTitle>
           <h1>Esplora le soluzioni Leroy Merlin per

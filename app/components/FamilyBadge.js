@@ -49,11 +49,12 @@ export default class FamilyBadge extends Component {
 
     switch (size) {
       case 'square-big':
-      default:
         return { height: 561, width: 490 };
       case 'square-small':
         return { height: 235, width: 235 };
       case 'horizontal':
+        return { height: 235, width: 490 };
+      default:
         return { height: 235, width: 490 };
     }
   }
