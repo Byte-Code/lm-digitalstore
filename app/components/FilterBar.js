@@ -80,7 +80,7 @@ export default class FilterBar extends Component {
     applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
-    productsByAids: ImmutablePropTypes.list.isRequired
+    productsByAids: ImmutablePropTypes.set.isRequired
   }
 
   constructor(props) {
