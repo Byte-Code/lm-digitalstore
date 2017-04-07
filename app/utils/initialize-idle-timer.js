@@ -17,7 +17,7 @@ export default function initializeIdleTimer(store) {
   }
 
   idleTimer.init(
-    5000,
+    TEN_MINUTES,
     onTimerStart,
     onTimerComplete,
     //onTimerReset
