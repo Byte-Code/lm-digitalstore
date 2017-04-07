@@ -65,7 +65,7 @@ export default class FilterBar extends Component {
 
   // TODO separate dialog logic into dialog component?
   render() {
-    const { resetFilters, activeFilters, applyFilters } = this.props;
+    const { resetFilters, activeFilters, applyFilters, productsByAids } = this.props;
 
     return (
       <Wrapper>
@@ -88,6 +88,7 @@ export default class FilterBar extends Component {
             handleClose={this.handleClose}
             activeFilters={activeFilters}
             applyFilters={applyFilters}
+            productsByAids={productsByAids}
           />
         </Dialog>
       </Wrapper>

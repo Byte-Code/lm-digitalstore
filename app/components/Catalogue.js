@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, List } from 'immutable';
 import styled from 'styled-components';
-import Waypoint from 'react-waypoint';
+// import Waypoint from 'react-waypoint';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
@@ -65,6 +65,25 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode, activeAid, activeFilters);
   }
 
+  componentWillUpdate(nextProps) {
+    const {
+      params: { categoryCode },
+      categoryInfo,
+      activeAid,
+      activeFilters,
+      setFilters,
+      setSellingAids
+    } = nextProps;
+    if (activeAid !== this.props.activeAid || !activeFilters.equals(this.props.activeFilters)) {
+      const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
+      const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
+      const allAid = filterProductsByAid(sellingAids, activeAid);
+      const allFilters = filterProducts(filterGroups, activeFilters);
+      setFilters(categoryCode, allFilters);
+      setSellingAids(categoryCode, allAid);
+    }
+  }
+
   toggleAid = (newAid) => {
     const { router, activeAid } = this.props;
     let newQuery;
@@ -73,9 +92,9 @@ export default class Catalogue extends Component {
     } else newQuery = encodeURIComponent(newAid);
     router.push({
       pathname: router.location.pathname,
-      query: {
+      query: Object.assign({}, router.location.query, {
         aids: newQuery
-      }
+      })
     });
   }
 
@@ -104,7 +123,7 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo, activeAid, activeFilters } = this.props;
+    const { categoryInfo, activeAid, activeFilters, productsByAids } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -128,6 +147,7 @@ export default class Catalogue extends Component {
           resetFilters={this.resetFilters}
           applyFilters={this.applyFilters}
           activeFilters={activeFilters}
+          productsByAids={productsByAids}
         />
         <ProductSlider>
           {this.renderProducts()}

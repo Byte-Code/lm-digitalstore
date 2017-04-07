@@ -20,5 +20,5 @@ export function getIdsToFetch(state, categoryCode, activeFilters) {
     return getProductsByAids(state, categoryCode);
   }
   return getProductsByAids(state, categoryCode)
-  .intersect(getProductsByFilters, categoryCode);
+    .intersect(getProductsByFilters(state, categoryCode));
 }

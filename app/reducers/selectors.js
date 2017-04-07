@@ -33,7 +33,7 @@ export function getProductsToShow(state, categoryCode, productIDList) {
 }
 
 export function getProductsByAids(state, categoryCode) {
-  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode);
+  return catalogueSelectors.getProductsByAids(state.get('catalogueReducer'), categoryCode);
 }
 
 export function getProductsByFilters(state, categoryCode) {

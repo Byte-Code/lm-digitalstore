@@ -142,9 +142,9 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { handleClose, filterGroups } = this.props;
+    const { handleClose, filterGroups, productsByAids } = this.props;
     const { active } = this.state;
-    const totalProducts = filterProducts(filterGroups, active);
+    const totalProducts = filterProducts(filterGroups, active).intersect(productsByAids);
 
     return (
       <Wrapper>
