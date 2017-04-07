@@ -75,6 +75,21 @@ export default class Catalogue extends Component {
     });
   }
 
+  toggleFilter = (newFilter) => {
+    const { router, activeFilters } = this.props;
+    let newFilters;
+    if (activeFilters.includes(newFilter)) {
+      newFilters = activeFilters.filterNot(f => f === newFilter);
+    } else newFilters = activeFilters.push(newFilter);
+    const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
+    router.push({
+      pathname: router.location.pathname,
+      query: Object.assign({}, router.location.query, {
+        filters: newQuery
+      })
+    });
+  }
+
   applyFilters = (newFilters) => {
     const { router } = this.props;
     const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
@@ -126,6 +141,7 @@ export default class Catalogue extends Component {
           applyFilters={this.applyFilters}
           activeFilters={activeFilters}
           productsByAids={productsByAids}
+          toggleFilter={this.toggleFilter}
         />
         <ProductSlider>
           {this.renderProducts()}

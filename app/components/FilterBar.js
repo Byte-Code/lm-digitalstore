@@ -34,7 +34,7 @@ const ActiveFilters = styled.div`
   align-items: center;
   background: ${props => props.bgColor};
   padding: 0 20px;
-  width: 890px;
+  width: 100%;
   &>p {
     font-family: LeroyMerlinSans Italic;
     font-size: 16px;
@@ -45,11 +45,11 @@ const ActiveFilters = styled.div`
 `;
 
 const Filter = styled.div`
-  width: 150px;
+  width: ${props => props.width || '150px'};
   height: 42px;
   border-radius: 20px;
-  background-color: #67cb33;
-  color: #efefef;
+  background-color: ${props => (props.isActive ? '#67cb33' : '#efefef')};
+  color: ${props => (props.isActive ? '#efefef' : '#67cb33')}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,11 +61,24 @@ const Filter = styled.div`
   }
 `;
 
+const ResetButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  &>p {
+    font-size: 16px;
+    text-decoration: underline;
+    color: #fff;
+  }
+`;
+
 export default class FilterBar extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
     resetFilters: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
+    toggleFilter: PropTypes.func.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
     productsByAids: ImmutablePropTypes.list.isRequired
   }
@@ -86,13 +99,13 @@ export default class FilterBar extends Component {
   }
 
   renderActiveFilters() {
-    const { activeFilters, filterGroups } = this.props;
+    const { activeFilters, filterGroups, resetFilters, toggleFilter } = this.props;
     if (activeFilters.isEmpty()) {
       return (
         <ActiveFilters bgColor="#e4e4e4">
           <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
         </ActiveFilters>
-      )
+      );
     }
     const activeFilterList = filterGroups.reduce((acc, val) =>
       acc.push(val.get('filters').filter(f => activeFilters.includes(f.get('code'))))
@@ -101,18 +114,25 @@ export default class FilterBar extends Component {
       <ActiveFilters bgColor="rgba(51, 51, 51, 0.8)">
         {
           activeFilterList.map(f => (
-            <Filter key={f.get('code')}>
+            <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
               <p>{f.get('name')}</p>
             </Filter>))
         }
+        { activeFilters.size > 3 &&
+          (<Filter width="178px" onClick={this.handleOpen}>
+            <p>Visualizza altri filtri</p>
+          </Filter>)
+        }
+        <ResetButton onClick={resetFilters}>
+          <p>Reset filtri</p>
+        </ResetButton>
       </ActiveFilters>
-
-  )
+    );
   }
 
   // TODO separate dialog logic into dialog component?
   render() {
-    const { resetFilters, activeFilters, applyFilters, productsByAids } = this.props;
+    const { activeFilters, applyFilters, productsByAids } = this.props;
     return (
       <Wrapper>
         <Button onClick={this.handleOpen}>
