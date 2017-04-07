@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
 import routes from './routes';
 import configureStore, { sagaMiddleware } from './store/configureStore';
 import rootSaga from './sagas/sagas';
+import initializeIdleTimer from './utils/initialize-idle-timer';
 import './app.global.css';
 
 const store = configureStore();
@@ -18,6 +18,7 @@ const history = syncHistoryWithStore(hashHistory, store, {
 });
 injectTapEventPlugin();
 sagaMiddleware.run(rootSaga);
+initializeIdleTimer(store);
 
 render(
   <Provider store={store}>
@@ -29,3 +30,4 @@ render(
   </Provider>,
   document.getElementById('root')
 );
+
