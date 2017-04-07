@@ -11,8 +11,8 @@ export default function catalogueReducer(state = Map(), action) {
       return state.setIn([categoryCode, 'byFilters'], productIDList);
     }
     case 'SUCCESS_FETCH_PRODUCTS': {
-      const { result, categoryCode } = action;
-      return state.setIn([categoryCode, 'products'], result);
+      const { productList, categoryCode } = action;
+      return state.setIn([categoryCode, 'products'], productList);
     }
     default:
       return state;
