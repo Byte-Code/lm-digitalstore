@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { filterCatalogueByAids } from '../actions/catalogueActions';
-import { getCategory, getProductsToShow, getSellingAid } from '../reducers/selectors';
+import { getCategory, getProductsToShow } from '../reducers/selectors';
 import { buildAid, buildFilters } from '../utils/utils';
 
 const mapStateToProps = (state, ownProps) => {
@@ -12,11 +12,10 @@ const mapStateToProps = (state, ownProps) => {
     router: { location: { query } }
   } = ownProps;
   const activeAid = buildAid(query);
-  const idListAid = getSellingAid(state, categoryCode, activeAid);
   const activeFilters = buildFilters(query);
   return {
     categoryInfo: getCategory(state, categoryCode),
-    products: getProductsToShow(state, categoryCode, idListAid),
+    products: getProductsToShow(state, categoryCode, activeFilters),
     activeAid,
     activeFilters
   };

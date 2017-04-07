@@ -28,6 +28,18 @@ export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }
 
-export function getProductsToShow(state, categoryCode, productIds) {
-  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode, productIds);
+export function getProductsToShow(state, categoryCode) {
+  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode);
+}
+
+export function getProductsByAids(state, categoryCode) {
+  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode);
+}
+
+export function getProductsByFilters(state, categoryCode) {
+  return catalogueSelectors.getProductsByFilters(state.get('catalogueReducer'), categoryCode);
+}
+
+export function getIdsToFetch(state, categoryCode, activeFilters) {
+  return catalogueSelectors.getIdsToFetch(state.get('catalogueReducer'), categoryCode, activeFilters);
 }
