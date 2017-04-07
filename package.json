@@ -190,7 +190,7 @@
     "electron-updater": "1.8.2",
     "font-awesome": "^4.7.0",
     "html-loader": "^0.4.5",
-    "immutable": "4.0.0",
+    "immutable": "4.0.0-rc.2",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
     "react": "^15.4.2",
