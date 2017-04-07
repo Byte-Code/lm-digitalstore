@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
-import { filterCatalogueByAids } from '../actions/catalogueActions';
+import { setSellingAids, setFilters } from '../actions/catalogueActions';
 import { getCategory, getProductsToShow } from '../reducers/selectors';
 import { buildAid, buildFilters } from '../utils/utils';
 
@@ -23,7 +23,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = {
   requestFetchCategory,
-  filterCatalogueByAids
+  setSellingAids,
+  setFilters
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalogue);

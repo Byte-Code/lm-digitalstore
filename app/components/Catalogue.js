@@ -40,6 +40,8 @@ export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
+    setSellingAids: PropTypes.func.isRequired,
+    setFilters: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     activeAid: PropTypes.string.isRequired,
@@ -74,8 +76,9 @@ export default class Catalogue extends Component {
     });
   }
 
-  applyFilters = (newFilters) => {
-    const { router } = this.props;
+  applyFilters = (newFilters, productIDList) => {
+    const { router, setFilters, params: { categoryCode } } = this.props;
+    setFilters(categoryCode, productIDList);
     const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
     router.push({
       pathname: router.location.pathname,

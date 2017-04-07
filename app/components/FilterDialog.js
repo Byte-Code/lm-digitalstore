@@ -128,7 +128,8 @@ export default class FilterDialog extends Component {
   applyAndClose = () => {
     const { applyFilters, handleClose } = this.props;
     const { active } = this.state;
-    applyFilters(active);
+    const productIDList = this.getTotalProducts();
+    applyFilters(active, productIDList);
     handleClose();
   }
 
