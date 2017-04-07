@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
-import { List, Set } from 'immutable';
+import { List } from 'immutable';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
+
+import { filterProducts } from '../utils/utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -83,23 +85,6 @@ const Filter = styled.div`
   }
 `;
 
-function getAllProducts(filterGroups) {
-  return filterGroups.map(g => (g.get('filters')
-    .reduce((acc, f) => acc.push(f.get('products')), List()))
-  ).flatten().toSet();
-}
-
-function filterProducts(filterGroups, activeFilters) {
-  return filterGroups.map(g =>
-    g.get('filters').reduce((acc, f) => {
-      if (activeFilters.includes(f.get('code'))) {
-        return acc.push(f.get('products'));
-      }
-      return acc;
-    }, List()).flatten().toSet()
-  ).filterNot(f => f.isEmpty()).toArray();
-}
-
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
@@ -116,20 +101,10 @@ export default class FilterDialog extends Component {
     };
   }
 
-  getTotalProducts() {
-    const { filterGroups } = this.props;
-    const { active } = this.state;
-    if (active.isEmpty()) {
-      return getAllProducts(filterGroups);
-    }
-    return Set.intersect(filterProducts(filterGroups, active));
-  }
-
   applyAndClose = () => {
     const { applyFilters, handleClose } = this.props;
     const { active } = this.state;
-    const productIDList = this.getTotalProducts();
-    applyFilters(active, productIDList);
+    applyFilters(active);
     handleClose();
   }
 
@@ -167,8 +142,9 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { handleClose } = this.props;
-    const totalProducts = this.getTotalProducts();
+    const { handleClose, filterGroups } = this.props;
+    const { active } = this.state;
+    const totalProducts = filterProducts(filterGroups, active);
 
     return (
       <Wrapper>

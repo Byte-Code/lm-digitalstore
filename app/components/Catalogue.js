@@ -7,6 +7,7 @@ import Waypoint from 'react-waypoint';
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
+import { filterProducts, filterProductsByAid } from '../utils/utils';
 
 const Header = styled.div`
   width: 100%;
@@ -57,9 +58,11 @@ export default class Catalogue extends Component {
   componentDidMount() {
     const {
       params: { categoryCode },
-      requestFetchCategory
+      requestFetchCategory,
+      activeFilters,
+      activeAid
     } = this.props;
-    requestFetchCategory(categoryCode);
+    requestFetchCategory(categoryCode, activeAid, activeFilters);
   }
 
   toggleAid = (newAid) => {
@@ -76,9 +79,8 @@ export default class Catalogue extends Component {
     });
   }
 
-  applyFilters = (newFilters, productIDList) => {
-    const { router, setFilters, params: { categoryCode } } = this.props;
-    setFilters(categoryCode, productIDList);
+  applyFilters = (newFilters) => {
+    const { router } = this.props;
     const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
     router.push({
       pathname: router.location.pathname,
