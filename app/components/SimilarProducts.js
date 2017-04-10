@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 
 import ProductBadge from './ProductBadge';
+import SimilarProductBadge from './SimilarProductBadge';
 
 const Wrapper = styled.div`
   padding-left: 40px;
@@ -25,6 +26,9 @@ const Slider = styled.div`
   overflow-x: auto;
   &>a {
     margin-right: 20px;
+  }
+  &>div {
+    margin-right: 40px;
   }
 `;
 
@@ -60,6 +64,15 @@ export default class SimilarProducts extends Component {
     ));
   }
 
+  renderSimilarProducts() {
+    const { similarProducts } = this.props;
+
+    return similarProducts.map(p => (
+      <SimilarProductBadge key={p.get('code')} productInfo={p} />
+    ));
+  }
+
+  // TODO separate dialog logic into dialog component?
   render() {
     const { similarProducts } = this.props;
 
@@ -81,10 +94,11 @@ export default class SimilarProducts extends Component {
           open={this.state.open}
           contentClassName="similarDialog"
           contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
-          bodyStyle={{ padding: '40px', background: 'transparent' }}
+          bodyStyle={{ padding: 0, background: 'transparent' }}
+          autoScrollBodyContent
         >
           <Slider>
-            {this.renderProducts()}
+            {this.renderSimilarProducts()}
           </Slider>
         </Dialog>
       </Wrapper>
