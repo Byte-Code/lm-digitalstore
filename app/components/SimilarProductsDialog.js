@@ -21,7 +21,8 @@ export default class SimilarProductsDialog extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
     isOpen: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func.isRequired,
+    selectedProduct: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -29,9 +30,13 @@ export default class SimilarProductsDialog extends Component {
   }
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, selectedProduct } = this.props;
 
-    return similarProducts.map(p => (
+    const selectedIndex = similarProducts.findIndex(p => p.get('code') === selectedProduct) || 0;
+    const orderedList = similarProducts.skip(selectedIndex)
+    .concat(similarProducts.take(selectedIndex));
+
+    return orderedList.map(p => (
       <SimilarProductBadge
         key={p.get('code')}
         productInfo={p}

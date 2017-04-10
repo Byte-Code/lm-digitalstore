@@ -40,12 +40,16 @@ export default class SimilarProducts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dialogOpen: false
+      dialogOpen: false,
+      selectedProduct: 0
     };
   }
 
-  handleOpen = () => {
-    this.setState({ dialogOpen: true });
+  handleOpen = (product) => {
+    this.setState({
+      selectedProduct: product,
+      dialogOpen: true
+    });
   }
 
   handleClose = () => {
@@ -59,17 +63,17 @@ export default class SimilarProducts extends Component {
       <ProductBadge
         key={p.get('code')}
         productInfo={p}
-        handleClick={this.handleOpen}
+        handleClick={() => this.handleOpen(p.get('code'))}
       />
     ));
   }
 
   render() {
     const { similarProducts } = this.props;
-
     if (similarProducts.isEmpty()) {
       return null;
     }
+    const { dialogOpen, selectedProduct } = this.state;
 
     return (
       <Wrapper>
@@ -82,7 +86,8 @@ export default class SimilarProducts extends Component {
         <SimilarProductsDialog
           similarProducts={similarProducts}
           handleClose={this.handleClose}
-          isOpen={this.state.dialogOpen}
+          isOpen={dialogOpen}
+          selectedProduct={selectedProduct}
         />
       </Wrapper>
     );
