@@ -41,7 +41,7 @@ export default class SimilarProducts extends Component {
     super(props);
     this.state = {
       dialogOpen: false,
-      selectedProduct: 0
+      selectedProduct: ''
     };
   }
 

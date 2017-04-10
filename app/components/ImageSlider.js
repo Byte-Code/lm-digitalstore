@@ -11,8 +11,7 @@ const settings = {
   speed: 100,
   arrows: false,
   dots: true,
-  dotsClass: 'slickDots',
-
+  dotsClass: 'slickDots'
 };
 
 export default class ImageSlider extends Component {

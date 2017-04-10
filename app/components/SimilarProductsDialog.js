@@ -3,18 +3,13 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
+import Slick from 'react-slick';
 
 import SimilarProductBadge from './SimilarProductBadge';
 
-const Slider = styled.div`
-  display: flex;
-  overflow-x: auto;
-  &>div {
-    margin-right: 40px;
-    &:first-child {
-      margin-left: 40px;
-    }
-  }
+const Slide = styled.div`
+  width: 830px;
+  margin-right: 40px;
 `;
 
 export default class SimilarProductsDialog extends Component {
@@ -29,27 +24,46 @@ export default class SimilarProductsDialog extends Component {
     similarProducts: List()
   }
 
-  renderProducts() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialRender: true
+    };
+  }
+
+  initializeSlick() {
     const { similarProducts, selectedProduct } = this.props;
 
     const selectedIndex = similarProducts.findIndex(p => p.get('code') === selectedProduct) || 0;
-    const orderedList = similarProducts.skip(selectedIndex)
-    .concat(similarProducts.take(selectedIndex));
 
-    return orderedList.map(p => (
-      <SimilarProductBadge
-        key={p.get('code')}
-        productInfo={p}
-      />
+    return {
+      centerMode: true,
+      arrows: false,
+      variableWidth: true,
+      dots: false,
+      initialSlide: selectedIndex
+    };
+  }
+
+  renderProducts() {
+    const { similarProducts } = this.props;
+
+    return similarProducts.map(p => (
+      <Slide key={p.get('code')}>
+        <SimilarProductBadge productInfo={p} />
+      </Slide>
     ));
   }
 
-  render() {
-    const { similarProducts, handleClose, isOpen } = this.props;
 
-    if (similarProducts.isEmpty()) {
+  render() {
+    const { handleClose, isOpen } = this.props;
+
+    if (!isOpen) {
       return null;
     }
+
+    const settings = this.initializeSlick();
 
     return (
       <Dialog
@@ -61,9 +75,9 @@ export default class SimilarProductsDialog extends Component {
         bodyStyle={{ padding: 0, background: 'transparent' }} // TODO min-height to be fixed here
         autoScrollBodyContent
       >
-        <Slider>
+        <Slick {...settings}>
           {this.renderProducts()}
-        </Slider>
+        </Slick>
       </Dialog>
     );
   }
