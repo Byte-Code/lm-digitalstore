@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
-import { Link } from 'react-router';
 
 import Image from './Image';
 
@@ -40,39 +39,38 @@ const Price = styled.div`
   margin-bottom: 83px;
 `;
 
-const ProductBadge = ({ productInfo }) => {
+const ProductBadge = ({ productInfo, handleClick }) => {
   if (productInfo.isEmpty()) {
     return null;
   }
   const imageID = productInfo.get('mainImage');
   const imageOptions = { width: 405, height: 405 };
   const name = productInfo.get('name');
-  const code = productInfo.get('code');
   const price = productInfo.getIn(['price', 'selling', 'gross']).toFixed(2);
   const currency = productInfo.getIn(['price', 'currency']);
   const displayPrice = `${price} ${currency}`;
 
   return (
-    <Link to={`/product/${code}`}>
-      <Wrapper>
-        <Image
-          imageID={imageID}
-          imageOptions={imageOptions}
-          alt={name}
-        />
-        <Name>{name}</Name>
-        <Price>{displayPrice}</Price>
-      </Wrapper>
-    </Link>
+    <Wrapper onClick={handleClick}>
+      <Image
+        imageID={imageID}
+        imageOptions={imageOptions}
+        alt={name}
+      />
+      <Name>{name}</Name>
+      <Price>{displayPrice}</Price>
+    </Wrapper>
   );
 };
 
 ProductBadge.propTypes = {
-  productInfo: ImmutablePropTypes.map
+  productInfo: ImmutablePropTypes.map,
+  handleClick: PropTypes.func
 };
 
 ProductBadge.defaultProps = {
-  productInfo: Map()
+  productInfo: Map(),
+  handleClick: () => {}
 };
 
 export default ProductBadge;

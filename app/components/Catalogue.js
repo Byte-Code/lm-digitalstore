@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Link } from 'react-router';
 import { Map, List } from 'immutable';
 import styled from 'styled-components';
 // import Waypoint from 'react-waypoint';
@@ -111,7 +112,11 @@ export default class Catalogue extends Component {
 
   renderProducts() {
     const { products } = this.props;
-    return products.map(p => (<ProductBadge productInfo={p} key={p.get('code')} />));
+    return products.map(p => (
+      <Link to={`product/${p.get('code')}`} key={p.get('code')}>
+        <ProductBadge productInfo={p} />
+      </Link>
+    ));
   }
 
   render() {

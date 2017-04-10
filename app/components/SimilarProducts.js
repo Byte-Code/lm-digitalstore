@@ -29,6 +29,9 @@ const Slider = styled.div`
   }
   &>div {
     margin-right: 40px;
+    &:first-child {
+      margin-left: 40px;
+    }
   }
 `;
 
@@ -60,7 +63,11 @@ export default class SimilarProducts extends Component {
     const { similarProducts } = this.props;
 
     return similarProducts.map(p => (
-      <ProductBadge key={p.get('code')} productInfo={p} />
+      <ProductBadge
+        key={p.get('code')}
+        productInfo={p}
+        handleClick={this.handleOpen}
+      />
     ));
   }
 
@@ -68,7 +75,10 @@ export default class SimilarProducts extends Component {
     const { similarProducts } = this.props;
 
     return similarProducts.map(p => (
-      <SimilarProductBadge key={p.get('code')} productInfo={p} />
+      <SimilarProductBadge
+        key={p.get('code')}
+        productInfo={p}
+      />
     ));
   }
 
@@ -82,7 +92,7 @@ export default class SimilarProducts extends Component {
 
     return (
       <Wrapper>
-        <Header onClick={this.handleOpen}>
+        <Header>
           <h3>prodotti simili</h3>
         </Header>
         <Slider>
