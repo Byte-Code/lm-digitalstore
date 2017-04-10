@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import styled from 'styled-components';
+import Dialog from 'material-ui/Dialog';
 
 import ProductBadge from './ProductBadge';
 
@@ -36,6 +37,21 @@ export default class SimilarProducts extends Component {
     similarProducts: List()
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  }
+
+  handleClose = () => {
+    this.setState({ open: false });
+  }
+
   renderProducts() {
     const { similarProducts } = this.props;
 
@@ -53,12 +69,24 @@ export default class SimilarProducts extends Component {
 
     return (
       <Wrapper>
-        <Header>
+        <Header onClick={this.handleOpen}>
           <h3>prodotti simili</h3>
         </Header>
         <Slider>
           {this.renderProducts()}
         </Slider>
+        <Dialog
+          modal={false}
+          onRequestClose={this.handleClose}
+          open={this.state.open}
+          contentClassName="similarDialog"
+          contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
+          bodyStyle={{ padding: '40px', background: 'transparent' }}
+        >
+          <Slider>
+            {this.renderProducts()}
+          </Slider>
+        </Dialog>
       </Wrapper>
     );
   }

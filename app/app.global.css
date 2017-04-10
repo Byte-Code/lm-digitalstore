@@ -144,3 +144,8 @@ li.slick-active button:before {
     color: #333333;
     opacity: 0.75;
 }
+
+.similarDialog > div {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
