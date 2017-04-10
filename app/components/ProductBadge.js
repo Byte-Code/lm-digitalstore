@@ -70,7 +70,7 @@ ProductBadge.propTypes = {
 
 ProductBadge.defaultProps = {
   productInfo: Map(),
-  handleClick: () => {}
+  handleClick: () => null
 };
 
 export default ProductBadge;
