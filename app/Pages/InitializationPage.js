@@ -40,7 +40,6 @@ class InitializationPage extends Component {
       if (isWhitelisted(ipAddress)) {
         const storeId = getStoreIdFromIpAddress(ipAddress)
         setStoreId(storeId);
-        replace('/');
       }
       else {
         replace('/store-selection');

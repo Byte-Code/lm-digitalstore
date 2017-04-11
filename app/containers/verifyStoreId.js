@@ -7,7 +7,6 @@ import {replace} from 'react-router-redux';
 export default function(WrappedComponent) {
   class verifyStoreId extends Component {
     componentWillMount() {
-      console.log('in verifStoreId');
       if (!this.props.storeId) {
         this.props.replace('/initialization');
       }
