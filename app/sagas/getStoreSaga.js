@@ -7,7 +7,7 @@ import * as storeActions from '../actions/storeActions';
 
 export function* callFetchStore() {
   try {
-    const result = fromJS(yield call(apiV1.getStore.bind(apiV1)));
+    const result = fromJS(yield call(apiV1.getStore.bind(apiV1))).get('content');
     yield put(storeActions.successFetchStore(result));
   } catch (error) {
     yield put(storeActions.failureFetchStore());
