@@ -42,13 +42,15 @@ export default class SimilarProductsDialog extends Component {
     const { similarProducts, selectedProduct } = this.props;
 
     const selectedIndex = similarProducts.findIndex(p => p.get('code') === selectedProduct) || 0;
+    const infinite = similarProducts.size > 1;
 
     return {
       centerMode: true,
       arrows: false,
       variableWidth: true,
       dots: false,
-      initialSlide: selectedIndex
+      initialSlide: selectedIndex,
+      infinite
     };
   }
 
