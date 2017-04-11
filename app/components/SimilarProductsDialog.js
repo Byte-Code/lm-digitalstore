@@ -31,6 +31,13 @@ export default class SimilarProductsDialog extends Component {
     };
   }
 
+  // HACK this fixes a bug with slick
+  componentDidUpdate() {
+    window.requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('resize'));
+    });
+  }
+
   initializeSlick() {
     const { similarProducts, selectedProduct } = this.props;
 
@@ -72,8 +79,7 @@ export default class SimilarProductsDialog extends Component {
         open={isOpen}
         contentClassName="similarDialog"
         contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
-        bodyStyle={{ padding: 0, background: 'transparent' }} // TODO min-height to be fixed here
-        autoScrollBodyContent
+        bodyStyle={{ padding: 0, background: 'transparent', minHeight: 'none' }}
       >
         <Slick {...settings}>
           {this.renderProducts()}
