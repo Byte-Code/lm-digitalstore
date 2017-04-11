@@ -7,7 +7,13 @@ import * as storeActions from '../actions/storeActions';
 
 export function* callFetchStore() {
   try {
-    const result = fromJS(yield call(apiV1.getStore.bind(apiV1))).get('content');
+    const storeInfo = fromJS(yield call(apiV1.getStore.bind(apiV1))).get('content');
+    const lat = storeInfo.getIn(['gpsInformation', 'x']);
+    const lng = storeInfo.getIn(['gpsInformation', 'y']);
+    const nearbyStores = fromJS(
+      yield call(apiV1.getNearbyStores.bind(apiV1), lat, lng)
+    ).get('content');
+    const result = storeInfo.set('nearbyStores', nearbyStores);
     yield put(storeActions.successFetchStore(result));
   } catch (error) {
     yield put(storeActions.failureFetchStore());
