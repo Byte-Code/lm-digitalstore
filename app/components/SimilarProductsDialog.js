@@ -79,7 +79,7 @@ export default class SimilarProductsDialog extends Component {
         open={isOpen}
         contentClassName="similarDialog"
         contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
-        bodyStyle={{ padding: 0, background: 'transparent', minHeight: 'none' }}
+        bodyStyle={{ padding: 0, background: 'transparent' }}
       >
         <Slick {...settings}>
           {this.renderProducts()}

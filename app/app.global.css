@@ -78,6 +78,7 @@ a:hover {
   cursor: pointer;
 }
 
+/*Martellate slick*/
 .slick-slider {
   margin-bottom: 0;
 }
@@ -145,7 +146,12 @@ li.slick-active button:before {
     opacity: 0.75;
 }
 
+/*Martellate material-ui*/
 .similarDialog > div {
   background-color: transparent !important;
   box-shadow: none !important;
+}
+
+.similarDialog > div > div {
+  max-height: none !important;
 }
