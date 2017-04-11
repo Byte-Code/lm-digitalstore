@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import styled from 'styled-components';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-forward';
@@ -84,8 +85,7 @@ const SimilarProductBadge = (props) => {
   const { productInfo } = props;
   const name = productInfo.get('name');
   const code = productInfo.get('code');
-  const description = productInfo.get('shortDescription');
-  console.log(description);
+  const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const pricingInfo = productInfo.getIn(['price', 'selling']);
   const sellingPrice = pricingInfo.get('gross').toFixed(2);
   const image = productInfo.get('mainImage');
@@ -116,6 +116,10 @@ const SimilarProductBadge = (props) => {
       </Link>
     </Wrapper>
   );
+};
+
+SimilarProductBadge.propTypes = {
+  productInfo: ImmutablePropTypes.map.isRequired
 };
 
 export default SimilarProductBadge;
