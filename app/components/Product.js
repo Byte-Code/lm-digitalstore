@@ -83,6 +83,8 @@ export default class Product extends Component {
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
     const pricingInfo = productInfo.getIn(['price', 'selling']);
+    // TODO this data should't arrive from here
+    const currentStoreStock = productInfo.get('nearbyStoreStock').get(0);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -106,7 +108,10 @@ export default class Product extends Component {
           <SimilarProducts similarProducts={similarProducts} />
         </SimilarProductsWrapper>
         <PriceWrapper>
-          <PriceBadge pricingInfo={pricingInfo} />
+          <PriceBadge
+            pricingInfo={pricingInfo}
+            currentStoreStock={currentStoreStock}
+          />
         </PriceWrapper>
       </Wrapper>
     );
