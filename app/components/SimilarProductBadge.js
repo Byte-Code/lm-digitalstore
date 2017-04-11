@@ -84,8 +84,8 @@ const SimilarProductBadge = (props) => {
   const { productInfo } = props;
   const name = productInfo.get('name');
   const code = productInfo.get('code');
-  // const description = productInfo.get('shortDescription');
-  const description = "lorem ipsum short description";
+  const description = productInfo.get('shortDescription');
+  console.log(description);
   const pricingInfo = productInfo.getIn(['price', 'selling']);
   const sellingPrice = pricingInfo.get('gross').toFixed(2);
   const image = productInfo.get('mainImage');

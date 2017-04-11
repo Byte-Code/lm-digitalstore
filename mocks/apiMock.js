@@ -18,7 +18,7 @@ export function fetchWeather() {
   });
 }
 
-const baseUrl = 'https://api-gw-qa.leroymerlin.it/api/v1';
+const baseUrl = 'https://api-gw-qa2.leroymerlin.it/api/v1';
 const spaceId = 'web-prd';
 const apiKey = 'testToken';
 const storeCode = 89;
