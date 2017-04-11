@@ -18,7 +18,10 @@ export function* callFetchProduct(action) {
     const similarProducts = fromJS(
       yield call(apiV1.getProductListDisplay.bind(apiV1), idList.toJS())
     ).getIn(['content', 'itemlist']);
-    const result = product.set('similarProducts', similarProducts);
+    const storeStock = fromJS(
+      yield call(apiMicro.getStoreAvailability.bind(apiMicro), productCode)
+    );
+    const result = product.set('similarProducts', similarProducts).set('storeStock', storeStock);
     yield put(productActions.successFetchProduct(productCode, result));
   } catch (error) {
     yield put(productActions.failureFetchProduct(error));
