@@ -5,6 +5,7 @@ import getWeatherSaga from './getWeatherSaga';
 import getCategorySaga from './getCategorySaga';
 import getProductSaga from './getProductSaga';
 import getCatalogueSaga from './getCatalogueSaga';
+import getStoreSaga from './getStoreSaga';
 import idleTimerSaga from './idleTimerSaga';
 
 export default function* root() {
@@ -14,6 +15,7 @@ export default function* root() {
     fork(getCategorySaga),
     fork(getProductSaga),
     fork(getCatalogueSaga),
+    fork(getStoreSaga),
     fork(idleTimerSaga)
   ];
 }

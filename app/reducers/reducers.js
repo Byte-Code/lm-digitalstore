@@ -6,6 +6,7 @@ import weatherReducer from './Weather/weatherReducer';
 import categoryReducer from './Category/categoryReducer';
 import productReducer from './Product/productReducer';
 import catalogueReducer from './Catalogue/catalogueReducer';
+import storeReducer from './Store/storeReducer';
 
 const rootReducer = combineReducers({
   worldReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   categoryReducer,
   productReducer,
   catalogueReducer,
+  storeReducer,
   routing
 });
 
