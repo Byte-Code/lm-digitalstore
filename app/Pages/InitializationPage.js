@@ -4,6 +4,25 @@ import getIpAddresses from '../utils/get-ip-addresses';
 import {isWhitelisted, getStoreCodeFromIpAddress} from '../utils/store-code-utils';
 import {setstoreCode} from '../actions/storeCodeActions';
 import {replace} from 'react-router-redux';
+import LinearProgress from 'material-ui/LinearProgress';
+import styled from 'styled-components';
+import Page from '../components/Page.js';
+
+const Title = styled.h1`
+  padding-top: 120px;
+  color: white;
+  text-align: center;
+  margin-bottom: 12px;
+`;
+const Wrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  width: 260px;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+`;
 
 class InitializationPage extends Component {
   constructor() {
@@ -11,7 +30,6 @@ class InitializationPage extends Component {
     this.state = {
       ipAddress: null
     }
-    console.log('in initializationPage')
   }
   
   componentDidMount() {
@@ -50,9 +68,14 @@ class InitializationPage extends Component {
   render() {
     if (!this.state.ipAddress) {
       return (
-        <div>
-          initializing...
-        </div>
+        <Page background="teal" height={1920}>
+          <Wrapper>
+            <Title>
+              initializing...
+            </Title>
+            <LinearProgress style={{width: '100%'}}/>
+          </Wrapper>
+        </Page>
       );
     }
     
