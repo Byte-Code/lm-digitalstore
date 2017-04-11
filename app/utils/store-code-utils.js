@@ -5,7 +5,7 @@ export function isWhitelisted(ipAddress) {
   return networkWhitelist.includes(bits[1])
 }
 
-export function getStoreIdFromIpAddress(ipAddress) {
+export function getStoreCodeFromIpAddress(ipAddress) {
   const bits = ipAddress.split('.');
   return Math.floor(bits[2] / 2)
 }

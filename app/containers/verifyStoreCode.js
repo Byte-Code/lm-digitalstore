@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import hoistStatics from 'hoist-non-react-statics';
-import {getStoreId} from '../reducers/selectors';
+import {getStoreCode} from '../reducers/selectors';
 import {replace} from 'react-router-redux';
 
 export default function(WrappedComponent) {
-  class verifyStoreId extends Component {
+  class verifystoreCode extends Component {
     componentWillMount() {
-      if (!this.props.storeId) {
+      if (!this.props.storeCode) {
         this.props.replace('/initialization');
       }
     }
     
     render() {
-      console.log(this.props.storeId)
-      if(!this.props.storeId) {
+      console.log(this.props.storeCode)
+      if(!this.props.storeCode) {
         return null
       }
       
@@ -23,9 +23,9 @@ export default function(WrappedComponent) {
   }
   
   const mapStateToProps = (state) => {
-    return {storeId: getStoreId(state)}
+    return {storeCode: getStoreCode(state)}
   };
   
-  const connected = connect(mapStateToProps, {replace})(verifyStoreId);
+  const connected = connect(mapStateToProps, {replace})(verifystoreCode);
   return hoistStatics(connected, WrappedComponent);
 }

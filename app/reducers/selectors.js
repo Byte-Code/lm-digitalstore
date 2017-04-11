@@ -2,7 +2,7 @@ import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
 import * as categorySelectors from './Category/categorySelectors';
 import * as catalogueSelectors from './Catalogue/catalogueSelectors';
-import * as storeIdSelectore from './StoreId/storeIdSelectors'
+import * as storeCodeSelectore from './storeCode/storeCodeSelectors'
 import getProductSelector from './Product/productSelectors';
 
 export function getWorld(state) {
@@ -37,6 +37,6 @@ export function getIdsToFetch(state, categoryCode, idsByFilters, idsByAids) {
   return catalogueSelectors.getIdsToFetch(state.get('catalogueReducer'), categoryCode, idsByFilters, idsByAids);
 }
 
-export function getStoreId(state) {
-  return storeIdSelectore.getStoreId(state.get('storeIdReducer'));
+export function getStoreCode(state) {
+  return storeCodeSelectore.getStoreCode(state.get('storeCodeReducer'));
 }

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import getIpAddresses from '../utils/get-ip-addresses';
-import {isWhitelisted, getStoreIdFromIpAddress} from '../utils/store-id-utils';
-import {setStoreId} from '../actions/storeIdActions';
+import {isWhitelisted, getStoreCodeFromIpAddress} from '../utils/store-code-utils';
+import {setstoreCode} from '../actions/storeCodeActions';
 import {replace} from 'react-router-redux';
 
 class InitializationPage extends Component {
@@ -34,12 +34,12 @@ class InitializationPage extends Component {
   
   componentDidUpdate() {
     const { ipAddress } = this.state;
-    const { replace, setStoreId } = this.props;
+    const { replace, setstoreCode } = this.props;
     
     if (ipAddress) {
       if (isWhitelisted(ipAddress)) {
-        const storeId = getStoreIdFromIpAddress(ipAddress)
-        setStoreId(storeId);
+        const storeCode = getStoreCodeFromIpAddress(ipAddress)
+        setstoreCode(storeCode);
       }
       else {
         replace('/store-selection');
@@ -60,4 +60,4 @@ class InitializationPage extends Component {
   }
 }
 
-export default connect(null, { replace, setStoreId })(InitializationPage);
+export default connect(null, { replace, setstoreCode })(InitializationPage);
