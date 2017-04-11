@@ -12,17 +12,15 @@ import SelectStorePage from './pages/SelectStorePage';
 
 export default (
   <Route>
-    <Route path="/">
-      <IndexRoute component={verifyStoreId(App)}>
-        <IndexRoute component={SplashScreenPage}/>
-        <Route path="/world" component={HomePage}/>
-        <Route path="/catalogue/:categoryCode" component={CataloguePage}/>
-        <Route path="/product/:productCode" component={ProductPage}/>
-      </IndexRoute>
+    <Route path="/" component={verifyStoreId(App)}>
+      <IndexRoute component={SplashScreenPage}/>
+      <Route path="/world" component={HomePage}/>
+      <Route path="/catalogue/:categoryCode" component={CataloguePage}/>
+      <Route path="/product/:productCode" component={ProductPage}/>
     </Route>
-  
+    
     <Route path="/initialization" component={InitializationPage}/>
     <Route path="/store-selection" component={SelectStorePage}/>
-    
+  
   </Route>
 );

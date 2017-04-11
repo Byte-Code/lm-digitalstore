@@ -14,6 +14,7 @@ export default function(WrappedComponent) {
     }
     
     render() {
+      console.log(this.props.storeId)
       if(!this.props.storeId) {
         return null
       }
