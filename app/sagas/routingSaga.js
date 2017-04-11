@@ -10,6 +10,7 @@ export function* gotoSplashscreen() {
   }
 }
 
-export default function* idleTimerSaga() {
+export default function* routingSaga() {
   yield takeEvery(actionTypes.IDLE_TIMER_COMPLETE, gotoSplashscreen);
+  yield takeEvery(actionTypes.SET_STORE_ID, gotoSplashscreen);
 }
