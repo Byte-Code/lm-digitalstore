@@ -90,7 +90,8 @@ export default class FilterDialog extends Component {
     filterGroups: ImmutablePropTypes.list.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired
+    applyFilters: PropTypes.func.isRequired,
+    productsByAids: ImmutablePropTypes.set.isRequired
   }
 
   constructor(props) {
@@ -144,7 +145,9 @@ export default class FilterDialog extends Component {
   render() {
     const { handleClose, filterGroups, productsByAids } = this.props;
     const { active } = this.state;
-    const totalProducts = filterProducts(filterGroups, active).intersect(productsByAids);
+    const totalProducts = productsByAids.isEmpty() ?
+    filterProducts(filterGroups, active) :
+    filterProducts(filterGroups, active).intersect(productsByAids);
 
     return (
       <Wrapper>

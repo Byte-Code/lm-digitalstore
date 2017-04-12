@@ -16,7 +16,7 @@ export function buildAid(query) {
 }
 
 export function filterProductsByAid(sellingAids, activeAid) {
-  if (sellingAids.isEmpty()) {
+  if (!sellingAids || sellingAids.isEmpty()) {
     return Set();
   }
   if (!activeAid) {

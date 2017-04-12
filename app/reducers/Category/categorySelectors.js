@@ -5,10 +5,7 @@ export function getCategory(state, categoryCode) {
 }
 
 export function getSellingAids(state, categoryCode) {
-  if (state.hasIn([categoryCode, 'sellingAidsProducts'])) {
-    return state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']);
-  }
-  return List();
+  return state.getIn([categoryCode, 'sellingAidsProducts', 0, 'aids']) || List();
 }
 
 export function getFilters(state, categoryCode) {

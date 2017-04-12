@@ -8,5 +8,8 @@ export function getProductsToShow(state, categoryCode, productIDList) {
 }
 
 export function getIdsToFetch(state, categoryCode, idsByFilters, idsByAids) {
+  if (idsByAids.isEmpty()) {
+    return idsByFilters;
+  }
   return idsByAids.intersect(idsByFilters);
 }

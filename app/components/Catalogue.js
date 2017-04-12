@@ -126,7 +126,7 @@ export default class Catalogue extends Component {
       return null;
     }
     const catName = categoryInfo.get('name');
-    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
+    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || List();
     const filterGroups = categoryInfo.get('facetFilters').filterNot(g => g.get('group') === 'Prezzo');
     const productsByAids = filterProductsByAid(sellingAids.get('aids'), activeAid);
 
