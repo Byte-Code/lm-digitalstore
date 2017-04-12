@@ -2,7 +2,7 @@ import { call } from 'redux-saga/effects';
 
 import { callFetchWorld } from '../../app/sagas/getWorldSaga';
 import { callFetchWeather } from '../../app/sagas/getWeatherSaga';
-import { callFetchCategoryDisplay, api } from '../../app/sagas/getCategoryDisplaySaga';
+import { callFetchCategoryDisplay, api } from '../../app/sagas/getCategorySaga';
 import { fetchWorld, fetchWeather } from '../../mocks/apiMock';
 
 describe('getWorldSaga ', () => {
