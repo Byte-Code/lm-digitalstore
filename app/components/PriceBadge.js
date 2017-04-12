@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 
 import StoreStockBadge from '../containers/StoreStockBadge';
+import AvailabilityButton from '../containers/AvailabilityButton';
 
 const Wrapper = styled.div`
   width: 255px;
@@ -52,10 +53,19 @@ export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map.isRequired,
     currentStoreStock: PropTypes.number.isRequired,
+    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
+    productName: PropTypes.string.isRequired,
+    productCode: PropTypes.string.isRequired
   }
 
   render() {
-    const { pricingInfo, currentStoreStock } = this.props;
+    const {
+      pricingInfo,
+      currentStoreStock,
+      nearbyStoreStock,
+      productName,
+      productCode
+    } = this.props;
     const sellingPrice = pricingInfo.get('gross').toFixed(2);
 
     return (
@@ -68,7 +78,11 @@ export default class PriceBadge extends Component {
             currentStoreStock={currentStoreStock}
           />
         </StoreStockWrapper>
-        <Button bgColor="#67cb33">verifica disponibilità in negozi vicini</Button>
+        <AvailabilityButton
+          productName={productName}
+          productCode={productCode}
+          nearbyStoreStock={nearbyStoreStock}
+        />
         <Divider />
         <Button bgColor="#339900">acquista online</Button>
       </Wrapper>
