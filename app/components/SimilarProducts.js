@@ -23,7 +23,7 @@ const Header = styled.div`
 const Slider = styled.div`
   display: flex;
   overflow-x: auto;
-  &>a {
+  &>div {
     margin-right: 20px;
   }
 `;
