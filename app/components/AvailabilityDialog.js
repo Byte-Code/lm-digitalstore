@@ -58,8 +58,7 @@ export default class AvailabilityDialog extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
-    nearbyStores: ImmutablePropTypes.list.isRequired
+    nearbyStocks: ImmutablePropTypes.list.isRequired,
   }
 
   constructor(props) {
@@ -75,10 +74,13 @@ export default class AvailabilityDialog extends Component {
     } else this.setState({ selectedStore: storeCode });
   }
 
+  // TODO move this logic into a separate component
   renderNearbyStores() {
-    const { nearbyStores } = this.props;
+    const { nearbyStocks } = this.props;
     const { selectedStore } = this.state;
-    return nearbyStores.map(s => {
+    return nearbyStocks.map(s => {
+      const currentStock = s.get('storeStock');
+      const iconColor = currentStock > 0 ? '#67cb33' : 'e4e4e4';
       const code = s.get('code');
       const isActive = code === selectedStore;
       const province = s.getIn(['address', 'state']);
@@ -87,13 +89,14 @@ export default class AvailabilityDialog extends Component {
       const zip = s.getIn(['address', 'zipCode']);
       const city = s.getIn(['address', 'city']);
       const name = s.get('name');
+
       return (
         <StoreBadge
           key={code}
           isActive={isActive}
           onClick={() => this.selectStore(code)}
         >
-          <PlaceIcon style={{ height: 55, width: 55 }} color="#67cb33" />
+          <PlaceIcon style={{ height: 55, width: 55 }} color={iconColor} />
           <StoreInfo>
             <p>{`${province} - ${name}`}</p>
             <p>{`${street} ${streetNumber}`}</p>

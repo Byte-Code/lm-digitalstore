@@ -23,8 +23,7 @@ export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
-    nearbyStores: ImmutablePropTypes.list.isRequired
+    nearbyStocks: ImmutablePropTypes.list.isRequired,
   }
   constructor(props) {
     super(props);
@@ -43,8 +42,7 @@ export default class AvailabilityButton extends Component {
 
   render() {
     const {
-      nearbyStores,
-      nearbyStoreStock,
+      nearbyStocks,
       productName,
       productCode
     } = this.props;
@@ -65,8 +63,7 @@ export default class AvailabilityButton extends Component {
           bodyStyle={{ padding: '80px 75px', background: '#333333' }}
         >
           <AvailabilityDialog
-            nearbyStores={nearbyStores}
-            nearbyStoreStock={nearbyStoreStock}
+            nearbyStocks={nearbyStocks}
             productName={productName}
             productCode={productCode}
           />
