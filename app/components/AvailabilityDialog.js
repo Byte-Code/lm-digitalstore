@@ -65,6 +65,7 @@ const Divider = styled.div`
 const SelectedStore = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 96px;
   &>div {
     width: 385px;
   }
@@ -139,7 +140,7 @@ export default class AvailabilityDialog extends Component {
     const { nearbyStocks } = this.props;
     const { selectedStore } = this.state;
     if (selectedStore === -1) {
-      return null;
+      return <SelectedStore />;
     }
     const currentStoreStockInfo = nearbyStocks.find(ns => ns.get('code') === selectedStore);
     const name = currentStoreStockInfo.get('name');
