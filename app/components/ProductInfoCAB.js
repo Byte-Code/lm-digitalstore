@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
+import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 
 import { titleFormatter } from '../utils/utils';
 import Card from './Card';
@@ -65,14 +66,19 @@ const Divider = styled.div`
   margin-top: 20px;
 `;
 
-function CardTitleComponent() {
+function CardTitleComponent({ expanded }) {
+  const Icon = expanded ? RemoveIcon : AddIcon;
   return (
     <CardTitle>
-      <AddIcon color="#333333" />
+      <Icon color="#333333" />
       <h3>Maggiori informazioni</h3>
     </CardTitle>
   );
 }
+
+CardTitleComponent.propTypes = {
+  expanded: PropTypes.bool.isRequired
+};
 
 export default class ProductInfoCAB extends Component {
   static propTypes = {

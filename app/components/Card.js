@@ -38,7 +38,7 @@ export default class Card extends Component {
     return (
       <div>
         <div onTouchTap={this.toggleCard.bind(this)}>
-          <TitleComponent />
+          <TitleComponent expanded={expanded} />
         </div>
         <CardBody
           isVisible={isVisible}
