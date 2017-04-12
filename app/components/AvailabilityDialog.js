@@ -48,7 +48,7 @@ const StoreInfo = styled.div`
     font-size: 16px;
     margin-bottom: 5px;
     &:first-child {
-      font-weight: bold;
+      font-family: LeroyMerlinSans Bold;
       font-size: 20px;
       margin-bottom: 10px;
       line-height: 24px;

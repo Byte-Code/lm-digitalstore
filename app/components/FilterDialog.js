@@ -149,7 +149,7 @@ export default class FilterDialog extends Component {
     return (
       <Wrapper>
         <Header>
-          <Button fFamily="LeoryMerlinSans Light" fSize="20px" onClick={handleClose}>
+          <Button fFamily="LeroyMerlinSans Light" fSize="20px" onClick={handleClose}>
             <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Chiudi Filtri</p>
           </Button>
