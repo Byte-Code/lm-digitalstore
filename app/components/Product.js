@@ -48,7 +48,8 @@ export default class Product extends Component {
       productCode: PropTypes.string.isRequired
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
-    requestFetchProduct: PropTypes.func.isRequired
+    requestFetchProduct: PropTypes.func.isRequired,
+    storeName: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -70,7 +71,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productInfo } = this.props;
+    const { productInfo, storeName } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -84,7 +85,7 @@ export default class Product extends Component {
     const similarProducts = productInfo.get('similarProducts');
     const pricingInfo = productInfo.getIn(['price', 'selling']);
     // TODO this data should't arrive from here
-    const currentStoreStock = productInfo.get('nearbyStoreStock').get(0);
+    const currentStoreStock = productInfo.get('storeStock');
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -111,6 +112,7 @@ export default class Product extends Component {
           <PriceBadge
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
+            storeName={storeName}
           />
         </PriceWrapper>
       </Wrapper>

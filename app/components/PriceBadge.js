@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 
@@ -51,11 +51,12 @@ const StoreStockWrapper = styled.div`
 export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map.isRequired,
-    currentStoreStock: ImmutablePropTypes.map.isRequired
+    currentStoreStock: PropTypes.number.isRequired,
+    storeName: PropTypes.string.isRequired
   }
 
   render() {
-    const { pricingInfo, currentStoreStock } = this.props;
+    const { pricingInfo, currentStoreStock, storeName } = this.props;
     const sellingPrice = pricingInfo.get('gross').toFixed(2);
 
     return (
@@ -64,7 +65,10 @@ export default class PriceBadge extends Component {
         <Quantity>1 pz / pz</Quantity>
         <Divider />
         <StoreStockWrapper>
-          <StoreStockBadge currentStoreStock={currentStoreStock} />
+          <StoreStockBadge
+            currentStoreStock={currentStoreStock}
+            storeName={storeName}
+          />
         </StoreStockWrapper>
         <Button bgColor="#67cb33">verifica disponibilità in negozi vicini</Button>
         <Divider />

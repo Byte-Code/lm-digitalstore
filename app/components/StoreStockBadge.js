@@ -1,5 +1,4 @@
-import React from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import CheckIcon from 'material-ui/svg-icons/navigation/check';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
@@ -21,9 +20,8 @@ const Availability = styled.div`
   }
 `;
 
-const StoreStockBadge = ({ currentStoreStock }) => {
-  const storeName = currentStoreStock.get('storeName');
-  const availabilty = currentStoreStock.get('storeStock') - 2;
+const StoreStockBadge = ({ currentStoreStock, storeName }) => {
+  const availabilty = currentStoreStock - 2;
   const isAvailable = availabilty > 0;
   const label = isAvailable ?
     `~ ${availabilty} Pezzi disponibile` :
@@ -44,7 +42,8 @@ const StoreStockBadge = ({ currentStoreStock }) => {
 };
 
 StoreStockBadge.propTypes = {
-  currentStoreStock: ImmutablePropTypes.map.isRequired
+  currentStoreStock: PropTypes.number.isRequired,
+  storeName: PropTypes.string.isRequired
 };
 
 export default StoreStockBadge;
