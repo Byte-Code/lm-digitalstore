@@ -31,12 +31,12 @@ const FamilyName = styled.div`
   text-transform: uppercase;
 `;
 
-const ItemCount = styled.div`
-  height: 20px;
-  font-size: 16px;
-  line-height: 1.4;
-  font-family: LeroyMerlinSans Light-Italic;
-`;
+// const ItemCount = styled.div`
+//  height: 20px;
+//  font-size: 16px;
+//  line-height: 1.4;
+//  font-family: LeroyMerlinSans Light-Italic;
+// `;
 
 export default class FamilyBadge extends Component {
   static propTypes = {
@@ -64,7 +64,6 @@ export default class FamilyBadge extends Component {
 
     const familyName = family.get('familyName');
     const image = family.get('image');
-    const itemCount = family.get('itemCount');
     const categoryCode = family.get('categoryCode');
     const { height, width } = this.getSize();
 
@@ -79,7 +78,6 @@ export default class FamilyBadge extends Component {
           />
           <NameWrapper>
             <FamilyName>{familyName}</FamilyName>
-            <ItemCount>{itemCount} prodotti</ItemCount>
           </NameWrapper>
         </Wrapper>
       </Link>
