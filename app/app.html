@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <title>Hello Electron React!</title>
     <script>
       (function() {
@@ -26,6 +27,11 @@
           : './dist/bundle.js';
         // HACK: Writing the script path should be done with webpack
         document.body.appendChild(script);
+
+        // disable zoom https://github.com/electron/electron/issues/3609
+        const webFrame = require('electron').webFrame
+        webFrame.setVisualZoomLevelLimits(1, 1);
+        webFrame.setLayoutZoomLevelLimits(0, 0);
       }
     </script>
   </body>
