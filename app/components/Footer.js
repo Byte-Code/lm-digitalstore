@@ -47,7 +47,7 @@ const Footer = () => (
     <Link to="/world">
       <Button>
         <HomeIcon color="#fff" style={{ height: 50, width: 50 }} />
-        <p>Homepage Mondo</p>
+        <p>Homepage</p>
       </Button>
     </Link>
     <Link>
