@@ -2,7 +2,8 @@ import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
 import * as categorySelectors from './Category/categorySelectors';
 import * as catalogueSelectors from './Catalogue/catalogueSelectors';
-import * as storeCodeSelectore from './storeCode/storeCodeSelectors'
+import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
+import * as storeSelectors from './Store/storeSelectors';
 import getProductSelector from './Product/productSelectors';
 
 export function getWorld(state) {
@@ -38,5 +39,17 @@ export function getIdsToFetch(state, categoryCode, idsByFilters, idsByAids) {
 }
 
 export function getStoreCode(state) {
-  return storeCodeSelectore.getStoreCode(state.get('storeCodeReducer'));
+  return storeCodeSelectors.getStoreCode(state.get('storeCodeReducer'));
+}
+
+export function getStore(state) {
+  return storeSelectors.getStoreInfo(state.get('storeReducer'));
+}
+
+export function getStoreName(state) {
+  return storeSelectors.getStoreName(state.get('storeReducer'));
+}
+
+export function getNearbyStores(state) {
+  return storeSelectors.getNearbyStores(state.get('storeReducer'));
 }

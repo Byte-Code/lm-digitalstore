@@ -83,6 +83,9 @@ export default class Product extends Component {
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
     const pricingInfo = productInfo.getIn(['price', 'selling']);
+    // TODO this data should't arrive from here, selector Maybe?
+    const currentStoreStock = productInfo.get('storeStock');
+    const nearbyStoreStock = productInfo.get('nearbyStoreStock');
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -103,10 +106,18 @@ export default class Product extends Component {
           descriptions={descriptions}
         />
         <SimilarProductsWrapper>
-          <SimilarProducts similarProducts={similarProducts} />
+          <SimilarProducts
+            similarProducts={similarProducts}
+          />
         </SimilarProductsWrapper>
         <PriceWrapper>
-          <PriceBadge pricingInfo={pricingInfo} />
+          <PriceBadge
+            productName={name}
+            productCode={code}
+            pricingInfo={pricingInfo}
+            currentStoreStock={currentStoreStock}
+            nearbyStoreStock={nearbyStoreStock}
+          />
         </PriceWrapper>
       </Wrapper>
     );

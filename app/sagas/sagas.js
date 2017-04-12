@@ -6,6 +6,7 @@ import getCategorySaga from './getCategorySaga';
 import getProductSaga from './getProductSaga';
 import getCatalogueSaga from './getCatalogueSaga';
 import routingSaga from './routingSaga';
+import getStoreSaga from './getStoreSaga';
 
 export default function* root() {
   yield [
@@ -15,5 +16,6 @@ export default function* root() {
     fork(getProductSaga),
     fork(getCatalogueSaga),
     fork(routingSaga),
+    fork(getStoreSaga),
   ];
 }
