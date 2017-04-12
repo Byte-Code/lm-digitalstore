@@ -109,25 +109,25 @@ export default class Home extends Component {
         </WorldTitle>
         <GridWrapper>
           <Row>
-            <FamilyBadge family={families.get(2)} size="square-big" />
-            <DoubleVertical>
-              <FamilyBadge family={families.get(7)} size="square-small" />
-              <FamilyBadge family={families.get(3)} size="square-small" />
-            </DoubleVertical>
+            <FamilyBadge family={families.get(0)} size="square-big" />
             <DoubleVertical>
               <FamilyBadge family={families.get(1)} size="square-small" />
+              <FamilyBadge family={families.get(2)} size="square-small" />
+            </DoubleVertical>
+            <DoubleVertical>
+              <FamilyBadge family={families.get(3)} size="square-small" />
               <FamilyBadge family={families.get(4)} size="square-small" />
             </DoubleVertical>
           </Row>
           <Row>
-            <FamilyBadge family={families.get(8)} size="square-small" />
-            <FamilyBadge family={families.get(0)} size="horizontal" />
-            <FamilyBadge family={families.get(9)} size="square-small" />
+            <FamilyBadge family={families.get(5)} size="square-small" />
+            <FamilyBadge family={families.get(6)} size="horizontal" />
+            <FamilyBadge family={families.get(7)} size="square-small" />
           </Row>
           <Row>
-            <FamilyBadge family={families.get(5)} size="square-small" />
-            <FamilyBadge family={families.get(10)} size="square-small" />
-            <FamilyBadge family={families.get(6)} size="horizontal" />
+            <FamilyBadge family={families.get(8)} size="square-small" />
+            <FamilyBadge family={families.get(9)} size="square-small" />
+            <FamilyBadge family={families.get(10)} size="horizontal" />
           </Row>
           <Banner url={bannerImg}>
             {bannerText}
