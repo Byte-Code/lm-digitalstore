@@ -15,7 +15,7 @@ const Row = styled.div`
 `;
 
 const Logo = styled.div`
-  padding-top: 70px;
+  padding-top: 66px;
   margin-bottom: 27px;
   display: flex;
   align-items: center;
