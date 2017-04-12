@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
   cursor: pointer;
   font-size:0;
   &>div {
@@ -39,6 +40,21 @@ const Price = styled.div`
   margin-bottom: 83px;
 `;
 
+const Available = styled.div`
+  color: #339900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 40px;
+  bottom: 200px;
+  &>p {
+    font-family: LeroyMerlinSans Bold;
+    font-size: 16px;
+  }
+  background: rgba(255, 255, 255, 0.8);
+`;
+
 const ProductBadge = ({ productInfo, handleClick }) => {
   if (productInfo.isEmpty()) {
     return null;
@@ -49,6 +65,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const price = productInfo.getIn(['price', 'selling', 'gross']).toFixed(2);
   const currency = productInfo.getIn(['price', 'currency']);
   const displayPrice = `${price} ${currency}`;
+  const isInStock = (productInfo.get('storeStock') - 2) > 0;
 
   return (
     <Wrapper onClick={handleClick}>
@@ -59,6 +76,10 @@ const ProductBadge = ({ productInfo, handleClick }) => {
       />
       <Name>{name}</Name>
       <Price>{displayPrice}</Price>
+      {isInStock &&
+      <Available>
+        <p>Disponibile in Negozio</p>
+      </Available>}
     </Wrapper>
   );
 };
