@@ -17,7 +17,7 @@ export default class SimilarProductsDialog extends Component {
     similarProducts: ImmutablePropTypes.list,
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
-    selectedProduct: PropTypes.string.isRequired
+    selectedProduct: PropTypes.string.isRequired,
   }
 
   static defaultProps = {

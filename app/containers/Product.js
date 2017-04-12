@@ -2,11 +2,10 @@ import { connect } from 'react-redux';
 
 import Product from '../components/Product';
 import { requestFetchProduct } from '../actions/productActions';
-import { getProduct, getStoreName } from '../reducers/selectors';
+import { getProduct } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  productInfo: getProduct(state, ownProps.params.productCode),
-  storeName: getStoreName(state)
+  productInfo: getProduct(state, ownProps.params.productCode)
 });
 
 const mapDispatchToProps = {

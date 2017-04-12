@@ -48,8 +48,7 @@ export default class Product extends Component {
       productCode: PropTypes.string.isRequired
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
-    requestFetchProduct: PropTypes.func.isRequired,
-    storeName: PropTypes.string.isRequired
+    requestFetchProduct: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -71,7 +70,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productInfo, storeName } = this.props;
+    const { productInfo } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -106,13 +105,14 @@ export default class Product extends Component {
           descriptions={descriptions}
         />
         <SimilarProductsWrapper>
-          <SimilarProducts similarProducts={similarProducts} />
+          <SimilarProducts
+            similarProducts={similarProducts}
+          />
         </SimilarProductsWrapper>
         <PriceWrapper>
           <PriceBadge
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
-            storeName={storeName}
           />
         </PriceWrapper>
       </Wrapper>

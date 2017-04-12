@@ -30,7 +30,7 @@ const Slider = styled.div`
 
 export default class SimilarProducts extends Component {
   static propTypes = {
-    similarProducts: ImmutablePropTypes.list
+    similarProducts: ImmutablePropTypes.list,
   }
 
   static defaultProps = {
