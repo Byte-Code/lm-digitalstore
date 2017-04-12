@@ -22,81 +22,70 @@ const world = {
   },
   families: [
     {
-      familyName: 'Set di tavoli e sedie',
-      image: tavoliSedie,
-      areaId: 0,
-      itemCount: 73,
-      categoryCode: 'CAT656'
-    },
-    {
-      familyName: 'Sedie e Poltrone',
-      image: sedie,
-      areaId: 1,
-      itemCount: 208,
-      categoryCode: 'CAT657'
-    },
-    {
       familyName: 'Tavoli',
       image: tavoli,
       areaId: 2,
-      itemCount: 182,
-      categoryCode: 'CAT655'
-    },
-    {
-      familyName: 'Panchine',
-      image: panchine,
-      areaId: 3,
-      itemCount: 37,
-      categoryCode: 'CAT655'
-    },
-    {
-      familyName: 'Dondoli e Amache',
-      image: dondoli,
-      areaId: 4,
-      itemCount: 16,
-      categoryCode: 'CAT655'
-    },
-    {
-      familyName: 'Pergole',
-      image: pergole,
-      areaId: 5,
-      itemCount: 36,
-      categoryCode: 'CAT655'
-    },
-    {
-      familyName: 'Divisori Giardino',
-      image: divisori,
-      areaId: 6,
-      itemCount: 139,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT657'
     },
     {
       familyName: 'Gazebo',
       image: gazebo,
       areaId: 7,
-      itemCount: 34,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT944'
+    },
+    {
+      familyName: 'Sedie e Poltrone',
+      image: sedie,
+      areaId: 1,
+      categoryCode: 'CAT657'
+    },
+    {
+      familyName: 'Panchine',
+      image: panchine,
+      areaId: 3,
+      categoryCode: 'CAT945'
+    },
+    {
+      familyName: 'Dondoli e Amache',
+      image: dondoli,
+      areaId: 4,
+      categoryCode: 'CAT659'
     },
     {
       familyName: 'Ombrelloni e Basi',
       image: ombrelloni,
       areaId: 8,
-      itemCount: 103,
+      categoryCode: 'CAT660'
+    },
+    {
+      familyName: 'Set di tavoli e sedie',
+      image: tavoliSedie,
+      areaId: 0,
       categoryCode: 'CAT655'
     },
     {
       familyName: 'Sdraio e Lettini',
       image: sdraio,
       areaId: 9,
-      itemCount: 99,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT658'
+    },
+    {
+      familyName: 'Pergole',
+      image: pergole,
+      areaId: 5,
+      categoryCode: 'CAT676'
     },
     {
       familyName: 'Carport',
       image: carport,
       areaId: 10,
-      itemCount: 3,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT4231'
+    },
+    {
+      familyName: 'Divisori Giardino',
+      image: divisori,
+      areaId: 6,
+      categoryCode: 'CAT4097'
     }
   ]
 };
