@@ -83,8 +83,8 @@ export default class PriceBadge extends Component {
           productCode={productCode}
           nearbyStoreStock={nearbyStoreStock}
         />
-        <Divider />
-        <Button bgColor="#339900">acquista online</Button>
+        {/* <Divider />
+        <Button bgColor="#339900">acquista online</Button> */}
       </Wrapper>
     );
   }
