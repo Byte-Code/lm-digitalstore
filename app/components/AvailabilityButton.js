@@ -61,7 +61,7 @@ export default class AvailabilityButton extends Component {
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.dialogOpen}
-          contentStyle={{ width: 1000 }}
+          contentStyle={{ width: 1000, maxWidth: 'none' }}
           bodyStyle={{ padding: '80px 75px', background: '#333333' }}
         >
           <AvailabilityDialog
