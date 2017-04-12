@@ -68,7 +68,7 @@ class InitializationPage extends Component {
   render() {
     if (!this.state.ipAddress) {
       return (
-        <Page background="teal" height={1920}>
+        <Page background="teal" height="1920">
           <Wrapper>
             <Title>
               initializing...
