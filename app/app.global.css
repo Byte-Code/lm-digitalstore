@@ -57,6 +57,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+  font-family: LeroyMerlinSans, Arial, Helvetica, Helvetica Neue, serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -86,7 +87,6 @@ body {
   position: relative;
   height: 100vh;
   color: #333333;
-  font-family: LeroyMerlinSans, Arial, Helvetica, Helvetica Neue, serif;
 }
 
 ::-webkit-scrollbar {
