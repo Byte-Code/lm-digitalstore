@@ -3,6 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 
+import StoreStockBadge from '../containers/StoreStockBadge';
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,11 +48,38 @@ const StoreInfo = styled.div`
     font-size: 16px;
     margin-bottom: 5px;
     &:first-child {
-      font-family: LeroyMerlinSans Bold;
+      font-weight: bold;
       font-size: 20px;
       margin-bottom: 10px;
       line-height: 24px;
     }
+  }
+`;
+
+const Divider = styled.div`
+  border: 1px dashed #fff;
+  width: 100%;
+  margin: 30px 0 55px 0;
+`;
+
+const SelectedStore = styled.div`
+  display: flex;
+  justify-content: space-between;
+  &>div {
+    width: 385px;
+  }
+`;
+
+const StoreName = styled.p`
+  font-size: 36px;
+  margin-bottom: 20px;
+`;
+
+const Address = styled.div`
+  &>p {
+    font-size: 20px;
+    color: #e4e4e4;
+    font-family: LeroyMerlinSans Light;
   }
 `;
 
@@ -69,9 +98,7 @@ export default class AvailabilityDialog extends Component {
   }
 
   selectStore = (storeCode) => {
-    if (this.state.selectStore === storeCode) {
-      this.setState({ selectedStore: -1 });
-    } else this.setState({ selectedStore: storeCode });
+    this.setState({ selectedStore: storeCode });
   }
 
   // TODO move this logic into a separate component
@@ -107,6 +134,39 @@ export default class AvailabilityDialog extends Component {
     });
   }
 
+  // TODO move this logic into a separate component
+  renderSelectedStore() {
+    const { nearbyStocks } = this.props;
+    const { selectedStore } = this.state;
+    if (selectedStore === -1) {
+      return null;
+    }
+    const currentStoreStockInfo = nearbyStocks.find(ns => ns.get('code') === selectedStore);
+    const name = currentStoreStockInfo.get('name');
+    const street = currentStoreStockInfo.getIn(['address', 'street']);
+    const streetNumber = currentStoreStockInfo.getIn(['address', 'streetNumber']) || '';
+    const zip = currentStoreStockInfo.getIn(['address', 'zipCode']);
+    const city = currentStoreStockInfo.getIn(['address', 'city']);
+    const province = currentStoreStockInfo.getIn(['address', 'state']);
+    const currentStoreStock = currentStoreStockInfo.get('storeStock');
+
+    return (
+      <SelectedStore>
+        <div>
+          <StoreName>{name}</StoreName>
+          <Address>
+            <p>{`${street} ${streetNumber}`}</p>
+            <p>{`${zip} - ${city} (${province})`}</p>
+          </Address>
+        </div>
+        <StoreStockBadge
+          currentStoreStock={currentStoreStock}
+          showStore={false}
+        />
+      </SelectedStore>
+    );
+  }
+
   render() {
     const { productName, productCode } = this.props;
 
@@ -117,6 +177,8 @@ export default class AvailabilityDialog extends Component {
         <StoreList>
           {this.renderNearbyStores()}
         </StoreList>
+        <Divider />
+        {this.renderSelectedStore()}
       </Wrapper>
     );
   }

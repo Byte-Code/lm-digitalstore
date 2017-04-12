@@ -20,7 +20,7 @@ const Availability = styled.div`
   }
 `;
 
-const StoreStockBadge = ({ currentStoreStock, storeName }) => {
+const StoreStockBadge = ({ currentStoreStock, storeName, showStore }) => {
   const availabilty = currentStoreStock - 2;
   const isAvailable = availabilty > 0;
   const label = isAvailable ?
@@ -35,15 +35,21 @@ const StoreStockBadge = ({ currentStoreStock, storeName }) => {
       {icon}
       <Availability>
         <p>{label}</p>
-        <p>{`in negozio a ${storeName}`}</p>
+        {showStore && (<p>{`in negozio a ${storeName}`}</p>)}
       </Availability>
     </Wrapper>
   );
 };
 
+// TODO find a better solution for hideStore
 StoreStockBadge.propTypes = {
   currentStoreStock: PropTypes.number.isRequired,
-  storeName: PropTypes.string.isRequired
+  storeName: PropTypes.string.isRequired,
+  showStore: PropTypes.bool
+};
+
+StoreStockBadge.defaultProps = {
+  showStore: true
 };
 
 export default StoreStockBadge;
