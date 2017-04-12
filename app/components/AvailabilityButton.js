@@ -3,6 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Dialog from 'material-ui/Dialog';
 import styled from 'styled-components';
 
+import AvailabilityDialog from './AvailabilityDialog';
+
 const Button = styled.div`
   width: '100%';
   text-transform: uppercase;
@@ -40,6 +42,13 @@ export default class AvailabilityButton extends Component {
   }
 
   render() {
+    const {
+      nearbyStores,
+      nearbyStoreStock,
+      productName,
+      productCode
+    } = this.props;
+
     return (
       <div>
         <Button
@@ -55,7 +64,12 @@ export default class AvailabilityButton extends Component {
           contentStyle={{ width: 1000 }}
           bodyStyle={{ padding: '80px 75px', background: '#333333' }}
         >
-            hello
+          <AvailabilityDialog
+            nearbyStores={nearbyStores}
+            nearbyStoreStock={nearbyStoreStock}
+            productName={productName}
+            productCode={productCode}
+          />
         </Dialog>
       </div>
     );
