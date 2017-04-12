@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 
 import Image from './Image';
+import StoreStockBadge from '../containers/StoreStockBadge';
 
 const Wrapper = styled.div`
   width: 830px;
@@ -88,6 +89,7 @@ const SimilarProductBadge = (props) => {
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const pricingInfo = productInfo.getIn(['price', 'selling']);
   const sellingPrice = pricingInfo.get('gross').toFixed(2);
+  const currentStoreStock = productInfo.get('storeStock');
   const image = productInfo.get('mainImage');
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
 
@@ -106,6 +108,7 @@ const SimilarProductBadge = (props) => {
           <Price>{sellingPrice} &#8364;</Price>
           <Quantity>1 pz / pz</Quantity>
           <Divider />
+          <StoreStockBadge currentStoreStock={currentStoreStock} />
         </PriceAndStock>
       </InfoWrapper>
       <Link to={`/product/${code}`}>
