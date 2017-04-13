@@ -53,7 +53,7 @@ export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map.isRequired,
     currentStoreStock: PropTypes.number.isRequired,
-    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
+    allStoreStock: ImmutablePropTypes.list.isRequired,
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired
   }
@@ -62,7 +62,7 @@ export default class PriceBadge extends Component {
     const {
       pricingInfo,
       currentStoreStock,
-      nearbyStoreStock,
+      allStoreStock,
       productName,
       productCode
     } = this.props;
@@ -81,7 +81,7 @@ export default class PriceBadge extends Component {
         <AvailabilityButton
           productName={productName}
           productCode={productCode}
-          nearbyStoreStock={nearbyStoreStock}
+          allStoreStock={allStoreStock}
         />
         {/* <Divider />
         <Button bgColor="#339900">acquista online</Button> */}

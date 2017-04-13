@@ -88,7 +88,7 @@ export default class AvailabilityDialog extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    nearbyStocks: ImmutablePropTypes.list.isRequired,
+    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
   }
 
   constructor(props) {
@@ -104,9 +104,9 @@ export default class AvailabilityDialog extends Component {
 
   // TODO move this logic into a separate component
   renderNearbyStores() {
-    const { nearbyStocks } = this.props;
+    const { nearbyStoreStock } = this.props;
     const { selectedStore } = this.state;
-    return nearbyStocks.map(s => {
+    return nearbyStoreStock.map(s => {
       const currentStock = s.get('storeStock');
       const iconColor = currentStock > 0 ? '#67cb33' : 'e4e4e4';
       const code = s.get('code');
@@ -137,12 +137,12 @@ export default class AvailabilityDialog extends Component {
 
   // TODO move this logic into a separate component
   renderSelectedStore() {
-    const { nearbyStocks } = this.props;
+    const { nearbyStoreStock } = this.props;
     const { selectedStore } = this.state;
     if (selectedStore === -1) {
       return <SelectedStore />;
     }
-    const currentStoreStockInfo = nearbyStocks.find(ns => ns.get('code') === selectedStore);
+    const currentStoreStockInfo = nearbyStoreStock.find(ns => ns.get('code') === selectedStore);
     const name = currentStoreStockInfo.get('name');
     const street = currentStoreStockInfo.getIn(['address', 'street']);
     const streetNumber = currentStoreStockInfo.getIn(['address', 'streetNumber']) || '';
