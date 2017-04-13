@@ -24,7 +24,7 @@ const world = {
     {
       familyName: 'Tavoli',
       image: tavoli,
-      categoryCode: 'CAT657'
+      categoryCode: 'CAT656'
     },
     {
       familyName: 'Gazebo',

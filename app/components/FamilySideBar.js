@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Link } from 'react-router';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
@@ -26,6 +25,7 @@ const Family = styled.div`
   height: 250px;
   box-shadow: 0 0 8px 0 #e4e4e4;
   margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled.img`
@@ -51,7 +51,9 @@ const FamilyName = styled.div`
 export default class FamilySideBar extends Component {
   static propTypes = {
     requestFetchWorld: PropTypes.func.isRequired,
-    world: ImmutablePropTypes.map
+    world: ImmutablePropTypes.map,
+    closeMenu: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -60,6 +62,12 @@ export default class FamilySideBar extends Component {
 
   componentDidMount() {
     this.props.requestFetchWorld();
+  }
+
+  handleClick(categoryCode) {
+    const { closeMenu, push } = this.props;
+    push(`catalogue/${categoryCode}`);
+    closeMenu();
   }
 
   renderFamilies() {
@@ -72,17 +80,15 @@ export default class FamilySideBar extends Component {
       const categoryCode = fam.get('categoryCode');
 
       return (
-        <Link
+        <Family
           key={familyName}
-          to={`/catalogue/${categoryCode}`}
+          onClick={() => this.handleClick(categoryCode)}
         >
-          <Family>
-            <ImageWrapper src={image} />
-            <FamilyName>
-              <p>{familyName}</p>
-            </FamilyName>
-          </Family>
-        </Link>
+          <ImageWrapper src={image} />
+          <FamilyName>
+            <p>{familyName}</p>
+          </FamilyName>
+        </Family>
       );
     });
   }

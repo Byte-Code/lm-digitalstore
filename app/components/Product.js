@@ -85,7 +85,7 @@ export default class Product extends Component {
     const pricingInfo = productInfo.getIn(['price', 'selling']);
     // TODO this data should't arrive from here, selector Maybe?
     const currentStoreStock = productInfo.get('storeStock');
-    const nearbyStoreStock = productInfo.get('nearbyStoreStock');
+    const allStoreStock = productInfo.get('allStoreStock');
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
@@ -116,7 +116,7 @@ export default class Product extends Component {
             productCode={code}
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
-            nearbyStoreStock={nearbyStoreStock}
+            allStoreStock={allStoreStock}
           />
         </PriceWrapper>
       </Wrapper>

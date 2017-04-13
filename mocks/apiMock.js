@@ -18,9 +18,9 @@ export function fetchWeather() {
   });
 }
 
-const baseUrl = 'https://api-gw-qa2.leroymerlin.it/api/v1';
+const baseUrl = 'https://api.leroymerlin.it/api/v1';
 const spaceId = 'web-prd';
-const apiKey = 'testToken';
+const apiKey = process.env.API_KEY;
 const storeCode = 7;
 export const apiV1 = new LmApi(baseUrl, spaceId, storeCode, apiKey);
 

@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 import { apiV1, apiMicro } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
@@ -15,13 +15,16 @@ export function* callFetchProduct(action) {
     const idList = fromJS(
       yield call(apiMicro.getCrossSellingProducts.bind(apiMicro), productCode)
     ).map(p => p.get('code'));
-    const similarProducts = fromJS(
-      yield call(apiV1.getProductListDisplay.bind(apiV1), idList.toJS())
-    ).getIn(['content', 'itemlist']);
-    const nearbyStoreStock = fromJS(
+    let similarProducts;
+    if (!idList.isEmpty()) {
+      similarProducts = fromJS(
+          yield call(apiV1.getProductListDisplay.bind(apiV1), idList.toJS())
+        ).getIn(['content', 'itemlist']);
+    } else similarProducts = List();
+    const allStoreStock = fromJS(
       yield call(apiMicro.getStoreAvailability.bind(apiMicro), productCode)
     );
-    const result = product.set('similarProducts', similarProducts).set('nearbyStoreStock', nearbyStoreStock);
+    const result = product.set('similarProducts', similarProducts).set('allStoreStock', allStoreStock);
     yield put(productActions.successFetchProduct(productCode, result));
   } catch (error) {
     yield put(productActions.failureFetchProduct(error));
