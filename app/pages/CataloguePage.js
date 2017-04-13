@@ -10,7 +10,6 @@ export default function CataloguePage(props) {
     <Page
       background="#f7f7f7"
       padding="0 0 140px"
-      height="1920px"
     >
       <SideMenu />
       <Catalogue params={props.params} router={props.router} />
