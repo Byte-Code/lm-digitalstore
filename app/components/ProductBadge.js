@@ -77,6 +77,43 @@ const Available = styled.div`
   background: rgba(255, 255, 255, 0.8);
 `;
 
+// TODO create a more scalable component
+const Corner = styled.section`
+  height: 42px;
+  width: 42px;
+  background: ${props => props.bgColor};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${props => props.fSize};
+  color: #fff;
+  text-align: center;
+  font-family: LeroyMerlinSans Bold;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const MarketingFlag = ({ isDiscounted, isNew }) => {
+  if (isDiscounted) {
+    return <Corner bgColor="#cc0000" fSize="24px">%</Corner>;
+  }
+  if (isNew) {
+    return <Corner bgColor="#6699cc" fSize="16px">NEW</Corner>;
+  }
+  return null;
+};
+
+MarketingFlag.propTypes = {
+  isDiscounted: PropTypes.bool,
+  isNew: PropTypes.bool
+};
+
+MarketingFlag.defaultProps = {
+  isDiscounted: false,
+  isNew: false
+};
+
 const ProductBadge = ({ productInfo, handleClick }) => {
   if (productInfo.isEmpty()) {
     return null;
@@ -89,7 +126,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const isDiscounted = listPrice && true;
   const discount = productInfo.getIn(['price', 'selling', 'discount']);
   const isInStock = (productInfo.get('storeStock') - 2) > 0;
-  // const marketingAttributes = productInfo.get('marketingAttributes');
+  const isNew = productInfo.getIn(['marketingAttributes', 'newOnMarketEndDate']) && true;
 
   return (
     <Wrapper onClick={handleClick}>
@@ -97,6 +134,10 @@ const ProductBadge = ({ productInfo, handleClick }) => {
         imageID={imageID}
         imageOptions={imageOptions}
         alt={name}
+      />
+      <MarketingFlag
+        isDiscounted={isDiscounted}
+        isNew={isNew}
       />
       <Name>{name}</Name>
       <PriceWrapper>
