@@ -7,7 +7,7 @@ import Image from './Image';
 import { formatPrice } from '../utils/utils';
 
 const Wrapper = styled.div`
-  height: 605px;
+  height: 593px;
   width: 405px;
   display: flex;
   flex-direction: column;
