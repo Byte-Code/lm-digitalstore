@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import FamilySideBar from '../components/FamilySideBar';
 import { requestFetchWorld } from '../actions/worldActions';
@@ -9,7 +10,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  requestFetchWorld
+  requestFetchWorld,
+  push
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FamilySideBar);

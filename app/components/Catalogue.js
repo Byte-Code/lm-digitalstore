@@ -62,6 +62,16 @@ export default class Catalogue extends Component {
     requestFetchCategory(categoryCode);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {
+      params: { categoryCode },
+      requestFetchCategory
+    } = nextProps;
+    if (categoryCode !== this.props.params.categoryCode) {
+      requestFetchCategory(categoryCode);
+    }
+  }
+
   toggleAid = (newAid) => {
     const { router, activeAid } = this.props;
     let newQuery;

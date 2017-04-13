@@ -5,9 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
 import FamilySideBar from '../containers/FamilySideBar';
 
-const DivWithProps = (props) => <div {...props} />;
-
-const Button = styled(DivWithProps)`
+const Button = styled.div`
   width: 90px
   height: 120px;
   background: #339900;
@@ -53,7 +51,7 @@ export default class SideMenu extends Component {
 
     return (
       <div>
-        <Button onTouchTap={this.toggleMenu} isVisible={!open}>
+        <Button onClick={this.toggleMenu} isVisible={!open}>
           <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
           <p>Giardino & Terrazzo</p>
         </Button>
@@ -69,11 +67,11 @@ export default class SideMenu extends Component {
             width="275px"
             bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
           >
-            <FamilySideBar />
+            <FamilySideBar closeMenu={this.toggleMenu} />
           </Column>
           <Column bgColor="transparent">
             <Button
-              onTouchTap={this.toggleMenu}
+              onClick={this.toggleMenu}
               pLeft="275px"
               isVisible={open}
             >
