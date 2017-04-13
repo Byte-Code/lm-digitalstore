@@ -1,22 +1,29 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 
-import StoreStockBadge from '../containers/StoreStockBadge';
-import AvailabilityButton from '../containers/AvailabilityButton';
+import { formatPrice } from '../utils/utils';
 
-const Wrapper = styled.div`
-  width: 255px;
+const Discount = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 22px 10px 10px;
-  background-color: #f7f7f7;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 5px;
+  &>span {
+    &:first-child {
+      color: #cc0000;
+    }
+    color: #000;
+    text-decoration: line-through;
+  }
 `;
 
-const Price = styled.p`
+const MainPrice = styled.p`
   font-size: 36px;
   text-align: right;
   margin-bottom: 3px;
+  color: ${props => (props.isDiscounted ? '#cc0000' : '#000')};
 `;
 
 const Quantity = styled.p`
@@ -25,68 +32,32 @@ const Quantity = styled.p`
   text-align: right;
 `;
 
-const Divider = styled.div`
-  border: 1px dashed #333333;
-  width: 100%;
-  margin: 15px 0;
-`;
-
-const Button = styled.div`
-  width: '100%';
-  text-transform: uppercase;
-  background: ${props => props.bgColor};
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-  box-shadow:  0 0 8px 0 rgba(51, 51, 51, 0.1);
-  cursor: pointer;
-`;
-
-const StoreStockWrapper = styled.div`
-  margin-bottom: 20px;
-`;
-
 export default class PriceBadge extends Component {
   static propTypes = {
-    pricingInfo: ImmutablePropTypes.map.isRequired,
-    currentStoreStock: PropTypes.number.isRequired,
-    allStoreStock: ImmutablePropTypes.list.isRequired,
-    productName: PropTypes.string.isRequired,
-    productCode: PropTypes.string.isRequired
+    pricingInfo: ImmutablePropTypes.map.isRequired
   }
 
   render() {
-    const {
-      pricingInfo,
-      currentStoreStock,
-      allStoreStock,
-      productName,
-      productCode
-    } = this.props;
-    const sellingPrice = pricingInfo.get('gross').toFixed(2);
+    const { pricingInfo } = this.props;
+
+    const grossPrice = pricingInfo.get('gross');
+    const listPrice = pricingInfo.get('list');
+    const isDiscounted = listPrice && true;
+    const discount = pricingInfo.get('discount');
 
     return (
-      <Wrapper>
-        <Price>{sellingPrice} &#8364;</Price>
+      <div>
+        {isDiscounted &&
+          <Discount>
+            <span>-{Math.ceil(discount)} &#37;</span>
+            <span>{formatPrice(listPrice)}&#8364;</span>
+          </Discount>
+        }
+        <MainPrice isDiscounted={isDiscounted}>
+          {grossPrice} &#8364;
+        </MainPrice>
         <Quantity>1 pz / pz</Quantity>
-        <Divider />
-        <StoreStockWrapper>
-          <StoreStockBadge
-            currentStoreStock={currentStoreStock}
-          />
-        </StoreStockWrapper>
-        <AvailabilityButton
-          productName={productName}
-          productCode={productCode}
-          allStoreStock={allStoreStock}
-        />
-        {/* <Divider />
-        <Button bgColor="#339900">acquista online</Button> */}
-      </Wrapper>
+      </div>
     );
   }
-
 }

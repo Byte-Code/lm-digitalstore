@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
-import PriceBadge from './PriceBadge';
+import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
 
 const Wrapper = styled.div`
@@ -114,7 +114,7 @@ export default class Product extends Component {
           />
         </SimilarProductsWrapper>
         <PriceWrapper>
-          <PriceBadge
+          <ProductInfoBadge
             productName={name}
             productCode={code}
             pricingInfo={pricingInfo}

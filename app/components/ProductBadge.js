@@ -37,7 +37,7 @@ const PriceWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   width: 100%;
   justify-content: center;
   &>p{
@@ -86,7 +86,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const name = productInfo.get('name');
   const grossPrice = productInfo.getIn(['price', 'selling', 'gross']);
   const listPrice = productInfo.getIn(['price', 'selling', 'list']);
-  const isBarred = listPrice && true;
+  const isDiscounted = listPrice && true;
   const discount = productInfo.getIn(['price', 'selling', 'discount']);
   const isInStock = (productInfo.get('storeStock') - 2) > 0;
   // const marketingAttributes = productInfo.get('marketingAttributes');
@@ -101,8 +101,10 @@ const ProductBadge = ({ productInfo, handleClick }) => {
       <Name>{name}</Name>
       <PriceWrapper>
         {discount && <Discount>-{Math.ceil(discount)} &#37;</Discount>}
-        <Price isBarred={isBarred}>{formatPrice(grossPrice)} &#8364;</Price>
-        {listPrice && <Price discounted>{formatPrice(listPrice)} &#8364;</Price>}
+        <Price isBarred={isDiscounted}>
+          {formatPrice(listPrice) || formatPrice(grossPrice)} &#8364;
+        </Price>
+        {listPrice && <Price discounted>{formatPrice(grossPrice)} &#8364;</Price>}
       </PriceWrapper>
       {isInStock &&
       <Available>
