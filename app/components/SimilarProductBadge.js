@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import styled from 'styled-components';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 
+import PriceBadge from './PriceBadge';
 import Image from './Image';
 import StoreStockBadge from '../containers/StoreStockBadge';
 
@@ -88,7 +89,6 @@ const SimilarProductBadge = (props) => {
   const code = productInfo.get('code');
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const pricingInfo = productInfo.getIn(['price', 'selling']);
-  const sellingPrice = pricingInfo.get('gross').toFixed(2);
   const currentStoreStock = productInfo.get('storeStock');
   const image = productInfo.get('mainImage');
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
@@ -106,7 +106,7 @@ const SimilarProductBadge = (props) => {
       <InfoWrapper>
         <Description>{description}</Description>
         <PriceAndStock>
-          <Price>{sellingPrice} &#8364;</Price>
+          <PriceBadge pricingInfo={pricingInfo} />
           <Quantity>1 pz / pz</Quantity>
           <Divider />
           <StoreStockBadge currentStoreStock={currentStoreStock} />
