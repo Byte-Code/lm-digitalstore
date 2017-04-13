@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-  min-width: 160px;
+  width: 90px;
   &>h3 {
     font-size: 16px;
     text-transform: uppercase;
