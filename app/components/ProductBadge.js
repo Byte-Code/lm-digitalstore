@@ -69,7 +69,7 @@ const Available = styled.div`
   align-items: center;
   position: absolute;
   height: 40px;
-  bottom: 200px;
+  bottom: 188px;
   &>p {
     font-family: LeroyMerlinSans Bold;
     font-size: 16px;
