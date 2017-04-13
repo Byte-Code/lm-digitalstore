@@ -29,9 +29,7 @@ export default class Image extends Component {
     if (fixBrightColor) {
       options = {
         ...options,
-        width: 1080,
         crop: 'fit',
-        height: 1080,
         dpr: 'auto',
         fetch_format: 'auto',
         flags: ['lossy']
