@@ -99,6 +99,7 @@ const SimilarProductBadge = (props) => {
       <Ref>REF. {code}</Ref>
       <Image
         imageID={image}
+        fixBrightColor
         alt="alt"
         imageOptions={imageOptions}
       />

@@ -10,6 +10,7 @@ const Img = styled.img`
 export default class Image extends Component {
   static propTypes = {
     imageID: PropTypes.string.isRequired,
+    fixBrightColor: PropTypes.bool,
     alt: PropTypes.string.isRequired,
     imageOptions: PropTypes.shape({
       height: PropTypes.number,
@@ -18,12 +19,25 @@ export default class Image extends Component {
   }
 
   static defaultProps = {
-    imageOptions: {}
+    imageOptions: {},
+    fixBrightColor: false
   }
 
   render() {
-    const { imageID, alt, imageOptions } = this.props;
-    const url = getUrl(imageID, imageOptions);
+    const { imageID, alt, imageOptions, fixBrightColor } = this.props;
+    let options = { ...imageOptions };
+    if (fixBrightColor) {
+      options = {
+        ...options,
+        width: 1080,
+        crop: 'fit',
+        height: 1080,
+        dpr: 'auto',
+        fetch_format: 'auto',
+        flags: ['lossy']
+      };
+    }
+    const url = getUrl(imageID, options);
 
     return (
       <Img
