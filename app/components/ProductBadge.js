@@ -100,7 +100,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
       />
       <Name>{name}</Name>
       <PriceWrapper>
-        {discount && <Discount>{Math.ceil(discount)} &#37;</Discount>}
+        {discount && <Discount>-{Math.ceil(discount)} &#37;</Discount>}
         <Price isBarred={isBarred}>{formatPrice(grossPrice)} &#8364;</Price>
         {listPrice && <Price discounted>{formatPrice(listPrice)} &#8364;</Price>}
       </PriceWrapper>
