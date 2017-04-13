@@ -81,8 +81,6 @@ export default class Product extends Component {
     const productType = productInfo.getIn(['productDetail', 'descriptionType']);
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const marketingAttributes = productInfo.get('marketingAttributes');
-    // if (marketingAttributes.getIn(['marketingAttributesList', 'specialBadge']))
-    console.log(marketingAttributes.toJS());
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
     const pricingInfo = productInfo.getIn(['price', 'selling']);
@@ -120,6 +118,7 @@ export default class Product extends Component {
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
             allStoreStock={allStoreStock}
+            marketingAttributes={marketingAttributes}
           />
         </PriceWrapper>
       </Wrapper>

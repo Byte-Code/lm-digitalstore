@@ -30,7 +30,8 @@ export default class ProductInfoBadge extends Component {
     currentStoreStock: PropTypes.number.isRequired,
     allStoreStock: ImmutablePropTypes.list.isRequired,
     productName: PropTypes.string.isRequired,
-    productCode: PropTypes.string.isRequired
+    productCode: PropTypes.string.isRequired,
+    marketingAttributes: ImmutablePropTypes.map.isRequired
   }
 
   render() {
@@ -39,8 +40,11 @@ export default class ProductInfoBadge extends Component {
       currentStoreStock,
       allStoreStock,
       productName,
-      productCode
+      productCode,
+      marketingAttributes
     } = this.props;
+    console.log(marketingAttributes.toJS());
+
 
     return (
       <Wrapper>
