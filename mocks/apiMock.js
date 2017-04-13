@@ -20,8 +20,8 @@ export function fetchWeather() {
 
 const baseUrl = 'https://api.leroymerlin.it/api/v1';
 const spaceId = 'web-prd';
-const apiKey = process.env.API_KEY;
+const apiKey = 'wYv7iVtxEU';
 const storeCode = 7;
 export const apiV1 = new LmApi(baseUrl, spaceId, storeCode, apiKey);
 
-export const apiMicro = new LmApi(baseUrl, spaceId, storeCode, 'W7bWcKx6Vc');
+export const apiMicro = new LmApi('https://api-gw-qa.leroymerlin.it/', spaceId, storeCode, 'W7bWcKx6Vc');

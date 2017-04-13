@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 export function getStoreInfo(state) {
   return state;
 }
@@ -8,5 +10,7 @@ export function getStoreName(state) {
 
 export function getNearbyStores(state) {
   const currentStoreSlug = state.get('slug');
-  return state.get('nearbyStores').filterNot(s => s.get('slug') === currentStoreSlug);
+  if (state.get('nearbyStores')) {
+    return state.get('nearbyStores').filterNot(s => s.get('slug') === currentStoreSlug);
+  } return List();
 }

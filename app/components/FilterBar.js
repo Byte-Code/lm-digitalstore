@@ -132,7 +132,12 @@ export default class FilterBar extends Component {
 
   // TODO separate dialog logic into dialog component?
   render() {
-    const { activeFilters, applyFilters, productsByAids } = this.props;
+    const { activeFilters, applyFilters, productsByAids, filterGroups } = this.props;
+
+    if (filterGroups.isEmpty()) {
+      return null;
+    }
+
     return (
       <Wrapper>
         <Button onClick={this.handleOpen}>
