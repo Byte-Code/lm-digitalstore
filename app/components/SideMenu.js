@@ -61,6 +61,7 @@ export default class SideMenu extends Component {
           open={open}
           onRequestChange={(value) => this.setState({ open: value })}
           containerStyle={{ background: 'transparent', boxShadow: 'none', display: 'flex' }}
+          swipeAreaWidth={90}
         >
           <Column
             bgColor="#fff"
