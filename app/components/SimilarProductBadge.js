@@ -22,6 +22,9 @@ const Title = styled.h1`
   margin: 40px 40px 0;
   text-align: center;
   font-size: 48px;
+  height: 70px;
+  overflow: hidden;
+  text-size-adjust: auto;
   line-height: 70px;
   text-transform: capitalize;
 `;
