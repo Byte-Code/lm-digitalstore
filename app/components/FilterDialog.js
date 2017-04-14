@@ -38,7 +38,8 @@ const ApplyButton = styled(Button)`
   width: 320px;
   height: 60px;
   align-self: center;
-  background: #339900;
+  background: ${props => (props.isActive ? '#339900' : '#e4e4e4')};
+  cursor: ${props => (props.isActive ? 'pointer' : 'not-allowed')};
   margin-top: 22px;
 `;
 
@@ -148,6 +149,8 @@ export default class FilterDialog extends Component {
     const totalProducts = productsByAids.isEmpty() ?
     filterProducts(filterGroups, active) :
     filterProducts(filterGroups, active).intersect(productsByAids);
+    const result = totalProducts.size;
+    const onApply = result > 0 ? this.applyAndClose : () => null;
 
     return (
       <Wrapper>
@@ -162,8 +165,12 @@ export default class FilterDialog extends Component {
           </Button>
         </Header>
         {this.renderFilterGroups()}
-        <ApplyButton fSize="20px" onClick={this.applyAndClose}>
-          <p>{`Vedi tutti i ${totalProducts.size} risultati`}</p>
+        <ApplyButton
+          fSize="20px"
+          onClick={onApply}
+          isActive={result > 0}
+        >
+          <p>{`Vedi tutti i ${result} risultati`}</p>
         </ApplyButton>
       </Wrapper>
     );

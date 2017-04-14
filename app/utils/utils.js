@@ -9,6 +9,12 @@ export function chunkItemList(itemList, chunkSize) {
     .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
 }
 
+export function formatPrice(price) {
+  if (price) {
+    return price.toFixed(2).replace('.', ',');
+  }
+}
+
 // AIDS
 export function buildAid(query) {
   const aids = query.aids ? decodeURIComponent(query.aids) : '';

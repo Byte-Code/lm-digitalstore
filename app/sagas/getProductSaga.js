@@ -21,10 +21,10 @@ export function* callFetchProduct(action) {
           yield call(apiV1.getProductListDisplay.bind(apiV1), idList.toJS())
         ).getIn(['content', 'itemlist']);
     } else similarProducts = List();
-    const allStoreStock = fromJS(
-      yield call(apiMicro.getStoreAvailability.bind(apiMicro), productCode)
-    );
-    const result = product.set('similarProducts', similarProducts).set('allStoreStock', allStoreStock);
+    // const allStoreStock = fromJS(
+    //   yield call(apiMicro.getStoreAvailability.bind(apiMicro), productCode)
+    // );
+    const result = product.set('similarProducts', similarProducts).set('allStoreStock', []);
     yield put(productActions.successFetchProduct(productCode, result));
   } catch (error) {
     yield put(productActions.failureFetchProduct(error));
