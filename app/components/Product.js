@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
-import PriceBadge from './PriceBadge';
+import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
 
 const Wrapper = styled.div`
@@ -80,9 +80,12 @@ export default class Product extends Component {
     const code = productInfo.get('code');
     const productType = productInfo.getIn(['productDetail', 'descriptionType']);
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
+    const marketingAttributes = productInfo.get('marketingAttributes');
+    const loyaltyProgram = productInfo.get('loyaltyProgram');
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
-    const pricingInfo = productInfo.getIn(['price', 'selling']);
+    const price = productInfo.getIn(['price', 'selling']);
+    const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
     const currentStoreStock = productInfo.get('storeStock');
     const allStoreStock = productInfo.get('allStoreStock');
@@ -111,12 +114,15 @@ export default class Product extends Component {
           />
         </SimilarProductsWrapper>
         <PriceWrapper>
-          <PriceBadge
+          <ProductInfoBadge
             productName={name}
             productCode={code}
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
             allStoreStock={allStoreStock}
+            marketingAttributes={marketingAttributes}
+            loyaltyProgram={loyaltyProgram}
+            price={price}
           />
         </PriceWrapper>
       </Wrapper>

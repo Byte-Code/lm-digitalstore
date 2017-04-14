@@ -12,7 +12,7 @@ import { filterProductsByAid } from '../utils/utils';
 
 const Header = styled.div`
   width: 100%;
-  height: 230px;
+  height: 184px;
   background: #f7f7f7;
   display: flex;
   justify-content: center;
@@ -27,10 +27,10 @@ const ProductSlider = styled.div`
   display: flex;
   overflow-x: auto;
   flex-flow: column wrap;
-  height: 1270px;
+  height: 1246px;
   &>a {
     width: 405px;
-    height: 605px;
+    height: 593px;
     margin-right: 20px;
     &:nth-child(odd) {
       margin-bottom: 60px;

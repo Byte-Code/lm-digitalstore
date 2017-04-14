@@ -5,7 +5,10 @@ import Home from '../containers/Home';
 
 export default function HomePage() {
   return (
-    <Page background="linear-gradient(0, #efefef, #ffffff)">
+    <Page
+      background="linear-gradient(0, #efefef, #ffffff)"
+      height="1920px"
+    >
       <Home />
     </Page>
   );

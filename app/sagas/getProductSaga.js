@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS, List } from 'immutable';
 
-import { apiV1, apiMicro } from '../../mocks/apiMock';
+import { apiV1, apiMicro, storeStockApi } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
 
@@ -22,7 +22,7 @@ export function* callFetchProduct(action) {
         ).getIn(['content', 'itemlist']);
     } else similarProducts = List();
     const allStoreStock = fromJS(
-      yield call(apiMicro.getStoreAvailability.bind(apiMicro), productCode)
+      yield call(storeStockApi.getStoreAvailability.bind(storeStockApi), productCode)
     );
     const result = product.set('similarProducts', similarProducts).set('allStoreStock', allStoreStock);
     yield put(productActions.successFetchProduct(productCode, result));
