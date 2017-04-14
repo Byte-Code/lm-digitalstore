@@ -84,7 +84,8 @@ export default class Product extends Component {
     const loyaltyProgram = productInfo.get('loyaltyProgram');
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
-    const pricingInfo = productInfo.getIn(['price', 'selling']);
+    const price = productInfo.getIn(['price', 'selling']);
+    const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
     const currentStoreStock = productInfo.get('storeStock');
     const allStoreStock = productInfo.get('allStoreStock');
@@ -121,6 +122,7 @@ export default class Product extends Component {
             allStoreStock={allStoreStock}
             marketingAttributes={marketingAttributes}
             loyaltyProgram={loyaltyProgram}
+            price={price}
           />
         </PriceWrapper>
       </Wrapper>

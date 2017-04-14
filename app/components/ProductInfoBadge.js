@@ -27,6 +27,7 @@ const StoreStockWrapper = styled.div`
 
 export default class ProductInfoBadge extends Component {
   static propTypes = {
+    price: ImmutablePropTypes.map.isRequired,
     pricingInfo: ImmutablePropTypes.map.isRequired,
     currentStoreStock: PropTypes.number.isRequired,
     allStoreStock: ImmutablePropTypes.list.isRequired,
@@ -38,6 +39,7 @@ export default class ProductInfoBadge extends Component {
 
   render() {
     const {
+      price,
       pricingInfo,
       currentStoreStock,
       allStoreStock,
@@ -53,7 +55,7 @@ export default class ProductInfoBadge extends Component {
           marketingAttributes={marketingAttributes}
           loyaltyProgram={loyaltyProgram}
         />
-        <PriceBadge pricingInfo={pricingInfo} />
+        <PriceBadge pricingInfo={pricingInfo} price={price} />
         <Divider />
         <StoreStockWrapper>
           <StoreStockBadge

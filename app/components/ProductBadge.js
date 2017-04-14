@@ -123,7 +123,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const name = productInfo.get('name');
   const grossPrice = productInfo.getIn(['price', 'selling', 'gross']);
   const listPrice = productInfo.getIn(['price', 'selling', 'list']);
-  const isDiscounted = listPrice && true;
+  const isDiscounted = listPrice && true && (listPrice - grossPrice > 1);
   const discount = productInfo.getIn(['price', 'selling', 'discount']);
   const isInStock = (productInfo.get('storeStock') - 2) > 0;
   const isNew = productInfo.getIn(['marketingAttributes', 'newOnMarketEndDate']) && true;
@@ -141,7 +141,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
       />
       <Name>{name}</Name>
       <PriceWrapper>
-        {discount && <Discount>-{Math.ceil(discount)} &#37;</Discount>}
+        {isDiscounted && <Discount>-{Math.ceil(discount)} &#37;</Discount>}
         <Price isBarred={isDiscounted}>
           {formatPrice(listPrice) || formatPrice(grossPrice)} &#8364;
         </Price>

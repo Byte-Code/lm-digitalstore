@@ -84,7 +84,8 @@ const SimilarProductBadge = (props) => {
   const name = productInfo.get('name');
   const code = productInfo.get('code');
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
-  const pricingInfo = productInfo.getIn(['price', 'selling']);
+  const price = productInfo.getIn(['price', 'selling']);
+  const pricingInfo = productInfo.get('pricingInformations');
   const currentStoreStock = productInfo.get('storeStock');
   const marketingAttributes = productInfo.get('marketingAttributes');
   const loyaltyProgram = productInfo.get('loyaltyProgram');
@@ -95,12 +96,12 @@ const SimilarProductBadge = (props) => {
     <Wrapper>
       <Title>{name}</Title>
       <Ref>REF. {code}</Ref>
-      {/* <Image
+      <Image
         imageID={image}
         fixBrightColor
         alt="alt"
         imageOptions={imageOptions}
-      /> */}
+      />
       <InfoWrapper>
         <Description>{description}</Description>
         <PriceAndStock>
@@ -108,7 +109,7 @@ const SimilarProductBadge = (props) => {
             marketingAttributes={marketingAttributes}
             loyaltyProgram={loyaltyProgram}
           />
-          <PriceBadge pricingInfo={pricingInfo} />
+          <PriceBadge pricingInfo={pricingInfo} price={price} />
           <Quantity>1 pz / pz</Quantity>
           <Divider />
           <StoreStockBadge currentStoreStock={currentStoreStock} />

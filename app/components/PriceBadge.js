@@ -34,16 +34,18 @@ const Quantity = styled.p`
 
 export default class PriceBadge extends Component {
   static propTypes = {
-    pricingInfo: ImmutablePropTypes.map.isRequired
+    pricingInfo: ImmutablePropTypes.map.isRequired,
+    price: ImmutablePropTypes.map.isRequired
   }
 
   render() {
-    const { pricingInfo } = this.props;
-
-    const grossPrice = pricingInfo.get('gross');
-    const listPrice = pricingInfo.get('list');
-    const isDiscounted = listPrice && true;
-    const discount = pricingInfo.get('discount');
+    const { pricingInfo, price } = this.props;
+    const grossPrice = price.get('gross');
+    const listPrice = price.get('list');
+    const isDiscounted = listPrice && true && (listPrice - grossPrice > 1);
+    const discount = price.get('discount');
+    const sellingCapacity = pricingInfo.get('sellingCapacity') || 1;
+    const sellingUnit = pricingInfo.get('sellingUnit');
 
     return (
       <div>
@@ -56,7 +58,7 @@ export default class PriceBadge extends Component {
         <MainPrice isDiscounted={isDiscounted}>
           {grossPrice} &#8364;
         </MainPrice>
-        <Quantity>1 pz / pz</Quantity>
+        <Quantity>{`${sellingCapacity} ${sellingUnit} / ${sellingUnit}`}</Quantity>
       </div>
     );
   }
