@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { fromJS } from 'immutable';
 import styled from 'styled-components';
 
 import MarketingFlag from './MarketingFlag';
@@ -29,12 +30,19 @@ export default class ProductInfoBadge extends Component {
   static propTypes = {
     price: ImmutablePropTypes.map.isRequired,
     pricingInfo: ImmutablePropTypes.map.isRequired,
-    currentStoreStock: PropTypes.number.isRequired,
+    currentStoreStock: ImmutablePropTypes.map,
     allStoreStock: ImmutablePropTypes.list.isRequired,
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired
+  }
+
+  static defaultProps = {
+    currentStoreStock: fromJS({
+      storeStock: 0,
+      stockStatus: 'notAvailable'
+    })
   }
 
   render() {

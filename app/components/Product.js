@@ -48,7 +48,8 @@ export default class Product extends Component {
       productCode: PropTypes.string.isRequired
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
-    requestFetchProduct: PropTypes.func.isRequired
+    requestFetchProduct: PropTypes.func.isRequired,
+    storeCode: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -70,7 +71,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productInfo } = this.props;
+    const { productInfo, storeCode } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -87,8 +88,8 @@ export default class Product extends Component {
     const price = productInfo.getIn(['price', 'selling']);
     const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
-    const currentStoreStock = productInfo.get('storeStock');
     const allStoreStock = productInfo.get('allStoreStock');
+    const currentStoreStock = allStoreStock.find(s => s.get('storeCode') === storeCode);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 

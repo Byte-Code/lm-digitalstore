@@ -108,7 +108,7 @@ export default class AvailabilityDialog extends Component {
     const { selectedStore } = this.state;
     return nearbyStoreStock.map(s => {
       const currentStock = s.get('storeStock');
-      const iconColor = currentStock > 2 ? '#67cb33' : 'e4e4e4';
+      const iconColor = currentStock > 0 ? '#67cb33' : 'e4e4e4';
       const code = s.get('code');
       const isActive = code === selectedStore;
       const province = s.getIn(['address', 'state']);
@@ -149,7 +149,6 @@ export default class AvailabilityDialog extends Component {
     const zip = currentStoreStockInfo.getIn(['address', 'zipCode']);
     const city = currentStoreStockInfo.getIn(['address', 'city']);
     const province = currentStoreStockInfo.getIn(['address', 'state']);
-    const currentStoreStock = currentStoreStockInfo.get('storeStock');
 
     return (
       <SelectedStore>
@@ -161,7 +160,7 @@ export default class AvailabilityDialog extends Component {
           </Address>
         </div>
         <StoreStockBadge
-          currentStoreStock={currentStoreStock}
+          currentStoreStock={currentStoreStockInfo}
           showStore={false}
         />
       </SelectedStore>

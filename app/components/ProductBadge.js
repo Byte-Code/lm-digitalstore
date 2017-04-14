@@ -125,7 +125,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const listPrice = productInfo.getIn(['price', 'selling', 'list']);
   const isDiscounted = listPrice && true && (listPrice - grossPrice > 1);
   const discount = productInfo.getIn(['price', 'selling', 'discount']);
-  const isInStock = (productInfo.get('storeStock') - 2) > 0;
+  const isInStock = productInfo.get('storeStock') > 0;
   const isNew = productInfo.getIn(['marketingAttributes', 'newOnMarketEndDate']) && true;
 
   return (
