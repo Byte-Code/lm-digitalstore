@@ -4,8 +4,8 @@ import Slick from 'react-slick';
 import styled from 'styled-components';
 
 const Slide = styled.div`
-  width: 1080px;
-  height: 1920px;
+  width: 1000px;
+  height: 1420px;
   display: flex;
   align-items: center;
   justify-content: center;
