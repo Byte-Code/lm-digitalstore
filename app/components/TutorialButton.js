@@ -35,6 +35,7 @@ class TutorialButton extends Component {
   getSlickSettings = () => ({
     centerMode: true,
     arrows: false,
+    infinite: false,
     variableWidth: true,
     dots: false,
     initialSlide: 0,
