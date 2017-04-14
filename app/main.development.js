@@ -72,7 +72,7 @@ app.on('window-all-closed', () => {
 
 
 const installExtensions = async () => {
-  if (true) {
+  if (process.env.NODE_ENV === 'development') {
     const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
 
     const extensions = [
@@ -118,7 +118,7 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  if (true) {
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
     mainWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;
