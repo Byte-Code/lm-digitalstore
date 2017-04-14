@@ -23,5 +23,5 @@ const spaceId = 'web-prd';
 const apiKey = 'wYv7iVtxEU';
 const storeCode = 7;
 export const apiV1 = new LmApi(baseUrl, spaceId, storeCode, apiKey);
-
+export const storeStockApi = new LmApi(baseUrl, spaceId, storeCode, '96zoJArqvUf0');
 export const apiMicro = new LmApi('https://api-gw-qa.leroymerlin.it/', spaceId, storeCode, 'W7bWcKx6Vc');

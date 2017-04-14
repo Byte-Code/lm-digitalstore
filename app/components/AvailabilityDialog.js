@@ -108,7 +108,7 @@ export default class AvailabilityDialog extends Component {
     const { selectedStore } = this.state;
     return nearbyStoreStock.map(s => {
       const currentStock = s.get('storeStock');
-      const iconColor = currentStock > 0 ? '#67cb33' : 'e4e4e4';
+      const iconColor = currentStock > 2 ? '#67cb33' : 'e4e4e4';
       const code = s.get('code');
       const isActive = code === selectedStore;
       const province = s.getIn(['address', 'state']);
