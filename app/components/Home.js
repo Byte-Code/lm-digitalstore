@@ -7,6 +7,10 @@ import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import FamilyBadge from './FamilyBadge';
 import LogoLM from '../assets/logo.png';
 
+const Wrapper = styled.div`
+  overflow-y: hidden;
+`;
+
 const Row = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -99,7 +103,7 @@ export default class Home extends Component {
     const trailingImage = world.get('trailingImage');
 
     return (
-      <div>
+      <Wrapper>
         <Logo>
           <img src={LogoLM} alt="logo" />
         </Logo>
@@ -135,7 +139,7 @@ export default class Home extends Component {
           </Banner>
         </GridWrapper>
         <TrailingImage src={trailingImage} alt="alt" />
-      </div>
+      </Wrapper>
     );
   }
 }
