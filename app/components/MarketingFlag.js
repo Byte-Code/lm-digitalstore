@@ -9,6 +9,8 @@ import DestockBadge from '../assets/product_badge/DESTOCK-2.png';
 import PrezzoStockBadge from '../assets/product_badge/PREZZO_STOCK-2.png';
 import LoyaltyBadge from '../assets/product_badge/badge-doppio.png';
 
+import Novita from './Novita';
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,20 +38,6 @@ const Label = styled.p`
   align-items: center;
   text-align: center;
   text-transform: uppercase;
-`;
-
-const Novita = styled.p`
-  background-color: #6699cc;
-  color: #fff;
-  font-size: 14px;
-  height: 20px;
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-  margin-bottom: 2px;
 `;
 
 export default class MarketingFlag extends Component {
@@ -147,7 +135,7 @@ export default class MarketingFlag extends Component {
         />
       );
     } else if (novita) {
-      list = list.push(<Novita key="novita">novità</Novita>);
+      list = list.push(<Novita key="novita" />);
     }
     if (promoWeb) {
       list = list.push(
