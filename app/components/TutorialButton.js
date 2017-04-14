@@ -26,19 +26,12 @@ class TutorialButton extends Component {
     open: false,
   }
 
-  componentDidUpdate() {
-    window.requestAnimationFrame(() => {
-      window.dispatchEvent(new Event('resize'));
-    });
-  }
-
   getSlickSettings = () => ({
     centerMode: true,
     arrows: false,
     infinite: false,
-    variableWidth: true,
     dots: false,
-    initialSlide: 0,
+    initialSlide: 0
   })
 
   closeDialog = () => {

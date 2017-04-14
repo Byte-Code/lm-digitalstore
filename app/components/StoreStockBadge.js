@@ -24,7 +24,7 @@ const StoreStockBadge = ({ currentStoreStock, storeName, showStore }) => {
   const availabilty = currentStoreStock - 2;
   const isAvailable = availabilty > 0;
   const label = isAvailable ?
-    `~ ${availabilty} Pezzi disponibile` :
+    `${availabilty} Pezzi disponibile` :
     'Non disponibile';
   const icon = isAvailable ?
     <CheckIcon style={{ width: 40, height: 45 }} color="#58c527" /> :
