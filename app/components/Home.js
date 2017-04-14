@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
+import TutorialButton from './TutorialButton';
 
 import FamilyBadge from './FamilyBadge';
 import LogoLM from '../assets/logo.png';
@@ -133,10 +134,12 @@ export default class Home extends Component {
             <FamilyBadge family={families.get(9)} size="square-small" />
             <FamilyBadge family={families.get(10)} size="horizontal" />
           </Row>
-          <Banner url={bannerImg}>
-            {bannerText}
-            <HelpIcon color="#fff" style={{ height: 65, width: 65 }} />
-          </Banner>
+          <TutorialButton>
+            <Banner url={bannerImg}>
+              {bannerText}
+              <HelpIcon color="#fff" style={{ height: 65, width: 65 }} />
+            </Banner>
+          </TutorialButton>
         </GridWrapper>
         <TrailingImage src={trailingImage} alt="alt" />
       </Wrapper>
