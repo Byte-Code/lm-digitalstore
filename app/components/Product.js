@@ -82,7 +82,6 @@ export default class Product extends Component {
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const marketingAttributes = productInfo.get('marketingAttributes');
     const loyaltyProgram = productInfo.get('loyaltyProgram');
-    const promoWeb = productInfo.get('promoWeb');
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const similarProducts = productInfo.get('similarProducts');
     const pricingInfo = productInfo.getIn(['price', 'selling']);
@@ -122,7 +121,6 @@ export default class Product extends Component {
             allStoreStock={allStoreStock}
             marketingAttributes={marketingAttributes}
             loyaltyProgram={loyaltyProgram}
-            promoWeb={promoWeb}
           />
         </PriceWrapper>
       </Wrapper>

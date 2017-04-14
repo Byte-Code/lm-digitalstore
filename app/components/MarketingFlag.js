@@ -110,11 +110,12 @@ export default class MarketingFlag extends Component {
   calculateLoyalty() {
     const { loyaltyProgram } = this.props;
     const discount = loyaltyProgram.get('type') === 'DISCOUNT';
+    const value = loyaltyProgram.get('value');
     if (discount) {
       this.setState({
         loyalty: {
           active: true,
-          discount
+          discount: value
         }
       });
     }

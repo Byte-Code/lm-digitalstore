@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import styled from 'styled-components';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 
+import MarketingFlag from './MarketingFlag';
 import PriceBadge from './PriceBadge';
 import Image from './Image';
 import StoreStockBadge from '../containers/StoreStockBadge';
@@ -55,11 +56,6 @@ const PriceAndStock = styled.div`
   padding-left: 85px;
 `;
 
-const Price = styled.p`
-  font-size: 36px;
-  margin-bottom: 3px;
-`;
-
 const Quantity = styled.p`
   font-size: 14px;
   font-family: LeroyMerlinSans Light;
@@ -90,6 +86,8 @@ const SimilarProductBadge = (props) => {
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const pricingInfo = productInfo.getIn(['price', 'selling']);
   const currentStoreStock = productInfo.get('storeStock');
+  const marketingAttributes = productInfo.get('marketingAttributes');
+  const loyaltyProgram = productInfo.get('loyaltyProgram');
   const image = productInfo.get('mainImage');
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
 
@@ -97,15 +95,19 @@ const SimilarProductBadge = (props) => {
     <Wrapper>
       <Title>{name}</Title>
       <Ref>REF. {code}</Ref>
-      <Image
+      {/* <Image
         imageID={image}
         fixBrightColor
         alt="alt"
         imageOptions={imageOptions}
-      />
+      /> */}
       <InfoWrapper>
         <Description>{description}</Description>
         <PriceAndStock>
+          <MarketingFlag
+            marketingAttributes={marketingAttributes}
+            loyaltyProgram={loyaltyProgram}
+          />
           <PriceBadge pricingInfo={pricingInfo} />
           <Quantity>1 pz / pz</Quantity>
           <Divider />

@@ -33,8 +33,7 @@ export default class ProductInfoBadge extends Component {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
-    loyaltyProgram: ImmutablePropTypes.map.isRequired,
-    promoWeb: ImmutablePropTypes.map.isRequired
+    loyaltyProgram: ImmutablePropTypes.map.isRequired
   }
 
   render() {
@@ -45,19 +44,14 @@ export default class ProductInfoBadge extends Component {
       productName,
       productCode,
       marketingAttributes,
-      promoWeb,
       loyaltyProgram
     } = this.props;
-    console.log(marketingAttributes.toJS());
-    console.log(loyaltyProgram.toJS());
-    console.log(promoWeb.toJS());
 
     return (
       <Wrapper>
         <MarketingFlag
           marketingAttributes={marketingAttributes}
           loyaltyProgram={loyaltyProgram}
-          promoWeb={promoWeb}
         />
         <PriceBadge pricingInfo={pricingInfo} />
         <Divider />
@@ -70,8 +64,6 @@ export default class ProductInfoBadge extends Component {
           productName={productName}
           productCode={productCode}
           allStoreStock={allStoreStock}
-          loyaltyProgram={loyaltyProgram}
-          promoWeb={promoWeb}
         />
       </Wrapper>
     );
