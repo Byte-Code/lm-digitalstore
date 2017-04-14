@@ -4,8 +4,7 @@ import { Link } from 'react-router';
 import { Map } from 'immutable';
 import styled from 'styled-components';
 
-import LocationBadge from './LocationBadge';
-import ForecastBadge from './ForecastBadge';
+import ScreenSaver from './ScreenSaver';
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,13 +44,6 @@ const Banner = styled.div`
   padding-left: 40px;
 `;
 
-const ForecastList = styled.div`
-  display: flex;
-  padding: 50px 40px;
-  background: #333333;
-  justify-content: space-between;
-`;
-
 export default class Page extends Component {
   static propTypes = {
     forecast: ImmutablePropTypes.map.isRequired,
@@ -73,15 +65,6 @@ export default class Page extends Component {
       return null;
     }
 
-    const city = forecast.getIn(['city', 'name']);
-    const country = forecast.getIn(['city', 'country']);
-    const weather = forecast.getIn(['list', 0, 'weather', 0, 'main']);
-    const temp = Math.floor(forecast.getIn(['list', 0, 'temp', 'day']));
-    const dailyForecast1 = forecast.getIn(['list', 1]);
-    const dailyForecast2 = forecast.getIn(['list', 2]);
-    const dailyForecast3 = forecast.getIn(['list', 3]);
-    const dailyForecast4 = forecast.getIn(['list', 4]);
-
     return (
       <Link to="/world">
         <Wrapper>
@@ -90,18 +73,7 @@ export default class Page extends Component {
             <Banner>Entra nel mondo giardino</Banner>
           </TopDiv>
           <BottomDiv>
-            <LocationBadge
-              city={city}
-              country={country}
-              weather={weather}
-              temp={temp}
-            />
-            <ForecastList>
-              <ForecastBadge dailyForecast={dailyForecast1} />
-              <ForecastBadge dailyForecast={dailyForecast2} />
-              <ForecastBadge dailyForecast={dailyForecast3} />
-              <ForecastBadge dailyForecast={dailyForecast4} />
-            </ForecastList>
+            <ScreenSaver />
           </BottomDiv>
         </Wrapper>
       </Link>
