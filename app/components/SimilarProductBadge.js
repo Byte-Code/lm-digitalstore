@@ -1,6 +1,7 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
+import { fromJS } from 'immutable';
 import styled from 'styled-components';
 import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-forward';
 
@@ -89,7 +90,11 @@ const SimilarProductBadge = (props) => {
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const price = productInfo.getIn(['price', 'selling']);
   const pricingInfo = productInfo.get('pricingInformations');
-  const currentStoreStock = productInfo.get('storeStock');
+  // HACK hardcoded!!!!
+  const currentStoreStock = fromJS({
+    storeStock: productInfo.get('storeStock'),
+    stockStatus: 'availableOnOrder'
+  });
   const marketingAttributes = productInfo.get('marketingAttributes');
   const loyaltyProgram = productInfo.get('loyaltyProgram');
   const image = productInfo.get('mainImage');
