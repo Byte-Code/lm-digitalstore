@@ -20,7 +20,7 @@ export default validate({
       loader: 'html-loader?attrs[]=video:src'
     }, {
       test: /\.mp4$/,
-      loader: 'url?limit=3500000&mimetype=video/mp4'
+      loader: 'url?limit=350000000&mimetype=video/mp4'
     }]
   },
 
