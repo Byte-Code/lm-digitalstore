@@ -94,7 +94,7 @@ const Corner = styled.section`
   right: 0;
 `;
 
-const MarketingFlag = ({ isDiscounted, isNew }) => {
+const MarketingCorner = ({ isDiscounted, isNew }) => {
   if (isDiscounted) {
     return <Corner bgColor="#cc0000" fSize="24px">%</Corner>;
   }
@@ -104,12 +104,12 @@ const MarketingFlag = ({ isDiscounted, isNew }) => {
   return null;
 };
 
-MarketingFlag.propTypes = {
+MarketingCorner.propTypes = {
   isDiscounted: PropTypes.bool,
   isNew: PropTypes.bool
 };
 
-MarketingFlag.defaultProps = {
+MarketingCorner.defaultProps = {
   isDiscounted: false,
   isNew: false
 };
@@ -135,7 +135,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
         imageOptions={imageOptions}
         alt={name}
       />
-      <MarketingFlag
+      <MarketingCorner
         isDiscounted={isDiscounted}
         isNew={isNew}
       />
