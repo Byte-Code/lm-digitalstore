@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -34,7 +34,9 @@ const FilterWrapper = styled.div`
 `;
 
 const Filter = styled.div`
-  width: 150px;
+  min-width: 150px;
+  max-width: 300px;
+  padding: 0 20px;
   height: 42px;
   border-radius: 20px;
   background-color: ${props => (props.isActive ? '#67cb33' : '#efefef')};
