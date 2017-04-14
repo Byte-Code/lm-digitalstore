@@ -22,17 +22,16 @@ const Button = styled.div`
 
 const TitleWrapper = styled.div`
   width: 100%;
-  height: 50px;
+  height: 70px;
   display: flex;
   justify-content: flex-end;\
   background: rgb(51, 51, 51);
-  padding: 10px;
 `;
 
 const TitleComponent = ({ handleClick }) => (
   <TitleWrapper>
     <BlockIcon
-      style={{ height: 50, width: 50, cursor: 'pointer' }}
+      style={{ height: 50, width: 50, cursor: 'pointer', margin: 10 }}
       color="#fff"
       onTouchTap={handleClick}
     />
@@ -84,7 +83,7 @@ export default class AvailabilityButton extends Component {
           onRequestClose={this.handleClose}
           open={this.state.dialogOpen}
           contentStyle={{ width: 1000, maxWidth: 'none' }}
-          bodyStyle={{ padding: '20px 75px', background: '#333333' }}
+          bodyStyle={{ padding: '0 75px 70px', background: '#333333' }}
           title={<TitleComponent handleClick={this.handleClose} />}
         >
           <AvailabilityDialog
