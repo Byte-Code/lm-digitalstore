@@ -8,6 +8,6 @@ export function successFetchProducts(categoryCode, productList) {
   return ({ type: actions.SUCCESS_FETCH_PRODUCTS, categoryCode, productList });
 }
 
-export function failureFetchProducts() {
-  return ({ type: actions.FAILURE_FETCH_PRODUCTS });
+export function failureFetchProducts(error) {
+  return ({ type: actions.FAILURE_FETCH_PRODUCTS, error });
 }

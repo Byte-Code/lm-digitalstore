@@ -10,8 +10,7 @@ const validResponse = fromJS({
     itemlist: [0, 1, 2]
   }
 });
-
-const thrownError = new Error('Generic Error');
+const genericError = new Error('Generic Error');
 
 describe('getProductListSaga', () => {
   describe('Scenario1: input is fine, doesn\'t throw', () => {
@@ -28,8 +27,8 @@ describe('getProductListSaga', () => {
       );
     });
 
-    it('should dispatch an action with the transformed result', () => {
-      const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']);
+    it('should dispatch a SUCCESS_FETCH_PRODUCTS action with the transformed result', () => {
+      const transformedResult = validResponse.getIn(['content', 'itemlist']);
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchProducts(input.categoryCode, transformedResult)));
     });
@@ -45,15 +44,16 @@ describe('getProductListSaga', () => {
       productIDList: fromJS([])
     };
     const gen = callFetchProductList(input);
+
     it('should call the api first', () => {
       expect(JSON.stringify(gen.next().value)).toEqual(
         JSON.stringify(call(apiV1.getProductListDisplay.bind(apiV1), input.productIDList.toJS()))
       );
     });
 
-    it('and then trigger an error action with the error message', () => {
-      expect(gen.throw(thrownError).value)
-      .toEqual(put(failureFetchProducts(input.categoryCode, 'Generic Error')));
+    it('should dispatch a FAILURE_PRODUCTS action with the error message', () => {
+      expect(gen.throw(genericError).value)
+      .toEqual(put(failureFetchProducts(genericError)));
     });
 
     it('and then nothing', () => {
