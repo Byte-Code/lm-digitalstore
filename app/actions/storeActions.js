@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 
-export function requestFetchStore() {
-  return ({ type: actions.REQUEST_FETCH_STORE });
+export function setStoreCode(storeCode) {
+  return { type: actions.SET_STORE_CODE, storeCode };
 }
 
 export function successFetchStore(result) {

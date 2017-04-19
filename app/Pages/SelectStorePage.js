@@ -1,11 +1,13 @@
-import React, {Component, PropTypes} from 'react';
-import Page from '../components/Page.js';
-import {connect} from 'react-redux';
-import {setStoreCode} from '../actions/storeCodeActions.js';
-import SelectField from 'material-ui/SelectField';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
-import styled from 'styled-components';
+import SelectField from 'material-ui/SelectField';
+
+import Page from '../components/Page';
+import { setStoreCode } from '../actions/storeActions';
+import stores from '../../mocks/stores';
 
 const Title = styled.h1`
   padding-top: 120px;
@@ -19,15 +21,17 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-import stores from '../../mocks/stores';
-
 class SelectStorePage extends Component {
+  static propTypes = {
+    setStoreCode: PropTypes.func.isRequired
+  }
+
   state = {
     storeCode: null
   }
-  
+
   handleChange = (event, index, value) => this.setState({ storeCode: value });
-  
+
   render() {
     return (
       <Page background="teal">
@@ -36,22 +40,28 @@ class SelectStorePage extends Component {
         </Title>
         <Wrapper>
           <SelectField
-            selectedMenuItemStyle={{color: 'teal'}}
+            selectedMenuItemStyle={{ color: 'teal' }}
             value={this.state.storeCode}
             onChange={this.handleChange}
           >
             {stores.map(store => (
               <MenuItem
-                key={store.storeCode} value={store.storeCode} label={store.storeName} primaryText={store.storeName}/>
+                key={store.storeCode}
+                value={store.storeCode}
+                label={store.storeName}
+                primaryText={store.storeName}
+              />
             ))}
           </SelectField>
           <div>
-            <RaisedButton onTouchTap={() => {
-              console.log(this.state.storeCode)
-              if (this.state.storeCode) {
-                this.props.setStoreCode(this.state.storeCode)
-              }
-            }}>set store id
+            <RaisedButton
+              onTouchTap={() => {
+                if (this.state.storeCode) {
+                  this.props.setStoreCode(this.state.storeCode);
+                }
+              }}
+            >
+              set store id
             </RaisedButton>
           </div>
         </Wrapper>
@@ -60,4 +70,4 @@ class SelectStorePage extends Component {
   }
 }
 
-export default connect(null, { setStoreCode })(SelectStorePage)
+export default connect(null, { setStoreCode })(SelectStorePage);

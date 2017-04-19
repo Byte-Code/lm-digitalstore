@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import getIpAddresses from '../utils/get-ip-addresses';
-import {isWhitelisted, getStoreCodeFromIpAddress} from '../utils/store-code-utils';
-import {setStoreCode} from '../actions/storeCodeActions';
-import {replace} from 'react-router-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import LinearProgress from 'material-ui/LinearProgress';
 import styled from 'styled-components';
-import Page from '../components/Page.js';
+
+import Page from '../components/Page';
+import { setStoreCode } from '../actions/storeActions';
+import getIpAddresses from '../utils/get-ip-addresses';
+import { isWhitelisted, getStoreCodeFromIpAddress } from '../utils/store-code-utils';
 
 const Title = styled.h1`
   padding-top: 120px;
@@ -29,42 +30,40 @@ class InitializationPage extends Component {
     super();
     this.state = {
       ipAddress: null
-    }
+    };
   }
-  
+
   componentDidMount() {
     this.startIpCheck();
   }
-  
-  startIpCheck = () => {
-    this.interval = setInterval(() => {
-      const [ipAddress] = getIpAddresses();
-      
-      if (ipAddress) {
-        clearInterval(this.interval)
-        console.log(ipAddress)
-        this.setState({
-          ipAddress
-        })
-      }
-    }, 1000);
-  }
-  
+
+
   componentDidUpdate() {
     const { ipAddress } = this.state;
     const { replace, setStoreCode } = this.props;
-    
+
     if (ipAddress) {
       if (isWhitelisted(ipAddress)) {
-        const storeCode = getStoreCodeFromIpAddress(ipAddress)
+        const storeCode = getStoreCodeFromIpAddress(ipAddress);
         setStoreCode(storeCode);
-      }
-      else {
+      } else {
         replace('/store-selection');
       }
     }
   }
-  
+
+  startIpCheck = () => {
+    this.interval = setInterval(() => {
+      const [ipAddress] = getIpAddresses();
+      if (ipAddress) {
+        clearInterval(this.interval);
+        this.setState({
+          ipAddress
+        });
+      }
+    }, 1000);
+  }
+
   render() {
     if (!this.state.ipAddress) {
       return (
@@ -73,12 +72,12 @@ class InitializationPage extends Component {
             <Title>
               initializing...
             </Title>
-            <LinearProgress style={{width: '100%'}}/>
+            <LinearProgress style={{ width: '100%' }} />
           </Wrapper>
         </Page>
       );
     }
-    
+
     return null;
   }
 }
