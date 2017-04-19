@@ -15,6 +15,10 @@ export function formatPrice(price) {
   }
 }
 
+export function isValidResponse(response) {
+  return response.status === 'OK';
+}
+
 // AIDS
 export function buildAid(query) {
   const aids = query.aids ? decodeURIComponent(query.aids) : '';

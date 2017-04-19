@@ -8,6 +8,6 @@ export function successFetchWorld(result) {
   return ({ type: actions.SUCCESS_FETCH_WORLD, result });
 }
 
-export function failureFetchWorld() {
-  return ({ type: actions.FAILURE_FETCH_WORLD });
+export function failureFetchWorld(error) {
+  return ({ type: actions.FAILURE_FETCH_WORLD, error });
 }

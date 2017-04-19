@@ -5,14 +5,15 @@ import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import { successFetchCategory, failureFetchCategory } from '../actions/categoryActions';
 import { requestFetchProducts } from '../actions/catalogueActions';
+import { isValidResponse } from '../utils/utils';
 
 export function* callFetchCategory({ categoryCode }) {
   try {
     const categoryList = yield call(apiV1.getCategoryDisplay.bind(apiV1), categoryCode);
-    const result = fromJS(categoryList).get('content');
-    const orderedProducts = result.get('orderedProducts');
-    if (orderedProducts) {
+    if (isValidResponse(categoryList)) {
+      const result = fromJS(categoryList).get('content');
       yield put(successFetchCategory(categoryCode, result));
+      const orderedProducts = result.get('orderedProducts');
       const productIDList = orderedProducts.map(p => p.get('code'));
       yield put(requestFetchProducts(categoryCode, productIDList));
     } else {

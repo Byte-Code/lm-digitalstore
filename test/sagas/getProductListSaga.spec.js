@@ -5,11 +5,11 @@ import { apiV1 } from '../../mocks/apiMock';
 import { callFetchProductList } from '../../app/sagas/getProductListSaga';
 import { successFetchProducts, failureFetchProducts } from '../../app/actions/catalogueActions';
 
-const validResponse = fromJS({
+const validResponse = {
   content: {
     itemlist: [0, 1, 2]
   }
-});
+};
 const genericError = new Error('Generic Error');
 
 describe('getProductListSaga', () => {
@@ -28,7 +28,7 @@ describe('getProductListSaga', () => {
     });
 
     it('should dispatch a SUCCESS_FETCH_PRODUCTS action with the transformed result', () => {
-      const transformedResult = validResponse.getIn(['content', 'itemlist']);
+      const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']);
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchProducts(input.categoryCode, transformedResult)));
     });

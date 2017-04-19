@@ -8,6 +8,6 @@ export function successFetchStore(result) {
   return ({ type: actions.SUCCESS_FETCH_STORE, result });
 }
 
-export function failureFetchStore() {
-  return ({ type: actions.FAILURE_FETCH_STORE });
+export function failureFetchStore(error) {
+  return ({ type: actions.FAILURE_FETCH_STORE, error });
 }

@@ -6,21 +6,23 @@ import { callFetchCategory } from '../../app/sagas/getCategorySaga';
 import { successFetchCategory, failureFetchCategory } from '../../app/actions/categoryActions';
 import { requestFetchProducts } from '../../app/actions/catalogueActions';
 
-const validResponse = fromJS({
+const validResponse = {
   content: {
     orderedProducts: [
       { code: '0' },
       { code: '1' },
       { code: '2' }
     ]
-  }
-});
-const invalidResponse = fromJS({
+  },
+  status: 'OK'
+};
+const invalidResponse = {
   content: {
     description: 'The category does not exists or is not visible',
     code: 'not.found'
-  }
-});
+  },
+  status: 'KO'
+};
 const genericError = new Error('Generic Error');
 const notFoundError = new Error('Not Found Error');
 
@@ -37,7 +39,7 @@ describe('getCategorySaga', () => {
     });
 
     it('should dispatch a SUCCESS_FETCH_CATEGORY action with the transformed result', () => {
-      const transformedResult = validResponse.get('content');
+      const transformedResult = fromJS(validResponse).get('content');
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchCategory(input.categoryCode, transformedResult)));
     });

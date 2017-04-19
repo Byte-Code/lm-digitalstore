@@ -4,23 +4,28 @@ import { fromJS } from 'immutable';
 import { apiV1, apiMicro } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as storeActions from '../actions/storeActions';
+import { isValidResponse } from '../utils/utils';
 
-export function* callFetchStore(action) {
+export function* callFetchStore({ storeCode }) {
   try {
-    const { storeCode } = action;
     // HACK init api instances
     apiV1.storeCode = storeCode;
     apiMicro.storeCode = storeCode;
-    const storeInfo = fromJS(yield call(apiV1.getStore.bind(apiV1))).get('content');
-    const lat = storeInfo.getIn(['gpsInformation', 'x']);
-    const lng = storeInfo.getIn(['gpsInformation', 'y']);
-    const nearbyStores = fromJS(
-      yield call(apiV1.getNearbyStores.bind(apiV1), lat, lng)
-    ).get('content');
-    const result = storeInfo.set('nearbyStores', nearbyStores);
-    yield put(storeActions.successFetchStore(result));
+    const storeInfo = yield call(apiV1.getStore.bind(apiV1));
+    if (isValidResponse(storeInfo)) {
+      const result = fromJS(storeInfo).get('content');
+      yield put(storeActions.successFetchStore(result));
+    } else {
+      throw new Error('Not Found Error');
+    }
+    // const lat = storeInfo.getIn(['gpsInformation', 'x']);
+    // const lng = storeInfo.getIn(['gpsInformation', 'y']);
+    // const nearbyStores = fromJS(
+    //   yield call(apiV1.getNearbyStores.bind(apiV1), lat, lng)
+    // ).get('content');
+    // const result = storeInfo.set('nearbyStores', nearbyStores);
   } catch (error) {
-    yield put(storeActions.failureFetchStore());
+    yield put(storeActions.failureFetchStore(error));
   }
 }
 

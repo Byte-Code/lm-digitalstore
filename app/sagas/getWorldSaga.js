@@ -10,7 +10,7 @@ export function* callFetchWorld() {
     const result = fromJS(yield call(fetchWorld));
     yield put(worldActions.successFetchWorld(result));
   } catch (error) {
-    yield put(worldActions.failureFetchWorld());
+    yield put(worldActions.failureFetchWorld(error));
   }
 }
 
