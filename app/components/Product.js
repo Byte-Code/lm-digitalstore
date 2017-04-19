@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import styled from 'styled-components';
 
 import ImageSlider from './ImageSlider';
@@ -88,7 +88,7 @@ export default class Product extends Component {
     const price = productInfo.getIn(['price', 'selling']);
     const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
-    const allStoreStock = productInfo.get('allStoreStock');
+    const allStoreStock = productInfo.get('allStoreStock') || List();
     const currentStoreStock = allStoreStock.find(s => s.get('storeCode') === storeCode);
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
