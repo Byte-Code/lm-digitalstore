@@ -4,6 +4,7 @@ import getWorldSaga from './getWorldSaga';
 import getWeatherSaga from './getWeatherSaga';
 import getCategorySaga from './getCategorySaga';
 import getProductSaga from './getProductSaga';
+import getSimilarProductsSaga from './getSimilarProductsSaga';
 import getProductListSaga from './getProductListSaga';
 import getStoreSaga from './getStoreSaga';
 import getNearbyStoresSaga from './getNearbyStoresSaga';
@@ -15,6 +16,7 @@ export default function* root() {
     fork(getWeatherSaga),
     fork(getCategorySaga),
     fork(getProductSaga),
+    fork(getSimilarProductsSaga),
     fork(getProductListSaga),
     fork(getStoreSaga),
     fork(getNearbyStoresSaga),

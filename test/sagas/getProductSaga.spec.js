@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchProduct } from '../../app/sagas/getProductSaga';
-import { successFetchProduct, failureFetchProduct } from '../../app/actions/productActions';
+import * as productActions from '../../app/actions/productActions';
 
 const validResponse = {
   content: {
@@ -36,15 +36,18 @@ describe('getProductSaga', () => {
     it('should dispatch a SUCCESS_FETCH_PRODUCT action with the transformed result', () => {
       const transformedResult = fromJS(validResponse).get('content');
       expect(gen.next(validResponse).value)
-      .toEqual(put(successFetchProduct(input.productCode, transformedResult)));
+      .toEqual(put(productActions.successFetchProduct(input.productCode, transformedResult)));
     });
 
-    // it('should then dispatch a REQUEST_FETCH_NEARBYSTORES action with the lat and lng', () => {
-    //   const lat = fromJS(validResponse).getIn(['content', 'gpsInformation', 'x']);
-    //   const lng = fromJS(validResponse).getIn(['content', 'gpsInformation', 'y']);
-    //   expect(gen.next().value)
-    //   .toEqual(put(requestFetchNearbyStores(lat, lng)));
-    // });
+    it('should then dispatch a REQUEST_FETCH_SIMILARPRODUCTS action', () => {
+      expect(gen.next().value)
+      .toEqual(put(productActions.requestFetchSimilarProducts(input.productCode)));
+    });
+
+    // const allStoreStock = fromJS(
+    //   yield call(storeStockApi.getStoreAvailability.bind(storeStockApi), productCode)
+    // );
+    // const result = product.set('similarProducts', similarProducts).set('allStoreStock', allStoreStock);
 
     it('and then nothing', () => {
       expect(gen.next().value).toBeUndefined();
@@ -63,7 +66,7 @@ describe('getProductSaga', () => {
 
     it('should dispatch a FAILURE_FETCH_PRODUCT action with the error message', () => {
       expect(gen.throw(genericError).value)
-      .toEqual(put(failureFetchProduct(genericError)));
+      .toEqual(put(productActions.failureFetchProduct(genericError)));
     });
 
     it('and then nothing', () => {
@@ -83,7 +86,7 @@ describe('getProductSaga', () => {
 
     it('should dispatch a FAILURE_FETCH_PRODUCT action with the error message', () => {
       expect(gen.next(invalidResponse).value)
-      .toEqual(put(failureFetchProduct(notFoundError)));
+      .toEqual(put(productActions.failureFetchProduct(notFoundError)));
     });
   });
 });
