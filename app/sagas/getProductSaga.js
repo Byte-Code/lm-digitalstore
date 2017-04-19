@@ -13,6 +13,7 @@ export function* callFetchProduct({ productCode }) {
       const result = fromJS(product).get('content');
       yield put(productActions.successFetchProduct(productCode, result));
       yield put(productActions.requestFetchSimilarProducts(productCode));
+      yield put(productActions.requestFetchStoreStock(productCode));
     } else {
       throw new Error('Not Found Error');
     }

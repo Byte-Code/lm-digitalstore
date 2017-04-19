@@ -44,10 +44,10 @@ describe('getProductSaga', () => {
       .toEqual(put(productActions.requestFetchSimilarProducts(input.productCode)));
     });
 
-    // const allStoreStock = fromJS(
-    //   yield call(storeStockApi.getStoreAvailability.bind(storeStockApi), productCode)
-    // );
-    // const result = product.set('similarProducts', similarProducts).set('allStoreStock', allStoreStock);
+    it('and dispatch a REQUEST_FETCH_STORESTOCK action', () => {
+      expect(gen.next().value)
+      .toEqual(put(productActions.requestFetchStoreStock(input.productCode)));
+    });
 
     it('and then nothing', () => {
       expect(gen.next().value).toBeUndefined();

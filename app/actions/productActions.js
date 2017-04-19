@@ -23,3 +23,15 @@ export function successFetchSimilarProducts(productCode, result) {
 export function failureFetchSimilarProducts(error) {
   return ({ type: actions.FAILURE_FETCH_SIMILARPRODUCTS, error });
 }
+
+export function requestFetchStoreStock(productCode) {
+  return ({ type: actions.REQUEST_FETCH_STORESTOCK, productCode });
+}
+
+export function successFetchStoreStock(productCode, result) {
+  return ({ type: actions.SUCCESS_FETCH_STORESTOCK, productCode, result });
+}
+
+export function failureFetchStoreStock(error) {
+  return ({ type: actions.FAILURE_FETCH_STORESTOCK, error });
+}

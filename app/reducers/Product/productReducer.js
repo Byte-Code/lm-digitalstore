@@ -7,6 +7,8 @@ export default function productReducer(state = Map(), action) {
       return state.set(productCode, result);
     case 'SUCCESS_FETCH_SIMILARPRODUCTS':
       return state.setIn([productCode, 'similarProducts'], result);
+    case 'SUCCESS_FETCH_STORESTOCK':
+      return state.setIn([productCode, 'allStoreStock'], result);
     default:
       return state;
   }
