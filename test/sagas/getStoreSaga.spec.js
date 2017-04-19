@@ -3,8 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchStore } from '../../app/sagas/getStoreSaga';
-import { successFetchStore, failureFetchStore } from '../../app/actions/storeActions';
-// import { requestFetchProducts } from '../../app/actions/catalogueActions';
+import { successFetchStore, failureFetchStore, requestFetchNearbyStores } from '../../app/actions/storeActions';
 
 const validResponse = {
   content: {
@@ -44,11 +43,12 @@ describe('getStoreSaga', () => {
       .toEqual(put(successFetchStore(transformedResult)));
     });
 
-    // it('should then dispatch a REQUEST_FETCH_PRODUCTS action with the ids', () => {
-    //   const productIDList = fromJS(['0', '1', '2']);
-    //   expect(gen.next().value)
-    //   .toEqual(put(requestFetchProducts(input.categoryCode, productIDList)));
-    // });
+    it('should then dispatch a REQUEST_FETCH_NEARBYSTORES action with the lat and lng', () => {
+      const lat = fromJS(validResponse).getIn(['content', 'gpsInformation', 'x']);
+      const lng = fromJS(validResponse).getIn(['content', 'gpsInformation', 'y']);
+      expect(gen.next().value)
+      .toEqual(put(requestFetchNearbyStores(lat, lng)));
+    });
 
     it('and then nothing', () => {
       expect(gen.next().value).toBeUndefined();

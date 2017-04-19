@@ -15,15 +15,12 @@ export function* callFetchStore({ storeCode }) {
     if (isValidResponse(storeInfo)) {
       const result = fromJS(storeInfo).get('content');
       yield put(storeActions.successFetchStore(result));
+      const lat = result.getIn(['gpsInformation', 'x']);
+      const lng = result.getIn(['gpsInformation', 'y']);
+      yield put(storeActions.requestFetchNearbyStores(lat, lng));
     } else {
       throw new Error('Not Found Error');
     }
-    // const lat = storeInfo.getIn(['gpsInformation', 'x']);
-    // const lng = storeInfo.getIn(['gpsInformation', 'y']);
-    // const nearbyStores = fromJS(
-    //   yield call(apiV1.getNearbyStores.bind(apiV1), lat, lng)
-    // ).get('content');
-    // const result = storeInfo.set('nearbyStores', nearbyStores);
   } catch (error) {
     yield put(storeActions.failureFetchStore(error));
   }

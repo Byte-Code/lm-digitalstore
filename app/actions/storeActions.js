@@ -11,3 +11,15 @@ export function successFetchStore(result) {
 export function failureFetchStore(error) {
   return ({ type: actions.FAILURE_FETCH_STORE, error });
 }
+
+export function requestFetchNearbyStores(lat, lng) {
+  return { type: actions.REQUEST_FETCH_NEARBYSTORES, lat, lng };
+}
+
+export function successFetchNearbyStores(result) {
+  return ({ type: actions.SUCCESS_FETCH_NEARBYSTORES, result });
+}
+
+export function failureFetchNearbyStores(error) {
+  return ({ type: actions.FAILURE_FETCH_NEARBYSTORES, error });
+}
