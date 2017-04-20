@@ -8,6 +8,10 @@ export function successFetchCategory(categoryCode, result) {
   return ({ type: actions.SUCCESS_FETCH_CATEGORY, categoryCode, result });
 }
 
+export function successFetchCategoryProducts(categoryCode, result) {
+  return ({ type: actions.SUCCESS_FETCH_CATEGORY_PRODUCTS, categoryCode, result });
+}
+
 export function failureFetchCategory(error) {
   return ({ type: actions.FAILURE_FETCH_CATEGORY, error });
 }

@@ -3,8 +3,8 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchCategory } from '../../app/sagas/getCategorySaga';
-import { successFetchCategory, failureFetchCategory } from '../../app/actions/categoryActions';
-import { requestFetchProducts } from '../../app/actions/catalogueActions';
+import { successFetchCategory, failureFetchCategory, successFetchCategoryProducts } from '../../app/actions/categoryActions';
+import { requestFetchProductList } from '../../app/actions/catalogueActions';
 
 const validResponse = {
   content: {
@@ -44,10 +44,12 @@ describe('getCategorySaga', () => {
       .toEqual(put(successFetchCategory(input.categoryCode, transformedResult)));
     });
 
-    it('should then dispatch a REQUEST_FETCH_PRODUCTS action with the ids', () => {
+    it('should then dispatch a REQUEST_FETCH_PRODUCTLIST action with categoryCode as args, a successAction and the idList', () => {
       const productIDList = fromJS(['0', '1', '2']);
       expect(gen.next().value)
-      .toEqual(put(requestFetchProducts(input.categoryCode, productIDList)));
+      .toEqual(put(requestFetchProductList(
+        productIDList, successFetchCategoryProducts, [input.categoryCode]
+      )));
     });
 
     it('and then nothing', () => {

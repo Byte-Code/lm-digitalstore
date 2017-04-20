@@ -1,13 +1,9 @@
 import * as actions from './actionTypes';
 
-export function requestFetchProducts(categoryCode, productIDList) {
-  return ({ type: actions.REQUEST_FETCH_PRODUCTS, categoryCode, productIDList });
+export function requestFetchProductList(productIDList, action, args) {
+  return ({ type: actions.REQUEST_FETCH_PRODUCTLIST, productIDList, action, args });
 }
 
-export function successFetchProducts(categoryCode, productList) {
-  return ({ type: actions.SUCCESS_FETCH_PRODUCTS, categoryCode, productList });
-}
-
-export function failureFetchProducts(error) {
-  return ({ type: actions.FAILURE_FETCH_PRODUCTS, error });
+export function failureFetchProductList(error) {
+  return ({ type: actions.FAILURE_FETCH_PRODUCTLIST, error });
 }

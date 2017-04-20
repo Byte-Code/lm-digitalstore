@@ -5,19 +5,19 @@ import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as catalogueActions from '../actions/catalogueActions';
 
-export function* callFetchProductList({ categoryCode, productIDList }) {
+export function* callFetchProductList({ productIDList, action, args }) {
   try {
     const productList = yield call(apiV1.getProductListDisplay.bind(apiV1), productIDList.toJS());
-    const result = fromJS(productList).getIn(['content', 'itemlist']);
-    yield put(catalogueActions.successFetchProducts(categoryCode, result));
+    const result = fromJS(productList);
+    yield put(action(...args, result));
   } catch (error) {
-    yield put(catalogueActions.failureFetchProducts(error));
+    yield put(catalogueActions.failureFetchProductList(error));
   }
 }
 
 export default function* getProductListSaga() {
   yield takeEvery(
-    actionTypes.REQUEST_FETCH_PRODUCTS,
+    actionTypes.REQUEST_FETCH_PRODUCTLIST,
     callFetchProductList
   );
 }

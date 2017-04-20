@@ -3,7 +3,8 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchProductList } from '../../app/sagas/getProductListSaga';
-import { successFetchProducts, failureFetchProducts } from '../../app/actions/catalogueActions';
+import { successFetchCategoryProducts } from '../../app/actions/categoryActions';
+import { failureFetchProductList } from '../../app/actions/catalogueActions';
 
 const validResponse = {
   content: {
@@ -15,7 +16,8 @@ const genericError = new Error('Generic Error');
 describe('getProductListSaga', () => {
   describe('Scenario1: input is fine, doesn\'t throw', () => {
     const input = {
-      categoryCode: 'CAT4231',
+      args: 'CAT4231',
+      action: successFetchCategoryProducts,
       productIDList: fromJS(['36143366', '33741225', '36135274', '36135260'])
     };
     const gen = callFetchProductList(input);
@@ -27,10 +29,10 @@ describe('getProductListSaga', () => {
       );
     });
 
-    it('should dispatch a SUCCESS_FETCH_PRODUCTS action with the transformed result', () => {
+    it('should dispatch the provided action with args and the transformed result', () => {
       const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']);
       expect(gen.next(validResponse).value)
-      .toEqual(put(successFetchProducts(input.categoryCode, transformedResult)));
+      .toEqual(put(input.action(...input.args, transformedResult)));
     });
 
     it('and then nothing', () => {
@@ -40,8 +42,9 @@ describe('getProductListSaga', () => {
 
   describe('Scenario2: input is invalid, throws an exception', () => {
     const input = {
-      categoryCode: 'CAT4231',
-      productIDList: fromJS([])
+      args: '',
+      action: successFetchCategoryProducts,
+      productIDList: fromJS(['36143366', '33741225', '36135274', '36135260'])
     };
     const gen = callFetchProductList(input);
 
@@ -51,9 +54,9 @@ describe('getProductListSaga', () => {
       );
     });
 
-    it('should dispatch a FAILURE_PRODUCTS action with the error message', () => {
+    it('should dispatch a FAILURE_FETCH_PRODUCTLIST action with the error message', () => {
       expect(gen.throw(genericError).value)
-      .toEqual(put(failureFetchProducts(genericError)));
+      .toEqual(put(failureFetchProductList(genericError)));
     });
 
     it('and then nothing', () => {

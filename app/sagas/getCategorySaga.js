@@ -3,8 +3,8 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
-import { successFetchCategory, failureFetchCategory } from '../actions/categoryActions';
-import { requestFetchProducts } from '../actions/catalogueActions';
+import { successFetchCategory, failureFetchCategory, successFetchCategoryProducts } from '../actions/categoryActions';
+import { requestFetchProductList } from '../actions/catalogueActions';
 import { isValidResponse } from '../utils/utils';
 
 export function* callFetchCategory({ categoryCode }) {
@@ -15,7 +15,9 @@ export function* callFetchCategory({ categoryCode }) {
       yield put(successFetchCategory(categoryCode, result));
       const orderedProducts = result.get('orderedProducts');
       const productIDList = orderedProducts.map(p => p.get('code'));
-      yield put(requestFetchProducts(categoryCode, productIDList));
+      yield put(
+        requestFetchProductList(productIDList, successFetchCategoryProducts, [categoryCode])
+      );
     } else {
       throw new Error('Not Found Error');
     }
