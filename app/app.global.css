@@ -66,6 +66,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+  /* Disable text selection, or your app will feel like a web page */
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }
 ol, ul {
 	list-style: none;
