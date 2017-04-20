@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-  width: 90px;
+  width: 130px;
   &>h3 {
     font-size: 16px;
     text-transform: uppercase;
@@ -31,6 +31,7 @@ const Slider = styled.div`
 export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
+    title: PropTypes.string.isRequired
   }
 
   static defaultProps = {
@@ -69,7 +70,7 @@ export default class SimilarProducts extends Component {
   }
 
   render() {
-    const { similarProducts } = this.props;
+    const { similarProducts, title } = this.props;
     if (similarProducts.isEmpty()) {
       return null;
     }
@@ -78,7 +79,7 @@ export default class SimilarProducts extends Component {
     return (
       <Wrapper>
         <Header>
-          <h3>prodotti simili</h3>
+          <h3>{title}</h3>
         </Header>
         <Slider>
           {this.renderProducts()}

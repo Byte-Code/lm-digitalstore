@@ -39,7 +39,10 @@ const PriceWrapper = styled.div`
 `;
 
 const SimilarProductsWrapper = styled.div`
-  margin: 60px 0 80px;
+  margin: 60px 0 0;
+  &>div {
+    margin-bottom: 80px;
+  }
 `;
 
 export default class Product extends Component {
@@ -70,6 +73,23 @@ export default class Product extends Component {
     }
   }
 
+  renderSimilarProducts() {
+    const { productInfo } = this.props;
+    const similarProducts = productInfo.get('similarProducts');
+
+    if (!similarProducts) {
+      return null;
+    }
+
+    return similarProducts.map((sp, key) => (
+      <SimilarProducts
+        key={key}
+        similarProducts={sp}
+        title={key}
+      />
+    )).toList();
+  }
+
   render() {
     const { productInfo, storeCode } = this.props;
 
@@ -84,7 +104,6 @@ export default class Product extends Component {
     const marketingAttributes = productInfo.get('marketingAttributes');
     const loyaltyProgram = productInfo.get('loyaltyProgram');
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
-    const similarProducts = productInfo.get('similarProducts');
     const price = productInfo.getIn(['price', 'selling']);
     const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
@@ -110,9 +129,7 @@ export default class Product extends Component {
           descriptions={descriptions}
         />
         <SimilarProductsWrapper>
-          <SimilarProducts
-            similarProducts={similarProducts}
-          />
+          {this.renderSimilarProducts()}
         </SimilarProductsWrapper>
         <PriceWrapper>
           <ProductInfoBadge
