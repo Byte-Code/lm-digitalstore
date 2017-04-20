@@ -39,9 +39,9 @@ describe('getProductSaga', () => {
       .toEqual(put(productActions.successFetchProduct(input.productCode, transformedResult)));
     });
 
-    it('should then dispatch a REQUEST_FETCH_SIMILARPRODUCTS action', () => {
+    it('should then dispatch a REQUEST_FETCH_RELATEDPRODUCTS action', () => {
       expect(gen.next().value)
-      .toEqual(put(productActions.requestFetchSimilarProducts(input.productCode)));
+      .toEqual(put(productActions.requestFetchRelatedProducts(input.productCode)));
     });
 
     it('and dispatch a REQUEST_FETCH_STORESTOCK action', () => {

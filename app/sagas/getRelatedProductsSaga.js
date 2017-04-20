@@ -8,10 +8,10 @@ import { requestFetchProductList } from '../actions/catalogueActions';
 
 export function* callFetchRelatedProducts({ productCode }) {
   try {
-    const products = yield call(apiV1.getRelatedProducts.bind(apiV1), productCode);
-    const groups = fromJS(products).getIn(['content', 0, 'RelatedProducts']);
+    const productList = yield call(apiV1.getRelatedProducts.bind(apiV1), productCode);
+    const groups = fromJS(productList).getIn(['content', 0, 'RelatedProducts']);
     if (!groups) {
-      yield put(productActions.requestFetchXSellProducts(productCode));
+      throw new Error('Not Found Error');
     } else {
       // HACK doesn't work with immutable list
       yield groups.toJS().map(g => put(requestFetchProductList(
@@ -21,8 +21,8 @@ export function* callFetchRelatedProducts({ productCode }) {
       )));
     }
   } catch (error) {
-    yield put(productActions.requestFetchXSellProducts(productCode));
     yield put(productActions.failureFetchRelatedProducts(error));
+    yield put(productActions.requestFetchXSellProducts(productCode));
   }
 }
 
