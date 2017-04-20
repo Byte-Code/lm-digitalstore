@@ -8,7 +8,7 @@ export default function productReducer(state = Map(), action) {
     case 'SUCCESS_FETCH_RELATEDPRODUCTS':
       return state.setIn([productCode, 'suggestedProducts', groupCode], result.getIn(['content', 'itemlist']));
     case 'SUCCESS_FETCH_XSELLPRODUCTS':
-      return state.setIn([productCode, 'suggestedProducts', 'PRODOTTI SIMILI'], result.getIn(['content', 'itemlist']).take(5));
+      return state.setIn([productCode, 'suggestedProducts', 'POTREBBE SERVIRTI ANCHE'], result.getIn(['content', 'itemlist']));
     case 'SUCCESS_FETCH_STORESTOCK':
       return state.setIn([productCode, 'allStoreStock'], result);
     default:

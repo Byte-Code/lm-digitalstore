@@ -9,7 +9,7 @@ import { requestFetchProductList } from '../actions/catalogueActions';
 export function* callFetchXSellProducts({ productCode }) {
   try {
     const products = yield call(apiMicro.getCrossSellingProducts.bind(apiMicro), productCode);
-    const idList = fromJS(products).map(p => p.get('code'));
+    const idList = fromJS(products).map(p => p.get('code')).take(5);
     if (idList.isEmpty()) {
       throw new Error('Not Found Error');
     } else {
