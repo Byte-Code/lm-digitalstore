@@ -52,12 +52,18 @@ const Footer = () => (
         <p>Homepage</p>
       </Button>
     </Link>
-    <TutorialButton>
+    <Link to="/product/34116054">
+      <Button>
+        <HomeIcon color="#fff" style={{ height: 50, width: 50 }} />
+        <p>Product</p>
+      </Button>
+    </Link>
+    {/* <TutorialButton>
       <Button>
         <HelpIcon color="#fff" style={{ height: 50, width: 50 }} />
         <p>Scopri il Digital Store</p>
       </Button>
-    </TutorialButton>
+    </TutorialButton> */}
   </Wrapper>
 );
 

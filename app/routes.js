@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
 import verifystoreCode from './containers/verifystoreCode';
 import App from './containers/App';
@@ -13,14 +13,14 @@ import SelectStorePage from './pages/SelectStorePage';
 export default (
   <Route>
     <Route path="/" component={verifystoreCode(App)}>
-      <IndexRoute component={SplashScreenPage}/>
-      <Route path="/world" component={HomePage}/>
-      <Route path="/catalogue/:categoryCode" component={CataloguePage}/>
-      <Route path="/product/:productCode" component={ProductPage}/>
+      <IndexRoute component={SplashScreenPage} />
+      <Route path="/world" component={HomePage} />
+      <Route path="/catalogue/:categoryCode" component={CataloguePage} />
+      <Route path="/product/:productCode" component={ProductPage} />
     </Route>
-    
-    <Route path="/initialization" component={InitializationPage}/>
-    <Route path="/store-selection" component={SelectStorePage}/>
-  
+
+    <Route path="/initialization" component={InitializationPage} />
+    <Route path="/store-selection" component={SelectStorePage} />
+
   </Route>
 );

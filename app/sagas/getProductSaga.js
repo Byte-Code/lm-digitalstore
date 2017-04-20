@@ -12,7 +12,7 @@ export function* callFetchProduct({ productCode }) {
     if (isValidResponse(product)) {
       const result = fromJS(product).get('content');
       yield put(productActions.successFetchProduct(productCode, result));
-      yield put(productActions.requestFetchSimilarProducts(productCode));
+      yield put(productActions.requestFetchRelatedProducts(productCode));
       yield put(productActions.requestFetchStoreStock(productCode));
     } else {
       throw new Error('Not Found Error');
