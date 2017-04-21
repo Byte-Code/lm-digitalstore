@@ -1,10 +1,10 @@
-import { List } from 'immutable';
+import { OrderedSet } from 'immutable';
 
-export default function catalogueReducer(state = List(), action) {
+export default function catalogueReducer(state = OrderedSet(), action) {
   const { result } = action;
   switch (action.type) {
     case 'SUCCESS_FETCH_PRODUCTLIST':
-      return state.concat(result).toOrderedSet().toList();
+      return state.union(result);
     default:
       return state;
   }

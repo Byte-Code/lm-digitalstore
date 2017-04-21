@@ -27,7 +27,7 @@ describe('getProductListSaga', () => {
     });
 
     it('should dispatch a SUCCESS_FETCH_PRODUCTLIST action with the transformed result', () => {
-      const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']);
+      const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']).toOrderedSet();
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchProductList(transformedResult)));
     });
