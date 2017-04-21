@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiMicro } from '../../mocks/apiMock';
 import { callFetchXSellProducts } from '../../app/sagas/getXSellProductsSaga';
-import { requestFetchProductList } from '../../app/actions/catalogueActions';
+import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
 
 const validResponse = [
@@ -27,16 +27,18 @@ describe('getXSellProductsSaga', () => {
       );
     });
 
+    it('should dispatch a SUCCESS_FETCH_XSELLPRODUCTS action with the transformed result', () => {
+      const transformedResult = fromJS(validResponse).map(p => p.get('code')).take(5);
+      expect(gen.next(validResponse).value)
+      .toEqual(
+        put(productActions.successFetchXSellProducts(input.productCode, transformedResult))
+      );
+    });
+
     it('should dispatch a REQUEST_FETCH_PRODUCTLIST action with the first five results', () => {
       const idList = fromJS(validResponse).map(p => p.get('code')).take(5);
       expect(gen.next(validResponse).value)
-      .toEqual(
-        put(requestFetchProductList(
-          idList,
-          productActions.successFetchXSellProducts,
-          [input.productCode]
-        ))
-      );
+      .toEqual(put(requestFetchProductList(idList)));
     });
 
     it('and then nothing', () => {

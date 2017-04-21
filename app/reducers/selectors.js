@@ -30,12 +30,8 @@ export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }
 
-export function getProductsToShow(state, categoryCode, productIDList) {
-  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), categoryCode, productIDList);
-}
-
-export function getIdsToFetch(state, categoryCode, idsByFilters, idsByAids) {
-  return catalogueSelectors.getIdsToFetch(state.get('catalogueReducer'), categoryCode, idsByFilters, idsByAids);
+export function getProductsToShow(state, productIDList) {
+  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), productIDList);
 }
 
 export function getStoreCode(state) {

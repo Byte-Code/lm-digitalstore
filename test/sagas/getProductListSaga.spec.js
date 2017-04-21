@@ -3,8 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchProductList } from '../../app/sagas/getProductListSaga';
-import { successFetchCategoryProducts } from '../../app/actions/categoryActions';
-import { failureFetchProductList } from '../../app/actions/catalogueActions';
+import { successFetchProductList, failureFetchProductList } from '../../app/actions/productListActions';
 
 const validResponse = {
   content: {
@@ -16,8 +15,6 @@ const genericError = new Error('Generic Error');
 describe('getProductListSaga', () => {
   describe('Scenario1: input is fine, doesn\'t throw', () => {
     const input = {
-      args: 'CAT4231',
-      action: successFetchCategoryProducts,
       productIDList: fromJS(['36143366', '33741225', '36135274', '36135260'])
     };
     const gen = callFetchProductList(input);
@@ -29,10 +26,10 @@ describe('getProductListSaga', () => {
       );
     });
 
-    it('should dispatch the provided action with args and the transformed result', () => {
+    it('should dispatch a SUCCESS_FETCH_PRODUCTLIST action with the transformed result', () => {
       const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']);
       expect(gen.next(validResponse).value)
-      .toEqual(put(input.action(...input.args, transformedResult)));
+      .toEqual(put(successFetchProductList(transformedResult)));
     });
 
     it('and then nothing', () => {
@@ -42,9 +39,7 @@ describe('getProductListSaga', () => {
 
   describe('Scenario2: input is invalid, throws an exception', () => {
     const input = {
-      args: '',
-      action: successFetchCategoryProducts,
-      productIDList: fromJS(['36143366', '33741225', '36135274', '36135260'])
+      productIDList: fromJS([])
     };
     const gen = callFetchProductList(input);
 

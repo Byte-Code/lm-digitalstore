@@ -4,21 +4,20 @@ import { fromJS } from 'immutable';
 import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
-import { requestFetchProductList } from '../actions/catalogueActions';
+import { requestFetchProductList } from '../actions/productListActions';
 
 export function* callFetchRelatedProducts({ productCode }) {
   try {
     const productList = yield call(apiV1.getRelatedProducts.bind(apiV1), productCode);
-    const groups = fromJS(productList).getIn(['content', 0, 'RelatedProducts']);
-    if (!groups) {
+    const result = fromJS(productList).getIn(['content', 0, 'RelatedProducts']);
+    if (!result) {
       throw new Error('Not Found Error');
     } else {
+      yield put(productActions.successFetchRelatedProducts(productCode, result));
       // HACK doesn't work with immutable list
-      yield groups.toJS().map(g => put(requestFetchProductList(
-        fromJS(g.products),
-        productActions.successFetchRelatedProducts,
-        [productCode, g.name]
-      )));
+      yield result.toJS().map(g =>
+        put(requestFetchProductList(fromJS(g.products)))
+      );
     }
   } catch (error) {
     yield put(productActions.failureFetchRelatedProducts(error));

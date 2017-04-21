@@ -16,8 +16,8 @@ export function requestFetchRelatedProducts(productCode) {
   return ({ type: actions.REQUEST_FETCH_RELATEDPRODUCTS, productCode });
 }
 
-export function successFetchRelatedProducts(productCode, groupCode, result) {
-  return ({ type: actions.SUCCESS_FETCH_RELATEDPRODUCTS, productCode, groupCode, result });
+export function successFetchRelatedProducts(productCode, result) {
+  return ({ type: actions.SUCCESS_FETCH_RELATEDPRODUCTS, productCode, result });
 }
 
 export function failureFetchRelatedProducts(error) {

@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchRelatedProducts } from '../../app/sagas/getRelatedProductsSaga';
-import { requestFetchProductList } from '../../app/actions/catalogueActions';
+import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
 
 const validResponse = {
@@ -32,15 +32,20 @@ describe('getRelatedProductsSaga', () => {
       );
     });
 
+    it('should dispatch a SUCCESS_FETCH_RELATEDPRODUCTS action with the transformed result', () => {
+      const transformedResult = fromJS(validResponse).getIn(['content', 0, 'RelatedProducts']);
+      expect(gen.next(validResponse).value)
+      .toEqual(
+        put(productActions.successFetchRelatedProducts(input.productCode, transformedResult))
+      );
+    });
+
     it('should dispatch a REQUEST_FETCH_PRODUCTLIST action for each group of products', () => {
       const groups = fromJS(validResponse).getIn(['content', 0, 'RelatedProducts']);
       expect(gen.next(validResponse).value)
       .toEqual(
-        groups.map(g =>
-          put(requestFetchProductList(
-            g.get('products'), productActions.successFetchRelatedProducts, [input.productCode, g.get('name')]))
-          ).toJS()
-        );
+        groups.map(g => put(requestFetchProductList(g.get('products')))).toJS()
+      );
     });
 
     it('and then nothing', () => {

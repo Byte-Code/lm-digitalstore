@@ -4,20 +4,17 @@ import { fromJS } from 'immutable';
 import { apiMicro } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
-import { requestFetchProductList } from '../actions/catalogueActions';
+import { requestFetchProductList } from '../actions/productListActions';
 
 export function* callFetchXSellProducts({ productCode }) {
   try {
     const products = yield call(apiMicro.getCrossSellingProducts.bind(apiMicro), productCode);
-    const idList = fromJS(products).map(p => p.get('code')).take(5);
-    if (idList.isEmpty()) {
+    const result = fromJS(products).map(p => p.get('code')).take(5);
+    if (result.isEmpty()) {
       throw new Error('Not Found Error');
     } else {
-      yield put(requestFetchProductList(
-        idList,
-        productActions.successFetchXSellProducts,
-        [productCode]
-      ));
+      yield put(productActions.successFetchXSellProducts(productCode, result));
+      yield put(requestFetchProductList(result));
     }
   } catch (error) {
     yield put(productActions.failureFetchXSellProducts(error));

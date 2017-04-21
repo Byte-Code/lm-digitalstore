@@ -3,15 +3,15 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
-import * as catalogueActions from '../actions/catalogueActions';
+import * as productListActions from '../actions/productListActions';
 
-export function* callFetchProductList({ productIDList, action, args }) {
+export function* callFetchProductList({ productIDList }) {
   try {
     const productList = yield call(apiV1.getProductListDisplay.bind(apiV1), productIDList.toJS());
-    const result = fromJS(productList);
-    yield put(action(...args, result));
+    const result = fromJS(productList).getIn(['content', 'itemlist']);
+    yield put(productListActions.successFetchProductList(result));
   } catch (error) {
-    yield put(catalogueActions.failureFetchProductList(error));
+    yield put(productListActions.failureFetchProductList(error));
   }
 }
 

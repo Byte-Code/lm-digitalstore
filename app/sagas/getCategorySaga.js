@@ -3,21 +3,20 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
-import { successFetchCategory, failureFetchCategory, successFetchCategoryProducts } from '../actions/categoryActions';
-import { requestFetchProductList } from '../actions/catalogueActions';
+import { successFetchCategory, failureFetchCategory } from '../actions/categoryActions';
+import { requestFetchProductList } from '../actions/productListActions';
 import { isValidResponse } from '../utils/utils';
 
 export function* callFetchCategory({ categoryCode }) {
   try {
     const categoryList = yield call(apiV1.getCategoryDisplay.bind(apiV1), categoryCode);
     if (isValidResponse(categoryList)) {
-      const result = fromJS(categoryList).get('content');
-      yield put(successFetchCategory(categoryCode, result));
-      const orderedProducts = result.get('orderedProducts');
+      const content = fromJS(categoryList).get('content');
+      const orderedProducts = content.get('orderedProducts');
       const productIDList = orderedProducts.map(p => p.get('code'));
-      yield put(
-        requestFetchProductList(productIDList, successFetchCategoryProducts, [categoryCode])
-      );
+      const result = content.set('orderedProducts', productIDList);
+      yield put(successFetchCategory(categoryCode, result));
+      yield put(requestFetchProductList(productIDList));
     } else {
       throw new Error('Not Found Error');
     }

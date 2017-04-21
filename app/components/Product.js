@@ -52,7 +52,8 @@ export default class Product extends Component {
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
-    storeCode: PropTypes.string.isRequired
+    storeCode: PropTypes.string.isRequired,
+    similarProducts: ImmutablePropTypes.list.isRequired
   }
 
   static defaultProps = {
@@ -74,20 +75,22 @@ export default class Product extends Component {
   }
 
   renderSimilarProducts() {
-    const { productInfo } = this.props;
-    const similarProducts = productInfo.get('similarProducts');
-
-    if (!similarProducts) {
+    const { similarProducts, productInfo } = this.props;
+    if (similarProducts.isEmpty()) {
       return null;
     }
+    const relatedProd = productInfo.get('similarProducts');
 
-    return similarProducts.map((sp, key) => (
-      <SimilarProducts
-        key={key}
-        similarProducts={sp}
-        title={key}
-      />
-    )).toList();
+    return relatedProd.map((sp) => {
+      const products = similarProducts.filter(p => sp.get('products').includes(p.get('code')));
+      return (
+        <SimilarProducts
+          key={sp.get('name')}
+          similarProducts={products}
+          title={sp.get('name')}
+        />
+      );
+    });
   }
 
   render() {
