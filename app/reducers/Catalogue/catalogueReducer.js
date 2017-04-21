@@ -1,11 +1,10 @@
-import { Map } from 'immutable';
+import { List } from 'immutable';
 
-export default function catalogueReducer(state = Map(), action) {
+export default function catalogueReducer(state = List(), action) {
+  const { result } = action;
   switch (action.type) {
-    case 'SUCCESS_FETCH_PRODUCTS': {
-      const { productList, categoryCode } = action;
-      return state.setIn([categoryCode, 'products'], productList);
-    }
+    case 'SUCCESS_FETCH_PRODUCTLIST':
+      return state.concat(result).toOrderedSet().toList();
     default:
       return state;
   }

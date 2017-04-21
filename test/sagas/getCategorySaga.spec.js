@@ -3,8 +3,8 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchCategory } from '../../app/sagas/getCategorySaga';
-import { successFetchCategory, failureFetchCategory } from '../../app/actions/categoryActions';
-import { requestFetchProducts } from '../../app/actions/catalogueActions';
+import { successFetchCategory, failureFetchCategory, successFetchCategoryProducts } from '../../app/actions/categoryActions';
+import { requestFetchProductList } from '../../app/actions/productListActions';
 
 const validResponse = {
   content: {
@@ -39,15 +39,18 @@ describe('getCategorySaga', () => {
     });
 
     it('should dispatch a SUCCESS_FETCH_CATEGORY action with the transformed result', () => {
-      const transformedResult = fromJS(validResponse).get('content');
+      const productIDList = fromJS(['0', '1', '2']);
+      const transformedResult = fromJS(validResponse).get('content').set('orderedProducts', productIDList);
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchCategory(input.categoryCode, transformedResult)));
     });
 
-    it('should then dispatch a REQUEST_FETCH_PRODUCTS action with the ids', () => {
+    it('should then dispatch a REQUEST_FETCH_PRODUCTLIST action with categoryCode as args, a successAction and the idList', () => {
       const productIDList = fromJS(['0', '1', '2']);
       expect(gen.next().value)
-      .toEqual(put(requestFetchProducts(input.categoryCode, productIDList)));
+      .toEqual(put(requestFetchProductList(
+        productIDList, successFetchCategoryProducts, [input.categoryCode]
+      )));
     });
 
     it('and then nothing', () => {

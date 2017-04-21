@@ -26,9 +26,9 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
-"@byte-code/lm-sdk@^1.0.15":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@byte-code/lm-sdk/-/lm-sdk-1.0.15.tgz#8806b6779a0c2489d0ad4cc396ea260cfdaa99cb"
+"@byte-code/lm-sdk@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@byte-code/lm-sdk/-/lm-sdk-1.0.17.tgz#bae0be45257b56e8d20e9dfa5634ddded53b4dcc"
   dependencies:
     axios "^0.15.3"
 

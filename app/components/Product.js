@@ -39,7 +39,10 @@ const PriceWrapper = styled.div`
 `;
 
 const SimilarProductsWrapper = styled.div`
-  margin: 60px 0 80px;
+  margin: 60px 0 0;
+  &>div {
+    margin-bottom: 80px;
+  }
 `;
 
 export default class Product extends Component {
@@ -49,7 +52,8 @@ export default class Product extends Component {
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
-    storeCode: PropTypes.string.isRequired
+    storeCode: PropTypes.string.isRequired,
+    similarProducts: ImmutablePropTypes.list.isRequired
   }
 
   static defaultProps = {
@@ -70,6 +74,25 @@ export default class Product extends Component {
     }
   }
 
+  renderSimilarProducts() {
+    const { similarProducts, productInfo } = this.props;
+    if (similarProducts.isEmpty()) {
+      return null;
+    }
+    const relatedProd = productInfo.get('similarProducts');
+
+    return relatedProd.map((sp) => {
+      const products = similarProducts.filter(p => sp.get('products').includes(p.get('code')));
+      return (
+        <SimilarProducts
+          key={sp.get('name')}
+          similarProducts={products}
+          title={sp.get('name')}
+        />
+      );
+    });
+  }
+
   render() {
     const { productInfo, storeCode } = this.props;
 
@@ -84,7 +107,6 @@ export default class Product extends Component {
     const marketingAttributes = productInfo.get('marketingAttributes');
     const loyaltyProgram = productInfo.get('loyaltyProgram');
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
-    const similarProducts = productInfo.get('similarProducts');
     const price = productInfo.getIn(['price', 'selling']);
     const pricingInfo = productInfo.get('pricingInformations');
     // TODO this data should't arrive from here, selector Maybe?
@@ -110,9 +132,7 @@ export default class Product extends Component {
           descriptions={descriptions}
         />
         <SimilarProductsWrapper>
-          <SimilarProducts
-            similarProducts={similarProducts}
-          />
+          {this.renderSimilarProducts()}
         </SimilarProductsWrapper>
         <PriceWrapper>
           <ProductInfoBadge
