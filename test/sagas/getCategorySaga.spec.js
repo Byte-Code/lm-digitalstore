@@ -39,8 +39,7 @@ describe('getCategorySaga', () => {
     });
 
     it('should dispatch a SUCCESS_FETCH_CATEGORY action with the transformed result', () => {
-      const productIDList = fromJS(['0', '1', '2']);
-      const transformedResult = fromJS(validResponse).get('content').set('orderedProducts', productIDList);
+      const transformedResult = fromJS(validResponse).get('content');
       expect(gen.next(validResponse).value)
       .toEqual(put(successFetchCategory(input.categoryCode, transformedResult)));
     });

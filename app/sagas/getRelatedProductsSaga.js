@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
@@ -14,10 +14,8 @@ export function* callFetchRelatedProducts({ productCode }) {
       throw new Error('Not Found Error');
     } else {
       yield put(productActions.successFetchRelatedProducts(productCode, result));
-      // HACK doesn't work with immutable list
-      yield result.toJS().map(g =>
-        put(requestFetchProductList(fromJS(g.products)))
-      );
+      const productIDList = result.reduce((acc, val) => acc.push(val.get('products')), List()).flatten().toSet().toList();
+      yield put(requestFetchProductList(productIDList));
     }
   } catch (error) {
     yield put(productActions.failureFetchRelatedProducts(error));

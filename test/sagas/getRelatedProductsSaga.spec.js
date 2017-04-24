@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchRelatedProducts } from '../../app/sagas/getRelatedProductsSaga';
@@ -40,12 +40,14 @@ describe('getRelatedProductsSaga', () => {
       );
     });
 
-    it('should dispatch a REQUEST_FETCH_PRODUCTLIST action for each group of products', () => {
-      const groups = fromJS(validResponse).getIn(['content', 0, 'RelatedProducts']);
+    it('should dispatch a REQUEST_FETCH_PRODUCTLIST action with a list containing all products id', () => {
+      const productIDList = fromJS(validResponse).getIn(['content', 0, 'RelatedProducts'])
+      .reduce((acc, val) => acc.push(val.get('products')), List())
+      .flatten()
+      .toSet()
+      .toList();
       expect(gen.next(validResponse).value)
-      .toEqual(
-        groups.map(g => put(requestFetchProductList(g.get('products')))).toJS()
-      );
+      .toEqual(put(requestFetchProductList(productIDList)));
     });
 
     it('and then nothing', () => {
