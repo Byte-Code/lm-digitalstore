@@ -128,7 +128,6 @@ describe('getProductsByFilter', () => {
     ]);
     const activeFilters = fromJS(['filter1', 'filter2', 'filter4']);
     const result = [Set([3, 4, 5, 0, 1, 2]), Set([3, 4, 9])];
-    console.log(filterUtils.getProductsByFilter(filterGroups, activeFilters));
     expect(filterUtils.getProductsByFilter(filterGroups, activeFilters)).toEqual(result);
   });
 
@@ -184,5 +183,38 @@ describe('filterProducts', () => {
     ]);
     const result = fromJS([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).toSet();
     expect(filterUtils.getAllFilterProducts(filterGroups)).toEqual(result);
+  });
+});
+
+describe('buildAvailability', () => {
+  it('should return true when the filter is set', () => {
+    const query = { available: true };
+    const result = true;
+    expect(filterUtils.buildAvailability(query)).toEqual(result);
+  });
+
+  it('should return false when the filter is not set', () => {
+    const query = {};
+    const result = false;
+    expect(filterUtils.buildAvailability(query)).toEqual(result);
+  });
+});
+
+describe('filterByAvailability', () => {
+  it('should return a set containing only the available productsID when productsList is defined', () => {
+    const productList = fromJS([
+      { code: '0', storeStock: 2 },
+      { code: '1', storeStock: 0 },
+      { code: '2', storeStock: 0 },
+      { code: '3', storeStock: 4 }
+    ]);
+    const result = Set(['0', '3']);
+    expect(filterUtils.filterProductsByAvailability(productList)).toEqual(result);
+  });
+
+  it('should return an empty Set when productList is undefined', () => {
+    const productList = undefined;
+    const result = Set();
+    expect(filterUtils.filterProductsByAvailability(productList)).toEqual(result);
   });
 });

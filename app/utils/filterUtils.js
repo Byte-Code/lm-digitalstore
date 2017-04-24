@@ -48,3 +48,17 @@ export function filterProducts(filterGroups, activeFilters) {
   }
   return Set.intersect(getProductsByFilter(filterGroups, activeFilters));
 }
+
+// AVAILABILITY
+export function buildAvailability(query) {
+  return query.available === true;
+}
+
+export function filterProductsByAvailability(productList) {
+  if (productList) {
+    return productList
+    .filter(p => p.get('storeStock') > 0)
+    .map(p => p.get('code'))
+    .toSet();
+  } return Set();
+}
