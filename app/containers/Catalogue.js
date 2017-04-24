@@ -4,7 +4,7 @@ import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { setSellingAids, setFilters, requestFetchProducts } from '../actions/productListActions';
 import { getCategory, getProductsToShow, getFilters, getSellingAids } from '../reducers/selectors';
-import { buildAid, buildFilters, filterProductsByAid, filterProducts } from '../utils/utils';
+import { buildAid, buildFilters, filterProductsByAid, filterProducts } from '../utils/filterUtils';
 
 export function getIdsToFetch(idsByFilters, idsByAids) {
   if (idsByAids.isEmpty()) {
@@ -26,7 +26,6 @@ const mapStateToProps = (state, ownProps) => {
   const idsByAids = filterProductsByAid(sellingAids, activeAid);
   const idsByFilters = filterProducts(filters, activeFilters);
   const productsToFetch = getIdsToFetch(idsByFilters, idsByAids);
-
   return {
     categoryInfo: getCategory(state, categoryCode),
     products: getProductsToShow(state, productsToFetch),

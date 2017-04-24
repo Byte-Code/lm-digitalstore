@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
-import { filterProductsByAid } from '../utils/utils';
+import { filterProductsByAid } from '../utils/filterUtils';
 
 const Header = styled.div`
   width: 100%;
@@ -92,7 +92,7 @@ export default class Catalogue extends Component {
     if (activeFilters.includes(newFilter)) {
       newFilters = activeFilters.filterNot(f => f === newFilter);
     } else newFilters = activeFilters.push(newFilter);
-    const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
+    const newQuery = encodeURIComponent(newFilters.join('&'));
     router.push({
       pathname: router.location.pathname,
       query: Object.assign({}, router.location.query, {
@@ -103,7 +103,7 @@ export default class Catalogue extends Component {
 
   applyFilters = (newFilters) => {
     const { router } = this.props;
-    const newQuery = newFilters.map(f => encodeURIComponent(f)).join(',');
+    const newQuery = encodeURIComponent(newFilters.join('&'));
     router.push({
       pathname: router.location.pathname,
       query: Object.assign({}, router.location.query, {

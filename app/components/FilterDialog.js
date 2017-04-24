@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
-import { filterProducts } from '../utils/utils';
+import { filterProducts } from '../utils/filterUtils';
 
 const Wrapper = styled.div`
   display: flex;
