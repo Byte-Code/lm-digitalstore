@@ -66,6 +66,7 @@ const ResetButton = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: auto;
+  cursor: pointer;
   &>p {
     font-size: 16px;
     text-decoration: underline;
