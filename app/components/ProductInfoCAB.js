@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
+import { List } from 'immutable';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 
@@ -91,7 +92,8 @@ export default class ProductInfoCAB extends Component {
     if (!marketingDescriptions) {
       return null;
     }
-    const blocks = marketingDescriptions.get('chooseBlocks');
+    // TODO why can this be undefined?
+    const blocks = marketingDescriptions.get('chooseBlocks') || List();
 
     return blocks.map(block => (
       <Column key={block.get('title')}>
