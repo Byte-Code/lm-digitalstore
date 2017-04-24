@@ -11,3 +11,7 @@ export function getSellingAids(state, categoryCode) {
 export function getFilters(state, categoryCode) {
   return state.getIn([categoryCode, 'facetFilters']) || List();
 }
+
+export function getOrderedProducts(state, categoryCode) {
+  return state.getIn([categoryCode, 'orderedProducts']) || List();
+}

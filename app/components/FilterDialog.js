@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import { List } from 'immutable';
+import Toggle from 'material-ui/Toggle';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
-import { filterProducts } from '../utils/filterUtils';
+import { filterProducts, filterProductsByAvailability, filterCatalogue } from '../utils/filterUtils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -92,30 +93,38 @@ export default class FilterDialog extends Component {
     activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    productsByAids: ImmutablePropTypes.set.isRequired
+    idsByAids: ImmutablePropTypes.set.isRequired,
+    orderedProducts: ImmutablePropTypes.list.isRequired,
+    activeAvailability: PropTypes.bool.isRequired
   }
 
   constructor(props) {
     super(props);
 
     this.state = {
-      active: props.activeFilters,
+      activeFilters: props.activeFilters,
+      activeAvailability: props.activeAvailability
     };
   }
 
   applyAndClose = () => {
     const { applyFilters, handleClose } = this.props;
-    const { active } = this.state;
-    applyFilters(active);
+    const { activeFilters, activeAvailability } = this.state;
+    applyFilters(activeFilters, activeAvailability);
     handleClose();
   }
 
   toggleFilter = (filterCode) => {
-    const { active } = this.state;
-    if (active.includes(filterCode)) {
-      return this.setState({ active: active.filterNot(f => f === filterCode) });
+    const { activeFilters } = this.state;
+    if (activeFilters.includes(filterCode)) {
+      return this.setState({ activeFilters: activeFilters.filterNot(f => f === filterCode) });
     }
-    return this.setState({ active: active.push(filterCode) });
+    return this.setState({ activeFilters: activeFilters.push(filterCode) });
+  }
+
+  toggleAvailability = () => {
+    const { activeAvailability } = this.state;
+    return this.setState({ activeAvailability: !activeAvailability });
   }
 
   resetFilters = () => {
@@ -124,7 +133,7 @@ export default class FilterDialog extends Component {
 
   renderFilterGroups = () => {
     const { filterGroups } = this.props;
-    const { active } = this.state;
+    const { activeFilters } = this.state;
     return filterGroups.map(g => (
       <GroupWrapper key={g.get('code')}>
         <GroupTitle>{g.get('group')}</GroupTitle>
@@ -133,7 +142,7 @@ export default class FilterDialog extends Component {
             <Filter
               key={f.get('code')}
               onClick={() => this.toggleFilter(f.get('code'))}
-              isActive={active.contains(f.get('code'))}
+              isActive={activeFilters.contains(f.get('code'))}
             >
               <p>{f.get('name')}</p>
             </Filter>
@@ -144,11 +153,11 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { handleClose, filterGroups, productsByAids } = this.props;
-    const { active } = this.state;
-    const totalProducts = productsByAids.isEmpty() ?
-    filterProducts(filterGroups, active) :
-    filterProducts(filterGroups, active).intersect(productsByAids);
+    const { handleClose, filterGroups, idsByAids, orderedProducts } = this.props;
+    const { activeFilters, activeAvailability } = this.state;
+    const idsByFilters = filterProducts(filterGroups, activeFilters);
+    const idsByAvailability = filterProductsByAvailability(orderedProducts, activeAvailability);
+    const totalProducts = filterCatalogue(idsByAids, idsByFilters, idsByAvailability);
     const result = totalProducts.size;
     const onApply = result > 0 ? this.applyAndClose : () => null;
 
@@ -164,6 +173,12 @@ export default class FilterDialog extends Component {
             <p>Reset Filtri</p>
           </Button>
         </Header>
+        <Toggle
+          label="Simple"
+          // style={styles.toggle}
+          toggled={activeAvailability}
+          onToggle={this.toggleAvailability}
+        />
         {this.renderFilterGroups()}
         <ApplyButton
           fSize="20px"

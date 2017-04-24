@@ -26,6 +26,10 @@ export function getFilters(state, categoryCode) {
   return categorySelectors.getFilters(state.get('categoryReducer'), categoryCode);
 }
 
+export function getOrderedProducts(state, categoryCode) {
+  return categorySelectors.getOrderedProducts(state.get('categoryReducer'), categoryCode);
+}
+
 export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }

@@ -188,7 +188,7 @@ describe('filterProducts', () => {
 
 describe('buildAvailability', () => {
   it('should return true when the filter is set', () => {
-    const query = { available: true };
+    const query = { availability: 'true' };
     const result = true;
     expect(filterUtils.buildAvailability(query)).toEqual(result);
   });
@@ -201,15 +201,30 @@ describe('buildAvailability', () => {
 });
 
 describe('filterByAvailability', () => {
-  it('should return a set containing only the available productsID when productsList is defined', () => {
+  it('should return a set containing only the available productsID when productsList is defined and availability is active', () => {
     const productList = fromJS([
       { code: '0', storeStock: 2 },
       { code: '1', storeStock: 0 },
       { code: '2', storeStock: 0 },
       { code: '3', storeStock: 4 }
     ]);
+    const activeAvailability = true;
     const result = Set(['0', '3']);
-    expect(filterUtils.filterProductsByAvailability(productList)).toEqual(result);
+    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability))
+    .toEqual(result);
+  });
+
+  it('should return a set with all the productsID when productsList is defined and availability is false', () => {
+    const productList = fromJS([
+      { code: '0', storeStock: 2 },
+      { code: '1', storeStock: 0 },
+      { code: '2', storeStock: 0 },
+      { code: '3', storeStock: 4 }
+    ]);
+    const activeAvailability = false;
+    const result = Set(['0', '1', '2', '3']);
+    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability))
+    .toEqual(result);
   });
 
   it('should return an empty Set when productList is undefined', () => {
@@ -218,3 +233,21 @@ describe('filterByAvailability', () => {
     expect(filterUtils.filterProductsByAvailability(productList)).toEqual(result);
   });
 });
+
+describe('filterCatalogue', () => {
+  it('should return the intersection of all sets if idsByAids are not empty', () => {
+    const idsByAids = fromJS([0, 1]);
+    const idsByFilters = fromJS([0, 6, 9]);
+    const idsByAvailability = fromJS([0, 9, 12]);
+    const result = Set([0]);
+    expect(filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)).toEqual(result);
+  })
+
+  it('should return the intersection of only idsByFilters and idsByAvailability if idsByAids are not empty', () => {
+    const idsByAids = fromJS([]);
+    const idsByFilters = fromJS([0, 6, 9]);
+    const idsByAvailability = fromJS([0, 9, 12]);
+    const result = Set([0, 9]);
+    expect(filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)).toEqual(result);
+  })
+})

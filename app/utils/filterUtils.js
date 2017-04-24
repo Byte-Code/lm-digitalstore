@@ -51,14 +51,23 @@ export function filterProducts(filterGroups, activeFilters) {
 
 // AVAILABILITY
 export function buildAvailability(query) {
-  return query.available === true;
+  return query.availability === 'true';
 }
 
-export function filterProductsByAvailability(productList) {
-  if (productList) {
-    return productList
-    .filter(p => p.get('storeStock') > 0)
-    .map(p => p.get('code'))
-    .toSet();
-  } return Set();
+export function filterProductsByAvailability(productList, activeAvailability) {
+  if (!productList) {
+    return Set();
+  }
+  let products = productList;
+  if (activeAvailability) {
+    products = productList.filter(p => p.get('storeStock') > 0);
+  } return products.map(p => p.get('code')).toSet();
+}
+
+export function filterCatalogue(idsByAids, idsByFilters, idsByAvailability) {
+  let toIntersect = fromJS([idsByAvailability, idsByFilters]);
+  if (!idsByAids.isEmpty()) {
+    toIntersect = toIntersect.push(idsByAids);
+  }
+  return Set.intersect(toIntersect.toJS());
 }

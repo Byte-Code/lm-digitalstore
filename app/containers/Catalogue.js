@@ -3,16 +3,8 @@ import { connect } from 'react-redux';
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { setSellingAids, setFilters, requestFetchProducts } from '../actions/productListActions';
-import { getCategory, getProductsToShow, getFilters, getSellingAids } from '../reducers/selectors';
-import { buildAid, buildFilters, filterProductsByAid, filterProducts } from '../utils/filterUtils';
-
-export function getIdsToFetch(idsByFilters, idsByAids) {
-  if (idsByAids.isEmpty()) {
-    return idsByFilters;
-  }
-  return idsByAids.intersect(idsByFilters);
-}
-
+import { getCategory, getProductsToShow, getFilters, getSellingAids, getOrderedProducts } from '../reducers/selectors';
+import { buildAid, buildFilters, buildAvailability, filterProductsByAid, filterProducts, filterProductsByAvailability, filterCatalogue } from '../utils/filterUtils';
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -21,16 +13,22 @@ const mapStateToProps = (state, ownProps) => {
   } = ownProps;
   const activeAid = buildAid(query);
   const activeFilters = buildFilters(query);
+  const activeAvailability = buildAvailability(query);
   const sellingAids = getSellingAids(state, categoryCode);
-  const filters = getFilters(state, categoryCode);
+  const filterGroups = getFilters(state, categoryCode);
+  const orderedProducts = getOrderedProducts(state, categoryCode);
   const idsByAids = filterProductsByAid(sellingAids, activeAid);
-  const idsByFilters = filterProducts(filters, activeFilters);
-  const productsToFetch = getIdsToFetch(idsByFilters, idsByAids);
+  const idsByFilters = filterProducts(filterGroups, activeFilters);
+  const idsByAvailability = filterProductsByAvailability(orderedProducts, activeAvailability);
+  const productsToFetch = filterCatalogue(idsByAids, idsByFilters, idsByAvailability);
   return {
     categoryInfo: getCategory(state, categoryCode),
     products: getProductsToShow(state, productsToFetch),
     activeAid,
-    activeFilters
+    activeFilters,
+    activeAvailability,
+    idsByAids,
+    orderedProducts
   };
 };
 

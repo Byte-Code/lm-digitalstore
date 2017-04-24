@@ -3,12 +3,10 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import { Map, List } from 'immutable';
 import styled from 'styled-components';
-// import Waypoint from 'react-waypoint';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
-import { filterProductsByAid } from '../utils/filterUtils';
 
 const Header = styled.div`
   width: 100%;
@@ -47,6 +45,9 @@ export default class Catalogue extends Component {
     activeAid: PropTypes.string.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
     router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
+    idsByAids: ImmutablePropTypes.set.isRequired,
+    activeAvailability: PropTypes.bool.isRequired,
+    orderedProducts: ImmutablePropTypes.list.isRequired
   }
 
   static defaultProps = {
@@ -101,13 +102,14 @@ export default class Catalogue extends Component {
     });
   }
 
-  applyFilters = (newFilters) => {
+  applyFilters = (newFilters, newAvailability) => {
     const { router } = this.props;
     const newQuery = encodeURIComponent(newFilters.join('&'));
     router.push({
       pathname: router.location.pathname,
       query: Object.assign({}, router.location.query, {
-        filters: newQuery
+        filters: newQuery,
+        availability: newAvailability
       })
     });
   }
@@ -130,7 +132,14 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo, activeAid, activeFilters } = this.props;
+    const {
+      categoryInfo,
+      activeAid,
+      activeFilters,
+      idsByAids,
+      orderedProducts,
+      activeAvailability
+    } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -139,7 +148,6 @@ export default class Catalogue extends Component {
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
-    const productsByAids = filterProductsByAid(sellingAids.get('aids'), activeAid);
 
     return (
       <div>
@@ -156,16 +164,13 @@ export default class Catalogue extends Component {
           resetFilters={this.resetFilters}
           applyFilters={this.applyFilters}
           activeFilters={activeFilters}
-          productsByAids={productsByAids}
+          idsByAids={idsByAids}
           toggleFilter={this.toggleFilter}
+          orderedProducts={orderedProducts}
+          activeAvailability={activeAvailability}
         />
         <ProductSlider>
           {this.renderProducts()}
-          {/* <Waypoint
-            onPositionChange={() => {
-              setTimeout(
-                () => requestFetchProducts(categoryCode, productsToFetch), 2000);
-          }} horizontal /> */}
         </ProductSlider>
       </div>
     );

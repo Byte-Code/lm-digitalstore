@@ -81,7 +81,9 @@ export default class FilterBar extends Component {
     applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
     activeFilters: ImmutablePropTypes.list.isRequired,
-    productsByAids: ImmutablePropTypes.set.isRequired
+    idsByAids: ImmutablePropTypes.set.isRequired,
+    activeAvailability: PropTypes.bool.isRequired,
+    orderedProducts: ImmutablePropTypes.list.isRequired
   }
 
   constructor(props) {
@@ -133,7 +135,14 @@ export default class FilterBar extends Component {
 
   // TODO separate dialog logic into dialog component?
   render() {
-    const { activeFilters, applyFilters, productsByAids, filterGroups } = this.props;
+    const {
+      activeFilters,
+      applyFilters,
+      idsByAids,
+      filterGroups,
+      activeAvailability,
+      orderedProducts
+    } = this.props;
 
     if (filterGroups.isEmpty()) {
       return null;
@@ -158,7 +167,9 @@ export default class FilterBar extends Component {
             handleClose={this.handleClose}
             activeFilters={activeFilters}
             applyFilters={applyFilters}
-            productsByAids={productsByAids}
+            idsByAids={idsByAids}
+            orderedProducts={orderedProducts}
+            activeAvailability={activeAvailability}
           />
         </Dialog>
       </Wrapper>
