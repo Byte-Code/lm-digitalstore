@@ -6,10 +6,12 @@ import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
 
 import SimilarProductBadge from './SimilarProductBadge';
+import CloseButton from './CloseButton';
 
 const Slide = styled.div`
   width: 830px;
   margin-right: 40px;
+  position: relative;
 `;
 
 export default class SimilarProductsDialog extends Component {
@@ -55,10 +57,11 @@ export default class SimilarProductsDialog extends Component {
   }
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, handleClose } = this.props;
 
     return similarProducts.map(p => (
       <Slide key={p.get('code')}>
+        <CloseButton handleClick={handleClose} color="#333333" />
         <SimilarProductBadge productInfo={p} />
       </Slide>
     ));

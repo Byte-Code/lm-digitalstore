@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 40px 40px 0;
+  margin: 40px 50px 0;
   text-align: center;
   font-size: 48px;
   height: 70px;

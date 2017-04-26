@@ -3,6 +3,8 @@ import QRCode from 'qrcode.react';
 import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 
+import CloseButton from './CloseButton';
+
 const Header = styled.div`
   display: flex;
   justify-content: center;
@@ -61,7 +63,6 @@ export default class PurchaseDialog extends Component {
   render() {
     const { children, productCode, productSlug } = this.props;
     const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p`;
-    console.log(url);
 
     return (
       <div onTouchTap={this.handleOpen}>
@@ -73,6 +74,7 @@ export default class PurchaseDialog extends Component {
           contentStyle={{ width: '100%', maxWidth: 'none' }}
           bodyStyle={{ padding: 75, background: '#fff' }}
         >
+          <CloseButton handleClick={this.handleClose} color="#333333" />
           <Header>
             <p>genera qr-code</p>
           </Header>
