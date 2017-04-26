@@ -102,6 +102,7 @@ export default class Product extends Component {
 
     const name = productInfo.get('name');
     const code = productInfo.get('code');
+    const slug = productInfo.get('slug');
     const productType = productInfo.getIn(['productDetail', 'descriptionType']);
     const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
     const marketingAttributes = productInfo.get('marketingAttributes');
@@ -138,6 +139,7 @@ export default class Product extends Component {
           <ProductInfoBadge
             productName={name}
             productCode={code}
+            productSlug={slug}
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
             allStoreStock={allStoreStock}

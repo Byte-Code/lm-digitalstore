@@ -7,6 +7,7 @@ import MarketingFlag from './MarketingFlag';
 import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
 import AvailabilityButton from '../containers/AvailabilityButton';
+import PurchaseDialog from '../components/PurchaseDialog';
 
 const Wrapper = styled.div`
   width: 255px;
@@ -22,6 +23,20 @@ const Divider = styled.div`
   margin: 15px 0;
 `;
 
+const Button = styled.div`
+  width: '100%';
+  text-transform: uppercase;
+  background: ${props => props.bgColor};
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  box-shadow:  0 0 8px 0 rgba(51, 51, 51, 0.1);
+  cursor: pointer;
+`;
+
 const StoreStockWrapper = styled.div`
   margin-bottom: 20px;
 `;
@@ -34,6 +49,7 @@ export default class ProductInfoBadge extends Component {
     allStoreStock: ImmutablePropTypes.list.isRequired,
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
+    productSlug: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired
   }
@@ -45,6 +61,7 @@ export default class ProductInfoBadge extends Component {
     })
   }
 
+  // TODO dialog component for Availability
   render() {
     const {
       price,
@@ -53,6 +70,7 @@ export default class ProductInfoBadge extends Component {
       allStoreStock,
       productName,
       productCode,
+      productSlug,
       marketingAttributes,
       loyaltyProgram
     } = this.props;
@@ -75,6 +93,15 @@ export default class ProductInfoBadge extends Component {
           productCode={productCode}
           allStoreStock={allStoreStock}
         />
+        <Divider />
+        <PurchaseDialog
+          productCode={productCode}
+          productSlug={productSlug}
+        >
+          <Button bgColor="#67cb33">
+            Acquista online
+          </Button>
+        </PurchaseDialog>
       </Wrapper>
     );
   }

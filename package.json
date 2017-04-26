@@ -193,6 +193,7 @@
     "immutable": "4.0.0-rc.2",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
+    "qrcode.react": "^0.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
