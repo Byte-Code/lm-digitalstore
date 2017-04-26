@@ -80,7 +80,8 @@ export default class FilterBar extends Component {
     resetFilters: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
-    filterMap: ImmutablePropTypes.map.isRequired
+    filterMap: ImmutablePropTypes.map.isRequired,
+    toggleAvailability: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -98,19 +99,22 @@ export default class FilterBar extends Component {
     this.setState({ open: false });
   }
 
+  // TODO separate this logic into another component?
   renderActiveFilters() {
-    const { filterMap, filterGroups, resetFilters, toggleFilter } = this.props;
+    const { filterMap, filterGroups, resetFilters, toggleFilter, toggleAvailability } = this.props;
     const activeFilters = filterMap.get('activeFilters');
-    if (activeFilters.isEmpty()) {
+    const activeAvailability = filterMap.get('activeAvailability');
+    if (activeFilters.isEmpty() && !activeAvailability) {
       return (
         <ActiveFilters bgColor="#e4e4e4">
           <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
         </ActiveFilters>
       );
     }
+    const toTake = activeAvailability ? 2 : 3;
     const activeFilterList = filterGroups.reduce((acc, val) =>
       acc.push(val.get('filters').filter(f => activeFilters.includes(f.get('code'))))
-      , List()).filterNot(g => g.isEmpty()).flatten(true).take(3);
+      , List()).filterNot(g => g.isEmpty()).flatten(true).take(toTake);
     return (
       <ActiveFilters bgColor="rgba(51, 51, 51, 0.8)">
         {
@@ -119,7 +123,12 @@ export default class FilterBar extends Component {
               <p>{f.get('name')}</p>
             </Filter>))
         }
-        { activeFilters.size > 3 &&
+        { activeAvailability &&
+          (<Filter isActive onClick={toggleAvailability}>
+            <p>Disponibile</p>
+          </Filter>)
+        }
+        { activeFilters.size > toTake &&
           (<Filter width="178px" onClick={this.handleOpen}>
             <p>Visualizza altri filtri</p>
           </Filter>)

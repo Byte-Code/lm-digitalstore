@@ -100,6 +100,16 @@ export default class Catalogue extends Component {
     });
   }
 
+  toggleAvailability = () => {
+    const { router } = this.props;
+    router.push({
+      pathname: router.location.pathname,
+      query: Object.assign({}, router.location.query, {
+        availability: false
+      })
+    });
+  }
+
   applyFilters = (newFilters, newAvailability) => {
     const { router } = this.props;
     const newQuery = encodeURIComponent(newFilters.join('&'));
@@ -112,7 +122,6 @@ export default class Catalogue extends Component {
     });
   }
 
-  // TODO need a different resetFilters for FiltersDialog
   resetFilters = () => {
     const { router } = this.props;
     router.replace({
@@ -157,6 +166,7 @@ export default class Catalogue extends Component {
           applyFilters={this.applyFilters}
           filterMap={filterMap}
           toggleFilter={this.toggleFilter}
+          toggleAvailability={this.toggleAvailability}
         />
         <ProductSlider>
           {this.renderProducts()}
