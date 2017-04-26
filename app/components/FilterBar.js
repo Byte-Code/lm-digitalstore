@@ -160,7 +160,7 @@ export default class FilterBar extends Component {
           onRequestClose={this.handleClose}
           open={this.state.open}
           contentStyle={{ width: '100%', maxWidth: 'none' }}
-          bodyStyle={{ padding: '40px', background: 'rgba(51, 51, 51, 0.8)' }}
+          bodyStyle={{ padding: 0, background: 'rgba(51, 51, 51, 0.8)' }}
         >
           <FilterDialog
             filterGroups={this.props.filterGroups}

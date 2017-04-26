@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: #fff;
+  margin-bottom: 40px;
 `;
 
 const Header = styled.div`
@@ -19,6 +20,7 @@ const Header = styled.div`
   height: 41px;
   justify-content: space-between;
   margin-bottom: 30px;
+  margin: 40px 40px;
 `;
 
 const Button = styled.div`
@@ -44,6 +46,10 @@ const ApplyButton = styled(Button)`
   margin-top: 22px;
 `;
 
+const Groups = styled.div`
+margin: 0 40px;
+`;
+
 const GroupWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -66,6 +72,21 @@ const FilterWrapper = styled.div`
   }
   &>div:last-child {
     margin-right: 0;
+  }
+`;
+
+const Availability = styled.div`
+  background: rgba(103, 203, 51, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 40px;
+  margin-bottom: 31px;
+  &>p {
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: LeroyMerlinSans Light;
+    margin-bottom: 13px;
   }
 `;
 
@@ -128,7 +149,7 @@ export default class FilterDialog extends Component {
   }
 
   resetFilters = () => {
-    this.setState({ active: List() });
+    this.setState({ activeFilters: List(), activeAvailability: false });
   }
 
   renderFilterGroups = () => {
@@ -159,6 +180,8 @@ export default class FilterDialog extends Component {
     const idsByAvailability = filterProductsByAvailability(orderedProducts, activeAvailability);
     const totalProducts = filterCatalogue(idsByAids, idsByFilters, idsByAvailability);
     const result = totalProducts.size;
+    const availabilityLabel = activeAvailability ? 'Disponibile' : 'Indifferente';
+    const labelColor = activeAvailability ? '#67cb33' : '#fff';
     const onApply = result > 0 ? this.applyAndClose : () => null;
 
     return (
@@ -173,13 +196,30 @@ export default class FilterDialog extends Component {
             <p>Reset Filtri</p>
           </Button>
         </Header>
-        <Toggle
-          label="Simple"
-          // style={styles.toggle}
-          toggled={activeAvailability}
-          onToggle={this.toggleAvailability}
-        />
-        {this.renderFilterGroups()}
+        <Availability>
+          <p>Disponibilità in negozio</p>
+          <Toggle
+            label={availabilityLabel}
+            labelPosition="right"
+            trackStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
+            trackSwitchedStyle={{ backgroundColor: '#fff' }}
+            thumbStyle={{ width: 30, height: 30, top: '10px', left: '36px', backgroundColor: '#f4f4f4' }}
+            thumbSwitchedStyle={{ backgroundColor: '#67cb33' }}
+            toggled={activeAvailability}
+            onToggle={this.toggleAvailability}
+            labelStyle={{
+              marginLeft: 50,
+              fontSize: 16,
+              color: labelColor,
+              fontFamily: 'LeroyMerlinSans Italic',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          />
+        </Availability>
+        <Groups>
+          {this.renderFilterGroups()}
+        </Groups>
         <ApplyButton
           fSize="20px"
           onClick={onApply}
