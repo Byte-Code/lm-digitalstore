@@ -30,6 +30,10 @@ export function getOrderedProducts(state, categoryCode) {
   return categorySelectors.getOrderedProducts(state.get('categoryReducer'), categoryCode);
 }
 
+export function getFilteredIDs(state, filterMap) {
+  return categorySelectors.getFilteredIDs(state.get('categoryReducer'), filterMap);
+}
+
 export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }

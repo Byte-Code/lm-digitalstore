@@ -80,10 +80,7 @@ export default class FilterBar extends Component {
     resetFilters: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
-    activeFilters: ImmutablePropTypes.list.isRequired,
-    idsByAids: ImmutablePropTypes.set.isRequired,
-    activeAvailability: PropTypes.bool.isRequired,
-    orderedProducts: ImmutablePropTypes.list.isRequired
+    filterMap: ImmutablePropTypes.map.isRequired
   }
 
   constructor(props) {
@@ -102,7 +99,8 @@ export default class FilterBar extends Component {
   }
 
   renderActiveFilters() {
-    const { activeFilters, filterGroups, resetFilters, toggleFilter } = this.props;
+    const { filterMap, filterGroups, resetFilters, toggleFilter } = this.props;
+    const activeFilters = filterMap.get('activeFilters');
     if (activeFilters.isEmpty()) {
       return (
         <ActiveFilters bgColor="#e4e4e4">
@@ -136,12 +134,9 @@ export default class FilterBar extends Component {
   // TODO separate dialog logic into dialog component?
   render() {
     const {
-      activeFilters,
       applyFilters,
-      idsByAids,
       filterGroups,
-      activeAvailability,
-      orderedProducts
+      filterMap
     } = this.props;
 
     if (filterGroups.isEmpty()) {
@@ -165,11 +160,8 @@ export default class FilterBar extends Component {
           <FilterDialog
             filterGroups={this.props.filterGroups}
             handleClose={this.handleClose}
-            activeFilters={activeFilters}
             applyFilters={applyFilters}
-            idsByAids={idsByAids}
-            orderedProducts={orderedProducts}
-            activeAvailability={activeAvailability}
+            filterMap={filterMap}
           />
         </Dialog>
       </Wrapper>

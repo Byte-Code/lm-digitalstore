@@ -42,12 +42,8 @@ export default class Catalogue extends Component {
     requestFetchCategory: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
-    activeAid: PropTypes.string.isRequired,
-    activeFilters: ImmutablePropTypes.list.isRequired,
+    filterMap: ImmutablePropTypes.map.isRequired,
     router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
-    idsByAids: ImmutablePropTypes.set.isRequired,
-    activeAvailability: PropTypes.bool.isRequired,
-    orderedProducts: ImmutablePropTypes.list.isRequired
   }
 
   static defaultProps = {
@@ -74,7 +70,8 @@ export default class Catalogue extends Component {
   }
 
   toggleAid = (newAid) => {
-    const { router, activeAid } = this.props;
+    const { router, filterMap } = this.props;
+    const activeAid = filterMap.get('activeAid');
     let newQuery;
     if (activeAid === newAid) {
       newQuery = '';
@@ -88,7 +85,8 @@ export default class Catalogue extends Component {
   }
 
   toggleFilter = (newFilter) => {
-    const { router, activeFilters } = this.props;
+    const { router, filterMap } = this.props;
+    const activeFilters = filterMap.get('activeFilters');
     let newFilters;
     if (activeFilters.includes(newFilter)) {
       newFilters = activeFilters.filterNot(f => f === newFilter);
@@ -105,6 +103,7 @@ export default class Catalogue extends Component {
   applyFilters = (newFilters, newAvailability) => {
     const { router } = this.props;
     const newQuery = encodeURIComponent(newFilters.join('&'));
+    console.log(newFilters.toJS());
     router.push({
       pathname: router.location.pathname,
       query: Object.assign({}, router.location.query, {
@@ -132,14 +131,7 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const {
-      categoryInfo,
-      activeAid,
-      activeFilters,
-      idsByAids,
-      orderedProducts,
-      activeAvailability
-    } = this.props;
+    const { categoryInfo, filterMap } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
@@ -148,6 +140,7 @@ export default class Catalogue extends Component {
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
+    const activeAid = filterMap.get('activeAid');
 
     return (
       <div>
@@ -163,11 +156,8 @@ export default class Catalogue extends Component {
           filterGroups={filterGroups}
           resetFilters={this.resetFilters}
           applyFilters={this.applyFilters}
-          activeFilters={activeFilters}
-          idsByAids={idsByAids}
+          filterMap={filterMap}
           toggleFilter={this.toggleFilter}
-          orderedProducts={orderedProducts}
-          activeAvailability={activeAvailability}
         />
         <ProductSlider>
           {this.renderProducts()}

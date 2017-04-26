@@ -1,5 +1,30 @@
 import { fromJS, List, Set } from 'immutable';
 
+// GENERAL
+export function isValidList(list) {
+  return list && !list.isEmpty();
+}
+
+export function buildFilterMap(query, categoryCode) {
+  return fromJS({
+    activeAid: buildAid(query),
+    activeFilters: buildFilters(query),
+    activeAvailability: buildAvailability(query),
+    categoryCode
+  });
+}
+
+export function filterCatalogue(idsByAids, idsByFilters, idsByAvailability) {
+  let toIntersect = fromJS([idsByAvailability]);
+  if (idsByAids) {
+    toIntersect = toIntersect.push(idsByAids);
+  }
+  if (idsByFilters) {
+    toIntersect = toIntersect.push(idsByFilters);
+  }
+  return Set.intersect(toIntersect.toJS());
+}
+
 // AIDS
 export function buildAid(query) {
   const aids = query.aids ? decodeURIComponent(query.aids) : '';
@@ -7,13 +32,10 @@ export function buildAid(query) {
 }
 
 export function filterProductsByAid(sellingAids, activeAid) {
-  if (!sellingAids || sellingAids.isEmpty()) {
-    return Set();
+  if (isValidList(sellingAids) && activeAid) {
+    return sellingAids.find(a => a.get('code') === activeAid).get('products').toSet();
   }
-  if (!activeAid) {
-    return sellingAids.reduce((acc, val) => acc.push(val.get('products')), List()).flatten().toSet();
-  }
-  return sellingAids.find(a => a.get('code') === activeAid).get('products').toSet();
+  return null;
 }
 
 // FILTERS
@@ -21,14 +43,6 @@ export function buildFilters(query) {
   if (query.filters) {
     return fromJS(decodeURIComponent(query.filters).split('&'));
   } return List();
-}
-
-export function getAllFilterProducts(filterGroups) {
-  if (filterGroups) {
-    return filterGroups.map(g => (g.get('filters')
-      .reduce((acc, f) => acc.push(f.get('products')), List()))
-    ).flatten().toSet();
-  } return Set();
 }
 
 export function getProductsByFilter(filterGroups, activeFilters) {
@@ -43,10 +57,10 @@ export function getProductsByFilter(filterGroups, activeFilters) {
 }
 
 export function filterProducts(filterGroups, activeFilters) {
-  if (!activeFilters || activeFilters.isEmpty()) {
-    return getAllFilterProducts(filterGroups);
+  if (isValidList(filterGroups) && isValidList(activeFilters)) {
+    return Set.intersect(getProductsByFilter(filterGroups, activeFilters));
   }
-  return Set.intersect(getProductsByFilter(filterGroups, activeFilters));
+  return null;
 }
 
 // AVAILABILITY
@@ -55,19 +69,11 @@ export function buildAvailability(query) {
 }
 
 export function filterProductsByAvailability(productList, activeAvailability) {
-  if (!productList) {
-    return Set();
+  if (isValidList(productList)) {
+    let products = productList;
+    if (activeAvailability) {
+      products = productList.filter(p => p.get('storeStock') > 0);
+    } return products.map(p => p.get('code')).toSet();
   }
-  let products = productList;
-  if (activeAvailability) {
-    products = productList.filter(p => p.get('storeStock') > 0);
-  } return products.map(p => p.get('code')).toSet();
-}
-
-export function filterCatalogue(idsByAids, idsByFilters, idsByAvailability) {
-  let toIntersect = fromJS([idsByAvailability, idsByFilters]);
-  if (!idsByAids.isEmpty()) {
-    toIntersect = toIntersect.push(idsByAids);
-  }
-  return Set.intersect(toIntersect.toJS());
+  return Set();
 }
