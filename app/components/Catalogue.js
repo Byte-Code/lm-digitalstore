@@ -103,7 +103,6 @@ export default class Catalogue extends Component {
   applyFilters = (newFilters, newAvailability) => {
     const { router } = this.props;
     const newQuery = encodeURIComponent(newFilters.join('&'));
-    console.log(newFilters.toJS());
     router.push({
       pathname: router.location.pathname,
       query: Object.assign({}, router.location.query, {
