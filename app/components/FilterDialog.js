@@ -3,7 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import { fromJS, List } from 'immutable';
 import Toggle from 'material-ui/Toggle';
-import Dialog from 'material-ui/Dialog';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
@@ -103,9 +102,9 @@ const Filter = styled.div`
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
+    handleClose: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    filterMap: ImmutablePropTypes.map.isRequired,
-    children: PropTypes.node.isRequired
+    filterMap: ImmutablePropTypes.map.isRequired
   }
 
   constructor(props) {
@@ -116,24 +115,15 @@ export default class FilterDialog extends Component {
       activeAid: filterMap.get('activeAid'),
       activeFilters: filterMap.get('activeFilters'),
       activeAvailability: filterMap.get('activeAvailability'),
-      categoryCode: filterMap.get('categoryCode'),
-      open: false
+      categoryCode: filterMap.get('categoryCode')
     };
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-  }
-
   applyAndClose = () => {
-    const { applyFilters } = this.props;
+    const { applyFilters, handleClose } = this.props;
     const { activeFilters, activeAvailability } = this.state;
     applyFilters(activeFilters, activeAvailability);
-    this.handleClose();
+    handleClose();
   }
 
   toggleFilter = (filterCode) => {
@@ -175,64 +165,53 @@ export default class FilterDialog extends Component {
   }
 
   render() {
-    const { children } = this.props;
-    const { activeAvailability, open } = this.state;
+    const { handleClose } = this.props;
+    const { activeAvailability } = this.state;
     const availabilityLabel = activeAvailability ? 'Disponibile' : 'Indifferente';
     const labelColor = activeAvailability ? '#67cb33' : '#fff';
     const temporaryFilterMap = fromJS(this.state);
 
     return (
-      <div onTouchTap={this.handleOpen}>
-        {children}
-        <Dialog
-          modal={false}
-          onRequestClose={this.handleClose}
-          open={open}
-          contentStyle={{ width: '100%', maxWidth: 'none' }}
-          bodyStyle={{ padding: 0, background: 'rgba(51, 51, 51, 0.8)' }}
-        >
-          <Wrapper>
-            <Header>
-              <Button fFamily="LeroyMerlinSans Light" fSize="20px" onClick={this.handleClose}>
-                <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
-                <p>Chiudi Filtri</p>
-              </Button>
-              <Button tDeco="underline" fSize="16px" onClick={this.resetFilters}>
-                <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
-                <p>Reset Filtri</p>
-              </Button>
-            </Header>
-            <Availability>
-              <p>Disponibilità in negozio</p>
-              <Toggle
-                label={availabilityLabel}
-                labelPosition="right"
-                trackSwitchedStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
-                trackStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
-                thumbStyle={{ width: 30, height: 30, backgroundColor: '#e4e4e4', top: 10, left: 10 }}
-                thumbSwitchedStyle={{ backgroundColor: '#67cb33', top: 10, left: 65 }}
-                toggled={activeAvailability}
-                onToggle={this.toggleAvailability}
-                labelStyle={{
-                  marginLeft: 50,
-                  fontSize: 16,
-                  color: labelColor,
-                  fontFamily: 'LeroyMerlinSans Italic',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              />
-            </Availability>
-            <Groups>
-              {this.renderFilterGroups()}
-            </Groups>
-            <FilterButton
-              onApply={this.applyAndClose}
-              filterMap={temporaryFilterMap}
-            />
-          </Wrapper>
-        </Dialog>
-      </div>
+      <Wrapper>
+        <Header>
+          <Button fFamily="LeroyMerlinSans Light" fSize="20px" onClick={handleClose}>
+            <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
+            <p>Chiudi Filtri</p>
+          </Button>
+          <Button tDeco="underline" fSize="16px" onClick={this.resetFilters}>
+            <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
+            <p>Reset Filtri</p>
+          </Button>
+        </Header>
+        <Availability>
+          <p>Disponibilità in negozio</p>
+          <Toggle
+            label={availabilityLabel}
+            labelPosition="right"
+            trackSwitchedStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
+            trackStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
+            thumbStyle={{ width: 30, height: 30, backgroundColor: '#e4e4e4', top: 10, left: 10 }}
+            thumbSwitchedStyle={{ backgroundColor: '#67cb33', top: 10, left: 65 }}
+            toggled={activeAvailability}
+            onToggle={this.toggleAvailability}
+            labelStyle={{
+              marginLeft: 50,
+              fontSize: 16,
+              color: labelColor,
+              fontFamily: 'LeroyMerlinSans Italic',
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          />
+        </Availability>
+        <Groups>
+          {this.renderFilterGroups()}
+        </Groups>
+        <FilterButton
+          onApply={this.applyAndClose}
+          filterMap={temporaryFilterMap}
+        />
+      </Wrapper>
     );
   }
 }
