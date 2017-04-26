@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import styled from 'styled-components';
-import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
 import FilterDialog from './FilterDialog';
@@ -14,6 +13,7 @@ const Wrapper = styled.div`
 
 const Button = styled.div`
   width: 190px;
+  height: 71px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,21 +83,6 @@ export default class FilterBar extends Component {
     filterMap: ImmutablePropTypes.map.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  }
-
-  handleClose = () => {
-    this.setState({ open: false });
-  }
-
   renderActiveFilters() {
     const { filterMap, filterGroups, resetFilters, toggleFilter } = this.props;
     const activeFilters = filterMap.get('activeFilters');
@@ -131,7 +116,6 @@ export default class FilterBar extends Component {
     );
   }
 
-  // TODO separate dialog logic into dialog component?
   render() {
     const {
       applyFilters,
@@ -145,25 +129,17 @@ export default class FilterBar extends Component {
 
     return (
       <Wrapper>
-        <Button onClick={this.handleOpen}>
-          <AddIcon color="#fff" style={{ height: 30, width: 30 }} />
-          <p>Piú filtri</p>
-        </Button>
-        {this.renderActiveFilters()}
-        <Dialog
-          modal={false}
-          onRequestClose={this.handleClose}
-          open={this.state.open}
-          contentStyle={{ width: '100%', maxWidth: 'none' }}
-          bodyStyle={{ padding: 0, background: 'rgba(51, 51, 51, 0.8)' }}
+        <FilterDialog
+          filterGroups={filterGroups}
+          applyFilters={applyFilters}
+          filterMap={filterMap}
         >
-          <FilterDialog
-            filterGroups={this.props.filterGroups}
-            handleClose={this.handleClose}
-            applyFilters={applyFilters}
-            filterMap={filterMap}
-          />
-        </Dialog>
+          <Button>
+            <AddIcon color="#fff" style={{ height: 30, width: 30 }} />
+            <p>Piú filtri</p>
+          </Button>
+        </FilterDialog>
+        {this.renderActiveFilters()}
       </Wrapper>
     );
   }
