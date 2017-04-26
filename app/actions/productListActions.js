@@ -11,3 +11,7 @@ export function successFetchProductList(result) {
 export function failureFetchProductList(error) {
   return ({ type: actions.FAILURE_FETCH_PRODUCTLIST, error });
 }
+
+export function clearProductList() {
+  return ({ type: actions.CLEAR_PRODUCT_LIST });
+}

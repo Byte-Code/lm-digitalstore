@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
 import { callFetchProductList } from '../../app/sagas/getProductListSaga';
-import { successFetchProductList, failureFetchProductList } from '../../app/actions/productListActions';
+import { successFetchProductList, failureFetchProductList, clearProductList } from '../../app/actions/productListActions';
 
 const validResponse = {
   content: {
@@ -24,6 +24,10 @@ describe('getProductListSaga', () => {
       expect(JSON.stringify(gen.next().value)).toEqual(
         JSON.stringify(call(apiV1.getProductListDisplay.bind(apiV1), input.productIDList.toJS()))
       );
+    });
+
+    it('should dispatch a CLEAR_PRODUCT_LIST action', () => {
+      expect(gen.next(validResponse).value).toEqual(put(clearProductList()));
     });
 
     it('should dispatch a SUCCESS_FETCH_PRODUCTLIST action with the transformed result', () => {

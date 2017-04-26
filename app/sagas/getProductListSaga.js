@@ -7,8 +7,10 @@ import * as productListActions from '../actions/productListActions';
 
 export function* callFetchProductList({ productIDList }) {
   try {
+    // TODO remove this clear action once state is persisted
     const productList = yield call(apiV1.getProductListDisplay.bind(apiV1), productIDList.toJS());
     const result = fromJS(productList).getIn(['content', 'itemlist']).toOrderedSet();
+    yield put(productListActions.clearProductList());
     yield put(productListActions.successFetchProductList(result));
   } catch (error) {
     yield put(productListActions.failureFetchProductList(error));
