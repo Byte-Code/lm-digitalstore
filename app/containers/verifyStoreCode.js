@@ -11,21 +11,21 @@ export default function(WrappedComponent) {
         this.props.replace('/initialization');
       }
     }
-    
+
     render() {
       console.log(this.props.storeCode)
       if(!this.props.storeCode) {
         return null
       }
-      
+
       return <WrappedComponent {...this.state} {...this.props}/>
     }
   }
-  
+
   const mapStateToProps = (state) => {
     return {storeCode: getStoreCode(state)}
   };
-  
+
   const connected = connect(mapStateToProps, {replace})(verifystoreCode);
   return hoistStatics(connected, WrappedComponent);
 }
