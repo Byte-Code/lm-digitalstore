@@ -56,7 +56,7 @@ export default class PriceBadge extends Component {
           </Discount>
         }
         <MainPrice isDiscounted={isDiscounted}>
-          {grossPrice} &#8364;
+          {formatPrice(grossPrice)} &#8364;
         </MainPrice>
         <Quantity>{`${sellingCapacity} ${sellingUnit} / ${sellingUnit}`}</Quantity>
       </div>
