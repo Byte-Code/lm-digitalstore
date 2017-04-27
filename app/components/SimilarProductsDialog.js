@@ -57,11 +57,10 @@ export default class SimilarProductsDialog extends Component {
   }
 
   renderProducts() {
-    const { similarProducts, handleClose } = this.props;
+    const { similarProducts } = this.props;
 
     return similarProducts.map(p => (
       <Slide key={p.get('code')}>
-        <CloseButton handleClick={handleClose} color="#333333" />
         <SimilarProductBadge productInfo={p} />
       </Slide>
     ));
@@ -86,6 +85,12 @@ export default class SimilarProductsDialog extends Component {
         contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
         bodyStyle={{ padding: 0, background: 'transparent' }}
       >
+        <CloseButton
+          handleClick={handleClose}
+          color="#858585"
+          backgroundColor="#333333"
+          top={-70}
+        />
         <Slick {...settings}>
           {this.renderProducts()}
         </Slick>
