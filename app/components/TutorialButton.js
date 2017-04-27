@@ -64,7 +64,7 @@ class TutorialButton extends Component {
         >
           <CloseButton
             handleClick={this.closeDialog}
-            top={-249}
+            top={-250}
           />
           <Slick {...settings}>
             <div><Slide><Img src={require('../assets/tutorial/tutorial1.png')} alt="tutorial 1" /></Slide></div>

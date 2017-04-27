@@ -89,7 +89,7 @@ export default class SimilarProductsDialog extends Component {
       >
         <CloseButton
           handleClick={handleClose}
-          top={-249}
+          top={-250}
         />
         <Slick {...settings}>
           {this.renderProducts()}
