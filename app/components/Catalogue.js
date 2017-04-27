@@ -21,7 +21,7 @@ const Header = styled.div`
 `;
 
 const ProductSlider = styled.div`
-  margin: 100px 40px 0;
+  margin: 50px 40px;
   display: flex;
   overflow-x: auto;
   flex-flow: column wrap;

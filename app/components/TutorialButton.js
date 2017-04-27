@@ -3,17 +3,19 @@ import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
 import styled from 'styled-components';
 
+import CloseButton from './CloseButton';
+
 const Slide = styled.div`
-  width: 1000px;
-  height: 1420px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 40px;
+  margin-right: 65px;
+  margin-left: -35px;
 `;
+
 const Img = styled.img`
   display: block;
-  width: 1000px;
+  width: 980px;
   height: 1420px;
 `;
 
@@ -27,11 +29,12 @@ class TutorialButton extends Component {
   }
 
   getSlickSettings = () => ({
-    centerMode: true,
     arrows: false,
-    infinite: false,
+    centerMode: true,
     dots: false,
-    initialSlide: 0
+    initialSlide: 0,
+    infinite: false,
+    variableWidth: true
   })
 
   closeDialog = () => {
@@ -56,14 +59,18 @@ class TutorialButton extends Component {
           onRequestClose={this.closeDialog}
           open={this.state.open}
           contentClassName="similarDialog"
-          contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
+          contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent', height: 1420 }}
           bodyStyle={{ padding: 0, background: 'transparent' }}
         >
+          <CloseButton
+            handleClick={this.closeDialog}
+            top={-249}
+          />
           <Slick {...settings}>
-            <Slide><Img src={require('../assets/tutorial/tutorial1.png')} alt="tutorial 1" /></Slide>
-            <Slide><Img src={require('../assets/tutorial/tutorial2.png')} alt="tutorial 2" /></Slide>
-            <Slide><Img src={require('../assets/tutorial/tutorial3.png')} alt="tutorial 3" /></Slide>
-            <Slide><Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" /></Slide>
+            <div><Slide><Img src={require('../assets/tutorial/tutorial1.png')} alt="tutorial 1" /></Slide></div>
+            <div><Slide><Img src={require('../assets/tutorial/tutorial2.png')} alt="tutorial 2" /></Slide></div>
+            <div><Slide><Img src={require('../assets/tutorial/tutorial3.png')} alt="tutorial 3" /></Slide></div>
+            <div><Slide><Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" /></Slide></div>
           </Slick>
         </Dialog>
 

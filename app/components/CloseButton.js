@@ -1,17 +1,16 @@
 import React, { PropTypes } from 'react';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 
-const CloseButton = ({ handleClick, color, top, right, backgroundColor }) => (
+const CloseButton = ({ handleClick, top, right, backgroundColor, fill }) => (
   <BlockIcon
     style={{
-      height: 50,
-      width: 50,
-      cursor: 'pointer',
-      position: 'absolute',
+      fill,
+      backgroundColor,
       top,
       right,
-      fill: color,
-      backgroundColor
+      width: 80,
+      height: 80,
+      position: 'absolute'
     }}
     color="#fff"
     onTouchTap={handleClick}
@@ -20,16 +19,17 @@ const CloseButton = ({ handleClick, color, top, right, backgroundColor }) => (
 
 CloseButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  color: PropTypes.string.isRequired,
   top: PropTypes.number,
   right: PropTypes.number,
+  fill: PropTypes.string,
   backgroundColor: PropTypes.string
 };
 
 CloseButton.defaultProps = {
-  top: 10,
-  right: 10,
-  backgroundColor: 'transparent'
+  top: 0,
+  right: 0,
+  fill: '#858585',
+  backgroundColor: '#333333'
 };
 
 export default CloseButton;

@@ -71,10 +71,10 @@ export default class PurchaseDialog extends Component {
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.open}
-          contentStyle={{ width: '100%', maxWidth: 'none' }}
+          contentStyle={{ width: '100%' }}
           bodyStyle={{ padding: 75, background: '#fff' }}
         >
-          <CloseButton handleClick={this.handleClose} color="#333333" />
+          <CloseButton handleClick={this.handleClose} backgroundColor="#fff" />
           <Header>
             <p>genera qr-code</p>
           </Header>

@@ -9,9 +9,10 @@ import SimilarProductBadge from './SimilarProductBadge';
 import CloseButton from './CloseButton';
 
 const Slide = styled.div`
-  width: 830px;
-  margin-right: 40px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-right: 75px;
+  margin-left: -35px;
 `;
 
 export default class SimilarProductsDialog extends Component {
@@ -44,15 +45,14 @@ export default class SimilarProductsDialog extends Component {
     const { similarProducts, selectedProduct } = this.props;
 
     const selectedIndex = similarProducts.findIndex(p => p.get('code') === selectedProduct) || 0;
-    const infinite = similarProducts.size > 1;
 
     return {
-      centerMode: true,
       arrows: false,
-      variableWidth: true,
+      centerMode: true,
       dots: false,
       initialSlide: selectedIndex,
-      infinite
+      infinite: false,
+      variableWidth: true
     };
   }
 
@@ -60,9 +60,11 @@ export default class SimilarProductsDialog extends Component {
     const { similarProducts } = this.props;
 
     return similarProducts.map(p => (
-      <Slide key={p.get('code')}>
-        <SimilarProductBadge productInfo={p} />
-      </Slide>
+      <div>
+        <Slide key={p.get('code')}>
+          <SimilarProductBadge productInfo={p} />
+        </Slide>
+      </div>
     ));
   }
 
@@ -87,9 +89,7 @@ export default class SimilarProductsDialog extends Component {
       >
         <CloseButton
           handleClick={handleClose}
-          color="#858585"
-          backgroundColor="#333333"
-          top={-70}
+          top={-249}
         />
         <Slick {...settings}>
           {this.renderProducts()}

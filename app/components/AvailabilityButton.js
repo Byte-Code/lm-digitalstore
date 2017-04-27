@@ -48,6 +48,10 @@ export default class AvailabilityButton extends Component {
       productCode
     } = this.props;
 
+    if (!nearbyStoreStock || nearbyStoreStock.isEmpty()) {
+      return null;
+    }
+
     return (
       <div>
         <Button
@@ -63,7 +67,7 @@ export default class AvailabilityButton extends Component {
           contentStyle={{ width: 1000, maxWidth: 'none' }}
           bodyStyle={{ padding: '75px 70px', background: '#333333' }}
         >
-          <CloseButton handleClick={this.handleClose} color="#fff" />
+          <CloseButton handleClick={this.handleClose} />
           <AvailabilityDialog
             nearbyStoreStock={nearbyStoreStock}
             productName={productName}
