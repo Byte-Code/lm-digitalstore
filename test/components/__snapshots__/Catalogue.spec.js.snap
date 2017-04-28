@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`catalogue should render null when categoryInfo is empty or undefined 1`] = `null`;
+
+exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
+<div>
+  <styled.div>
+    <h1>
+      cat123
+    </h1>
+  </styled.div>
+  <SellingAidsBadge
+    activeAid=""
+    onToggle={[Function]}
+    sellingAids={Object {}}
+  />
+  <FilterBar
+    applyFilters={[Function]}
+    filterGroups={Array []}
+    filterMap={Object {}}
+    resetFilters={[Function]}
+    toggleAvailability={[Function]}
+    toggleFilter={[Function]}
+  />
+  <styled.div>
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="product/1"
+    >
+      <ProductBadge
+        handleClick={[Function]}
+        productInfo={
+          Object {
+            "code": 1,
+            "mainImage": "image1",
+            "name": "product1",
+          }
+        }
+      />
+    </Link>
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="product/2"
+    >
+      <ProductBadge
+        handleClick={[Function]}
+        productInfo={
+          Object {
+            "code": 2,
+            "mainImage": "image2",
+            "name": "product2",
+          }
+        }
+      />
+    </Link>
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="product/3"
+    >
+      <ProductBadge
+        handleClick={[Function]}
+        productInfo={
+          Object {
+            "code": 3,
+            "mainImage": "image3",
+            "name": "product3",
+          }
+        }
+      />
+    </Link>
+  </styled.div>
+</div>
+`;

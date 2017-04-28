@@ -32,7 +32,7 @@ const StoreList = styled.div`
   }
 `;
 
-const StoreBadge = styled.div`
+export const StoreBadge = styled.div`
   display: flex;
   padding: 10px;
   margin-bottom: 20px;

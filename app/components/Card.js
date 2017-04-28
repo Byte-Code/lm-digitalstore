@@ -5,6 +5,9 @@ const CardBody = styled.div`
   display: ${props => props.isVisible};
 `;
 
+export const TitleWrapper = styled.div`
+`;
+
 export default class Card extends Component {
   static propTypes = {
     TitleComponent: PropTypes.func.isRequired,
@@ -37,9 +40,9 @@ export default class Card extends Component {
 
     return (
       <div>
-        <div onTouchTap={this.toggleCard.bind(this)}>
+        <TitleWrapper onClick={this.toggleCard.bind(this)}>
           <TitleComponent expanded={expanded} />
-        </div>
+        </TitleWrapper>
         <CardBody
           isVisible={isVisible}
           className="animated fadeIn"
