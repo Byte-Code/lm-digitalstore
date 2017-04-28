@@ -101,6 +101,9 @@
   ],
   "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
   "jest": {
+    "setupFiles": [
+      "./test/setup.js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
       "\\.(css|less|sass|scss)$": "identity-obj-proxy"
@@ -114,7 +117,10 @@
     ],
     "transform": {
       "^.+\\.js$": "babel-jest"
-    }
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ]
   },
   "devDependencies": {
     "animate.css": "^3.5.2",
@@ -173,7 +179,6 @@
     "sinon": "^1.17.7",
     "spectron": "^3.4.1",
     "style-loader": "^0.13.1",
-    "styled-components": "^1.4.4",
     "tcomb": "^3.2.16",
     "url-loader": "^0.5.7",
     "webpack": "^1.14.0",
@@ -188,6 +193,7 @@
     "electron-debug": "^1.1.0",
     "electron-log": "^2.0.2",
     "electron-updater": "1.8.2",
+    "enzyme-to-json": "^1.5.1",
     "font-awesome": "^4.7.0",
     "html-loader": "^0.4.5",
     "immutable": "4.0.0-rc.2",
@@ -204,7 +210,8 @@
     "redux": "^3.6.0",
     "redux-immutable": "^3.1.0",
     "redux-saga": "^0.14.3",
-    "source-map-support": "^0.4.10"
+    "source-map-support": "^0.4.10",
+    "styled-components": "^1.4.5"
   },
   "devEngines": {
     "node": ">=6.x",

@@ -6,7 +6,7 @@ import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
 import FamilySideBar from '../containers/FamilySideBar';
 
 const Button = styled.div`
-  width: 90px
+  width: 90px;
   height: 120px;
   background: #339900;
   position: fixed;

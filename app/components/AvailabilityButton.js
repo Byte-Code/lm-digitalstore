@@ -5,8 +5,9 @@ import styled from 'styled-components';
 
 import AvailabilityDialog from './AvailabilityDialog';
 import CloseButton from './CloseButton';
+import { isValidList } from '../utils/filterUtils';
 
-const Button = styled.div`
+export const Button = styled.div`
   width: '100%';
   text-transform: uppercase;
   background: ${props => props.bgColor};
@@ -48,7 +49,7 @@ export default class AvailabilityButton extends Component {
       productCode
     } = this.props;
 
-    if (!nearbyStoreStock || nearbyStoreStock.isEmpty()) {
+    if (!isValidList(nearbyStoreStock)) {
       return null;
     }
 
