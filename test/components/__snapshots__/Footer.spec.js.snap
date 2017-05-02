@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render properly 1`] = `
+<styled.div>
+  <LinkBack>
+    <styled.div>
+      <NavigationArrowBack
+        color="#fff"
+        style={
+          Object {
+            "height": 50,
+            "width": 50,
+          }
+        }
+      />
+      <p>
+        Indietro
+      </p>
+    </styled.div>
+  </LinkBack>
+  <Link
+    onlyActiveOnIndex={false}
+    style={Object {}}
+    to="/world"
+  >
+    <styled.div>
+      <ActionHome
+        color="#fff"
+        style={
+          Object {
+            "height": 50,
+            "width": 50,
+          }
+        }
+      />
+      <p>
+        Homepage
+      </p>
+    </styled.div>
+  </Link>
+  <TutorialButton>
+    <styled.div>
+      <ActionHelpOutline
+        color="#fff"
+        style={
+          Object {
+            "height": 50,
+            "width": 50,
+          }
+        }
+      />
+      <p>
+        Scopri il Digital Store
+      </p>
+    </styled.div>
+  </TutorialButton>
+</styled.div>
+`;
