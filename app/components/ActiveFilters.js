@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Filter = styled.div`
+export const Filter = styled.div`
   width: ${props => props.width || '150px'};
   height: 42px;
   border-radius: 20px;
@@ -36,7 +36,7 @@ const Filter = styled.div`
   }
 `;
 
-const ResetButton = styled.div`
+export const ResetButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

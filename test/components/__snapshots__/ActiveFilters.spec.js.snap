@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActiveFilters should call handleOpen when showMore filter is clicked 1`] = `
+<styled.div
+  bgColor="rgba(51, 51, 51, 0.8)"
+>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p />
+  </styled.div>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p />
+  </styled.div>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p />
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+    width="178px"
+  >
+    <p>
+      Visualizza altri filtri
+    </p>
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <p>
+      Reset filtri
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ActiveFilters should call toggleAvailability when a availability filter is clicked 1`] = `
+<styled.div
+  bgColor="rgba(51, 51, 51, 0.8)"
+>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p>
+      Disponibile
+    </p>
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <p>
+      Reset filtri
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ActiveFilters should call toggleFilter when a filter is clicked 1`] = `
+<styled.div
+  bgColor="rgba(51, 51, 51, 0.8)"
+>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p />
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <p>
+      Reset filtri
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ActiveFilters should render a paragrapgh when no filters are active 1`] = `
+<styled.div
+  bgColor="#e4e4e4"
+>
+  <p>
+    Tocca per avviare una ricerca avanzata dei prodotti
+  </p>
+</styled.div>
+`;
+
+exports[`ActiveFilters should render any activeFilters 1`] = `
+<styled.div
+  bgColor="rgba(51, 51, 51, 0.8)"
+>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p />
+  </styled.div>
+  <styled.div
+    isActive={true}
+    onClick={[Function]}
+  >
+    <p>
+      Disponibile
+    </p>
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <p>
+      Reset filtri
+    </p>
+  </styled.div>
+</styled.div>
+`;

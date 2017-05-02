@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filterBar should initially render with a closed dialog 1`] = `
+<styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <ContentAddCircleOutline
+      color="#fff"
+      style={
+        Object {
+          "height": 30,
+          "width": 30,
+        }
+      }
+    />
+    <p>
+      Piú filtri
+    </p>
+  </styled.div>
+  <ActiveFilters
+    filterGroups={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+    filterMap={Object {}}
+    handleOpen={[Function]}
+    resetFilters={[Function]}
+    toggleAvailability={[Function]}
+    toggleFilter={[Function]}
+  />
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "rgba(51, 51, 51, 0.8)",
+        "padding": 0,
+      }
+    }
+    contentStyle={
+      Object {
+        "maxWidth": "none",
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={false}
+    repositionOnUpdate={true}
+  >
+    <FilterDialog
+      applyFilters={[Function]}
+      filterGroups={
+        Array [
+          1,
+          2,
+          3,
+        ]
+      }
+      filterMap={Object {}}
+      handleClose={[Function]}
+    />
+  </Dialog>
+</styled.div>
+`;
+
+exports[`filterBar should open the dialog when the button is clicked 1`] = `
+<styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <ContentAddCircleOutline
+      color="#fff"
+      style={
+        Object {
+          "height": 30,
+          "width": 30,
+        }
+      }
+    />
+    <p>
+      Piú filtri
+    </p>
+  </styled.div>
+  <ActiveFilters
+    filterGroups={
+      Array [
+        1,
+        2,
+        3,
+      ]
+    }
+    filterMap={Object {}}
+    handleOpen={[Function]}
+    resetFilters={[Function]}
+    toggleAvailability={[Function]}
+    toggleFilter={[Function]}
+  />
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "rgba(51, 51, 51, 0.8)",
+        "padding": 0,
+      }
+    }
+    contentStyle={
+      Object {
+        "maxWidth": "none",
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={true}
+    repositionOnUpdate={true}
+  >
+    <FilterDialog
+      applyFilters={[Function]}
+      filterGroups={
+        Array [
+          1,
+          2,
+          3,
+        ]
+      }
+      filterMap={Object {}}
+      handleClose={[Function]}
+    />
+  </Dialog>
+</styled.div>
+`;
+
+exports[`filterBar should return null when filterGroups are empty 1`] = `null`;

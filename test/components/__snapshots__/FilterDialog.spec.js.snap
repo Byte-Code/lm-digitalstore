@@ -1,0 +1,636 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterDialog should change state when a filter is clicked 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      fFamily="LeroyMerlinSans Light"
+      fSize="20px"
+      id="close-filterDialog"
+      onClick={[Function]}
+    >
+      <ContentRemoveCircleOutline
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Chiudi Filtri
+      </p>
+    </styled.div>
+    <styled.div
+      fSize="16px"
+      id="reset-filterDialog"
+      onClick={[Function]}
+      tDeco="underline"
+    >
+      <ContentUndo
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Reset Filtri
+      </p>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibilità in negozio
+    </p>
+    <Toggle
+      defaultToggled={false}
+      disabled={false}
+      label="Indifferente"
+      labelPosition="right"
+      labelStyle={
+        Object {
+          "alignItems": "center",
+          "color": "#fff",
+          "display": "flex",
+          "fontFamily": "LeroyMerlinSans Italic",
+          "fontSize": 16,
+          "marginLeft": 50,
+        }
+      }
+      onToggle={[Function]}
+      thumbStyle={
+        Object {
+          "backgroundColor": "#e4e4e4",
+          "height": 30,
+          "left": 10,
+          "top": 10,
+          "width": 30,
+        }
+      }
+      thumbSwitchedStyle={
+        Object {
+          "backgroundColor": "#67cb33",
+          "left": 65,
+          "top": 10,
+        }
+      }
+      toggled={null}
+      trackStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+      trackSwitchedStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+    />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={true}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <Connect(FilterButton)
+    filterMap={
+      Object {
+        "activeAid": "aid1",
+        "activeAvailability": null,
+        "activeFilters": Array [
+          "filter5",
+        ],
+        "categoryCode": "CAT123",
+      }
+    }
+    onApply={[Function]}
+  />
+</styled.div>
+`;
+
+exports[`FilterDialog should change state when availability is toggled 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      fFamily="LeroyMerlinSans Light"
+      fSize="20px"
+      id="close-filterDialog"
+      onClick={[Function]}
+    >
+      <ContentRemoveCircleOutline
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Chiudi Filtri
+      </p>
+    </styled.div>
+    <styled.div
+      fSize="16px"
+      id="reset-filterDialog"
+      onClick={[Function]}
+      tDeco="underline"
+    >
+      <ContentUndo
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Reset Filtri
+      </p>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibilità in negozio
+    </p>
+    <Toggle
+      defaultToggled={false}
+      disabled={false}
+      label="Disponibile"
+      labelPosition="right"
+      labelStyle={
+        Object {
+          "alignItems": "center",
+          "color": "#67cb33",
+          "display": "flex",
+          "fontFamily": "LeroyMerlinSans Italic",
+          "fontSize": 16,
+          "marginLeft": 50,
+        }
+      }
+      onToggle={[Function]}
+      thumbStyle={
+        Object {
+          "backgroundColor": "#e4e4e4",
+          "height": 30,
+          "left": 10,
+          "top": 10,
+          "width": 30,
+        }
+      }
+      thumbSwitchedStyle={
+        Object {
+          "backgroundColor": "#67cb33",
+          "left": 65,
+          "top": 10,
+        }
+      }
+      toggled={true}
+      trackStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+      trackSwitchedStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+    />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={true}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <Connect(FilterButton)
+    filterMap={
+      Object {
+        "activeAid": "aid1",
+        "activeAvailability": true,
+        "activeFilters": Array [
+          "filter5",
+        ],
+        "categoryCode": "CAT123",
+      }
+    }
+    onApply={[Function]}
+  />
+</styled.div>
+`;
+
+exports[`FilterDialog should initialize status based on filterMap 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      fFamily="LeroyMerlinSans Light"
+      fSize="20px"
+      id="close-filterDialog"
+      onClick={[Function]}
+    >
+      <ContentRemoveCircleOutline
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Chiudi Filtri
+      </p>
+    </styled.div>
+    <styled.div
+      fSize="16px"
+      id="reset-filterDialog"
+      onClick={[Function]}
+      tDeco="underline"
+    >
+      <ContentUndo
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Reset Filtri
+      </p>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibilità in negozio
+    </p>
+    <Toggle
+      defaultToggled={false}
+      disabled={false}
+      label="Indifferente"
+      labelPosition="right"
+      labelStyle={
+        Object {
+          "alignItems": "center",
+          "color": "#fff",
+          "display": "flex",
+          "fontFamily": "LeroyMerlinSans Italic",
+          "fontSize": 16,
+          "marginLeft": 50,
+        }
+      }
+      onToggle={[Function]}
+      thumbStyle={
+        Object {
+          "backgroundColor": "#e4e4e4",
+          "height": 30,
+          "left": 10,
+          "top": 10,
+          "width": 30,
+        }
+      }
+      thumbSwitchedStyle={
+        Object {
+          "backgroundColor": "#67cb33",
+          "left": 65,
+          "top": 10,
+        }
+      }
+      toggled={null}
+      trackStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+      trackSwitchedStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+    />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={true}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={true}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <Connect(FilterButton)
+    filterMap={
+      Object {
+        "activeAid": "aid1",
+        "activeAvailability": null,
+        "activeFilters": Array [
+          "filter0",
+          "filter5",
+        ],
+        "categoryCode": "CAT123",
+      }
+    }
+    onApply={[Function]}
+  />
+</styled.div>
+`;
+
+exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.div
+      fFamily="LeroyMerlinSans Light"
+      fSize="20px"
+      id="close-filterDialog"
+      onClick={[Function]}
+    >
+      <ContentRemoveCircleOutline
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Chiudi Filtri
+      </p>
+    </styled.div>
+    <styled.div
+      fSize="16px"
+      id="reset-filterDialog"
+      onClick={[Function]}
+      tDeco="underline"
+    >
+      <ContentUndo
+        color="#fff"
+        style={
+          Object {
+            "height": 25,
+            "width": 25,
+          }
+        }
+      />
+      <p>
+        Reset Filtri
+      </p>
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibilità in negozio
+    </p>
+    <Toggle
+      defaultToggled={false}
+      disabled={false}
+      label="Indifferente"
+      labelPosition="right"
+      labelStyle={
+        Object {
+          "alignItems": "center",
+          "color": "#fff",
+          "display": "flex",
+          "fontFamily": "LeroyMerlinSans Italic",
+          "fontSize": 16,
+          "marginLeft": 50,
+        }
+      }
+      onToggle={[Function]}
+      thumbStyle={
+        Object {
+          "backgroundColor": "#e4e4e4",
+          "height": 30,
+          "left": 10,
+          "top": 10,
+          "width": 30,
+        }
+      }
+      thumbSwitchedStyle={
+        Object {
+          "backgroundColor": "#67cb33",
+          "left": 65,
+          "top": 10,
+        }
+      }
+      toggled={false}
+      trackStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+      trackSwitchedStyle={
+        Object {
+          "backgroundColor": "#fff",
+          "height": 42,
+          "width": 70,
+        }
+      }
+    />
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.div />
+      <styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+        <styled.div
+          isActive={false}
+          onClick={[Function]}
+        >
+          <p />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <Connect(FilterButton)
+    filterMap={
+      Object {
+        "activeAid": "aid1",
+        "activeAvailability": false,
+        "activeFilters": Array [],
+        "categoryCode": "CAT123",
+      }
+    }
+    onApply={[Function]}
+  />
+</styled.div>
+`;

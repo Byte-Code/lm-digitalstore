@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   height: 71px;
 `;
 
-const Button = styled.div`
+export const Button = styled.div`
   width: 190px;
   display: flex;
   align-items: center;

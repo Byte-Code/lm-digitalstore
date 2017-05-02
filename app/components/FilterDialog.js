@@ -23,7 +23,7 @@ const Header = styled.div`
   margin: 0 40px 40px;
 `;
 
-const Button = styled.div`
+export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +81,7 @@ const Availability = styled.div`
   }
 `;
 
-const Filter = styled.div`
+export const Filter = styled.div`
   width: 150px;
   height: 42px;
   border-radius: 20px;
@@ -174,11 +174,21 @@ export default class FilterDialog extends Component {
     return (
       <Wrapper>
         <Header>
-          <Button fFamily="LeroyMerlinSans Light" fSize="20px" onClick={handleClose}>
+          <Button
+            fFamily="LeroyMerlinSans Light"
+            fSize="20px"
+            onClick={handleClose}
+            id="close-filterDialog"
+          >
             <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Chiudi Filtri</p>
           </Button>
-          <Button tDeco="underline" fSize="16px" onClick={this.resetFilters}>
+          <Button
+            tDeco="underline"
+            fSize="16px"
+            onClick={this.resetFilters}
+            id="reset-filterDialog"
+          >
             <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
             <p>Reset Filtri</p>
           </Button>
