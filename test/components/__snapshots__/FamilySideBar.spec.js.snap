@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FamilySideBar should render null when world is empty 1`] = `null`;
+
+exports[`FamilySideBar should render properly when world is not empty 1`] = `
+<styled.div>
+  <styled.h3 />
+  <styled.div
+    onClick={[Function]}
+  >
+    <styled.img
+      src="image"
+    />
+    <styled.div>
+      <p>
+        name
+      </p>
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;

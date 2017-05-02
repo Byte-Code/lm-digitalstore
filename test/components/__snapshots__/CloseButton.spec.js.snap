@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CloseButton should render properly when no styles are provided 1`] = `
+<NavigationClose
+  color="#fff"
+  onTouchTap={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#333333",
+      "fill": "#858585",
+      "height": 80,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
+      "width": 80,
+    }
+  }
+/>
+`;
+
+exports[`CloseButton should render properly when styles are provided 1`] = `
+<NavigationClose
+  color="#fff"
+  onTouchTap={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#333333",
+      "fill": "#fff",
+      "height": 80,
+      "position": "absolute",
+      "right": 10,
+      "top": 10,
+      "width": 80,
+    }
+  }
+/>
+`;

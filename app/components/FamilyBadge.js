@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: ${props => props.width}px;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-const ImageWrapper = styled.img`
+export const ImageWrapper = styled.img`
   height: ${props => props.height}px;
 `;
 
