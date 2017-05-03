@@ -1,42 +1,208 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MarketingBadge should render DESTOCK 1`] = `
-<Component
-  src="test-file-stub"
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "DESTOCK",
+    }
+  }
+>
+  <Component
+    src="test-file-stub"
+  >
+    <styled.img
+      src="test-file-stub"
+    >
+      <img
+        className="cuDvmw"
+        src="test-file-stub"
+      />
+    </styled.img>
+  </Component>
+</MarketingBadge>
 `;
 
 exports[`MarketingBadge should render IDEAPIU 1`] = `
-<Component
-  src="test-file-stub"
-  value={10}
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "IDEAPIU",
+      "value": 10,
+    }
+  }
+>
+  <Component
+    src="test-file-stub"
+    value={10}
+  >
+    <div
+      style={
+        Object {
+          "position": "relative",
+        }
+      }
+    >
+      <styled.img
+        height="50px"
+        mBottom="18px"
+        src="test-file-stub"
+        width="100px"
+      >
+        <img
+          className="gJrHnD"
+          height="50px"
+          src="test-file-stub"
+          width="100px"
+        />
+      </styled.img>
+      <styled.p>
+        <p
+          className="bXfyzC"
+        >
+          -10% IDEAPIÚ
+        </p>
+      </styled.p>
+    </div>
+  </Component>
+</MarketingBadge>
 `;
 
-exports[`MarketingBadge should render NOVITA 1`] = `<Icon />`;
+exports[`MarketingBadge should render NOVITA 1`] = `
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "NOVITA",
+    }
+  }
+>
+  <Icon>
+    <styled.div>
+      <div
+        className="bjsMfp"
+      >
+        <styled.div>
+          <div
+            className="gZQECl"
+          />
+        </styled.div>
+        <styled.span>
+          <span
+            className="hDeyYv"
+          >
+            NOVITÀ
+          </span>
+        </styled.span>
+      </div>
+    </styled.div>
+  </Icon>
+</MarketingBadge>
+`;
 
 exports[`MarketingBadge should render PREZZO_GIU 1`] = `
-<Component
-  src="test-file-stub"
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "PREZZO_GIU",
+    }
+  }
+>
+  <Component
+    src="test-file-stub"
+  >
+    <styled.img
+      height="100px"
+      src="test-file-stub"
+      width="100px"
+    >
+      <img
+        className="jqBbJk"
+        height="100px"
+        src="test-file-stub"
+        width="100px"
+      />
+    </styled.img>
+  </Component>
+</MarketingBadge>
 `;
 
 exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
-<Component
-  src="test-file-stub"
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "PREZZO_STOCK",
+    }
+  }
+>
+  <Component
+    src="test-file-stub"
+  >
+    <styled.img
+      height="20px"
+      src="test-file-stub"
+      width="120px"
+    >
+      <img
+        className="fUkjDv"
+        height="20px"
+        src="test-file-stub"
+        width="120px"
+      />
+    </styled.img>
+  </Component>
+</MarketingBadge>
 `;
 
 exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
-<styled.img
-  src="test-file-stub"
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "PREZZO_VINCENTE",
+    }
+  }
+>
+  <styled.img
+    src="test-file-stub"
+  >
+    <img
+      className="cuDvmw"
+      src="test-file-stub"
+    />
+  </styled.img>
+</MarketingBadge>
 `;
 
 exports[`MarketingBadge should render PROMO_WEB 1`] = `
-<Component
-  src="test-file-stub"
-/>
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "PROMO_WEB",
+    }
+  }
+>
+  <Component
+    src="test-file-stub"
+  >
+    <styled.img
+      src="test-file-stub"
+      width="100px"
+    >
+      <img
+        className="GjBEV"
+        src="test-file-stub"
+        width="100px"
+      />
+    </styled.img>
+  </Component>
+</MarketingBadge>
 `;
 
-exports[`MarketingBadge should render null if no promotion is provided 1`] = `null`;
+exports[`MarketingBadge should render null if no promotion is provided 1`] = `
+<MarketingBadge
+  promotion={
+    Object {
+      "code": "",
+    }
+  }
+/>
+`;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { fromJS } from 'immutable';
 
 import MarketingBadge, * as badges from '../../app/components/MarketingBadge';
@@ -9,7 +9,7 @@ import Novita from '../../app/components/Novita';
 describe('MarketingBadge', () => {
   it('should render null if no promotion is provided', () => {
     const promotion = fromJS({ code: '' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     expect(result).toMatchSnapshot();
@@ -17,7 +17,7 @@ describe('MarketingBadge', () => {
 
   it('should render PREZZO_GIU', () => {
     const promotion = fromJS({ code: 'PREZZO_GIU' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.PrezzoGiu);
@@ -27,7 +27,7 @@ describe('MarketingBadge', () => {
 
   it('should render NOVITA', () => {
     const promotion = fromJS({ code: 'NOVITA' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(Novita);
@@ -37,7 +37,7 @@ describe('MarketingBadge', () => {
 
   it('should render PROMO_WEB', () => {
     const promotion = fromJS({ code: 'PROMO_WEB' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.PromoWeb);
@@ -47,7 +47,7 @@ describe('MarketingBadge', () => {
 
   it('should render DESTOCK', () => {
     const promotion = fromJS({ code: 'DESTOCK' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.Destock);
@@ -57,7 +57,7 @@ describe('MarketingBadge', () => {
 
   it('should render PREZZO_STOCK', () => {
     const promotion = fromJS({ code: 'PREZZO_STOCK' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.PrezzoStock);
@@ -67,7 +67,7 @@ describe('MarketingBadge', () => {
 
   it('should render PREZZO_VINCENTE', () => {
     const promotion = fromJS({ code: 'PREZZO_VINCENTE' });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.PrezzoVincente);
@@ -77,7 +77,7 @@ describe('MarketingBadge', () => {
 
   it('should render IDEAPIU', () => {
     const promotion = fromJS({ code: 'IDEAPIU', value: 10 });
-    const result = shallow(
+    const result = mount(
       <MarketingBadge promotion={promotion} />
     );
     const badge = result.find(badges.IdeaPiu);
