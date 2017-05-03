@@ -40,6 +40,16 @@ export default class ImageSlider extends Component {
   }
 
   render() {
+    const { imageIDList } = this.props;
+
+    if (imageIDList.size === 1) {
+      return (
+        <div>
+          {this.renderImages()}
+        </div>
+      );
+    }
+
     return (
       <Slider {...settings}>
         {this.renderImages()}

@@ -5,6 +5,9 @@ import styled from 'styled-components';
 
 import CloseButton from './CloseButton';
 
+const Wrapper = styled.div`
+`;
+
 const Slide = styled.div`
   display: flex;
   align-items: center;
@@ -52,7 +55,7 @@ class TutorialButton extends Component {
   render() {
     const settings = this.getSlickSettings();
     return (
-      <div onTouchTap={this.openDialog}>
+      <Wrapper onClick={this.openDialog}>
         {this.props.children}
         <Dialog
           modal={false}
@@ -73,8 +76,7 @@ class TutorialButton extends Component {
             <div><Slide><Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" /></Slide></div>
           </Slick>
         </Dialog>
-
-      </div>
+      </Wrapper>
     );
   }
 }

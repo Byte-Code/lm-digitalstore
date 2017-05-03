@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should render null if world is empty 1`] = `null`;
+
+exports[`Home should render properly if world is not empty 1`] = `
+<styled.div>
+  <styled.div>
+    <img
+      alt="logo"
+      src="test-file-stub"
+    />
+  </styled.div>
+  <styled.section>
+    <h1>
+      Esplora le soluzioni Leroy Merlin per
+      <span>
+         
+        Giardino e Terrazzo
+      </span>
+    </h1>
+  </styled.section>
+  <styled.div>
+    <styled.div>
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT656",
+            "familyName": "Tavoli",
+            "image": "test-file-stub",
+          }
+        }
+        size="square-big"
+      />
+      <styled.div>
+        <FamilyBadge
+          family={
+            Object {
+              "categoryCode": "CAT944",
+              "familyName": "Gazebo",
+              "image": "test-file-stub",
+            }
+          }
+          size="square-small"
+        />
+        <FamilyBadge
+          family={
+            Object {
+              "categoryCode": "CAT657",
+              "familyName": "Sedie e Poltrone",
+              "image": "test-file-stub",
+            }
+          }
+          size="square-small"
+        />
+      </styled.div>
+      <styled.div>
+        <FamilyBadge
+          family={
+            Object {
+              "categoryCode": "CAT945",
+              "familyName": "Panchine",
+              "image": "test-file-stub",
+            }
+          }
+          size="square-small"
+        />
+        <FamilyBadge
+          family={
+            Object {
+              "categoryCode": "CAT659",
+              "familyName": "Dondoli e Amache",
+              "image": "test-file-stub",
+            }
+          }
+          size="square-small"
+        />
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT660",
+            "familyName": "Ombrelloni e Basi",
+            "image": "test-file-stub",
+          }
+        }
+        size="square-small"
+      />
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT655",
+            "familyName": "Set di tavoli e sedie",
+            "image": "test-file-stub",
+          }
+        }
+        size="horizontal"
+      />
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT658",
+            "familyName": "Sdraio e Lettini",
+            "image": "test-file-stub",
+          }
+        }
+        size="square-small"
+      />
+    </styled.div>
+    <styled.div>
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT676",
+            "familyName": "Pergole",
+            "image": "test-file-stub",
+          }
+        }
+        size="square-small"
+      />
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT4231",
+            "familyName": "Carport",
+            "image": "test-file-stub",
+          }
+        }
+        size="square-small"
+      />
+      <FamilyBadge
+        family={
+          Object {
+            "categoryCode": "CAT4097",
+            "familyName": "Divisori Giardino",
+            "image": "test-file-stub",
+          }
+        }
+        size="horizontal"
+      />
+    </styled.div>
+    <TutorialButton>
+      <styled.div
+        url="test-file-stub"
+      >
+        Scopri le funzioni del Digital Store
+        <ActionHelpOutline
+          color="#fff"
+          style={
+            Object {
+              "height": 65,
+              "width": 65,
+            }
+          }
+        />
+      </styled.div>
+    </TutorialButton>
+  </styled.div>
+  <styled.img
+    alt="alt"
+    src="test-file-stub"
+  />
+</styled.div>
+`;

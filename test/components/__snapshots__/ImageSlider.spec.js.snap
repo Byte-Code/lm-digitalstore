@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageSlider should not render the slick if only one image is present 1`] = `
+<div>
+  <div>
+    <Image
+      alt="alt"
+      fixBrightColor={true}
+      imageID="image0"
+      imageOptions={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`ImageSlider should render a slick carousel when multiple images are present 1`] = `
+<Slider
+  arrows={false}
+  dots={true}
+  dotsClass="slickDots"
+  infinite={false}
+  slidesToScroll={1}
+  slidesToShow={1}
+  speed={100}
+>
+  <div>
+    <Image
+      alt="alt"
+      fixBrightColor={true}
+      imageID="image0"
+      imageOptions={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+  <div>
+    <Image
+      alt="alt"
+      fixBrightColor={true}
+      imageID="image1"
+      imageOptions={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+  <div>
+    <Image
+      alt="alt"
+      fixBrightColor={true}
+      imageID="image2"
+      imageOptions={
+        Object {
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+</Slider>
+`;

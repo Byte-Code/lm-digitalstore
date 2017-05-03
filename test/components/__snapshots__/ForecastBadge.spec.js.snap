@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForecastBadge should render properly 1`] = `
+<styled.div>
+  <styled.div>
+    dt
+  </styled.div>
+  <styled.div>
+    <IconSelector
+      weather="sunny"
+    />
+  </styled.div>
+  <styled.div>
+    <p>
+      <styled.span>
+        min.
+      </styled.span>
+      <styled.span>
+        0
+         °
+      </styled.span>
+    </p>
+    <p>
+      <styled.span>
+        max.
+      </styled.span>
+      <styled.span>
+        0
+         °
+      </styled.span>
+    </p>
+  </styled.div>
+</styled.div>
+`;

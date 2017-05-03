@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationBadge renders properly 1`] = `
+<styled.div>
+  <styled.div>
+    <IconSelector
+      weather="sunny"
+    />
+    <styled.div>
+      <styled.p>
+        milano
+         (
+        Italia
+        )
+      </styled.p>
+      <DateBadge />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    30
+     °
+  </styled.div>
+</styled.div>
+`;

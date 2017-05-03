@@ -5,6 +5,9 @@ import Dialog from 'material-ui/Dialog';
 
 import CloseButton from './CloseButton';
 
+const Wrapper = styled.div`
+`;
+
 const Header = styled.div`
   display: flex;
   justify-content: center;
@@ -65,7 +68,7 @@ export default class PurchaseDialog extends Component {
     const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p`;
 
     return (
-      <div onTouchTap={this.handleOpen}>
+      <Wrapper onClick={this.handleOpen}>
         {children}
         <Dialog
           modal={false}
@@ -89,7 +92,7 @@ export default class PurchaseDialog extends Component {
             />
           </Content>
         </Dialog>
-      </div>
+      </Wrapper>
     );
   }
 }

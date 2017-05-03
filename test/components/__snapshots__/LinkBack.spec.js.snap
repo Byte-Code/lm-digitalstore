@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkBack renders properly 1`] = `
+<a
+  onClick={[Function]}
+>
+  <p>
+    children
+  </p>
+</a>
+`;

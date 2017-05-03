@@ -72,7 +72,6 @@ export default class SellingAidsBadge extends Component {
       const aidCode = aid.get('code');
       const isActive = aidCode === activeAid;
 
-      // TODO add onTouchTap here
       return (
         <Filter
           key={aidCode}
