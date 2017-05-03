@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarketingFlag should render an empty div when no promotions are active 1`] = `
+<MarketingFlag
+  loyaltyProgram={Object {}}
+  marketingAttributes={Object {}}
+>
+  <styled.div>
+    <div
+      className="foyPkx"
+    />
+  </styled.div>
+</MarketingFlag>
+`;
+
+exports[`MarketingFlag should render properly when promotions are active 1`] = `
+<MarketingFlag
+  loyaltyProgram={
+    Object {
+      "type": "DISCOUNT",
+      "value": 10,
+    }
+  }
+  marketingAttributes={
+    Object {
+      "specialBadgeCode": "PREZZO_STOCK",
+    }
+  }
+>
+  <styled.div>
+    <div
+      className="foyPkx"
+    >
+      <MarketingBadge
+        promotion={
+          Object {
+            "code": "IDEAPIU",
+            "value": 10,
+          }
+        }
+      >
+        <Component
+          src="test-file-stub"
+          value={10}
+        >
+          <div
+            style={
+              Object {
+                "position": "relative",
+              }
+            }
+          >
+            <styled.img
+              height="50px"
+              mBottom="18px"
+              src="test-file-stub"
+              width="100px"
+            >
+              <img
+                className="gJrHnD"
+                height="50px"
+                src="test-file-stub"
+                width="100px"
+              />
+            </styled.img>
+            <styled.p>
+              <p
+                className="bXfyzC"
+              >
+                -10% IDEAPIÚ
+              </p>
+            </styled.p>
+          </div>
+        </Component>
+      </MarketingBadge>
+    </div>
+  </styled.div>
+</MarketingFlag>
+`;

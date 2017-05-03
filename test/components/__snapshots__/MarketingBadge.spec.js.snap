@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarketingBadge should render DESTOCK 1`] = `
+<Component
+  src="test-file-stub"
+/>
+`;
+
+exports[`MarketingBadge should render IDEAPIU 1`] = `
+<Component
+  src="test-file-stub"
+  value={10}
+/>
+`;
+
+exports[`MarketingBadge should render NOVITA 1`] = `<Icon />`;
+
+exports[`MarketingBadge should render PREZZO_GIU 1`] = `
+<Component
+  src="test-file-stub"
+/>
+`;
+
+exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
+<Component
+  src="test-file-stub"
+/>
+`;
+
+exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
+<styled.img
+  src="test-file-stub"
+/>
+`;
+
+exports[`MarketingBadge should render PROMO_WEB 1`] = `
+<Component
+  src="test-file-stub"
+/>
+`;
+
+exports[`MarketingBadge should render null if no promotion is provided 1`] = `null`;
