@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page should render properly 1`] = `
+<styled.div
+  background="#ffffff"
+  height="auto"
+  padding={0}
+>
+  <p>
+    hello
+  </p>
+</styled.div>
+`;

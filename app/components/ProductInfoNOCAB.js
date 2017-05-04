@@ -34,7 +34,7 @@ export default class ProductInfoNOCAB extends Component {
 
   renderDescriptions() {
     const { descriptions } = this.props;
-    if (!descriptions) {
+    if (!descriptions || descriptions.isEmpty()) {
       return null;
     }
     return descriptions.get(0).map(item => (

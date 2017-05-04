@@ -65,9 +65,9 @@ export default class Product extends Component {
     requestFetchProduct(productCode);
   }
 
-  componentDidUpdate(prevProps) {
-    const prevProductCode = prevProps.params.productCode;
-    const { params: { productCode }, requestFetchProduct } = this.props;
+  componentWillReceiveProps(nextProps) {
+    const prevProductCode = this.props.params.productCode;
+    const { params: { productCode }, requestFetchProduct } = nextProps;
 
     if (prevProductCode !== productCode) {
       requestFetchProduct(productCode);
@@ -76,9 +76,11 @@ export default class Product extends Component {
 
   renderSimilarProducts() {
     const { similarProducts, productInfo } = this.props;
+
     if (similarProducts.isEmpty()) {
       return null;
     }
+
     const relatedProd = productInfo.get('similarProducts');
 
     return relatedProd.map((sp) => {

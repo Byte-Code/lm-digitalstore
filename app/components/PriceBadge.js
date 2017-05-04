@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { formatPrice } from '../utils/utils';
 
-const Discount = styled.div`
+export const Discount = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -42,7 +42,7 @@ export default class PriceBadge extends Component {
     const { pricingInfo, price } = this.props;
     const grossPrice = price.get('gross');
     const listPrice = price.get('list');
-    const isDiscounted = listPrice && true && (listPrice - grossPrice > 1);
+    const isDiscounted = listPrice && (listPrice - grossPrice > 1);
     const discount = price.get('discount');
     const sellingCapacity = pricingInfo.get('sellingCapacity') || 1;
     const sellingUnit = pricingInfo.get('sellingUnit');

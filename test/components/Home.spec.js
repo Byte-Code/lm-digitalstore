@@ -1,8 +1,8 @@
 import React from 'react';
 import { fromJS } from 'immutable';
-import { shallow, mount } from 'enzyme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { shallow } from 'enzyme';
 
+import mountWithStore from '../../app/utils/testingUtils';
 import Home from '../../app/components/Home';
 import World from '../../mocks/world';
 
@@ -31,13 +31,11 @@ describe('Home', () => {
   });
 
   it('should call requestFetchWorld after mount', () => {
-    mount(
-      <MuiThemeProvider>
-        <Home
-          world={fromJS(World)}
-          requestFetchWorld={requestFetchWorld}
-        />
-      </MuiThemeProvider>
+    mountWithStore(
+      <Home
+        world={fromJS(World)}
+        requestFetchWorld={requestFetchWorld}
+      />
     );
     expect(requestFetchWorld).toHaveBeenCalled();
   });

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Novita should render properly 1`] = `
+<styled.div>
+  <styled.div />
+  <styled.span>
+    NOVITÀ
+  </styled.span>
+</styled.div>
+`;

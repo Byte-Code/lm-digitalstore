@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product should render properly with no similarProducts  1`] = `
+<styled.div>
+  <styled.h1>
+    name
+  </styled.h1>
+  <styled.h3>
+    REF. code
+  </styled.h3>
+  <styled.div>
+    <ImageSlider
+      alt="name"
+      imageIDList={
+        Array [
+          "image1",
+        ]
+      }
+      imageOptions={
+        Object {
+          "crop": "fit",
+          "height": 1080,
+          "width": 1080,
+        }
+      }
+    />
+  </styled.div>
+  <ProductInfo
+    descriptions={Array []}
+    marketingDescriptions={Object {}}
+    productType="descriptionType"
+  />
+  <styled.div />
+  <styled.div>
+    <ProductInfoBadge
+      allStoreStock={Array []}
+      currentStoreStock={
+        Object {
+          "stockStatus": "notAvailable",
+          "storeStock": 0,
+        }
+      }
+      loyaltyProgram={Object {}}
+      marketingAttributes={Object {}}
+      price={Object {}}
+      pricingInfo={Object {}}
+      productCode="code"
+      productName="name"
+      productSlug="slug"
+    />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`Product should render properly with similarProducts  1`] = `
+<styled.div>
+  <styled.h1>
+    name
+  </styled.h1>
+  <styled.h3>
+    REF. code
+  </styled.h3>
+  <styled.div>
+    <ImageSlider
+      alt="name"
+      imageIDList={
+        Array [
+          "image1",
+        ]
+      }
+      imageOptions={
+        Object {
+          "crop": "fit",
+          "height": 1080,
+          "width": 1080,
+        }
+      }
+    />
+  </styled.div>
+  <ProductInfo
+    descriptions={Array []}
+    marketingDescriptions={Object {}}
+    productType="descriptionType"
+  />
+  <styled.div>
+    <SimilarProducts
+      similarProducts={
+        Array [
+          Object {
+            "code": "prod1",
+          },
+        ]
+      }
+      title="anche"
+    />
+  </styled.div>
+  <styled.div>
+    <ProductInfoBadge
+      allStoreStock={Array []}
+      currentStoreStock={
+        Object {
+          "stockStatus": "notAvailable",
+          "storeStock": 0,
+        }
+      }
+      loyaltyProgram={Object {}}
+      marketingAttributes={Object {}}
+      price={Object {}}
+      pricingInfo={Object {}}
+      productCode="code"
+      productName="name"
+      productSlug="slug"
+    />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`Product should return null when productInfo is empty 1`] = `null`;

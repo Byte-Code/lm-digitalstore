@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PriceBadge should also render the discount when it is active 1`] = `
+<div>
+  <styled.div>
+    <span>
+      -
+      5
+       %
+    </span>
+    <span>
+      15,00
+      €
+    </span>
+  </styled.div>
+  <styled.p
+    isDiscounted={true}
+  >
+    10,00
+     €
+  </styled.p>
+  <styled.p>
+    unit unit / unit
+  </styled.p>
+</div>
+`;
+
+exports[`PriceBadge should only render the price if no discount is active 1`] = `
+<div>
+  <styled.p>
+    10,00
+     €
+  </styled.p>
+  <styled.p>
+    unit unit / unit
+  </styled.p>
+</div>
+`;

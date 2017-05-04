@@ -12,15 +12,18 @@ describe('catalogue', () => {
     { code: 2, mainImage: 'image2', name: 'product2' },
     { code: 3, mainImage: 'image3', name: 'product3' }
   ]);
+  const categoryInfo = fromJS({
+    name: 'cat123',
+    sellingAidsProducts: List(),
+    facetFilters: List()
+  });
   const router = { location: { } };
   const filterMap = Map();
 
   it('should render null when categoryInfo is empty or undefined', () => {
-    const categoryInfo = undefined;
     const result = shallow(
       <Catalogue
         params={params}
-        categoryInfo={categoryInfo}
         filterMap={filterMap}
         products={products}
         requestFetchCategory={requestFetchCategory}
@@ -31,11 +34,6 @@ describe('catalogue', () => {
   });
 
   it('should render properly when categoryInfo is not empty', () => {
-    const categoryInfo = fromJS({
-      name: 'cat123',
-      sellingAidsProducts: List(),
-      facetFilters: List()
-    });
     const result = shallow(
       <Catalogue
         params={params}
@@ -50,11 +48,6 @@ describe('catalogue', () => {
   });
 
   it('should call requestFetchCategory after mount', () => {
-    const categoryInfo = fromJS({
-      name: 'cat123',
-      sellingAidsProducts: List(),
-      facetFilters: List()
-    });
     mount(
       <Catalogue
         params={params}
@@ -66,5 +59,21 @@ describe('catalogue', () => {
       />
     );
     expect(requestFetchCategory).toHaveBeenCalledWith('CAT123');
+  });
+
+  it('should call requestFetchCategory again in categoryCode changes', () => {
+    const result = mount(
+      <Catalogue
+        params={params}
+        categoryInfo={categoryInfo}
+        filterMap={filterMap}
+        products={products}
+        requestFetchCategory={requestFetchCategory}
+        router={router}
+      />
+    );
+    const nextProps = { params: { categoryCode: 'CAT456' } };
+    result.setProps(nextProps);
+    expect(requestFetchCategory).toHaveBeenCalledWith('CAT456');
   });
 });
