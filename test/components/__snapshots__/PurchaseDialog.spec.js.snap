@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <p>
+    children
+  </p>
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "#fff",
+        "padding": 75,
+      }
+    }
+    contentStyle={
+      Object {
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={false}
+    repositionOnUpdate={true}
+  >
+    <CloseButton
+      backgroundColor="#fff"
+      fill="#858585"
+      handleClick={[Function]}
+      right={0}
+      top={0}
+    />
+    <styled.div>
+      <p>
+        genera qr-code
+      </p>
+    </styled.div>
+    <styled.h1>
+      Genera QR-Code
+    </styled.h1>
+    <styled.p>
+      Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
+    </styled.p>
+    <styled.div>
+      <QRCode
+        bgColor="#FFFFFF"
+        fgColor="#000000"
+        level="L"
+        size={200}
+        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
+      />
+    </styled.div>
+  </Dialog>
+</styled.div>
+`;
+
+exports[`PurchaseDialog should open the dialog once clicked 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <p>
+    children
+  </p>
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "#fff",
+        "padding": 75,
+      }
+    }
+    contentStyle={
+      Object {
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={true}
+    repositionOnUpdate={true}
+  >
+    <CloseButton
+      backgroundColor="#fff"
+      fill="#858585"
+      handleClick={[Function]}
+      right={0}
+      top={0}
+    />
+    <styled.div>
+      <p>
+        genera qr-code
+      </p>
+    </styled.div>
+    <styled.h1>
+      Genera QR-Code
+    </styled.h1>
+    <styled.p>
+      Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
+    </styled.p>
+    <styled.div>
+      <QRCode
+        bgColor="#FFFFFF"
+        fgColor="#000000"
+        level="L"
+        size={200}
+        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
+      />
+    </styled.div>
+  </Dialog>
+</styled.div>
+`;

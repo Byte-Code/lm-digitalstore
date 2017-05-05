@@ -8,7 +8,7 @@ import Slick from 'react-slick';
 import SimilarProductBadge from './SimilarProductBadge';
 import CloseButton from './CloseButton';
 
-const Slide = styled.div`
+export const Slide = styled.div`
   display: flex;
   justify-content: center;
   margin-right: 75px;
@@ -25,13 +25,6 @@ export default class SimilarProductsDialog extends Component {
 
   static defaultProps = {
     similarProducts: List()
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      initialRender: true
-    };
   }
 
   // HACK this fixes a bug with slick

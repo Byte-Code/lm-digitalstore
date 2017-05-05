@@ -3,7 +3,6 @@ import { List, fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
 import AvailabilityButton, { Button } from '../../app/components/AvailabilityButton';
-import CloseButton from '../../app/components/CloseButton';
 
 describe('AvailabilityButton', () => {
   const productName = 'abc';
@@ -45,20 +44,6 @@ describe('AvailabilityButton', () => {
     );
     result.find(Button).simulate('click');
     expect(result.state('dialogOpen')).toBe(true);
-    expect(result).toMatchSnapshot();
-  });
-
-  it('should close the dialog once the closeButton is clicked', () => {
-    const nearbyStoreStock = fromJS([0, 1, 2]);
-    const result = shallow(
-      <AvailabilityButton
-        productCode={productCode}
-        productName={productName}
-        nearbyStoreStock={nearbyStoreStock}
-      />
-    );
-    result.find(CloseButton).simulate('click');
-    expect(result.state('dialogOpen')).toBe(false);
     expect(result).toMatchSnapshot();
   });
 });

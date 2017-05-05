@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render properly 1`] = `
+<styled.div>
+  <NavigationCheck
+    color="#58c527"
+    style={
+      Object {
+        "height": 45,
+        "width": 40,
+      }
+    }
+  />
+  <styled.div>
+    <p>
+      10 prodotti disponibili
+    </p>
+    <p>
+      in negozio a storeName
+    </p>
+  </styled.div>
+</styled.div>
+`;

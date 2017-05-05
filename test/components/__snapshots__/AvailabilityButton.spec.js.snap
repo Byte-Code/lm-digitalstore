@@ -1,55 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AvailabilityButton should close the dialog once the closeButton is clicked 1`] = `
-<div>
-  <styled.div
-    bgColor="#67cb33"
-    onClick={[Function]}
-  >
-    verifica disponibilità in negozi vicini
-  </styled.div>
-  <Dialog
-    autoDetectWindowHeight={true}
-    autoScrollBodyContent={false}
-    bodyStyle={
-      Object {
-        "background": "#333333",
-        "padding": "75px 70px",
-      }
-    }
-    contentStyle={
-      Object {
-        "maxWidth": "none",
-        "width": 1000,
-      }
-    }
-    modal={false}
-    onRequestClose={[Function]}
-    open={false}
-    repositionOnUpdate={true}
-  >
-    <CloseButton
-      backgroundColor="#333333"
-      fill="#858585"
-      handleClick={[Function]}
-      right={0}
-      top={0}
-    />
-    <AvailabilityDialog
-      nearbyStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
-      productCode="123"
-      productName="abc"
-    />
-  </Dialog>
-</div>
-`;
-
 exports[`AvailabilityButton should display a dialog when the button is clicked 1`] = `
 <div>
   <styled.div

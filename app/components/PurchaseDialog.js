@@ -5,7 +5,7 @@ import Dialog from 'material-ui/Dialog';
 
 import CloseButton from './CloseButton';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
 `;
 
 const Header = styled.div`

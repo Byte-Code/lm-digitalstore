@@ -53,7 +53,7 @@ const CardTitle = styled.div`
   }
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   font-family: LeroyMerlinSans Italic;
   font-size: ${props => props.fSize};
   line-height: 20px;
@@ -123,7 +123,7 @@ export default class ProductInfoCAB extends Component {
             {item.get('value')}
           </p>
         ))}
-        {!(descriptions.get(index).last() === desc) && <Divider />}
+        {(descriptions.get(index).last() !== desc) && <Divider />}
       </Section>
     ));
   }

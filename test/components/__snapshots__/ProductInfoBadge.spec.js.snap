@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductInfoBadge should render properly 1`] = `
+<styled.div>
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+  />
+  <PriceBadge
+    price={Object {}}
+    pricingInfo={Object {}}
+  />
+  <styled.div />
+  <styled.div>
+    <Connect(StoreStockBadge)
+      currentStoreStock={Object {}}
+    />
+  </styled.div>
+  <Connect(AvailabilityButton)
+    allStoreStock={Array []}
+    productCode="foobar"
+    productName="foobar"
+  />
+  <styled.div />
+  <PurchaseDialog
+    productCode="foobar"
+    productSlug="foobar"
+  >
+    <styled.div
+      bgColor="#67cb33"
+    >
+      Acquista online
+    </styled.div>
+  </PurchaseDialog>
+</styled.div>
+`;

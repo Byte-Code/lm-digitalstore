@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SplashScreen should otherwise render properly 1`] = `
+<Link
+  onlyActiveOnIndex={false}
+  style={Object {}}
+  to="/world"
+>
+  <styled.div>
+    <styled.div>
+      <styled.h1>
+        Accendi la tua voglia di estate
+      </styled.h1>
+      <styled.div>
+        Entra nel mondo giardino
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <ScreenSaver />
+    </styled.div>
+  </styled.div>
+</Link>
+`;
+
+exports[`SplashScreen should return null when forecast is empty 1`] = `null`;

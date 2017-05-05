@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import CloseButton from './CloseButton';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
 `;
 
 const Slide = styled.div`

@@ -5,42 +5,42 @@ import Toggle from 'material-ui/Toggle';
 
 import FilterDialog, { Filter } from '../../app/components/FilterDialog';
 
-describe('FilterDialog', () => {
-  const applyFilters = () => {};
-  const handleClose = jest.fn();
-  const filterGroups = fromJS([
-    {
-      code: 'group0',
-      filters: [
-        { code: 'filter0', products: [0, 1, 2] },
-        { code: 'filter1', products: [3, 4, 5] },
-        { code: 'filter2', products: [0, 1, 2] }
-      ]
-    },
-    {
-      code: 'group1',
-      filters: [
-        { code: 'filter3', products: [0, 1, 2] },
-        { code: 'filter4', products: [3, 4, 9] },
-        { code: 'filter5', products: [6, 7, 8] }
-      ]
-    }
-  ]);
-  const filterMap = fromJS({
-    activeFilters: ['filter0', 'filter5'],
-    activeAvailability: null,
-    activeAid: 'aid1',
-    categoryCode: 'CAT123'
-  });
-  const result = shallow(
-    <FilterDialog
-      filterGroups={filterGroups}
-      filterMap={filterMap}
-      handleClose={handleClose}
-      applyFilters={applyFilters}
-    />
-  );
+const applyFilters = () => {};
+const handleClose = jest.fn();
+const filterGroups = fromJS([
+  {
+    code: 'group0',
+    filters: [
+      { code: 'filter0', products: [0, 1, 2] },
+      { code: 'filter1', products: [3, 4, 5] },
+      { code: 'filter2', products: [0, 1, 2] }
+    ]
+  },
+  {
+    code: 'group1',
+    filters: [
+      { code: 'filter3', products: [0, 1, 2] },
+      { code: 'filter4', products: [3, 4, 9] },
+      { code: 'filter5', products: [6, 7, 8] }
+    ]
+  }
+]);
+const filterMap = fromJS({
+  activeFilters: ['filter0', 'filter5'],
+  activeAvailability: null,
+  activeAid: 'aid1',
+  categoryCode: 'CAT123'
+});
+const result = shallow(
+  <FilterDialog
+    filterGroups={filterGroups}
+    filterMap={filterMap}
+    handleClose={handleClose}
+    applyFilters={applyFilters}
+  />
+);
 
+describe('FilterDialog', () => {
   it('should initialize status based on filterMap', () => {
     const newState = {
       activeAid: filterMap.get('activeAid'),

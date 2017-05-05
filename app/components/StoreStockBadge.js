@@ -21,6 +21,7 @@ const Availability = styled.div`
   }
 `;
 
+//TODO test these functions
 function getStockLabel(stock, stockStatus) {
   if (stock > 0) {
     return stock + (stock === 1 ? ' prodotto disponibile' : ' prodotti disponibili');

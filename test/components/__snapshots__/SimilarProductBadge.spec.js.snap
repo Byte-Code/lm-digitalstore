@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimilarProductBadge should render properly 1`] = `
+<styled.div>
+  <styled.h1>
+    name
+  </styled.h1>
+  <styled.h3>
+    REF. 
+    code
+  </styled.h3>
+  <Image
+    alt="alt"
+    fixBrightColor={true}
+    imageID="mainImage"
+    imageOptions={
+      Object {
+        "crop": "fit",
+        "height": 830,
+        "width": 830,
+      }
+    }
+  />
+  <styled.div>
+    <styled.p />
+    <styled.div>
+      <MarketingFlag
+        loyaltyProgram={Object {}}
+        marketingAttributes={Object {}}
+      />
+      <PriceBadge
+        price={
+          Object {
+            "gross": 15,
+            "list": 15,
+          }
+        }
+        pricingInfo={Object {}}
+      />
+      <styled.p>
+        1 pz / pz
+      </styled.p>
+      <styled.div />
+      <Connect(StoreStockBadge)
+        currentStoreStock={
+          Object {
+            "stockStatus": "availableOnOrder",
+            "storeStock": 10,
+          }
+        }
+      />
+    </styled.div>
+  </styled.div>
+  <Link
+    onlyActiveOnIndex={false}
+    style={Object {}}
+    to="/product/code"
+  >
+    <styled.div>
+      Dettagli Prodotto
+      <NavigationArrowForward
+        color="#fff"
+        style={
+          Object {
+            "height": 32,
+            "marginLeft": 10,
+            "width": 37,
+          }
+        }
+      />
+    </styled.div>
+  </Link>
+</styled.div>
+`;

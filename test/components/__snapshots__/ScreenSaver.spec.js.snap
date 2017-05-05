@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScreenSaver should render properly 1`] = `
+<video
+  autoPlay={true}
+  className="video"
+  loop={true}
+  muted={true}
+>
+  <source
+    src="test-file-stub"
+    type="video/mp4"
+  />
+</video>
+`;

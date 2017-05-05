@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductBadge should display the available overlay if product is in stock 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <Image
+    alt="name"
+    fixBrightColor={false}
+    imageID="mainImage"
+    imageOptions={
+      Object {
+        "height": 405,
+        "width": 405,
+      }
+    }
+  />
+  <MarketingCorner
+    isDiscounted={true}
+    isNew={false}
+  />
+  <styled.div>
+    name
+  </styled.div>
+  <styled.div>
+    <styled.p>
+      -
+      5
+       %
+    </styled.p>
+    <styled.div
+      isBarred={true}
+    >
+      15,00
+       €
+    </styled.div>
+    <styled.div
+      discounted={true}
+    >
+      10,00
+       €
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibile in Negozio
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ProductBadge should display the discount if product is discounted 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <Image
+    alt="name"
+    fixBrightColor={false}
+    imageID="mainImage"
+    imageOptions={
+      Object {
+        "height": 405,
+        "width": 405,
+      }
+    }
+  />
+  <MarketingCorner
+    isDiscounted={true}
+    isNew={false}
+  />
+  <styled.div>
+    name
+  </styled.div>
+  <styled.div>
+    <styled.p>
+      -
+      5
+       %
+    </styled.p>
+    <styled.div
+      isBarred={true}
+    >
+      15,00
+       €
+    </styled.div>
+    <styled.div
+      discounted={true}
+    >
+      10,00
+       €
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibile in Negozio
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ProductBadge should not display the available overlay if product is not in stock 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <Image
+    alt="name"
+    fixBrightColor={false}
+    imageID="mainImage"
+    imageOptions={
+      Object {
+        "height": 405,
+        "width": 405,
+      }
+    }
+  />
+  <MarketingCorner
+    isDiscounted={false}
+    isNew={false}
+  />
+  <styled.div>
+    name
+  </styled.div>
+  <styled.div>
+    <styled.div
+      isBarred={false}
+    >
+      15,00
+       €
+    </styled.div>
+    <styled.div
+      discounted={true}
+    >
+      15,00
+       €
+    </styled.div>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ProductBadge should not display the discount if product is not discounted 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <Image
+    alt="name"
+    fixBrightColor={false}
+    imageID="mainImage"
+    imageOptions={
+      Object {
+        "height": 405,
+        "width": 405,
+      }
+    }
+  />
+  <MarketingCorner
+    isDiscounted={false}
+    isNew={false}
+  />
+  <styled.div>
+    name
+  </styled.div>
+  <styled.div>
+    <styled.div
+      isBarred={false}
+    >
+      15,00
+       €
+    </styled.div>
+    <styled.div
+      discounted={true}
+    >
+      15,00
+       €
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <p>
+      Disponibile in Negozio
+    </p>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`ProductBadge should return null when productInfo is empty 1`] = `null`;

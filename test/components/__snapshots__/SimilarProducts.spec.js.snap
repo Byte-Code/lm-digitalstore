@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
+<styled.div>
+  <styled.div>
+    <h3>
+      title
+    </h3>
+  </styled.div>
+  <styled.div>
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product0",
+        }
+      }
+    />
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product1",
+        }
+      }
+    />
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product2",
+        }
+      }
+    />
+  </styled.div>
+  <SimilarProductsDialog
+    handleClose={[Function]}
+    isOpen={false}
+    selectedProduct=""
+    similarProducts={
+      Array [
+        Object {
+          "code": "product0",
+        },
+        Object {
+          "code": "product1",
+        },
+        Object {
+          "code": "product2",
+        },
+      ]
+    }
+  />
+</styled.div>
+`;
+
+exports[`SimilarProducts should otherwise render a list of similarProducts 1`] = `
+<styled.div>
+  <styled.div>
+    <h3>
+      title
+    </h3>
+  </styled.div>
+  <styled.div>
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product0",
+        }
+      }
+    />
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product1",
+        }
+      }
+    />
+    <ProductBadge
+      handleClick={[Function]}
+      productInfo={
+        Object {
+          "code": "product2",
+        }
+      }
+    />
+  </styled.div>
+  <SimilarProductsDialog
+    handleClose={[Function]}
+    isOpen={false}
+    selectedProduct=""
+    similarProducts={
+      Array [
+        Object {
+          "code": "product0",
+        },
+        Object {
+          "code": "product1",
+        },
+        Object {
+          "code": "product2",
+        },
+      ]
+    }
+  />
+</styled.div>
+`;
+
+exports[`SimilarProducts should render null when similarProducts are empty 1`] = `null`;

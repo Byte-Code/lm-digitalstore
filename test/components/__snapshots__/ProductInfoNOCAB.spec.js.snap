@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductInfoCAB should render just one list of descriptions 1`] = `
+<styled.div>
+  <p>
+    <span>
+      label00: 
+    </span>
+    value00
+  </p>
+  <p>
+    <span>
+      label01: 
+    </span>
+    value01
+  </p>
+  <p>
+    <span>
+      label02: 
+    </span>
+    value02
+  </p>
+  <styled.div />
+</styled.div>
+`;
+
+exports[`ProductInfoCAB should render no descriptions when they are not provided 1`] = `
+<styled.div>
+  <styled.div />
+</styled.div>
+`;

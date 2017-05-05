@@ -5,7 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
 import FamilySideBar from '../containers/FamilySideBar';
 
-const Button = styled.div`
+export const Button = styled.div`
   width: 90px;
   height: 120px;
   background: #339900;
@@ -61,7 +61,7 @@ export default class SideMenu extends Component {
           open={open}
           onRequestChange={(value) => this.setState({ open: value })}
           containerStyle={{ background: 'transparent', boxShadow: 'none', display: 'flex' }}
-          swipeAreaWidth={90}
+          swipeAreaWidth={45}
         >
           <Column
             bgColor="#fff"

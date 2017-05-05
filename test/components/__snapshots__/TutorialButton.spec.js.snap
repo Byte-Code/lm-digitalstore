@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TutorialButton should initially render with a closed dialog 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <button>
+    click me
+  </button>
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "transparent",
+        "padding": 0,
+      }
+    }
+    contentClassName="similarDialog"
+    contentStyle={
+      Object {
+        "background": "transparent",
+        "height": 1420,
+        "maxWidth": "none",
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={false}
+    repositionOnUpdate={true}
+  >
+    <CloseButton
+      backgroundColor="#333333"
+      fill="#858585"
+      handleClick={[Function]}
+      right={0}
+      top={-250}
+    />
+    <Slider
+      arrows={false}
+      centerMode={true}
+      dots={false}
+      infinite={false}
+      initialSlide={0}
+      variableWidth={true}
+    >
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 1"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 2"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 3"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 4"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+    </Slider>
+  </Dialog>
+</styled.div>
+`;
+
+exports[`TutorialButton should open the dialog once clicked 1`] = `
+<styled.div
+  onClick={[Function]}
+>
+  <button>
+    click me
+  </button>
+  <Dialog
+    autoDetectWindowHeight={true}
+    autoScrollBodyContent={false}
+    bodyStyle={
+      Object {
+        "background": "transparent",
+        "padding": 0,
+      }
+    }
+    contentClassName="similarDialog"
+    contentStyle={
+      Object {
+        "background": "transparent",
+        "height": 1420,
+        "maxWidth": "none",
+        "width": "100%",
+      }
+    }
+    modal={false}
+    onRequestClose={[Function]}
+    open={true}
+    repositionOnUpdate={true}
+  >
+    <CloseButton
+      backgroundColor="#333333"
+      fill="#858585"
+      handleClick={[Function]}
+      right={0}
+      top={-250}
+    />
+    <Slider
+      arrows={false}
+      centerMode={true}
+      dots={false}
+      infinite={false}
+      initialSlide={0}
+      variableWidth={true}
+    >
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 1"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 2"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 3"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+      <div>
+        <styled.div>
+          <styled.img
+            alt="tutorial 4"
+            src="test-file-stub"
+          />
+        </styled.div>
+      </div>
+    </Slider>
+  </Dialog>
+</styled.div>
+`;

@@ -10,10 +10,18 @@ const CloseButton = ({ handleClick, top, right, backgroundColor, fill }) => (
       right,
       width: 80,
       height: 80,
-      position: 'absolute'
+      position: 'absolute',
+      cursor: 'pointer'
     }}
     color="#fff"
-    onTouchTap={handleClick}
+    onTouchTap={
+      (e) => {
+        if (e) {
+          e.preventDefault();
+        }
+        handleClick();
+      }
+    }
   />
 );
 

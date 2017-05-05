@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideMenu should close again once the second button is clicked 1`] = `
+<div>
+  <styled.div
+    isVisible={true}
+    onClick={[Function]}
+  >
+    <MapsLocalFlorist
+      color="#fff"
+      style={
+        Object {
+          "height": 50,
+          "width": 50,
+        }
+      }
+    />
+    <p>
+      Giardino & Terrazzo
+    </p>
+  </styled.div>
+  <Drawer
+    containerStyle={
+      Object {
+        "background": "transparent",
+        "boxShadow": "none",
+        "display": "flex",
+      }
+    }
+    disableSwipeToOpen={false}
+    docked={false}
+    onRequestChange={[Function]}
+    open={false}
+    openSecondary={false}
+    swipeAreaWidth={45}
+    width={365}
+    zDepth={2}
+  >
+    <styled.div
+      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
+      bgColor="#fff"
+      width="275px"
+    >
+      <Connect(FamilySideBar)
+        closeMenu={[Function]}
+      />
+    </styled.div>
+    <styled.div
+      bgColor="transparent"
+    >
+      <styled.div
+        isVisible={false}
+        onClick={[Function]}
+        pLeft="275px"
+      >
+        <MapsLocalFlorist
+          color="#fff"
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <p>
+          Giardino & Terrazzo
+        </p>
+      </styled.div>
+    </styled.div>
+  </Drawer>
+</div>
+`;
+
+exports[`SideMenu should initially render closed 1`] = `
+<div>
+  <styled.div
+    isVisible={true}
+    onClick={[Function]}
+  >
+    <MapsLocalFlorist
+      color="#fff"
+      style={
+        Object {
+          "height": 50,
+          "width": 50,
+        }
+      }
+    />
+    <p>
+      Giardino & Terrazzo
+    </p>
+  </styled.div>
+  <Drawer
+    containerStyle={
+      Object {
+        "background": "transparent",
+        "boxShadow": "none",
+        "display": "flex",
+      }
+    }
+    disableSwipeToOpen={false}
+    docked={false}
+    onRequestChange={[Function]}
+    open={false}
+    openSecondary={false}
+    swipeAreaWidth={45}
+    width={365}
+    zDepth={2}
+  >
+    <styled.div
+      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
+      bgColor="#fff"
+      width="275px"
+    >
+      <Connect(FamilySideBar)
+        closeMenu={[Function]}
+      />
+    </styled.div>
+    <styled.div
+      bgColor="transparent"
+    >
+      <styled.div
+        isVisible={false}
+        onClick={[Function]}
+        pLeft="275px"
+      >
+        <MapsLocalFlorist
+          color="#fff"
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <p>
+          Giardino & Terrazzo
+        </p>
+      </styled.div>
+    </styled.div>
+  </Drawer>
+</div>
+`;
+
+exports[`SideMenu should open once the first button is clicked 1`] = `
+<div>
+  <styled.div
+    isVisible={false}
+    onClick={[Function]}
+  >
+    <MapsLocalFlorist
+      color="#fff"
+      style={
+        Object {
+          "height": 50,
+          "width": 50,
+        }
+      }
+    />
+    <p>
+      Giardino & Terrazzo
+    </p>
+  </styled.div>
+  <Drawer
+    containerStyle={
+      Object {
+        "background": "transparent",
+        "boxShadow": "none",
+        "display": "flex",
+      }
+    }
+    disableSwipeToOpen={false}
+    docked={false}
+    onRequestChange={[Function]}
+    open={true}
+    openSecondary={false}
+    swipeAreaWidth={45}
+    width={365}
+    zDepth={2}
+  >
+    <styled.div
+      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
+      bgColor="#fff"
+      width="275px"
+    >
+      <Connect(FamilySideBar)
+        closeMenu={[Function]}
+      />
+    </styled.div>
+    <styled.div
+      bgColor="transparent"
+    >
+      <styled.div
+        isVisible={true}
+        onClick={[Function]}
+        pLeft="275px"
+      >
+        <MapsLocalFlorist
+          color="#fff"
+          style={
+            Object {
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+        <p>
+          Giardino & Terrazzo
+        </p>
+      </styled.div>
+    </styled.div>
+  </Drawer>
+</div>
+`;

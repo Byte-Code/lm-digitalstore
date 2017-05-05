@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductInfoCAB should render a list of marketingDescriptions 1`] = `
+<styled.div>
+  <styled.div
+    bgColor="#efefef"
+    pTop="69px"
+  >
+    <styled.div>
+      <styled.div
+        fSize="18px"
+      >
+        <styled.div
+          fSize="20px"
+        >
+          desc0
+        </styled.div>
+        <p>
+          foo
+        </p>
+        <p>
+          bar
+        </p>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+    <styled.div>
+      <styled.div
+        fSize="18px"
+      >
+        <styled.div
+          fSize="20px"
+        >
+          desc1
+        </styled.div>
+        <p>
+          foobar
+        </p>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+  <Card
+    TitleComponent={[Function]}
+  >
+    <styled.div
+      bgColor="#f7f7f7"
+      pTop="31px"
+    >
+      <styled.div />
+      <styled.div />
+    </styled.div>
+  </Card>
+</styled.div>
+`;
+
+exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
+<styled.div>
+  <styled.div
+    bgColor="#efefef"
+    pTop="69px"
+  />
+  <Card
+    TitleComponent={[Function]}
+  >
+    <styled.div
+      bgColor="#f7f7f7"
+      pTop="31px"
+    >
+      <styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description0
+          </styled.div>
+          <p>
+            <span>
+              label00: 
+            </span>
+            value00
+          </p>
+          <p>
+            <span>
+              label01: 
+            </span>
+            value01
+          </p>
+          <p>
+            <span>
+              label02: 
+            </span>
+            value02
+          </p>
+          <styled.div />
+        </styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description01
+          </styled.div>
+          <p>
+            <span>
+              label03: 
+            </span>
+            value03
+          </p>
+        </styled.div>
+      </styled.div>
+      <styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description1
+          </styled.div>
+          <p>
+            <span>
+              label04: 
+            </span>
+            value04
+          </p>
+          <p>
+            <span>
+              label05: 
+            </span>
+            value05
+          </p>
+          <p>
+            <span>
+              label06: 
+            </span>
+            value06
+          </p>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </Card>
+</styled.div>
+`;
+
+exports[`ProductInfoCAB should render both descriptions and marketingDescriptions 1`] = `
+<styled.div>
+  <styled.div
+    bgColor="#efefef"
+    pTop="69px"
+  >
+    <styled.div>
+      <styled.div
+        fSize="18px"
+      >
+        <styled.div
+          fSize="20px"
+        >
+          desc0
+        </styled.div>
+        <p>
+          foo
+        </p>
+        <p>
+          bar
+        </p>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+    <styled.div>
+      <styled.div
+        fSize="18px"
+      >
+        <styled.div
+          fSize="20px"
+        >
+          desc1
+        </styled.div>
+        <p>
+          foobar
+        </p>
+      </styled.div>
+      <styled.div />
+    </styled.div>
+  </styled.div>
+  <Card
+    TitleComponent={[Function]}
+  >
+    <styled.div
+      bgColor="#f7f7f7"
+      pTop="31px"
+    >
+      <styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description0
+          </styled.div>
+          <p>
+            <span>
+              label00: 
+            </span>
+            value00
+          </p>
+          <p>
+            <span>
+              label01: 
+            </span>
+            value01
+          </p>
+          <p>
+            <span>
+              label02: 
+            </span>
+            value02
+          </p>
+          <styled.div />
+        </styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description01
+          </styled.div>
+          <p>
+            <span>
+              label03: 
+            </span>
+            value03
+          </p>
+        </styled.div>
+      </styled.div>
+      <styled.div>
+        <styled.div
+          fSize="14px"
+        >
+          <styled.div
+            fSize="16px"
+          >
+            description1
+          </styled.div>
+          <p>
+            <span>
+              label04: 
+            </span>
+            value04
+          </p>
+          <p>
+            <span>
+              label05: 
+            </span>
+            value05
+          </p>
+          <p>
+            <span>
+              label06: 
+            </span>
+            value06
+          </p>
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </Card>
+</styled.div>
+`;
+
+exports[`ProductInfoCAB should render no descriptions when they are not provided 1`] = `
+<styled.div>
+  <styled.div
+    bgColor="#efefef"
+    pTop="69px"
+  />
+  <Card
+    TitleComponent={[Function]}
+  >
+    <styled.div
+      bgColor="#f7f7f7"
+      pTop="31px"
+    >
+      <styled.div />
+      <styled.div />
+    </styled.div>
+  </Card>
+</styled.div>
+`;

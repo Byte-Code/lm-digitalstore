@@ -22,6 +22,10 @@ const Wrapper = styled.div`
     justify-content: center;
     padding: 0 33px;
   }
+  &>img {
+    height: 405px;
+    width: 405px;
+  }
 `;
 
 const Name = styled.div`
@@ -55,14 +59,14 @@ const Price = styled.div`
   text-decoration: ${props => (props.isBarred ? 'line-through' : 'none')};
 `;
 
-const Discount = styled.p`
+export const Discount = styled.p`
   font-size: 20px;
   color: #cc0000;
   text-align: center;
   width: 100%;
 `;
 
-const Available = styled.div`
+export const Available = styled.div`
   color: #339900;
   display: flex;
   justify-content: center;

@@ -33,7 +33,7 @@ const FilterWrapper = styled.div`
   }
 `;
 
-const Filter = styled.div`
+export const Filter = styled.div`
   min-width: 150px;
   max-width: 300px;
   padding: 0 20px;

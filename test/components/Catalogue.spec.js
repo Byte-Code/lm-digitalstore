@@ -4,22 +4,22 @@ import { shallow, mount } from 'enzyme';
 
 import Catalogue from '../../app/components/Catalogue';
 
-describe('catalogue', () => {
-  const params = { categoryCode: 'CAT123' };
-  const requestFetchCategory = jest.fn();
-  const products = fromJS([
-    { code: 1, mainImage: 'image1', name: 'product1' },
-    { code: 2, mainImage: 'image2', name: 'product2' },
-    { code: 3, mainImage: 'image3', name: 'product3' }
-  ]);
-  const categoryInfo = fromJS({
-    name: 'cat123',
-    sellingAidsProducts: List(),
-    facetFilters: List()
-  });
-  const router = { location: { } };
-  const filterMap = Map();
+const params = { categoryCode: 'CAT123' };
+const requestFetchCategory = jest.fn();
+const products = fromJS([
+  { code: 1, mainImage: 'image1', name: 'product1' },
+  { code: 2, mainImage: 'image2', name: 'product2' },
+  { code: 3, mainImage: 'image3', name: 'product3' }
+]);
+const categoryInfo = fromJS({
+  name: 'cat123',
+  sellingAidsProducts: List(),
+  facetFilters: List()
+});
+const router = { location: { } };
+const filterMap = Map();
 
+describe('catalogue', () => {
   it('should render null when categoryInfo is empty or undefined', () => {
     const result = shallow(
       <Catalogue
