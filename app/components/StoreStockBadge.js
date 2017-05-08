@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import CheckIcon from 'material-ui/svg-icons/navigation/check';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 
+import { getStockLabel } from '../utils/utils';
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -12,30 +14,14 @@ const Wrapper = styled.div`
 const Availability = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
   &>p {
     font-size: 16px;
+    margin-left: 10px;
     &:first-child {
       font-family: LeroyMerlinSans Bold;
     }
   }
 `;
-
-//TODO test these functions
-function getStockLabel(stock, stockStatus) {
-  if (stock > 0) {
-    return stock + (stock === 1 ? ' prodotto disponibile' : ' prodotti disponibili');
-  }
-  switch (stockStatus) {
-    case 'notAvailable':
-      return 'Prodotto non disponibile';
-    case 'availableOnOrder':
-      return 'Prodotto disponibile su ordinazione';
-    case 'onRestock':
-    default:
-      return 'Prodotto in riassortimento';
-  }
-}
 
 function getStockIcon(stock, stockStatus) {
   if (stock > 0) {
@@ -47,7 +33,7 @@ function getStockIcon(stock, stockStatus) {
   return null;
 }
 
-const StoreStockBadge = ({ currentStoreStock, storeName, showStore }) => {
+const StoreStockBadge = ({ currentStoreStock, storeName }) => {
   const availability = currentStoreStock.get('storeStock');
   const stockStatus = currentStoreStock.get('stockStatus');
   const label = getStockLabel(availability, stockStatus);
@@ -58,7 +44,7 @@ const StoreStockBadge = ({ currentStoreStock, storeName, showStore }) => {
       {icon}
       <Availability>
         <p>{label}</p>
-        {showStore && (<p>{`in negozio a ${storeName}`}</p>)}
+        <p>{`in negozio a ${storeName}`}</p>
       </Availability>
     </Wrapper>
   );
@@ -67,12 +53,7 @@ const StoreStockBadge = ({ currentStoreStock, storeName, showStore }) => {
 // TODO find a better solution for hideStore
 StoreStockBadge.propTypes = {
   currentStoreStock: ImmutablePropTypes.map.isRequired,
-  storeName: PropTypes.string.isRequired,
-  showStore: PropTypes.bool
-};
-
-StoreStockBadge.defaultProps = {
-  showStore: true
+  storeName: PropTypes.string.isRequired
 };
 
 export default StoreStockBadge;

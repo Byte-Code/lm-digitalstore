@@ -18,3 +18,19 @@ export function formatPrice(price) {
 export function isValidResponse(response) {
   return response.status === 'OK';
 }
+
+// TODO test these functions
+export function getStockLabel(stock, stockStatus) {
+  if (stock > 0) {
+    return stock + (stock === 1 ? ' prodotto disponibile' : ' prodotti disponibili');
+  }
+  switch (stockStatus) {
+    case 'notAvailable':
+      return 'Prodotto non disponibile';
+    case 'availableOnOrder':
+      return 'Prodotto disponibile su ordinazione';
+    case 'onRestock':
+    default:
+      return 'Prodotto disponibile su ordinazione';
+  }
+}
