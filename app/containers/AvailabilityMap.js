@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import AvailabilityButton from '../components/AvailabilityButton';
-import { getNearbyStores } from '../reducers/selectors';
+import AvailabilityMap from '../components/AvailabilityMap';
+import { getNearbyStores, getStore } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const { allStoreStock } = ownProps;
@@ -12,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
       return s.set('storeStock', hasProduct.get('storeStock'));
     } return s.set('storeStock', 0);
   });
-  return { nearbyStoreStock };
+  const currentStore = getStore(state);
+  return { nearbyStoreStock, currentStore };
 };
 
-export default connect(mapStateToProps, {})(AvailabilityButton);
+export default connect(mapStateToProps, {})(AvailabilityMap);

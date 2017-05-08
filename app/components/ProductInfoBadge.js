@@ -4,9 +4,9 @@ import { fromJS } from 'immutable';
 import styled from 'styled-components';
 
 import MarketingFlag from './MarketingFlag';
+import AvailabilityButton from './AvailabilityButton';
 import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
-import AvailabilityButton from '../containers/AvailabilityButton';
 import PurchaseDialog from '../components/PurchaseDialog';
 
 const Wrapper = styled.div`
@@ -61,7 +61,6 @@ export default class ProductInfoBadge extends Component {
     })
   }
 
-  // TODO dialog component for Availability
   render() {
     const {
       price,

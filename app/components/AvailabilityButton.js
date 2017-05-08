@@ -3,9 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Dialog from 'material-ui/Dialog';
 import styled from 'styled-components';
 
-import AvailabilityDialog from './AvailabilityDialog';
+import AvailabilityMap from '../containers/AvailabilityMap';
 import CloseButton from './CloseButton';
-import { isValidList } from '../utils/filterUtils';
 
 export const Button = styled.div`
   width: '100%';
@@ -25,7 +24,7 @@ export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    nearbyStoreStock: ImmutablePropTypes.list.isRequired,
+    allStoreStock: ImmutablePropTypes.list.isRequired
   }
   constructor(props) {
     super(props);
@@ -44,14 +43,10 @@ export default class AvailabilityButton extends Component {
 
   render() {
     const {
-      nearbyStoreStock,
       productName,
-      productCode
+      productCode,
+      allStoreStock
     } = this.props;
-
-    if (!isValidList(nearbyStoreStock)) {
-      return null;
-    }
 
     return (
       <div>
@@ -69,10 +64,10 @@ export default class AvailabilityButton extends Component {
           bodyStyle={{ padding: '75px 70px', background: '#333333' }}
         >
           <CloseButton handleClick={this.handleClose} />
-          <AvailabilityDialog
-            nearbyStoreStock={nearbyStoreStock}
+          <AvailabilityMap
             productName={productName}
             productCode={productCode}
+            allStoreStock={allStoreStock}
           />
         </Dialog>
       </div>

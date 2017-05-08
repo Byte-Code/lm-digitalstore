@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import GoogleMapReact from 'google-map-react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
+import MyPlaceIcon from 'material-ui/svg-icons/maps/person-pin-circle';
 
 import StoreStockBadge from '../containers/StoreStockBadge';
 
@@ -9,6 +11,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: #fff;
+  width: 100%;
+  height: 1080px;
 `;
 
 const Title = styled.h1`
@@ -22,14 +26,6 @@ const ProductInfo = styled.h3`
   text-align: center;
   text-transform: capitalize;
   margin-bottom: 66px;
-`;
-
-const StoreList = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  &>div {
-    width: 50%;
-  }
 `;
 
 export const StoreBadge = styled.div`
@@ -84,11 +80,29 @@ const Address = styled.div`
   }
 `;
 
-export default class AvailabilityDialog extends Component {
+const WhiteBg = styled.div`
+  position: absolute;
+  height: 25px;
+  width: 20px;
+  z-index: -1;
+  top: 9px;
+  left: 16px;
+  background-color: #fff;
+`;
+
+const Icon = styled.div`
+  position: relative;
+`;
+
+
+const Marker = ({ })
+
+export default class AvailabilityMap extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     nearbyStoreStock: ImmutablePropTypes.list.isRequired,
+    currentStore: ImmutablePropTypes.map.isRequired
   }
 
   constructor(props) {
@@ -103,34 +117,28 @@ export default class AvailabilityDialog extends Component {
   }
 
   // TODO move this logic into a separate component
-  renderNearbyStores() {
+  renderMarkers() {
     const { nearbyStoreStock } = this.props;
-    const { selectedStore } = this.state;
     return nearbyStoreStock.map(s => {
       const currentStock = s.get('storeStock');
-      const iconColor = currentStock > 0 ? '#67cb33' : 'e4e4e4';
+      const iconColor = currentStock > 0 ? '#67cb33' : '#000';
       const code = s.get('code');
-      const isActive = code === selectedStore;
-      const province = s.getIn(['address', 'state']);
-      const street = s.getIn(['address', 'street']);
-      const streetNumber = s.getIn(['address', 'streetNumber']) || '';
-      const zip = s.getIn(['address', 'zipCode']);
-      const city = s.getIn(['address', 'city']);
-      const name = s.get('name');
+      const lat = s.get('latitude');
+      const lng = s.get('longitude');
 
       return (
-        <StoreBadge
+        <Icon
           key={code}
-          isActive={isActive}
-          onClick={() => this.selectStore(code)}
+          lat={lat}
+          lng={lng}
         >
-          <PlaceIcon style={{ height: 55, width: 55 }} color={iconColor} />
-          <StoreInfo>
-            <p>{`${province} - ${name}`}</p>
-            <p>{`${street} ${streetNumber}`}</p>
-            <p>{`${zip} - ${city} (${province})`}</p>
-          </StoreInfo>
-        </StoreBadge>
+          <PlaceIcon
+            style={{ height: 55, width: 55, cursor: 'pointer' }}
+            color={iconColor}
+            onTouchTap={() => this.selectStore(code)}
+          />
+          <WhiteBg />
+        </Icon>
       );
     });
   }
@@ -168,17 +176,38 @@ export default class AvailabilityDialog extends Component {
   }
 
   render() {
-    const { productName, productCode } = this.props;
+    const { productName, productCode, currentStore } = this.props;
+    const lat = currentStore.getIn(['gpsInformation', 'x']);
+    const lng = currentStore.getIn(['gpsInformation', 'y']);
+    const code = currentStore.get('code');
+
+    const center = { lat, lng };
 
     return (
       <Wrapper>
         <Title>Verifica Disponibilità</Title>
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
-        <StoreList>
+        {/* <StoreList>
           {this.renderNearbyStores()}
         </StoreList>
         <Divider />
-        {this.renderSelectedStore()}
+        {this.renderSelectedStore()} */}
+        <GoogleMapReact
+          center={center}
+          defaultZoom={11}
+          fullscreenControl={false}
+          options={{ fullscreenControl: false }}
+        >
+          <Icon lat={lat} lng={lng}>
+            <MyPlaceIcon
+              style={{ height: 55, width: 55, cursor: 'pointer' }}
+              color="red"
+              onTouchTap={() => this.selectStore(code)}
+            />
+            <WhiteBg />
+          </Icon>
+          {this.renderMarkers()}
+        </GoogleMapReact>
       </Wrapper>
     );
   }
