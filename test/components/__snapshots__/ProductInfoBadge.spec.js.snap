@@ -16,7 +16,7 @@ exports[`ProductInfoBadge should render properly 1`] = `
       currentStoreStock={Object {}}
     />
   </styled.div>
-  <Connect(AvailabilityButton)
+  <AvailabilityButton
     allStoreStock={Array []}
     productCode="foobar"
     productName="foobar"

@@ -2,7 +2,7 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
-import AvailabilityDialog, { StoreBadge } from '../../app/components/AvailabilityDialog';
+import AvailabilityMap, { StoreBadge } from '../../app/components/AvailabilityMap';
 
 describe('AvailabilityDialog', () => {
   const productCode = '123';

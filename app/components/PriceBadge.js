@@ -1,36 +1,36 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import { formatPrice } from '../utils/utils';
 
-export const Discount = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  font-size: 16px;
-  margin-bottom: 5px;
-  &>span {
-    &:first-child {
-      color: #cc0000;
-    }
-    color: #000;
-    text-decoration: line-through;
+export const Discount = glamorous.div({
+  display: 'flex',
+  width: '100%',
+  justifyContent: 'space-between',
+  fontSize: '16px',
+  marginBottom: '5px',
+  '&>span': {
+    '&:first-child': {
+      color: '#cc0000',
+    },
+    color: '#000',
+    textDecoration: 'line-through'
   }
-`;
+});
 
-const MainPrice = styled.p`
-  font-size: 36px;
-  text-align: right;
-  margin-bottom: 3px;
-  color: ${props => (props.isDiscounted ? '#cc0000' : '#000')};
-`;
+const MainPrice = glamorous.p(({ isDiscounted }) => ({
+  fontSize: '36px',
+  textAlign: 'right',
+  marginBottom: '3px',
+  color: isDiscounted ? '#cc0000' : '#000'
+}));
 
-const Quantity = styled.p`
-  font-size: 14px;
-  font-family: LeroyMerlinSans Light;
-  text-align: right;
-`;
+const Quantity = glamorous.p({
+  fontSize: '14px',
+  fontFamily: 'LeroyMerlinSans Light',
+  textAlign: 'right'
+});
 
 export default class PriceBadge extends Component {
   static propTypes = {

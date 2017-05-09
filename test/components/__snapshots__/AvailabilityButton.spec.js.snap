@@ -2,12 +2,12 @@
 
 exports[`AvailabilityButton should display a dialog when the button is clicked 1`] = `
 <div>
-  <styled.div
+  <glamorous(div)
     bgColor="#67cb33"
     onClick={[Function]}
   >
     verifica disponibilità in negozi vicini
-  </styled.div>
+  </glamorous(div)>
   <Dialog
     autoDetectWindowHeight={true}
     autoScrollBodyContent={false}
@@ -35,14 +35,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
       right={0}
       top={0}
     />
-    <AvailabilityDialog
-      nearbyStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
+    <Connect(AvailabilityMap)
       productCode="123"
       productName="abc"
     />
@@ -50,16 +43,14 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
 </div>
 `;
 
-exports[`AvailabilityButton should render null when nearbyStoreStock is empty 1`] = `null`;
-
-exports[`AvailabilityButton should render properly with a closed dialog when nearbyStoreStock is not Empty 1`] = `
+exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
 <div>
-  <styled.div
+  <glamorous(div)
     bgColor="#67cb33"
     onClick={[Function]}
   >
     verifica disponibilità in negozi vicini
-  </styled.div>
+  </glamorous(div)>
   <Dialog
     autoDetectWindowHeight={true}
     autoScrollBodyContent={false}
@@ -87,14 +78,7 @@ exports[`AvailabilityButton should render properly with a closed dialog when nea
       right={0}
       top={0}
     />
-    <AvailabilityDialog
-      nearbyStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
+    <Connect(AvailabilityMap)
       productCode="123"
       productName="abc"
     />

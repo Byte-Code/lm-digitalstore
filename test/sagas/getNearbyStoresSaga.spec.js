@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { fromJS } from 'immutable';
 
 import { apiV1 } from '../../mocks/apiMock';
@@ -17,13 +18,17 @@ const notFoundError = new Error('Not Found Error');
 
 describe('getNearbyStoresSaga', () => {
   describe('Scenario1: input is fine, doens\'t throw', () => {
-    const input = { lat: 200, lng: 30 };
+    const input = { lat: 200, lng: 30, radius: 20 };
     const gen = callFetchNearbyStores(input);
 
+    it('should call the delay helper', () => {
+      expect(gen.next().value).toEqual(call(delay, 100));
+    });
+
     // HACK(ish) need to serialize otherwise test doesn't pass, bound functions
-    it('should call the api first', () => {
+    it('should call the api', () => {
       expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng))
+        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng, input.radius))
       );
     });
 
@@ -39,12 +44,16 @@ describe('getNearbyStoresSaga', () => {
   });
 
   describe('Scenario2: input is invalid, throws an exception', () => {
-    const input = { lat: 'foo', lng: undefined };
+    const input = { lat: 'foo', lng: undefined, radius: 20 };
     const gen = callFetchNearbyStores(input);
+
+    it('should call the delay helper', () => {
+      expect(gen.next().value).toEqual(call(delay, 100));
+    });
 
     it('should call the api first', () => {
       expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng))
+        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng, input.radius))
       );
     });
 
@@ -59,12 +68,16 @@ describe('getNearbyStoresSaga', () => {
   });
 
   describe('Scenario3: no results are found, throw an exception', () => {
-    const input = { lat: 200, lng: 30 };
+    const input = { lat: 200, lng: 30, radius: 20 };
     const gen = callFetchNearbyStores(input);
 
-    it('should call the api first', () => {
+    it('should call the delay helper', () => {
+      expect(gen.next().value).toEqual(call(delay, 100));
+    });
+
+    it('should call the api', () => {
       expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng))
+        JSON.stringify(call(apiV1.getNearbyStores.bind(apiV1), input.lat, input.lng, input.radius))
       );
     });
 

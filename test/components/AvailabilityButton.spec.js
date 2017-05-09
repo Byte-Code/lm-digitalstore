@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
 import AvailabilityButton, { Button } from '../../app/components/AvailabilityButton';
@@ -8,19 +8,7 @@ describe('AvailabilityButton', () => {
   const productName = 'abc';
   const productCode = '123';
 
-  it('should render null when nearbyStoreStock is empty', () => {
-    const nearbyStoreStock = List();
-    const result = shallow(
-      <AvailabilityButton
-        productCode={productCode}
-        productName={productName}
-        nearbyStoreStock={nearbyStoreStock}
-      />
-    );
-    expect(result).toMatchSnapshot();
-  });
-
-  it('should render properly with a closed dialog when nearbyStoreStock is not Empty', () => {
+  it('should render properly with a closed dialog', () => {
     const nearbyStoreStock = fromJS([0, 1, 2]);
     const result = shallow(
       <AvailabilityButton
