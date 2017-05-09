@@ -195,6 +195,8 @@
     "electron-updater": "1.8.2",
     "enzyme-to-json": "^1.5.1",
     "font-awesome": "^4.7.0",
+    "glamor": "^2.20.25",
+    "glamorous": "^3.13.3",
     "google-map-react": "^0.24.0",
     "html-loader": "^0.4.5",
     "immutable": "4.0.0-rc.2",

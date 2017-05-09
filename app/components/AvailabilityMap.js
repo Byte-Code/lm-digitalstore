@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { meters2ScreenPixels } from 'google-map-react/utils';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 import MyPlaceIcon from 'material-ui/svg-icons/maps/person-pin-circle';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
+import Slider from 'material-ui/Slider';
 
 import { getStockLabel } from '../utils/utils';
 
@@ -12,8 +14,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: #fff;
+`;
+
+const Map = styled.div`
   width: 100%;
   height: 1080px;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -45,6 +51,7 @@ const InfoWindow = styled.div`
   top: -195px;
   left: 0;
   padding: 20px;
+  z-index: 1;
 `;
 
 const Divider = styled.div`
@@ -98,6 +105,17 @@ const WhiteBg = styled.div`
 
 const Icon = styled.div`
   position: relative;
+  z-index: 1;
+`;
+
+const Circle = styled.div`
+  box-sizing: content-box;
+  border: 5px dotted #67cb33;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
 `;
 
 export default class AvailabilityMap extends Component {
@@ -112,7 +130,8 @@ export default class AvailabilityMap extends Component {
     super(props);
     this.state = {
       selectedStore: null,
-      infoWindowOpen: false
+      infoWindowOpen: false,
+      zoom: 11
     };
   }
 
@@ -122,6 +141,10 @@ export default class AvailabilityMap extends Component {
 
   closeInfoWindow = () => {
     this.setState({ infoWindowOpen: false });
+  }
+
+  updateZoom = (e) => {
+    this.setState({ zoom: e.zoom });
   }
 
   renderMarkers() {
@@ -206,23 +229,29 @@ export default class AvailabilityMap extends Component {
 
   render() {
     const { productName, productCode, currentStore } = this.props;
+    const { zoom } = this.state;
     const lat = currentStore.getIn(['gpsInformation', 'x']);
     const lng = currentStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
+    const { w, h } = meters2ScreenPixels(80000, { lat, lng }, zoom);
 
     return (
       <Wrapper>
         <Title>Verifica Disponibilità</Title>
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
-        <GoogleMapReact
-          center={center}
-          defaultZoom={11}
-          fullscreenControl={false}
-          options={{ fullscreenControl: false }}
-        >
-          {this.renderMarkers()}
-          {this.renderInfoWindow()}
-        </GoogleMapReact>
+        <Map>
+          <GoogleMapReact
+            center={center}
+            defaultZoom={11}
+            fullscreenControl={false}
+            options={{ fullscreenControl: false }}
+            onChange={this.updateZoom}
+          >
+            {this.renderMarkers()}
+            {this.renderInfoWindow()}
+            <Circle lat={lat} lng={lng} style={{ width: parseInt(h, 10), height: parseInt(w, 10) }} />
+          </GoogleMapReact>
+        </Map>
       </Wrapper>
     );
   }
