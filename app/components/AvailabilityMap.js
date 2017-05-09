@@ -7,6 +7,7 @@ import PlaceIcon from 'material-ui/svg-icons/maps/place';
 import MyPlaceIcon from 'material-ui/svg-icons/maps/person-pin-circle';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 import Slider from 'material-ui/Slider';
+import glamorous from 'glamorous';
 
 import { getStockLabel } from '../utils/utils';
 
@@ -26,6 +27,12 @@ const Title = styled.h1`
   font-size: 48px;
   text-align: center;
   line-height: 70px;
+`;
+
+const SliderTitle = styled.p`
+  font-size: 16px;
+  color: #e4e4e4;
+  font-family: LeroyMerlinSans Italic;
 `;
 
 const ProductInfo = styled.h3`
@@ -106,6 +113,7 @@ const WhiteBg = styled.div`
 const Icon = styled.div`
   position: relative;
   z-index: 1;
+  transform: translate(-50%, -50%);
 `;
 
 const Circle = styled.div`
@@ -117,6 +125,14 @@ const Circle = styled.div`
   pointer-events: none;
 }
 `;
+
+const Radius = glamorous.div({
+  fontSize: '16px',
+  color: '#67cb33',
+  margin: '0 auto 24px',
+  textAlign: 'center',
+  fontFamily: 'LeroyMerlinSans Light-Italic'
+});
 
 export default class AvailabilityMap extends Component {
   static propTypes = {
@@ -131,12 +147,13 @@ export default class AvailabilityMap extends Component {
     this.state = {
       selectedStore: null,
       infoWindowOpen: false,
-      zoom: 11
+      zoom: 11,
+      slider: 30
     };
   }
 
-  selectStore = (storeCode) => {
-    this.setState({ selectedStore: storeCode, infoWindowOpen: true });
+  onChangeSlider = (e, value) => {
+    this.setState({ slider: value });
   }
 
   closeInfoWindow = () => {
@@ -145,6 +162,10 @@ export default class AvailabilityMap extends Component {
 
   updateZoom = (e) => {
     this.setState({ zoom: e.zoom });
+  }
+
+  selectStore = (storeCode) => {
+    this.setState({ selectedStore: storeCode, infoWindowOpen: true });
   }
 
   renderMarkers() {
@@ -229,22 +250,35 @@ export default class AvailabilityMap extends Component {
 
   render() {
     const { productName, productCode, currentStore } = this.props;
-    const { zoom } = this.state;
+    const { zoom, slider } = this.state;
+    const currentStoreName = currentStore.get('name');
     const lat = currentStore.getIn(['gpsInformation', 'x']);
     const lng = currentStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
-    const { w, h } = meters2ScreenPixels(80000, { lat, lng }, zoom);
+    const diameter = slider * 1000 * 2;
+    const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
 
     return (
       <Wrapper>
         <Title>Verifica Disponibilità</Title>
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
+        <SliderTitle>{`Seleziona il raggio di distanza dal negozio di ${currentStoreName}`}</SliderTitle>
+        <Slider
+          min={10}
+          max={50}
+          step={10}
+          value={slider}
+          onChange={this.onChangeSlider}
+          color="#67cb33"
+          sliderStyle={{ marginBottom: 24 }}
+        />
+        <Radius>{`${slider} km`}</Radius>
         <Map>
           <GoogleMapReact
             center={center}
             defaultZoom={11}
             fullscreenControl={false}
-            options={{ fullscreenControl: false }}
+            options={{ fullscreenControl: false, maxZoom: 17, minZoom: 8, zoomControl: false }}
             onChange={this.updateZoom}
           >
             {this.renderMarkers()}
