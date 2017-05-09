@@ -55,7 +55,7 @@ const InfoWindow = styled.div`
   background-color: #fff;
   box-shadow: 0 0 8px 0 #e4e4e4;
   position: absolute;
-  top: -195px;
+  top: -230px;
   left: 0;
   padding: 20px;
   z-index: 1;
@@ -139,7 +139,8 @@ export default class AvailabilityMap extends Component {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     nearbyStoreStock: ImmutablePropTypes.list.isRequired,
-    currentStore: ImmutablePropTypes.map.isRequired
+    currentStore: ImmutablePropTypes.map.isRequired,
+    requestFetchNearbyStores: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -148,12 +149,29 @@ export default class AvailabilityMap extends Component {
       selectedStore: null,
       infoWindowOpen: false,
       zoom: 11,
-      slider: 30
+      radius: 30
     };
   }
 
+  componentDidMount() {
+    this.updateMarkers();
+  }
+
+
   onChangeSlider = (e, value) => {
-    this.setState({ slider: value });
+    this.setState(
+      { radius: value },
+      () => { this.updateMarkers(); }
+    );
+  }
+
+  updateMarkers() {
+    const { currentStore, requestFetchNearbyStores } = this.props;
+    const { radius } = this.state;
+    const lat = currentStore.getIn(['gpsInformation', 'x']);
+    const lng = currentStore.getIn(['gpsInformation', 'y']);
+    requestFetchNearbyStores(lat, lng, radius);
+    this.closeInfoWindow();
   }
 
   closeInfoWindow = () => {
@@ -250,12 +268,12 @@ export default class AvailabilityMap extends Component {
 
   render() {
     const { productName, productCode, currentStore } = this.props;
-    const { zoom, slider } = this.state;
+    const { zoom, radius } = this.state;
     const currentStoreName = currentStore.get('name');
     const lat = currentStore.getIn(['gpsInformation', 'x']);
     const lng = currentStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
-    const diameter = slider * 1000 * 2;
+    const diameter = radius * 1000 * 2;
     const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
 
     return (
@@ -267,12 +285,12 @@ export default class AvailabilityMap extends Component {
           min={10}
           max={50}
           step={10}
-          value={slider}
+          value={radius}
           onChange={this.onChangeSlider}
           color="#67cb33"
           sliderStyle={{ marginBottom: 24 }}
         />
-        <Radius>{`${slider} km`}</Radius>
+        <Radius>{`${radius} km`}</Radius>
         <Map>
           <GoogleMapReact
             center={center}

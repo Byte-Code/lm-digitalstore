@@ -12,8 +12,8 @@ export function failureFetchStore(error) {
   return ({ type: actions.FAILURE_FETCH_STORE, error });
 }
 
-export function requestFetchNearbyStores(lat, lng) {
-  return { type: actions.REQUEST_FETCH_NEARBYSTORES, lat, lng };
+export function requestFetchNearbyStores(lat, lng, radius) {
+  return { type: actions.REQUEST_FETCH_NEARBYSTORES, lat, lng, radius };
 }
 
 export function successFetchNearbyStores(result) {

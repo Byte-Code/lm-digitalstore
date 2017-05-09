@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import AvailabilityMap from '../components/AvailabilityMap';
 import { getNearbyStores, getStore } from '../reducers/selectors';
+import { requestFetchNearbyStores } from '../actions/storeActions';
 
 const mapStateToProps = (state, ownProps) => {
   const { allStoreStock } = ownProps;
@@ -16,4 +17,8 @@ const mapStateToProps = (state, ownProps) => {
   return { nearbyStoreStock, currentStore };
 };
 
-export default connect(mapStateToProps, {})(AvailabilityMap);
+const MapDispatchToProps = {
+  requestFetchNearbyStores
+};
+
+export default connect(mapStateToProps, MapDispatchToProps)(AvailabilityMap);
