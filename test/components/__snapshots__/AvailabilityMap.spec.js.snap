@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AvailabilityDialog should initialize with the right interal state 1`] = `
+<glamorous(div)>
+  <glamorous(h1)>
+    Verifica Disponibilità
+  </glamorous(h1)>
+  <glamorous(h3)>
+    abc - REF. 123
+  </glamorous(h3)>
+  <glamorous(p)>
+    Seleziona il raggio di distanza dal negozio di current
+  </glamorous(p)>
+  <Slider
+    axis="x"
+    color="#67cb33"
+    disableFocusRipple={false}
+    disabled={false}
+    max={50}
+    min={10}
+    onChange={[Function]}
+    required={true}
+    sliderStyle={
+      Object {
+        "marginBottom": 24,
+      }
+    }
+    step={10}
+    style={Object {}}
+    value={30}
+  />
+  <glamorous(div)>
+    30 km
+  </glamorous(div)>
+  <glamorous(div)>
+    <GoogleMap
+      center={
+        Object {
+          "lat": 12311,
+          "lng": 123213,
+        }
+      }
+      debounced={true}
+      defaultZoom={11}
+      distanceToMouse={[Function]}
+      fullscreenControl={false}
+      googleMapLoader={[Function]}
+      hoverDistance={30}
+      layerTypes={Array []}
+      onChange={[Function]}
+      options={
+        Object {
+          "fullscreenControl": false,
+          "maxZoom": 17,
+          "minZoom": 8,
+          "zoomControl": false,
+        }
+      }
+      style={
+        Object {
+          "height": "100%",
+          "margin": 0,
+          "padding": 0,
+          "position": "relative",
+          "width": "100%",
+        }
+      }
+      yesIWantToUseGoogleMapApiInternals={false}
+    >
+      <Marker
+        code="123"
+        handleClick={[Function]}
+        isAvailable={false}
+        isCurrentStore={true}
+        lat={1231}
+        lng={123213}
+      />
+      <Marker
+        code="1234"
+        handleClick={[Function]}
+        isAvailable={false}
+        isCurrentStore={false}
+        lat={12311}
+        lng={123213}
+      />
+      <glamorous(div)
+        height={2405.6967429352226}
+        lat={12311}
+        lng={123213}
+        width={2403.821601331234}
+      />
+    </GoogleMap>
+  </glamorous(div)>
+</glamorous(div)>
+`;

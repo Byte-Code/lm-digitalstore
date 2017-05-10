@@ -2,7 +2,7 @@
 
 exports[`PriceBadge should also render the discount when it is active 1`] = `
 <div>
-  <styled.div>
+  <glamorous(div)>
     <span>
       -
       5
@@ -12,27 +12,27 @@ exports[`PriceBadge should also render the discount when it is active 1`] = `
       15,00
       €
     </span>
-  </styled.div>
-  <styled.p
+  </glamorous(div)>
+  <glamorous(p)
     isDiscounted={true}
   >
     10,00
      €
-  </styled.p>
-  <styled.p>
+  </glamorous(p)>
+  <glamorous(p)>
     unit unit / unit
-  </styled.p>
+  </glamorous(p)>
 </div>
 `;
 
 exports[`PriceBadge should only render the price if no discount is active 1`] = `
 <div>
-  <styled.p>
+  <glamorous(p)>
     10,00
      €
-  </styled.p>
-  <styled.p>
+  </glamorous(p)>
+  <glamorous(p)>
     unit unit / unit
-  </styled.p>
+  </glamorous(p)>
 </div>
 `;

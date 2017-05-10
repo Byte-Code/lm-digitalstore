@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoWindow should render properly 1`] = `
+<glamorous(div)>
+  <NavigationClose
+    fill="#333333"
+    onTouchTap={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+        "height": 24,
+        "position": "absolute",
+        "right": 5,
+        "top": 5,
+        "width": 24,
+      }
+    }
+  />
+  <div>
+    <glamorous(p)>
+      abc
+    </glamorous(p)>
+    <glamorous(div)>
+      <p>
+        bde 1
+      </p>
+      <p>
+        milan - (abc)
+      </p>
+      <p>
+        213
+      </p>
+    </glamorous(div)>
+  </div>
+  <glamorous(div) />
+  <glamorous(div)
+    isAvailable={false}
+  >
+    Prodotto disponibile su ordinazione
+  </glamorous(div)>
+  <glamorous(div) />
+</glamorous(div)>
+`;

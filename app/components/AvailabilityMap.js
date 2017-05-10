@@ -44,7 +44,7 @@ const Circle = glamorous.div(({ height, width }) => ({
   border: '5px dotted #67cb33',
   transform: 'translate(-50%, -50%)',
   borderRadius: '50%',
-  boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.3)',
+  boxShadow: '0 0 0 9999999px rgba(0, 0, 0, 0.3)',
   pointerEvents: 'none',
   height,
   width

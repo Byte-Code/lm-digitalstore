@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Marker should render a black icon if isAvailable is false 1`] = `
+<glamorous(div)
+  onClick={[Function]}
+>
+  <MapsPlace
+    color="#000"
+    style={
+      Object {
+        "cursor": "pointer",
+        "height": 55,
+        "width": 55,
+      }
+    }
+  />
+  <glamorous(div) />
+</glamorous(div)>
+`;
+
+exports[`Marker should render a green icon if isAvailable is false 1`] = `
+<glamorous(div)
+  onClick={[Function]}
+>
+  <MapsPlace
+    color="#67cb33"
+    style={
+      Object {
+        "cursor": "pointer",
+        "height": 55,
+        "width": 55,
+      }
+    }
+  />
+  <glamorous(div) />
+</glamorous(div)>
+`;
+
+exports[`Marker should render with a MyPlaceIcon if isCurrentStore is true 1`] = `
+<glamorous(div)
+  onClick={[Function]}
+>
+  <MapsPersonPinCircle
+    color="#000"
+    style={
+      Object {
+        "cursor": "pointer",
+        "height": 55,
+        "width": 55,
+      }
+    }
+  />
+  <glamorous(div) />
+</glamorous(div)>
+`;
+
+exports[`Marker should render with a PlaceIcon if isCurrentStore is false 1`] = `
+<glamorous(div)
+  onClick={[Function]}
+>
+  <MapsPlace
+    color="#000"
+    style={
+      Object {
+        "cursor": "pointer",
+        "height": 55,
+        "width": 55,
+      }
+    }
+  />
+  <glamorous(div) />
+</glamorous(div)>
+`;
