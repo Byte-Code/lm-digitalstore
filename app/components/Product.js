@@ -1,52 +1,52 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, List } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
 import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
 
-const Wrapper = styled.div`
-  position: relative;
-`;
+const Wrapper = glamorous.div({
+  position: 'relative'
+});
 
-const Title = styled.h1`
-  margin: 40px 100px 0;
-  text-align: center;
-  font-size: 48px;
-  line-height: 70px;
-  text-transform: capitalize;
-`;
+const Title = glamorous.h1({
+  margin: '40px 100px 0',
+  textAlign: 'center',
+  fontSize: 48,
+  lineHeight: '70px',
+  textTransform: 'capitalize'
+});
 
-const Ref = styled.h3`
-  text-transform: uppercase;
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 16px;
-`;
+const Ref = glamorous.h3({
+  textTransform: 'uppercase',
+  fontSize: 16,
+  lineHeight: '24px',
+  textAlign: 'center',
+  marginBottom: 16
+});
 
-const SliderWrapper = styled.div`
-  width: 100%;
-`;
+const SliderWrapper = glamorous.div({
+  width: '100%'
+});
 
-const PriceWrapper = styled.div`
-  position: absolute;
-  right: 30px;
-  top: 234px;
-`;
+const PriceWrapper = glamorous.div({
+  position: 'absolute',
+  right: 30,
+  top: 234
+});
 
-const SimilarProductsWrapper = styled.div`
-  margin: 60px 0 0;
-  &>div {
-    margin-bottom: 80px;
+const SimilarProductsWrapper = glamorous.div({
+  margin: '60px 0 0',
+  '&>div': {
+    marginBottom: 80
   }
-`;
+});
 
 export default class Product extends Component {
-  static propTypes ={
+  static propTypes = {
     params: PropTypes.shape({
       productCode: PropTypes.string.isRequired
     }).isRequired,
@@ -54,11 +54,11 @@ export default class Product extends Component {
     requestFetchProduct: PropTypes.func.isRequired,
     storeCode: PropTypes.string.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired
-  }
+  };
 
   static defaultProps = {
     productInfo: Map()
-  }
+  };
 
   componentDidMount() {
     const { params: { productCode }, requestFetchProduct } = this.props;
@@ -83,14 +83,10 @@ export default class Product extends Component {
 
     const relatedProd = productInfo.get('similarProducts');
 
-    return relatedProd.map((sp) => {
+    return relatedProd.map(sp => {
       const products = similarProducts.filter(p => sp.get('products').includes(p.get('code')));
       return (
-        <SimilarProducts
-          key={sp.get('name')}
-          similarProducts={products}
-          title={sp.get('name')}
-        />
+        <SimilarProducts key={sp.get('name')} similarProducts={products} title={sp.get('name')} />
       );
     });
   }
@@ -123,11 +119,7 @@ export default class Product extends Component {
         <Title>{name}</Title>
         <Ref>{`REF. ${code}`}</Ref>
         <SliderWrapper>
-          <ImageSlider
-            imageIDList={imageIDList}
-            imageOptions={imageOptions}
-            alt={name}
-          />
+          <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
         </SliderWrapper>
         <ProductInfo
           productType={productType}

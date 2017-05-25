@@ -12,7 +12,7 @@ export const Discount = glamorous.div({
   marginBottom: '5px',
   '&>span': {
     '&:first-child': {
-      color: '#cc0000',
+      color: '#cc0000'
     },
     color: '#000',
     textDecoration: 'line-through'
@@ -36,13 +36,13 @@ export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map.isRequired,
     price: ImmutablePropTypes.map.isRequired
-  }
+  };
 
   render() {
     const { pricingInfo, price } = this.props;
     const grossPrice = price.get('gross');
     const listPrice = price.get('list');
-    const isDiscounted = listPrice && (listPrice - grossPrice > 1);
+    const isDiscounted = listPrice && listPrice - grossPrice > 1;
     const discount = price.get('discount');
     const sellingCapacity = pricingInfo.get('sellingCapacity') || 1;
     const sellingUnit = pricingInfo.get('sellingUnit');
@@ -51,12 +51,11 @@ export default class PriceBadge extends Component {
       <div>
         {isDiscounted &&
           <Discount>
-            <span>-{Math.ceil(discount)} &#37;</span>
-            <span>{formatPrice(listPrice)}&#8364;</span>
-          </Discount>
-        }
+            <span>-{Math.ceil(discount)} %</span>
+            <span>{formatPrice(listPrice)}€</span>
+          </Discount>}
         <MainPrice isDiscounted={isDiscounted}>
-          {formatPrice(grossPrice)} &#8364;
+          {formatPrice(grossPrice)} €
         </MainPrice>
         <Quantity>{`${sellingCapacity} ${sellingUnit} / ${sellingUnit}`}</Quantity>
       </div>
