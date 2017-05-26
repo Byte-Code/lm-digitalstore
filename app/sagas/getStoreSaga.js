@@ -1,17 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
-import { apiV1, apiMicro } from '../../mocks/apiMock';
+import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as storeActions from '../actions/storeActions';
 import { isValidResponse } from '../utils/utils';
 
 export function* callFetchStore({ storeCode }) {
   try {
-    // HACK init api instances
-    apiV1.storeCode = storeCode;
-    apiMicro.storeCode = storeCode;
-    const storeInfo = yield call(apiV1.getStore.bind(apiV1));
+    apiClient.storeCode = storeCode;
+    const storeInfo = yield call(apiClient.fetchStore);
     if (isValidResponse(storeInfo)) {
       const result = fromJS(storeInfo).get('content');
       yield put(storeActions.successFetchStore(result));

@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
-import { apiV1 } from '../../mocks/apiMock';
+import { apiClient } from '../../mocks/apiMock';
 import { callFetchStore } from '../../app/sagas/getStoreSaga';
 import { successFetchStore, failureFetchStore } from '../../app/actions/storeActions';
 
@@ -22,21 +22,17 @@ const genericError = new Error('Generic Error');
 const notFoundError = new Error('Not Found Error');
 
 describe('getStoreSaga', () => {
-  describe('Scenario1: input is fine, doesn\'t throw', () => {
+  describe("Scenario1: input is fine, doesn't throw", () => {
     const input = { storeCode: '11' };
     const gen = callFetchStore(input);
 
-    // HACK(ish) need to serialize otherwise test doesn't pass, bound functions
     it('should call the api first', () => {
-      expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getStore.bind(apiV1)))
-      );
+      expect(gen.next().value).toEqual(call(apiClient.fetchStore));
     });
 
     it('should dispatch a SUCCESS_FETCH_STORE action with the transformed result', () => {
       const transformedResult = fromJS(validResponse).get('content');
-      expect(gen.next(validResponse).value)
-      .toEqual(put(successFetchStore(transformedResult)));
+      expect(gen.next(validResponse).value).toEqual(put(successFetchStore(transformedResult)));
     });
 
     it('and then nothing', () => {
@@ -49,14 +45,11 @@ describe('getStoreSaga', () => {
     const gen = callFetchStore(input);
 
     it('should call the api first', () => {
-      expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getStore.bind(apiV1)))
-      );
+      expect(gen.next().value).toEqual(call(apiClient.fetchStore));
     });
 
     it('should dispatch a FAILURE_FETCH_STORE action with the error message', () => {
-      expect(gen.throw(genericError).value)
-      .toEqual(put(failureFetchStore(genericError)));
+      expect(gen.throw(genericError).value).toEqual(put(failureFetchStore(genericError)));
     });
 
     it('and then nothing', () => {
@@ -69,14 +62,11 @@ describe('getStoreSaga', () => {
     const gen = callFetchStore(input);
 
     it('should call the api first', () => {
-      expect(JSON.stringify(gen.next().value)).toEqual(
-        JSON.stringify(call(apiV1.getStore.bind(apiV1)))
-      );
+      expect(gen.next().value).toEqual(call(apiClient.fetchStore));
     });
 
     it('should dispatch a FAILURE_FETCH_STORE action with the error message', () => {
-      expect(gen.next(invalidResponse).value)
-      .toEqual(put(failureFetchStore(notFoundError)));
+      expect(gen.next(invalidResponse).value).toEqual(put(failureFetchStore(notFoundError)));
     });
   });
 });

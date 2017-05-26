@@ -3,7 +3,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import { Map } from 'immutable';
 import styled from 'styled-components';
-
 import ScreenSaver from './ScreenSaver';
 
 const Wrapper = styled.div`
@@ -48,11 +47,11 @@ export default class Page extends Component {
   static propTypes = {
     forecast: ImmutablePropTypes.map.isRequired,
     requestFetchWeather: PropTypes.func.isRequired
-  }
+  };
 
   static defaultProps = {
     forecast: Map()
-  }
+  };
 
   componentDidMount() {
     this.props.requestFetchWeather();

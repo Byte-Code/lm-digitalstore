@@ -1,14 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
-import { apiMicro } from '../../mocks/apiMock';
+import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
 import { requestFetchProductList } from '../actions/productListActions';
 
 export function* callFetchXSellProducts({ productCode }) {
   try {
-    const products = yield call(apiMicro.getCrossSellingProducts.bind(apiMicro), productCode);
+    const products = yield call(apiClient.fetchSuggest, productCode);
     const result = fromJS(products).map(p => p.get('code')).take(5);
     if (result.isEmpty()) {
       throw new Error('Not Found Error');
@@ -22,8 +22,5 @@ export function* callFetchXSellProducts({ productCode }) {
 }
 
 export default function* getXSellProductsSaga() {
-  yield takeEvery(
-    actionTypes.REQUEST_FETCH_XSELLPRODUCTS,
-    callFetchXSellProducts
-  );
+  yield takeEvery(actionTypes.REQUEST_FETCH_XSELLPRODUCTS, callFetchXSellProducts);
 }
