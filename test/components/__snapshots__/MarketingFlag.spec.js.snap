@@ -2,8 +2,14 @@
 
 exports[`MarketingFlag should render an empty div when no promotions are active 1`] = `
 <MarketingFlag
-  loyaltyProgram={Object {}}
-  marketingAttributes={Object {}}
+  loyaltyProgram={
+    Immutable.Map {
+    }
+  }
+  marketingAttributes={
+    Immutable.Map {
+    }
+  }
 >
   <styled.div>
     <div
@@ -16,14 +22,14 @@ exports[`MarketingFlag should render an empty div when no promotions are active 
 exports[`MarketingFlag should render properly when promotions are active 1`] = `
 <MarketingFlag
   loyaltyProgram={
-    Object {
-      "type": "DISCOUNT",
-      "value": 10,
+    Immutable.Map {
+      type: "DISCOUNT",
+      value: 10,
     }
   }
   marketingAttributes={
-    Object {
-      "specialBadgeCode": "PREZZO_STOCK",
+    Immutable.Map {
+      specialBadgeCode: "PREZZO_STOCK",
     }
   }
 >
@@ -33,9 +39,9 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
     >
       <MarketingBadge
         promotion={
-          Object {
-            "code": "IDEAPIU",
-            "value": 10,
+          Immutable.Map {
+            code: "IDEAPIU",
+            value: 10,
           }
         }
       >

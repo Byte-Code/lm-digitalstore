@@ -4,23 +4,26 @@ exports[`ProductInfo should render ProductInfoCAB with the right props if produc
 <ProductInfoCAB
   descriptions={
     Array [
-      Array [
+      Immutable.List [
         "descriptions0",
         "descriptions1",
-      ],
-      Array [
+    ],
+      Immutable.List [
         "descriptions2",
-      ],
+    ],
     ]
   }
-  marketingDescriptions={Object {}}
+  marketingDescriptions={
+    Immutable.Map {
+    }
+  }
 />
 `;
 
 exports[`ProductInfo should render ProductInfoNOCAB with the right props if product is NOCAB 1`] = `
 <ProductInfoNOCAB
   descriptions={
-    Array [
+    Immutable.List [
       "descriptions0",
       "descriptions1",
       "descriptions2",

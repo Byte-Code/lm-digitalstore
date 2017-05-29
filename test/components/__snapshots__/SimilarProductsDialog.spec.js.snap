@@ -42,8 +42,8 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
       <styled.div>
         <SimilarProductBadge
           productInfo={
-            Object {
-              "code": "product0",
+            Immutable.Map {
+              code: "product0",
             }
           }
         />
@@ -53,8 +53,8 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
       <styled.div>
         <SimilarProductBadge
           productInfo={
-            Object {
-              "code": "product1",
+            Immutable.Map {
+              code: "product1",
             }
           }
         />
@@ -64,8 +64,8 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
       <styled.div>
         <SimilarProductBadge
           productInfo={
-            Object {
-              "code": "product2",
+            Immutable.Map {
+              code: "product2",
             }
           }
         />

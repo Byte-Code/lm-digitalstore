@@ -145,13 +145,13 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
   </styled.div>
   <Connect(FilterButton)
     filterMap={
-      Object {
-        "activeAid": "aid1",
-        "activeAvailability": null,
-        "activeFilters": Array [
+      Immutable.Map {
+        activeAid: "aid1",
+        activeFilters: Immutable.List [
           "filter5",
         ],
-        "categoryCode": "CAT123",
+        activeAvailability: null,
+        categoryCode: "CAT123",
       }
     }
     onApply={[Function]}
@@ -304,13 +304,13 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
   </styled.div>
   <Connect(FilterButton)
     filterMap={
-      Object {
-        "activeAid": "aid1",
-        "activeAvailability": true,
-        "activeFilters": Array [
+      Immutable.Map {
+        activeAid: "aid1",
+        activeFilters: Immutable.List [
           "filter5",
         ],
-        "categoryCode": "CAT123",
+        activeAvailability: true,
+        categoryCode: "CAT123",
       }
     }
     onApply={[Function]}
@@ -463,14 +463,14 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
   </styled.div>
   <Connect(FilterButton)
     filterMap={
-      Object {
-        "activeAid": "aid1",
-        "activeAvailability": null,
-        "activeFilters": Array [
+      Immutable.Map {
+        activeAid: "aid1",
+        activeFilters: Immutable.List [
           "filter0",
           "filter5",
         ],
-        "categoryCode": "CAT123",
+        activeAvailability: null,
+        categoryCode: "CAT123",
       }
     }
     onApply={[Function]}
@@ -623,11 +623,12 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
   </styled.div>
   <Connect(FilterButton)
     filterMap={
-      Object {
-        "activeAid": "aid1",
-        "activeAvailability": false,
-        "activeFilters": Array [],
-        "categoryCode": "CAT123",
+      Immutable.Map {
+        activeAid: "aid1",
+        activeFilters: Immutable.List [
+        ],
+        activeAvailability: false,
+        categoryCode: "CAT123",
       }
     }
     onApply={[Function]}

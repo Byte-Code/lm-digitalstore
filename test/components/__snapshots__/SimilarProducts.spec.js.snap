@@ -11,24 +11,24 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product0",
+        Immutable.Map {
+          code: "product0",
         }
       }
     />
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product1",
+        Immutable.Map {
+          code: "product1",
         }
       }
     />
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product2",
+        Immutable.Map {
+          code: "product2",
         }
       }
     />
@@ -38,15 +38,15 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
     isOpen={false}
     selectedProduct=""
     similarProducts={
-      Array [
-        Object {
-          "code": "product0",
+      Immutable.List [
+        Immutable.Map {
+          code: "product0",
         },
-        Object {
-          "code": "product1",
+        Immutable.Map {
+          code: "product1",
         },
-        Object {
-          "code": "product2",
+        Immutable.Map {
+          code: "product2",
         },
       ]
     }
@@ -65,24 +65,24 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product0",
+        Immutable.Map {
+          code: "product0",
         }
       }
     />
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product1",
+        Immutable.Map {
+          code: "product1",
         }
       }
     />
     <ProductBadge
       handleClick={[Function]}
       productInfo={
-        Object {
-          "code": "product2",
+        Immutable.Map {
+          code: "product2",
         }
       }
     />
@@ -92,15 +92,15 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
     isOpen={false}
     selectedProduct=""
     similarProducts={
-      Array [
-        Object {
-          "code": "product0",
+      Immutable.List [
+        Immutable.Map {
+          code: "product0",
         },
-        Object {
-          "code": "product1",
+        Immutable.Map {
+          code: "product1",
         },
-        Object {
-          "code": "product2",
+        Immutable.Map {
+          code: "product2",
         },
       ]
     }

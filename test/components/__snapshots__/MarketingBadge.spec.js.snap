@@ -3,8 +3,8 @@
 exports[`MarketingBadge should render DESTOCK 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "DESTOCK",
+    Immutable.Map {
+      code: "DESTOCK",
     }
   }
 >
@@ -26,9 +26,9 @@ exports[`MarketingBadge should render DESTOCK 1`] = `
 exports[`MarketingBadge should render IDEAPIU 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "IDEAPIU",
-      "value": 10,
+    Immutable.Map {
+      code: "IDEAPIU",
+      value: 10,
     }
   }
 >
@@ -71,8 +71,8 @@ exports[`MarketingBadge should render IDEAPIU 1`] = `
 exports[`MarketingBadge should render NOVITA 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "NOVITA",
+    Immutable.Map {
+      code: "NOVITA",
     }
   }
 >
@@ -102,8 +102,8 @@ exports[`MarketingBadge should render NOVITA 1`] = `
 exports[`MarketingBadge should render PREZZO_GIU 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "PREZZO_GIU",
+    Immutable.Map {
+      code: "PREZZO_GIU",
     }
   }
 >
@@ -129,8 +129,8 @@ exports[`MarketingBadge should render PREZZO_GIU 1`] = `
 exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "PREZZO_STOCK",
+    Immutable.Map {
+      code: "PREZZO_STOCK",
     }
   }
 >
@@ -156,8 +156,8 @@ exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
 exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "PREZZO_VINCENTE",
+    Immutable.Map {
+      code: "PREZZO_VINCENTE",
     }
   }
 >
@@ -175,8 +175,8 @@ exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
 exports[`MarketingBadge should render PROMO_WEB 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "PROMO_WEB",
+    Immutable.Map {
+      code: "PROMO_WEB",
     }
   }
 >
@@ -200,8 +200,8 @@ exports[`MarketingBadge should render PROMO_WEB 1`] = `
 exports[`MarketingBadge should render null if no promotion is provided 1`] = `
 <MarketingBadge
   promotion={
-    Object {
-      "code": "",
+    Immutable.Map {
+      code: "",
     }
   }
 />

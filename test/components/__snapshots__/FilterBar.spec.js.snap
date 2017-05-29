@@ -20,13 +20,16 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
   </styled.div>
   <ActiveFilters
     filterGroups={
-      Array [
+      Immutable.List [
         1,
         2,
         3,
       ]
     }
-    filterMap={Object {}}
+    filterMap={
+      Immutable.Map {
+      }
+    }
     handleOpen={[Function]}
     resetFilters={[Function]}
     toggleAvailability={[Function]}
@@ -55,13 +58,16 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
     <FilterDialog
       applyFilters={[Function]}
       filterGroups={
-        Array [
+        Immutable.List [
           1,
           2,
           3,
         ]
       }
-      filterMap={Object {}}
+      filterMap={
+        Immutable.Map {
+        }
+      }
       handleClose={[Function]}
     />
   </Dialog>
@@ -88,13 +94,16 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
   </styled.div>
   <ActiveFilters
     filterGroups={
-      Array [
+      Immutable.List [
         1,
         2,
         3,
       ]
     }
-    filterMap={Object {}}
+    filterMap={
+      Immutable.Map {
+      }
+    }
     handleOpen={[Function]}
     resetFilters={[Function]}
     toggleAvailability={[Function]}
@@ -123,13 +132,16 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
     <FilterDialog
       applyFilters={[Function]}
       filterGroups={
-        Array [
+        Immutable.List [
           1,
           2,
           3,
         ]
       }
-      filterMap={Object {}}
+      filterMap={
+        Immutable.Map {
+        }
+      }
       handleClose={[Function]}
     />
   </Dialog>

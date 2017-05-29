@@ -37,7 +37,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
     />
     <Connect(AvailabilityMap)
       allStoreStock={
-        Array [
+        Immutable.List [
           0,
           1,
           2,
@@ -87,7 +87,7 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
     />
     <Connect(AvailabilityMap)
       allStoreStock={
-        Array [
+        Immutable.List [
           0,
           1,
           2,

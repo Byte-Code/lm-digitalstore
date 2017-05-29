@@ -10,7 +10,7 @@ describe('DateBadge', () => {
   const result = mount(<DateBadge />);
 
   it('should update state with the intervalID before mounting', () => {
-    expect(result.state('intID')).toEqual(0);
+    expect(result.state('intID')).toEqual(1);
   });
 
   it('should update state with the currentTime everySecond', () => {
