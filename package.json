@@ -199,7 +199,7 @@
     "google-map-react": "^0.24.0",
     "html-loader": "^0.4.5",
     "immutable": "4.0.0-rc.2",
-    "lm-remote-api": "^0.0.15",
+    "lm-remote-api": "^0.0.16",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
     "qrcode.react": "^0.7.0",

@@ -3,39 +3,21 @@
 exports[`ProductInfoBadge should render properly 1`] = `
 <styled.div>
   <MarketingFlag
-    loyaltyProgram={
-      Immutable.Map {
-      }
-    }
-    marketingAttributes={
-      Immutable.Map {
-      }
-    }
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
   />
   <PriceBadge
-    price={
-      Immutable.Map {
-      }
-    }
-    pricingInfo={
-      Immutable.Map {
-      }
-    }
+    price={Object {}}
+    pricingInfo={Object {}}
   />
   <styled.div />
   <styled.div>
     <Connect(StoreStockBadge)
-      currentStoreStock={
-        Immutable.Map {
-        }
-      }
+      currentStoreStock={Object {}}
     />
   </styled.div>
   <AvailabilityButton
-    allStoreStock={
-      Immutable.List [
-      ]
-    }
+    allStoreStock={Array []}
     productCode="foobar"
     productName="foobar"
   />

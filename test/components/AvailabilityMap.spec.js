@@ -64,13 +64,13 @@ describe('AvailabilityDialog', () => {
       selectedStore: null,
       infoWindowOpen: false,
       zoom: 11,
-      radius: 30
+      range: 30
     };
     expect(shallowWrapper.state()).toEqual(expectedState);
     expect(shallowWrapper).toMatchSnapshot();
   });
 
-  it('should render a marker for each nearbyStore in radius', () => {
+  it('should render a marker for each nearbyStore in range', () => {
     expect(shallowWrapper.find(Marker)).toHaveLength(2);
   });
 
@@ -88,7 +88,6 @@ describe('AvailabilityDialog', () => {
         requestFetchNearbyStores={requestFetchNearbyStores}
       />
     );
-    expect(requestFetchNearbyStores).toHaveBeenCalledWith(12311,
-      123213, 30);
+    expect(requestFetchNearbyStores).toHaveBeenCalledWith(12311, 123213, 30);
   });
 });

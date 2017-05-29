@@ -4911,9 +4911,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lm-remote-api@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/lm-remote-api/-/lm-remote-api-0.0.15.tgz#304c2baa51fc03fae20d4ef2f656771085a5e7a9"
+lm-remote-api@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/lm-remote-api/-/lm-remote-api-0.0.16.tgz#76af549f1011d207672200e10c2ddd8ab59655a9"
   dependencies:
     axios "0.15.3"
 

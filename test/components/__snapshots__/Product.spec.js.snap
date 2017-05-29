@@ -12,7 +12,7 @@ exports[`Product should render properly with no similarProducts  1`] = `
     <ImageSlider
       alt="name"
       imageIDList={
-        Immutable.List [
+        Array [
           "image1",
         ]
       }
@@ -26,45 +26,24 @@ exports[`Product should render properly with no similarProducts  1`] = `
     />
   </styled.div>
   <ProductInfo
-    descriptions={
-      Immutable.List [
-      ]
-    }
-    marketingDescriptions={
-      Immutable.Map {
-      }
-    }
+    descriptions={Array []}
+    marketingDescriptions={Object {}}
     productType="descriptionType"
   />
   <styled.div />
   <styled.div>
     <ProductInfoBadge
-      allStoreStock={
-        Immutable.List [
-        ]
-      }
+      allStoreStock={Array []}
       currentStoreStock={
-        Immutable.Map {
-          storeStock: 0,
-          stockStatus: "notAvailable",
+        Object {
+          "stockStatus": "notAvailable",
+          "storeStock": 0,
         }
       }
-      loyaltyProgram={
-        Immutable.Map {
-        }
-      }
-      marketingAttributes={
-        Immutable.Map {
-        }
-      }
-      price={
-        Immutable.Map {
-        }
-      }
-      pricingInfo={
-        Immutable.Map {
-        }
-      }
+      loyaltyProgram={Object {}}
+      marketingAttributes={Object {}}
+      price={Object {}}
+      pricingInfo={Object {}}
       productCode="code"
       productName="name"
       productSlug="slug"
@@ -85,7 +64,7 @@ exports[`Product should render properly with similarProducts  1`] = `
     <ImageSlider
       alt="name"
       imageIDList={
-        Immutable.List [
+        Array [
           "image1",
         ]
       }
@@ -99,22 +78,16 @@ exports[`Product should render properly with similarProducts  1`] = `
     />
   </styled.div>
   <ProductInfo
-    descriptions={
-      Immutable.List [
-      ]
-    }
-    marketingDescriptions={
-      Immutable.Map {
-      }
-    }
+    descriptions={Array []}
+    marketingDescriptions={Object {}}
     productType="descriptionType"
   />
   <styled.div>
     <SimilarProducts
       similarProducts={
-        Immutable.List [
-          Immutable.Map {
-            code: "prod1",
+        Array [
+          Object {
+            "code": "prod1",
           },
         ]
       }
@@ -123,32 +96,17 @@ exports[`Product should render properly with similarProducts  1`] = `
   </styled.div>
   <styled.div>
     <ProductInfoBadge
-      allStoreStock={
-        Immutable.List [
-        ]
-      }
+      allStoreStock={Array []}
       currentStoreStock={
-        Immutable.Map {
-          storeStock: 0,
-          stockStatus: "notAvailable",
+        Object {
+          "stockStatus": "notAvailable",
+          "storeStock": 0,
         }
       }
-      loyaltyProgram={
-        Immutable.Map {
-        }
-      }
-      marketingAttributes={
-        Immutable.Map {
-        }
-      }
-      price={
-        Immutable.Map {
-        }
-      }
-      pricingInfo={
-        Immutable.Map {
-        }
-      }
+      loyaltyProgram={Object {}}
+      marketingAttributes={Object {}}
+      price={Object {}}
+      pricingInfo={Object {}}
       productCode="code"
       productName="name"
       productSlug="slug"

@@ -12,21 +12,12 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
   <SellingAidsBadge
     activeAid=""
     onToggle={[Function]}
-    sellingAids={
-      Immutable.Map {
-      }
-    }
+    sellingAids={Object {}}
   />
   <FilterBar
     applyFilters={[Function]}
-    filterGroups={
-      Immutable.List [
-      ]
-    }
-    filterMap={
-      Immutable.Map {
-      }
-    }
+    filterGroups={Array []}
+    filterMap={Object {}}
     resetFilters={[Function]}
     toggleAvailability={[Function]}
     toggleFilter={[Function]}
@@ -40,10 +31,10 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       <ProductBadge
         handleClick={[Function]}
         productInfo={
-          Immutable.Map {
-            code: 1,
-            mainImage: "image1",
-            name: "product1",
+          Object {
+            "code": 1,
+            "mainImage": "image1",
+            "name": "product1",
           }
         }
       />
@@ -56,10 +47,10 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       <ProductBadge
         handleClick={[Function]}
         productInfo={
-          Immutable.Map {
-            code: 2,
-            mainImage: "image2",
-            name: "product2",
+          Object {
+            "code": 2,
+            "mainImage": "image2",
+            "name": "product2",
           }
         }
       />
@@ -72,10 +63,10 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       <ProductBadge
         handleClick={[Function]}
         productInfo={
-          Immutable.Map {
-            code: 3,
-            mainImage: "image3",
-            name: "product3",
+          Object {
+            "code": 3,
+            "mainImage": "image3",
+            "name": "product3",
           }
         }
       />

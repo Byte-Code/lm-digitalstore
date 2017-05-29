@@ -18,9 +18,9 @@ const notFoundError = new Error('Not Found Error');
 
 describe('getNearbyStoresSaga', () => {
   describe("Scenario1: input is fine, doens't throw", () => {
-    const input = { lat: 200, lng: 30, radius: 20 };
+    const input = { lat: 200, lng: 30, range: 20 };
     const pathParams = { lat: 200, lng: 30 };
-    const queryParams = { radius: 20, orderBy: 'distance' };
+    const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
 
     it('should call the delay helper', () => {
@@ -45,9 +45,9 @@ describe('getNearbyStoresSaga', () => {
   });
 
   describe('Scenario2: input is invalid, throws an exception', () => {
-    const input = { lat: 'foo', lng: undefined, radius: 20 };
+    const input = { lat: 'foo', lng: undefined, range: 20 };
     const pathParams = { lat: 'foo', lng: undefined };
-    const queryParams = { radius: 20, orderBy: 'distance' };
+    const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
 
     it('should call the delay helper', () => {
@@ -68,9 +68,9 @@ describe('getNearbyStoresSaga', () => {
   });
 
   describe('Scenario3: no results are found, throw an exception', () => {
-    const input = { lat: 200, lng: 30, radius: 20 };
+    const input = { lat: 200, lng: 30, range: 20 };
     const pathParams = { lat: 200, lng: 30 };
-    const queryParams = { radius: 20, orderBy: 'distance' };
+    const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
 
     it('should call the delay helper', () => {

@@ -5,21 +5,21 @@ export function setStoreCode(storeCode) {
 }
 
 export function successFetchStore(result) {
-  return ({ type: actions.SUCCESS_FETCH_STORE, result });
+  return { type: actions.SUCCESS_FETCH_STORE, result };
 }
 
 export function failureFetchStore(error) {
-  return ({ type: actions.FAILURE_FETCH_STORE, error });
+  return { type: actions.FAILURE_FETCH_STORE, error };
 }
 
-export function requestFetchNearbyStores(lat, lng, radius) {
-  return { type: actions.REQUEST_FETCH_NEARBYSTORES, lat, lng, radius };
+export function requestFetchNearbyStores(lat, lng, range) {
+  return { type: actions.REQUEST_FETCH_NEARBYSTORES, lat, lng, range };
 }
 
 export function successFetchNearbyStores(result) {
-  return ({ type: actions.SUCCESS_FETCH_NEARBYSTORES, result });
+  return { type: actions.SUCCESS_FETCH_NEARBYSTORES, result };
 }
 
 export function failureFetchNearbyStores(error) {
-  return ({ type: actions.FAILURE_FETCH_NEARBYSTORES, error });
+  return { type: actions.FAILURE_FETCH_NEARBYSTORES, error };
 }

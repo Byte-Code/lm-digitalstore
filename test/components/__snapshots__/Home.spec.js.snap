@@ -23,10 +23,10 @@ exports[`Home should render properly if world is not empty 1`] = `
     <styled.div>
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Tavoli",
-            image: "test-file-stub",
-            categoryCode: "CAT656",
+          Object {
+            "categoryCode": "CAT656",
+            "familyName": "Tavoli",
+            "image": "test-file-stub",
           }
         }
         size="square-big"
@@ -34,20 +34,20 @@ exports[`Home should render properly if world is not empty 1`] = `
       <styled.div>
         <FamilyBadge
           family={
-            Immutable.Map {
-              familyName: "Gazebo",
-              image: "test-file-stub",
-              categoryCode: "CAT944",
+            Object {
+              "categoryCode": "CAT944",
+              "familyName": "Gazebo",
+              "image": "test-file-stub",
             }
           }
           size="square-small"
         />
         <FamilyBadge
           family={
-            Immutable.Map {
-              familyName: "Sedie e Poltrone",
-              image: "test-file-stub",
-              categoryCode: "CAT657",
+            Object {
+              "categoryCode": "CAT657",
+              "familyName": "Sedie e Poltrone",
+              "image": "test-file-stub",
             }
           }
           size="square-small"
@@ -56,20 +56,20 @@ exports[`Home should render properly if world is not empty 1`] = `
       <styled.div>
         <FamilyBadge
           family={
-            Immutable.Map {
-              familyName: "Panchine",
-              image: "test-file-stub",
-              categoryCode: "CAT945",
+            Object {
+              "categoryCode": "CAT945",
+              "familyName": "Panchine",
+              "image": "test-file-stub",
             }
           }
           size="square-small"
         />
         <FamilyBadge
           family={
-            Immutable.Map {
-              familyName: "Dondoli e Amache",
-              image: "test-file-stub",
-              categoryCode: "CAT659",
+            Object {
+              "categoryCode": "CAT659",
+              "familyName": "Dondoli e Amache",
+              "image": "test-file-stub",
             }
           }
           size="square-small"
@@ -79,30 +79,30 @@ exports[`Home should render properly if world is not empty 1`] = `
     <styled.div>
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Ombrelloni e Basi",
-            image: "test-file-stub",
-            categoryCode: "CAT660",
+          Object {
+            "categoryCode": "CAT660",
+            "familyName": "Ombrelloni e Basi",
+            "image": "test-file-stub",
           }
         }
         size="square-small"
       />
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Set di tavoli e sedie",
-            image: "test-file-stub",
-            categoryCode: "CAT655",
+          Object {
+            "categoryCode": "CAT655",
+            "familyName": "Set di tavoli e sedie",
+            "image": "test-file-stub",
           }
         }
         size="horizontal"
       />
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Sdraio e Lettini",
-            image: "test-file-stub",
-            categoryCode: "CAT658",
+          Object {
+            "categoryCode": "CAT658",
+            "familyName": "Sdraio e Lettini",
+            "image": "test-file-stub",
           }
         }
         size="square-small"
@@ -111,30 +111,30 @@ exports[`Home should render properly if world is not empty 1`] = `
     <styled.div>
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Pergole",
-            image: "test-file-stub",
-            categoryCode: "CAT676",
+          Object {
+            "categoryCode": "CAT676",
+            "familyName": "Pergole",
+            "image": "test-file-stub",
           }
         }
         size="square-small"
       />
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Carport",
-            image: "test-file-stub",
-            categoryCode: "CAT4231",
+          Object {
+            "categoryCode": "CAT4231",
+            "familyName": "Carport",
+            "image": "test-file-stub",
           }
         }
         size="square-small"
       />
       <FamilyBadge
         family={
-          Immutable.Map {
-            familyName: "Divisori Giardino",
-            image: "test-file-stub",
-            categoryCode: "CAT4097",
+          Object {
+            "categoryCode": "CAT4097",
+            "familyName": "Divisori Giardino",
+            "image": "test-file-stub",
           }
         }
         size="horizontal"

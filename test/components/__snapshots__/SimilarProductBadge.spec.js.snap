@@ -25,26 +25,17 @@ exports[`SimilarProductBadge should render properly 1`] = `
     <styled.p />
     <styled.div>
       <MarketingFlag
-        loyaltyProgram={
-          Immutable.Map {
-          }
-        }
-        marketingAttributes={
-          Immutable.Map {
-          }
-        }
+        loyaltyProgram={Object {}}
+        marketingAttributes={Object {}}
       />
       <PriceBadge
         price={
-          Immutable.Map {
-            list: 15,
-            gross: 15,
+          Object {
+            "gross": 15,
+            "list": 15,
           }
         }
-        pricingInfo={
-          Immutable.Map {
-          }
-        }
+        pricingInfo={Object {}}
       />
       <styled.p>
         1 pz / pz
@@ -52,9 +43,9 @@ exports[`SimilarProductBadge should render properly 1`] = `
       <styled.div />
       <Connect(StoreStockBadge)
         currentStoreStock={
-          Immutable.Map {
-            storeStock: 10,
-            stockStatus: "availableOnOrder",
+          Object {
+            "stockStatus": "availableOnOrder",
+            "storeStock": 10,
           }
         }
       />
