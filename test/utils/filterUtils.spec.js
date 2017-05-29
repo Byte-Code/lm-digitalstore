@@ -2,35 +2,19 @@ import { fromJS, List, Set } from 'immutable';
 
 import * as filterUtils from '../../app/utils/filterUtils';
 
-describe('buildAid', () => {
-  it('should return a decoded string when the input is valid', () => {
-    const query = { aids: 'aid1%3D1' };
-    const result = 'aid1=1';
-    expect(filterUtils.buildAid(query)).toEqual(result);
-  });
-
-  it('should return an empty string when the input is invalid', () => {
-    const query = {};
-    const result = '';
-    expect(filterUtils.buildAid(query)).toEqual(result);
-  });
-});
-
 describe('filterProductsByAid', () => {
   it('should return null when sellingAids are undefined', () => {
     const sellingAids = undefined;
     const activeAid = 'aid';
     const result = null;
-    expect(filterUtils.filterProductsByAid(sellingAids, activeAid))
-      .toEqual(result);
+    expect(filterUtils.filterProductsByAid(sellingAids, activeAid)).toEqual(result);
   });
 
   it('should return null when sellingAids are empty', () => {
     const sellingAids = List();
     const activeAid = 'aid';
     const result = null;
-    expect(filterUtils.filterProductsByAid(sellingAids, activeAid))
-      .toEqual(result);
+    expect(filterUtils.filterProductsByAid(sellingAids, activeAid)).toEqual(result);
   });
 
   it('should return null when no activeAid is provided', () => {
@@ -41,8 +25,7 @@ describe('filterProductsByAid', () => {
     ]);
     const activeAid = undefined;
     const result = null;
-    expect(filterUtils.filterProductsByAid(sellingAids, activeAid))
-      .toEqual(result);
+    expect(filterUtils.filterProductsByAid(sellingAids, activeAid)).toEqual(result);
   });
 
   it('should return a set containing only the products relative the activeId when input is valid', () => {
@@ -53,23 +36,7 @@ describe('filterProductsByAid', () => {
     ]);
     const activeAid = 'aid2';
     const result = fromJS([0, 1, 9]).toSet();
-    expect(filterUtils.filterProductsByAid(sellingAids, activeAid))
-      .toEqual(result);
-  });
-});
-
-
-describe('buildFilters', () => {
-  it('should return an empty List when input is invalid', () => {
-    const query = {};
-    const result = List();
-    expect(filterUtils.buildFilters(query)).toEqual(result);
-  });
-
-  it('should return a list containing all the decoded filters when input is valid', () => {
-    const query = { filters: 'filter1%3D1%26filter2%3D2%26filter3%3D3' };
-    const result = fromJS(['filter1=1', 'filter2=2', 'filter3=3']);
-    expect(filterUtils.buildFilters(query)).toEqual(result);
+    expect(filterUtils.filterProductsByAid(sellingAids, activeAid)).toEqual(result);
   });
 });
 
@@ -128,7 +95,6 @@ describe('filterProducts', () => {
     expect(filterUtils.filterProducts(filterGroups, activeFilters)).toEqual(result);
   });
 
-
   it('should return null no active filters are provided', () => {
     const filterGroups = fromJS([
       {
@@ -151,20 +117,6 @@ describe('filterProducts', () => {
   });
 });
 
-describe('buildAvailability', () => {
-  it('should return true when the filter is set', () => {
-    const query = { availability: 'true' };
-    const result = true;
-    expect(filterUtils.buildAvailability(query)).toEqual(result);
-  });
-
-  it('should return false when the filter is not set', () => {
-    const query = {};
-    const result = false;
-    expect(filterUtils.buildAvailability(query)).toEqual(result);
-  });
-});
-
 describe('filterByAvailability', () => {
   it('should return a set containing only the available productsID when productsList is defined and availability is active', () => {
     const productList = fromJS([
@@ -175,8 +127,9 @@ describe('filterByAvailability', () => {
     ]);
     const activeAvailability = true;
     const result = Set(['0', '3']);
-    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability))
-    .toEqual(result);
+    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability)).toEqual(
+      result
+    );
   });
 
   it('should return a set with all the productsID when productsList is defined and availability is false', () => {
@@ -188,8 +141,9 @@ describe('filterByAvailability', () => {
     ]);
     const activeAvailability = false;
     const result = Set(['0', '1', '2', '3']);
-    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability))
-    .toEqual(result);
+    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability)).toEqual(
+      result
+    );
   });
 
   it('should return an empty Set when productList is undefined', () => {
@@ -232,7 +186,6 @@ describe('filterCatalogue', () => {
     expect(filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)).toEqual(result);
   });
 });
-
 
 describe('isValidList', () => {
   it('should return true when input is valid', () => {

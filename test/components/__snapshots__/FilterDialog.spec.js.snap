@@ -146,12 +146,12 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
   <Connect(FilterButton)
     filterMap={
       Object {
-        "activeAid": "aid1",
-        "activeAvailability": null,
-        "activeFilters": Array [
+        "aid": "aid1",
+        "availability": null,
+        "categoryCode": "CAT123",
+        "filters": Array [
           "filter5",
         ],
-        "categoryCode": "CAT123",
       }
     }
     onApply={[Function]}
@@ -305,12 +305,12 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
   <Connect(FilterButton)
     filterMap={
       Object {
-        "activeAid": "aid1",
-        "activeAvailability": true,
-        "activeFilters": Array [
+        "aid": "aid1",
+        "availability": true,
+        "categoryCode": "CAT123",
+        "filters": Array [
           "filter5",
         ],
-        "categoryCode": "CAT123",
       }
     }
     onApply={[Function]}
@@ -464,13 +464,13 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
   <Connect(FilterButton)
     filterMap={
       Object {
-        "activeAid": "aid1",
-        "activeAvailability": null,
-        "activeFilters": Array [
+        "aid": "aid1",
+        "availability": null,
+        "categoryCode": "CAT123",
+        "filters": Array [
           "filter0",
           "filter5",
         ],
-        "categoryCode": "CAT123",
       }
     }
     onApply={[Function]}
@@ -624,10 +624,10 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
   <Connect(FilterButton)
     filterMap={
       Object {
-        "activeAid": "aid1",
-        "activeAvailability": false,
-        "activeFilters": Array [],
+        "aid": "aid1",
+        "availability": false,
         "categoryCode": "CAT123",
+        "filters": Array [],
       }
     }
     onApply={[Function]}

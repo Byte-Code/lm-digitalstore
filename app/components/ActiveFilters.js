@@ -49,7 +49,7 @@ export const ResetButton = styled.div`
   }
 `;
 
-const ActiveFilters = (props) => {
+const ActiveFilters = props => {
   const {
     filterMap,
     filterGroups,
@@ -59,8 +59,8 @@ const ActiveFilters = (props) => {
     handleOpen
   } = props;
 
-  const activeFilters = filterMap.get('activeFilters');
-  const activeAvailability = filterMap.get('activeAvailability');
+  const activeFilters = filterMap.get('filters');
+  const activeAvailability = filterMap.get('availability');
 
   if (activeFilters.isEmpty() && !activeAvailability) {
     return (
@@ -71,28 +71,30 @@ const ActiveFilters = (props) => {
   }
 
   const toTake = activeAvailability ? 2 : 3;
-  const activeFilterList = filterGroups.reduce((acc, val) =>
-    acc.push(val.get('filters').filter(f => activeFilters.includes(f.get('code'))))
-    , List()).filterNot(g => g.isEmpty()).flatten(true).take(toTake);
+  const activeFilterList = filterGroups
+    .reduce(
+      (acc, val) => acc.push(val.get('filters').filter(f => activeFilters.includes(f.get('code')))),
+      List()
+    )
+    .filterNot(g => g.isEmpty())
+    .flatten(true)
+    .take(toTake);
 
   return (
     <Wrapper bgColor="rgba(51, 51, 51, 0.8)">
-      {
-        activeFilterList.map(f => (
-          <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
-            <p>{f.get('name')}</p>
-          </Filter>))
-      }
-      { activeAvailability &&
-        (<Filter isActive onClick={toggleAvailability}>
+      {activeFilterList.map(f => (
+        <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
+          <p>{f.get('name')}</p>
+        </Filter>
+      ))}
+      {activeAvailability &&
+        <Filter isActive onClick={toggleAvailability}>
           <p>Disponibile</p>
-        </Filter>)
-      }
-      { activeFilters.size > toTake &&
-        (<Filter width="178px" onClick={handleOpen}>
+        </Filter>}
+      {activeFilters.size > toTake &&
+        <Filter width="178px" onClick={handleOpen}>
           <p>Visualizza altri filtri</p>
-        </Filter>)
-      }
+        </Filter>}
       <ResetButton onClick={resetFilters}>
         <p>Reset filtri</p>
       </ResetButton>

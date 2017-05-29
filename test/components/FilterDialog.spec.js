@@ -26,9 +26,9 @@ const filterGroups = fromJS([
   }
 ]);
 const filterMap = fromJS({
-  activeFilters: ['filter0', 'filter5'],
-  activeAvailability: null,
-  activeAid: 'aid1',
+  filters: ['filter0', 'filter5'],
+  availability: null,
+  aid: 'aid1',
   categoryCode: 'CAT123'
 });
 const result = shallow(
@@ -43,9 +43,9 @@ const result = shallow(
 describe('FilterDialog', () => {
   it('should initialize status based on filterMap', () => {
     const newState = {
-      activeAid: filterMap.get('activeAid'),
-      activeFilters: filterMap.get('activeFilters'),
-      activeAvailability: filterMap.get('activeAvailability'),
+      aid: filterMap.get('aid'),
+      filters: filterMap.get('filters'),
+      availability: filterMap.get('availability'),
       categoryCode: filterMap.get('categoryCode')
     };
     expect(result.state()).toEqual(newState);
@@ -59,9 +59,9 @@ describe('FilterDialog', () => {
 
   it('should change state when a filter is clicked', () => {
     const newState = {
-      activeAid: filterMap.get('activeAid'),
-      activeFilters: fromJS(['filter5']),
-      activeAvailability: filterMap.get('activeAvailability'),
+      aid: filterMap.get('aid'),
+      filters: fromJS(['filter5']),
+      availability: filterMap.get('availability'),
       categoryCode: filterMap.get('categoryCode')
     };
     result.find(Filter).at(0).simulate('click');
@@ -71,9 +71,9 @@ describe('FilterDialog', () => {
 
   it('should change state when availability is toggled', () => {
     const newState = {
-      activeAid: filterMap.get('activeAid'),
-      activeFilters: fromJS(['filter5']),
-      activeAvailability: true,
+      aid: filterMap.get('aid'),
+      filters: fromJS(['filter5']),
+      availability: true,
       categoryCode: filterMap.get('categoryCode')
     };
     result.find(Toggle).simulate('toggle');
@@ -83,9 +83,9 @@ describe('FilterDialog', () => {
 
   it('should reset filter when reset button is clicked', () => {
     const newState = {
-      activeAid: filterMap.get('activeAid'),
-      activeFilters: fromJS([]),
-      activeAvailability: false,
+      aid: filterMap.get('aid'),
+      filters: fromJS([]),
+      availability: false,
       categoryCode: filterMap.get('categoryCode')
     };
     result.find('#reset-filterDialog').simulate('click');

@@ -92,7 +92,7 @@ exports[`ActiveFilters should render a paragrapgh when no filters are active 1`]
 </styled.div>
 `;
 
-exports[`ActiveFilters should render any activeFilters 1`] = `
+exports[`ActiveFilters should render any filters 1`] = `
 <styled.div
   bgColor="rgba(51, 51, 51, 0.8)"
 >

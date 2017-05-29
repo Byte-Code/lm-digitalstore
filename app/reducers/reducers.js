@@ -8,6 +8,7 @@ import productReducer from './Product/productReducer';
 import catalogueReducer from './Catalogue/catalogueReducer';
 import storeCodeReducer from './StoreCode/storeCodeReducer';
 import storeReducer from './Store/storeReducer';
+import filtersReducer from './Filters/filtersReducer';
 
 const rootReducer = combineReducers({
   worldReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   catalogueReducer,
   storeCodeReducer,
   storeReducer,
+  filtersReducer,
   routing
 });
 

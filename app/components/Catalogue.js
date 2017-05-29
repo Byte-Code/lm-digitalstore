@@ -43,90 +43,31 @@ export default class Catalogue extends Component {
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     filterMap: ImmutablePropTypes.map.isRequired,
-    router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
-  }
+    toggleAid: PropTypes.func.isRequired,
+    toggleFilter: PropTypes.func.isRequired,
+    toggleAvailability: PropTypes.func.isRequired,
+    resetFilters: PropTypes.func.isRequired,
+    initFilters: PropTypes.func.isRequired,
+    applyFilters: PropTypes.func.isRequired
+  };
 
   static defaultProps = {
     categoryInfo: Map(),
     products: List()
-  }
+  };
 
   componentDidMount() {
-    const {
-      params: { categoryCode },
-      requestFetchCategory
-    } = this.props;
+    const { params: { categoryCode }, requestFetchCategory, initFilters } = this.props;
+    initFilters();
     requestFetchCategory(categoryCode);
   }
 
   componentWillReceiveProps(nextProps) {
-    const {
-      params: { categoryCode },
-      requestFetchCategory
-    } = nextProps;
+    const { params: { categoryCode }, requestFetchCategory, initFilters } = nextProps;
     if (categoryCode !== this.props.params.categoryCode) {
+      initFilters();
       requestFetchCategory(categoryCode);
     }
-  }
-
-  toggleAid = (newAid) => {
-    const { router, filterMap } = this.props;
-    const activeAid = filterMap.get('activeAid');
-    let newQuery;
-    if (activeAid === newAid) {
-      newQuery = '';
-    } else newQuery = encodeURIComponent(newAid);
-    router.push({
-      pathname: router.location.pathname,
-      query: Object.assign({}, router.location.query, {
-        aids: newQuery
-      })
-    });
-  }
-
-  toggleFilter = (newFilter) => {
-    const { router, filterMap } = this.props;
-    const activeFilters = filterMap.get('activeFilters');
-    let newFilters;
-    if (activeFilters.includes(newFilter)) {
-      newFilters = activeFilters.filterNot(f => f === newFilter);
-    } else newFilters = activeFilters.push(newFilter);
-    const newQuery = encodeURIComponent(newFilters.join('&'));
-    router.push({
-      pathname: router.location.pathname,
-      query: Object.assign({}, router.location.query, {
-        filters: newQuery
-      })
-    });
-  }
-
-  toggleAvailability = () => {
-    const { router } = this.props;
-    router.push({
-      pathname: router.location.pathname,
-      query: Object.assign({}, router.location.query, {
-        availability: false
-      })
-    });
-  }
-
-  applyFilters = (newFilters, newAvailability) => {
-    const { router } = this.props;
-    const newQuery = encodeURIComponent(newFilters.join('&'));
-    router.push({
-      pathname: router.location.pathname,
-      query: Object.assign({}, router.location.query, {
-        filters: newQuery,
-        availability: newAvailability
-      })
-    });
-  }
-
-  resetFilters = () => {
-    const { router } = this.props;
-    router.replace({
-      pathname: router.location.pathname
-    });
   }
 
   renderProducts() {
@@ -139,34 +80,39 @@ export default class Catalogue extends Component {
   }
 
   render() {
-    const { categoryInfo, filterMap } = this.props;
+    const {
+      categoryInfo,
+      filterMap,
+      toggleAid,
+      resetFilters,
+      toggleAvailability,
+      toggleFilter,
+      applyFilters
+    } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
     }
+
     const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
-    const activeAid = filterMap.get('activeAid');
+    const activeAid = filterMap.get('aid');
 
     return (
       <div>
         <Header>
           <h1>{catName}</h1>
         </Header>
-        <SellingAidsBadge
-          sellingAids={sellingAids}
-          onToggle={this.toggleAid}
-          activeAid={activeAid}
-        />
+        <SellingAidsBadge sellingAids={sellingAids} onToggle={toggleAid} activeAid={activeAid} />
         <FilterBar
           filterGroups={filterGroups}
-          resetFilters={this.resetFilters}
-          applyFilters={this.applyFilters}
+          resetFilters={resetFilters}
+          applyFilters={applyFilters}
           filterMap={filterMap}
-          toggleFilter={this.toggleFilter}
-          toggleAvailability={this.toggleAvailability}
+          toggleFilter={toggleFilter}
+          toggleAvailability={toggleAvailability}
         />
         <ProductSlider>
           {this.renderProducts()}

@@ -28,8 +28,8 @@ describe('ActiveFilters', () => {
 
   it('should render a paragrapgh when no filters are active', () => {
     const filterMap = fromJS({
-      activeFilters: [],
-      activeAvailability: null
+      filters: [],
+      availability: null
     });
     const result = shallow(
       <ActiveFilters
@@ -44,10 +44,10 @@ describe('ActiveFilters', () => {
     expect(result).toMatchSnapshot();
   });
 
-  it('should render any activeFilters', () => {
+  it('should render any filters', () => {
     const filterMap = fromJS({
-      activeFilters: ['filter0'],
-      activeAvailability: true
+      filters: ['filter0'],
+      availability: true
     });
     const result = shallow(
       <ActiveFilters
@@ -64,8 +64,8 @@ describe('ActiveFilters', () => {
 
   it('should call reset filters when reset button is clicked', () => {
     const filterMap = fromJS({
-      activeFilters: ['filter0'],
-      activeAvailability: true
+      filters: ['filter0'],
+      availability: true
     });
     const resetFiltersMock = jest.fn();
     const result = shallow(
@@ -84,8 +84,8 @@ describe('ActiveFilters', () => {
 
   it('should call toggleFilter when a filter is clicked', () => {
     const filterMap = fromJS({
-      activeFilters: ['filter0'],
-      activeAvailability: false
+      filters: ['filter0'],
+      availability: false
     });
     const toggleFilterMock = jest.fn();
     const result = shallow(
@@ -105,8 +105,8 @@ describe('ActiveFilters', () => {
 
   it('should call toggleAvailability when a availability filter is clicked', () => {
     const filterMap = fromJS({
-      activeFilters: [],
-      activeAvailability: true
+      filters: [],
+      availability: true
     });
     const toggleAvailabilityMock = jest.fn();
     const result = shallow(
@@ -126,8 +126,8 @@ describe('ActiveFilters', () => {
 
   it('should call handleOpen when showMore filter is clicked', () => {
     const filterMap = fromJS({
-      activeFilters: ['filter0', 'filter1', 'filter2', 'filter3'],
-      activeAvailability: false
+      filters: ['filter0', 'filter1', 'filter2', 'filter3'],
+      availability: false
     });
     const handleOpenMock = jest.fn();
     const result = shallow(

@@ -19,16 +19,18 @@ export function getOrderedProducts(state, categoryCode) {
 }
 
 export function getFilteredIDs(state, filterMap) {
+  const activeAid = filterMap.get('aid');
+  const activeFilters = filterMap.get('filters');
+  const activeAvailability = filterMap.get('availability');
   const categoryCode = filterMap.get('categoryCode');
-  const activeAid = filterMap.get('activeAid');
-  const activeFilters = filterMap.get('activeFilters');
-  const activeAvailability = filterMap.get('activeAvailability');
   const sellingAids = getSellingAids(state, categoryCode);
   const filterGroups = getFilters(state, categoryCode);
   const orderedProducts = getOrderedProducts(state, categoryCode);
   const idsByAids = filterUtils.filterProductsByAid(sellingAids, activeAid);
   const idsByFilters = filterUtils.filterProducts(filterGroups, activeFilters);
-  const idsByAvailability =
-  filterUtils.filterProductsByAvailability(orderedProducts, activeAvailability);
+  const idsByAvailability = filterUtils.filterProductsByAvailability(
+    orderedProducts,
+    activeAvailability
+  );
   return filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability);
 }

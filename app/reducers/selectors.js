@@ -5,6 +5,7 @@ import * as catalogueSelectors from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
 import getProductSelector from './Product/productSelectors';
+import * as filtersSelector from './Filters/filtersSelectors';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
@@ -30,8 +31,8 @@ export function getOrderedProducts(state, categoryCode) {
   return categorySelectors.getOrderedProducts(state.get('categoryReducer'), categoryCode);
 }
 
-export function getFilteredIDs(state, filterMap) {
-  return categorySelectors.getFilteredIDs(state.get('categoryReducer'), filterMap);
+export function getFilteredIDs(state, filterMap, categoryCode) {
+  return categorySelectors.getFilteredIDs(state.get('categoryReducer'), filterMap, categoryCode);
 }
 
 export function getProduct(state, productCode) {
@@ -56,4 +57,8 @@ export function getStoreName(state) {
 
 export function getNearbyStores(state) {
   return storeSelectors.getNearbyStores(state.get('storeReducer'));
+}
+
+export function getFilterMap(state) {
+  return filtersSelector.getFilterMap(state.get('filtersReducer'));
 }

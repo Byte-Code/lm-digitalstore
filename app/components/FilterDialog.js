@@ -105,47 +105,46 @@ export default class FilterDialog extends Component {
     handleClose: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
 
     const { filterMap } = props;
     this.state = {
-      activeAid: filterMap.get('activeAid'),
-      activeFilters: filterMap.get('activeFilters'),
-      activeAvailability: filterMap.get('activeAvailability'),
+      aid: filterMap.get('aid'),
+      filters: filterMap.get('filters'),
+      availability: filterMap.get('availability'),
       categoryCode: filterMap.get('categoryCode')
     };
   }
 
   applyAndClose = () => {
     const { applyFilters, handleClose } = this.props;
-    const { activeFilters, activeAvailability } = this.state;
-    applyFilters(activeFilters, activeAvailability);
+    applyFilters(fromJS(this.state));
     handleClose();
-  }
+  };
 
-  toggleFilter = (filterCode) => {
-    const { activeFilters } = this.state;
-    if (activeFilters.includes(filterCode)) {
-      return this.setState({ activeFilters: activeFilters.filterNot(f => f === filterCode) });
+  toggleFilter = filterCode => {
+    const { filters } = this.state;
+    if (filters.includes(filterCode)) {
+      return this.setState({ filters: filters.filterNot(f => f === filterCode) });
     }
-    return this.setState({ activeFilters: activeFilters.push(filterCode) });
-  }
+    return this.setState({ filters: filters.push(filterCode) });
+  };
 
   toggleAvailability = () => {
-    const { activeAvailability } = this.state;
-    return this.setState({ activeAvailability: !activeAvailability });
-  }
+    const { availability } = this.state;
+    return this.setState({ availability: !availability });
+  };
 
   resetFilters = () => {
-    this.setState({ activeFilters: List(), activeAvailability: false });
-  }
+    this.setState({ filters: List(), availability: false });
+  };
 
   renderFilterGroups = () => {
     const { filterGroups } = this.props;
-    const { activeFilters } = this.state;
+    const { filters } = this.state;
     return filterGroups.map(g => (
       <GroupWrapper key={g.get('code')}>
         <GroupTitle>{g.get('group')}</GroupTitle>
@@ -154,7 +153,7 @@ export default class FilterDialog extends Component {
             <Filter
               key={f.get('code')}
               onClick={() => this.toggleFilter(f.get('code'))}
-              isActive={activeFilters.contains(f.get('code'))}
+              isActive={filters.contains(f.get('code'))}
             >
               <p>{f.get('name')}</p>
             </Filter>
@@ -162,13 +161,13 @@ export default class FilterDialog extends Component {
         </FilterWrapper>
       </GroupWrapper>
     ));
-  }
+  };
 
   render() {
     const { handleClose } = this.props;
-    const { activeAvailability } = this.state;
-    const availabilityLabel = activeAvailability ? 'Disponibile' : 'Indifferente';
-    const labelColor = activeAvailability ? '#67cb33' : '#fff';
+    const { availability } = this.state;
+    const availabilityLabel = availability ? 'Disponibile' : 'Indifferente';
+    const labelColor = availability ? '#67cb33' : '#fff';
     const temporaryFilterMap = fromJS(this.state);
 
     return (
@@ -202,7 +201,7 @@ export default class FilterDialog extends Component {
             trackStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
             thumbStyle={{ width: 30, height: 30, backgroundColor: '#e4e4e4', top: 10, left: 10 }}
             thumbSwitchedStyle={{ backgroundColor: '#67cb33', top: 10, left: 65 }}
-            toggled={activeAvailability}
+            toggled={availability}
             onToggle={this.toggleAvailability}
             labelStyle={{
               marginLeft: 50,
@@ -217,10 +216,7 @@ export default class FilterDialog extends Component {
         <Groups>
           {this.renderFilterGroups()}
         </Groups>
-        <FilterButton
-          onApply={this.applyAndClose}
-          filterMap={temporaryFilterMap}
-        />
+        <FilterButton onApply={this.applyAndClose} filterMap={temporaryFilterMap} />
       </Wrapper>
     );
   }
