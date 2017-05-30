@@ -135,7 +135,7 @@ export default class ProductInfoCAB extends Component {
           {this.renderBlocks()}
         </Row>
         <Card TitleComponent={CardTitleComponent}>
-          <Row pTop="31px" bgColor="#f7f7f7">
+          <Row Card="31px" backgroundColor="#f7f7f7">
             <Column>
               {this.renderDescriptions(0)}
             </Column>
