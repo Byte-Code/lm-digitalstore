@@ -32,11 +32,11 @@ autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
 });
 
-autoUpdater.on('update-available', (ev, info) => {
+autoUpdater.on('update-available', () => {
   sendStatusToWindow('Update available.');
 });
 
-autoUpdater.on('update-not-available', (ev, info) => {
+autoUpdater.on('update-not-available', () => {
   sendStatusToWindow('Update not available.');
 });
 
@@ -45,11 +45,11 @@ autoUpdater.on('error', (ev, err) => {
   sendStatusToWindow('Error in auto-updater.');
 });
 
-autoUpdater.on('download-progress', (ev, progressObj) => {
+autoUpdater.on('download-progress', () => {
   sendStatusToWindow('Download progress...');
 });
 
-autoUpdater.on('update-downloaded', (ev, info) => {
+autoUpdater.on('update-downloaded', () => {
   sendStatusToWindow('Update downloaded; will install in 5 seconds');
 });
 
@@ -94,6 +94,7 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
+  // comment this line before pre-release
   if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
   }

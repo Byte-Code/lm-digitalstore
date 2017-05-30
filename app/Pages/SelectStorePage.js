@@ -1,43 +1,43 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import Page from '../components/Page';
 import { setStoreCode } from '../actions/storeActions';
 import stores from '../../mocks/stores';
 
-const Title = styled.h1`
-  padding-top: 120px;
-  color: rgb(255, 64, 129);
-  text-align: center;
-  font-size: 48px;
-  text-transform: uppercase;
-`;
+const Title = glamorous.h1({
+  paddingTop: '120px',
+  color: 'rgb(255, 64, 129)',
+  textAlign: 'center',
+  fontSize: '48px',
+  textTransform: 'uppercase'
+});
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column'
+});
 
-const Buttons = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 600px;
-  justify-content: space-between;
-  margin: 50px 0;
-`;
+const Buttons = glamorous.div({
+  display: 'flex',
+  flexWrap: 'wrap',
+  width: '600px',
+  justifyContent: 'space-between',
+  margin: '50px 0'
+});
 
 class SelectStorePage extends Component {
   static propTypes = {
     setStoreCode: PropTypes.func.isRequired
-  }
+  };
 
   state = {
     storeCode: null
-  }
+  };
 
   handleChange = (value) => this.setState({ storeCode: value });
 

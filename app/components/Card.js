@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import styled from 'styled-components';
+import glamorous, { Div } from 'glamorous';
 
-const CardBody = styled.div`
-  display: ${props => props.isVisible};
-`;
-
-export const TitleWrapper = styled.div`
-`;
+const CardBody = glamorous.div(
+  (props) => ({
+    display: props.isVisible
+  })
+);
 
 export default class Card extends Component {
   static propTypes = {
     TitleComponent: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-  }
+    children: PropTypes.node.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -40,9 +39,9 @@ export default class Card extends Component {
 
     return (
       <div>
-        <TitleWrapper onClick={this.toggleCard.bind(this)}>
+        <Div onClick={this.toggleCard.bind(this)}>
           <TitleComponent expanded={expanded} />
-        </TitleWrapper>
+        </Div>
         <CardBody
           isVisible={isVisible}
           className="animated fadeIn"

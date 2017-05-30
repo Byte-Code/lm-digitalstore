@@ -1,32 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
 import FilterDialog from './FilterDialog';
 import ActiveFilters from './ActiveFilters';
 
-const Wrapper = styled.div`
-  display: flex;
-  height: 71px;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  height: '71px'
+});
 
-export const Button = styled.div`
-  width: 190px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(51, 51, 51, 0.8);
-  cursor: pointer;
-  &>p {
-    font-size: 20px;
-    line-height: 32px;
-    font-family: LeroyMerlinSans Light;
-    margin-left: 12px;
-    color: #fff;
+export const Button = glamorous.div({
+  width: '190px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'rgba(51, 51, 51, 0.8)',
+  cursor: 'pointer',
+  '&>p': {
+    fontSize: '20px',
+    lineHeight: '32px',
+    fontFamily: 'LeroyMerlinSans Light',
+    marginLeft: '12px',
+    color: '#fff'
   }
-`;
+});
 
 export default class FilterBar extends Component {
   static propTypes = {
@@ -36,7 +36,7 @@ export default class FilterBar extends Component {
     toggleFilter: PropTypes.func.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired,
     toggleAvailability: PropTypes.func.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -47,11 +47,11 @@ export default class FilterBar extends Component {
 
   handleOpen = () => {
     this.setState({ open: true });
-  }
+  };
 
   handleClose = () => {
     this.setState({ open: false });
-  }
+  };
 
   // TODO separate dialog logic into dialog component?
   render() {

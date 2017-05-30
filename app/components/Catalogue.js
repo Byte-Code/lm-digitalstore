@@ -2,39 +2,39 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import { Map, List } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
-const Header = styled.div`
-  width: 100%;
-  height: 184px;
-  background: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &>h1 {
-    font-size: 48px;
+const Header = glamorous.div({
+  width: '100%',
+  height: '184px',
+  background: '#f7f7f7',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '&>h1': {
+    fontSize: '48px'
   }
-`;
+});
 
-const ProductSlider = styled.div`
-  margin: 50px 40px;
-  display: flex;
-  overflow-x: auto;
-  flex-flow: column wrap;
-  height: 1246px;
-  &>a {
-    width: 405px;
-    height: 593px;
-    margin-right: 20px;
-    &:nth-child(odd) {
-      margin-bottom: 60px;
+const ProductSlider = glamorous.div({
+  margin: '50px 40px',
+  display: 'flex',
+  overflowX: 'auto',
+  flexFlow: 'column wrap',
+  height: '1246px',
+  '&>a': {
+    width: '405px',
+    height: '593px',
+    marginRight: '20px',
+    '&:nth-child(odd)': {
+      marginBottom: '60px'
     }
   }
-`;
+});
 
 export default class Catalogue extends Component {
   static propTypes = {
@@ -44,12 +44,12 @@ export default class Catalogue extends Component {
     products: ImmutablePropTypes.list,
     filterMap: ImmutablePropTypes.map.isRequired,
     router: PropTypes.shape({ location: PropTypes.object.isRequired }).isRequired,
-  }
+  };
 
   static defaultProps = {
     categoryInfo: Map(),
     products: List()
-  }
+  };
 
   componentDidMount() {
     const {
@@ -82,7 +82,7 @@ export default class Catalogue extends Component {
         aids: newQuery
       })
     });
-  }
+  };
 
   toggleFilter = (newFilter) => {
     const { router, filterMap } = this.props;
@@ -98,7 +98,7 @@ export default class Catalogue extends Component {
         filters: newQuery
       })
     });
-  }
+  };
 
   toggleAvailability = () => {
     const { router } = this.props;
@@ -108,7 +108,7 @@ export default class Catalogue extends Component {
         availability: false
       })
     });
-  }
+  };
 
   applyFilters = (newFilters, newAvailability) => {
     const { router } = this.props;
@@ -120,14 +120,14 @@ export default class Catalogue extends Component {
         availability: newAvailability
       })
     });
-  }
+  };
 
   resetFilters = () => {
     const { router } = this.props;
     router.replace({
       pathname: router.location.pathname
     });
-  }
+  };
 
   renderProducts() {
     const { products } = this.props;

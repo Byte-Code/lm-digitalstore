@@ -1,4 +1,4 @@
-import { getStoreCodeFromIpAddress } from './store-code-utils';
+import { getStoreCodeFromIpAddress } from './../app/utils/store-code-utils';
 
 const testStores = [
   { location: 'Lissone ', storeCode: '16', ipAddress: '10.126.33.129' },

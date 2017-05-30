@@ -1,52 +1,52 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: auto;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  overflow: 'auto'
+});
 
-const WorldName = styled.h3`
-  font-family: LeroyMerlinSans Italic;
-  font-size: 30px;
-  width: 136px;
-  line-height: 32px;
-  margin: 46px 0 30px;
-`;
+const WorldName = glamorous.h3({
+  fontFamily: 'LeroyMerlinSans Italic',
+  fontSize: '30px',
+  width: '136px',
+  lineHeight: '32px',
+  margin: '46px 0 30px'
+});
 
-const Family = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 190px;
-  height: 250px;
-  box-shadow: 0 0 8px 0 #e4e4e4;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
+const Family = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '190px',
+  height: '250px',
+  boxShadow: '0 0 8px 0 #e4e4e4',
+  marginBottom: '20px',
+  cursor: 'pointer'
+});
 
-const ImageWrapper = styled.img`
-  width: 190px;
-  height: 190px;
-`;
+const ImageWrapper = glamorous.img({
+  width: '190px',
+  height: '190px'
+});
 
-const FamilyName = styled.div`
-  height: 60px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  &>p {
-    text-transform: uppercase;
-    padding-left: 10px;
-    padding-right: 35px;
-    font-family: LeroyMerlinSans Bold;
-    font-size: 20px;
-    line-height: 22px;
+const FamilyName = glamorous.div({
+  height: '60px',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  '&>p': {
+    textTransform: 'uppercase',
+    paddingLeft: '10px',
+    paddingRight: '35px',
+    fontFamily: 'LeroyMerlinSans Bold',
+    fontSize: '20px',
+    lineHeight: '22px'
   }
-`;
+});
 
 export default class FamilySideBar extends Component {
   static propTypes = {
@@ -54,11 +54,11 @@ export default class FamilySideBar extends Component {
     world: ImmutablePropTypes.map,
     closeMenu: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired
-  }
+  };
 
   static defaultProps = {
     world: Map()
-  }
+  };
 
   componentDidMount() {
     this.props.requestFetchWorld();

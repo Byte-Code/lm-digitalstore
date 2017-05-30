@@ -1,50 +1,50 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import IconSelector from './Icons';
 
-const Wrapper = styled.div`
-  width: 235px;
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+const Wrapper = glamorous.div({
+  width: '235px',
+  height: '280px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
+});
 
-const Day = styled.div`
-  font-size: 24px;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-`;
+const Day = glamorous.div({
+  fontSize: '24px',
+  width: '100%',
+  textAlign: 'center',
+  color: '#fff',
+  textTransform: 'uppercase'
+});
 
-const Temp = styled.div`
-  display: flex;
-  flex-direction: column;
-  &>p {
-    text-align: center;
+const Temp = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  '&>p': {
+    textAlign: 'center'
   }
-`;
+});
 
-const GreenText = styled.span`
-  font-size: 20px;
-  text-transform: uppercase;
-  color: #67cb33;
-  margin-right: 10px;
-`;
+const GreenText = glamorous.span({
+  fontSize: '20px',
+  textTransform: 'uppercase',
+  color: '#67cb33',
+  marginRight: '10px'
+});
 
-const WhiteText = styled.span`
-  font-size: 40px;
-  color: #fff;
-`;
+const WhiteText = glamorous.span({
+  fontSize: '40px',
+  color: '#fff'
+});
 
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const IconWrapper = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+});
 
 const ForecastBadge = ({ dailyForecast }) => {
   const dt = dailyForecast.get('dt');

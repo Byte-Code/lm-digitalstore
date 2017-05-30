@@ -1,27 +1,27 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import CheckIcon from 'material-ui/svg-icons/navigation/check';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 
 import { getStockLabel } from '../utils/utils';
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  alignItems: 'center'
+});
 
-const Availability = styled.div`
-  display: flex;
-  flex-direction: column;
-  &>p {
-    font-size: 16px;
-    margin-left: 10px;
-    &:first-child {
-      font-family: LeroyMerlinSans Bold;
+const Availability = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  '&>p': {
+    fontSize: '16px',
+    marginLeft: '10px',
+    '&:first-child': {
+      fontFamily: 'LeroyMerlinSans Bold'
     }
   }
-`;
+});
 
 function getStockIcon(stock, stockStatus) {
   if (stock > 0) {

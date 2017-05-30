@@ -1,42 +1,37 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
-export const Wrapper = styled.div`
-  width: ${props => props.width}px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  box-shadow: 0 0 8px 0 #e4e4e4;
-  cursor: pointer;
-`;
+export const Wrapper = glamorous.div(({ width }) => ({
+  width: `${width}px`,
+  display: 'flex',
+  flexDirection: 'column',
+  marginBottom: '20px',
+  boxShadow: '0 0 8px 0 #e4e4e4',
+  cursor: 'pointer'
+}));
 
-export const ImageWrapper = styled.img`
-  height: ${props => props.height}px;
-`;
 
-const NameWrapper = styled.div`
-  width: 100%;
-  background-color: #ffffff;
-  padding: 10px 15px 15px;
-  height: 70px;
-`;
+export const ImageWrapper = glamorous.img(({ height }) => ({
+  height: `${height}px`
+}));
 
-const FamilyName = styled.div`
-  height: 28px;
-  font-family: LeroyMerlinSans Bold;
-  font-size: 20px;
-  line-height: 1.4;
-  text-transform: uppercase;
-`;
 
-// const ItemCount = styled.div`
-//  height: 20px;
-//  font-size: 16px;
-//  line-height: 1.4;
-//  font-family: LeroyMerlinSans Light-Italic;
-// `;
+const NameWrapper = glamorous.div({
+  width: '100%',
+  backgroundColor: '#ffffff',
+  padding: '10px 15px 15px',
+  height: '70px'
+});
+
+const FamilyName = glamorous.div({
+  height: '28px',
+  fontFamily: 'LeroyMerlinSans Bold',
+  fontSize: '20px',
+  lineHeight: '1.4',
+  textTransform: 'uppercase'
+});
 
 export default class FamilyBadge extends Component {
   static propTypes = {

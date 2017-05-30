@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
+
 
 moment.locale('it');
 
-const Time = styled.div`
-  font-size: 48px;
-  color: #fff;
-  font-family: LeroyMerlinSans Bold;
-  text-transform: uppercase;
-`;
+const Time = glamorous.div({
+  fontSize: '48px',
+  color: '#fff',
+  fontFamily: 'LeroyMerlinSans Bold',
+  textTransform: 'uppercase'
+});
 
 export default class DateBadge extends Component {
   constructor(props) {

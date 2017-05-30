@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { fromJS } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import MarketingFlag from './MarketingFlag';
 import AvailabilityButton from './AvailabilityButton';
@@ -9,37 +9,37 @@ import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
 import PurchaseDialog from '../components/PurchaseDialog';
 
-const Wrapper = styled.div`
-  width: 255px;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background-color: #f7f7f7;
-`;
+const Wrapper = glamorous.div({
+  width: '255px',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '10px',
+  backgroundColor: '#f7f7f7'
+});
 
-const Divider = styled.div`
-  border: 1px dashed #333333;
-  width: 100%;
-  margin: 15px 0;
-`;
+const Divider = glamorous.div({
+  border: '1px dashed #333333',
+  width: '100%',
+  margin: '15px 0'
+});
 
-const Button = styled.div`
-  width: '100%';
-  text-transform: uppercase;
-  background: ${props => props.bgColor};
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-  box-shadow:  0 0 8px 0 rgba(51, 51, 51, 0.1);
-  cursor: pointer;
-`;
+const Button = glamorous.div(({ background }) => ({
+  width: '100%',
+  textTransform: 'uppercase',
+  background,
+  height: '60px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  color: '#fff',
+  boxShadow: '0 0 8px 0 rgba(51, 51, 51, 0.1)',
+  cursor: 'pointer'
+}));
 
-const StoreStockWrapper = styled.div`
-  margin-bottom: 20px;
-`;
+const StoreStockWrapper = glamorous.div({
+  marginBottom: '20px'
+});
 
 export default class ProductInfoBadge extends Component {
   static propTypes = {
@@ -52,14 +52,14 @@ export default class ProductInfoBadge extends Component {
     productSlug: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired
-  }
+  };
 
   static defaultProps = {
     currentStoreStock: fromJS({
       storeStock: 0,
       stockStatus: 'notAvailable'
     })
-  }
+  };
 
   render() {
     const {
@@ -97,7 +97,7 @@ export default class ProductInfoBadge extends Component {
           productCode={productCode}
           productSlug={productSlug}
         >
-          <Button bgColor="#67cb33">
+          <Button background="#67cb33">
             Acquista online
           </Button>
         </PurchaseDialog>

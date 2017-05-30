@@ -1,3 +1,4 @@
+/* eslint-disable */
 export function getCurrentPath(state) {
   return state.getIn([
     'routing',
@@ -5,3 +6,4 @@ export function getCurrentPath(state) {
     'pathname'
   ]);
 }
+/* eslint-disable */

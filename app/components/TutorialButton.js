@@ -1,35 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
-import styled from 'styled-components';
+import glamorous, { Div } from 'glamorous';
 
 import CloseButton from './CloseButton';
 
-export const Wrapper = styled.div`
-`;
+const Slide = glamorous.div({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: '65px',
+  marginLeft: '-35px'
+});
 
-const Slide = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 65px;
-  margin-left: -35px;
-`;
-
-const Img = styled.img`
-  display: block;
-  width: 980px;
-  height: 1420px;
-`;
+const Img = glamorous.img({
+  display: 'block',
+  width: '980px',
+  height: '1420px'
+});
 
 class TutorialButton extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired
-  }
+  };
 
   state = {
-    open: false,
-  }
+    open: false
+  };
 
   getSlickSettings = () => ({
     arrows: false,
@@ -38,24 +35,25 @@ class TutorialButton extends Component {
     initialSlide: 0,
     infinite: false,
     variableWidth: true
-  })
+  });
 
   closeDialog = () => {
     this.setState({
       open: false
     });
-  }
+  };
 
   openDialog = () => {
     this.setState({
       open: true
     });
-  }
+  };
 
   render() {
+    /* eslint-disable */
     const settings = this.getSlickSettings();
     return (
-      <Wrapper onClick={this.openDialog}>
+      <Div onClick={this.openDialog}>
         {this.props.children}
         <Dialog
           modal={false}
@@ -76,8 +74,9 @@ class TutorialButton extends Component {
             <div><Slide><Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" /></Slide></div>
           </Slick>
         </Dialog>
-      </Wrapper>
+      </Div>
     );
+    /* eslint-disable */
   }
 }
 

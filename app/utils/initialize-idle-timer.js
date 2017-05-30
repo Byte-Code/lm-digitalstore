@@ -1,5 +1,5 @@
 import idleTimer from './idle-timer';
-import { startIdleTimer, resetIdleTimer, idleTimerCompleted } from '../actions/idleTimerActions';
+import { startIdleTimer, /* resetIdleTimer, */ idleTimerCompleted } from '../actions/idleTimerActions';
 
 const TEN_MINUTES = 60 * 1000 * 10;
 
@@ -12,15 +12,15 @@ export default function initializeIdleTimer(store) {
     store.dispatch(idleTimerCompleted());
   }
 
-  function onTimerReset() {
+  /* function onTimerReset() {
     store.dispatch(resetIdleTimer());
-  }
+  } */
 
   idleTimer.init(
     TEN_MINUTES,
     onTimerStart,
-    onTimerComplete,
-    //onTimerReset
-    //onTimerTick
+    onTimerComplete
+    // onTimerReset
+    // onTimerTick
   );
 }

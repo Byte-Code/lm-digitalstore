@@ -1,52 +1,49 @@
 import React, { Component, PropTypes } from 'react';
 import QRCode from 'qrcode.react';
-import styled from 'styled-components';
+import glamorous, { Div } from 'glamorous';
 import Dialog from 'material-ui/Dialog';
 
 import CloseButton from './CloseButton';
 
-export const Wrapper = styled.div`
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 114px;
-  &>p {
-    font-size: 14px;
-    text-align: center;
-    color: #67cb33;
-    border-bottom: 2px solid #67cb33;
-    padding-bottom: 9px;
-    text-transform: uppercase;
+const Header = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '114px',
+  '&>p': {
+    fontSize: '14px',
+    textAlign: 'center',
+    color: '#67cb33',
+    borderBottom: '2px solid #67cb33',
+    paddingBottom: '9px',
+    textTransform: 'uppercase'
   }
-`;
+});
 
-const Title = styled.h1`
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: 13px;
-`;
+const Title = glamorous.h1({
+  fontSize: '48px',
+  textAlign: 'center',
+  marginBottom: '13px'
+});
 
-const Subtitle = styled.p`
-  font-size: 14px;
-  font-family: LeroyMerlinSans Light-Italic;
-  text-align: center;
-  margin-bottom: 57px;
-`;
+const Subtitle = glamorous.p({
+  fontSize: '14px',
+  fontFamily: 'LeroyMerlinSans Light-Italic',
+  textAlign: 'center',
+  marginBottom: '57px'
+});
 
-const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+const Content = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+});
 
 export default class PurchaseDialog extends Component {
   static propTypes = {
     productCode: PropTypes.string.isRequired,
     productSlug: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -57,18 +54,18 @@ export default class PurchaseDialog extends Component {
 
   handleOpen = () => {
     this.setState({ open: true });
-  }
+  };
 
   handleClose = () => {
     this.setState({ open: false });
-  }
+  };
 
   render() {
     const { children, productCode, productSlug } = this.props;
     const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p`;
 
     return (
-      <Wrapper onClick={this.handleOpen}>
+      <Div onClick={this.handleOpen}>
         {children}
         <Dialog
           modal={false}
@@ -92,7 +89,7 @@ export default class PurchaseDialog extends Component {
             />
           </Content>
         </Dialog>
-      </Wrapper>
+      </Div>
     );
   }
 }

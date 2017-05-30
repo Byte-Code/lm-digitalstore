@@ -24,7 +24,8 @@
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
     "cleanup": "mop -v",
-    "release": "npm run build && build --win -p always"
+    "release": "npm run build && build --win -p always",
+    "validate": "npm ls"
   },
   "browserslist": "electron 1.4",
   "build": {
@@ -202,6 +203,7 @@
     "immutable": "4.0.0-rc.2",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
+    "precommit-hook": "^3.0.0",
     "qrcode.react": "^0.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -214,11 +216,13 @@
     "redux-immutable": "^3.1.0",
     "redux-mock-store": "^1.2.3",
     "redux-saga": "^0.14.3",
-    "source-map-support": "^0.4.10",
-    "styled-components": "^1.4.6"
+    "source-map-support": "^0.4.10"
   },
   "devEngines": {
     "node": ">=6.x",
     "npm": ">=3.x"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
