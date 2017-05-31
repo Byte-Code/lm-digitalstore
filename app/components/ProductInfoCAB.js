@@ -49,7 +49,7 @@ const CardTitle = glamorous.div({
   '&>h3': {
     marginLeft: '20px',
     fontSize: '16px',
-    lineHeight: '32px'
+    lineHeight: '50px'
   }
 });
 
