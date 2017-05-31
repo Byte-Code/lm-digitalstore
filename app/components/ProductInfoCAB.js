@@ -97,8 +97,8 @@ export default class ProductInfoCAB extends Component {
 
     return blocks.map(block => (
       <Column key={block.get('title')}>
-        <Section fSize="18px">
-          <Title fSize="20px">{titleFormatter(block.get('title'))}</Title>
+        <Section fontSize="18px">
+          <Title fontSize="20px">{titleFormatter(block.get('title'))}</Title>
           {block.get('customerChooses').map(c =>
             <p key={c.get('description')}>{c.get('description')}</p>)}
         </Section>
