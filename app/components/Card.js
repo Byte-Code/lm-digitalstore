@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import glamorous, { Div } from 'glamorous';
 
-const CardBody = glamorous.div(
-  (props) => ({
-    display: props.isVisible
-  })
-);
+const CardBody = glamorous.div(props => ({
+  display: props.isVisible
+}));
 
 export default class Card extends Component {
   static propTypes = {
@@ -42,10 +41,7 @@ export default class Card extends Component {
         <Div onClick={this.toggleCard.bind(this)}>
           <TitleComponent expanded={expanded} />
         </Div>
-        <CardBody
-          isVisible={isVisible}
-          className="animated fadeIn"
-        >
+        <CardBody isVisible={isVisible} className="animated fadeIn">
           {children}
         </CardBody>
       </div>

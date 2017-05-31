@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import glamorous from 'glamorous';
 
-
 moment.locale('it');
 
 const Time = glamorous.div({

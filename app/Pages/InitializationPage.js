@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -37,7 +38,6 @@ class InitializationPage extends Component {
   componentDidMount() {
     this.startIpCheck();
   }
-
 
   componentDidUpdate() {
     const { ipAddress } = this.state;

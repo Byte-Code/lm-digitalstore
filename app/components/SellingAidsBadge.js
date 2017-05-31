@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import glamorous from 'glamorous';
@@ -57,12 +58,12 @@ export default class SellingAidsBadge extends Component {
     sellingAids: ImmutablePropTypes.map,
     onToggle: PropTypes.func.isRequired,
     activeAid: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     sellingAids: Map(),
     activeAid: ''
-  }
+  };
 
   renderAids() {
     const { sellingAids, onToggle, activeAid } = this.props;
@@ -73,11 +74,7 @@ export default class SellingAidsBadge extends Component {
       const isActive = aidCode === activeAid;
 
       return (
-        <Filter
-          key={aidCode}
-          onClick={() => onToggle(aidCode)}
-          isActive={isActive}
-        >
+        <Filter key={aidCode} onClick={() => onToggle(aidCode)} isActive={isActive}>
           <p>{aid.get('name')}</p>
         </Filter>
       );

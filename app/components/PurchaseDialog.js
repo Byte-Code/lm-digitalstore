@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import glamorous, { Div } from 'glamorous';
 import Dialog from 'material-ui/Dialog';
@@ -83,10 +84,7 @@ export default class PurchaseDialog extends Component {
             Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
           </Subtitle>
           <Content>
-            <QRCode
-              value={url}
-              size={200}
-            />
+            <QRCode value={url} size={200} />
           </Content>
         </Dialog>
       </Div>

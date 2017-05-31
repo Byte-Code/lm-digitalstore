@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 import glamorous from 'glamorous';
@@ -51,7 +52,7 @@ const Address = glamorous.div({
   marginBottom: '20px',
   '&>p': {
     fontSize: '15px',
-    color: '#333333',
+    color: '#333333'
   }
 });
 

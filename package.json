@@ -25,7 +25,8 @@
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "release": "npm run build && build --win -p always"
+    "release": "npm run build && build --win -p always",
+    "validate": "npm ls"
   },
   "browserslist": "electron 1.4",
   "build": {
@@ -152,7 +153,7 @@
     "electron-builder": "^13.3.2",
     "electron-devtools-installer": "^2.0.1",
     "enzyme": "^2.7.1",
-    "eslint": "^3.14.0",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-formatter-pretty": "^1.1.0",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -172,6 +173,7 @@
     "jsdom": "^9.9.1",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
+    "prop-types": "^15.5.10",
     "react-addons-test-utils": "^15.4.2",
     "react-immutable-proptypes": "^2.1.0",
     "react-tap-event-plugin": "^2.0.1",

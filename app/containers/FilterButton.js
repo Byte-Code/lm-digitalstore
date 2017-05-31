@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import glamorous from 'glamorous';
 
@@ -24,15 +25,10 @@ const ApplyButton = glamorous.div(({ fontFamily, fontSize, textDecoration, isAct
 }));
 
 const FilterButton = ({ onApply, result }) => (
-  <ApplyButton
-    fontSize="20px"
-    onClick={result > 0 ? onApply : () => null}
-    isActive={result > 0}
-  >
+  <ApplyButton fontSize="20px" onClick={result > 0 ? onApply : () => null} isActive={result > 0}>
     <p>{`Vedi tutti i ${result} risultati`}</p>
   </ApplyButton>
-  );
-
+);
 
 FilterButton.propTypes = {
   onApply: PropTypes.func.isRequired,

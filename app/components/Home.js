@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import glamorous from 'glamorous';
@@ -109,8 +110,10 @@ export default class Home extends Component {
           <img src={LogoLM} alt="logo" />
         </Logo>
         <WorldTitle>
-          <h1>Esplora le soluzioni Leroy Merlin per
-          <span>&nbsp;{worldName}</span></h1>
+          <h1>
+            Esplora le soluzioni Leroy Merlin per
+            <span>&nbsp;{worldName}</span>
+          </h1>
         </WorldTitle>
         <GridWrapper>
           <Row>

@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
@@ -80,4 +79,3 @@ MarketingBadge.propTypes = {
 export default MarketingBadge;
 
 /* eslint-disable */
-

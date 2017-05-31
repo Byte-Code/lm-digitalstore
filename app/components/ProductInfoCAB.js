@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
 import { List } from 'immutable';
@@ -99,8 +100,9 @@ export default class ProductInfoCAB extends Component {
       <Column key={block.get('title')}>
         <Section fontSize="18px">
           <Title fontSize="20px">{titleFormatter(block.get('title'))}</Title>
-          {block.get('customerChooses').map(c =>
-            <p key={c.get('description')}>{c.get('description')}</p>)}
+          {block
+            .get('customerChooses')
+            .map(c => <p key={c.get('description')}>{c.get('description')}</p>)}
         </Section>
         <Divider />
       </Column>
@@ -123,7 +125,7 @@ export default class ProductInfoCAB extends Component {
             {item.get('value')}
           </p>
         ))}
-        {(descriptions.get(index).last() !== desc) && <Divider />}
+        {descriptions.get(index).last() !== desc && <Divider />}
       </Section>
     ));
   }

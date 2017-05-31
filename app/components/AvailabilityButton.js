@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Dialog from 'material-ui/Dialog';
 import glamorous from 'glamorous';
@@ -25,7 +26,7 @@ export default class AvailabilityButton extends Component {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     allStoreStock: ImmutablePropTypes.list.isRequired
-  }
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -35,25 +36,18 @@ export default class AvailabilityButton extends Component {
 
   handleOpen = () => {
     this.setState({ dialogOpen: true });
-  }
+  };
 
   handleClose = () => {
     this.setState({ dialogOpen: false });
-  }
+  };
 
   render() {
-    const {
-      productName,
-      productCode,
-      allStoreStock
-    } = this.props;
+    const { productName, productCode, allStoreStock } = this.props;
 
     return (
       <div>
-        <Button
-          bgColor="#67cb33"
-          onClick={this.handleOpen}
-        >
+        <Button bgColor="#67cb33" onClick={this.handleOpen}>
           verifica disponibilità in negozi vicini
         </Button>
         <Dialog

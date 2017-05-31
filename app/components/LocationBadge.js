@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import IconSelector from './Icons';
@@ -48,7 +49,7 @@ const LocationBadge = ({ city, country, weather, temp }) => (
         <DateBadge />
       </InfoWrapper>
     </LeftColumn>
-    <Temp>{temp} &#176;</Temp>
+    <Temp>{temp} °</Temp>
   </Wrapper>
 );
 

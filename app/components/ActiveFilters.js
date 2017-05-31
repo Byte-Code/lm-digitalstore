@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous from 'glamorous';
@@ -57,7 +58,7 @@ const ActiveFilters = props => {
     toggleFilter,
     toggleAvailability,
     handleOpen
-    } = props;
+  } = props;
 
   const activeFilters = filterMap.get('filters');
   const activeAvailability = filterMap.get('availability');

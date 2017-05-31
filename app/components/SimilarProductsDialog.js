@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import Dialog from 'material-ui/Dialog';
@@ -20,7 +21,7 @@ export default class SimilarProductsDialog extends Component {
     similarProducts: ImmutablePropTypes.list,
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
-    selectedProduct: PropTypes.string.isRequired,
+    selectedProduct: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -61,7 +62,6 @@ export default class SimilarProductsDialog extends Component {
     ));
   }
 
-
   render() {
     const { handleClose, isOpen } = this.props;
 
@@ -80,10 +80,7 @@ export default class SimilarProductsDialog extends Component {
         contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
         bodyStyle={{ padding: 0, background: 'transparent' }}
       >
-        <CloseButton
-          handleClick={handleClose}
-          top={-250}
-        />
+        <CloseButton handleClick={handleClose} top={-250} />
         <Slick {...settings}>
           {this.renderProducts()}
         </Slick>

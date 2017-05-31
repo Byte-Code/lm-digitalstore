@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 import MyPlaceIcon from 'material-ui/svg-icons/maps/person-pin-circle';
 import glamorous from 'glamorous';
@@ -19,16 +20,12 @@ const WhiteBg = glamorous.div({
   backgroundColor: '#fff'
 });
 
-
 const Marker = ({ handleClick, isCurrentStore, isAvailable }) => {
   const Icon = isCurrentStore ? MyPlaceIcon : PlaceIcon;
   const iconColor = isAvailable ? '#67cb33' : '#000';
   return (
     <Wrapper onClick={handleClick}>
-      <Icon
-        style={{ height: 55, width: 55, cursor: 'pointer' }}
-        color={iconColor}
-      />
+      <Icon style={{ height: 55, width: 55, cursor: 'pointer' }} color={iconColor} />
       <WhiteBg />
     </Wrapper>
   );

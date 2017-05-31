@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import glamorous from 'glamorous';
@@ -80,10 +81,7 @@ export default class FamilySideBar extends Component {
       const categoryCode = fam.get('categoryCode');
 
       return (
-        <Family
-          key={familyName}
-          onClick={() => this.handleClick(categoryCode)}
-        >
+        <Family key={familyName} onClick={() => this.handleClick(categoryCode)}>
           <ImageWrapper src={image} />
           <FamilyName>
             <p>{familyName}</p>

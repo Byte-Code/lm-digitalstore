@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 import { Map } from 'immutable';
 import configureStore from 'redux-mock-store';

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Page from '../components/Page';
 import Catalogue from '../containers/Catalogue';
@@ -7,11 +8,7 @@ import SideMenu from '../components/SideMenu';
 
 export default function CataloguePage(props) {
   return (
-    <Page
-      background="#f7f7f7"
-      padding="0 0 140px"
-      height="1920px"
-    >
+    <Page background="#f7f7f7" padding="0 0 140px" height="1920px">
       <SideMenu />
       <Catalogue params={props.params} router={props.router} />
       <Footer />

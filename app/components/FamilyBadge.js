@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import glamorous from 'glamorous';
@@ -12,11 +13,9 @@ export const Wrapper = glamorous.div(({ width }) => ({
   cursor: 'pointer'
 }));
 
-
 export const ImageWrapper = glamorous.img(({ height }) => ({
   height: `${height}px`
 }));
-
 
 const NameWrapper = glamorous.div({
   width: '100%',
@@ -37,7 +36,7 @@ export default class FamilyBadge extends Component {
   static propTypes = {
     family: ImmutablePropTypes.map.isRequired,
     size: PropTypes.string.isRequired
-  }
+  };
 
   getSize() {
     const { size } = this.props;
@@ -65,12 +64,7 @@ export default class FamilyBadge extends Component {
     return (
       <Link to={`/catalogue/${categoryCode}`}>
         <Wrapper width={width}>
-          <ImageWrapper
-            src={image}
-            alt="alt1"
-            width={width}
-            height={height}
-          />
+          <ImageWrapper src={image} alt="alt1" width={width} height={height} />
           <NameWrapper>
             <FamilyName>{familyName}</FamilyName>
           </NameWrapper>

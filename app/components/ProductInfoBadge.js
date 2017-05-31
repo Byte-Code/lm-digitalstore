@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { fromJS } from 'immutable';
 import glamorous from 'glamorous';
@@ -76,16 +77,11 @@ export default class ProductInfoBadge extends Component {
 
     return (
       <Wrapper>
-        <MarketingFlag
-          marketingAttributes={marketingAttributes}
-          loyaltyProgram={loyaltyProgram}
-        />
+        <MarketingFlag marketingAttributes={marketingAttributes} loyaltyProgram={loyaltyProgram} />
         <PriceBadge pricingInfo={pricingInfo} price={price} />
         <Divider />
         <StoreStockWrapper>
-          <StoreStockBadge
-            currentStoreStock={currentStoreStock}
-          />
+          <StoreStockBadge currentStoreStock={currentStoreStock} />
         </StoreStockWrapper>
         <AvailabilityButton
           productName={productName}
@@ -93,10 +89,7 @@ export default class ProductInfoBadge extends Component {
           allStoreStock={allStoreStock}
         />
         <Divider />
-        <PurchaseDialog
-          productCode={productCode}
-          productSlug={productSlug}
-        >
+        <PurchaseDialog productCode={productCode} productSlug={productSlug}>
           <Button background="#67cb33">
             Acquista online
           </Button>

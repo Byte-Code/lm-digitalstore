@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
 
 import getUrl from '../utils/cloudinary';
@@ -36,11 +37,6 @@ export default class Image extends Component {
     }
     const url = getUrl(imageID, options);
 
-    return (
-      <Img
-        src={url}
-        alt={alt}
-      />
-    );
+    return <Img src={url} alt={alt} />;
   }
 }

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import glamorous from 'glamorous';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -39,7 +40,7 @@ class SelectStorePage extends Component {
     storeCode: null
   };
 
-  handleChange = (value) => this.setState({ storeCode: value });
+  handleChange = value => this.setState({ storeCode: value });
 
   render() {
     return (
@@ -58,7 +59,7 @@ class SelectStorePage extends Component {
               >
                 {store.storeName}
               </RaisedButton>
-              ))}
+            ))}
           </Buttons>
           <div>
             <RaisedButton

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous from 'glamorous';
@@ -46,16 +47,16 @@ export default class SimilarProducts extends Component {
     };
   }
 
-  handleOpen = (product) => {
+  handleOpen = product => {
     this.setState({
       selectedProduct: product,
       dialogOpen: true
     });
-  }
+  };
 
   handleClose = () => {
     this.setState({ dialogOpen: false });
-  }
+  };
 
   renderProducts() {
     const { similarProducts } = this.props;

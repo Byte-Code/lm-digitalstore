@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Slider from 'react-slick';
 
@@ -22,19 +23,14 @@ export default class ImageSlider extends Component {
       width: PropTypes.number
     }).isRequired,
     alt: PropTypes.string.isRequired
-  }
+  };
 
   renderImages() {
     const { imageIDList, imageOptions, alt } = this.props;
 
     return imageIDList.map(imageID => (
       <div key={imageID}>
-        <Image
-          fixBrightColor
-          imageID={imageID}
-          imageOptions={imageOptions}
-          alt={alt}
-        />
+        <Image fixBrightColor imageID={imageID} imageOptions={imageOptions} alt={alt} />
       </div>
     ));
   }

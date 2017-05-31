@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 
 const CloseButton = ({ handleClick, top, right, backgroundColor, fill }) => (
@@ -14,14 +15,12 @@ const CloseButton = ({ handleClick, top, right, backgroundColor, fill }) => (
       cursor: 'pointer'
     }}
     color="#fff"
-    onTouchTap={
-      (e) => {
-        if (e) {
-          e.preventDefault();
-        }
-        handleClick();
+    onTouchTap={e => {
+      if (e) {
+        e.preventDefault();
       }
-    }
+      handleClick();
+    }}
   />
 );
 
