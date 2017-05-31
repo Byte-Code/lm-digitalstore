@@ -4,11 +4,11 @@ exports[`catalogue should render null when categoryInfo is empty or undefined 1`
 
 exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
 <div>
-  <styled.div>
+  <glamorous(div)>
     <h1>
       cat123
     </h1>
-  </styled.div>
+  </glamorous(div)>
   <SellingAidsBadge
     activeAid=""
     onToggle={[Function]}
@@ -22,7 +22,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
     toggleAvailability={[Function]}
     toggleFilter={[Function]}
   />
-  <styled.div>
+  <glamorous(div)>
     <Link
       onlyActiveOnIndex={false}
       style={Object {}}
@@ -71,6 +71,6 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
         }
       />
     </Link>
-  </styled.div>
+  </glamorous(div)>
 </div>
 `;

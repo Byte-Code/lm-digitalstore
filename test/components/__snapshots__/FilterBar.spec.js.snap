@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`filterBar should initially render with a closed dialog 1`] = `
-<styled.div>
-  <styled.div
+<glamorous(div)>
+  <glamorous(div)
     onClick={[Function]}
   >
     <ContentAddCircleOutline
@@ -17,7 +17,7 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
     <p>
       Piú filtri
     </p>
-  </styled.div>
+  </glamorous(div)>
   <ActiveFilters
     filterGroups={
       Array [
@@ -65,12 +65,12 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
       handleClose={[Function]}
     />
   </Dialog>
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`filterBar should open the dialog when the button is clicked 1`] = `
-<styled.div>
-  <styled.div
+<glamorous(div)>
+  <glamorous(div)
     onClick={[Function]}
   >
     <ContentAddCircleOutline
@@ -85,7 +85,7 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
     <p>
       Piú filtri
     </p>
-  </styled.div>
+  </glamorous(div)>
   <ActiveFilters
     filterGroups={
       Array [
@@ -133,7 +133,7 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
       handleClose={[Function]}
     />
   </Dialog>
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`filterBar should return null when filterGroups are empty 1`] = `null`;

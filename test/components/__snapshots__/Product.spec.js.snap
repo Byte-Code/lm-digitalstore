@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Product should render properly with no similarProducts  1`] = `
-<styled.div>
-  <styled.h1>
+<glamorous(div)>
+  <glamorous(h1)>
     name
-  </styled.h1>
-  <styled.h3>
+  </glamorous(h1)>
+  <glamorous(h3)>
     REF. code
-  </styled.h3>
-  <styled.div>
+  </glamorous(h3)>
+  <glamorous(div)>
     <ImageSlider
       alt="name"
       imageIDList={
@@ -24,14 +24,14 @@ exports[`Product should render properly with no similarProducts  1`] = `
         }
       }
     />
-  </styled.div>
+  </glamorous(div)>
   <ProductInfo
     descriptions={Array []}
     marketingDescriptions={Object {}}
     productType="descriptionType"
   />
-  <styled.div />
-  <styled.div>
+  <glamorous(div) />
+  <glamorous(div)>
     <ProductInfoBadge
       allStoreStock={Array []}
       currentStoreStock={
@@ -48,19 +48,19 @@ exports[`Product should render properly with no similarProducts  1`] = `
       productName="name"
       productSlug="slug"
     />
-  </styled.div>
-</styled.div>
+  </glamorous(div)>
+</glamorous(div)>
 `;
 
 exports[`Product should render properly with similarProducts  1`] = `
-<styled.div>
-  <styled.h1>
+<glamorous(div)>
+  <glamorous(h1)>
     name
-  </styled.h1>
-  <styled.h3>
+  </glamorous(h1)>
+  <glamorous(h3)>
     REF. code
-  </styled.h3>
-  <styled.div>
+  </glamorous(h3)>
+  <glamorous(div)>
     <ImageSlider
       alt="name"
       imageIDList={
@@ -76,13 +76,13 @@ exports[`Product should render properly with similarProducts  1`] = `
         }
       }
     />
-  </styled.div>
+  </glamorous(div)>
   <ProductInfo
     descriptions={Array []}
     marketingDescriptions={Object {}}
     productType="descriptionType"
   />
-  <styled.div>
+  <glamorous(div)>
     <SimilarProducts
       similarProducts={
         Array [
@@ -93,8 +93,8 @@ exports[`Product should render properly with similarProducts  1`] = `
       }
       title="anche"
     />
-  </styled.div>
-  <styled.div>
+  </glamorous(div)>
+  <glamorous(div)>
     <ProductInfoBadge
       allStoreStock={Array []}
       currentStoreStock={
@@ -111,8 +111,8 @@ exports[`Product should render properly with similarProducts  1`] = `
       productName="name"
       productSlug="slug"
     />
-  </styled.div>
-</styled.div>
+  </glamorous(div)>
+</glamorous(div)>
 `;
 
 exports[`Product should return null when productInfo is empty 1`] = `null`;

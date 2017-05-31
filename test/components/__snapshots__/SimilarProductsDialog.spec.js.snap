@@ -39,7 +39,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
     variableWidth={true}
   >
     <div>
-      <styled.div>
+      <glamorous(div)>
         <SimilarProductBadge
           productInfo={
             Object {
@@ -47,10 +47,10 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
             }
           }
         />
-      </styled.div>
+      </glamorous(div)>
     </div>
     <div>
-      <styled.div>
+      <glamorous(div)>
         <SimilarProductBadge
           productInfo={
             Object {
@@ -58,10 +58,10 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
             }
           }
         />
-      </styled.div>
+      </glamorous(div)>
     </div>
     <div>
-      <styled.div>
+      <glamorous(div)>
         <SimilarProductBadge
           productInfo={
             Object {
@@ -69,7 +69,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
             }
           }
         />
-      </styled.div>
+      </glamorous(div)>
     </div>
   </Slider>
 </Dialog>

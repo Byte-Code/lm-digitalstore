@@ -6,21 +6,21 @@ exports[`FamilyBadge case horizontal: should render with the right height and wi
   style={Object {}}
   to="/catalogue/123"
 >
-  <styled.div
+  <glamorous(div)
     width={490}
   >
-    <styled.img
+    <glamorous(img)
       alt="alt1"
       height={235}
       src="image"
       width={490}
     />
-    <styled.div>
-      <styled.div>
+    <glamorous(div)>
+      <glamorous(div)>
         family
-      </styled.div>
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
 </Link>
 `;
 
@@ -30,21 +30,21 @@ exports[`FamilyBadge case square-big: should render with the right height and wi
   style={Object {}}
   to="/catalogue/123"
 >
-  <styled.div
+  <glamorous(div)
     width={490}
   >
-    <styled.img
+    <glamorous(img)
       alt="alt1"
       height={561}
       src="image"
       width={490}
     />
-    <styled.div>
-      <styled.div>
+    <glamorous(div)>
+      <glamorous(div)>
         family
-      </styled.div>
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
 </Link>
 `;
 
@@ -54,21 +54,21 @@ exports[`FamilyBadge case square-small: should render with the right height and 
   style={Object {}}
   to="/catalogue/123"
 >
-  <styled.div
+  <glamorous(div)
     width={235}
   >
-    <styled.img
+    <glamorous(img)
       alt="alt1"
       height={235}
       src="image"
       width={235}
     />
-    <styled.div>
-      <styled.div>
+    <glamorous(div)>
+      <glamorous(div)>
         family
-      </styled.div>
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
 </Link>
 `;
 
@@ -78,20 +78,20 @@ exports[`FamilyBadge case wrong prop: should render with default height and widt
   style={Object {}}
   to="/catalogue/123"
 >
-  <styled.div
+  <glamorous(div)
     width={490}
   >
-    <styled.img
+    <glamorous(img)
       alt="alt1"
       height={235}
       src="image"
       width={490}
     />
-    <styled.div>
-      <styled.div>
+    <glamorous(div)>
+      <glamorous(div)>
         family
-      </styled.div>
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
 </Link>
 `;

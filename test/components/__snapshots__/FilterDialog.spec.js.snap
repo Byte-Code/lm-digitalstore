@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilterDialog should change state when a filter is clicked 1`] = `
-<styled.div>
-  <styled.div>
-    <styled.div
-      fFamily="LeroyMerlinSans Light"
-      fSize="20px"
+<glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)
+      fontFamily="LeroyMerlinSans Light"
+      fontSize="20px"
       id="close-filterDialog"
       onClick={[Function]}
     >
@@ -21,12 +21,12 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
       <p>
         Chiudi Filtri
       </p>
-    </styled.div>
-    <styled.div
-      fSize="16px"
+    </glamorous(div)>
+    <glamorous(div)
+      fontSize="16px"
       id="reset-filterDialog"
       onClick={[Function]}
-      tDeco="underline"
+      textDecoration="underline"
     >
       <ContentUndo
         color="#fff"
@@ -40,9 +40,9 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
       <p>
         Reset Filtri
       </p>
-    </styled.div>
-  </styled.div>
-  <styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+  <glamorous(div)>
     <p>
       Disponibilità in negozio
     </p>
@@ -94,55 +94,55 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
         }
       }
     />
-  </styled.div>
-  <styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+  </glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={true}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-  </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
   <Connect(FilterButton)
     filterMap={
       Object {
@@ -156,15 +156,15 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
     }
     onApply={[Function]}
   />
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`FilterDialog should change state when availability is toggled 1`] = `
-<styled.div>
-  <styled.div>
-    <styled.div
-      fFamily="LeroyMerlinSans Light"
-      fSize="20px"
+<glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)
+      fontFamily="LeroyMerlinSans Light"
+      fontSize="20px"
       id="close-filterDialog"
       onClick={[Function]}
     >
@@ -180,12 +180,12 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
       <p>
         Chiudi Filtri
       </p>
-    </styled.div>
-    <styled.div
-      fSize="16px"
+    </glamorous(div)>
+    <glamorous(div)
+      fontSize="16px"
       id="reset-filterDialog"
       onClick={[Function]}
-      tDeco="underline"
+      textDecoration="underline"
     >
       <ContentUndo
         color="#fff"
@@ -199,9 +199,9 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
       <p>
         Reset Filtri
       </p>
-    </styled.div>
-  </styled.div>
-  <styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+  <glamorous(div)>
     <p>
       Disponibilità in negozio
     </p>
@@ -253,55 +253,55 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
         }
       }
     />
-  </styled.div>
-  <styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+  </glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={true}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-  </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
   <Connect(FilterButton)
     filterMap={
       Object {
@@ -315,15 +315,15 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
     }
     onApply={[Function]}
   />
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`FilterDialog should initialize status based on filterMap 1`] = `
-<styled.div>
-  <styled.div>
-    <styled.div
-      fFamily="LeroyMerlinSans Light"
-      fSize="20px"
+<glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)
+      fontFamily="LeroyMerlinSans Light"
+      fontSize="20px"
       id="close-filterDialog"
       onClick={[Function]}
     >
@@ -339,12 +339,12 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
       <p>
         Chiudi Filtri
       </p>
-    </styled.div>
-    <styled.div
-      fSize="16px"
+    </glamorous(div)>
+    <glamorous(div)
+      fontSize="16px"
       id="reset-filterDialog"
       onClick={[Function]}
-      tDeco="underline"
+      textDecoration="underline"
     >
       <ContentUndo
         color="#fff"
@@ -358,9 +358,9 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
       <p>
         Reset Filtri
       </p>
-    </styled.div>
-  </styled.div>
-  <styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+  <glamorous(div)>
     <p>
       Disponibilità in negozio
     </p>
@@ -412,55 +412,55 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
         }
       }
     />
-  </styled.div>
-  <styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+  </glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={true}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={true}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-  </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
   <Connect(FilterButton)
     filterMap={
       Object {
@@ -475,15 +475,15 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
     }
     onApply={[Function]}
   />
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
-<styled.div>
-  <styled.div>
-    <styled.div
-      fFamily="LeroyMerlinSans Light"
-      fSize="20px"
+<glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)
+      fontFamily="LeroyMerlinSans Light"
+      fontSize="20px"
       id="close-filterDialog"
       onClick={[Function]}
     >
@@ -499,12 +499,12 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
       <p>
         Chiudi Filtri
       </p>
-    </styled.div>
-    <styled.div
-      fSize="16px"
+    </glamorous(div)>
+    <glamorous(div)
+      fontSize="16px"
       id="reset-filterDialog"
       onClick={[Function]}
-      tDeco="underline"
+      textDecoration="underline"
     >
       <ContentUndo
         color="#fff"
@@ -518,9 +518,9 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
       <p>
         Reset Filtri
       </p>
-    </styled.div>
-  </styled.div>
-  <styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+  <glamorous(div)>
     <p>
       Disponibilità in negozio
     </p>
@@ -572,55 +572,55 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
         }
       }
     />
-  </styled.div>
-  <styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+  </glamorous(div)>
+  <glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-    <styled.div>
-      <styled.div />
-      <styled.div>
-        <styled.div
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div) />
+      <glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-        <styled.div
+        </glamorous(div)>
+        <glamorous(div)
           isActive={false}
           onClick={[Function]}
         >
           <p />
-        </styled.div>
-      </styled.div>
-    </styled.div>
-  </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
+  </glamorous(div)>
   <Connect(FilterButton)
     filterMap={
       Object {
@@ -632,5 +632,5 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
     }
     onApply={[Function]}
   />
-</styled.div>
+</glamorous(div)>
 `;

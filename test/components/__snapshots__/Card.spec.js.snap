@@ -2,60 +2,60 @@
 
 exports[`Card should close if the title is clickedAgain 1`] = `
 <div>
-  <styled.div
+  <glamorous.Div
     onClick={[Function]}
   >
     <TitleComponent
       expanded={false}
     />
-  </styled.div>
-  <styled.div
+  </glamorous.Div>
+  <glamorous(div)
     className="animated fadeIn"
     isVisible="none"
   >
     <div>
       Children
     </div>
-  </styled.div>
+  </glamorous(div)>
 </div>
 `;
 
 exports[`Card should initally be closed 1`] = `
 <div>
-  <styled.div
+  <glamorous.Div
     onClick={[Function]}
   >
     <TitleComponent
       expanded={false}
     />
-  </styled.div>
-  <styled.div
+  </glamorous.Div>
+  <glamorous(div)
     className="animated fadeIn"
     isVisible="none"
   >
     <div>
       Children
     </div>
-  </styled.div>
+  </glamorous(div)>
 </div>
 `;
 
 exports[`Card should open once the title is clicked 1`] = `
 <div>
-  <styled.div
+  <glamorous.Div
     onClick={[Function]}
   >
     <TitleComponent
       expanded={true}
     />
-  </styled.div>
-  <styled.div
+  </glamorous.Div>
+  <glamorous(div)
     className="animated fadeIn"
     isVisible="block"
   >
     <div>
       Children
     </div>
-  </styled.div>
+  </glamorous(div)>
 </div>
 `;

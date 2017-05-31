@@ -97,8 +97,8 @@ export default class ProductInfoCAB extends Component {
 
     return blocks.map(block => (
       <Column key={block.get('title')}>
-        <Section fSize="18px">
-          <Title fSize="20px">{titleFormatter(block.get('title'))}</Title>
+        <Section fontSize="18px">
+          <Title fontSize="20px">{titleFormatter(block.get('title'))}</Title>
           {block.get('customerChooses').map(c =>
             <p key={c.get('description')}>{c.get('description')}</p>)}
         </Section>
@@ -135,7 +135,7 @@ export default class ProductInfoCAB extends Component {
           {this.renderBlocks()}
         </Row>
         <Card TitleComponent={CardTitleComponent}>
-          <Row pTop="31px" bgColor="#f7f7f7">
+          <Row Card="31px" backgroundColor="#f7f7f7">
             <Column>
               {this.renderDescriptions(0)}
             </Column>
