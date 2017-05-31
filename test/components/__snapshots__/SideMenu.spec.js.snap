@@ -2,7 +2,7 @@
 
 exports[`SideMenu should close again once the second button is clicked 1`] = `
 <div>
-  <styled.div
+  <glamorous(div)
     isVisible={true}
     onClick={[Function]}
   >
@@ -18,7 +18,7 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
     <p>
       Giardino & Terrazzo
     </p>
-  </styled.div>
+  </glamorous(div)>
   <Drawer
     containerStyle={
       Object {
@@ -36,22 +36,22 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
     width={365}
     zDepth={2}
   >
-    <styled.div
-      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
-      bgColor="#fff"
+    <glamorous(div)
+      background="#fff"
+      boxShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
       width="275px"
     >
       <Connect(FamilySideBar)
         closeMenu={[Function]}
       />
-    </styled.div>
-    <styled.div
-      bgColor="transparent"
+    </glamorous(div)>
+    <glamorous(div)
+      background="transparent"
     >
-      <styled.div
+      <glamorous(div)
         isVisible={false}
+        left="275px"
         onClick={[Function]}
-        pLeft="275px"
       >
         <MapsLocalFlorist
           color="#fff"
@@ -65,15 +65,15 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
         <p>
           Giardino & Terrazzo
         </p>
-      </styled.div>
-    </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
   </Drawer>
 </div>
 `;
 
 exports[`SideMenu should initially render closed 1`] = `
 <div>
-  <styled.div
+  <glamorous(div)
     isVisible={true}
     onClick={[Function]}
   >
@@ -89,7 +89,7 @@ exports[`SideMenu should initially render closed 1`] = `
     <p>
       Giardino & Terrazzo
     </p>
-  </styled.div>
+  </glamorous(div)>
   <Drawer
     containerStyle={
       Object {
@@ -107,22 +107,22 @@ exports[`SideMenu should initially render closed 1`] = `
     width={365}
     zDepth={2}
   >
-    <styled.div
-      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
-      bgColor="#fff"
+    <glamorous(div)
+      background="#fff"
+      boxShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
       width="275px"
     >
       <Connect(FamilySideBar)
         closeMenu={[Function]}
       />
-    </styled.div>
-    <styled.div
-      bgColor="transparent"
+    </glamorous(div)>
+    <glamorous(div)
+      background="transparent"
     >
-      <styled.div
+      <glamorous(div)
         isVisible={false}
+        left="275px"
         onClick={[Function]}
-        pLeft="275px"
       >
         <MapsLocalFlorist
           color="#fff"
@@ -136,15 +136,15 @@ exports[`SideMenu should initially render closed 1`] = `
         <p>
           Giardino & Terrazzo
         </p>
-      </styled.div>
-    </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
   </Drawer>
 </div>
 `;
 
 exports[`SideMenu should open once the first button is clicked 1`] = `
 <div>
-  <styled.div
+  <glamorous(div)
     isVisible={false}
     onClick={[Function]}
   >
@@ -160,7 +160,7 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
     <p>
       Giardino & Terrazzo
     </p>
-  </styled.div>
+  </glamorous(div)>
   <Drawer
     containerStyle={
       Object {
@@ -178,22 +178,22 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
     width={365}
     zDepth={2}
   >
-    <styled.div
-      bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
-      bgColor="#fff"
+    <glamorous(div)
+      background="#fff"
+      boxShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
       width="275px"
     >
       <Connect(FamilySideBar)
         closeMenu={[Function]}
       />
-    </styled.div>
-    <styled.div
-      bgColor="transparent"
+    </glamorous(div)>
+    <glamorous(div)
+      background="transparent"
     >
-      <styled.div
+      <glamorous(div)
         isVisible={true}
+        left="275px"
         onClick={[Function]}
-        pLeft="275px"
       >
         <MapsLocalFlorist
           color="#fff"
@@ -207,8 +207,8 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
         <p>
           Giardino & Terrazzo
         </p>
-      </styled.div>
-    </styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
   </Drawer>
 </div>
 `;

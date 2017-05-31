@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProductInfoCAB should render just one list of descriptions 1`] = `
-<styled.div>
+<glamorous(div)>
   <p>
     <span>
       label00: 
@@ -20,12 +20,12 @@ exports[`ProductInfoCAB should render just one list of descriptions 1`] = `
     </span>
     value02
   </p>
-  <styled.div />
-</styled.div>
+  <glamorous(div) />
+</glamorous(div)>
 `;
 
 exports[`ProductInfoCAB should render no descriptions when they are not provided 1`] = `
-<styled.div>
-  <styled.div />
-</styled.div>
+<glamorous(div)>
+  <glamorous(div) />
+</glamorous(div)>
 `;

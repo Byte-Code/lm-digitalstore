@@ -1,81 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProductInfoCAB should render a list of marketingDescriptions 1`] = `
-<styled.div>
-  <styled.div
-    bgColor="#efefef"
-    pTop="69px"
+<glamorous(div)>
+  <glamorous(div)
+    backgroundColor="#efefef"
+    paddingTop="69px"
   >
-    <styled.div>
-      <styled.div
-        fSize="18px"
+    <glamorous(div)>
+      <glamorous(div)
+        fontSize="18px"
       >
-        <styled.div
-          fSize="20px"
+        <glamorous(div)
+          fontSize="20px"
         >
           desc0
-        </styled.div>
+        </glamorous(div)>
         <p>
           foo
         </p>
         <p>
           bar
         </p>
-      </styled.div>
-      <styled.div />
-    </styled.div>
-    <styled.div>
-      <styled.div
-        fSize="18px"
+      </glamorous(div)>
+      <glamorous(div) />
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div)
+        fontSize="18px"
       >
-        <styled.div
-          fSize="20px"
+        <glamorous(div)
+          fontSize="20px"
         >
           desc1
-        </styled.div>
+        </glamorous(div)>
         <p>
           foobar
         </p>
-      </styled.div>
-      <styled.div />
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+      <glamorous(div) />
+    </glamorous(div)>
+  </glamorous(div)>
   <Card
     TitleComponent={[Function]}
   >
-    <styled.div
-      bgColor="#f7f7f7"
-      pTop="31px"
+    <glamorous(div)
+      Card="31px"
+      backgroundColor="#f7f7f7"
     >
-      <styled.div />
-      <styled.div />
-    </styled.div>
+      <glamorous(div) />
+      <glamorous(div) />
+    </glamorous(div)>
   </Card>
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
-<styled.div>
-  <styled.div
-    bgColor="#efefef"
-    pTop="69px"
+<glamorous(div)>
+  <glamorous(div)
+    backgroundColor="#efefef"
+    paddingTop="69px"
   />
   <Card
     TitleComponent={[Function]}
   >
-    <styled.div
-      bgColor="#f7f7f7"
-      pTop="31px"
+    <glamorous(div)
+      Card="31px"
+      backgroundColor="#f7f7f7"
     >
-      <styled.div>
-        <styled.div
-          fSize="14px"
+      <glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description0
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label00: 
@@ -94,33 +94,33 @@ exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
             </span>
             value02
           </p>
-          <styled.div />
-        </styled.div>
-        <styled.div
-          fSize="14px"
+          <glamorous(div) />
+        </glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description01
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label03: 
             </span>
             value03
           </p>
-        </styled.div>
-      </styled.div>
-      <styled.div>
-        <styled.div
-          fSize="14px"
+        </glamorous(div)>
+      </glamorous(div)>
+      <glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description1
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label04: 
@@ -139,69 +139,69 @@ exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
             </span>
             value06
           </p>
-        </styled.div>
-      </styled.div>
-    </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
   </Card>
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`ProductInfoCAB should render both descriptions and marketingDescriptions 1`] = `
-<styled.div>
-  <styled.div
-    bgColor="#efefef"
-    pTop="69px"
+<glamorous(div)>
+  <glamorous(div)
+    backgroundColor="#efefef"
+    paddingTop="69px"
   >
-    <styled.div>
-      <styled.div
-        fSize="18px"
+    <glamorous(div)>
+      <glamorous(div)
+        fontSize="18px"
       >
-        <styled.div
-          fSize="20px"
+        <glamorous(div)
+          fontSize="20px"
         >
           desc0
-        </styled.div>
+        </glamorous(div)>
         <p>
           foo
         </p>
         <p>
           bar
         </p>
-      </styled.div>
-      <styled.div />
-    </styled.div>
-    <styled.div>
-      <styled.div
-        fSize="18px"
+      </glamorous(div)>
+      <glamorous(div) />
+    </glamorous(div)>
+    <glamorous(div)>
+      <glamorous(div)
+        fontSize="18px"
       >
-        <styled.div
-          fSize="20px"
+        <glamorous(div)
+          fontSize="20px"
         >
           desc1
-        </styled.div>
+        </glamorous(div)>
         <p>
           foobar
         </p>
-      </styled.div>
-      <styled.div />
-    </styled.div>
-  </styled.div>
+      </glamorous(div)>
+      <glamorous(div) />
+    </glamorous(div)>
+  </glamorous(div)>
   <Card
     TitleComponent={[Function]}
   >
-    <styled.div
-      bgColor="#f7f7f7"
-      pTop="31px"
+    <glamorous(div)
+      Card="31px"
+      backgroundColor="#f7f7f7"
     >
-      <styled.div>
-        <styled.div
-          fSize="14px"
+      <glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description0
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label00: 
@@ -220,33 +220,33 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
             </span>
             value02
           </p>
-          <styled.div />
-        </styled.div>
-        <styled.div
-          fSize="14px"
+          <glamorous(div) />
+        </glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description01
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label03: 
             </span>
             value03
           </p>
-        </styled.div>
-      </styled.div>
-      <styled.div>
-        <styled.div
-          fSize="14px"
+        </glamorous(div)>
+      </glamorous(div)>
+      <glamorous(div)>
+        <glamorous(div)
+          fontSize="14px"
         >
-          <styled.div
-            fSize="16px"
+          <glamorous(div)
+            fontSize="16px"
           >
             description1
-          </styled.div>
+          </glamorous(div)>
           <p>
             <span>
               label04: 
@@ -265,29 +265,29 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
             </span>
             value06
           </p>
-        </styled.div>
-      </styled.div>
-    </styled.div>
+        </glamorous(div)>
+      </glamorous(div)>
+    </glamorous(div)>
   </Card>
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`ProductInfoCAB should render no descriptions when they are not provided 1`] = `
-<styled.div>
-  <styled.div
-    bgColor="#efefef"
-    pTop="69px"
+<glamorous(div)>
+  <glamorous(div)
+    backgroundColor="#efefef"
+    paddingTop="69px"
   />
   <Card
     TitleComponent={[Function]}
   >
-    <styled.div
-      bgColor="#f7f7f7"
-      pTop="31px"
+    <glamorous(div)
+      Card="31px"
+      backgroundColor="#f7f7f7"
     >
-      <styled.div />
-      <styled.div />
-    </styled.div>
+      <glamorous(div) />
+      <glamorous(div) />
+    </glamorous(div)>
   </Card>
-</styled.div>
+</glamorous(div)>
 `;

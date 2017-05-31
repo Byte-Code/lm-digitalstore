@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render properly 1`] = `
-<styled.div>
+<glamorous(div)>
   <NavigationCheck
     color="#58c527"
     style={
@@ -11,13 +11,13 @@ exports[`should render properly 1`] = `
       }
     }
   />
-  <styled.div>
+  <glamorous(div)>
     <p>
       10 prodotti disponibili
     </p>
     <p>
       in negozio a storeName
     </p>
-  </styled.div>
-</styled.div>
+  </glamorous(div)>
+</glamorous(div)>
 `;

@@ -8,6 +8,7 @@
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest ./test/*",
     "test-all": "npm run lint && npm run test && npm run build",
     "test-watch": "npm test --watch",
+    "snap": "jest -u",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest ./test/e2e.spec.js",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",

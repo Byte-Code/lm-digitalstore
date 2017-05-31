@@ -3,19 +3,19 @@
 exports[`FamilySideBar should render null when world is empty 1`] = `null`;
 
 exports[`FamilySideBar should render properly when world is not empty 1`] = `
-<styled.div>
-  <styled.h3 />
-  <styled.div
+<glamorous(div)>
+  <glamorous(h3) />
+  <glamorous(div)
     onClick={[Function]}
   >
-    <styled.img
+    <glamorous(img)
       src="image"
     />
-    <styled.div>
+    <glamorous(div)>
       <p>
         name
       </p>
-    </styled.div>
-  </styled.div>
-</styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+</glamorous(div)>
 `;

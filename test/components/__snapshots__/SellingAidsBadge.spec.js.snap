@@ -1,37 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SellingAidsBadge should render a list of all the sellingAids otherwise 1`] = `
-<styled.div>
-  <styled.p>
+<glamorous(div)>
+  <glamorous(p)>
     ...
-  </styled.p>
-  <styled.div>
-    <styled.div
+  </glamorous(p)>
+  <glamorous(div)>
+    <glamorous(div)
       isActive={true}
       onClick={[Function]}
     >
       <p>
         aid0
       </p>
-    </styled.div>
-    <styled.div
+    </glamorous(div)>
+    <glamorous(div)
       isActive={false}
       onClick={[Function]}
     >
       <p>
         aid1
       </p>
-    </styled.div>
-    <styled.div
+    </glamorous(div)>
+    <glamorous(div)
       isActive={false}
       onClick={[Function]}
     >
       <p>
         aid2
       </p>
-    </styled.div>
-  </styled.div>
-</styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
+</glamorous(div)>
 `;
 
 exports[`SellingAidsBadge should render null when sellingAids are empty 1`] = `null`;

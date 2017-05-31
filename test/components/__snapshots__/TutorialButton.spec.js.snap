@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TutorialButton should initially render with a closed dialog 1`] = `
-<styled.div
+<glamorous.Div
   onClick={[Function]}
 >
   <button>
@@ -46,44 +46,44 @@ exports[`TutorialButton should initially render with a closed dialog 1`] = `
       variableWidth={true}
     >
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 1"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 2"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 3"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 4"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
     </Slider>
   </Dialog>
-</styled.div>
+</glamorous.Div>
 `;
 
 exports[`TutorialButton should open the dialog once clicked 1`] = `
-<styled.div
+<glamorous.Div
   onClick={[Function]}
 >
   <button>
@@ -128,38 +128,38 @@ exports[`TutorialButton should open the dialog once clicked 1`] = `
       variableWidth={true}
     >
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 1"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 2"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 3"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
       <div>
-        <styled.div>
-          <styled.img
+        <glamorous(div)>
+          <glamorous(img)
             alt="tutorial 4"
             src="test-file-stub"
           />
-        </styled.div>
+        </glamorous(div)>
       </div>
     </Slider>
   </Dialog>
-</styled.div>
+</glamorous.Div>
 `;

@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SimilarProductBadge should render properly 1`] = `
-<styled.div>
-  <styled.h1>
+<glamorous(div)>
+  <glamorous(h1)>
     name
-  </styled.h1>
-  <styled.h3>
+  </glamorous(h1)>
+  <glamorous(h3)>
     REF. 
     code
-  </styled.h3>
+  </glamorous(h3)>
   <Image
     alt="alt"
     fixBrightColor={true}
@@ -21,9 +21,9 @@ exports[`SimilarProductBadge should render properly 1`] = `
       }
     }
   />
-  <styled.div>
-    <styled.p />
-    <styled.div>
+  <glamorous(div)>
+    <glamorous(p) />
+    <glamorous(div)>
       <MarketingFlag
         loyaltyProgram={Object {}}
         marketingAttributes={Object {}}
@@ -37,10 +37,10 @@ exports[`SimilarProductBadge should render properly 1`] = `
         }
         pricingInfo={Object {}}
       />
-      <styled.p>
+      <glamorous(p)>
         1 pz / pz
-      </styled.p>
-      <styled.div />
+      </glamorous(p)>
+      <glamorous(div) />
       <Connect(StoreStockBadge)
         currentStoreStock={
           Object {
@@ -49,14 +49,14 @@ exports[`SimilarProductBadge should render properly 1`] = `
           }
         }
       />
-    </styled.div>
-  </styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
   <Link
     onlyActiveOnIndex={false}
     style={Object {}}
     to="/product/code"
   >
-    <styled.div>
+    <glamorous(div)>
       Dettagli Prodotto
       <NavigationArrowForward
         color="#fff"
@@ -68,7 +68,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
           }
         }
       />
-    </styled.div>
+    </glamorous(div)>
   </Link>
-</styled.div>
+</glamorous(div)>
 `;

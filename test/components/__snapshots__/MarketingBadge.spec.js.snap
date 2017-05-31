@@ -11,14 +11,14 @@ exports[`MarketingBadge should render DESTOCK 1`] = `
   <Component
     src="test-file-stub"
   >
-    <styled.img
+    <glamorous(img)
       src="test-file-stub"
     >
       <img
-        className="cuDvmw"
+        className="css-13azwyo"
         src="test-file-stub"
       />
-    </styled.img>
+    </glamorous(img)>
   </Component>
 </MarketingBadge>
 `;
@@ -43,26 +43,24 @@ exports[`MarketingBadge should render IDEAPIU 1`] = `
         }
       }
     >
-      <styled.img
+      <glamorous(img)
         height="50px"
         mBottom="18px"
         src="test-file-stub"
         width="100px"
       >
         <img
-          className="gJrHnD"
-          height="50px"
+          className="css-1mc4zot"
           src="test-file-stub"
-          width="100px"
         />
-      </styled.img>
-      <styled.p>
+      </glamorous(img)>
+      <glamorous(p)>
         <p
-          className="bXfyzC"
+          className="css-178lsms"
         >
           -10% IDEAPIÚ
         </p>
-      </styled.p>
+      </glamorous(p)>
     </div>
   </Component>
 </MarketingBadge>
@@ -77,24 +75,24 @@ exports[`MarketingBadge should render NOVITA 1`] = `
   }
 >
   <Icon>
-    <styled.div>
+    <glamorous(div)>
       <div
-        className="bjsMfp"
+        className="css-1gfp3u5"
       >
-        <styled.div>
+        <glamorous(div)>
           <div
-            className="gZQECl"
+            className="css-uslqpr"
           />
-        </styled.div>
-        <styled.span>
+        </glamorous(div)>
+        <glamorous(span)>
           <span
-            className="hDeyYv"
+            className="css-t9b1qp"
           >
             NOVITÀ
           </span>
-        </styled.span>
+        </glamorous(span)>
       </div>
-    </styled.div>
+    </glamorous(div)>
   </Icon>
 </MarketingBadge>
 `;
@@ -110,18 +108,16 @@ exports[`MarketingBadge should render PREZZO_GIU 1`] = `
   <Component
     src="test-file-stub"
   >
-    <styled.img
+    <glamorous(img)
       height="100px"
       src="test-file-stub"
       width="100px"
     >
       <img
-        className="jqBbJk"
-        height="100px"
+        className="css-6g4mv0"
         src="test-file-stub"
-        width="100px"
       />
-    </styled.img>
+    </glamorous(img)>
   </Component>
 </MarketingBadge>
 `;
@@ -137,18 +133,16 @@ exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
   <Component
     src="test-file-stub"
   >
-    <styled.img
+    <glamorous(img)
       height="20px"
       src="test-file-stub"
       width="120px"
     >
       <img
-        className="fUkjDv"
-        height="20px"
+        className="css-satsm1"
         src="test-file-stub"
-        width="120px"
       />
-    </styled.img>
+    </glamorous(img)>
   </Component>
 </MarketingBadge>
 `;
@@ -161,14 +155,14 @@ exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
     }
   }
 >
-  <styled.img
+  <glamorous(img)
     src="test-file-stub"
   >
     <img
-      className="cuDvmw"
+      className="css-13azwyo"
       src="test-file-stub"
     />
-  </styled.img>
+  </glamorous(img)>
 </MarketingBadge>
 `;
 
@@ -183,16 +177,15 @@ exports[`MarketingBadge should render PROMO_WEB 1`] = `
   <Component
     src="test-file-stub"
   >
-    <styled.img
+    <glamorous(img)
       src="test-file-stub"
       width="100px"
     >
       <img
-        className="GjBEV"
+        className="css-1bfg59v"
         src="test-file-stub"
-        width="100px"
       />
-    </styled.img>
+    </glamorous(img)>
   </Component>
 </MarketingBadge>
 `;

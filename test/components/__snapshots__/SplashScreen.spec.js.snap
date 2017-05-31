@@ -6,19 +6,19 @@ exports[`SplashScreen should otherwise render properly 1`] = `
   style={Object {}}
   to="/world"
 >
-  <styled.div>
-    <styled.div>
-      <styled.h1>
+  <glamorous(div)>
+    <glamorous(div)>
+      <glamorous(h1)>
         Accendi la tua voglia di estate
-      </styled.h1>
-      <styled.div>
+      </glamorous(h1)>
+      <glamorous(div)>
         Entra nel mondo giardino
-      </styled.div>
-    </styled.div>
-    <styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
       <ScreenSaver />
-    </styled.div>
-  </styled.div>
+    </glamorous(div)>
+  </glamorous(div)>
 </Link>
 `;
 

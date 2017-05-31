@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Div } from 'glamorous';
 
-import TutorialButton, { Wrapper } from '../../app/components/TutorialButton';
+import TutorialButton from '../../app/components/TutorialButton';
 
 const children = <button>click me</button>;
 
@@ -22,7 +23,7 @@ describe('TutorialButton', () => {
         {children}
       </TutorialButton>
     );
-    result.find(Wrapper).simulate('click');
+    result.find(Div).simulate('click');
     expect(result.state('open')).toBe(true);
     expect(result).toMatchSnapshot();
   });

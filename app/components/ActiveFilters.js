@@ -19,7 +19,7 @@ const Wrapper = glamorous.div(({ backgroundColor }) => ({
   }
 }));
 
-const Filter = glamorous.div(({ width = '150px', isActive = false }) => ({
+export const Filter = glamorous.div(({ width = '150px', isActive = false }) => ({
   height: '42px',
   borderRadius: '20px',
   display: 'flex',
