@@ -1,19 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
-import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
+import glamorous from 'glamorous';
 
 import SimilarProductBadge from './SimilarProductBadge';
 import CloseButton from './CloseButton';
 
-export const Slide = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-right: 75px;
-  margin-left: -35px;
-`;
+export const Slide = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginRight: '75px',
+  marginLeft: '-35px'
+});
 
 export default class SimilarProductsDialog extends Component {
   static propTypes = {
@@ -21,11 +21,11 @@ export default class SimilarProductsDialog extends Component {
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     selectedProduct: PropTypes.string.isRequired,
-  }
+  };
 
   static defaultProps = {
     similarProducts: List()
-  }
+  };
 
   // HACK this fixes a bug with slick
   componentDidUpdate() {

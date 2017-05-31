@@ -1,90 +1,90 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import TutorialButton from './TutorialButton';
 
 import FamilyBadge from './FamilyBadge';
 import LogoLM from '../assets/logo.png';
 
-const Wrapper = styled.div`
-  overflow-y: hidden;
-`;
+const Wrapper = glamorous.div({
+  overflowY: 'hidden'
+});
 
-const Row = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  width: 100%;
-`;
+const Row = glamorous.div({
+  display: 'flex',
+  flexFlow: 'row wrap',
+  justifyContent: 'space-between',
+  width: '100%'
+});
 
-const Logo = styled.div`
-  padding-top: 66px;
-  margin-bottom: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &>img {
-    width: 180px;
-    height: 130px;
+const Logo = glamorous.div({
+  paddingTop: '66px',
+  marginBottom: '27px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '&>img': {
+    width: '180px',
+    height: '130px'
   }
-`;
+});
 
-const GridWrapper = styled.div`
-  padding: 16px 40px 40px;
-`;
+const GridWrapper = glamorous.div({
+  padding: '16px 40px 40px'
+});
 
-const DoubleVertical = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+const DoubleVertical = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
+});
 
-const Banner = styled.div`
-  background: url(${props => props.url}) center no-repeat border-box padding-box;
-  width: 100%;
-  height: 120px;
-  font-size: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  margin-top: 30px;
-  color: #fff;
-  cursor: pointer;
-  font-family: LeroyMerlinSans Bold-Italic;
-`;
+const Banner = glamorous.div(({ url = '/' }) => ({
+  background: `url(${url}) center no-repeat border-box padding-box`,
+  width: '100%',
+  height: '120px',
+  fontSize: '32px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '0 20px',
+  marginTop: '30px',
+  color: '#fff',
+  cursor: 'pointer',
+  fontFamily: 'LeroyMerlinSans Bold-Italic'
+}));
 
-const TrailingImage = styled.img`
-  width: 100%;
-  height: 100px;
-`;
+const TrailingImage = glamorous.img({
+  width: '100%',
+  height: '100px'
+});
 
-const WorldTitle = styled.section`
-  line-height: 88px;
-  font-family: LeroyMerlinSans Italic;
-  margin: 0 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &>h1 {
-    font-size: 36px;
-    &>span{
-      color: #58c527;
+const WorldTitle = glamorous.section({
+  lineHeight: '88px',
+  fontFamily: 'LeroyMerlinSans Italic',
+  margin: '0 40px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '&>h1': {
+    fontSize: '36px',
+    '&>span': {
+      color: '#58c527'
     }
   }
-`;
+});
 
 export default class Home extends Component {
   static propTypes = {
     requestFetchWorld: PropTypes.func.isRequired,
     world: ImmutablePropTypes.map
-  }
+  };
 
   static defaultProps = {
     world: Map()
-  }
+  };
 
   componentDidMount() {
     this.props.requestFetchWorld();

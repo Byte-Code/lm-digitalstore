@@ -2,10 +2,10 @@
 
 exports[`DateBadge should render properly 1`] = `
 <DateBadge>
-  <styled.div>
+  <glamorous(div)>
     <div
-      className="dKoGBN"
+      className="css-a7u1rk"
     />
-  </styled.div>
+  </glamorous(div)>
 </DateBadge>
 `;

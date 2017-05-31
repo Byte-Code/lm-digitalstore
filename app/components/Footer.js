@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import { Link } from 'react-router';
 
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
@@ -8,35 +8,36 @@ import ArrowIcon from 'material-ui/svg-icons/navigation/arrow-back';
 import TutorialButton from './TutorialButton';
 import LinkBack from './LinkBack';
 
-const Wrapper = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  bottom: 0;
-  width: 100%;
-  height: 140px;
-  background: #333333;
-  &>* {
-    width: 33.33%;
-    border-right: 1px solid #67cb33;
+const Wrapper = glamorous.div({
+  position: 'fixed',
+  display: 'flex',
+  alignItems: 'center',
+  bottom: 0,
+  width: '100%',
+  height: '140px',
+  background: '#333333',
+  '&>*': {
+    width: '33.33%',
+    borderRight: '1px solid #67cb33'
+  },
+  '&>*:last-child': {
+    borderRight: 'none'
   }
-  &>*:last-child {
-    border-right: none;
-  }
-`;
+});
 
-const Button = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 100px;
-  width: 100%;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
-  position: relative;
-`;
+
+const Button = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  height: '100px',
+  width: '100%',
+  background: 'transparent',
+  color: '#fff',
+  cursor: 'pointer',
+  position: 'relative'
+});
 
 const Footer = () => (
   <Wrapper>

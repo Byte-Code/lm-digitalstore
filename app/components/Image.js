@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import getUrl from '../utils/cloudinary';
 
-const Img = styled.img`
-  background-color: #fff;
-`;
+const Img = glamorous.img({
+  backgroundColor: '#fff'
+});
 
 export default class Image extends Component {
   static propTypes = {
@@ -16,12 +16,12 @@ export default class Image extends Component {
       height: PropTypes.number,
       width: PropTypes.number
     })
-  }
+  };
 
   static defaultProps = {
     imageOptions: {},
     fixBrightColor: false
-  }
+  };
 
   render() {
     const { imageID, alt, imageOptions, fixBrightColor } = this.props;

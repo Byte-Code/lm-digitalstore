@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import verifystoreCode from './containers/verifystoreCode';
+import verifystoreCode from './containers/verifyStoreCode';
 import App from './containers/App';
-import HomePage from './pages/HomePage';
-import SplashScreenPage from './pages/SplashScreenPage';
-import CataloguePage from './pages/CataloguePage';
-import ProductPage from './pages/ProductPage';
-import InitializationPage from './pages/InitializationPage';
-import SelectStorePage from './pages/SelectStorePage';
+import HomePage from './Pages/HomePage';
+import SplashScreenPage from './Pages/SplashScreenPage';
+import CataloguePage from './Pages/CataloguePage';
+import ProductPage from './Pages/ProductPage';
+import InitializationPage from './Pages/InitializationPage';
+import SelectStorePage from './Pages/SelectStorePage';
 
 export default (
   <Route>

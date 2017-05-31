@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import Drawer from 'material-ui/Drawer';
 
 import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
 import FamilySideBar from '../containers/FamilySideBar';
 
-export const Button = styled.div`
-  width: 90px;
-  height: 120px;
-  background: #339900;
-  position: fixed;
-  left: ${props => (props.pLeft || 0)};
-  top: 70px;
-  z-index: 2;
-  cursor: pointer;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
-  display: ${props => (props.isVisible ? 'flex' : 'none')};
-  &>p {
-    text-align: center;
-    color: #fff;
-    font-size: 16px;
-    font-family: LeroyMerlinSans Italic;
+export const Button = glamorous.div(({ isVisible = false, left = 0 }) => ({
+  width: '90px',
+  height: '120px',
+  background: '#339900',
+  position: 'fixed',
+  left,
+  top: '70px',
+  zIndex: 2,
+  cursor: 'pointer',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px',
+  display: isVisible ? 'flex' : 'none',
+  '&>p': {
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: '16px',
+    fontFamily: 'LeroyMerlinSans Italic'
   }
-`;
+}));
 
-const Column = styled.div`
-  background: ${props => props.bgColor || '#fff'};
-  width: ${props => props.width || 'auto'};
-  box-shadow: ${props => props.bShadow || 'none'};
-  overflow: auto;
-`;
+const Column = glamorous.div(({ background, boxShadow = 'none', width = 'auto' }) => ({
+  background,
+  width,
+  boxShadow,
+  overflow: 'auto'
+}));
 
 export default class SideMenu extends Component {
-  static propTypes = {}
+  static propTypes = {};
 
   constructor(props) {
     super(props);
@@ -44,7 +44,7 @@ export default class SideMenu extends Component {
 
   toggleMenu = () => {
     this.setState({ open: !this.state.open });
-  }
+  };
 
   render() {
     const { open } = this.state;
@@ -64,16 +64,16 @@ export default class SideMenu extends Component {
           swipeAreaWidth={45}
         >
           <Column
-            bgColor="#fff"
+            background="#fff"
             width="275px"
-            bShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
+            boxShadow="rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px"
           >
             <FamilySideBar closeMenu={this.toggleMenu} />
           </Column>
-          <Column bgColor="transparent">
+          <Column background="transparent">
             <Button
               onClick={this.toggleMenu}
-              pLeft="275px"
+              left="275px"
               isVisible={open}
             >
               <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />

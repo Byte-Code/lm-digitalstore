@@ -5,11 +5,11 @@ exports[`MarketingFlag should render an empty div when no promotions are active 
   loyaltyProgram={Object {}}
   marketingAttributes={Object {}}
 >
-  <styled.div>
+  <glamorous(div)>
     <div
-      className="foyPkx"
+      className="css-c7um26"
     />
-  </styled.div>
+  </glamorous(div)>
 </MarketingFlag>
 `;
 
@@ -27,9 +27,9 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
     }
   }
 >
-  <styled.div>
+  <glamorous(div)>
     <div
-      className="foyPkx"
+      className="css-c7um26"
     >
       <MarketingBadge
         promotion={
@@ -50,30 +50,28 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
               }
             }
           >
-            <styled.img
+            <glamorous(img)
               height="50px"
               mBottom="18px"
               src="test-file-stub"
               width="100px"
             >
               <img
-                className="gJrHnD"
-                height="50px"
+                className="css-1mc4zot"
                 src="test-file-stub"
-                width="100px"
               />
-            </styled.img>
-            <styled.p>
+            </glamorous(img)>
+            <glamorous(p)>
               <p
-                className="bXfyzC"
+                className="css-178lsms"
               >
                 -10% IDEAPIÚ
               </p>
-            </styled.p>
+            </glamorous(p)>
           </div>
         </Component>
       </MarketingBadge>
     </div>
-  </styled.div>
+  </glamorous(div)>
 </MarketingFlag>
 `;

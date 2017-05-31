@@ -3,14 +3,14 @@
 exports[`Home should render null if world is empty 1`] = `null`;
 
 exports[`Home should render properly if world is not empty 1`] = `
-<styled.div>
-  <styled.div>
+<glamorous(div)>
+  <glamorous(div)>
     <img
       alt="logo"
       src="test-file-stub"
     />
-  </styled.div>
-  <styled.section>
+  </glamorous(div)>
+  <glamorous(section)>
     <h1>
       Esplora le soluzioni Leroy Merlin per
       <span>
@@ -18,9 +18,9 @@ exports[`Home should render properly if world is not empty 1`] = `
         Giardino e Terrazzo
       </span>
     </h1>
-  </styled.section>
-  <styled.div>
-    <styled.div>
+  </glamorous(section)>
+  <glamorous(div)>
+    <glamorous(div)>
       <FamilyBadge
         family={
           Object {
@@ -31,7 +31,7 @@ exports[`Home should render properly if world is not empty 1`] = `
         }
         size="square-big"
       />
-      <styled.div>
+      <glamorous(div)>
         <FamilyBadge
           family={
             Object {
@@ -52,8 +52,8 @@ exports[`Home should render properly if world is not empty 1`] = `
           }
           size="square-small"
         />
-      </styled.div>
-      <styled.div>
+      </glamorous(div)>
+      <glamorous(div)>
         <FamilyBadge
           family={
             Object {
@@ -74,9 +74,9 @@ exports[`Home should render properly if world is not empty 1`] = `
           }
           size="square-small"
         />
-      </styled.div>
-    </styled.div>
-    <styled.div>
+      </glamorous(div)>
+    </glamorous(div)>
+    <glamorous(div)>
       <FamilyBadge
         family={
           Object {
@@ -107,8 +107,8 @@ exports[`Home should render properly if world is not empty 1`] = `
         }
         size="square-small"
       />
-    </styled.div>
-    <styled.div>
+    </glamorous(div)>
+    <glamorous(div)>
       <FamilyBadge
         family={
           Object {
@@ -139,9 +139,9 @@ exports[`Home should render properly if world is not empty 1`] = `
         }
         size="horizontal"
       />
-    </styled.div>
+    </glamorous(div)>
     <TutorialButton>
-      <styled.div
+      <glamorous(div)
         url="test-file-stub"
       >
         Scopri le funzioni del Digital Store
@@ -154,12 +154,12 @@ exports[`Home should render properly if world is not empty 1`] = `
             }
           }
         />
-      </styled.div>
+      </glamorous(div)>
     </TutorialButton>
-  </styled.div>
-  <styled.img
+  </glamorous(div)>
+  <glamorous(img)
     alt="alt"
     src="test-file-stub"
   />
-</styled.div>
+</glamorous(div)>
 `;

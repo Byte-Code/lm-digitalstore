@@ -1,42 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import ProductBadge from './ProductBadge';
 import SimilarProductsDialog from './SimilarProductsDialog';
 
-const Wrapper = styled.div`
-  padding-left: 40px;
-  display: flex;
-`;
+const Wrapper = glamorous.div({
+  paddingLeft: '40px',
+  display: 'flex'
+});
 
-const Header = styled.div`
-  width: 130px;
-  &>h3 {
-    font-size: 16px;
-    text-transform: uppercase;
-    padding-right: 60px;
+const Header = glamorous.div({
+  width: '130px',
+  '&>h3': {
+    fontSize: '16px',
+    textTransform: 'uppercase',
+    paddingRight: '60px'
   }
-`;
+});
 
-const Slider = styled.div`
-  display: flex;
-  overflow-x: auto;
-  &>div {
-    margin-right: 20px;
+const Slider = glamorous.div({
+  display: 'flex',
+  overflowX: 'auto',
+  '&>div': {
+    marginRight: '20px'
   }
-`;
+});
 
 export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
     title: PropTypes.string.isRequired
-  }
+  };
 
   static defaultProps = {
     similarProducts: List()
-  }
+  };
 
   constructor(props) {
     super(props);

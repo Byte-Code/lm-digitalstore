@@ -1,56 +1,56 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
-const Wrapper = styled.div`
-  height: 179px;
-  background: #333333;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 35px 0 47px;
-`;
+const Wrapper = glamorous.div({
+  height: '179px',
+  background: '#333333',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  padding: '35px 0 47px'
+});
 
-const GroupName = styled.p`
-  font-size: 20px;
-  font-family: LeroyMerlinSans Light;
-  text-align: center;
-  line-height: 32px;
-  color: #fff;
-  width: 100%;
-`;
+const GroupName = glamorous.p({
+  fontSize: '20px',
+  fontFamily: 'LeroyMerlinSans Light',
+  textAlign: 'center',
+  lineHeight: '32px',
+  color: '#fff',
+  width: '100%'
+});
 
-const FilterWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-self: flex-end;
-  &>div {
-    margin-right: 10px;
+const FilterWrapper = glamorous.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignSelf: 'flex-end',
+  '&>div': {
+    marginRight: '10px'
+  },
+  '&>div:last-child': {
+    marginRight: 0
   }
-  &>div:last-child {
-    margin-right: 0;
-  }
-`;
+});
 
-export const Filter = styled.div`
-  min-width: 150px;
-  max-width: 300px;
-  padding: 0 20px;
-  height: 42px;
-  border-radius: 20px;
-  background-color: ${props => (props.isActive ? '#67cb33' : '#efefef')};
-  color: ${props => (props.isActive ? '#efefef' : '#333333')}
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &>p {
-    line-height: 20px;
-    font-size: 16px;
-    text-align: center;
+export const Filter = glamorous.div(({ isActive = false }) => ({
+  minWidth: '150px',
+  maxWidth: '300px',
+  padding: '0 20px',
+  height: '42px',
+  borderRadius: '20px',
+  backgroundColor: isActive ? '#67cb33' : '#efefef',
+  color: isActive ? '#efefef' : '#333333',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+  '&>p': {
+    lineHeight: '20px',
+    fontSize: '16px',
+    textAlign: 'center'
   }
-`;
+}));
 
 export default class SellingAidsBadge extends Component {
   static propTypes = {

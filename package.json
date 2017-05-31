@@ -8,6 +8,7 @@
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest ./test/*",
     "test-all": "npm run lint && npm run test && npm run build",
     "test-watch": "npm test --watch",
+    "snap": "jest -u",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest ./test/e2e.spec.js",
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",
@@ -202,6 +203,7 @@
     "lm-remote-api": "^0.0.16",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
+    "precommit-hook": "^3.0.0",
     "qrcode.react": "^0.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -213,11 +215,13 @@
     "redux-immutable": "^3.1.0",
     "redux-mock-store": "^1.2.3",
     "redux-saga": "^0.14.3",
-    "source-map-support": "^0.4.10",
-    "styled-components": "^1.4.6"
+    "source-map-support": "^0.4.10"
   },
   "devEngines": {
     "node": ">=6.x",
     "npm": ">=3.x"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }

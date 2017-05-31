@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
-<styled.div>
-  <styled.div>
+<glamorous(div)>
+  <glamorous(div)>
     <h3>
       title
     </h3>
-  </styled.div>
-  <styled.div>
+  </glamorous(div)>
+  <glamorous(div)>
     <ProductBadge
       handleClick={[Function]}
       productInfo={
@@ -32,7 +32,7 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
         }
       }
     />
-  </styled.div>
+  </glamorous(div)>
   <SimilarProductsDialog
     handleClose={[Function]}
     isOpen={false}
@@ -51,17 +51,17 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
       ]
     }
   />
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`SimilarProducts should otherwise render a list of similarProducts 1`] = `
-<styled.div>
-  <styled.div>
+<glamorous(div)>
+  <glamorous(div)>
     <h3>
       title
     </h3>
-  </styled.div>
-  <styled.div>
+  </glamorous(div)>
+  <glamorous(div)>
     <ProductBadge
       handleClick={[Function]}
       productInfo={
@@ -86,7 +86,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
         }
       }
     />
-  </styled.div>
+  </glamorous(div)>
   <SimilarProductsDialog
     handleClose={[Function]}
     isOpen={false}
@@ -105,7 +105,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
       ]
     }
   />
-</styled.div>
+</glamorous(div)>
 `;
 
 exports[`SimilarProducts should render null when similarProducts are empty 1`] = `null`;

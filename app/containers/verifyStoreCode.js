@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import hoistStatics from 'hoist-non-react-statics';
 import { getStoreCode } from '../reducers/selectors';
-import { replace } from 'react-router-redux';
 
 export default function (WrappedComponent) {
   class verifystoreCode extends Component {
@@ -27,3 +28,4 @@ export default function (WrappedComponent) {
   const connected = connect(mapStateToProps, { replace })(verifystoreCode);
   return hoistStatics(connected, WrappedComponent);
 }
+/* eslint-disable */

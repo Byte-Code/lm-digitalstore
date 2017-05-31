@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
-<styled.div
+<glamorous.Div
   onClick={[Function]}
 >
   <p>
@@ -33,18 +33,18 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
       right={0}
       top={0}
     />
-    <styled.div>
+    <glamorous(div)>
       <p>
         genera qr-code
       </p>
-    </styled.div>
-    <styled.h1>
+    </glamorous(div)>
+    <glamorous(h1)>
       Genera QR-Code
-    </styled.h1>
-    <styled.p>
+    </glamorous(h1)>
+    <glamorous(p)>
       Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
-    </styled.p>
-    <styled.div>
+    </glamorous(p)>
+    <glamorous(div)>
       <QRCode
         bgColor="#FFFFFF"
         fgColor="#000000"
@@ -52,13 +52,13 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
         size={200}
         value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
       />
-    </styled.div>
+    </glamorous(div)>
   </Dialog>
-</styled.div>
+</glamorous.Div>
 `;
 
 exports[`PurchaseDialog should open the dialog once clicked 1`] = `
-<styled.div
+<glamorous.Div
   onClick={[Function]}
 >
   <p>
@@ -90,18 +90,18 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
       right={0}
       top={0}
     />
-    <styled.div>
+    <glamorous(div)>
       <p>
         genera qr-code
       </p>
-    </styled.div>
-    <styled.h1>
+    </glamorous(div)>
+    <glamorous(h1)>
       Genera QR-Code
-    </styled.h1>
-    <styled.p>
+    </glamorous(h1)>
+    <glamorous(p)>
       Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
-    </styled.p>
-    <styled.div>
+    </glamorous(p)>
+    <glamorous(div)>
       <QRCode
         bgColor="#FFFFFF"
         fgColor="#000000"
@@ -109,7 +109,7 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
         size={200}
         value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
       />
-    </styled.div>
+    </glamorous(div)>
   </Dialog>
-</styled.div>
+</glamorous.Div>
 `;

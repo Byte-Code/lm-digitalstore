@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import MarketingBadge from './MarketingBadge';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 10px;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
+  marginBottom: 10
+});
 
 export default class MarketingFlag extends Component {
   static propTypes = {
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired
-  }
+  };
 
   renderBadges() {
     const { marketingAttributes, loyaltyProgram } = this.props;

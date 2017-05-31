@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 import { fromJS, List } from 'immutable';
 import Toggle from 'material-ui/Toggle';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
@@ -8,96 +8,96 @@ import UndoIcon from 'material-ui/svg-icons/content/undo';
 
 import FilterButton from '../containers/FilterButton';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  margin: 40px 0;
-`;
+const Wrapper = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  color: '#fff',
+  margin: '40px 0'
+});
 
-const Header = styled.div`
-  display: flex;
-  height: 41px;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  margin: 0 40px 40px;
-`;
+const Header = glamorous.div({
+  display: 'flex',
+  height: '41px',
+  justifyContent: 'space-between',
+  marginBottom: '30px',
+  margin: '0 40px 40px'
+});
 
-export const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &>p {
-    color: #fff;
-    font-family: ${props => props.fFamily};
-    font-size: ${props => props.fSize};
-    text-decoration: ${props => props.tDeco};
-    margin-left: 12px;
+export const Button = glamorous.div(({ fontFamily, fontSize, textDecoration }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+  '&>p': {
+    color: '#fff',
+    fontFamily,
+    fontSize,
+    textDecoration,
+    marginLeft: '12px'
   }
-`;
+}));
 
-const Groups = styled.div`
-margin: 0 40px;
-`;
+const Groups = glamorous.div({
+  margin: '0 40px'
+});
 
-const GroupWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-`;
+const GroupWrapper = glamorous.div({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  marginBottom: '10px'
+});
 
-const GroupTitle = styled.div`
-  font-size: 16px;
-  text-transform: uppercase;
-  margin-bottom: 13px;
-  font-family: LeroyMerlinSans Light;
-`;
+const GroupTitle = glamorous.div({
+  fontSize: '16px',
+  textTransform: 'uppercase',
+  marginBottom: '13px',
+  fontFamily: 'LeroyMerlinSans Light'
+});
 
-const FilterWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  &>div {
-    margin-right: 10px;
+const FilterWrapper = glamorous.div({
+  display: 'flex',
+  flexWrap: 'wrap',
+  '&>div': {
+    marginRight: '10px'
+  },
+  '&>div:last-child': {
+    marginRight: 0
   }
-  &>div:last-child {
-    margin-right: 0;
-  }
-`;
+});
 
-const Availability = styled.div`
-  background: rgba(103, 203, 51, 0.1);
-  display: flex;
-  flex-direction: column;
-  padding: 14px 40px;
-  margin-bottom: 31px;
-  &>p {
-    font-size: 16px;
-    color: #fff;
-    text-transform: uppercase;
-    font-family: LeroyMerlinSans Light;
-    margin-bottom: 13px;
+const Availability = glamorous.div({
+  background: 'rgba(103, 203, 51, 0.1)',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '14px 40px',
+  marginBottom: '31px',
+  '&>p': {
+    fontSize: '16px',
+    color: '#fff',
+    textTransform: 'uppercase',
+    fontFamily: 'LeroyMerlinSans Light',
+    marginBottom: '13px'
   }
-`;
+});
 
-export const Filter = styled.div`
-  width: 150px;
-  height: 42px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  background-color: ${props => (props.isActive ? '#67cb33' : '#efefef')};
-  color: ${props => (props.isActive ? '#efefef' : '#333333')}
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &>p {
-    line-height: 20px;
-    font-size: 16px;
-    text-align: center;
+export const Filter = glamorous.div(({ isActive = false }) => ({
+  width: '150px',
+  height: '42px',
+  borderRadius: '20px',
+  marginBottom: '20px',
+  backgroundColor: isActive ? '#67cb33' : '#efefef',
+  color: isActive ? '#efefef' : '#333333',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'pointer',
+  '&>p': {
+    lineHeight: '20px',
+    fontSize: '16px',
+    textAlign: 'center'
   }
-`;
+}));
 
 export default class FilterDialog extends Component {
   static propTypes = {
@@ -174,8 +174,8 @@ export default class FilterDialog extends Component {
       <Wrapper>
         <Header>
           <Button
-            fFamily="LeroyMerlinSans Light"
-            fSize="20px"
+            fontFamily="LeroyMerlinSans Light"
+            fontSize="20px"
             onClick={handleClose}
             id="close-filterDialog"
           >
@@ -183,8 +183,8 @@ export default class FilterDialog extends Component {
             <p>Chiudi Filtri</p>
           </Button>
           <Button
-            tDeco="underline"
-            fSize="16px"
+            textDecoration="underline"
+            fontSize="16px"
             onClick={this.resetFilters}
             id="reset-filterDialog"
           >

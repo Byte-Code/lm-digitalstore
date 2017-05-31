@@ -1,31 +1,31 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import { getFilteredIDs } from '../reducers/selectors';
 
-const ApplyButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 320px;
-  height: 60px;
-  background: ${props => (props.isActive ? '#339900' : '#e4e4e4')};
-  cursor: ${props => (props.isActive ? 'pointer' : 'not-allowed')};
-  margin-top: 22px;
-  align-self: center;
-  &>p {
-    color: #fff;
-    font-family: ${props => props.fFamily};
-    font-size: ${props => props.fSize};
-    text-decoration: ${props => props.tDeco};
-    margin-left: 12px;
+const ApplyButton = glamorous.div(({ fontFamily, fontSize, textDecoration, isActive = false }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '320px',
+  height: '60px',
+  background: isActive ? '#339900' : '#e4e4e4',
+  cursor: isActive ? 'pointer' : 'not-allowed',
+  marginTop: '22px',
+  alignSelf: 'center',
+  '&>p': {
+    color: '#fff',
+    fontFamily,
+    fontSize,
+    textDecoration,
+    marginLeft: '12px'
   }
-`;
+}));
 
 const FilterButton = ({ onApply, result }) => (
   <ApplyButton
-    fSize="20px"
+    fontSize="20px"
     onClick={result > 0 ? onApply : () => null}
     isActive={result > 0}
   >

@@ -3,6 +3,7 @@ const os = require('os');
 export default function getIpAddresses() {
   const interfaces = os.networkInterfaces();
   const addresses = [];
+  /* eslint-disable */
   for (const k in interfaces) {
     for (const k2 in interfaces[k]) {
       const address = interfaces[k][k2];
@@ -11,6 +12,7 @@ export default function getIpAddresses() {
       }
     }
   }
+  /* eslint-disable */
 
   return addresses;
 }

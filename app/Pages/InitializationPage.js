@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import LinearProgress from 'material-ui/LinearProgress';
-import styled from 'styled-components';
+import glamorous from 'glamorous';
 
 import Page from '../components/Page';
 import { setStoreCode } from '../actions/storeActions';
 import getIpAddresses from '../utils/get-ip-addresses';
 import { isWhitelisted, getStoreCodeFromIpAddress } from '../utils/store-code-utils';
 
-const Title = styled.h1`
-  padding-top: 120px;
-  color: white;
-  text-align: center;
-  margin-bottom: 12px;
-`;
-const Wrapper = styled.div`
-  margin: 0 auto;
-  display: flex;
-  width: 260px;
-  justify-content: center;
-  height: 100vh;
-  align-items: center;
-  flex-direction: column;
-`;
+const Title = glamorous.h1({
+  paddingTop: '120px',
+  color: 'white',
+  textAlign: 'center',
+  marginBottom: '12px'
+});
+
+const Wrapper = glamorous.div({
+  margin: '0 auto',
+  display: 'flex',
+  width: '260px',
+  justifyContent: 'center',
+  height: '100vh',
+  alignItems: 'center',
+  flexDirection: 'column'
+});
 
 class InitializationPage extends Component {
   constructor() {
@@ -40,14 +41,13 @@ class InitializationPage extends Component {
 
   componentDidUpdate() {
     const { ipAddress } = this.state;
-    const { replace, setStoreCode } = this.props;
 
     if (ipAddress) {
       if (isWhitelisted(ipAddress)) {
         const storeCode = getStoreCodeFromIpAddress(ipAddress);
-        setStoreCode(storeCode);
+        this.props.setStoreCode(storeCode);
       } else {
-        replace('/store-selection');
+        this.props.replace('/store-selection');
       }
     }
   }
@@ -62,7 +62,7 @@ class InitializationPage extends Component {
         });
       }
     }, 1000);
-  }
+  };
 
   render() {
     if (!this.state.ipAddress) {
@@ -81,5 +81,10 @@ class InitializationPage extends Component {
     return null;
   }
 }
+
+InitializationPage.propTypes = {
+  setStoreCode: PropTypes.func.isRequired,
+  replace: PropTypes.func.isRequired
+};
 
 export default connect(null, { replace, setStoreCode })(InitializationPage);
