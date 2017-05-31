@@ -1,9 +1,16 @@
 # lm-digital-store
 
-Leroy Merlin Kiosk app built on top of:
+Leroy Merlin Kiosk App built on top of:
 [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate), which you should **always refer to in case of problems**.
 
-> Using: [React](https://facebook.github.io/react/), [Redux](https://github.com/reactjs/redux), [Redux-Saga](https://github.com/redux-saga/redux-saga), [React Router](https://github.com/reactjs/react-router), [Jest](https://github.com/facebook/jest).
+> Tech Stack:
+[Electron](https://github.com/electron/electron),
+[React](https://facebook.github.io/react/),
+[Redux](https://github.com/reactjs/redux),
+[Redux-Saga](https://github.com/redux-saga/redux-saga),
+[React Router](https://github.com/reactjs/react-router),
+[Jest](https://github.com/facebook/jest),
+[Enzyme](https://github.com/airbnb/enzyme).
 
 ## Install
 
@@ -23,50 +30,33 @@ And then install dependencies.
 $ cd your-project-name && yarn
 ```
 
-Or old school cool:
+Or the old school cool way:
 ```bash
 $ cd your-project-name && npm install
 ```
 
 ## Run
 
-Run these two commands __simultaneously__ in different console tabs.
+Development mode:
 
 ```bash
-$ npm run hot-server
-$ npm run start-hot
+$ yarn dev
 ```
 
-or run two servers with one command
+Production mode (without packaging):
+
+* **Note: doing this is gonna throw an harmless error since electron auto-updater is not able to find the app-update.yml file. I suggest going through the packaging first if you need to test that functionality.**
 
 ```bash
-$ npm run dev
+$ yarn prod
 ```
-
-## DevTools
-
-#### Toggle Chrome DevTools
-
-- OS X: <kbd>Cmd</kbd> <kbd>Alt</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
-- Linux: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
-- Windows: <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd> or <kbd>F12</kbd>
-
-*See [electron-debug](https://github.com/sindresorhus/electron-debug) for more information.*
-
-#### DevTools extension
-
-This boilerplate is included following DevTools extensions:
-
-* [Devtron](https://github.com/electron/devtron) - Install via [electron-debug](https://github.com/sindresorhus/electron-debug).
-* [React Developer Tools](https://github.com/facebook/react-devtools) - Install via [electron-devtools-installer](https://github.com/GPMDP/electron-devtools-installer).
-* [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension) - Install via [electron-devtools-installer](https://github.com/GPMDP/electron-devtools-installer).
 
 ## Packaging
 
 To package apps for the local platform:
 
 ```bash
-$ npm run package
+$ yarn package
 ```
 
 To package apps for all platforms:
@@ -75,13 +65,13 @@ First, refer to [Multi Platform Build](https://github.com/electron-userland/elec
 
 Then,
 ```bash
-$ npm run package-all
+$ yarn package-all
 ```
 
 To package apps with options:
 
 ```bash
-$ npm run package -- --[option]
+$ yarn package -- --[option]
 ```
 
 ## Release
@@ -89,31 +79,22 @@ $ npm run package -- --[option]
 **First, set GH_TOKEN as ENV variable.**
 
 Upgrade version, then run:
+
 ```bash
 $ yarn release
 ```
 
 This will create a draft release on github, that you need to confirm.
+
 #### Pre-Release
 
-Before a pre-releases you should **remember to disable auto-update functionality** by commenting the appropriate lines.
+* **Note: before a pre-releases you should remember to disable auto-update functionality by commenting the appropriate lines.**
+* **Remember to tick the apposite checkbox before confirming the draft.**
 
-**Also remember to tick the apposite checkbox before confirming the draft.**
-
-## Further commands
-
-To run the application without packaging run
+## Test
 
 ```bash
-$ npm run build
-$ npm start
-```
-
-To run End-to-End Test
-
-```bash
-$ npm run build
-$ npm run test-e2e
+$ yarn test
 ```
 
 ## Authors
