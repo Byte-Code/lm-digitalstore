@@ -25,7 +25,6 @@ const Wrapper = glamorous.div({
   }
 });
 
-
 const Button = glamorous.div({
   display: 'flex',
   flexDirection: 'column',
@@ -39,23 +38,25 @@ const Button = glamorous.div({
   position: 'relative'
 });
 
+const iconStyle = { height: 50, width: 50 };
+
 const Footer = () => (
   <Wrapper>
     <LinkBack>
       <Button>
-        <ArrowIcon color="#fff" style={{ height: 50, width: 50 }} />
+        <ArrowIcon color="#fff" style={iconStyle} />
         <p>Indietro</p>
       </Button>
     </LinkBack>
     <Link to="/world">
       <Button>
-        <HomeIcon color="#fff" style={{ height: 50, width: 50 }} />
+        <HomeIcon color="#fff" style={iconStyle} />
         <p>Homepage</p>
       </Button>
     </Link>
     <TutorialButton>
       <Button>
-        <HelpIcon color="#fff" style={{ height: 50, width: 50 }} />
+        <HelpIcon color="#fff" style={iconStyle} />
         <p>Scopri il Digital Store</p>
       </Button>
     </TutorialButton>

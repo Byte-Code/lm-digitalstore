@@ -31,6 +31,9 @@ const Buttons = glamorous.div({
   margin: '50px 0'
 });
 
+const storeButtonStyle = { margin: '0 20px 20px', width: 225 };
+const confirmButtonStyle = { width: 300, height: 50, color: '#fff' };
+
 class SelectStorePage extends Component {
   static propTypes = {
     setStoreCode: PropTypes.func.isRequired
@@ -54,7 +57,7 @@ class SelectStorePage extends Component {
               <RaisedButton
                 key={store.storeCode}
                 onTouchTap={() => this.handleChange(store.storeCode)}
-                style={{ margin: '0 20px 20px', width: 225 }}
+                style={storeButtonStyle}
                 primary={this.state.storeCode === store.storeCode}
               >
                 {store.storeName}
@@ -68,7 +71,7 @@ class SelectStorePage extends Component {
                   this.props.setStoreCode(this.state.storeCode);
                 }
               }}
-              style={{ width: 300, height: 50, color: '#fff' }}
+              style={confirmButtonStyle}
               secondary
               label="SET STORE ID"
               labelColor="#fff"

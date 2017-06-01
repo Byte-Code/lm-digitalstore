@@ -21,6 +21,9 @@ export const Button = glamorous.div(({ bgColor }) => ({
   cursor: 'pointer'
 }));
 
+const contentStyle = { width: 1000, maxWidth: 'none' };
+const bodyStyle = { padding: '75px 70px', background: '#333333' };
+
 export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
@@ -54,8 +57,8 @@ export default class AvailabilityButton extends Component {
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.dialogOpen}
-          contentStyle={{ width: 1000, maxWidth: 'none' }}
-          bodyStyle={{ padding: '75px 70px', background: '#333333' }}
+          contentStyle={contentStyle}
+          bodyStyle={bodyStyle}
         >
           <CloseButton handleClick={this.handleClose} />
           <AvailabilityMap

@@ -24,12 +24,15 @@ const Availability = glamorous.div({
   }
 });
 
+const checkIconStyle = { width: 40, height: 45 };
+const blockIconStyle = { width: 65, height: 45 };
+
 function getStockIcon(stock, stockStatus) {
   if (stock > 0) {
-    return <CheckIcon style={{ width: 40, height: 45 }} color="#58c527" />;
+    return <CheckIcon style={checkIconStyle} color="#58c527" />;
   }
   if (stockStatus === 'notAvailable') {
-    return <BlockIcon style={{ width: 65, height: 45 }} color="#dddddd" />;
+    return <BlockIcon style={blockIconStyle} color="#dddddd" />;
   }
   return null;
 }

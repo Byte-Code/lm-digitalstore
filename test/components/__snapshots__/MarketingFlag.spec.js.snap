@@ -43,32 +43,30 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
           src="test-file-stub"
           value={10}
         >
-          <div
-            style={
-              Object {
-                "position": "relative",
-              }
-            }
-          >
-            <glamorous(img)
-              height="50px"
-              mBottom="18px"
-              src="test-file-stub"
-              width="100px"
+          <glamorous(div)>
+            <div
+              className="css-13azwyo"
             >
-              <img
-                className="css-1mc4zot"
+              <glamorous(img)
+                height="50px"
+                mBottom="18px"
                 src="test-file-stub"
-              />
-            </glamorous(img)>
-            <glamorous(p)>
-              <p
-                className="css-178lsms"
+                width="100px"
               >
-                -10% IDEAPIÚ
-              </p>
-            </glamorous(p)>
-          </div>
+                <img
+                  className="css-1mc4zot"
+                  src="test-file-stub"
+                />
+              </glamorous(img)>
+              <glamorous(p)>
+                <p
+                  className="css-178lsms"
+                >
+                  -10% IDEAPIÚ
+                </p>
+              </glamorous(p)>
+            </div>
+          </glamorous(div)>
         </Component>
       </MarketingBadge>
     </div>

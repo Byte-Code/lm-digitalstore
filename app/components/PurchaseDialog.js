@@ -39,6 +39,9 @@ const Content = glamorous.div({
   alignItems: 'center'
 });
 
+const contentStyle = { width: '100%' };
+const bodyStyle = { padding: 75, background: '#fff' };
+
 export default class PurchaseDialog extends Component {
   static propTypes = {
     productCode: PropTypes.string.isRequired,
@@ -72,8 +75,8 @@ export default class PurchaseDialog extends Component {
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.open}
-          contentStyle={{ width: '100%' }}
-          bodyStyle={{ padding: 75, background: '#fff' }}
+          contentStyle={contentStyle}
+          bodyStyle={bodyStyle}
         >
           <CloseButton handleClick={this.handleClose} backgroundColor="#fff" />
           <Header>

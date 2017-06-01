@@ -83,7 +83,9 @@ const Button = glamorous.div({
   fontFamily: 'LeroyMerlinSans Bold'
 });
 
-const SimilarProductBadge = (props) => {
+const iconStyle = { height: 32, width: 37, marginLeft: 10 };
+
+const SimilarProductBadge = props => {
   const { productInfo } = props;
   const name = productInfo.get('name');
   const code = productInfo.get('code');
@@ -104,12 +106,7 @@ const SimilarProductBadge = (props) => {
     <Wrapper>
       <Title>{name}</Title>
       <Ref>REF. {code}</Ref>
-      <Image
-        imageID={image}
-        fixBrightColor
-        alt="alt"
-        imageOptions={imageOptions}
-      />
+      <Image imageID={image} fixBrightColor alt="alt" imageOptions={imageOptions} />
       <InfoWrapper>
         <Description>{description}</Description>
         <PriceAndStock>
@@ -126,7 +123,7 @@ const SimilarProductBadge = (props) => {
       <Link to={`/product/${code}`}>
         <Button>
           Dettagli Prodotto
-          <ArrowIcon color="#fff" style={{ height: 32, width: 37, marginLeft: 10 }} />
+          <ArrowIcon color="#fff" style={iconStyle} />
         </Button>
       </Link>
     </Wrapper>

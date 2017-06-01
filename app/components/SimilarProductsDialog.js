@@ -16,6 +16,9 @@ export const Slide = glamorous.div({
   marginLeft: '-35px'
 });
 
+const contentStyle = { width: '100%', maxWidth: 'none', background: 'transparent' };
+const bodyStyle = { padding: 0, background: 'transparent' };
+
 export default class SimilarProductsDialog extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
@@ -77,8 +80,8 @@ export default class SimilarProductsDialog extends Component {
         onRequestClose={handleClose}
         open={isOpen}
         contentClassName="similarDialog"
-        contentStyle={{ width: '100%', maxWidth: 'none', background: 'transparent' }}
-        bodyStyle={{ padding: 0, background: 'transparent' }}
+        contentStyle={contentStyle}
+        bodyStyle={bodyStyle}
       >
         <CloseButton handleClick={handleClose} top={-250} />
         <Slick {...settings}>

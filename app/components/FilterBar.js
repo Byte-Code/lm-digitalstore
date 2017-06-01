@@ -29,6 +29,10 @@ export const Button = glamorous.div({
   }
 });
 
+const iconStyle = { height: 30, width: 30 };
+const contentStyle = { width: '100%', maxWidth: 'none' };
+const bodyStyle = { padding: 0, background: 'rgba(51, 51, 51, 0.8)' };
+
 export default class FilterBar extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
@@ -72,7 +76,7 @@ export default class FilterBar extends Component {
     return (
       <Wrapper>
         <Button onClick={this.handleOpen}>
-          <AddIcon color="#fff" style={{ height: 30, width: 30 }} />
+          <AddIcon color="#fff" style={iconStyle} />
           <p>Piú filtri</p>
         </Button>
         <ActiveFilters
@@ -87,8 +91,8 @@ export default class FilterBar extends Component {
           modal={false}
           onRequestClose={this.handleClose}
           open={this.state.open}
-          contentStyle={{ width: '100%', maxWidth: 'none' }}
-          bodyStyle={{ padding: 0, background: 'rgba(51, 51, 51, 0.8)' }}
+          contentStyle={contentStyle}
+          bodyStyle={bodyStyle}
         >
           <FilterDialog
             filterGroups={this.props.filterGroups}

@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
+
+const style = (fill, top, right, backgroundColor) => ({
+  fill,
+  backgroundColor,
+  top,
+  right,
+  width: 80,
+  height: 80,
+  position: 'absolute',
+  cursor: 'pointer'
+});
 
 const CloseButton = ({ handleClick, top, right, backgroundColor, fill }) => (
   <BlockIcon
-    style={{
-      fill,
-      backgroundColor,
-      top,
-      right,
-      width: 80,
-      height: 80,
-      position: 'absolute',
-      cursor: 'pointer'
-    }}
+    style={style(fill, top, right, backgroundColor)}
     color="#fff"
     onTouchTap={e => {
       if (e) {

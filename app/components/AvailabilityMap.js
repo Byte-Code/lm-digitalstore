@@ -59,6 +59,9 @@ const Radius = glamorous.div({
   fontFamily: 'LeroyMerlinSans Light-Italic'
 });
 
+const sliderStyle = { marginBottom: 24 };
+const mapOptions = { fullscreenControl: false, maxZoom: 17, minZoom: 8, zoomControl: false };
+
 export default class AvailabilityMap extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
@@ -176,7 +179,7 @@ export default class AvailabilityMap extends Component {
           value={range}
           onChange={this.onChangeSlider}
           color="#67cb33"
-          sliderStyle={{ marginBottom: 24 }}
+          sliderStyle={sliderStyle}
         />
         <Radius>{`${range} km`}</Radius>
         <Map>
@@ -184,7 +187,7 @@ export default class AvailabilityMap extends Component {
             center={center}
             defaultZoom={11}
             fullscreenControl={false}
-            options={{ fullscreenControl: false, maxZoom: 17, minZoom: 8, zoomControl: false }}
+            options={mapOptions}
             onChange={this.updateZoom}
           >
             {this.renderMarkers()}

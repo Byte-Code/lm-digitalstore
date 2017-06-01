@@ -56,6 +56,15 @@ const Address = glamorous.div({
   }
 });
 
+const iconStyle = {
+  width: 24,
+  height: 24,
+  position: 'absolute',
+  top: 5,
+  right: 5,
+  cursor: 'pointer'
+};
+
 const InfoWindow = ({ currentStoreInfo, handleClick }) => {
   const name = currentStoreInfo.get('name');
   const availability = currentStoreInfo.get('storeStock');
@@ -69,18 +78,7 @@ const InfoWindow = ({ currentStoreInfo, handleClick }) => {
 
   return (
     <Wrapper>
-      <BlockIcon
-        style={{
-          width: 24,
-          height: 24,
-          position: 'absolute',
-          top: 5,
-          right: 5,
-          cursor: 'pointer'
-        }}
-        fill="#333333"
-        onTouchTap={handleClick}
-      />
+      <BlockIcon style={iconStyle} fill="#333333" onTouchTap={handleClick} />
       <div>
         <StoreName>{name}</StoreName>
         <Address>

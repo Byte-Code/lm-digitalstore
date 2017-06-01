@@ -34,6 +34,10 @@ const Label = glamorous.p({
   textTransform: 'uppercase'
 });
 
+const IdeaWrapper = glamorous.div({
+  position: 'relative'
+});
+
 export const PrezzoGiu = ({ src }) => <Badge height="100px" width="100px" src={src} />;
 
 export const PromoWeb = ({ src }) => <Badge width="100px" src={src} />;
@@ -45,10 +49,10 @@ export const PrezzoVincente = ({ src }) => <Badge height="20px" width="120px" sr
 export const PrezzoStock = ({ src }) => <Badge height="20px" width="120px" src={src} />;
 
 export const IdeaPiu = ({ src, value }) => (
-  <div style={{ position: 'relative' }}>
+  <IdeaWrapper>
     <Badge height="50px" width="100px" src={src} mBottom="18px" />
     <Label>{`-${value}% IDEAPIÚ`}</Label>
-  </div>
+  </IdeaWrapper>
 );
 
 const MarketingBadge = ({ promotion }) => {

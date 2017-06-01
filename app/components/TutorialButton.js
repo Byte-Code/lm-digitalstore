@@ -20,6 +20,14 @@ const Img = glamorous.img({
   height: '1420px'
 });
 
+const contentStyle = {
+  width: '100%',
+  maxWidth: 'none',
+  background: 'transparent',
+  height: 1420
+};
+const bodyStyle = { padding: 0, background: 'transparent' };
+
 class TutorialButton extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired
@@ -61,13 +69,8 @@ class TutorialButton extends Component {
           onRequestClose={this.closeDialog}
           open={this.state.open}
           contentClassName="similarDialog"
-          contentStyle={{
-            width: '100%',
-            maxWidth: 'none',
-            background: 'transparent',
-            height: 1420
-          }}
-          bodyStyle={{ padding: 0, background: 'transparent' }}
+          contentStyle={contentStyle}
+          bodyStyle={bodyStyle}
         >
           <CloseButton handleClick={this.closeDialog} top={-250} />
           <Slick {...settings}>

@@ -20,12 +20,14 @@ const WhiteBg = glamorous.div({
   backgroundColor: '#fff'
 });
 
+const iconStyle = { height: 55, width: 55, cursor: 'pointer' };
+
 const Marker = ({ handleClick, isCurrentStore, isAvailable }) => {
   const Icon = isCurrentStore ? MyPlaceIcon : PlaceIcon;
   const iconColor = isAvailable ? '#67cb33' : '#000';
   return (
     <Wrapper onClick={handleClick}>
-      <Icon style={{ height: 55, width: 55, cursor: 'pointer' }} color={iconColor} />
+      <Icon style={iconStyle} color={iconColor} />
       <WhiteBg />
     </Wrapper>
   );

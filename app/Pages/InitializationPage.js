@@ -27,6 +27,8 @@ const Wrapper = glamorous.div({
   flexDirection: 'column'
 });
 
+const progressStyle = { width: '100%' };
+
 class InitializationPage extends Component {
   constructor() {
     super();
@@ -72,7 +74,7 @@ class InitializationPage extends Component {
             <Title>
               initializing...
             </Title>
-            <LinearProgress style={{ width: '100%' }} />
+            <LinearProgress style={progressStyle} />
           </Wrapper>
         </Page>
       );

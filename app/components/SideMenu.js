@@ -34,6 +34,9 @@ const Column = glamorous.div(({ background, boxShadow = 'none', width = 'auto' }
   overflow: 'auto'
 }));
 
+const iconStyle = { height: 50, width: 50 };
+const drawerContainerStyle = { background: 'transparent', boxShadow: 'none', display: 'flex' };
+
 export default class SideMenu extends Component {
   static propTypes = {};
 
@@ -52,15 +55,15 @@ export default class SideMenu extends Component {
     return (
       <div>
         <Button onClick={this.toggleMenu} isVisible={!open}>
-          <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
+          <FlowerIcon color="#fff" style={iconStyle} />
           <p>Giardino & Terrazzo</p>
         </Button>
         <Drawer
           docked={false}
           width={365}
           open={open}
-          onRequestChange={(value) => this.setState({ open: value })}
-          containerStyle={{ background: 'transparent', boxShadow: 'none', display: 'flex' }}
+          onRequestChange={value => this.setState({ open: value })}
+          containerStyle={drawerContainerStyle}
           swipeAreaWidth={45}
         >
           <Column
@@ -71,12 +74,8 @@ export default class SideMenu extends Component {
             <FamilySideBar closeMenu={this.toggleMenu} />
           </Column>
           <Column background="transparent">
-            <Button
-              onClick={this.toggleMenu}
-              left="275px"
-              isVisible={open}
-            >
-              <FlowerIcon color="#fff" style={{ height: 50, width: 50 }} />
+            <Button onClick={this.toggleMenu} left="275px" isVisible={open}>
+              <FlowerIcon color="#fff" style={iconStyle} />
               <p>Giardino & Terrazzo</p>
             </Button>
           </Column>

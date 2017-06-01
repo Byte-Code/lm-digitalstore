@@ -100,6 +100,20 @@ export const Filter = glamorous.div(({ isActive = false }) => ({
   }
 }));
 
+const iconStyle = { height: 25, width: 25 };
+const trackSwitchedStyle = { width: 70, height: 42, backgroundColor: '#fff' };
+const trackStyle = { width: 70, height: 42, backgroundColor: '#fff' };
+const thumbStyle = { width: 30, height: 30, backgroundColor: '#e4e4e4', top: 10, left: 10 };
+const thumbSwitchedStyle = { backgroundColor: '#67cb33', top: 10, left: 65 };
+const labelStyle = labelColor => ({
+  marginLeft: 50,
+  fontSize: 16,
+  color: labelColor,
+  fontFamily: 'LeroyMerlinSans Italic',
+  display: 'flex',
+  alignItems: 'center'
+});
+
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
@@ -180,7 +194,7 @@ export default class FilterDialog extends Component {
             onClick={handleClose}
             id="close-filterDialog"
           >
-            <RemoveIcon color="#fff" style={{ height: 25, width: 25 }} />
+            <RemoveIcon color="#fff" style={iconStyle} />
             <p>Chiudi Filtri</p>
           </Button>
           <Button
@@ -189,7 +203,7 @@ export default class FilterDialog extends Component {
             onClick={this.resetFilters}
             id="reset-filterDialog"
           >
-            <UndoIcon color="#fff" style={{ height: 25, width: 25 }} />
+            <UndoIcon color="#fff" style={iconStyle} />
             <p>Reset Filtri</p>
           </Button>
         </Header>
@@ -198,20 +212,13 @@ export default class FilterDialog extends Component {
           <Toggle
             label={availabilityLabel}
             labelPosition="right"
-            trackSwitchedStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
-            trackStyle={{ width: 70, height: 42, backgroundColor: '#fff' }}
-            thumbStyle={{ width: 30, height: 30, backgroundColor: '#e4e4e4', top: 10, left: 10 }}
-            thumbSwitchedStyle={{ backgroundColor: '#67cb33', top: 10, left: 65 }}
+            trackSwitchedStyle={trackSwitchedStyle}
+            trackStyle={trackStyle}
+            thumbStyle={thumbStyle}
+            thumbSwitchedStyle={thumbSwitchedStyle}
             toggled={availability}
             onToggle={this.toggleAvailability}
-            labelStyle={{
-              marginLeft: 50,
-              fontSize: 16,
-              color: labelColor,
-              fontFamily: 'LeroyMerlinSans Italic',
-              display: 'flex',
-              alignItems: 'center'
-            }}
+            labelStyle={labelStyle(labelColor)}
           />
         </Availability>
         <Groups>

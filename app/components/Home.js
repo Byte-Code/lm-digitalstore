@@ -77,6 +77,8 @@ const WorldTitle = glamorous.section({
   }
 });
 
+const iconStyle = { height: 65, width: 65 };
+
 export default class Home extends Component {
   static propTypes = {
     requestFetchWorld: PropTypes.func.isRequired,
@@ -140,7 +142,7 @@ export default class Home extends Component {
           <TutorialButton>
             <Banner url={bannerImg}>
               {bannerText}
-              <HelpIcon color="#fff" style={{ height: 65, width: 65 }} />
+              <HelpIcon color="#fff" style={iconStyle} />
             </Banner>
           </TutorialButton>
         </GridWrapper>
