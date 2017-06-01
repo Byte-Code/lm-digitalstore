@@ -1,6 +1,6 @@
-# lm-digital-store
+# lm-digitalstore
 
-Leroy Merlin Kiosk App built on top of:
+Kiosk App built on top of
 [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate), which you should **always refer to in case of problems**.
 
 > Tech Stack:
