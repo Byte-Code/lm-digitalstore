@@ -11,12 +11,12 @@ const mapStateToProps = (state, ownProps) => {
   let productIDList;
   if (productInfo) {
     const sim = productInfo.get('similarProducts') || List();
-    productIDList = sim.reduce((acc, value) => (acc.push(value.get('products'))), List()).flatten();
+    productIDList = sim.reduce((acc, value) => acc.push(value.get('products')), List()).flatten();
   } else productIDList = List();
   return {
     productInfo,
     storeCode: getStoreCode(state),
-    similarProducts: getProductsToShow(state, productIDList)
+    similarProducts: getProductsToShow()(state, productIDList)
   };
 };
 

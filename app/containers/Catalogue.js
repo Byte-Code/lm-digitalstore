@@ -4,21 +4,15 @@ import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { requestFetchProducts } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
-import {
-  getCategory,
-  getProductsToShow,
-  getFilteredIDs,
-  getFilterMap
-} from '../reducers/selectors';
+import { getCatalogueProducts, getFilterMap, getCategory } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
-  const filterMap = getFilterMap(state);
-  const productsToFetch = getFilteredIDs(state, filterMap);
+  const toShowSelector = getCatalogueProducts();
   return {
     categoryInfo: getCategory(state, categoryCode),
-    products: getProductsToShow(state, productsToFetch),
-    filterMap
+    products: toShowSelector(state, categoryCode),
+    filterMap: getFilterMap(state)
   };
 };
 

@@ -1,3 +1,6 @@
+import { createSelector } from 'reselect';
+
+import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
 import * as categorySelectors from './Category/categorySelectors';
@@ -31,16 +34,12 @@ export function getOrderedProducts(state, categoryCode) {
   return categorySelectors.getOrderedProducts(state.get('categoryReducer'), categoryCode);
 }
 
-export function getFilteredIDs(state, filterMap, categoryCode) {
-  return categorySelectors.getFilteredIDs(state.get('categoryReducer'), filterMap, categoryCode);
-}
-
 export function getProduct(state, productCode) {
   return getProductSelector(state.get('productReducer'), productCode);
 }
 
-export function getProductsToShow(state, productIDList) {
-  return catalogueSelectors.getProductsToShow(state.get('catalogueReducer'), productIDList);
+export function getProductList(state) {
+  return catalogueSelectors.getProductList(state.get('catalogueReducer'));
 }
 
 export function getStoreCode(state) {
@@ -62,3 +61,42 @@ export function getNearbyStores(state) {
 export function getFilterMap(state) {
   return filtersSelector.getFilterMap(state.get('filtersReducer'));
 }
+
+export function getActiveAid(state) {
+  return filtersSelector.getActiveAid(state.get('filtersReducer'));
+}
+
+export function getActiveFilters(state) {
+  return filtersSelector.getActiveFilters(state.get('filtersReducer'));
+}
+
+export function getActiveAvailability(state) {
+  return filtersSelector.getActiveAvailability(state.get('filtersReducer'));
+}
+
+export const getIdsByAids = createSelector(
+  [getSellingAids, getActiveAid],
+  (sellingAids, activeAid) => filterUtils.filterProductsByAid(sellingAids, activeAid)
+);
+
+export const getIdsByFilters = createSelector(
+  [getFilters, getActiveFilters],
+  (filterGroups, activeFilters) => filterUtils.filterProducts(filterGroups, activeFilters)
+);
+
+export const getIdsByAvailability = createSelector(
+  [getOrderedProducts, getActiveAvailability],
+  (orderedProducts, activeAvailability) =>
+    filterUtils.filterProductsByAvailability(orderedProducts, activeAvailability)
+);
+
+export const getIdsToShow = createSelector(
+  [getIdsByAids, getIdsByFilters, getIdsByAvailability],
+  (idsByAids, idsByFilters, idsByAvailability) =>
+    filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)
+);
+
+export const getCatalogueProducts = () =>
+  createSelector([getProductList, getIdsToShow], (productList, idsToShow) =>
+    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+  );
