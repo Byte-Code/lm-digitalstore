@@ -23,3 +23,7 @@ export function resetFilters() {
 export function initFilters() {
   return { type: actionTypes.INIT_FILTERS };
 }
+
+export function toggleFiltersDialog() {
+  return { type: actionTypes.TOGGLE_FILTERS_DIALOG };
+}

@@ -21,7 +21,8 @@ const initialState = fromJS({
   availability: false,
   filters: [],
   aid: '',
-  categoryCode: ''
+  categoryCode: '',
+  isDialogOpen: false
 });
 
 export default function categoryReducer(state = initialState, action) {
@@ -40,6 +41,8 @@ export default function categoryReducer(state = initialState, action) {
       return resetFilters(state);
     case actionTypes.SUCCESS_FETCH_CATEGORY:
       return state.set('categoryCode', action.categoryCode);
+    case actionTypes.TOGGLE_FILTERS_DIALOG:
+      return state.set('isDialogOpen', !state.get('isDialogOpen'));
     default:
       return state;
   }

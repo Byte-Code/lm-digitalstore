@@ -13,7 +13,8 @@ const Wrapper = glamorous.div({
   display: 'flex',
   flexDirection: 'column',
   color: '#fff',
-  margin: '40px 0'
+  margin: '40px 0',
+  backgroundColor: 'rgba(51, 51, 51, 1)'
 });
 
 const Header = glamorous.div({
@@ -186,7 +187,7 @@ export default class FilterDialog extends Component {
     const temporaryFilterMap = fromJS(this.state);
 
     return (
-      <Wrapper>
+      <Wrapper id="filtersDialog">
         <Header>
           <Button
             fontFamily="LeroyMerlinSans Light"

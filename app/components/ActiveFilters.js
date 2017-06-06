@@ -4,8 +4,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous from 'glamorous';
 
-const Wrapper = glamorous.div(({ backgroundColor }) => ({
-  backgroundColor,
+const Wrapper = glamorous.div({
+  backgroundColor: 'transparent',
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'center',
@@ -13,12 +13,15 @@ const Wrapper = glamorous.div(({ backgroundColor }) => ({
   width: '100%',
   '&>p': {
     fontFamily: 'LeroyMerlinSans Italic',
-    fontSize: '16px'
+    fontSize: '16px',
+    color: 'white',
+    marginLeft: '28%',
+    marginTop: '2%'
   },
   '&>div': {
     marginRight: '10px'
   }
-}));
+});
 
 export const Filter = glamorous.div(({ width = '150px', isActive = false }) => ({
   height: '42px',
@@ -65,7 +68,7 @@ const ActiveFilters = props => {
 
   if (activeFilters.isEmpty() && !activeAvailability) {
     return (
-      <Wrapper bgColor="#e4e4e4">
+      <Wrapper>
         <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
       </Wrapper>
     );
@@ -82,7 +85,7 @@ const ActiveFilters = props => {
     .take(toTake);
 
   return (
-    <Wrapper backgroundColor="rgba(51, 51, 51, 0.8)">
+    <Wrapper>
       {activeFilterList.map(f => (
         <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
           <p>{f.get('name')}</p>
