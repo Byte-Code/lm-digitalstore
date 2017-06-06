@@ -2,16 +2,15 @@ import { connect } from 'react-redux';
 
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
-import { requestFetchProducts } from '../actions/productListActions';
+import { requestFetchProducts, clearProductList } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
 import { getCatalogueProducts, getFilterMap, getCategory } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
-  const toShowSelector = getCatalogueProducts();
   return {
     categoryInfo: getCategory(state, categoryCode),
-    products: toShowSelector(state, categoryCode),
+    products: getCatalogueProducts()(state, categoryCode),
     filterMap: getFilterMap(state)
   };
 };
@@ -19,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
   requestFetchCategory,
   requestFetchProducts,
+  clearProductList,
   ...filtersActions
 };
 

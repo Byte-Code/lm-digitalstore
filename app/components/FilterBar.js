@@ -5,7 +5,7 @@ import glamorous from 'glamorous';
 import Dialog from 'material-ui/Dialog';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 
-import FilterDialog from './FilterDialog';
+import FilterDialog from '../containers/FilterDialog';
 import ActiveFilters from './ActiveFilters';
 
 const Wrapper = glamorous.div({
@@ -37,7 +37,6 @@ export default class FilterBar extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
     resetFilters: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired,
     toggleAvailability: PropTypes.func.isRequired
@@ -58,16 +57,8 @@ export default class FilterBar extends Component {
     this.setState({ open: false });
   };
 
-  // TODO separate dialog logic into dialog component?
   render() {
-    const {
-      applyFilters,
-      filterGroups,
-      filterMap,
-      resetFilters,
-      toggleFilter,
-      toggleAvailability
-    } = this.props;
+    const { filterGroups, filterMap, resetFilters, toggleFilter, toggleAvailability } = this.props;
 
     if (filterGroups.isEmpty()) {
       return null;
@@ -95,10 +86,9 @@ export default class FilterBar extends Component {
           bodyStyle={bodyStyle}
         >
           <FilterDialog
-            filterGroups={this.props.filterGroups}
+            filterGroups={filterGroups}
+            categoryCode={filterMap.get('categoryCode')}
             handleClose={this.handleClose}
-            applyFilters={applyFilters}
-            filterMap={filterMap}
           />
         </Dialog>
       </Wrapper>

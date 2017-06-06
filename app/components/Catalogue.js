@@ -41,6 +41,7 @@ export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
+    clearProductList: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     filterMap: ImmutablePropTypes.map.isRequired,
@@ -48,8 +49,7 @@ export default class Catalogue extends Component {
     toggleFilter: PropTypes.func.isRequired,
     toggleAvailability: PropTypes.func.isRequired,
     resetFilters: PropTypes.func.isRequired,
-    initFilters: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired
+    initFilters: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -71,13 +71,17 @@ export default class Catalogue extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearProductList();
+  }
+
   renderProducts() {
     const { products } = this.props;
-    return products.map(p => (
+    return products.map(p =>
       <Link to={`product/${p.get('code')}`} key={p.get('code')}>
         <ProductBadge productInfo={p} />
       </Link>
-    ));
+    );
   }
 
   render() {
@@ -87,8 +91,7 @@ export default class Catalogue extends Component {
       toggleAid,
       resetFilters,
       toggleAvailability,
-      toggleFilter,
-      applyFilters
+      toggleFilter
     } = this.props;
 
     if (categoryInfo.isEmpty()) {
@@ -110,7 +113,6 @@ export default class Catalogue extends Component {
         <FilterBar
           filterGroups={filterGroups}
           resetFilters={resetFilters}
-          applyFilters={applyFilters}
           filterMap={filterMap}
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}

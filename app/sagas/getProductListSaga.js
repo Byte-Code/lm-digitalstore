@@ -9,7 +9,6 @@ export function* callFetchProductList({ productIDList }) {
   try {
     const productList = yield call(apiClient.fetchProductListDisplay, productIDList.toJS());
     const result = fromJS(productList).getIn(['content', 'itemlist']).toOrderedSet();
-    yield put(productListActions.clearProductList());
     yield put(productListActions.successFetchProductList(result));
   } catch (error) {
     yield put(productListActions.failureFetchProductList(error));

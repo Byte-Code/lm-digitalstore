@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { List } from 'immutable';
 
 import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
@@ -18,6 +19,11 @@ export function getWeather(state) {
   return getWeatherSelector(state.get('weatherReducer'));
 }
 
+export function getStoreCode(state) {
+  return storeCodeSelectors.getStoreCode(state.get('storeCodeReducer'));
+}
+
+// CATEGORY
 export function getCategory(state, categoryCode) {
   return categorySelectors.getCategory(state.get('categoryReducer'), categoryCode);
 }
@@ -34,44 +40,9 @@ export function getOrderedProducts(state, categoryCode) {
   return categorySelectors.getOrderedProducts(state.get('categoryReducer'), categoryCode);
 }
 
-export function getProduct(state, productCode) {
-  return getProductSelector(state.get('productReducer'), productCode);
-}
-
+// CATALOGUE
 export function getProductList(state) {
   return catalogueSelectors.getProductList(state.get('catalogueReducer'));
-}
-
-export function getStoreCode(state) {
-  return storeCodeSelectors.getStoreCode(state.get('storeCodeReducer'));
-}
-
-export function getStore(state) {
-  return storeSelectors.getStoreInfo(state.get('storeReducer'));
-}
-
-export function getStoreName(state) {
-  return storeSelectors.getStoreName(state.get('storeReducer'));
-}
-
-export function getNearbyStores(state) {
-  return storeSelectors.getNearbyStores(state.get('storeReducer'));
-}
-
-export function getFilterMap(state) {
-  return filtersSelector.getFilterMap(state.get('filtersReducer'));
-}
-
-export function getActiveAid(state) {
-  return filtersSelector.getActiveAid(state.get('filtersReducer'));
-}
-
-export function getActiveFilters(state) {
-  return filtersSelector.getActiveFilters(state.get('filtersReducer'));
-}
-
-export function getActiveAvailability(state) {
-  return filtersSelector.getActiveAvailability(state.get('filtersReducer'));
 }
 
 export const getIdsByAids = createSelector(
@@ -90,13 +61,90 @@ export const getIdsByAvailability = createSelector(
     filterUtils.filterProductsByAvailability(orderedProducts, activeAvailability)
 );
 
-export const getIdsToShow = createSelector(
+export const getIdsByTempFilters = createSelector(
+  [getFilters, getTempFilters],
+  (filterGroups, tempFilters) => filterUtils.filterProducts(filterGroups, tempFilters)
+);
+
+export const getIdsByTempAvailability = createSelector(
+  [getOrderedProducts, getTempAvailability],
+  (orderedProducts, tempAvailability) =>
+    filterUtils.filterProductsByAvailability(orderedProducts, tempAvailability)
+);
+
+export const getCatalogueProductsIds = createSelector(
   [getIdsByAids, getIdsByFilters, getIdsByAvailability],
   (idsByAids, idsByFilters, idsByAvailability) =>
     filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)
 );
 
 export const getCatalogueProducts = () =>
-  createSelector([getProductList, getIdsToShow], (productList, idsToShow) =>
+  createSelector([getProductList, getCatalogueProductsIds], (productList, idsToShow) =>
     productList.filter(p => idsToShow.contains(p.get('code'))).toList()
   );
+
+export const getSimilarProducts = () =>
+  createSelector([getProductList, getSimilarProductsIds], (productList, idsToShow) =>
+    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+  );
+
+export const getItemCount = createSelector(
+  [getIdsByAids, getIdsByTempFilters, getIdsByTempAvailability],
+  (idsByAids, idsByTempFilters, idsByTempAvailability) =>
+    filterUtils.filterCatalogue(idsByAids, idsByTempFilters, idsByTempAvailability).size
+);
+
+// FILTERS
+export function getFilterMap(state) {
+  return filtersSelector.getFilterMap(state.get('filtersReducer'));
+}
+
+export function getActiveAid(state) {
+  return filtersSelector.getActiveAid(state.get('filtersReducer'));
+}
+
+export function getActiveFilters(state) {
+  return filtersSelector.getActiveFilters(state.get('filtersReducer'));
+}
+
+export function getActiveAvailability(state) {
+  return filtersSelector.getActiveAvailability(state.get('filtersReducer'));
+}
+
+export function getTempAid(state) {
+  return filtersSelector.getTempAid(state.get('filtersReducer'));
+}
+
+export function getTempFilters(state) {
+  return filtersSelector.getTempFilters(state.get('filtersReducer'));
+}
+
+export function getTempAvailability(state) {
+  return filtersSelector.getTempAvailability(state.get('filtersReducer'));
+}
+
+// PRODUCT
+export function getProduct(state, productCode) {
+  return getProductSelector(state.get('productReducer'), productCode);
+}
+
+export const getSimilarProductsIds = createSelector(getProduct, product => {
+  if (product) {
+    const sim = product.get('similarProducts') || List();
+    return sim.reduce((acc, value) => acc.push(value.get('products')), List()).flatten();
+  }
+  return List();
+});
+
+// STORE
+export function getStore(state) {
+  return storeSelectors.getStoreInfo(state.get('storeReducer'));
+}
+
+export function getStoreName(state) {
+  return storeSelectors.getStoreName(state.get('storeReducer'));
+}
+
+export function getNearbyStores(state) {
+  return storeSelectors.getNearbyStores(state.get('storeReducer'));
+}

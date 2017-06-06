@@ -5,8 +5,7 @@ import { apiClient } from '../../mocks/apiMock';
 import { callFetchProductList } from '../../app/sagas/getProductListSaga';
 import {
   successFetchProductList,
-  failureFetchProductList,
-  clearProductList
+  failureFetchProductList
 } from '../../app/actions/productListActions';
 
 const validResponse = {
@@ -27,10 +26,6 @@ describe('getProductListSaga', () => {
       expect(gen.next().value).toEqual(
         call(apiClient.fetchProductListDisplay, input.productIDList.toJS())
       );
-    });
-
-    it('should dispatch a CLEAR_PRODUCT_LIST action', () => {
-      expect(gen.next(validResponse).value).toEqual(put(clearProductList()));
     });
 
     it('should dispatch a SUCCESS_FETCH_PRODUCTLIST action with the transformed result', () => {
