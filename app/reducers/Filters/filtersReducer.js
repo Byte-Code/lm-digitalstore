@@ -51,9 +51,9 @@ export default function filtersReducer(state = initialState, action) {
     case actionTypes.INIT_TEMP_FILTERS:
       return state.set('temp', state.get('active'));
     case actionTypes.RESET_FILTERS:
-      return resetFilters(state.get('active'));
+      return state.set('active', resetFilters(state.get('active')));
     case actionTypes.RESET_TEMP_FILTERS:
-      return resetFilters(state.get('temp'));
+      return state.set('temp', resetFilters(state.get('temp')));
     case actionTypes.SUCCESS_FETCH_CATEGORY:
       return state.setIn(['active', 'categoryCode'], action.categoryCode);
     default:
