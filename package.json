@@ -175,6 +175,7 @@
     "minimist": "^1.2.0",
     "prop-types": "^15.5.10",
     "react-addons-test-utils": "^15.4.2",
+    "react-easy-swipe": "^0.0.13",
     "react-immutable-proptypes": "^2.1.0",
     "react-tap-event-plugin": "^2.0.1",
     "react-test-renderer": "^15.4.2",

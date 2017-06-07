@@ -4,6 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import { Map, List } from 'immutable';
 import glamorous from 'glamorous';
+import Swipe from 'react-easy-swipe';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
@@ -21,8 +22,10 @@ const Header = glamorous.div({
   }
 });
 
-const ProductSlider = glamorous.div({
-  margin: '50px 40px',
+const ProductSlider = glamorous.div(({ marginLeft = '5%' }) => ({
+  marginTop: '5%',
+  marginRight: '5%',
+  marginLeft,
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
@@ -35,7 +38,7 @@ const ProductSlider = glamorous.div({
       marginBottom: '60px'
     }
   }
-});
+}));
 
 export default class Catalogue extends Component {
   static propTypes = {
@@ -57,6 +60,16 @@ export default class Catalogue extends Component {
     products: List()
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      marginLeft: '5%'
+    };
+    this.moving = false;
+    this.marginLeft = '5%';
+    this.count = 0;
+  }
+
   componentDidMount() {
     const { params: { categoryCode }, requestFetchCategory, initFilters } = this.props;
     initFilters();
@@ -70,6 +83,20 @@ export default class Catalogue extends Component {
       requestFetchCategory(categoryCode);
     }
   }
+
+  onSwipeMove = () => {
+    if (this.count === 0) {
+      this.setState({ marginLeft: '0%' });
+      this.count = 1;
+    }
+  };
+
+  onSwipeEnd = () => {
+    if (this.count === 1) {
+      this.setState({ marginLeft: '5%' });
+      this.count = 0;
+    }
+  };
 
   renderProducts() {
     const { products } = this.props;
@@ -115,9 +142,11 @@ export default class Catalogue extends Component {
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}
         />
-        <ProductSlider>
-          {this.renderProducts()}
-        </ProductSlider>
+        <Swipe onSwipeMove={this.onSwipeMove} onSwipeEnd={this.onSwipeEnd}>
+          <ProductSlider marginLeft={this.state.marginLeft}>
+            {this.renderProducts()}
+          </ProductSlider>
+        </Swipe>
       </div>
     );
   }
