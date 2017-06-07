@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
+import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import { List, ListItem } from 'material-ui/List';
 
 import FilterDialog from '../containers/FilterDialog';
@@ -32,13 +33,22 @@ export const Button = glamorous.div({
 });
 
 const ActiveFiltersWrapper = glamorous.div({
-  width: '73%',
+  width: '80%',
   marginLeft: '10%',
   position: 'absolute',
   zIndex: 10
 });
 
 const iconStyle = { height: 30, width: 30 };
+
+const filterListStyle = {
+  backgroundColor: 'rgba(51, 51, 51, 0.8)',
+  width: '100%'
+};
+
+const ListItemStyle = {
+  color: 'white'
+};
 
 export default class FilterBar extends Component {
   static propTypes = {
@@ -53,18 +63,15 @@ export default class FilterBar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    };
+    this.toggleIcon = this.toggleIcon.bind(this);
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  toggleIcon() {
+    const iconColor = '#fff';
+    return this.props.isDialogOpen ?
+      <RemoveIcon color={iconColor} style={iconStyle} /> :
+      <AddIcon color={iconColor} style={iconStyle} />;
+  }
 
   render() {
     const {
@@ -74,15 +81,6 @@ export default class FilterBar extends Component {
     if (filterGroups.isEmpty()) {
       return null;
     }
-
-    const filterListStyle = {
-      backgroundColor: 'rgba(51, 51, 51, 0.8)',
-      width: '100%'
-    };
-
-    const style = {
-      color: 'white'
-    };
 
     return (
       <Wrapper id="filtersListWrapper">
@@ -94,21 +92,20 @@ export default class FilterBar extends Component {
               resetFilters={resetFilters}
               toggleFilter={toggleFilter}
               toggleAvailability={toggleAvailability}
-              handleOpen={this.handleOpen}
+              handleOpen={toggleFiltersDialog}
             />
           </ActiveFiltersWrapper>
           <ListItem
             onClick={toggleFiltersDialog}
             open={isDialogOpen}
             primaryText="Piú filtri"
-            style={style}
-            rightIcon={
-              <AddIcon color="#fff" style={iconStyle} />
-            }
+            style={ListItemStyle}
+            rightIcon={this.toggleIcon()}
             nestedItems={[
               <FilterDialog
+                key="FilterDialog"
                 filterGroups={this.props.filterGroups}
-                handleClose={this.handleClose}
+                handleClose={toggleFiltersDialog}
                 categoryCode={filterMap.get('categoryCode')}
               />
             ]}
@@ -116,35 +113,5 @@ export default class FilterBar extends Component {
         </List>
       </Wrapper>
     );
-
-    /* return (
-      <Wrapper>
-        <Button onClick={this.handleOpen}>
-          <AddIcon color="#fff" style={iconStyle} />
-          <p>Piú filtri</p>
-        </Button>
-        <ActiveFilters
-          filterMap={filterMap}
-          filterGroups={filterGroups}
-          resetFilters={resetFilters}
-          toggleFilter={toggleFilter}
-          toggleAvailability={toggleAvailability}
-          handleOpen={this.handleOpen}
-        />
-        <Dialog
-          modal={false}
-          onRequestClose={this.handleClose}
-          open={this.state.open}
-          contentStyle={contentStyle}
-          bodyStyle={bodyStyle}
-        >
-          <FilterDialog
-            filterGroups={filterGroups}
-            categoryCode={filterMap.get('categoryCode')}
-            handleClose={this.handleClose}
-          />
-        </Dialog>
-      </Wrapper>
-    ); */
   }
 }

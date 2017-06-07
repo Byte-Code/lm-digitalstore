@@ -79,8 +79,7 @@ export default class Catalogue extends Component {
   }
 
   renderProducts() {
-    const { products, filterMap } = this.props;
-    const isDialogOpen = filterMap.get('isDialogOpen');
+    const { products, isDialogOpen } = this.props;
     return (
       <ProductSlider id="rinaldo" opacity={isDialogOpen} >
         {

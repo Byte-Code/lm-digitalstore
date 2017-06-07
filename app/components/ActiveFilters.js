@@ -68,7 +68,7 @@ const ActiveFilters = props => {
 
   if (activeFilters.isEmpty() && !activeAvailability) {
     return (
-      <Wrapper>
+      <Wrapper onClick={handleOpen}>
         <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
       </Wrapper>
     );
