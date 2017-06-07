@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilterDialog should call toggleTempAvailability availability is toggled 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  id="filtersDialog"
+>
   <glamorous(div)>
     <glamorous(div)
       fontFamily="LeroyMerlinSans Light"
@@ -142,14 +144,16 @@ exports[`FilterDialog should call toggleTempAvailability availability is toggled
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <FilterButton
+  <Component
     onApply={[Function]}
   />
 </glamorous(div)>
 `;
 
 exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  id="filtersDialog"
+>
   <glamorous(div)>
     <glamorous(div)
       fontFamily="LeroyMerlinSans Light"
@@ -290,14 +294,16 @@ exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] 
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <FilterButton
+  <Component
     onApply={[Function]}
   />
 </glamorous(div)>
 `;
 
 exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  id="filtersDialog"
+>
   <glamorous(div)>
     <glamorous(div)
       fontFamily="LeroyMerlinSans Light"
@@ -438,7 +444,7 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <FilterButton
+  <Component
     onApply={[Function]}
   />
 </glamorous(div)>

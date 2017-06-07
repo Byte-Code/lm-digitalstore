@@ -30,7 +30,7 @@ exports[`TutorialButton should initially render with a closed dialog 1`] = `
     open={false}
     repositionOnUpdate={true}
   >
-    <CloseButton
+    <Component
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}
@@ -112,7 +112,7 @@ exports[`TutorialButton should open the dialog once clicked 1`] = `
     open={true}
     repositionOnUpdate={true}
   >
-    <CloseButton
+    <Component
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}

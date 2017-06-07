@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ActiveFilters should call handleOpen when showMore filter is clicked 1`] = `
-<glamorous(div)
-  backgroundColor="rgba(51, 51, 51, 0.8)"
->
+<glamorous(div)>
   <glamorous(div)
     isActive={true}
     onClick={[Function]}
@@ -41,9 +39,7 @@ exports[`ActiveFilters should call handleOpen when showMore filter is clicked 1`
 `;
 
 exports[`ActiveFilters should call toggleAvailability when a availability filter is clicked 1`] = `
-<glamorous(div)
-  backgroundColor="rgba(51, 51, 51, 0.8)"
->
+<glamorous(div)>
   <glamorous(div)
     isActive={true}
     onClick={[Function]}
@@ -63,9 +59,7 @@ exports[`ActiveFilters should call toggleAvailability when a availability filter
 `;
 
 exports[`ActiveFilters should call toggleFilter when a filter is clicked 1`] = `
-<glamorous(div)
-  backgroundColor="rgba(51, 51, 51, 0.8)"
->
+<glamorous(div)>
   <glamorous(div)
     isActive={true}
     onClick={[Function]}
@@ -84,7 +78,7 @@ exports[`ActiveFilters should call toggleFilter when a filter is clicked 1`] = `
 
 exports[`ActiveFilters should render a paragrapgh when no filters are active 1`] = `
 <glamorous(div)
-  bgColor="#e4e4e4"
+  onClick={[Function]}
 >
   <p>
     Tocca per avviare una ricerca avanzata dei prodotti
@@ -93,9 +87,7 @@ exports[`ActiveFilters should render a paragrapgh when no filters are active 1`]
 `;
 
 exports[`ActiveFilters should render any filters 1`] = `
-<glamorous(div)
-  backgroundColor="rgba(51, 51, 51, 0.8)"
->
+<glamorous(div)>
   <glamorous(div)
     isActive={true}
     onClick={[Function]}

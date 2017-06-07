@@ -41,7 +41,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
         1 pz / pz
       </glamorous(p)>
       <glamorous(div) />
-      <Connect(StoreStockBadge)
+      <Connect(Component)
         currentStoreStock={
           Object {
             "stockStatus": "availableOnOrder",

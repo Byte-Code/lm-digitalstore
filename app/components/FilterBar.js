@@ -16,22 +16,6 @@ const Wrapper = glamorous.div({
   zIndex: 10
 });
 
-export const Button = glamorous.div({
-  width: '190px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  background: 'rgba(51, 51, 51, 0.8)',
-  cursor: 'pointer',
-  '&>p': {
-    fontSize: '20px',
-    lineHeight: '32px',
-    fontFamily: 'LeroyMerlinSans Light',
-    marginLeft: '12px',
-    color: '#fff'
-  }
-});
-
 const ActiveFiltersWrapper = glamorous.div({
   width: '80%',
   marginLeft: '10%',
