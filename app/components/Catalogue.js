@@ -9,6 +9,11 @@ import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
+const FakeMarginDiv = glamorous.div({
+  height: '100%',
+  width: '40px'
+});
+
 const Header = glamorous.div({
   width: '100%',
   height: '184px',
@@ -22,7 +27,7 @@ const Header = glamorous.div({
 });
 
 const ProductSlider = glamorous.div({
-  margin: '50px 40px',
+  marginTop: '5%',
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
@@ -115,8 +120,10 @@ export default class Catalogue extends Component {
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}
         />
-        <ProductSlider>
+        <ProductSlider marginLeft={this.state.marginLeft}>
+          <FakeMarginDiv />
           {this.renderProducts()}
+          <FakeMarginDiv />
         </ProductSlider>
       </div>
     );
