@@ -53,6 +53,7 @@ export default class Product extends Component {
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
+    clearProductList: PropTypes.func.isRequired,
     storeCode: PropTypes.string.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired
   };
@@ -75,6 +76,9 @@ export default class Product extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearProductList();
+  }
   renderSimilarProducts() {
     const { similarProducts, productInfo } = this.props;
 

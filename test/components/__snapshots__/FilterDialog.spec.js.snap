@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FilterDialog should change state when a filter is clicked 1`] = `
+exports[`FilterDialog should call toggleTempAvailability availability is toggled 1`] = `
 <glamorous(div)>
   <glamorous(div)>
     <glamorous(div)
@@ -78,7 +78,6 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
           "top": 10,
         }
       }
-      toggled={null}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -106,170 +105,11 @@ exports[`FilterDialog should change state when a filter is clicked 1`] = `
           <p />
         </glamorous(div)>
         <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
-        <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
-      </glamorous(div)>
-    </glamorous(div)>
-    <glamorous(div)>
-      <glamorous(div) />
-      <glamorous(div)>
-        <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
-        <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
-        <glamorous(div)
           isActive={true}
           onClick={[Function]}
         >
           <p />
         </glamorous(div)>
-      </glamorous(div)>
-    </glamorous(div)>
-  </glamorous(div)>
-  <Connect(FilterButton)
-    filterMap={
-      Object {
-        "aid": "aid1",
-        "availability": null,
-        "categoryCode": "CAT123",
-        "filters": Array [
-          "filter5",
-        ],
-      }
-    }
-    onApply={[Function]}
-  />
-</glamorous(div)>
-`;
-
-exports[`FilterDialog should change state when availability is toggled 1`] = `
-<glamorous(div)>
-  <glamorous(div)>
-    <glamorous(div)
-      fontFamily="LeroyMerlinSans Light"
-      fontSize="20px"
-      id="close-filterDialog"
-      onClick={[Function]}
-    >
-      <ContentRemoveCircleOutline
-        color="#fff"
-        style={
-          Object {
-            "height": 25,
-            "width": 25,
-          }
-        }
-      />
-      <p>
-        Chiudi Filtri
-      </p>
-    </glamorous(div)>
-    <glamorous(div)
-      fontSize="16px"
-      id="reset-filterDialog"
-      onClick={[Function]}
-      textDecoration="underline"
-    >
-      <ContentUndo
-        color="#fff"
-        style={
-          Object {
-            "height": 25,
-            "width": 25,
-          }
-        }
-      />
-      <p>
-        Reset Filtri
-      </p>
-    </glamorous(div)>
-  </glamorous(div)>
-  <glamorous(div)>
-    <p>
-      Disponibilità in negozio
-    </p>
-    <Toggle
-      defaultToggled={false}
-      disabled={false}
-      label="Disponibile"
-      labelPosition="right"
-      labelStyle={
-        Object {
-          "alignItems": "center",
-          "color": "#67cb33",
-          "display": "flex",
-          "fontFamily": "LeroyMerlinSans Italic",
-          "fontSize": 16,
-          "marginLeft": 50,
-        }
-      }
-      onToggle={[Function]}
-      thumbStyle={
-        Object {
-          "backgroundColor": "#e4e4e4",
-          "height": 30,
-          "left": 10,
-          "top": 10,
-          "width": 30,
-        }
-      }
-      thumbSwitchedStyle={
-        Object {
-          "backgroundColor": "#67cb33",
-          "left": 65,
-          "top": 10,
-        }
-      }
-      toggled={true}
-      trackStyle={
-        Object {
-          "backgroundColor": "#fff",
-          "height": 42,
-          "width": 70,
-        }
-      }
-      trackSwitchedStyle={
-        Object {
-          "backgroundColor": "#fff",
-          "height": 42,
-          "width": 70,
-        }
-      }
-    />
-  </glamorous(div)>
-  <glamorous(div)>
-    <glamorous(div)>
-      <glamorous(div) />
-      <glamorous(div)>
-        <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
-        <glamorous(div)
-          isActive={false}
-          onClick={[Function]}
-        >
-          <p />
-        </glamorous(div)>
         <glamorous(div)
           isActive={false}
           onClick={[Function]}
@@ -294,7 +134,7 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
           <p />
         </glamorous(div)>
         <glamorous(div)
-          isActive={true}
+          isActive={false}
           onClick={[Function]}
         >
           <p />
@@ -302,23 +142,13 @@ exports[`FilterDialog should change state when availability is toggled 1`] = `
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Connect(FilterButton)
-    filterMap={
-      Object {
-        "aid": "aid1",
-        "availability": true,
-        "categoryCode": "CAT123",
-        "filters": Array [
-          "filter5",
-        ],
-      }
-    }
+  <FilterButton
     onApply={[Function]}
   />
 </glamorous(div)>
 `;
 
-exports[`FilterDialog should initialize status based on filterMap 1`] = `
+exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] = `
 <glamorous(div)>
   <glamorous(div)>
     <glamorous(div)
@@ -396,7 +226,6 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
           "top": 10,
         }
       }
-      toggled={null}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -418,13 +247,13 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
       <glamorous(div) />
       <glamorous(div)>
         <glamorous(div)
-          isActive={true}
+          isActive={false}
           onClick={[Function]}
         >
           <p />
         </glamorous(div)>
         <glamorous(div)
-          isActive={false}
+          isActive={true}
           onClick={[Function]}
         >
           <p />
@@ -453,7 +282,7 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
           <p />
         </glamorous(div)>
         <glamorous(div)
-          isActive={true}
+          isActive={false}
           onClick={[Function]}
         >
           <p />
@@ -461,18 +290,7 @@ exports[`FilterDialog should initialize status based on filterMap 1`] = `
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Connect(FilterButton)
-    filterMap={
-      Object {
-        "aid": "aid1",
-        "availability": null,
-        "categoryCode": "CAT123",
-        "filters": Array [
-          "filter0",
-          "filter5",
-        ],
-      }
-    }
+  <FilterButton
     onApply={[Function]}
   />
 </glamorous(div)>
@@ -556,7 +374,6 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
           "top": 10,
         }
       }
-      toggled={false}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -584,7 +401,7 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
           <p />
         </glamorous(div)>
         <glamorous(div)
-          isActive={false}
+          isActive={true}
           onClick={[Function]}
         >
           <p />
@@ -621,15 +438,7 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Connect(FilterButton)
-    filterMap={
-      Object {
-        "aid": "aid1",
-        "availability": false,
-        "categoryCode": "CAT123",
-        "filters": Array [],
-      }
-    }
+  <FilterButton
     onApply={[Function]}
   />
 </glamorous(div)>

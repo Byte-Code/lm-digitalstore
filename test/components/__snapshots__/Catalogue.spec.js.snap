@@ -15,7 +15,6 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
     sellingAids={Object {}}
   />
   <FilterBar
-    applyFilters={[Function]}
     filterGroups={Array []}
     filterMap={Object {}}
     resetFilters={[Function]}

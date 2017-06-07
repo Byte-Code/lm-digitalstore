@@ -5,7 +5,7 @@ import { replace } from 'react-router-redux';
 import hoistStatics from 'hoist-non-react-statics';
 import { getStoreCode } from '../reducers/selectors';
 
-export default function (WrappedComponent) {
+export default function(WrappedComponent) {
   class verifystoreCode extends Component {
     componentWillMount() {
       if (!this.props.storeCode) {
@@ -14,7 +14,6 @@ export default function (WrappedComponent) {
     }
 
     render() {
-      console.log(this.props.storeCode);
       if (!this.props.storeCode) {
         return null;
       }
@@ -23,7 +22,7 @@ export default function (WrappedComponent) {
     }
   }
 
-  const mapStateToProps = (state) => ({ storeCode: getStoreCode(state) });
+  const mapStateToProps = state => ({ storeCode: getStoreCode(state) });
 
   const connected = connect(mapStateToProps, { replace })(verifystoreCode);
   return hoistStatics(connected, WrappedComponent);

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import glamorous from 'glamorous';
-
-import { getFilteredIDs } from '../reducers/selectors';
 
 const ApplyButton = glamorous.div(({ fontFamily, fontSize, textDecoration, isActive = false }) => ({
   display: 'flex',
@@ -24,19 +21,18 @@ const ApplyButton = glamorous.div(({ fontFamily, fontSize, textDecoration, isAct
   }
 }));
 
-const FilterButton = ({ onApply, result }) => (
-  <ApplyButton fontSize="20px" onClick={result > 0 ? onApply : () => null} isActive={result > 0}>
-    <p>{`Vedi tutti i ${result} risultati`}</p>
-  </ApplyButton>
-);
+const FilterButton = ({ onApply, itemCount }) =>
+  <ApplyButton
+    fontSize="20px"
+    onClick={itemCount > 0 ? onApply : () => null}
+    isActive={itemCount > 0}
+  >
+    <p>{`Vedi tutti i ${itemCount} risultati`}</p>
+  </ApplyButton>;
 
 FilterButton.propTypes = {
   onApply: PropTypes.func.isRequired,
-  result: PropTypes.number.isRequired
+  itemCount: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  result: getFilteredIDs(state, ownProps.filterMap).size
-});
-
-export default connect(mapStateToProps, {})(FilterButton);
+export default FilterButton;

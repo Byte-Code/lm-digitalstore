@@ -5,8 +5,12 @@ import Toggle from 'material-ui/Toggle';
 
 import FilterDialog, { Filter } from '../../app/components/FilterDialog';
 
-const applyFilters = () => {};
+const applyTempFilters = jest.fn();
 const handleClose = jest.fn();
+const initTempFilters = jest.fn();
+const resetTempFilters = jest.fn();
+const toggleTempFilter = jest.fn();
+const toggleTempAvailability = jest.fn();
 const filterGroups = fromJS([
   {
     code: 'group0',
@@ -25,71 +29,42 @@ const filterGroups = fromJS([
     ]
   }
 ]);
-const filterMap = fromJS({
-  filters: ['filter0', 'filter5'],
-  availability: null,
-  aid: 'aid1',
-  categoryCode: 'CAT123'
-});
+const activeFilters = fromJS(['filter1']);
 const result = shallow(
   <FilterDialog
     filterGroups={filterGroups}
-    filterMap={filterMap}
     handleClose={handleClose}
-    applyFilters={applyFilters}
+    categoryCode="CAT123"
+    applyTempFilters={applyTempFilters}
+    initTempFilters={initTempFilters}
+    toggleTempFilter={toggleTempFilter}
+    toggleTempAvailability={toggleTempAvailability}
+    resetTempFilters={resetTempFilters}
+    activeFilters={activeFilters}
   />
 );
 
 describe('FilterDialog', () => {
-  it('should initialize status based on filterMap', () => {
-    const newState = {
-      aid: filterMap.get('aid'),
-      filters: filterMap.get('filters'),
-      availability: filterMap.get('availability'),
-      categoryCode: filterMap.get('categoryCode')
-    };
-    expect(result.state()).toEqual(newState);
-    expect(result).toMatchSnapshot();
-  });
-
   it('should call handleClose when the button is clicked', () => {
     result.find('#close-filterDialog').simulate('click');
     expect(handleClose).toHaveBeenCalled();
   });
 
-  it('should change state when a filter is clicked', () => {
-    const newState = {
-      aid: filterMap.get('aid'),
-      filters: fromJS(['filter5']),
-      availability: filterMap.get('availability'),
-      categoryCode: filterMap.get('categoryCode')
-    };
+  it('should call toggleTempFilter when a filter is clicked', () => {
     result.find(Filter).at(0).simulate('click');
-    expect(result.state()).toEqual(newState);
+    expect(toggleTempFilter).toHaveBeenCalledWith('filter0');
     expect(result).toMatchSnapshot();
   });
 
-  it('should change state when availability is toggled', () => {
-    const newState = {
-      aid: filterMap.get('aid'),
-      filters: fromJS(['filter5']),
-      availability: true,
-      categoryCode: filterMap.get('categoryCode')
-    };
+  it('should call toggleTempAvailability availability is toggled', () => {
     result.find(Toggle).simulate('toggle');
-    expect(result.state()).toEqual(newState);
+    expect(toggleTempAvailability).toHaveBeenCalled();
     expect(result).toMatchSnapshot();
   });
 
   it('should reset filter when reset button is clicked', () => {
-    const newState = {
-      aid: filterMap.get('aid'),
-      filters: fromJS([]),
-      availability: false,
-      categoryCode: filterMap.get('categoryCode')
-    };
     result.find('#reset-filterDialog').simulate('click');
-    expect(result.state()).toEqual(newState);
+    expect(resetTempFilters).toHaveBeenCalled();
     expect(result).toMatchSnapshot();
   });
 });

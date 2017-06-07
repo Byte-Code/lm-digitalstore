@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
-import { fromJS, List } from 'immutable';
 import Toggle from 'material-ui/Toggle';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
-import FilterButton from '../containers/FilterButton';
+import FilterButton from './FilterButton';
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -118,73 +117,57 @@ const labelStyle = labelColor => ({
 export default class FilterDialog extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
+    activeFilters: ImmutablePropTypes.list.isRequired,
     handleClose: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired,
-    filterMap: ImmutablePropTypes.map.isRequired
+    initTempFilters: PropTypes.func.isRequired,
+    applyTempFilters: PropTypes.func.isRequired,
+    toggleTempAvailability: PropTypes.func.isRequired,
+    toggleTempFilter: PropTypes.func.isRequired,
+    resetTempFilters: PropTypes.func.isRequired,
+    availability: PropTypes.bool.isRequired,
+    itemCount: PropTypes.number.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
-    const { filterMap } = props;
-    this.state = {
-      aid: filterMap.get('aid'),
-      filters: filterMap.get('filters'),
-      availability: filterMap.get('availability'),
-      categoryCode: filterMap.get('categoryCode')
-    };
+  componentWillMount() {
+    this.props.initTempFilters();
   }
 
   applyAndClose = () => {
-    const { applyFilters, handleClose } = this.props;
-    applyFilters(fromJS(this.state));
+    const { applyTempFilters, handleClose } = this.props;
+    applyTempFilters();
     handleClose();
   };
 
-  toggleFilter = filterCode => {
-    const { filters } = this.state;
-    if (filters.includes(filterCode)) {
-      return this.setState({ filters: filters.filterNot(f => f === filterCode) });
-    }
-    return this.setState({ filters: filters.push(filterCode) });
-  };
-
-  toggleAvailability = () => {
-    const { availability } = this.state;
-    return this.setState({ availability: !availability });
-  };
-
-  resetFilters = () => {
-    this.setState({ filters: List(), availability: false });
-  };
-
   renderFilterGroups = () => {
-    const { filterGroups } = this.props;
-    const { filters } = this.state;
-    return filterGroups.map(g => (
+    const { filterGroups, toggleTempFilter, activeFilters } = this.props;
+    return filterGroups.map(g =>
       <GroupWrapper key={g.get('code')}>
         <GroupTitle>{g.get('group')}</GroupTitle>
         <FilterWrapper>
-          {g.get('filters').map(f => (
+          {g.get('filters').map(f =>
             <Filter
               key={f.get('code')}
-              onClick={() => this.toggleFilter(f.get('code'))}
-              isActive={filters.contains(f.get('code'))}
+              onClick={() => toggleTempFilter(f.get('code'))}
+              isActive={activeFilters.contains(f.get('code'))}
             >
               <p>{f.get('name')}</p>
             </Filter>
-          ))}
+          )}
         </FilterWrapper>
       </GroupWrapper>
-    ));
+    );
   };
 
   render() {
-    const { handleClose } = this.props;
-    const { availability } = this.state;
+    const {
+      handleClose,
+      resetTempFilters,
+      toggleTempAvailability,
+      availability,
+      itemCount
+    } = this.props;
     const availabilityLabel = availability ? 'Disponibile' : 'Indifferente';
     const labelColor = availability ? '#67cb33' : '#fff';
-    const temporaryFilterMap = fromJS(this.state);
 
     return (
       <Wrapper id="filtersDialog">
@@ -201,7 +184,7 @@ export default class FilterDialog extends Component {
           <Button
             textDecoration="underline"
             fontSize="16px"
-            onClick={this.resetFilters}
+            onClick={resetTempFilters}
             id="reset-filterDialog"
           >
             <UndoIcon color="#fff" style={iconStyle} />
@@ -218,14 +201,14 @@ export default class FilterDialog extends Component {
             thumbStyle={thumbStyle}
             thumbSwitchedStyle={thumbSwitchedStyle}
             toggled={availability}
-            onToggle={this.toggleAvailability}
+            onToggle={toggleTempAvailability}
             labelStyle={labelStyle(labelColor)}
           />
         </Availability>
         <Groups>
           {this.renderFilterGroups()}
         </Groups>
-        <FilterButton onApply={this.applyAndClose} filterMap={temporaryFilterMap} />
+        <FilterButton onApply={this.applyAndClose} itemCount={itemCount} />
       </Wrapper>
     );
   }

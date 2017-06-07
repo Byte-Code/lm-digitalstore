@@ -2,29 +2,24 @@ import { connect } from 'react-redux';
 
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
-import { requestFetchProducts } from '../actions/productListActions';
+import { requestFetchProducts, clearProductList } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
-import {
-  getCategory,
-  getProductsToShow,
-  getFilteredIDs,
-  getFilterMap
-} from '../reducers/selectors';
+import { getCatalogueProducts, getFilterMap, getCategory, getDialogStatus } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
-  const filterMap = getFilterMap(state);
-  const productsToFetch = getFilteredIDs(state, filterMap);
   return {
     categoryInfo: getCategory(state, categoryCode),
-    products: getProductsToShow(state, productsToFetch),
-    filterMap
+    products: getCatalogueProducts()(state, categoryCode),
+    filterMap: getFilterMap(state),
+    isDialogOpen: getDialogStatus(state)
   };
 };
 
 const mapDispatchToProps = {
   requestFetchCategory,
   requestFetchProducts,
+  clearProductList,
   ...filtersActions
 };
 

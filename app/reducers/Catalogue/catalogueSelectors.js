@@ -1,5 +1,5 @@
 /* eslint-disable */
-export function getProductsToShow(state, productIDList) {
-  return state.filter(p => productIDList.contains(p.get('code'))).toList();
+export function getProductList(state) {
+  return state;
 }
 /* eslint-disable */

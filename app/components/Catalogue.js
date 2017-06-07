@@ -42,6 +42,7 @@ export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
+    clearProductList: PropTypes.func.isRequired,
     categoryInfo: ImmutablePropTypes.map,
     products: ImmutablePropTypes.list,
     filterMap: ImmutablePropTypes.map.isRequired,
@@ -50,8 +51,8 @@ export default class Catalogue extends Component {
     toggleAvailability: PropTypes.func.isRequired,
     resetFilters: PropTypes.func.isRequired,
     initFilters: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired,
-    toggleFiltersDialog: PropTypes.func.isRequired
+    toggleFiltersDialog: PropTypes.func.isRequired,
+    isDialogOpen: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -73,17 +74,21 @@ export default class Catalogue extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearProductList();
+  }
+
   renderProducts() {
     const { products, filterMap } = this.props;
     const isDialogOpen = filterMap.get('isDialogOpen');
     return (
       <ProductSlider id="rinaldo" opacity={isDialogOpen} >
         {
-          products.map(p => (
+          products.map(p =>
             <Link to={`product/${p.get('code')}`} key={p.get('code')}>
               <ProductBadge productInfo={p} />
             </Link>
-          ))
+          )
         }
       </ProductSlider>
     );
@@ -97,8 +102,8 @@ export default class Catalogue extends Component {
       resetFilters,
       toggleAvailability,
       toggleFilter,
-      applyFilters,
-      toggleFiltersDialog
+      toggleFiltersDialog,
+      isDialogOpen
     } = this.props;
 
     if (categoryInfo.isEmpty()) {
@@ -120,11 +125,11 @@ export default class Catalogue extends Component {
         <FilterBar
           filterGroups={filterGroups}
           resetFilters={resetFilters}
-          applyFilters={applyFilters}
           filterMap={filterMap}
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}
           toggleFiltersDialog={toggleFiltersDialog}
+          isDialogOpen={isDialogOpen}
         />
         { this.renderProducts() }
       </div>

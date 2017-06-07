@@ -12,16 +12,32 @@ export function toggleAvailability() {
   return { type: actionTypes.TOGGLE_AVAILABILITY };
 }
 
-export function applyFilters(filterMap) {
-  return { type: actionTypes.APPLY_FILTERS, filterMap };
-}
-
 export function resetFilters() {
   return { type: actionTypes.RESET_FILTERS };
 }
 
 export function initFilters() {
   return { type: actionTypes.INIT_FILTERS };
+}
+
+export function toggleTempFilter(newFilter) {
+  return { type: actionTypes.TOGGLE_TEMP_FILTER, newFilter };
+}
+
+export function toggleTempAvailability() {
+  return { type: actionTypes.TOGGLE_TEMP_AVAILABILITY };
+}
+
+export function applyTempFilters() {
+  return { type: actionTypes.APPLY_TEMP_FILTERS };
+}
+
+export function resetTempFilters() {
+  return { type: actionTypes.RESET_TEMP_FILTERS };
+}
+
+export function initTempFilters() {
+  return { type: actionTypes.INIT_TEMP_FILTERS };
 }
 
 export function toggleFiltersDialog() {

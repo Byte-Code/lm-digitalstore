@@ -5,7 +5,7 @@ import glamorous from 'glamorous';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import { List, ListItem } from 'material-ui/List';
 
-import FilterDialog from './FilterDialog';
+import FilterDialog from '../containers/FilterDialog';
 import ActiveFilters from './ActiveFilters';
 
 const Wrapper = glamorous.div({
@@ -44,11 +44,11 @@ export default class FilterBar extends Component {
   static propTypes = {
     filterGroups: ImmutablePropTypes.list.isRequired,
     resetFilters: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired,
     toggleAvailability: PropTypes.func.isRequired,
-    toggleFiltersDialog: PropTypes.func.isRequired
+    toggleFiltersDialog: PropTypes.func.isRequired,
+    isDialogOpen: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -66,19 +66,10 @@ export default class FilterBar extends Component {
     this.setState({ open: false });
   };
 
-  // TODO separate dialog logic into dialog component?
   render() {
     const {
-      applyFilters,
-      filterGroups,
-      filterMap,
-      resetFilters,
-      toggleFilter,
-      toggleAvailability,
-      toggleFiltersDialog
-    } = this.props;
-
-    const isDialogOpen = filterMap.get('isDialogOpen');
+      filterGroups, filterMap, resetFilters, toggleFilter,
+      toggleAvailability, toggleFiltersDialog, isDialogOpen } = this.props;
 
     if (filterGroups.isEmpty()) {
       return null;
@@ -118,8 +109,7 @@ export default class FilterBar extends Component {
               <FilterDialog
                 filterGroups={this.props.filterGroups}
                 handleClose={this.handleClose}
-                applyFilters={applyFilters}
-                filterMap={filterMap}
+                categoryCode={filterMap.get('categoryCode')}
               />
             ]}
           />
@@ -149,10 +139,9 @@ export default class FilterBar extends Component {
           bodyStyle={bodyStyle}
         >
           <FilterDialog
-            filterGroups={this.props.filterGroups}
+            filterGroups={filterGroups}
+            categoryCode={filterMap.get('categoryCode')}
             handleClose={this.handleClose}
-            applyFilters={applyFilters}
-            filterMap={filterMap}
           />
         </Dialog>
       </Wrapper>
