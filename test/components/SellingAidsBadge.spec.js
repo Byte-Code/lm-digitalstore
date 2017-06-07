@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Map, fromJS } from 'immutable';
 
-import SellingAidsBadge, { Filter } from '../../app/components/SellingAidsBadge';
+import SellingAidsBadge from '../../app/components/SellingAidsBadge';
+import Filter from '../../app/components/Filter';
 
 const emptySellingAids = Map();
 const sellingAids = fromJS({
@@ -18,22 +19,14 @@ const activeAid = 'aid0';
 describe('SellingAidsBadge', () => {
   it('should render null when sellingAids are empty', () => {
     const result = shallow(
-      <SellingAidsBadge
-        onToggle={onToggle}
-        sellingAids={emptySellingAids}
-        activeAid={activeAid}
-      />
+      <SellingAidsBadge onToggle={onToggle} sellingAids={emptySellingAids} activeAid={activeAid} />
     );
     expect(result).toMatchSnapshot();
   });
 
   it('should render a list of all the sellingAids otherwise', () => {
     const result = shallow(
-      <SellingAidsBadge
-        onToggle={onToggle}
-        sellingAids={sellingAids}
-        activeAid={activeAid}
-      />
+      <SellingAidsBadge onToggle={onToggle} sellingAids={sellingAids} activeAid={activeAid} />
     );
     expect(result.find(Filter)).toHaveLength(3);
     expect(result).toMatchSnapshot();
@@ -41,11 +34,7 @@ describe('SellingAidsBadge', () => {
 
   it('should call onToggle once a filter is clicked', () => {
     const result = shallow(
-      <SellingAidsBadge
-        onToggle={onToggle}
-        sellingAids={sellingAids}
-        activeAid={activeAid}
-      />
+      <SellingAidsBadge onToggle={onToggle} sellingAids={sellingAids} activeAid={activeAid} />
     );
     result.find(Filter).at(0).simulate('click');
     expect(onToggle).toHaveBeenCalledWith('aid0');

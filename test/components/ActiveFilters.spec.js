@@ -2,7 +2,8 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
-import ActiveFilters, { Filter, ResetButton } from '../../app/components/ActiveFilters';
+import ActiveFilters, { OtherFilters, ResetButton } from '../../app/components/ActiveFilters';
+import Filter from '../../app/components/Filter';
 
 describe('ActiveFilters', () => {
   const resetFilters = () => {};
@@ -141,7 +142,7 @@ describe('ActiveFilters', () => {
       />
     );
     expect(result).toMatchSnapshot();
-    result.find(Filter).at(3).simulate('click');
+    result.find(OtherFilters).simulate('click');
     expect(handleOpenMock).toHaveBeenCalled();
   });
 });

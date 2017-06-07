@@ -7,6 +7,7 @@ import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import UndoIcon from 'material-ui/svg-icons/content/undo';
 
 import FilterButton from './FilterButton';
+import Filter from './Filter';
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -59,7 +60,8 @@ const FilterWrapper = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
   '&>div': {
-    marginRight: '10px'
+    marginRight: '10px',
+    marginBottom: 20
   },
   '&>div:last-child': {
     marginRight: 0
@@ -80,24 +82,6 @@ const Availability = glamorous.div({
     marginBottom: '13px'
   }
 });
-
-export const Filter = glamorous.div(({ isActive = false }) => ({
-  width: '150px',
-  height: '42px',
-  borderRadius: '20px',
-  marginBottom: '20px',
-  backgroundColor: isActive ? '#67cb33' : '#efefef',
-  color: isActive ? '#efefef' : '#333333',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer',
-  '&>p': {
-    lineHeight: '20px',
-    fontSize: '16px',
-    textAlign: 'center'
-  }
-}));
 
 const iconStyle = { height: 25, width: 25 };
 const trackSwitchedStyle = { width: 70, height: 42, backgroundColor: '#fff' };

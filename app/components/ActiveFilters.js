@@ -4,6 +4,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous from 'glamorous';
 
+import Filter from './Filter';
+
 const Wrapper = glamorous.div(({ backgroundColor }) => ({
   backgroundColor,
   display: 'flex',
@@ -20,22 +22,10 @@ const Wrapper = glamorous.div(({ backgroundColor }) => ({
   }
 }));
 
-export const Filter = glamorous.div(({ width = '150px', isActive = false }) => ({
-  height: '42px',
-  borderRadius: '20px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer',
-  '&>p': {
-    lineHeight: '20px',
-    fontSize: '16px',
-    textAlign: 'center'
-  },
-  width,
-  backgroundColor: isActive ? '#67cb33' : '#efefef',
-  color: isActive ? '#efefef' : '#67cb33'
-}));
+export const OtherFilters = glamorous(Filter)({
+  color: '#67cb33',
+  backgroundColor: '#efefef'
+});
 
 export const ResetButton = glamorous.div({
   display: 'flex',
@@ -83,19 +73,19 @@ const ActiveFilters = props => {
 
   return (
     <Wrapper backgroundColor="rgba(51, 51, 51, 0.8)">
-      {activeFilterList.map(f => (
+      {activeFilterList.map(f =>
         <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
           <p>{f.get('name')}</p>
         </Filter>
-      ))}
+      )}
       {activeAvailability &&
         <Filter isActive onClick={toggleAvailability}>
           <p>Disponibile</p>
         </Filter>}
       {activeFilters.size > toTake &&
-        <Filter width="178px" onClick={handleOpen}>
+        <OtherFilters width="178px" onClick={handleOpen}>
           <p>Visualizza altri filtri</p>
-        </Filter>}
+        </OtherFilters>}
       <ResetButton onClick={resetFilters}>
         <p>Reset filtri</p>
       </ResetButton>

@@ -4,6 +4,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 import glamorous from 'glamorous';
 
+import Filter from './Filter';
+
 const Wrapper = glamorous.div({
   height: '179px',
   background: '#333333',
@@ -33,25 +35,6 @@ const FilterWrapper = glamorous.div({
     marginRight: 0
   }
 });
-
-export const Filter = glamorous.div(({ isActive = false }) => ({
-  minWidth: '150px',
-  maxWidth: '300px',
-  padding: '0 20px',
-  height: '42px',
-  borderRadius: '20px',
-  backgroundColor: isActive ? '#67cb33' : '#efefef',
-  color: isActive ? '#efefef' : '#333333',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer',
-  '&>p': {
-    lineHeight: '20px',
-    fontSize: '16px',
-    textAlign: 'center'
-  }
-}));
 
 export default class SellingAidsBadge extends Component {
   static propTypes = {

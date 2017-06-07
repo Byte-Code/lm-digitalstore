@@ -22,14 +22,14 @@ exports[`ActiveFilters should call handleOpen when showMore filter is clicked 1`
   >
     <p />
   </glamorous(div)>
-  <glamorous(div)
+  <glamorous(glamorous(div))
     onClick={[Function]}
     width="178px"
   >
     <p>
       Visualizza altri filtri
     </p>
-  </glamorous(div)>
+  </glamorous(glamorous(div))>
   <glamorous(div)
     onClick={[Function]}
   >

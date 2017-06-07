@@ -3,7 +3,8 @@ import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 import Toggle from 'material-ui/Toggle';
 
-import FilterDialog, { Filter } from '../../app/components/FilterDialog';
+import FilterDialog from '../../app/components/FilterDialog';
+import Filter from '../../app/components/Filter';
 
 const applyTempFilters = jest.fn();
 const handleClose = jest.fn();

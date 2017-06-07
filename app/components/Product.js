@@ -14,7 +14,7 @@ const Wrapper = glamorous.div({
 });
 
 const Title = glamorous.h1({
-  margin: '40px 100px 0',
+  padding: '40px 100px 0',
   textAlign: 'center',
   fontSize: 48,
   lineHeight: '70px',
