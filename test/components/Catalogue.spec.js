@@ -55,6 +55,7 @@ describe('catalogue', () => {
         resetFilters={() => {}}
         initFilters={() => {}}
         applyFilters={() => {}}
+        clearProductList={() => {}}
       />
     );
     expect(result).toMatchSnapshot();
@@ -75,6 +76,7 @@ describe('catalogue', () => {
         toggleAvailability={() => {}}
         resetFilters={() => {}}
         applyFilters={() => {}}
+        clearProductList={() => {}}
       />
     );
     expect(initFilters).toHaveBeenCalled();
@@ -96,6 +98,7 @@ describe('catalogue', () => {
         toggleAvailability={() => {}}
         resetFilters={() => {}}
         applyFilters={() => {}}
+        clearProductList={() => {}}
       />
     );
     const nextProps = { params: { categoryCode: 'CAT456' } };

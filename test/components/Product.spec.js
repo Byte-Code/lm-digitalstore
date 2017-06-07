@@ -39,9 +39,7 @@ const productInfo = fromJS({
     }
   ]
 });
-const similarProducts = fromJS(
-  [{ code: 'prod1' }, { code: 'prod3' }]
-);
+const similarProducts = fromJS([{ code: 'prod1' }, { code: 'prod3' }]);
 
 describe('Product', () => {
   it('should return null when productInfo is empty', () => {
@@ -52,6 +50,7 @@ describe('Product', () => {
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
+        clearProductList={() => {}}
       />
     );
     expect(result).toMatchSnapshot();
@@ -65,6 +64,7 @@ describe('Product', () => {
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
+        clearProductList={() => {}}
       />
     );
     expect(result.find(SimilarProducts)).toHaveLength(0);
@@ -79,6 +79,7 @@ describe('Product', () => {
         storeCode={storeCode}
         similarProducts={similarProducts}
         requestFetchProduct={requestFetchProduct}
+        clearProductList={() => {}}
       />
     );
     expect(result.find(SimilarProducts)).toHaveLength(1);
@@ -93,6 +94,7 @@ describe('Product', () => {
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
+        clearProductList={() => {}}
       />,
       store
     );
@@ -107,6 +109,7 @@ describe('Product', () => {
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
+        clearProductList={() => {}}
       />,
       store
     );

@@ -49,12 +49,12 @@ exports[`FilterDialog should call toggleTempAvailability availability is toggled
     <Toggle
       defaultToggled={false}
       disabled={false}
-      label="Indifferente"
+      label="Disponibile"
       labelPosition="right"
       labelStyle={
         Object {
           "alignItems": "center",
-          "color": "#fff",
+          "color": "#67cb33",
           "display": "flex",
           "fontFamily": "LeroyMerlinSans Italic",
           "fontSize": 16,
@@ -78,6 +78,7 @@ exports[`FilterDialog should call toggleTempAvailability availability is toggled
           "top": 10,
         }
       }
+      toggled={true}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -143,6 +144,7 @@ exports[`FilterDialog should call toggleTempAvailability availability is toggled
     </glamorous(div)>
   </glamorous(div)>
   <FilterButton
+    itemCount={10}
     onApply={[Function]}
   />
 </glamorous(div)>
@@ -197,12 +199,12 @@ exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] 
     <Toggle
       defaultToggled={false}
       disabled={false}
-      label="Indifferente"
+      label="Disponibile"
       labelPosition="right"
       labelStyle={
         Object {
           "alignItems": "center",
-          "color": "#fff",
+          "color": "#67cb33",
           "display": "flex",
           "fontFamily": "LeroyMerlinSans Italic",
           "fontSize": 16,
@@ -226,6 +228,7 @@ exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] 
           "top": 10,
         }
       }
+      toggled={true}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -291,6 +294,7 @@ exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] 
     </glamorous(div)>
   </glamorous(div)>
   <FilterButton
+    itemCount={10}
     onApply={[Function]}
   />
 </glamorous(div)>
@@ -345,12 +349,12 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
     <Toggle
       defaultToggled={false}
       disabled={false}
-      label="Indifferente"
+      label="Disponibile"
       labelPosition="right"
       labelStyle={
         Object {
           "alignItems": "center",
-          "color": "#fff",
+          "color": "#67cb33",
           "display": "flex",
           "fontFamily": "LeroyMerlinSans Italic",
           "fontSize": 16,
@@ -374,6 +378,7 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
           "top": 10,
         }
       }
+      toggled={true}
       trackStyle={
         Object {
           "backgroundColor": "#fff",
@@ -439,6 +444,7 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
     </glamorous(div)>
   </glamorous(div)>
   <FilterButton
+    itemCount={10}
     onApply={[Function]}
   />
 </glamorous(div)>

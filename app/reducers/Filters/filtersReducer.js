@@ -1,7 +1,7 @@
 import { fromJS, List } from 'immutable';
 import * as actionTypes from '../../actions/actionTypes';
 
-function toggleFilter(state, newFilter) {
+export function toggleFilter(state, newFilter) {
   const filters = state.get('filters');
   if (filters.includes(newFilter)) {
     return filters.filterNot(f => f === newFilter);
@@ -9,11 +9,11 @@ function toggleFilter(state, newFilter) {
   return filters.push(newFilter);
 }
 
-function toggleAid(state, newAid) {
+export function toggleAid(state, newAid) {
   return state.get('aid') === newAid ? '' : newAid;
 }
 
-function resetFilters(state) {
+export function resetFilters(state) {
   return state.set('availability', false).set('filters', List()).set('aid', '');
 }
 

@@ -41,6 +41,8 @@ const result = shallow(
     toggleTempAvailability={toggleTempAvailability}
     resetTempFilters={resetTempFilters}
     activeFilters={activeFilters}
+    itemCount={10}
+    availability
   />
 );
 
