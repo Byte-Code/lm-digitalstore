@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
+import ReactImageZoom from 'react-image-zoom';
 
 import getUrl from '../utils/cloudinary';
-
-const Img = glamorous.img({
-  backgroundColor: '#fff'
-});
 
 export default class Image extends Component {
   static propTypes = {
     imageID: PropTypes.string.isRequired,
     fixBrightColor: PropTypes.bool,
-    alt: PropTypes.string.isRequired,
     imageOptions: PropTypes.shape({
       height: PropTypes.number,
       width: PropTypes.number
@@ -25,7 +20,7 @@ export default class Image extends Component {
   };
 
   render() {
-    const { imageID, alt, imageOptions, fixBrightColor } = this.props;
+    const { imageID, imageOptions, fixBrightColor } = this.props;
     let options = { ...imageOptions };
     if (fixBrightColor) {
       options = {
@@ -37,6 +32,8 @@ export default class Image extends Component {
     }
     const url = getUrl(imageID, options);
 
-    return <Img src={url} alt={alt} />;
+    const props = { width: 800, height: 800, zoomWidth: 500, img: url };
+
+    return <ReactImageZoom {...props} />;
   }
 }
