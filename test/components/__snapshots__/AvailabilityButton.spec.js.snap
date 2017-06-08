@@ -28,7 +28,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
     open={true}
     repositionOnUpdate={true}
   >
-    <CloseButton
+    <Component
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}
@@ -78,7 +78,7 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
     open={false}
     repositionOnUpdate={true}
   >
-    <CloseButton
+    <Component
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}

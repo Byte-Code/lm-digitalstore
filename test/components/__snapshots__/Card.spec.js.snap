@@ -5,7 +5,7 @@ exports[`Card should close if the title is clickedAgain 1`] = `
   <glamorous.Div
     onClick={[Function]}
   >
-    <TitleComponent
+    <Component
       expanded={false}
     />
   </glamorous.Div>
@@ -25,7 +25,7 @@ exports[`Card should initally be closed 1`] = `
   <glamorous.Div
     onClick={[Function]}
   >
-    <TitleComponent
+    <Component
       expanded={false}
     />
   </glamorous.Div>
@@ -45,7 +45,7 @@ exports[`Card should open once the title is clicked 1`] = `
   <glamorous.Div
     onClick={[Function]}
   >
-    <TitleComponent
+    <Component
       expanded={true}
     />
   </glamorous.Div>

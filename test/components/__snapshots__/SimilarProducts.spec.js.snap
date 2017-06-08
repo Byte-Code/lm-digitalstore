@@ -8,7 +8,7 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
     </h3>
   </glamorous(div)>
   <glamorous(div)>
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {
@@ -16,7 +16,7 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
         }
       }
     />
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {
@@ -24,7 +24,7 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
         }
       }
     />
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {
@@ -62,7 +62,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
     </h3>
   </glamorous(div)>
   <glamorous(div)>
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {
@@ -70,7 +70,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
         }
       }
     />
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {
@@ -78,7 +78,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
         }
       }
     />
-    <ProductBadge
+    <Component
       handleClick={[Function]}
       productInfo={
         Object {

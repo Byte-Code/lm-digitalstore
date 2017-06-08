@@ -23,7 +23,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
   open={true}
   repositionOnUpdate={true}
 >
-  <CloseButton
+  <Component
     backgroundColor="#333333"
     fill="#858585"
     handleClick={[Function]}
@@ -40,7 +40,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
   >
     <div>
       <glamorous(div)>
-        <SimilarProductBadge
+        <Component
           productInfo={
             Object {
               "code": "product0",
@@ -51,7 +51,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
     </div>
     <div>
       <glamorous(div)>
-        <SimilarProductBadge
+        <Component
           productInfo={
             Object {
               "code": "product1",
@@ -62,7 +62,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
     </div>
     <div>
       <glamorous(div)>
-        <SimilarProductBadge
+        <Component
           productInfo={
             Object {
               "code": "product2",
