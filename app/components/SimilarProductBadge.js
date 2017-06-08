@@ -92,10 +92,9 @@ const SimilarProductBadge = props => {
   const description = productInfo.getIn(['productDetail', 'shortDescription']);
   const price = productInfo.getIn(['price', 'selling']);
   const pricingInfo = productInfo.get('pricingInformations');
-  // HACK hardcoded!!!!
   const currentStoreStock = fromJS({
     storeStock: productInfo.get('storeStock'),
-    stockStatus: 'availableOnOrder'
+    stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
   });
   const marketingAttributes = productInfo.get('marketingAttributes');
   const loyaltyProgram = productInfo.get('loyaltyProgram');

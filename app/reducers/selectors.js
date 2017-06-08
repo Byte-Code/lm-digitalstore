@@ -8,7 +8,7 @@ import * as categorySelectors from './Category/categorySelectors';
 import * as catalogueSelectors from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
-import getProductSelector from './Product/productSelectors';
+import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
 
 export function getWorld(state) {
@@ -125,7 +125,7 @@ export function getTempAvailability(state) {
 
 // PRODUCT
 export function getProduct(state, productCode) {
-  return getProductSelector(state.get('productReducer'), productCode);
+  return productSelectors.getProduct(state.get('productReducer'), productCode);
 }
 
 export const getSimilarProductsIds = createSelector(getProduct, product => {
@@ -135,6 +135,10 @@ export const getSimilarProductsIds = createSelector(getProduct, product => {
   }
   return List();
 });
+
+export function getAllStoreStock(state, productCode) {
+  return productSelectors.getAllStoreStock(state.get('productReducer'), productCode);
+}
 
 // STORE
 export function getStore(state) {

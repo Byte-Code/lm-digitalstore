@@ -27,6 +27,7 @@ const contentStyle = {
   height: 1420
 };
 const bodyStyle = { padding: 0, background: 'transparent' };
+const overlayStyle = { backgroundColor: 'rgba(0, 0, 0, 0.7)' };
 
 class TutorialButton extends Component {
   static propTypes = {
@@ -71,6 +72,7 @@ class TutorialButton extends Component {
           contentClassName="similarDialog"
           contentStyle={contentStyle}
           bodyStyle={bodyStyle}
+          overlayStyle={overlayStyle}
         >
           <CloseButton handleClick={this.closeDialog} top={-250} />
           <Slick {...settings}>

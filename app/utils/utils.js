@@ -5,8 +5,9 @@ export function titleFormatter(text) {
 }
 
 export function chunkItemList(itemList, chunkSize) {
-  return Range(0, itemList.count(), chunkSize)
-    .map(chunkStart => itemList.slice(chunkStart, chunkStart + chunkSize));
+  return Range(0, itemList.count(), chunkSize).map(chunkStart =>
+    itemList.slice(chunkStart, chunkStart + chunkSize)
+  );
 }
 
 export function formatPrice(price) {
@@ -26,11 +27,15 @@ export function getStockLabel(stock, stockStatus) {
   }
   switch (stockStatus) {
     case 'notAvailable':
+    case 'none':
       return 'Prodotto non disponibile';
     case 'availableOnOrder':
+    case 'on_order':
       return 'Prodotto disponibile su ordinazione';
     case 'onRestock':
+    case 'on_restock':
+      return 'Prodotto in riassortimento';
     default:
-      return 'Prodotto disponibile su ordinazione';
+      return 'Prodotto non disponibile';
   }
 }

@@ -25,7 +25,6 @@ describe('getRelatedProductsSaga', () => {
     const input = { productCode: '21847689' };
     const gen = callFetchRelatedProducts(input);
 
-    // HACK(ish) need to serialize otherwise test doesn't pass, bound functions
     it('should call the RelatedProducts api first', () => {
       expect(gen.next().value).toEqual(
         call(apiClient.fetchRelatedProductDisplay, input.productCode)

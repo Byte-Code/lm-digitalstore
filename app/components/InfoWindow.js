@@ -68,8 +68,9 @@ const iconStyle = {
 const InfoWindow = ({ currentStoreInfo, handleClick }) => {
   const name = currentStoreInfo.get('name');
   const availability = currentStoreInfo.get('storeStock');
+  const stockStatus = currentStoreInfo.get('stockStatus');
   const isAvailable = availability > 0;
-  const label = getStockLabel(availability);
+  const label = getStockLabel(availability, stockStatus);
   const street = currentStoreInfo.getIn(['address', 'street']);
   const streetNumber = currentStoreInfo.getIn(['address', 'streetNumber']) || '';
   const zip = currentStoreInfo.getIn(['address', 'zipCode']);

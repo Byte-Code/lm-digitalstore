@@ -8,10 +8,10 @@ const mapStateToProps = (state, ownProps) => {
   const { allStoreStock } = ownProps;
   const nearbyStores = getNearbyStores(state);
   const nearbyStoreStock = nearbyStores.map(s => {
-    const hasProduct = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
-    if (hasProduct) {
-      return s.set('storeStock', hasProduct.get('storeStock'));
-    } return s.set('storeStock', 0);
+    const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
+    return s
+      .set('storeStock', currentStore.get('storeStock'))
+      .set('stockStatus', currentStore.get('stockStatus'));
   });
   const currentStore = getStore(state);
   return { nearbyStoreStock, currentStore };

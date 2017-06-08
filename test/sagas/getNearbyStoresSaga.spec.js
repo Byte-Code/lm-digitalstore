@@ -27,7 +27,6 @@ describe('getNearbyStoresSaga', () => {
       expect(gen.next().value).toEqual(call(delay, 100));
     });
 
-    // HACK(ish) need to serialize otherwise test doesn't pass, bound functions
     it('should call the api', () => {
       expect(gen.next().value).toEqual(call(apiClient.fetchSearchCoords, pathParams, queryParams));
     });

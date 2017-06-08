@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map, List } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
 
 import ImageSlider from './ImageSlider';
@@ -54,8 +54,8 @@ export default class Product extends Component {
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
-    storeCode: PropTypes.string.isRequired,
-    similarProducts: ImmutablePropTypes.list.isRequired
+    similarProducts: ImmutablePropTypes.list.isRequired,
+    allStoreStock: ImmutablePropTypes.list.isRequired
   };
 
   static defaultProps = {
@@ -97,7 +97,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productInfo, storeCode } = this.props;
+    const { productInfo, allStoreStock } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -113,9 +113,10 @@ export default class Product extends Component {
     const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
     const price = productInfo.getIn(['price', 'selling']);
     const pricingInfo = productInfo.get('pricingInformations');
-    // TODO this data should't arrive from here, selector Maybe?
-    const allStoreStock = productInfo.get('allStoreStock') || List();
-    const currentStoreStock = allStoreStock.find(s => s.get('storeCode') === storeCode);
+    const currentStoreStock = fromJS({
+      storeStock: productInfo.get('storeStock'),
+      stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
+    });
     const imageIDList = productInfo.get('images');
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
