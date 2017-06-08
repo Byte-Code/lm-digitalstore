@@ -120,7 +120,7 @@ export default class Catalogue extends Component {
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}
         />
-        <ProductSlider marginLeft={this.state.marginLeft}>
+        <ProductSlider>
           <FakeMarginDiv />
           {this.renderProducts()}
           <FakeMarginDiv />
