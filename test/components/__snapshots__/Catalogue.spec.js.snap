@@ -33,6 +33,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
           Object {
             "code": 1,
             "mainImage": "image1",
+            "marketingAttributes": Object {},
             "name": "product1",
           }
         }
@@ -49,6 +50,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
           Object {
             "code": 2,
             "mainImage": "image2",
+            "marketingAttributes": Object {},
             "name": "product2",
           }
         }
@@ -65,6 +67,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
           Object {
             "code": 3,
             "mainImage": "image3",
+            "marketingAttributes": Object {},
             "name": "product3",
           }
         }

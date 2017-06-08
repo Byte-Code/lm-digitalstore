@@ -33,11 +33,10 @@ exports[`Product should render properly with no similarProducts  1`] = `
   <glamorous(div) />
   <glamorous(div)>
     <ProductInfoBadge
-      allStoreStock={Array []}
       currentStoreStock={
         Object {
-          "stockStatus": "notAvailable",
-          "storeStock": 0,
+          "stockStatus": undefined,
+          "storeStock": undefined,
         }
       }
       loyaltyProgram={Object {}}
@@ -96,11 +95,10 @@ exports[`Product should render properly with similarProducts  1`] = `
   </glamorous(div)>
   <glamorous(div)>
     <ProductInfoBadge
-      allStoreStock={Array []}
       currentStoreStock={
         Object {
-          "stockStatus": "notAvailable",
-          "storeStock": 0,
+          "stockStatus": undefined,
+          "storeStock": undefined,
         }
       }
       loyaltyProgram={Object {}}

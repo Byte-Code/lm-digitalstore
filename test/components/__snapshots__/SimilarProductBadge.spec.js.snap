@@ -37,14 +37,11 @@ exports[`SimilarProductBadge should render properly 1`] = `
         }
         pricingInfo={Object {}}
       />
-      <glamorous(p)>
-        1 pz / pz
-      </glamorous(p)>
       <glamorous(div) />
       <Connect(StoreStockBadge)
         currentStoreStock={
           Object {
-            "stockStatus": "availableOnOrder",
+            "stockStatus": "none",
             "storeStock": 10,
           }
         }

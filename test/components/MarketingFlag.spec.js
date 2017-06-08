@@ -6,13 +6,17 @@ import MarketingFlag from '../../app/components/MarketingFlag';
 
 describe('MarketingFlag', () => {
   it('should render properly when promotions are active', () => {
-    const marketingAttributes = fromJS({ specialBadgeCode: 'PREZZO_STOCK' });
-    const loyaltyProgram = fromJS({ type: 'DISCOUNT', value: 10 });
+    const marketingAttributes = fromJS({
+      specialBadgeCode: 'PREZZO_STOCK',
+      specialBadgeCodePeriodEndDate: '2020-10-14T00:00:00.000Z'
+    });
+    const loyaltyProgram = fromJS({
+      type: 'DISCOUNT',
+      value: 10,
+      endDate: '2020-10-14T00:00:00.000Z'
+    });
     const result = mount(
-      <MarketingFlag
-        marketingAttributes={marketingAttributes}
-        loyaltyProgram={loyaltyProgram}
-      />
+      <MarketingFlag marketingAttributes={marketingAttributes} loyaltyProgram={loyaltyProgram} />
     );
     expect(result).toMatchSnapshot();
   });
@@ -21,10 +25,7 @@ describe('MarketingFlag', () => {
     const marketingAttributes = Map();
     const loyaltyProgram = Map();
     const result = mount(
-      <MarketingFlag
-        marketingAttributes={marketingAttributes}
-        loyaltyProgram={loyaltyProgram}
-      />
+      <MarketingFlag marketingAttributes={marketingAttributes} loyaltyProgram={loyaltyProgram} />
     );
     expect(result).toMatchSnapshot();
   });

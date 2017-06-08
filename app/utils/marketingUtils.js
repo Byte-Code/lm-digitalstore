@@ -5,10 +5,7 @@ export function isFutureDate(stringDate) {
 }
 
 export function isNewOnMarket(marketingAttributes) {
-  return (
-    marketingAttributes.get('newOnMarketStartDate') &&
-    isFutureDate(marketingAttributes.get('newOnMarketEndDate'))
-  );
+  return isFutureDate(marketingAttributes.get('newOnMarketEndDate'));
 }
 
 export function hasLoyaltyDiscount(loyaltyProgram) {

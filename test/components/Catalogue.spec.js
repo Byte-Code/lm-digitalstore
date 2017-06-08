@@ -8,9 +8,9 @@ const params = { categoryCode: 'CAT123' };
 const requestFetchCategory = jest.fn();
 const initFilters = jest.fn();
 const products = fromJS([
-  { code: 1, mainImage: 'image1', name: 'product1' },
-  { code: 2, mainImage: 'image2', name: 'product2' },
-  { code: 3, mainImage: 'image3', name: 'product3' }
+  { code: 1, mainImage: 'image1', name: 'product1', marketingAttributes: {} },
+  { code: 2, mainImage: 'image2', name: 'product2', marketingAttributes: {} },
+  { code: 3, mainImage: 'image3', name: 'product3', marketingAttributes: {} }
 ]);
 const categoryInfo = fromJS({
   name: 'cat123',

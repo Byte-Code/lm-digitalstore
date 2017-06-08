@@ -21,6 +21,9 @@ const productInfo = fromJS({
       gross: 15
     }
   },
+  productStockInfo: {
+    vendibilityValue: 'none'
+  },
   storeStock: 10,
   pricingInformations: {},
   allStoreStock: [],
@@ -36,11 +39,7 @@ const productInfo = fromJS({
 
 describe('SimilarProductBadge', () => {
   it('should render properly', () => {
-    const result = shallow(
-      <SimilarProductBadge
-        productInfo={productInfo}
-      />
-    );
+    const result = shallow(<SimilarProductBadge productInfo={productInfo} />);
     expect(result).toMatchSnapshot();
   });
 });

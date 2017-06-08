@@ -36,7 +36,7 @@ exports[`InfoWindow should render properly 1`] = `
   <glamorous(div)
     isAvailable={false}
   >
-    Prodotto disponibile su ordinazione
+    Prodotto non disponibile
   </glamorous(div)>
   <glamorous(div) />
 </glamorous(div)>
