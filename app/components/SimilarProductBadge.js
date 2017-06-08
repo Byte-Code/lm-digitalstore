@@ -60,11 +60,6 @@ const PriceAndStock = glamorous.div({
   paddingLeft: '85px'
 });
 
-const Quantity = glamorous.p({
-  fontSize: '14px',
-  fontFamily: 'LeroyMerlinSans Light'
-});
-
 const Divider = glamorous.div({
   border: '1px dashed #333333',
   width: '100%',
@@ -114,7 +109,6 @@ const SimilarProductBadge = props => {
             loyaltyProgram={loyaltyProgram}
           />
           <PriceBadge pricingInfo={pricingInfo} price={price} />
-          <Quantity>1 pz / pz</Quantity>
           <Divider />
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </PriceAndStock>

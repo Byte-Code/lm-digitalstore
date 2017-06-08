@@ -6,6 +6,7 @@ import glamorous from 'glamorous';
 
 import Image from './Image';
 import { formatPrice } from '../utils/utils';
+import { isNewOnMarket } from '../utils/marketingUtils';
 
 const Wrapper = glamorous.div({
   height: 593,
@@ -82,7 +83,6 @@ export const Available = glamorous.div({
   background: 'rgba(255, 255, 255, 0.8)'
 });
 
-// TODO create a more scalable component
 const Corner = glamorous.section(({ bgColor, fSize }) => ({
   height: 42,
   width: 42,
@@ -131,7 +131,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const isDiscounted = listPrice && true && listPrice - grossPrice > 1;
   const discount = productInfo.getIn(['price', 'selling', 'discount']);
   const isInStock = productInfo.get('storeStock') > 0;
-  const isNew = productInfo.getIn(['marketingAttributes', 'newOnMarketEndDate']) && true;
+  const isNew = isNewOnMarket(productInfo.get('marketingAttributes'));
 
   return (
     <Wrapper onClick={handleClick}>

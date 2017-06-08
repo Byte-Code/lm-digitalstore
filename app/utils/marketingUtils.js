@@ -1,16 +1,36 @@
 import { Map, List, fromJS } from 'immutable';
 
+export function isFutureDate(stringDate) {
+  return new Date().getTime() < new Date(stringDate).getTime();
+}
+
+export function isNewOnMarket(marketingAttributes) {
+  return (
+    marketingAttributes.get('newOnMarketStartDate') &&
+    isFutureDate(marketingAttributes.get('newOnMarketEndDate'))
+  );
+}
+
+export function hasLoyaltyDiscount(loyaltyProgram) {
+  return loyaltyProgram.get('type') === 'DISCOUNT' && isFutureDate(loyaltyProgram.get('endDate'));
+}
+
 export function getPromotions(marketingAttributes, loyaltyProgram) {
   let activeMarketing = Map();
-  const marketingAttributeList = marketingAttributes.getIn(['marketingAttributeList']);
+  const marketingAttributeList = marketingAttributes.get('marketingAttributeList');
   if (marketingAttributeList) {
-    activeMarketing = marketingAttributeList.reduce((acc, ma) =>
-    (acc.set(ma.get('specialBadgeCode'), true)), Map());
+    activeMarketing = marketingAttributeList.reduce((acc, ma) => {
+      let list = acc;
+      if (isFutureDate(ma.get('specialBadgeCodePeriodEndDate'))) {
+        list = acc.set(ma.get('specialBadgeCode'), true);
+      }
+      return list;
+    }, Map());
   }
-  if (marketingAttributes.get('newOnMarketStartDate')) {
+  if (isNewOnMarket(marketingAttributes)) {
     activeMarketing = activeMarketing.set('NOVITA', true);
   }
-  if (loyaltyProgram.get('type') === 'DISCOUNT') {
+  if (hasLoyaltyDiscount(loyaltyProgram)) {
     activeMarketing = activeMarketing.set('IDEAPIU', loyaltyProgram.get('value'));
   }
   return activeMarketing;
