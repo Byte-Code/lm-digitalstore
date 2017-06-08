@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
+import { Dialog, RaisedButton } from 'material-ui';
+import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Slick from 'react-slick';
 import glamorous, { Div } from 'glamorous';
-
 import CloseButton from './CloseButton';
 
 const Slide = glamorous.div({
@@ -27,6 +27,14 @@ const contentStyle = {
   height: 1420
 };
 const bodyStyle = { padding: 0, background: 'transparent' };
+
+const BackButton = glamorous.div({
+  position: 'relative',
+  width: '982px',
+  right: '35px',
+  bottom: '99px',
+  height: '100px'
+});
 
 class TutorialButton extends Component {
   static propTypes = {
@@ -62,7 +70,7 @@ class TutorialButton extends Component {
     /* eslint-disable */
     const settings = this.getSlickSettings();
     return (
-      <Div onClick={this.openDialog}>
+      <Div id="Carousel" onClick={this.openDialog}>
         {this.props.children}
         <Dialog
           modal={false}
@@ -93,6 +101,18 @@ class TutorialButton extends Component {
               <Slide>
                 <Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" />
               </Slide>
+              <BackButton id="BackButton">
+                <RaisedButton
+                  label="Torna alla navigazione"
+                  fullWidth={true}
+                  style={{ height: '100%' }}
+                  backgroundColor={'#333333'}
+                  labelColor={'white'}
+                  labelPosition="before"
+                  icon={<ArrowForward />}
+                  onTouchTap={this.closeDialog}
+                />
+              </BackButton>
             </div>
           </Slick>
         </Dialog>
