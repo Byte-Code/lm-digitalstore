@@ -8,6 +8,7 @@ import glamorous from 'glamorous';
 
 import Marker from './Marker';
 import InfoWindow from './InfoWindow';
+import NearbyStore from './NearbyStore';
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -59,6 +60,13 @@ const Radius = glamorous.div({
   fontFamily: 'LeroyMerlinSans Light-Italic'
 });
 
+const ControlsOverlay = glamorous.div({
+  height: 30,
+  position: 'absolute',
+  bottom: 0,
+  width: '100%'
+});
+
 const sliderStyle = { marginBottom: 24 };
 const mapOptions = { fullscreenControl: false, maxZoom: 17, minZoom: 8, zoomControl: false };
 
@@ -77,7 +85,7 @@ export default class AvailabilityMap extends Component {
       selectedStore: null,
       infoWindowOpen: false,
       zoom: 11,
-      range: 30
+      range: 20
     };
   }
 
@@ -157,6 +165,21 @@ export default class AvailabilityMap extends Component {
     );
   }
 
+  renderNearbyStores() {
+    const { nearbyStoreStock, currentStore } = this.props;
+    const { selectedStore } = this.state;
+    return nearbyStoreStock
+      .filterNot(s => s.get('storeStock') <= 0 || s.get('code') === currentStore.get('code'))
+      .map(s =>
+        <NearbyStore
+          key={s.get('code')}
+          currentStoreInfo={s}
+          handleClick={() => this.selectStore(s.get('code'))}
+          isSelected={selectedStore === s.get('code')}
+        />
+      );
+  }
+
   render() {
     const { productName, productCode, currentStore } = this.props;
     const { zoom, range } = this.state;
@@ -173,9 +196,8 @@ export default class AvailabilityMap extends Component {
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
         <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${currentStoreName}`}</SliderTitle>
         <Slider
-          min={10}
+          min={5}
           max={50}
-          step={10}
           value={range}
           onChange={this.onChangeSlider}
           color="#67cb33"
@@ -194,7 +216,11 @@ export default class AvailabilityMap extends Component {
             {this.renderInfoWindow()}
             <Circle lat={lat} lng={lng} width={w} height={h} />
           </GoogleMapReact>
+          <ControlsOverlay />
         </Map>
+        <div style={{ height: 300, display: 'flex', alignItems: 'center' }}>
+          {this.renderNearbyStores()}
+        </div>
       </Wrapper>
     );
   }
