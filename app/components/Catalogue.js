@@ -9,6 +9,11 @@ import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
+const FakeMarginDiv = glamorous.div({
+  height: '100%',
+  width: '40px'
+});
+
 const Header = glamorous.div({
   width: '100%',
   height: '184px',
@@ -22,7 +27,7 @@ const Header = glamorous.div({
 });
 
 const ProductSlider = glamorous.div(({ opacity = false }) => ({
-  margin: '50px 40px',
+  marginTop: '5%',
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
@@ -79,18 +84,12 @@ export default class Catalogue extends Component {
   }
 
   renderProducts() {
-    const { products, isDialogOpen } = this.props;
-    return (
-      <ProductSlider id="rinaldo" opacity={isDialogOpen} >
-        {
-          products.map(p =>
-            <Link to={`product/${p.get('code')}`} key={p.get('code')}>
-              <ProductBadge productInfo={p} />
-            </Link>
-          )
-        }
-      </ProductSlider>
-    );
+    const { products } = this.props;
+    return products.map(p => (
+      <Link to={`product/${p.get('code')}`} key={p.get('code')}>
+        <ProductBadge productInfo={p} />
+      </Link>
+    ));
   }
 
   render() {
@@ -130,7 +129,11 @@ export default class Catalogue extends Component {
           toggleFiltersDialog={toggleFiltersDialog}
           isDialogOpen={isDialogOpen}
         />
-        { this.renderProducts() }
+        <ProductSlider opacity={isDialogOpen}>
+          <FakeMarginDiv />
+          {this.renderProducts()}
+          <FakeMarginDiv />
+        </ProductSlider>
       </div>
     );
   }
