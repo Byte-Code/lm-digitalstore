@@ -12,7 +12,7 @@ exports[`ProductInfoBadge should render properly 1`] = `
   />
   <glamorous(div) />
   <glamorous(div)>
-    <Connect(StoreStockBadge)
+    <Connect(Component)
       currentStoreStock={Object {}}
     />
   </glamorous(div)>

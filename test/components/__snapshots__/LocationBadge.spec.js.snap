@@ -3,7 +3,7 @@
 exports[`LocationBadge renders properly 1`] = `
 <glamorous(div)>
   <glamorous(div)>
-    <IconSelector
+    <Component
       weather="sunny"
     />
     <glamorous(div)>

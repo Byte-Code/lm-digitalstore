@@ -33,7 +33,7 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
     <div
       className="css-c7um26"
     >
-      <MarketingBadge
+      <Component
         promotion={
           Object {
             "code": "IDEAPIU",
@@ -70,7 +70,7 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
             </div>
           </glamorous(div)>
         </Component>
-      </MarketingBadge>
+      </Component>
     </div>
   </glamorous(div)>
 </MarketingFlag>

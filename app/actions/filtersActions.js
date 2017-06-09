@@ -39,3 +39,7 @@ export function resetTempFilters() {
 export function initTempFilters() {
   return { type: actionTypes.INIT_TEMP_FILTERS };
 }
+
+export function toggleFiltersDialog() {
+  return { type: actionTypes.TOGGLE_FILTERS_DIALOG };
+}

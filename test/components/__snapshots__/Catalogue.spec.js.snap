@@ -21,13 +21,15 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
     toggleAvailability={[Function]}
     toggleFilter={[Function]}
   />
-  <glamorous(div)>
+  <glamorous(div)
+    id="rinaldo"
+  >
     <Link
       onlyActiveOnIndex={false}
       style={Object {}}
       to="product/1"
     >
-      <ProductBadge
+      <Component
         handleClick={[Function]}
         productInfo={
           Object {
@@ -44,7 +46,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       style={Object {}}
       to="product/2"
     >
-      <ProductBadge
+      <Component
         handleClick={[Function]}
         productInfo={
           Object {
@@ -61,7 +63,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       style={Object {}}
       to="product/3"
     >
-      <ProductBadge
+      <Component
         handleClick={[Function]}
         productInfo={
           Object {

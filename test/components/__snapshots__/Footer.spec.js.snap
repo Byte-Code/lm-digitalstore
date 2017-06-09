@@ -2,7 +2,7 @@
 
 exports[`Footer should render properly 1`] = `
 <glamorous(div)>
-  <LinkBack>
+  <Component>
     <glamorous(div)>
       <NavigationArrowBack
         color="#fff"
@@ -17,7 +17,7 @@ exports[`Footer should render properly 1`] = `
         Indietro
       </p>
     </glamorous(div)>
-  </LinkBack>
+  </Component>
   <Link
     onlyActiveOnIndex={false}
     style={Object {}}

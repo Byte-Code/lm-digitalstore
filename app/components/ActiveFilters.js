@@ -6,8 +6,8 @@ import glamorous from 'glamorous';
 
 import Filter from './Filter';
 
-const Wrapper = glamorous.div(({ backgroundColor }) => ({
-  backgroundColor,
+const Wrapper = glamorous.div({
+  backgroundColor: 'transparent',
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'center',
@@ -15,12 +15,15 @@ const Wrapper = glamorous.div(({ backgroundColor }) => ({
   width: '100%',
   '&>p': {
     fontFamily: 'LeroyMerlinSans Italic',
-    fontSize: '16px'
+    fontSize: '16px',
+    color: 'white',
+    marginLeft: '28%',
+    marginTop: '2%'
   },
   '&>div': {
     marginRight: '10px'
   }
-}));
+});
 
 export const OtherFilters = glamorous(Filter)({
   color: '#67cb33',
@@ -55,7 +58,7 @@ const ActiveFilters = props => {
 
   if (activeFilters.isEmpty() && !activeAvailability) {
     return (
-      <Wrapper bgColor="#e4e4e4">
+      <Wrapper onClick={handleOpen}>
         <p>Tocca per avviare una ricerca avanzata dei prodotti</p>
       </Wrapper>
     );
@@ -72,12 +75,12 @@ const ActiveFilters = props => {
     .take(toTake);
 
   return (
-    <Wrapper backgroundColor="rgba(51, 51, 51, 0.8)">
-      {activeFilterList.map(f =>
+    <Wrapper>
+      {activeFilterList.map(f => (
         <Filter key={f.get('code')} isActive onClick={() => toggleFilter(f.get('code'))}>
           <p>{f.get('name')}</p>
         </Filter>
-      )}
+      ))}
       {activeAvailability &&
         <Filter isActive onClick={toggleAvailability}>
           <p>Disponibile</p>

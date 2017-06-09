@@ -25,7 +25,7 @@ exports[`Product should render properly with no similarProducts  1`] = `
       }
     />
   </glamorous(div)>
-  <ProductInfo
+  <Component
     descriptions={Array []}
     marketingDescriptions={Object {}}
     productType="descriptionType"
@@ -76,7 +76,7 @@ exports[`Product should render properly with similarProducts  1`] = `
       }
     />
   </glamorous(div)>
-  <ProductInfo
+  <Component
     descriptions={Array []}
     marketingDescriptions={Object {}}
     productType="descriptionType"
