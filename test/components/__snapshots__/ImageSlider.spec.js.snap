@@ -13,6 +13,7 @@ exports[`ImageSlider should not render the slick if only one image is present 1`
           "width": 100,
         }
       }
+      zoomable={true}
     />
   </div>
 </div>
@@ -39,6 +40,7 @@ exports[`ImageSlider should render a slick carousel when multiple images are pre
           "width": 100,
         }
       }
+      zoomable={true}
     />
   </div>
   <div>
@@ -52,6 +54,7 @@ exports[`ImageSlider should render a slick carousel when multiple images are pre
           "width": 100,
         }
       }
+      zoomable={true}
     />
   </div>
   <div>
@@ -65,6 +68,7 @@ exports[`ImageSlider should render a slick carousel when multiple images are pre
           "width": 100,
         }
       }
+      zoomable={true}
     />
   </div>
 </Slider>

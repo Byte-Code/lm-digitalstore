@@ -14,6 +14,7 @@ exports[`ProductBadge should display the available overlay if product is in stoc
         "width": 405,
       }
     }
+    zoomable={false}
   />
   <Component
     isDiscounted={true}
@@ -63,6 +64,7 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
         "width": 405,
       }
     }
+    zoomable={false}
   />
   <Component
     isDiscounted={true}
@@ -112,6 +114,7 @@ exports[`ProductBadge should not display the available overlay if product is not
         "width": 405,
       }
     }
+    zoomable={false}
   />
   <Component
     isDiscounted={false}
@@ -151,6 +154,7 @@ exports[`ProductBadge should not display the discount if product is not discount
         "width": 405,
       }
     }
+    zoomable={false}
   />
   <Component
     isDiscounted={false}
