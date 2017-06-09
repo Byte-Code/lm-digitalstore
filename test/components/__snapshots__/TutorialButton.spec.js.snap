@@ -2,6 +2,7 @@
 
 exports[`TutorialButton should initially render with a closed dialog 1`] = `
 <glamorous.Div
+  id="TutorialSlider"
   onClick={[Function]}
 >
   <button>
@@ -76,6 +77,27 @@ exports[`TutorialButton should initially render with a closed dialog 1`] = `
             src="test-file-stub"
           />
         </glamorous(div)>
+        <glamorous(div)
+          id="BackButton"
+        >
+          <RaisedButton
+            backgroundColor="#333333"
+            disabled={false}
+            fullWidth={true}
+            icon={<NavigationArrowForward />}
+            label="Torna alla navigazione"
+            labelColor="white"
+            labelPosition="before"
+            onTouchTap={[Function]}
+            primary={false}
+            secondary={false}
+            style={
+              Object {
+                "height": "100%",
+              }
+            }
+          />
+        </glamorous(div)>
       </div>
     </Slider>
   </Dialog>
@@ -84,6 +106,7 @@ exports[`TutorialButton should initially render with a closed dialog 1`] = `
 
 exports[`TutorialButton should open the dialog once clicked 1`] = `
 <glamorous.Div
+  id="TutorialSlider"
   onClick={[Function]}
 >
   <button>
@@ -156,6 +179,27 @@ exports[`TutorialButton should open the dialog once clicked 1`] = `
           <glamorous(img)
             alt="tutorial 4"
             src="test-file-stub"
+          />
+        </glamorous(div)>
+        <glamorous(div)
+          id="BackButton"
+        >
+          <RaisedButton
+            backgroundColor="#333333"
+            disabled={false}
+            fullWidth={true}
+            icon={<NavigationArrowForward />}
+            label="Torna alla navigazione"
+            labelColor="white"
+            labelPosition="before"
+            onTouchTap={[Function]}
+            primary={false}
+            secondary={false}
+            style={
+              Object {
+                "height": "100%",
+              }
+            }
           />
         </glamorous(div)>
       </div>

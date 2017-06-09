@@ -145,7 +145,6 @@ exports[`FilterDialog should call toggleTempAvailability availability is toggled
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Component
   <FilterButton
     itemCount={10}
     onApply={[Function]}
@@ -298,7 +297,6 @@ exports[`FilterDialog should call toggleTempFilter when a filter is clicked 1`] 
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Component
   <FilterButton
     itemCount={10}
     onApply={[Function]}
@@ -451,7 +449,6 @@ exports[`FilterDialog should reset filter when reset button is clicked 1`] = `
       </glamorous(div)>
     </glamorous(div)>
   </glamorous(div)>
-  <Component
   <FilterButton
     itemCount={10}
     onApply={[Function]}
