@@ -20,6 +20,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
         "width": 830,
       }
     }
+    zoomable={false}
   />
   <glamorous(div)>
     <glamorous(p) />

@@ -10,7 +10,10 @@ import ProductInfoNOCAB from './ProductInfoNOCAB';
 const ProductInfo = ({ productType, descriptions, marketingDescriptions }) => {
   if (productType === 'CAB') {
     const halfDescriptionsSize = Math.ceil(descriptions.size / 2);
-    const chunkedDescriptions = chunkItemList(descriptions, halfDescriptionsSize);
+    const chunkedDescriptions = chunkItemList(
+      descriptions,
+      halfDescriptionsSize
+    );
     return (
       <ProductInfoCAB
         marketingDescriptions={marketingDescriptions}
@@ -24,7 +27,7 @@ const ProductInfo = ({ productType, descriptions, marketingDescriptions }) => {
 ProductInfo.propTypes = {
   productType: PropTypes.string.isRequired,
   descriptions: ImmutablePropTypes.list.isRequired,
-  marketingDescriptions: ImmutablePropTypes.map
+  marketingDescriptions: ImmutablePropTypes.map,
 };
 
 ProductInfo.defaultProps = {
