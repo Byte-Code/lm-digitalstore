@@ -20,6 +20,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
         "width": 830,
       }
     }
+    zoomable={false}
   />
   <glamorous(div)>
     <glamorous(p) />
@@ -38,7 +39,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
         pricingInfo={Object {}}
       />
       <glamorous(div) />
-      <Connect(StoreStockBadge)
+      <Connect(Component)
         currentStoreStock={
           Object {
             "stockStatus": "none",

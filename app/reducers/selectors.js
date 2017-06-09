@@ -99,6 +99,10 @@ export function getFilterMap(state) {
   return filtersSelector.getFilterMap(state.get('filtersReducer'));
 }
 
+export function getDialogStatus(state) {
+  return filtersSelector.getDialogStatus(state.get('filtersReducer'));
+}
+
 export function getActiveAid(state) {
   return filtersSelector.getActiveAid(state.get('filtersReducer'));
 }

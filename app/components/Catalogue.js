@@ -9,6 +9,11 @@ import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
+const FakeMarginDiv = glamorous.div({
+  height: '100%',
+  width: '40px'
+});
+
 const Header = glamorous.div({
   width: '100%',
   height: '184px',
@@ -21,12 +26,13 @@ const Header = glamorous.div({
   }
 });
 
-const ProductSlider = glamorous.div({
-  margin: '50px 40px',
+const ProductSlider = glamorous.div(({ opacity = false }) => ({
+  marginTop: '5%',
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
   height: '1246px',
+  opacity: opacity ? 0.17 : 1,
   '&>a': {
     width: '405px',
     height: '593px',
@@ -35,7 +41,7 @@ const ProductSlider = glamorous.div({
       marginBottom: '60px'
     }
   }
-});
+}));
 
 export default class Catalogue extends Component {
   static propTypes = {
@@ -49,7 +55,9 @@ export default class Catalogue extends Component {
     toggleFilter: PropTypes.func.isRequired,
     toggleAvailability: PropTypes.func.isRequired,
     resetFilters: PropTypes.func.isRequired,
-    initFilters: PropTypes.func.isRequired
+    initFilters: PropTypes.func.isRequired,
+    toggleFiltersDialog: PropTypes.func.isRequired,
+    isDialogOpen: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -77,11 +85,11 @@ export default class Catalogue extends Component {
 
   renderProducts() {
     const { products } = this.props;
-    return products.map(p =>
+    return products.map(p => (
       <Link to={`product/${p.get('code')}`} key={p.get('code')}>
         <ProductBadge productInfo={p} />
       </Link>
-    );
+    ));
   }
 
   render() {
@@ -91,7 +99,9 @@ export default class Catalogue extends Component {
       toggleAid,
       resetFilters,
       toggleAvailability,
-      toggleFilter
+      toggleFilter,
+      toggleFiltersDialog,
+      isDialogOpen
     } = this.props;
 
     if (categoryInfo.isEmpty()) {
@@ -116,9 +126,13 @@ export default class Catalogue extends Component {
           filterMap={filterMap}
           toggleFilter={toggleFilter}
           toggleAvailability={toggleAvailability}
+          toggleFiltersDialog={toggleFiltersDialog}
+          isDialogOpen={isDialogOpen}
         />
-        <ProductSlider>
+        <ProductSlider opacity={isDialogOpen}>
+          <FakeMarginDiv />
           {this.renderProducts()}
+          <FakeMarginDiv />
         </ProductSlider>
       </div>
     );

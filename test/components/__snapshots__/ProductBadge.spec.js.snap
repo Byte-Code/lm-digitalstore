@@ -14,8 +14,9 @@ exports[`ProductBadge should display the available overlay if product is in stoc
         "width": 405,
       }
     }
+    zoomable={false}
   />
-  <MarketingCorner
+  <Component
     isDiscounted={true}
     isNew={false}
   />
@@ -63,8 +64,9 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
         "width": 405,
       }
     }
+    zoomable={false}
   />
-  <MarketingCorner
+  <Component
     isDiscounted={true}
     isNew={false}
   />
@@ -112,8 +114,9 @@ exports[`ProductBadge should not display the available overlay if product is not
         "width": 405,
       }
     }
+    zoomable={false}
   />
-  <MarketingCorner
+  <Component
     isDiscounted={false}
     isNew={false}
   />
@@ -151,8 +154,9 @@ exports[`ProductBadge should not display the discount if product is not discount
         "width": 405,
       }
     }
+    zoomable={false}
   />
-  <MarketingCorner
+  <Component
     isDiscounted={false}
     isNew={false}
   />

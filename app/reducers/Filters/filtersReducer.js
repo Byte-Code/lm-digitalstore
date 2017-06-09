@@ -26,7 +26,8 @@ const initialFilters = fromJS({
 
 const initialState = fromJS({
   active: initialFilters,
-  temp: initialFilters
+  temp: initialFilters,
+  isDialogOpen: false
 });
 
 export default function filtersReducer(state = initialState, action) {
@@ -56,6 +57,8 @@ export default function filtersReducer(state = initialState, action) {
       return state.set('temp', resetFilters(state.get('temp')));
     case actionTypes.SUCCESS_FETCH_CATEGORY:
       return state.setIn(['active', 'categoryCode'], action.categoryCode);
+    case actionTypes.TOGGLE_FILTERS_DIALOG:
+      return state.set('isDialogOpen', !state.get('isDialogOpen'));
     default:
       return state;
   }

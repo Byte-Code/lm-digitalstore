@@ -67,7 +67,7 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
       }
       yesIWantToUseGoogleMapApiInternals={false}
     >
-      <Marker
+      <Component
         code="123"
         handleClick={[Function]}
         isAvailable={false}
@@ -75,7 +75,7 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
         lat={1231}
         lng={123213}
       />
-      <Marker
+      <Component
         code="1234"
         handleClick={[Function]}
         isAvailable={false}
@@ -84,7 +84,7 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
         lng={123213}
       />
       <glamorous(div)
-        height={2405.6967429352226}
+        height={2405.6967429351644}
         lat={12311}
         lng={123213}
         width={2403.821601331234}

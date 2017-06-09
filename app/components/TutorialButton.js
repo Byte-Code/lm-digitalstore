@@ -1,10 +1,88 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
+import { Dialog, RaisedButton } from 'material-ui';
+import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward';
 import Slick from 'react-slick';
 import glamorous, { Div } from 'glamorous';
-
 import CloseButton from './CloseButton';
+import * as tutorials from '../assets/tutorial';
+
+class TutorialButton extends Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  };
+
+  state = { open: false };
+
+  toggleDialog = () => {
+    this.setState({
+      open: !this.state.open
+    });
+  };
+
+  render() {
+    /* eslint-disable */
+    return (
+      <Div id={ids.TutorialSlider} onClick={this.toggleDialog}>
+        {this.props.children}
+        <Dialog
+          modal={false}
+          onRequestClose={this.toggleDialog}
+          open={this.state.open}
+          contentClassName="similarDialog"
+          contentStyle={contentStyle}
+          bodyStyle={bodyStyle}
+        >
+          <CloseButton handleClick={this.toggleDialog} top={-250} />
+          <Slick {...slickSettings}>
+            <div>
+              <Slide>
+                <Img src={tutorials.tutorial1} alt="tutorial 1" />
+              </Slide>
+            </div>
+            <div>
+              <Slide>
+                <Img src={tutorials.tutorial2} alt="tutorial 2" />
+              </Slide>
+            </div>
+            <div>
+              <Slide>
+                <Img src={tutorials.tutorial3} alt="tutorial 3" />
+              </Slide>
+            </div>
+            <div>
+              <Slide>
+                <Img src={tutorials.tutorial4} alt="tutorial 4" />
+              </Slide>
+              <BackButton id={ids.BackButton}>
+                <RaisedButton
+                  label={labels.backButton}
+                  fullWidth={true}
+                  style={{ height: '100%' }}
+                  backgroundColor={'#333333'}
+                  labelColor={'white'}
+                  labelPosition="before"
+                  icon={<ArrowForward />}
+                  onTouchTap={this.toggleDialog}
+                />
+              </BackButton>
+            </div>
+          </Slick>
+        </Dialog>
+      </Div>
+    );
+    /* eslint-disable */
+  }
+}
+
+const ids = {
+  BackButton: 'BackButton',
+  TutorialSlider: 'TutorialSlider'
+};
+
+const labels = {
+  backButton: 'Torna alla navigazione'
+};
 
 const Slide = glamorous.div({
   display: 'flex',
@@ -28,78 +106,22 @@ const contentStyle = {
 };
 const bodyStyle = { padding: 0, background: 'transparent' };
 
-class TutorialButton extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
+const BackButton = glamorous.div({
+  position: 'relative',
+  width: '982px',
+  right: '35px',
+  bottom: '99px',
+  height: '100px'
+});
 
-  state = {
-    open: false
-  };
+const slickSettings = {
+  arrows: false,
+  centerMode: true,
+  dots: false,
+  initialSlide: 0,
+  infinite: false,
+  variableWidth: true
+};
 
-  getSlickSettings = () => ({
-    arrows: false,
-    centerMode: true,
-    dots: false,
-    initialSlide: 0,
-    infinite: false,
-    variableWidth: true
-  });
-
-  closeDialog = () => {
-    this.setState({
-      open: false
-    });
-  };
-
-  openDialog = () => {
-    this.setState({
-      open: true
-    });
-  };
-
-  render() {
-    /* eslint-disable */
-    const settings = this.getSlickSettings();
-    return (
-      <Div onClick={this.openDialog}>
-        {this.props.children}
-        <Dialog
-          modal={false}
-          onRequestClose={this.closeDialog}
-          open={this.state.open}
-          contentClassName="similarDialog"
-          contentStyle={contentStyle}
-          bodyStyle={bodyStyle}
-        >
-          <CloseButton handleClick={this.closeDialog} top={-250} />
-          <Slick {...settings}>
-            <div>
-              <Slide>
-                <Img src={require('../assets/tutorial/tutorial1.png')} alt="tutorial 1" />
-              </Slide>
-            </div>
-            <div>
-              <Slide>
-                <Img src={require('../assets/tutorial/tutorial2.png')} alt="tutorial 2" />
-              </Slide>
-            </div>
-            <div>
-              <Slide>
-                <Img src={require('../assets/tutorial/tutorial3.png')} alt="tutorial 3" />
-              </Slide>
-            </div>
-            <div>
-              <Slide>
-                <Img src={require('../assets/tutorial/tutorial4.png')} alt="tutorial 4" />
-              </Slide>
-            </div>
-          </Slick>
-        </Dialog>
-      </Div>
-    );
-    /* eslint-disable */
-  }
-}
 
 export default TutorialButton;

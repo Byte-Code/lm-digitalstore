@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import glamorous from 'glamorous';
+import ImageZoom from 'react-medium-image-zoom';
 
 import getUrl from '../utils/cloudinary';
 
@@ -16,16 +17,19 @@ export default class Image extends Component {
     imageOptions: PropTypes.shape({
       height: PropTypes.number,
       width: PropTypes.number
-    })
+    }),
+    zoomable: PropTypes.bool
   };
 
   static defaultProps = {
     imageOptions: {},
-    fixBrightColor: false
+    fixBrightColor: false,
+    zoomable: false
   };
 
   render() {
-    const { imageID, alt, imageOptions, fixBrightColor } = this.props;
+    const { imageID, alt, imageOptions, fixBrightColor, zoomable } = this.props;
+    const overlayZoomStyle = { overlay: { opacity: 0.7 } };
     let options = { ...imageOptions };
     if (fixBrightColor) {
       options = {
@@ -35,8 +39,10 @@ export default class Image extends Component {
         flags: ['lossy']
       };
     }
-    const url = getUrl(imageID, options);
+    const src = getUrl(imageID, options);
 
-    return <Img src={url} alt={alt} />;
+    return zoomable ?
+      <ImageZoom defaultStyles={overlayZoomStyle} image={{ src, alt }} zoomImage={{ src, alt }} /> :
+      <Img src={src} alt={alt} />;
   }
 }

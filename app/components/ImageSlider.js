@@ -30,7 +30,7 @@ export default class ImageSlider extends Component {
 
     return imageIDList.map(imageID => (
       <div key={imageID}>
-        <Image fixBrightColor imageID={imageID} imageOptions={imageOptions} alt={alt} />
+        <Image zoomable fixBrightColor imageID={imageID} imageOptions={imageOptions} alt={alt} />
       </div>
     ));
   }

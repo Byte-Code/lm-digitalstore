@@ -18,7 +18,7 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
       Piú filtri
     </p>
   </glamorous(div)>
-  <ActiveFilters
+  <Component
     filterGroups={
       Array [
         1,
@@ -84,7 +84,7 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
       Piú filtri
     </p>
   </glamorous(div)>
-  <ActiveFilters
+  <Component
     filterGroups={
       Array [
         1,
@@ -112,23 +112,8 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
         "maxWidth": "none",
         "width": "100%",
       }
-    }
-    modal={false}
-    onRequestClose={[Function]}
-    open={true}
-    repositionOnUpdate={true}
-  >
-    <Connect(FilterDialog)
-      filterGroups={
-        Array [
-          1,
-          2,
-          3,
-        ]
-      }
-      handleClose={[Function]}
     />
-  </Dialog>
+  </List>
 </glamorous(div)>
 `;
 

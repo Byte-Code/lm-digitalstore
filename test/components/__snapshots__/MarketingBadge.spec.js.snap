@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MarketingBadge should render DESTOCK 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "DESTOCK",
@@ -20,11 +20,11 @@ exports[`MarketingBadge should render DESTOCK 1`] = `
       />
     </glamorous(img)>
   </Component>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render IDEAPIU 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "IDEAPIU",
@@ -61,11 +61,11 @@ exports[`MarketingBadge should render IDEAPIU 1`] = `
       </div>
     </glamorous(div)>
   </Component>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render NOVITA 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "NOVITA",
@@ -92,11 +92,11 @@ exports[`MarketingBadge should render NOVITA 1`] = `
       </div>
     </glamorous(div)>
   </Icon>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render PREZZO_GIU 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "PREZZO_GIU",
@@ -117,11 +117,11 @@ exports[`MarketingBadge should render PREZZO_GIU 1`] = `
       />
     </glamorous(img)>
   </Component>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "PREZZO_STOCK",
@@ -142,11 +142,11 @@ exports[`MarketingBadge should render PREZZO_STOCK 1`] = `
       />
     </glamorous(img)>
   </Component>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "PREZZO_VINCENTE",
@@ -161,11 +161,11 @@ exports[`MarketingBadge should render PREZZO_VINCENTE 1`] = `
       src="test-file-stub"
     />
   </glamorous(img)>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render PROMO_WEB 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "PROMO_WEB",
@@ -185,11 +185,11 @@ exports[`MarketingBadge should render PROMO_WEB 1`] = `
       />
     </glamorous(img)>
   </Component>
-</MarketingBadge>
+</Component>
 `;
 
 exports[`MarketingBadge should render null if no promotion is provided 1`] = `
-<MarketingBadge
+<Component
   promotion={
     Object {
       "code": "",
