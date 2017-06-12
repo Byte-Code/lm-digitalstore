@@ -82,9 +82,9 @@ export default class PurchaseDialog extends Component {
           <Header>
             <p>genera qr-code</p>
           </Header>
-          <Title>Genera QR-Code</Title>
+          <Title>Inquadra il QR-Code</Title>
           <Subtitle>
-            Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
+            Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.
           </Subtitle>
           <Content>
             <QRCode value={url} size={200} />
