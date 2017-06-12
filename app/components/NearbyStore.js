@@ -4,14 +4,33 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 
-const iconStyle = { height: 55, width: 55, cursor: 'pointer' };
+const iconStyle = {
+  height: 55,
+  width: 55,
+  cursor: 'pointer',
+  alignSelf: 'center',
+  marginRight: 15,
+  marginLeft: 5
+};
 
 const Wrapper = glamorous.div({
-  width: 200,
+  width: 344,
+  height: 108,
   display: 'flex'
 });
 
-const StoreInfo = glamorous.div({});
+const Info = glamorous.p(({ fontSize, color }) => ({
+  fontSize: fontSize || 20,
+  color: color || '#fff',
+  lineHeight: '20px'
+}));
+
+const StoreInfo = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '7px 0 11px'
+});
 
 const NearbyStore = ({ currentStoreInfo, handleClick }) => {
   const name = currentStoreInfo.get('name');
@@ -27,10 +46,14 @@ const NearbyStore = ({ currentStoreInfo, handleClick }) => {
     <Wrapper onClick={handleClick}>
       <PlaceIcon style={iconStyle} color="#67cb33" />
       <StoreInfo>
-        <p>{formattedDistance}</p>
-        <p>{`${province} - ${name}`}</p>
-        <p>{`${street} ${streetNumber}`}</p>
-        <p>{`${zip} - ${city}, (${province})`}</p>
+        <div>
+          <Info color="#58c527">{`A ${formattedDistance} km`}</Info>
+          <Info>{`${province} - ${name}`}</Info>
+        </div>
+        <div>
+          <Info fontSize={16}>{`${street} ${streetNumber}`}</Info>
+          <Info fontSize={16}>{`${zip} - ${city}, (${province})`}</Info>
+        </div>
       </StoreInfo>
     </Wrapper>
   );

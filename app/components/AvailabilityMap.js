@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import { meters2ScreenPixels } from 'google-map-react/utils';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Slider from 'material-ui/Slider';
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 
 import Marker from './Marker';
 import InfoWindow from './InfoWindow';
@@ -18,7 +18,7 @@ const Wrapper = glamorous.div({
 
 const Map = glamorous.div({
   width: '100%',
-  height: '1080px',
+  height: '930px',
   position: 'relative'
 });
 
@@ -52,19 +52,34 @@ const Circle = glamorous.div(({ height, width }) => ({
   width
 }));
 
-const Radius = glamorous.div({
-  fontSize: '16px',
-  color: '#67cb33',
-  margin: '0 auto 24px',
-  textAlign: 'center',
-  fontFamily: 'LeroyMerlinSans Light-Italic'
-});
+const Radius = glamorous.div(({ left }) => ({
+  '&>p': {
+    fontSize: '16px',
+    color: '#67cb33',
+    margin: '0 auto 24px',
+    textAlign: 'center',
+    fontFamily: 'LeroyMerlinSans Light-Italic'
+  },
+  position: 'absolute',
+  left,
+  top: 70
+}));
 
 const ControlsOverlay = glamorous.div({
   height: 30,
   position: 'absolute',
   bottom: 0,
   width: '100%'
+});
+
+const NearbyStores = glamorous.div({
+  overflowX: 'auto',
+  display: 'flex',
+  height: 150,
+  '&>div': {
+    display: 'flex',
+    alignItems: 'center'
+  }
 });
 
 const sliderStyle = { marginBottom: 24 };
@@ -188,22 +203,27 @@ export default class AvailabilityMap extends Component {
     const lng = currentStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
     const diameter = range * 1000 * 2;
+    /* eslint-disable */
+    const labelPosition = range * 960 / 50;
     const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
 
     return (
       <Wrapper>
         <Title>Verifica Disponibilità</Title>
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
-        <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${currentStoreName}`}</SliderTitle>
-        <Slider
-          min={5}
-          max={50}
-          value={range}
-          onChange={this.onChangeSlider}
-          color="#67cb33"
-          sliderStyle={sliderStyle}
-        />
-        <Radius>{`${range} km`}</Radius>
+        <Div padding="0 20px 40px" position="relative">
+          <SliderTitle
+          >{`Seleziona il raggio di distanza dal negozio di ${currentStoreName}`}</SliderTitle>
+          <Slider
+            min={0}
+            max={50}
+            value={range}
+            onChange={this.onChangeSlider}
+            color="#67cb33"
+            sliderStyle={sliderStyle}
+          />
+          <Radius left={labelPosition}><p>{`${range} km`}</p></Radius>
+        </Div>
         <Map>
           <GoogleMapReact
             center={center}
@@ -218,9 +238,11 @@ export default class AvailabilityMap extends Component {
           </GoogleMapReact>
           <ControlsOverlay />
         </Map>
-        <div style={{ height: 300, display: 'flex', alignItems: 'center' }}>
-          {this.renderNearbyStores()}
-        </div>
+        <NearbyStores>
+          <div>
+            {this.renderNearbyStores()}
+          </div>
+        </NearbyStores>
       </Wrapper>
     );
   }

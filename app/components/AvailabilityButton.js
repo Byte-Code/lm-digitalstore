@@ -22,7 +22,7 @@ export const Button = glamorous.div(({ bgColor }) => ({
 }));
 
 const contentStyle = { width: 1000, maxWidth: 'none' };
-const bodyStyle = { padding: '75px 70px', background: '#333333' };
+const bodyStyle = { padding: '75px 0 0', background: '#333333' };
 
 export default class AvailabilityButton extends Component {
   static propTypes = {
