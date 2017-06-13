@@ -61,10 +61,13 @@ describe('AvailabilityDialog', () => {
 
   it('should initialize with the right interal state', () => {
     const expectedState = {
-      selectedStore: null,
+      selectedStore: '',
       infoWindowOpen: false,
       zoom: 11,
-      range: 30
+      radius: 20,
+      minRadius: 2,
+      maxRadius: 50,
+      sliderWidth: 960
     };
     expect(shallowWrapper.state()).toEqual(expectedState);
     expect(shallowWrapper).toMatchSnapshot();
@@ -88,6 +91,6 @@ describe('AvailabilityDialog', () => {
         requestFetchNearbyStores={requestFetchNearbyStores}
       />
     );
-    expect(requestFetchNearbyStores).toHaveBeenCalledWith(12311, 123213, 30);
+    expect(requestFetchNearbyStores).toHaveBeenCalledWith(12311, 123213, 20);
   });
 });

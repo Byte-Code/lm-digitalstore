@@ -14,7 +14,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
     bodyStyle={
       Object {
         "background": "#333333",
-        "padding": "75px 70px",
+        "padding": "75px 0 0",
       }
     }
     contentStyle={
@@ -36,13 +36,6 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
       top={0}
     />
     <Connect(AvailabilityMap)
-      allStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
       productCode="123"
       productName="abc"
     />
@@ -64,7 +57,7 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
     bodyStyle={
       Object {
         "background": "#333333",
-        "padding": "75px 70px",
+        "padding": "75px 0 0",
       }
     }
     contentStyle={
@@ -86,13 +79,6 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
       top={0}
     />
     <Connect(AvailabilityMap)
-      allStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
       productCode="123"
       productName="abc"
     />

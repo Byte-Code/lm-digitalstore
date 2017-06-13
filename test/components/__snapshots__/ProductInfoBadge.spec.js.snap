@@ -17,7 +17,6 @@ exports[`ProductInfoBadge should render properly 1`] = `
     />
   </glamorous(div)>
   <AvailabilityButton
-    allStoreStock={Array []}
     productCode="foobar"
     productName="foobar"
   />
