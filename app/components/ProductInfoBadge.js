@@ -47,7 +47,6 @@ export default class ProductInfoBadge extends Component {
     price: ImmutablePropTypes.map.isRequired,
     pricingInfo: ImmutablePropTypes.map.isRequired,
     currentStoreStock: ImmutablePropTypes.map,
-    allStoreStock: ImmutablePropTypes.list.isRequired,
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
     productSlug: PropTypes.string.isRequired,
@@ -67,7 +66,6 @@ export default class ProductInfoBadge extends Component {
       price,
       pricingInfo,
       currentStoreStock,
-      allStoreStock,
       productName,
       productCode,
       productSlug,
@@ -83,11 +81,7 @@ export default class ProductInfoBadge extends Component {
         <StoreStockWrapper>
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </StoreStockWrapper>
-        <AvailabilityButton
-          productName={productName}
-          productCode={productCode}
-          allStoreStock={allStoreStock}
-        />
+        <AvailabilityButton productName={productName} productCode={productCode} />
         <Divider />
         <PurchaseDialog productCode={productCode} productSlug={productSlug}>
           <Button background="#67cb33">

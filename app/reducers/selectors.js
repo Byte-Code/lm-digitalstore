@@ -152,3 +152,14 @@ export function getStoreName(state) {
 export function getNearbyStores(state) {
   return storeSelectors.getNearbyStores(state.get('storeReducer'));
 }
+
+export const getNearbyStoresWithStock = createSelector(
+  [getNearbyStores, getAllStoreStock],
+  (nearbyStores, allStoreStock) =>
+    nearbyStores.map(s => {
+      const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
+      return s
+        .set('storeStock', currentStore.get('storeStock'))
+        .set('stockStatus', currentStore.get('stockStatus'));
+    })
+);
