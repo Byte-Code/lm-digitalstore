@@ -136,8 +136,8 @@ export const getSimilarProductsIds = createSelector(getProduct, product => {
   return List();
 });
 
-export function getAllStoreStock(state, productCode) {
-  return productSelectors.getAllStoreStock(state.get('productReducer'), productCode);
+export function getAllStoreStock(state, props) {
+  return productSelectors.getAllStoreStock(state.get('productReducer'), props);
 }
 
 // STORE
@@ -149,8 +149,12 @@ export function getStoreName(state) {
   return storeSelectors.getStoreName(state.get('storeReducer'));
 }
 
-export function getNearbyStores(state) {
-  return storeSelectors.getNearbyStores(state.get('storeReducer'));
+export function getNearbyStores(state, props) {
+  return storeSelectors.getNearbyStores(state.get('storeReducer'), props);
+}
+
+export function hasNearbyStores(state) {
+  return storeSelectors.hasNearbyStores(state.get('storeReducer'));
 }
 
 export const getNearbyStoresWithStock = createSelector(
@@ -163,3 +167,18 @@ export const getNearbyStoresWithStock = createSelector(
         .set('stockStatus', currentStore.get('stockStatus'));
     })
 );
+
+export const getNearbyStoresWithProductInStock = createSelector(
+  [getNearbyStoresWithStock, getStore],
+  (nearbyStoreStock, currentStore) =>
+    nearbyStoreStock.filterNot(
+      s => s.get('storeStock') <= 0 || s.get('code') === currentStore.get('code')
+    )
+);
+
+export const getSelectedNearbyStoreInfo = selectedStore =>
+  createSelector([getNearbyStoresWithStock], nearbyStoreStock =>
+    nearbyStoreStock.find(ns => ns.get('code') === selectedStore)
+  );
+
+// export const getSelectedStoreInfo = createSelector

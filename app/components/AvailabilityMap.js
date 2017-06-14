@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import { meters2ScreenPixels } from 'google-map-react/utils';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Slider from 'material-ui/Slider';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import glamorous, { Div } from 'glamorous';
 
 import Marker from './Marker';
@@ -17,7 +17,7 @@ const Wrapper = glamorous.div({
   color: '#fff'
 });
 
-const Map = glamorous.div({
+const MapWrapper = glamorous.div({
   width: '100%',
   height: '930px',
   position: 'relative'
@@ -61,7 +61,7 @@ const Radius = glamorous.div(({ left }) => ({
   fontFamily: 'LeroyMerlinSans Light-Italic',
   position: 'absolute',
   left,
-  top: 70
+  top: 75
 }));
 
 const ControlsOverlay = glamorous.div({
@@ -78,72 +78,48 @@ export default class AvailabilityMap extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    nearbyStoreStock: ImmutablePropTypes.list,
-    currentStore: ImmutablePropTypes.map.isRequired,
-    requestFetchNearbyStores: PropTypes.func.isRequired
+    selectedStore: PropTypes.string.isRequired,
+    allNearbyStores: ImmutablePropTypes.list,
+    homeStore: ImmutablePropTypes.map.isRequired,
+    selectedStoreInfo: ImmutablePropTypes.map,
+    nearbyStoresWithProductInStock: ImmutablePropTypes.list.isRequired,
+    selectStore: PropTypes.func.isRequired,
+    closeInfoWindow: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSlide: PropTypes.func.isRequired,
+    radius: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+    infoWindowOpen: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
-    nearbyStoreStock: List()
+    allNearbyStores: List(),
+    selectedStoreInfo: Map()
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedStore: '',
-      infoWindowOpen: false,
-      zoom: 11,
-      radius: 20,
+      initialZoom: 11,
       minRadius: 2,
       maxRadius: 50,
       sliderWidth: 960
     };
   }
 
-  componentDidMount() {
-    this.updateMarkers();
-  }
-
-  onChangeSlider = (e, value) => {
-    this.setState({ radius: value }, () => {
-      this.updateMarkers();
-    });
-  };
-
-  getLabelPosition = () => {
-    const { radius, sliderWidth, maxRadius, minRadius } = this.state;
+  getLabelPosition = radius => {
+    const { sliderWidth, maxRadius, minRadius } = this.state;
     return (radius - minRadius) * sliderWidth / (maxRadius - minRadius); // eslint-disable-line
   };
 
-  updateMarkers() {
-    const { currentStore, requestFetchNearbyStores } = this.props;
-    const { radius } = this.state;
-    const lat = currentStore.getIn(['gpsInformation', 'x']);
-    const lng = currentStore.getIn(['gpsInformation', 'y']);
-    requestFetchNearbyStores(lat, lng, radius);
-    this.closeInfoWindow();
-  }
-
-  closeInfoWindow = () => {
-    this.setState({ infoWindowOpen: false });
-  };
-
-  updateZoom = e => {
-    this.setState({ zoom: e.zoom });
-  };
-
-  selectStore = storeCode => {
-    this.setState({ selectedStore: storeCode, infoWindowOpen: true });
-  };
-
   renderMarkers() {
-    const { nearbyStoreStock, currentStore } = this.props;
-    return nearbyStoreStock.map(s => {
+    const { allNearbyStores, homeStore, selectStore } = this.props;
+    return allNearbyStores.map(s => {
       const isAvailable = s.get('storeStock') > 0;
       const code = s.get('code');
       const lat = s.get('latitude');
       const lng = s.get('longitude');
-      const isCurrentStore = currentStore.get('code') === code;
+      const isCurrentStore = homeStore.get('code') === code;
 
       return (
         <Marker
@@ -152,7 +128,7 @@ export default class AvailabilityMap extends Component {
           key={code}
           code={code}
           isCurrentStore={isCurrentStore}
-          handleClick={() => this.selectStore(code)}
+          handleClick={() => selectStore(code)}
           isAvailable={isAvailable}
         />
       );
@@ -160,75 +136,81 @@ export default class AvailabilityMap extends Component {
   }
 
   renderInfoWindow() {
-    const { nearbyStoreStock } = this.props;
-    const { selectedStore, infoWindowOpen } = this.state;
+    const { selectedStoreInfo, selectedStore, infoWindowOpen, closeInfoWindow } = this.props;
 
     if (!infoWindowOpen || !selectedStore) {
       return null;
     }
 
-    const currentStoreInfo = nearbyStoreStock.find(ns => ns.get('code') === selectedStore);
-    const lat = currentStoreInfo.get('latitude');
-    const lng = currentStoreInfo.get('longitude');
+    const lat = selectedStoreInfo.get('latitude');
+    const lng = selectedStoreInfo.get('longitude');
 
     return (
       <InfoWindow
         lat={lat}
         lng={lng}
-        handleClick={this.closeInfoWindow}
-        currentStoreInfo={currentStoreInfo}
+        handleClick={closeInfoWindow}
+        selectedStoreInfo={selectedStoreInfo}
       />
     );
   }
 
   render() {
-    const { productName, productCode, currentStore, nearbyStoreStock } = this.props;
-    const { zoom, radius, minRadius, maxRadius, selectedStore } = this.state;
-    const currentStoreName = currentStore.get('name');
-    const lat = currentStore.getIn(['gpsInformation', 'x']);
-    const lng = currentStore.getIn(['gpsInformation', 'y']);
+    const {
+      productName,
+      productCode,
+      homeStore,
+      nearbyStoresWithProductInStock,
+      radius,
+      zoom,
+      selectedStore,
+      selectStore,
+      handleChange,
+      handleSlide
+    } = this.props;
+    const { minRadius, maxRadius, initialZoom } = this.state;
+    const homeStoreName = homeStore.get('name');
+    const lat = homeStore.getIn(['gpsInformation', 'x']);
+    const lng = homeStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
     const diameter = radius * 1000 * 2;
-    const labelPosition = this.getLabelPosition();
+    const labelPosition = this.getLabelPosition(radius);
     const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
-    const nearbyStores = nearbyStoreStock.filterNot(
-      s => s.get('storeStock') <= 0 || s.get('code') === currentStore.get('code')
-    );
 
     return (
       <Wrapper>
         <Title>Verifica Disponibilità</Title>
         <ProductInfo>{`${productName} - REF. ${productCode}`}</ProductInfo>
         <Div padding="0 20px 40px" position="relative">
-          <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${currentStoreName}`}</SliderTitle>
+          <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${homeStoreName}`}</SliderTitle>
           <Slider
             min={minRadius}
             max={maxRadius}
             value={radius}
-            onChange={this.onChangeSlider}
+            onChange={handleSlide}
             color="#67cb33"
             sliderStyle={sliderStyle}
           />
           <Radius left={labelPosition}>{`${radius} km`}</Radius>
         </Div>
-        <Map>
+        <MapWrapper>
           <GoogleMapReact
             center={center}
-            defaultZoom={11}
+            defaultZoom={initialZoom}
             fullscreenControl={false}
             options={mapOptions}
-            onChange={this.updateZoom}
+            onChange={handleChange}
           >
             {this.renderMarkers()}
             {this.renderInfoWindow()}
             <Circle lat={lat} lng={lng} width={w} height={h} />
           </GoogleMapReact>
           <ControlsOverlay />
-        </Map>
+        </MapWrapper>
         <NearbyStores
-          nearbyStores={nearbyStores}
+          nearbyStores={nearbyStoresWithProductInStock}
           selectedStore={selectedStore}
-          handleClick={this.selectStore}
+          handleClick={selectStore}
         />
       </Wrapper>
     );

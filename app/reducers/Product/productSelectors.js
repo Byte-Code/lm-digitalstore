@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 
-export function getProduct(state, productCode) {
-  return state.get(productCode);
+export function getProduct(state, props) {
+  return state.get(props.productCode);
 }
 
 export const getAllStoreStock = createSelector([getProduct], productInfo => {

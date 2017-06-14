@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
 import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
@@ -8,7 +7,6 @@ import * as storeActions from '../actions/storeActions';
 
 export function* callFetchNearbyStores({ lat, lng, range }) {
   try {
-    yield call(delay, 100);
     const nearbyStores = yield call(
       apiClient.fetchSearchCoords,
       { lat, lng },

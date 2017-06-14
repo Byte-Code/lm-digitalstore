@@ -65,17 +65,17 @@ const iconStyle = {
   cursor: 'pointer'
 };
 
-const InfoWindow = ({ currentStoreInfo, handleClick }) => {
-  const name = currentStoreInfo.get('name');
-  const availability = currentStoreInfo.get('storeStock');
-  const stockStatus = currentStoreInfo.get('stockStatus');
+const InfoWindow = ({ selectedStoreInfo, handleClick }) => {
+  const name = selectedStoreInfo.get('name');
+  const availability = selectedStoreInfo.get('storeStock');
+  const stockStatus = selectedStoreInfo.get('stockStatus');
   const isAvailable = availability > 0;
   const label = getStockLabel(availability, stockStatus);
-  const street = currentStoreInfo.getIn(['address', 'street']);
-  const streetNumber = currentStoreInfo.getIn(['address', 'streetNumber']) || '';
-  const zip = currentStoreInfo.getIn(['address', 'zipCode']);
-  const city = currentStoreInfo.getIn(['address', 'city']);
-  const province = currentStoreInfo.getIn(['address', 'state']);
+  const street = selectedStoreInfo.getIn(['address', 'street']);
+  const streetNumber = selectedStoreInfo.getIn(['address', 'streetNumber']) || '';
+  const zip = selectedStoreInfo.getIn(['address', 'zipCode']);
+  const city = selectedStoreInfo.getIn(['address', 'city']);
+  const province = selectedStoreInfo.getIn(['address', 'state']);
 
   return (
     <Wrapper>
@@ -98,7 +98,7 @@ const InfoWindow = ({ currentStoreInfo, handleClick }) => {
 };
 
 InfoWindow.propTypes = {
-  currentStoreInfo: ImmutablePropTypes.map.isRequired,
+  selectedStoreInfo: ImmutablePropTypes.map.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 

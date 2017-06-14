@@ -13,6 +13,9 @@ export function* callFetchStore({ storeCode }) {
     if (isValidResponse(storeInfo)) {
       const result = fromJS(storeInfo).get('content');
       yield put(storeActions.successFetchStore(result));
+      const lat = result.getIn(['gpsInformation', 'x']);
+      const lng = result.getIn(['gpsInformation', 'y']);
+      yield put(storeActions.requestFetchNearbyStores(lat, lng, 50));
     } else {
       throw new Error('Not Found Error');
     }
