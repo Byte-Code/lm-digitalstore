@@ -34,9 +34,9 @@ const SliderWrapper = glamorous.div({
 });
 
 const PriceWrapper = glamorous.div({
-  position: 'absolute',
-  right: 30,
-  top: 234
+  position: 'fixed',
+  right: '2%',
+  top: '12%'
 });
 
 const SimilarProductsWrapper = glamorous.div({

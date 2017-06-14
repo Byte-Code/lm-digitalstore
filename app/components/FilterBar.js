@@ -1,38 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import glamorous from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import { List, ListItem } from 'material-ui/List';
+import ResetButton from './ResetButton';
 
 import FilterDialog from '../containers/FilterDialog';
 import ActiveFilters from './ActiveFilters';
-
-const Wrapper = glamorous.div({
-  display: 'flex',
-  height: '71px',
-  position: 'relative',
-  zIndex: 10
-});
-
-const ActiveFiltersWrapper = glamorous.div({
-  width: '80%',
-  marginLeft: '10%',
-  position: 'absolute',
-  zIndex: 10
-});
-
-const iconStyle = { height: 30, width: 30 };
-
-const filterListStyle = {
-  backgroundColor: 'rgba(51, 51, 51, 0.8)',
-  width: '100%'
-};
-
-const ListItemStyle = {
-  color: 'white'
-};
 
 export default class FilterBar extends Component {
   static propTypes = {
@@ -42,6 +18,7 @@ export default class FilterBar extends Component {
     filterMap: ImmutablePropTypes.map.isRequired,
     toggleAvailability: PropTypes.func.isRequired,
     toggleFiltersDialog: PropTypes.func.isRequired,
+    resetTempFilters: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired
   };
 
@@ -52,15 +29,27 @@ export default class FilterBar extends Component {
 
   toggleIcon() {
     const iconColor = '#fff';
-    return this.props.isDialogOpen ?
-      <RemoveIcon color={iconColor} style={iconStyle} /> :
-      <AddIcon color={iconColor} style={iconStyle} />;
+    return this.props.isDialogOpen
+      ? <RemoveIcon color={iconColor} style={leftIconStyle} />
+      : <AddIcon color={iconColor} style={leftIconStyle} />;
+  }
+
+  togglePrimaryText() {
+    const { moreFilters, lessFilters } = labels;
+    return this.props.isDialogOpen ? lessFilters : moreFilters;
   }
 
   render() {
     const {
-      filterGroups, filterMap, resetFilters, toggleFilter,
-      toggleAvailability, toggleFiltersDialog, isDialogOpen } = this.props;
+      filterGroups,
+      filterMap,
+      resetFilters,
+      toggleFilter,
+      toggleAvailability,
+      toggleFiltersDialog,
+      isDialogOpen,
+      resetTempFilters
+    } = this.props;
 
     if (filterGroups.isEmpty()) {
       return null;
@@ -82,9 +71,10 @@ export default class FilterBar extends Component {
           <ListItem
             onClick={toggleFiltersDialog}
             open={isDialogOpen}
-            primaryText="Piú filtri"
+            primaryText={this.togglePrimaryText()}
             style={ListItemStyle}
-            rightIcon={this.toggleIcon()}
+            leftIcon={this.toggleIcon()}
+            rightIcon={<Div />}
             nestedItems={[
               <FilterDialog
                 key="FilterDialog"
@@ -95,7 +85,40 @@ export default class FilterBar extends Component {
             ]}
           />
         </List>
+        <ResetButton resetTempFilters={resetTempFilters} resetActiveFilters={resetFilters} />
       </Wrapper>
     );
   }
 }
+
+const Wrapper = glamorous.div({
+  display: 'flex',
+  height: '71px',
+  position: 'relative',
+  zIndex: 10
+});
+
+const ActiveFiltersWrapper = glamorous.div({
+  width: '80%',
+  marginLeft: '18%',
+  position: 'absolute',
+  zIndex: 10,
+  marginTop: '7px'
+});
+
+const leftIconStyle = { height: 30, width: 30 };
+
+const filterListStyle = {
+  backgroundColor: 'rgba(51, 51, 51, 0.8)',
+  width: '100%'
+};
+
+const ListItemStyle = {
+  color: 'white'
+};
+
+const labels = {
+  moreFilters: 'Più filtri',
+  lessFilters: 'Chiudi filtri'
+};
+
