@@ -3,12 +3,20 @@ import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
 import { callFetchStore } from '../../app/sagas/getStoreSaga';
-import { successFetchStore, failureFetchStore } from '../../app/actions/storeActions';
+import {
+  successFetchStore,
+  failureFetchStore,
+  requestFetchNearbyStores
+} from '../../app/actions/storeActions';
 
 const validResponse = {
   content: {
     name: 'foo',
-    code: '23'
+    code: '23',
+    gpsInformation: {
+      x: 1,
+      y: 2
+    }
   },
   status: 'OK'
 };
@@ -33,6 +41,10 @@ describe('getStoreSaga', () => {
     it('should dispatch a SUCCESS_FETCH_STORE action with the transformed result', () => {
       const transformedResult = fromJS(validResponse).get('content');
       expect(gen.next(validResponse).value).toEqual(put(successFetchStore(transformedResult)));
+    });
+
+    it('should dispatch a REQUEST_FETCH_NEARBYSTORES with the coordinates and a set radius of 50', () => {
+      expect(gen.next().value).toEqual(put(requestFetchNearbyStores(1, 2, 50)));
     });
 
     it('and then nothing', () => {

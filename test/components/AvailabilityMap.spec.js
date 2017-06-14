@@ -2,7 +2,6 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
-import mountWithStore from '../../app/utils/testingUtils';
 import AvailabilityMap from '../../app/components/AvailabilityMap';
 import Marker from '../../app/components/Marker';
 import InfoWindow from '../../app/components/InfoWindow';
@@ -10,7 +9,7 @@ import InfoWindow from '../../app/components/InfoWindow';
 // TODO find a way to test user interactions
 const productCode = '123';
 const productName = 'abc';
-const nearbyStoreStock = fromJS([
+const allNearbyStores = fromJS([
   {
     code: '123',
     name: 'abc',
@@ -38,7 +37,7 @@ const nearbyStoreStock = fromJS([
     }
   }
 ]);
-const currentStore = fromJS({
+const homeStore = fromJS({
   code: '123',
   name: 'current',
   gpsInformation: {
@@ -48,23 +47,29 @@ const currentStore = fromJS({
 });
 const requestFetchNearbyStores = jest.fn();
 
-describe('AvailabilityDialog', () => {
+describe('AvailabilityMap', () => {
   const shallowWrapper = shallow(
     <AvailabilityMap
       productCode={productCode}
       productName={productName}
-      nearbyStoreStock={nearbyStoreStock}
-      currentStore={currentStore}
+      allNearbyStores={allNearbyStores}
+      homeStore={homeStore}
       requestFetchNearbyStores={requestFetchNearbyStores}
+      nearbyStoresWithProductInStock={allNearbyStores}
+      selectedStore=""
+      radius={25}
+      zoom={11}
+      InfoWindowOpen={false}
+      selectStore={() => {}}
+      handleChange={() => {}}
+      handleSlide={() => {}}
+      closeInfoWindow={() => {}}
     />
   );
 
   it('should initialize with the right interal state', () => {
     const expectedState = {
-      selectedStore: '',
-      infoWindowOpen: false,
-      zoom: 11,
-      radius: 20,
+      initialZoom: 11,
       minRadius: 2,
       maxRadius: 50,
       sliderWidth: 960
@@ -79,18 +84,5 @@ describe('AvailabilityDialog', () => {
 
   it('should not have rendered InfoWindow', () => {
     expect(shallowWrapper.find(InfoWindow)).toHaveLength(0);
-  });
-
-  it('should call requestFetchNearbyStores with the right args after mounting', () => {
-    mountWithStore(
-      <AvailabilityMap
-        productCode={productCode}
-        productName={productName}
-        nearbyStoreStock={nearbyStoreStock}
-        currentStore={currentStore}
-        requestFetchNearbyStores={requestFetchNearbyStores}
-      />
-    );
-    expect(requestFetchNearbyStores).toHaveBeenCalledWith(12311, 123213, 20);
   });
 });

@@ -35,7 +35,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
       right={0}
       top={0}
     />
-    <Connect(AvailabilityMap)
+    <withState(withState(withState(withState(withHandlers(Connect(AvailabilityMap))))))
       productCode="123"
       productName="abc"
     />
@@ -78,7 +78,7 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
       right={0}
       top={0}
     />
-    <Connect(AvailabilityMap)
+    <withState(withState(withState(withState(withHandlers(Connect(AvailabilityMap))))))
       productCode="123"
       productName="abc"
     />

@@ -39,6 +39,7 @@ exports[`Product should render properly with no similarProducts  1`] = `
           "storeStock": undefined,
         }
       }
+      hasNearbyStores={true}
       loyaltyProgram={Object {}}
       marketingAttributes={Object {}}
       price={Object {}}
@@ -101,6 +102,7 @@ exports[`Product should render properly with similarProducts  1`] = `
           "storeStock": undefined,
         }
       }
+      hasNearbyStores={true}
       loyaltyProgram={Object {}}
       marketingAttributes={Object {}}
       price={Object {}}

@@ -47,6 +47,7 @@ describe('Product', () => {
       <Product
         productInfo={emptyProductInfo}
         params={params}
+        hasNearbyStores
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
@@ -61,6 +62,7 @@ describe('Product', () => {
       <Product
         productInfo={productInfo}
         params={params}
+        hasNearbyStores
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
@@ -76,6 +78,7 @@ describe('Product', () => {
       <Product
         productInfo={productInfo}
         params={params}
+        hasNearbyStores
         storeCode={storeCode}
         similarProducts={similarProducts}
         requestFetchProduct={requestFetchProduct}
@@ -91,6 +94,7 @@ describe('Product', () => {
       <Product
         productInfo={productInfo}
         params={params}
+        hasNearbyStores
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}
@@ -106,6 +110,7 @@ describe('Product', () => {
       <Product
         productInfo={productInfo}
         params={params}
+        hasNearbyStores
         storeCode={storeCode}
         similarProducts={emptySimilarProducts}
         requestFetchProduct={requestFetchProduct}

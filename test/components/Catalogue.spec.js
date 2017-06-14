@@ -35,6 +35,7 @@ describe('catalogue', () => {
         resetFilters={() => {}}
         initFilters={() => {}}
         applyFilters={() => {}}
+        clearProductList={() => {}}
       />
     );
     expect(result).toMatchSnapshot();

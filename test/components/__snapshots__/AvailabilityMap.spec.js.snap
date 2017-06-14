@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AvailabilityDialog should initialize with the right interal state 1`] = `
+exports[`AvailabilityMap should initialize with the right interal state 1`] = `
 <glamorous(div)>
   <glamorous(h1)>
     Verifica Disponibilità
@@ -31,12 +31,12 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
       }
       step={0.01}
       style={Object {}}
-      value={20}
+      value={25}
     />
     <glamorous(div)
-      left={360}
+      left={460}
     >
-      20 km
+      25 km
     </glamorous(div)>
   </glamorous.Div>
   <glamorous(div)>
@@ -91,10 +91,10 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
         lng={123213}
       />
       <glamorous(div)
-        height={1603.7393847961794}
+        height={2004.7071044425247}
         lat={12311}
         lng={123213}
-        width={1602.5477342009544}
+        width={2003.1846677660942}
       />
     </GoogleMap>
     <glamorous(div) />
@@ -103,6 +103,19 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
     handleClick={[Function]}
     nearbyStores={
       Array [
+        Object {
+          "address": Object {
+            "city": "milan",
+            "state": "abc",
+            "street": "bde",
+            "streetNumber": "1",
+            "zipCode": "213",
+          },
+          "code": "123",
+          "latitude": 1231,
+          "longitude": 123213,
+          "name": "abc",
+        },
         Object {
           "address": Object {
             "city": "roma",
