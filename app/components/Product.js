@@ -9,43 +9,6 @@ import ProductInfo from './ProductInfo';
 import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
 
-const Wrapper = glamorous.div({
-  position: 'relative'
-});
-
-const Title = glamorous.h1({
-  padding: '40px 100px 0',
-  textAlign: 'center',
-  fontSize: 48,
-  lineHeight: '70px',
-  textTransform: 'capitalize'
-});
-
-const Ref = glamorous.h3({
-  textTransform: 'uppercase',
-  fontSize: 16,
-  lineHeight: '24px',
-  textAlign: 'center',
-  marginBottom: 16
-});
-
-const SliderWrapper = glamorous.div({
-  width: '100%'
-});
-
-const PriceWrapper = glamorous.div({
-  position: 'fixed',
-  right: '2%',
-  top: '12%'
-});
-
-const SimilarProductsWrapper = glamorous.div({
-  margin: '60px 0 0',
-  '&>div': {
-    marginBottom: 80
-  }
-});
-
 export default class Product extends Component {
   static propTypes = {
     params: PropTypes.shape({
@@ -122,8 +85,10 @@ export default class Product extends Component {
 
     return (
       <Wrapper>
-        <Title>{name}</Title>
-        <Ref>{`REF. ${code}`}</Ref>
+        <TitleWrapper>
+          <Title>{name}</Title>
+          <Ref>{`REF. ${code}`}</Ref>
+        </TitleWrapper>
         <SliderWrapper>
           <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
         </SliderWrapper>
@@ -152,3 +117,47 @@ export default class Product extends Component {
     );
   }
 }
+
+const Wrapper = glamorous.div({
+  position: 'relative'
+});
+
+const Title = glamorous.h1({
+  padding: '40px 100px 0',
+  textAlign: 'center',
+  fontSize: 48,
+  lineHeight: '70px',
+  textTransform: 'capitalize'
+});
+
+const Ref = glamorous.h3({
+  textTransform: 'uppercase',
+  fontSize: 16,
+  lineHeight: '24px',
+  textAlign: 'center',
+  marginBottom: 16
+});
+
+const SliderWrapper = glamorous.div({
+  width: '100%'
+});
+
+const PriceWrapper = glamorous.div({
+  position: 'fixed',
+  right: '2%',
+  top: '12%'
+});
+
+const SimilarProductsWrapper = glamorous.div({
+  margin: '60px 0 0',
+  '&>div': {
+    marginBottom: 80
+  }
+});
+
+const TitleWrapper = glamorous.div({
+  position: 'fixed',
+  width: '100%',
+  backgroundColor: 'white',
+  boxShadow: '0px 0px 5px #888888'
+});
