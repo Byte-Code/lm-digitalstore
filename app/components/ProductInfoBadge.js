@@ -38,20 +38,33 @@ export default class ProductInfoBadge extends Component {
     this.visibilityValue = 855;
     this.allVisible = true;
     this.visibilityTreshold = 300;
+    this.isCollapsed = false;
     this.onScrolling = this.onScrolling.bind(this);
     this.checkScrollingThreshold = this.checkScrollingThreshold.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
     this.update = this.update.bind(this);
     this.checkVisibility = this.checkVisibility.bind(this);
     this.updateVisibility = this.updateVisibility.bind(this);
+    this.getHeight = this.getHeight.bind(this);
+    this.getAnimatedWrapperHeight = this.getAnimatedWrapperHeight.bind(this);
+    this.animatedWrapperHeight = 0;
+    this.initialHeight = 0;
     this.state = {
       visibility: true
     };
   }
 
   componentWillUpdate(nextProps, nextState) {
+    const animatedWrapper = window.document.getElementById('AnimatedWrapper');
+    let shouldUpdate = false;
+    this.animatedWrapperHeight = animatedWrapper.offsetHeight;
+    if (this.animatedWrapperHeight > 1 && !this.initialHeight) {
+      shouldUpdate = true;
+      this.initialHeight = `${this.animatedWrapperHeight}`;
+    }
+
     const stateChanged = !fromJS(nextState).equals(fromJS(this.state));
-    if (stateChanged) {
+    if (stateChanged || shouldUpdate) {
       return true;
     }
   }
@@ -63,30 +76,18 @@ export default class ProductInfoBadge extends Component {
     this.checkScrollingThreshold();
   }
 
-  toggleVisibility() {
-    this.allVisible = !this.allVisible;
-    this.update();
+  getAnimatedWrapperHeight() {
+    return this.getHeight();
   }
 
-  update() {
-    this.forceUpdate();
-  }
+  getHeight() {
+    const isFirstRender = !this.initialHeight;
+    let height = isFirstRender ? 'auto' : this.initialHeight;
 
-  updateVisibility() {
-    this.setState({ visibility: !this.state.visibility });
-  }
-
-  checkVisibility() {
-    const { scrollValue, visibilityValue } = this;
-    const overThreshold = scrollValue >= visibilityValue && this.state.visibility;
-    const belowThreshold = scrollValue < visibilityValue && !this.state.visibility;
-    if (overThreshold || belowThreshold) {
-      this.updateVisibility();
+    if (!this.allVisible) {
+      height = '0px';
     }
-  }
-
-  purchaseLabel() {
-    return this.allVisible ? 'Acquista online' : '';
+    return height;
   }
 
   checkScrollingThreshold() {
@@ -96,6 +97,30 @@ export default class ProductInfoBadge extends Component {
     if (shouldCollapse || shouldExpand) {
       this.toggleVisibility();
     }
+  }
+
+  checkVisibility() {
+    const { scrollValue, visibilityValue } = this;
+    const overThreshold =
+      scrollValue >= visibilityValue && this.state.visibility;
+    const belowThreshold =
+      scrollValue < visibilityValue && !this.state.visibility;
+    if (overThreshold || belowThreshold) {
+      this.updateVisibility();
+    }
+  }
+
+  updateVisibility() {
+    this.setState({ visibility: !this.state.visibility });
+  }
+
+  update() {
+    this.forceUpdate();
+  }
+
+  toggleVisibility() {
+    this.allVisible = !this.allVisible;
+    this.update();
   }
 
   render() {
@@ -111,8 +136,7 @@ export default class ProductInfoBadge extends Component {
       loyaltyProgram,
     } = this.props;
 
-    const { allVisible } = this;
-    const dividerStyle = { display: allVisible ? '' : 'none' };
+    const height = this.getAnimatedWrapperHeight();
 
     return (
       <Wrapper visibility={this.state.visibility}>
@@ -122,22 +146,23 @@ export default class ProductInfoBadge extends Component {
             loyaltyProgram={loyaltyProgram}
           />
           <PriceBadge pricingInfo={pricingInfo} price={price} />
-          <Divider style={dividerStyle} />
-          <StoreStockWrapper id="storeStockWrapper" display={allVisible}>
-            <StoreStockBadge currentStoreStock={currentStoreStock} />
-          </StoreStockWrapper>
-          <AvailabilityButton
-            productName={productName}
-            productCode={productCode}
-            allStoreStock={allStoreStock}
-            collapse={allVisible}
-          />
-          <Divider style={dividerStyle} />
-          <PurchaseDialog productCode={productCode} productSlug={productSlug}>
-            <Button background="#67cb33" notCollapse={allVisible} value="">
-              {this.purchaseLabel()}
-            </Button>
-          </PurchaseDialog>
+          <AnimatedWrapper id="AnimatedWrapper" height={height}>
+            <Divider />
+            <StoreStockWrapper>
+              <StoreStockBadge currentStoreStock={currentStoreStock} />
+            </StoreStockWrapper>
+            <AvailabilityButton
+              productName={productName}
+              productCode={productCode}
+              allStoreStock={allStoreStock}
+            />
+            <Divider />
+            <PurchaseDialog productCode={productCode} productSlug={productSlug}>
+              <Button background="#67cb33" value="">
+                Acquista online
+              </Button>
+            </PurchaseDialog>
+          </AnimatedWrapper>
         </ScrollableDiv>
       </Wrapper>
     );
@@ -151,10 +176,7 @@ const Wrapper = glamorous.div(({ visibility = true }) => ({
   backgroundColor: '#f7f7f7',
   visibility: 'visible',
   opacity: visibility ? 1 : 0,
-  transition: visibility
-    ? ''
-    : 'max-height 1.00s, opacity 1.00s',
-  maxHeight: visibility ? '100%' : 'auto'
+  transition: 'opacity 0.5s'
 }));
 
 const Divider = glamorous.div({
@@ -182,4 +204,10 @@ const Button = glamorous.div(
 const StoreStockWrapper = glamorous.div(({ display = true }) => ({
   marginBottom: '20px',
   display: display ? '' : 'none'
+}));
+
+const AnimatedWrapper = glamorous.div(({ height }) => ({
+  height,
+  overflow: 'hidden',
+  transition: 'height 0.5s linear'
 }));
