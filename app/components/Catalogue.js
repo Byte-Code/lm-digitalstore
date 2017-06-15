@@ -31,6 +31,7 @@ const ProductSlider = glamorous.div(({ opacity = false }) => ({
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
+  alignContent: 'flex-start',
   height: '1246px',
   opacity: opacity ? 0.17 : 1,
   '&>a': {
@@ -85,11 +86,11 @@ export default class Catalogue extends Component {
 
   renderProducts() {
     const { products } = this.props;
-    return products.map(p => (
+    return products.map(p =>
       <Link to={`product/${p.get('code')}`} key={p.get('code')}>
         <ProductBadge productInfo={p} />
       </Link>
-    ));
+    );
   }
 
   render() {
