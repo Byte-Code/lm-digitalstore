@@ -5,7 +5,7 @@ import BlockIcon from 'material-ui/svg-icons/navigation/close';
 
 import InfoWindow from '../../app/components/InfoWindow';
 
-const currentStoreInfo = fromJS({
+const selectedStoreInfo = fromJS({
   code: '123',
   name: 'abc',
   latitude: 1231,
@@ -22,10 +22,7 @@ const handleClick = jest.fn();
 
 describe('InfoWindow', () => {
   const wrapper = shallow(
-    <InfoWindow
-      handleClick={handleClick}
-      currentStoreInfo={currentStoreInfo}
-    />
+    <InfoWindow handleClick={handleClick} selectedStoreInfo={selectedStoreInfo} />
   );
 
   it('should render properly', () => {

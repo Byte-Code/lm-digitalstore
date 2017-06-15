@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import Dialog from 'material-ui/Dialog';
 import glamorous from 'glamorous';
 
@@ -22,13 +21,12 @@ export const Button = glamorous.div(({ bgColor }) => ({
 }));
 
 const contentStyle = { width: 1000, maxWidth: 'none' };
-const bodyStyle = { padding: '75px 70px', background: '#333333' };
+const bodyStyle = { padding: '75px 0 0', background: '#333333' };
 
 export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
-    productCode: PropTypes.string.isRequired,
-    allStoreStock: ImmutablePropTypes.list.isRequired
+    productCode: PropTypes.string.isRequired
   };
   constructor(props) {
     super(props);
@@ -46,7 +44,7 @@ export default class AvailabilityButton extends Component {
   };
 
   render() {
-    const { productName, productCode, allStoreStock } = this.props;
+    const { productName, productCode } = this.props;
 
     return (
       <div>
@@ -55,17 +53,12 @@ export default class AvailabilityButton extends Component {
         </Button>
         <Dialog
           modal={false}
-          onRequestClose={this.handleClose}
           open={this.state.dialogOpen}
           contentStyle={contentStyle}
           bodyStyle={bodyStyle}
         >
           <CloseButton handleClick={this.handleClose} />
-          <AvailabilityMap
-            productName={productName}
-            productCode={productCode}
-            allStoreStock={allStoreStock}
-          />
+          <AvailabilityMap productName={productName} productCode={productCode} />
         </Dialog>
       </div>
     );

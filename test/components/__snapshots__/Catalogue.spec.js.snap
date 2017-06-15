@@ -17,19 +17,22 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
   <FilterBar
     filterGroups={Array []}
     filterMap={Object {}}
+    isDialogOpen={true}
     resetFilters={[Function]}
     toggleAvailability={[Function]}
     toggleFilter={[Function]}
+    toggleFiltersDialog={[Function]}
   />
   <glamorous(div)
-    id="rinaldo"
+    opacity={true}
   >
+    <glamorous(div) />
     <Link
       onlyActiveOnIndex={false}
       style={Object {}}
       to="product/1"
     >
-      <Component
+      <ProductBadge
         handleClick={[Function]}
         productInfo={
           Object {
@@ -46,7 +49,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       style={Object {}}
       to="product/2"
     >
-      <Component
+      <ProductBadge
         handleClick={[Function]}
         productInfo={
           Object {
@@ -63,7 +66,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       style={Object {}}
       to="product/3"
     >
-      <Component
+      <ProductBadge
         handleClick={[Function]}
         productInfo={
           Object {
@@ -75,6 +78,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
         }
       />
     </Link>
+    <glamorous(div) />
   </glamorous(div)>
 </div>
 `;

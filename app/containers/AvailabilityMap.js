@@ -1,24 +1,44 @@
 import { connect } from 'react-redux';
+import { compose, withState, withHandlers } from 'recompose';
 
 import AvailabilityMap from '../components/AvailabilityMap';
-import { getNearbyStores, getStore } from '../reducers/selectors';
+import {
+  getNearbyStoresWithStock,
+  getStore,
+  getNearbyStoresWithProductInStock,
+  getSelectedNearbyStoreInfo
+} from '../reducers/selectors';
 import { requestFetchNearbyStores } from '../actions/storeActions';
 
-const mapStateToProps = (state, ownProps) => {
-  const { allStoreStock } = ownProps;
-  const nearbyStores = getNearbyStores(state);
-  const nearbyStoreStock = nearbyStores.map(s => {
-    const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
-    return s
-      .set('storeStock', currentStore.get('storeStock'))
-      .set('stockStatus', currentStore.get('stockStatus'));
-  });
-  const currentStore = getStore(state);
-  return { nearbyStoreStock, currentStore };
-};
+const mapStateToProps = (state, ownProps) => ({
+  allNearbyStores: getNearbyStoresWithStock(state, ownProps),
+  nearbyStoresWithProductInStock: getNearbyStoresWithProductInStock(state, ownProps),
+  selectedStoreInfo: getSelectedNearbyStoreInfo(ownProps.selectedStore)(state, ownProps),
+  homeStore: getStore(state)
+});
 
 const MapDispatchToProps = {
   requestFetchNearbyStores
 };
 
-export default connect(mapStateToProps, MapDispatchToProps)(AvailabilityMap);
+const enhance = compose(
+  withState('radius', 'setRadius', 25),
+  withState('zoom', 'setZoom', 11),
+  withState('selectedStore', 'setSelectedStore', ''),
+  withState('infoWindowOpen', 'setInfoWindow', false),
+  withHandlers({
+    selectStore: ({ setInfoWindow, setSelectedStore }) => value => {
+      setSelectedStore(value, () => setInfoWindow(true));
+    },
+    closeInfoWindow: ({ setInfoWindow }) => () => setInfoWindow(false),
+    handleChange: ({ setZoom }) => e => {
+      setZoom(e.zoom);
+    },
+    handleSlide: ({ setRadius, setInfoWindow }) => (e, v) => {
+      setInfoWindow(false, () => setRadius(v));
+    }
+  }),
+  connect(mapStateToProps, MapDispatchToProps)
+);
+
+export default enhance(AvailabilityMap);

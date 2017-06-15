@@ -55,7 +55,7 @@ export default class Product extends Component {
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
-    allStoreStock: ImmutablePropTypes.list.isRequired
+    hasNearbyStores: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -97,7 +97,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { productInfo, allStoreStock } = this.props;
+    const { productInfo, hasNearbyStores } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -142,10 +142,10 @@ export default class Product extends Component {
             productSlug={slug}
             pricingInfo={pricingInfo}
             currentStoreStock={currentStoreStock}
-            allStoreStock={allStoreStock}
             marketingAttributes={marketingAttributes}
             loyaltyProgram={loyaltyProgram}
             price={price}
+            hasNearbyStores={hasNearbyStores}
           />
         </PriceWrapper>
       </Wrapper>

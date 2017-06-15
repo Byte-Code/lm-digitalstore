@@ -6,7 +6,7 @@ exports[`ForecastBadge should render properly 1`] = `
     dt
   </glamorous(div)>
   <glamorous(div)>
-    <Component
+    <IconSelector
       weather="sunny"
     />
   </glamorous(div)>

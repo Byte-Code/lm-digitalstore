@@ -1,116 +1,169 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`filterBar should initially render with a closed dialog 1`] = `
-<glamorous(div)>
-  <glamorous(div)
-    onClick={[Function]}
-  >
-    <ContentAddCircleOutline
-      color="#fff"
-      style={
-        Object {
-          "height": 30,
-          "width": 30,
-        }
-      }
-    />
-    <p>
-      Piú filtri
-    </p>
-  </glamorous(div)>
-  <Component
-    filterGroups={
-      Array [
-        1,
-        2,
-        3,
-      ]
-    }
-    filterMap={Object {}}
-    handleOpen={[Function]}
-    resetFilters={[Function]}
-    toggleAvailability={[Function]}
-    toggleFilter={[Function]}
-  />
-  <Dialog
-    autoDetectWindowHeight={true}
-    autoScrollBodyContent={false}
-    bodyStyle={
+exports[`filterBar should initially render properly when dialog is closed 1`] = `
+<glamorous(div)
+  id="filtersListWrapper"
+>
+  <List
+    id="filtersList"
+    style={
       Object {
-        "background": "rgba(51, 51, 51, 0.8)",
-        "padding": 0,
-      }
-    }
-    contentStyle={
-      Object {
-        "maxWidth": "none",
+        "backgroundColor": "rgba(51, 51, 51, 0.8)",
         "width": "100%",
       }
     }
-    modal={false}
-    onRequestClose={[Function]}
-    open={false}
-    repositionOnUpdate={true}
   >
-    <Connect(FilterDialog)
-      filterGroups={
+    <glamorous(div)
+      id="activeFiltersWrapper"
+    >
+      <ActiveFilters
+        filterGroups={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        filterMap={Object {}}
+        handleOpen={[Function]}
+        resetFilters={[Function]}
+        toggleAvailability={[Function]}
+        toggleFilter={[Function]}
+      />
+    </glamorous(div)>
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      containerElement="span"
+      disableKeyboardFocus={false}
+      disabled={false}
+      initiallyOpen={false}
+      insetChildren={false}
+      nestedItems={
         Array [
-          1,
-          2,
-          3,
+          <Connect(FilterDialog)
+            filterGroups={
+                Array [
+                    1,
+                    2,
+                    3,
+                  ]
+            }
+            handleClose={[Function]}
+        />,
         ]
       }
-      handleClose={[Function]}
+      nestedLevel={0}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={false}
+      primaryText="Piú filtri"
+      primaryTogglesNestedList={false}
+      rightIcon={
+        <ContentAddCircleOutline
+          color="#fff"
+          style={
+            Object {
+              "height": 30,
+              "width": 30,
+            }
+          }
+        />
+      }
+      secondaryTextLines={1}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
     />
-  </Dialog>
+  </List>
 </glamorous(div)>
 `;
 
-exports[`filterBar should open the dialog when the button is clicked 1`] = `
-<glamorous(div)>
-  <glamorous(div)
-    onClick={[Function]}
+exports[`filterBar should initially render properly when dialog is open 1`] = `
+<glamorous(div)
+  id="filtersListWrapper"
+>
+  <List
+    id="filtersList"
+    style={
+      Object {
+        "backgroundColor": "rgba(51, 51, 51, 0.8)",
+        "width": "100%",
+      }
+    }
   >
-    <ContentAddCircleOutline
-      color="#fff"
+    <glamorous(div)
+      id="activeFiltersWrapper"
+    >
+      <ActiveFilters
+        filterGroups={
+          Array [
+            1,
+            2,
+            3,
+          ]
+        }
+        filterMap={Object {}}
+        handleOpen={[Function]}
+        resetFilters={[Function]}
+        toggleAvailability={[Function]}
+        toggleFilter={[Function]}
+      />
+    </glamorous(div)>
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      containerElement="span"
+      disableKeyboardFocus={false}
+      disabled={false}
+      initiallyOpen={false}
+      insetChildren={false}
+      nestedItems={
+        Array [
+          <Connect(FilterDialog)
+            filterGroups={
+                Array [
+                    1,
+                    2,
+                    3,
+                  ]
+            }
+            handleClose={[Function]}
+        />,
+        ]
+      }
+      nestedLevel={0}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={true}
+      primaryText="Piú filtri"
+      primaryTogglesNestedList={false}
+      rightIcon={
+        <ContentRemoveCircleOutline
+          color="#fff"
+          style={
+            Object {
+              "height": 30,
+              "width": 30,
+            }
+          }
+        />
+      }
+      secondaryTextLines={1}
       style={
         Object {
-          "height": 30,
-          "width": 30,
+          "color": "white",
         }
-      }
-    />
-    <p>
-      Piú filtri
-    </p>
-  </glamorous(div)>
-  <Component
-    filterGroups={
-      Array [
-        1,
-        2,
-        3,
-      ]
-    }
-    filterMap={Object {}}
-    handleOpen={[Function]}
-    resetFilters={[Function]}
-    toggleAvailability={[Function]}
-    toggleFilter={[Function]}
-  />
-  <Dialog
-    autoDetectWindowHeight={true}
-    autoScrollBodyContent={false}
-    bodyStyle={
-      Object {
-        "background": "rgba(51, 51, 51, 0.8)",
-        "padding": 0,
-      }
-    }
-    contentStyle={
-      Object {
-        "maxWidth": "none",
-        "width": "100%",
       }
     />
   </List>

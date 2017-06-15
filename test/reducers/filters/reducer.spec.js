@@ -16,7 +16,8 @@ const initialFilters = fromJS({
 
 const initialState = fromJS({
   active: initialFilters,
-  temp: initialFilters
+  temp: initialFilters,
+  isDialogOpen: false
 });
 const anyAction = { type: 'any' };
 

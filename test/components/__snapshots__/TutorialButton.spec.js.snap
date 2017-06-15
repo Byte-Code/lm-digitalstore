@@ -27,11 +27,10 @@ exports[`TutorialButton should initially render with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}
@@ -131,11 +130,10 @@ exports[`TutorialButton should open the dialog once clicked 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}

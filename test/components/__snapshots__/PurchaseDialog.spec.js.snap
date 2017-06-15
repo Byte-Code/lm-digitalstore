@@ -22,11 +22,10 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#fff"
       fill="#858585"
       handleClick={[Function]}
@@ -39,10 +38,10 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
       </p>
     </glamorous(div)>
     <glamorous(h1)>
-      Genera QR-Code
+      Inquadra il QR-Code
     </glamorous(h1)>
     <glamorous(p)>
-      Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
+      Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.
     </glamorous(p)>
     <glamorous(div)>
       <QRCode
@@ -79,11 +78,10 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#fff"
       fill="#858585"
       handleClick={[Function]}
@@ -96,10 +94,10 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
       </p>
     </glamorous(div)>
     <glamorous(h1)>
-      Genera QR-Code
+      Inquadra il QR-Code
     </glamorous(h1)>
     <glamorous(p)>
-      Inquadra il QR-Code con il tuo smartphone per aprire il link alla scheda prodotto.
+      Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.
     </glamorous(p)>
     <glamorous(div)>
       <QRCode

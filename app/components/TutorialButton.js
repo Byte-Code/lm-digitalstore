@@ -27,7 +27,6 @@ class TutorialButton extends Component {
         {this.props.children}
         <Dialog
           modal={false}
-          onRequestClose={this.toggleDialog}
           open={this.state.open}
           contentClassName="similarDialog"
           contentStyle={contentStyle}
@@ -122,6 +121,5 @@ const slickSettings = {
   infinite: false,
   variableWidth: true
 };
-
 
 export default TutorialButton;

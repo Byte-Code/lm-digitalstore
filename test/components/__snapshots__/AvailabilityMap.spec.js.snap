@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AvailabilityDialog should initialize with the right interal state 1`] = `
+exports[`AvailabilityMap should initialize with the right interal state 1`] = `
 <glamorous(div)>
   <glamorous(h1)>
     Verifica Disponibilità
@@ -8,30 +8,37 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
   <glamorous(h3)>
     abc - REF. 123
   </glamorous(h3)>
-  <glamorous(p)>
-    Seleziona il raggio di distanza dal negozio di current
-  </glamorous(p)>
-  <Slider
-    axis="x"
-    color="#67cb33"
-    disableFocusRipple={false}
-    disabled={false}
-    max={50}
-    min={10}
-    onChange={[Function]}
-    required={true}
-    sliderStyle={
-      Object {
-        "marginBottom": 24,
+  <glamorous.Div
+    padding="0 20px 40px"
+    position="relative"
+  >
+    <glamorous(p)>
+      Seleziona il raggio di distanza dal negozio di current
+    </glamorous(p)>
+    <Slider
+      axis="x"
+      color="#67cb33"
+      disableFocusRipple={false}
+      disabled={false}
+      max={50}
+      min={2}
+      onChange={[Function]}
+      required={true}
+      sliderStyle={
+        Object {
+          "marginBottom": 24,
+        }
       }
-    }
-    step={10}
-    style={Object {}}
-    value={30}
-  />
-  <glamorous(div)>
-    30 km
-  </glamorous(div)>
+      step={0.01}
+      style={Object {}}
+      value={25}
+    />
+    <glamorous(div)
+      left={460}
+    >
+      25 km
+    </glamorous(div)>
+  </glamorous.Div>
   <glamorous(div)>
     <GoogleMap
       center={
@@ -67,7 +74,7 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
       }
       yesIWantToUseGoogleMapApiInternals={false}
     >
-      <Component
+      <Marker
         code="123"
         handleClick={[Function]}
         isAvailable={false}
@@ -75,7 +82,7 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
         lat={1231}
         lng={123213}
       />
-      <Component
+      <Marker
         code="1234"
         handleClick={[Function]}
         isAvailable={false}
@@ -84,12 +91,47 @@ exports[`AvailabilityDialog should initialize with the right interal state 1`] =
         lng={123213}
       />
       <glamorous(div)
-        height={2405.6967429351644}
+        height={2004.7071044425247}
         lat={12311}
         lng={123213}
-        width={2403.821601331234}
+        width={2003.1846677660942}
       />
     </GoogleMap>
+    <glamorous(div) />
   </glamorous(div)>
+  <NearbyStores
+    handleClick={[Function]}
+    nearbyStores={
+      Array [
+        Object {
+          "address": Object {
+            "city": "milan",
+            "state": "abc",
+            "street": "bde",
+            "streetNumber": "1",
+            "zipCode": "213",
+          },
+          "code": "123",
+          "latitude": 1231,
+          "longitude": 123213,
+          "name": "abc",
+        },
+        Object {
+          "address": Object {
+            "city": "roma",
+            "state": "asd",
+            "street": "bae",
+            "streetNumber": "1",
+            "zipCode": "213",
+          },
+          "code": "1234",
+          "latitude": 12311,
+          "longitude": 123213,
+          "name": "asdsa",
+        },
+      ]
+    }
+    selectedStore=""
+  />
 </glamorous(div)>
 `;

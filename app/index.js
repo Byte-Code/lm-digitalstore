@@ -30,6 +30,9 @@ const muiTheme = getMuiTheme({
     selectionColor: '#67cb33',
     rippleColor: '#67cb33',
     handleSize: 20
+  },
+  overlay: {
+    backgroundColor: 'rgba(51, 51, 51, 0.8)'
   }
 });
 
@@ -44,11 +47,7 @@ render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Router
-          onUpdate={() => window.scrollTo(0, 0)}
-          history={history}
-          routes={routes}
-        />
+        <Router onUpdate={() => window.scrollTo(0, 0)} history={history} routes={routes} />
       </MuiThemeProvider>
     </ThemeProvider>
   </Provider>,

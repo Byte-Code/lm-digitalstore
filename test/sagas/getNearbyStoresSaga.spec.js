@@ -1,5 +1,4 @@
 import { call, put } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
 import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
@@ -23,10 +22,6 @@ describe('getNearbyStoresSaga', () => {
     const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
 
-    it('should call the delay helper', () => {
-      expect(gen.next().value).toEqual(call(delay, 100));
-    });
-
     it('should call the api', () => {
       expect(gen.next().value).toEqual(call(apiClient.fetchSearchCoords, pathParams, queryParams));
     });
@@ -49,10 +44,6 @@ describe('getNearbyStoresSaga', () => {
     const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
 
-    it('should call the delay helper', () => {
-      expect(gen.next().value).toEqual(call(delay, 100));
-    });
-
     it('should call the api first', () => {
       expect(gen.next().value).toEqual(call(apiClient.fetchSearchCoords, pathParams, queryParams));
     });
@@ -71,10 +62,6 @@ describe('getNearbyStoresSaga', () => {
     const pathParams = { lat: 200, lng: 30 };
     const queryParams = { range: 20, orderBy: 'distance' };
     const gen = callFetchNearbyStores(input);
-
-    it('should call the delay helper', () => {
-      expect(gen.next().value).toEqual(call(delay, 100));
-    });
 
     it('should call the api', () => {
       expect(gen.next().value).toEqual(call(apiClient.fetchSearchCoords, pathParams, queryParams));

@@ -35,6 +35,9 @@ describe('catalogue', () => {
         resetFilters={() => {}}
         initFilters={() => {}}
         applyFilters={() => {}}
+        clearProductList={() => {}}
+        toggleFiltersDialog={() => {}}
+        isDialogOpen
       />
     );
     expect(result).toMatchSnapshot();
@@ -56,6 +59,8 @@ describe('catalogue', () => {
         initFilters={() => {}}
         applyFilters={() => {}}
         clearProductList={() => {}}
+        toggleFiltersDialog={() => {}}
+        isDialogOpen
       />
     );
     expect(result).toMatchSnapshot();
@@ -77,6 +82,8 @@ describe('catalogue', () => {
         resetFilters={() => {}}
         applyFilters={() => {}}
         clearProductList={() => {}}
+        toggleFiltersDialog={() => {}}
+        isDialogOpen
       />
     );
     expect(initFilters).toHaveBeenCalled();
@@ -99,6 +106,8 @@ describe('catalogue', () => {
         resetFilters={() => {}}
         applyFilters={() => {}}
         clearProductList={() => {}}
+        isDialogOpen
+        toggleFiltersDialog={() => {}}
       />
     );
     const nextProps = { params: { categoryCode: 'CAT456' } };

@@ -52,15 +52,21 @@ export default class FilterBar extends Component {
 
   toggleIcon() {
     const iconColor = '#fff';
-    return this.props.isDialogOpen ?
-      <RemoveIcon color={iconColor} style={iconStyle} /> :
-      <AddIcon color={iconColor} style={iconStyle} />;
+    return this.props.isDialogOpen
+      ? <RemoveIcon color={iconColor} style={iconStyle} />
+      : <AddIcon color={iconColor} style={iconStyle} />;
   }
 
   render() {
     const {
-      filterGroups, filterMap, resetFilters, toggleFilter,
-      toggleAvailability, toggleFiltersDialog, isDialogOpen } = this.props;
+      filterGroups,
+      filterMap,
+      resetFilters,
+      toggleFilter,
+      toggleAvailability,
+      toggleFiltersDialog,
+      isDialogOpen
+    } = this.props;
 
     if (filterGroups.isEmpty()) {
       return null;

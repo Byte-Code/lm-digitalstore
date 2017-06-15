@@ -14,7 +14,7 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
     bodyStyle={
       Object {
         "background": "#333333",
-        "padding": "75px 70px",
+        "padding": "75px 0 0",
       }
     }
     contentStyle={
@@ -24,25 +24,17 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}
       right={0}
       top={0}
     />
-    <Connect(AvailabilityMap)
-      allStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
+    <withState(withState(withState(withState(withHandlers(Connect(AvailabilityMap))))))
       productCode="123"
       productName="abc"
     />
@@ -64,7 +56,7 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
     bodyStyle={
       Object {
         "background": "#333333",
-        "padding": "75px 70px",
+        "padding": "75px 0 0",
       }
     }
     contentStyle={
@@ -74,25 +66,17 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >
-    <Component
+    <CloseButton
       backgroundColor="#333333"
       fill="#858585"
       handleClick={[Function]}
       right={0}
       top={0}
     />
-    <Connect(AvailabilityMap)
-      allStoreStock={
-        Array [
-          0,
-          1,
-          2,
-        ]
-      }
+    <withState(withState(withState(withState(withHandlers(Connect(AvailabilityMap))))))
       productCode="123"
       productName="abc"
     />

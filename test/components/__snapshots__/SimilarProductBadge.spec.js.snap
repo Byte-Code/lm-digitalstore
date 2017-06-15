@@ -39,7 +39,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
         pricingInfo={Object {}}
       />
       <glamorous(div) />
-      <Connect(Component)
+      <Connect(StoreStockBadge)
         currentStoreStock={
           Object {
             "stockStatus": "none",

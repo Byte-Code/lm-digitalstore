@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProductInfoBadge should render properly 1`] = `
+exports[`ProductInfoBadge should render properly with AvailabilityButton when hasNearbyStores is true 1`] = `
 <glamorous(div)>
   <MarketingFlag
     loyaltyProgram={Object {}}
@@ -12,15 +12,44 @@ exports[`ProductInfoBadge should render properly 1`] = `
   />
   <glamorous(div) />
   <glamorous(div)>
-    <Connect(Component)
+    <Connect(StoreStockBadge)
       currentStoreStock={Object {}}
     />
   </glamorous(div)>
   <AvailabilityButton
-    allStoreStock={Array []}
     productCode="foobar"
     productName="foobar"
   />
+  <glamorous(div) />
+  <PurchaseDialog
+    productCode="foobar"
+    productSlug="foobar"
+  >
+    <glamorous(div)
+      background="#67cb33"
+    >
+      Acquista online
+    </glamorous(div)>
+  </PurchaseDialog>
+</glamorous(div)>
+`;
+
+exports[`ProductInfoBadge should render properly without AvailabilityButton when hasNearbyStores is false 1`] = `
+<glamorous(div)>
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+  />
+  <PriceBadge
+    price={Object {}}
+    pricingInfo={Object {}}
+  />
+  <glamorous(div) />
+  <glamorous(div)>
+    <Connect(StoreStockBadge)
+      currentStoreStock={Object {}}
+    />
+  </glamorous(div)>
   <glamorous(div) />
   <PurchaseDialog
     productCode="foobar"
