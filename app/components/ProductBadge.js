@@ -139,7 +139,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
       <MarketingCorner isDiscounted={isDiscounted} isNew={isNew} />
       <Name>{name}</Name>
       <PriceWrapper>
-        {isDiscounted && <Discount>-{Math.ceil(discount)} %</Discount>}
+        {isDiscounted && <Discount>-{Math.round(discount)} %</Discount>}
         <Price isBarred={isDiscounted}>
           {formatPrice(listPrice) || formatPrice(grossPrice)} €
         </Price>

@@ -51,7 +51,7 @@ export default class PriceBadge extends Component {
       <div>
         {isDiscounted &&
           <Discount>
-            <span>-{Math.ceil(discount)} %</span>
+            <span>-{Math.round(discount)} %</span>
             <span>{formatPrice(listPrice)}€</span>
           </Discount>}
         <MainPrice isDiscounted={isDiscounted}>
