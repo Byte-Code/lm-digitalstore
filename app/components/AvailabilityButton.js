@@ -53,7 +53,6 @@ export default class AvailabilityButton extends Component {
         </Button>
         <Dialog
           modal={false}
-          onRequestClose={this.handleClose}
           open={this.state.dialogOpen}
           contentStyle={contentStyle}
           bodyStyle={bodyStyle}

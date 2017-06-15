@@ -22,7 +22,6 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >
@@ -79,7 +78,6 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >

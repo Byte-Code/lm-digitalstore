@@ -24,7 +24,6 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >
@@ -67,7 +66,6 @@ exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >

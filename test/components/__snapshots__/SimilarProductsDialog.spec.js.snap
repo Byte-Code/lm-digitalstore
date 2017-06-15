@@ -19,7 +19,6 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
     }
   }
   modal={false}
-  onRequestClose={[Function]}
   open={true}
   repositionOnUpdate={true}
 >

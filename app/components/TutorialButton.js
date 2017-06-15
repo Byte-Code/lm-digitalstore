@@ -66,7 +66,6 @@ class TutorialButton extends Component {
         {this.props.children}
         <Dialog
           modal={false}
-          onRequestClose={this.closeDialog}
           open={this.state.open}
           contentClassName="similarDialog"
           contentStyle={contentStyle}

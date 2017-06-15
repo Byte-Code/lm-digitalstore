@@ -48,7 +48,6 @@ exports[`filterBar should initially render with a closed dialog 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={false}
     repositionOnUpdate={true}
   >
@@ -114,7 +113,6 @@ exports[`filterBar should open the dialog when the button is clicked 1`] = `
       }
     }
     modal={false}
-    onRequestClose={[Function]}
     open={true}
     repositionOnUpdate={true}
   >

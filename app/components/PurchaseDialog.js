@@ -73,7 +73,6 @@ export default class PurchaseDialog extends Component {
         {children}
         <Dialog
           modal={false}
-          onRequestClose={this.handleClose}
           open={this.state.open}
           contentStyle={contentStyle}
           bodyStyle={bodyStyle}

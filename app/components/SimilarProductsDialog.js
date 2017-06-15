@@ -56,13 +56,13 @@ export default class SimilarProductsDialog extends Component {
   renderProducts() {
     const { similarProducts } = this.props;
 
-    return similarProducts.map(p => (
+    return similarProducts.map(p =>
       <div>
         <Slide key={p.get('code')}>
           <SimilarProductBadge productInfo={p} />
         </Slide>
       </div>
-    ));
+    );
   }
 
   render() {
@@ -77,7 +77,6 @@ export default class SimilarProductsDialog extends Component {
     return (
       <Dialog
         modal={false}
-        onRequestClose={handleClose}
         open={isOpen}
         contentClassName="similarDialog"
         contentStyle={contentStyle}

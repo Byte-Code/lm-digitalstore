@@ -80,7 +80,6 @@ export default class FilterBar extends Component {
         />
         <Dialog
           modal={false}
-          onRequestClose={this.handleClose}
           open={this.state.open}
           contentStyle={contentStyle}
           bodyStyle={bodyStyle}
