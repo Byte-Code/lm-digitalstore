@@ -30,10 +30,11 @@ const Column = glamorous.div({
   width: 'calc((100% - 100px) /2)'
 });
 
-const Section = glamorous.div(({ fontSize }) => ({
+const Section = glamorous.div(({ fontSize, lineHeight }) => ({
   marginBottom: '20px',
   '&>p': {
     fontSize,
+    lineHeight,
     fontFamily: 'LeroyMerlinSans Light',
     '&>span': {
       fontFamily: 'LeroyMerlinSans'
@@ -96,9 +97,9 @@ export default class ProductInfoCAB extends Component {
     // TODO why can this be undefined?
     const blocks = marketingDescriptions.get('chooseBlocks') || List();
 
-    return blocks.map(block => (
+    return blocks.map(block =>
       <Column key={block.get('title')}>
-        <Section fontSize="18px">
+        <Section fontSize="18px" lineHeight="28px">
           <Title fontSize="20px">{titleFormatter(block.get('title'))}</Title>
           {block
             .get('customerChooses')
@@ -106,7 +107,7 @@ export default class ProductInfoCAB extends Component {
         </Section>
         <Divider />
       </Column>
-    ));
+    );
   }
 
   renderDescriptions(index) {
@@ -116,18 +117,18 @@ export default class ProductInfoCAB extends Component {
       return null;
     }
 
-    return currentBatch.map(desc => (
-      <Section fontSize="14px" key={desc.get('code')}>
+    return currentBatch.map(desc =>
+      <Section fontSize="14px" lineHeight="20px" key={desc.get('code')}>
         <Title fontSize="16px">{titleFormatter(desc.get('title'))}</Title>
-        {desc.get('description').map(item => (
+        {desc.get('description').map(item =>
           <p key={`${item.get('label')}${item.get('value')}`}>
             <span>{item.get('label') && `${item.get('label')}: `}</span>
             {item.get('value')}
           </p>
-        ))}
+        )}
         {descriptions.get(index).last() !== desc && <Divider />}
       </Section>
-    ));
+    );
   }
 
   render() {

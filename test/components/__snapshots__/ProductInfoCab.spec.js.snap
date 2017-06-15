@@ -9,6 +9,7 @@ exports[`ProductInfoCAB should render a list of marketingDescriptions 1`] = `
     <glamorous(div)>
       <glamorous(div)
         fontSize="18px"
+        lineHeight="28px"
       >
         <glamorous(div)
           fontSize="20px"
@@ -27,6 +28,7 @@ exports[`ProductInfoCAB should render a list of marketingDescriptions 1`] = `
     <glamorous(div)>
       <glamorous(div)
         fontSize="18px"
+        lineHeight="28px"
       >
         <glamorous(div)
           fontSize="20px"
@@ -70,6 +72,7 @@ exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
       <glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
@@ -98,6 +101,7 @@ exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
         </glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
@@ -115,6 +119,7 @@ exports[`ProductInfoCAB should render a max of two list of descriptions 1`] = `
       <glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
@@ -155,6 +160,7 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
     <glamorous(div)>
       <glamorous(div)
         fontSize="18px"
+        lineHeight="28px"
       >
         <glamorous(div)
           fontSize="20px"
@@ -173,6 +179,7 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
     <glamorous(div)>
       <glamorous(div)
         fontSize="18px"
+        lineHeight="28px"
       >
         <glamorous(div)
           fontSize="20px"
@@ -196,6 +203,7 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
       <glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
@@ -224,6 +232,7 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
         </glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
@@ -241,6 +250,7 @@ exports[`ProductInfoCAB should render both descriptions and marketingDescription
       <glamorous(div)>
         <glamorous(div)
           fontSize="14px"
+          lineHeight="20px"
         >
           <glamorous(div)
             fontSize="16px"
