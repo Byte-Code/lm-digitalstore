@@ -160,7 +160,7 @@ export default class ProductInfoBadge extends Component {
             productCode={productCode}
             allStoreStock={allStoreStock}
           />
-          <Divider />
+          <Divider style={{}} />
           <PurchaseDialog productCode={productCode} productSlug={productSlug}>
             <Button background="#67cb33" value="">
               Acquista online
