@@ -4,6 +4,7 @@ import { List } from 'immutable';
 import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
+import getIdleDialogStatus from './Idle/idleSelectors';
 import * as categorySelectors from './Category/categorySelectors';
 import * as catalogueSelectors from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
@@ -185,4 +186,8 @@ export const getSelectedNearbyStoreInfo = selectedStore =>
     nearbyStoreStock.find(ns => ns.get('code') === selectedStore)
   );
 
-// export const getSelectedStoreInfo = createSelector
+// Idle
+
+export function getIdleDialog(state) {
+  return getIdleDialogStatus(state.get('idleReducer'));
+}

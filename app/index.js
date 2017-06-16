@@ -7,9 +7,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ThemeProvider } from 'glamorous';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 import configureStore, { sagaMiddleware } from './store/configureStore';
 import Light from './assets/LM_Font/LeroyMerlinSansOfficeLight-Italic.ttf';
-
 import routes from './routes';
 import rootSaga from './sagas/sagas';
 import initializeIdleTimer from './utils/initialize-idle-timer';
