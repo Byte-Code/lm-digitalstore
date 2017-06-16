@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 class IdleTimer {
   constructor() {
     this.idleTime = 0;
@@ -15,7 +17,7 @@ class IdleTimer {
     this.onReset = onReset;
     document.addEventListener('pointerenter', this.handleEvent, false);
     document.addEventListener('pointermove', this.handleEvent, false);
-    document.addEventListener('scroll', this.handleEvent, false);
+    document.addEventListener('scroll', _.throttle(this.handleEvent, 5 * 1000), false);
     this.start();
   }
 
@@ -47,9 +49,11 @@ class IdleTimer {
 
   resetIndleTime() {
     if (this.onReset) {
-      this.onReset();
+      this.onReset(this.tresholdReached);
     }
-    this.tresholdReached = false;
+    if (this.tresholdReached) {
+      this.tresholdReached = false;
+    }
     this.idleTime = 0;
   }
 }

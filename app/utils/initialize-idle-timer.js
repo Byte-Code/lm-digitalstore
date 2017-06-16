@@ -20,14 +20,14 @@ export default function initializeIdleTimer(store) {
   }
 
   function onReachTreshold() {
-    console.log('openDialog');
     store.dispatch(openIdleDialog());
   }
 
-  function onTimerReset() {
-    console.log('closeDialog');
+  function onTimerReset(treshold) {
     store.dispatch(resetIdleTimer());
-    store.dispatch(closeIdleDialog());
+    if (treshold) {
+      store.dispatch(closeIdleDialog());
+    }
   }
 
   idleTimer.init(
