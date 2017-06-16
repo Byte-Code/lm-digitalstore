@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
+import throttle from 'lodash/throttle';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
 import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
+import ScrollableDiv from './ScrollableDiv';
+
 
 export default class Product extends Component {
   static propTypes = {
@@ -24,6 +27,16 @@ export default class Product extends Component {
   static defaultProps = {
     productInfo: Map()
   };
+
+  constructor(props) {
+    super(props);
+    this.throttleValue = 500;
+    this.onScrolling = this.onScrolling.bind(this);
+    this.setScrollValue = this.setScrollValue.bind(this);
+    this.state = {
+      scrollValue: 0
+    };
+  }
 
   componentDidMount() {
     const { params: { productCode }, requestFetchProduct } = this.props;
@@ -42,6 +55,18 @@ export default class Product extends Component {
   componentWillUnmount() {
     this.props.clearProductList();
   }
+
+
+  onScrolling(scrollValue) {
+    this.setScrollValue(scrollValue);
+  }
+
+  setScrollValue(scrollValue) {
+    (throttle(() => {
+      this.setState({ scrollValue });
+    }, this.throttleValue))();
+  }
+
   renderSimilarProducts() {
     const { similarProducts, productInfo } = this.props;
 
@@ -58,6 +83,7 @@ export default class Product extends Component {
       );
     });
   }
+
 
   render() {
     const { productInfo, allStoreStock } = this.props;
@@ -85,34 +111,37 @@ export default class Product extends Component {
 
     return (
       <Wrapper>
-        <TitleWrapper>
-          <Title>{name}</Title>
-          <Ref>{`REF. ${code}`}</Ref>
-        </TitleWrapper>
-        <SliderWrapper>
-          <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
-        </SliderWrapper>
-        <ProductInfo
-          productType={productType}
-          marketingDescriptions={marketingDescriptions}
-          descriptions={descriptions}
-        />
-        <SimilarProductsWrapper>
-          {this.renderSimilarProducts()}
-        </SimilarProductsWrapper>
-        <PriceWrapper>
-          <ProductInfoBadge
-            productName={name}
-            productCode={code}
-            productSlug={slug}
-            pricingInfo={pricingInfo}
-            currentStoreStock={currentStoreStock}
-            allStoreStock={allStoreStock}
-            marketingAttributes={marketingAttributes}
-            loyaltyProgram={loyaltyProgram}
-            price={price}
+        <ScrollableDiv onScrolling={this.onScrolling}>
+          <TitleWrapper>
+            <Title>{name}</Title>
+            <Ref>{`REF. ${code}`}</Ref>
+          </TitleWrapper>
+          <SliderWrapper>
+            <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
+          </SliderWrapper>
+          <ProductInfo
+            productType={productType}
+            marketingDescriptions={marketingDescriptions}
+            descriptions={descriptions}
           />
-        </PriceWrapper>
+          <SimilarProductsWrapper>
+            {this.renderSimilarProducts()}
+          </SimilarProductsWrapper>
+          <PriceWrapper>
+            <ProductInfoBadge
+              productName={name}
+              productCode={code}
+              productSlug={slug}
+              pricingInfo={pricingInfo}
+              currentStoreStock={currentStoreStock}
+              allStoreStock={allStoreStock}
+              marketingAttributes={marketingAttributes}
+              loyaltyProgram={loyaltyProgram}
+              price={price}
+              scrollValue={this.state.scrollValue}
+            />
+          </PriceWrapper>
+        </ScrollableDiv>
       </Wrapper>
     );
   }

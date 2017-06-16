@@ -9,7 +9,6 @@ import AvailabilityButton from './AvailabilityButton';
 import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
 import PurchaseDialog from '../components/PurchaseDialog';
-import ScrollableDiv from './ScrollableDiv';
 
 export default class ProductInfoBadge extends Component {
   static propTypes = {
@@ -21,24 +20,29 @@ export default class ProductInfoBadge extends Component {
     productCode: PropTypes.string.isRequired,
     productSlug: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
-    loyaltyProgram: ImmutablePropTypes.map.isRequired
+    loyaltyProgram: ImmutablePropTypes.map.isRequired,
+    /*eslint-disable */
+    scrollValue: PropTypes.number
+    /*eslint-disable */
   };
 
   static defaultProps = {
     currentStoreStock: fromJS({
       storeStock: 0,
-      stockStatus: 'notAvailable'
+      stockStatus: 'notAvailable',
+      scrollValue: 0
     })
   };
 
   constructor(props) {
     super(props);
-    this.scrollValue = 0;
     this.isPositionFixed = false;
-    this.visibilityValue = 855;
+    this.visibilityValue = 724;
     this.allVisible = true;
     this.visibilityTreshold = 300;
     this.isCollapsed = false;
+    this.animatedWrapperHeight = 0;
+    this.initialHeight = 0;
     this.onScrolling = this.onScrolling.bind(this);
     this.checkScrollingThreshold = this.checkScrollingThreshold.bind(this);
     this.toggleVisibility = this.toggleVisibility.bind(this);
@@ -47,11 +51,13 @@ export default class ProductInfoBadge extends Component {
     this.updateVisibility = this.updateVisibility.bind(this);
     this.getHeight = this.getHeight.bind(this);
     this.getAnimatedWrapperHeight = this.getAnimatedWrapperHeight.bind(this);
-    this.animatedWrapperHeight = 0;
-    this.initialHeight = 0;
     this.state = {
       visibility: true
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.onScrolling(nextProps.scrollValue);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -60,7 +66,7 @@ export default class ProductInfoBadge extends Component {
     this.animatedWrapperHeight = animatedWrapper.offsetHeight;
     if (this.animatedWrapperHeight > 1 && !this.initialHeight) {
       shouldUpdate = true;
-      this.initialHeight = `${this.animatedWrapperHeight}`;
+      this.initialHeight = this.animatedWrapperHeight;
     }
 
     const stateChanged = !fromJS(nextState).equals(fromJS(this.state));
@@ -70,10 +76,9 @@ export default class ProductInfoBadge extends Component {
   }
 
   onScrolling(scrollValue) {
-    this.scrollValue = scrollValue;
     this.isPositionFixed = true;
-    this.checkVisibility();
-    this.checkScrollingThreshold();
+    this.checkVisibility(scrollValue);
+    this.checkScrollingThreshold(scrollValue);
   }
 
   getAnimatedWrapperHeight() {
@@ -90,8 +95,8 @@ export default class ProductInfoBadge extends Component {
     return height;
   }
 
-  checkScrollingThreshold() {
-    const { scrollValue, visibilityTreshold, allVisible } = this;
+  checkScrollingThreshold(scrollValue) {
+    const { visibilityTreshold, allVisible } = this;
     const shouldCollapse = scrollValue >= visibilityTreshold && allVisible;
     const shouldExpand = scrollValue < visibilityTreshold && !allVisible;
     if (shouldCollapse || shouldExpand) {
@@ -99,8 +104,8 @@ export default class ProductInfoBadge extends Component {
     }
   }
 
-  checkVisibility() {
-    const { scrollValue, visibilityValue } = this;
+  checkVisibility(scrollValue) {
+    const { visibilityValue } = this;
     const overThreshold =
       scrollValue >= visibilityValue && this.state.visibility;
     const belowThreshold =
@@ -140,30 +145,28 @@ export default class ProductInfoBadge extends Component {
 
     return (
       <Wrapper visibility={this.state.visibility}>
-        <ScrollableDiv onScrolling={this.onScrolling}>
-          <MarketingFlag
-            marketingAttributes={marketingAttributes}
-            loyaltyProgram={loyaltyProgram}
+        <MarketingFlag
+          marketingAttributes={marketingAttributes}
+          loyaltyProgram={loyaltyProgram}
+        />
+        <PriceBadge pricingInfo={pricingInfo} price={price}/>
+        <AnimatedWrapper id="AnimatedWrapper" height={height}>
+          <Divider />
+          <StoreStockWrapper>
+            <StoreStockBadge currentStoreStock={currentStoreStock}/>
+          </StoreStockWrapper>
+          <AvailabilityButton
+            productName={productName}
+            productCode={productCode}
+            allStoreStock={allStoreStock}
           />
-          <PriceBadge pricingInfo={pricingInfo} price={price} />
-          <AnimatedWrapper id="AnimatedWrapper" height={height}>
-            <Divider />
-            <StoreStockWrapper>
-              <StoreStockBadge currentStoreStock={currentStoreStock} />
-            </StoreStockWrapper>
-            <AvailabilityButton
-              productName={productName}
-              productCode={productCode}
-              allStoreStock={allStoreStock}
-            />
-            <Divider />
-            <PurchaseDialog productCode={productCode} productSlug={productSlug}>
-              <Button background="#67cb33" value="">
-                Acquista online
-              </Button>
-            </PurchaseDialog>
-          </AnimatedWrapper>
-        </ScrollableDiv>
+          <Divider />
+          <PurchaseDialog productCode={productCode} productSlug={productSlug}>
+            <Button background="#67cb33" value="">
+              Acquista online
+            </Button>
+          </PurchaseDialog>
+        </AnimatedWrapper>
       </Wrapper>
     );
   }
