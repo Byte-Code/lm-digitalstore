@@ -34,7 +34,7 @@ export default class Product extends Component {
     this.throttleValue = 500;
     this.onScrolling = this.onScrolling.bind(this);
     this.setScrollValue = this.setScrollValue.bind(this);
-    this.renderTitle = this.renderTitle.bind(this);
+    this.renderAnimatedTitle = this.renderAnimatedTitle.bind(this);
     this.getOpacity = this.getOpacity.bind(this);
     this.state = {
       scrollValue: 0
@@ -100,18 +100,15 @@ export default class Product extends Component {
     });
   }
 
-  renderTitle(config) {
+  renderAnimatedTitle(config) {
     const { name, code } = config;
     const isShadowBox = this.state.scrollValue >= 1100;
-    const style = {
-      backgroundColor: isShadowBox ? 'white' : 'transparent',
-      boxShadow: isShadowBox ? '0px 6px 5px #888888' : ''
-    };
     return (
-      <TitleWrapper {...style}>
-        <Title>{name}</Title>
-        <Ref>{`REF. ${code}`}</Ref>
-      </TitleWrapper>
+      isShadowBox ?
+        <FixedTitleWrapper>
+          <Title>{name}</Title>
+          <Ref>{`REF. ${code}`}</Ref>
+        </FixedTitleWrapper> : <div />
     );
   }
 
@@ -143,7 +140,9 @@ export default class Product extends Component {
     return (
       <Wrapper>
         <ScrollableDiv onScrolling={this.onScrolling}>
-          {this.renderTitle({ name, code })}
+          <Title>{name}</Title>
+          <Ref>{`REF. ${code}`}</Ref>
+          {this.renderAnimatedTitle({ name, code })}
           <SliderWrapper opacity={this.getOpacity()}>
             <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
           </SliderWrapper>
@@ -197,7 +196,6 @@ const Ref = glamorous.h3({
 
 const SliderWrapper = glamorous.div(({ opacity }) => ({
   width: '100%',
-  paddingTop: '180px',
   opacity
 }));
 
@@ -214,12 +212,11 @@ const SimilarProductsWrapper = glamorous.div({
   }
 });
 
-const TitleWrapper = glamorous.div(({ backgroundColor, boxShadow}) => ({
-  position: 'fixed',
+const FixedTitleWrapper = glamorous.div({
   width: '100%',
-  backgroundColor,
-  boxShadow,
-  transition: 'zIndex 2s linear',
-  zIndex: 1
-}));
-
+  backgroundColor: 'white',
+  boxShadow: '0px 6px 5px #888888',
+  zIndex: 1,
+  position: 'fixed',
+  top: '0px'
+});
