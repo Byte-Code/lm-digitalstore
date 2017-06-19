@@ -37,7 +37,7 @@ export default class ProductInfoBadge extends Component {
   constructor(props) {
     super(props);
     this.isPositionFixed = false;
-    this.visibilityValue = 724;
+    this.visibilityValue = 870;
     this.allVisible = true;
     this.visibilityTreshold = 300;
     this.isCollapsed = false;
