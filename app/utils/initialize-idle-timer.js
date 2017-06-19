@@ -7,26 +7,27 @@ import {
   closeIdleDialog
 } from '../actions/idleTimerActions';
 
-const THREE_MINUTES = 60 * 1000 * 3;
-const TWO_MINUTES = 60 * 1000 * 2.5;
+const THREE_MINUTES = 20 * 1000;
+// const TWO_MINUTES = 60 * 1000 * 2.5;
+const TWO_MINUTES = 10 * 1000;
 
-export default function initializeIdleTimer(store) {
+export default function initializeIdleTimer(dispatch) {
   function onTimerStart() {
-    store.dispatch(startIdleTimer());
+    dispatch(startIdleTimer());
   }
 
   function onTimerComplete() {
-    store.dispatch(idleTimerCompleted());
+    dispatch(idleTimerCompleted());
   }
 
-  function onReachTreshold() {
-    store.dispatch(openIdleDialog());
+  function onReachTreshold(countDownTime) {
+    dispatch(openIdleDialog(countDownTime));
   }
 
-  function onTimerReset(treshold) {
-    store.dispatch(resetIdleTimer());
-    if (treshold) {
-      store.dispatch(closeIdleDialog());
+  function onTimerReset(tresholdReached) {
+    dispatch(resetIdleTimer());
+    if (tresholdReached) {
+      dispatch(closeIdleDialog());
     }
   }
 

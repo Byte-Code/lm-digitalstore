@@ -8,8 +8,8 @@ class IdleTimer {
     this.tick = this.tick.bind(this);
   }
 
-  init(time, onStart, onComplete, treshold, onReachTreshold, onReset) {
-    this.time = time;
+  init(limit, onStart, onComplete, treshold, onReachTreshold, onReset) {
+    this.limit = limit;
     this.onStart = onStart;
     this.onComplete = onComplete;
     this.onReachTreshold = onReachTreshold;
@@ -29,9 +29,10 @@ class IdleTimer {
     this.idleTime = this.idleTime + 1;
     if (!this.tresholdReached && this.idleTime >= this.treshold / 1000) {
       this.tresholdReached = true;
-      this.onReachTreshold();
+      const countDownTime = this.limit - this.treshold;
+      this.onReachTreshold(countDownTime);
     }
-    if (this.idleTime >= this.time / 1000) {
+    if (this.idleTime >= this.limit / 1000) {
       if (this.onComplete) {
         this.onComplete();
       }

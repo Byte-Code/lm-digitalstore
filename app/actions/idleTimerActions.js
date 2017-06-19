@@ -12,8 +12,8 @@ export function idleTimerCompleted() {
   return { type: actions.IDLE_TIMER_COMPLETE };
 }
 
-export function openIdleDialog() {
-  return { type: actions.OPEN_IDLE_DIALOG };
+export function openIdleDialog(countDownTime) {
+  return { type: actions.OPEN_IDLE_DIALOG, countDownTime };
 }
 
 export function closeIdleDialog() {
