@@ -7,9 +7,9 @@ import {
   closeIdleDialog
 } from '../actions/idleTimerActions';
 
-const THREE_MINUTES = 20 * 1000;
+const TEN_SECONDS = 1000 * 10;
 // const TWO_MINUTES = 60 * 1000 * 2.5;
-const TWO_MINUTES = 10 * 1000;
+const THREE_MINUTES = 60 * 1000 * 3;
 
 export default function initializeIdleTimer(dispatch) {
   function onTimerStart() {
@@ -32,10 +32,10 @@ export default function initializeIdleTimer(dispatch) {
   }
 
   idleTimer.init(
-    THREE_MINUTES,
+    TEN_SECONDS,
     onTimerStart,
     onTimerComplete,
-    TWO_MINUTES,
+    THREE_MINUTES,
     onReachTreshold,
     onTimerReset
   );
