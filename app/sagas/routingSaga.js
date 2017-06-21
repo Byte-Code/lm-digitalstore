@@ -13,4 +13,8 @@ export function* gotoSplashscreen() {
 export default function* routingSaga() {
   yield takeEvery(actionTypes.IDLE_TIMER_COMPLETE, gotoSplashscreen);
   yield takeEvery(actionTypes.SET_STORE_CODE, gotoSplashscreen);
+  yield takeEvery('@@router/LOCATION_CHANGE', function* overrideEvent(action) {
+    const { payload } = action;
+    yield put({ type: 'LOCATION_CHANGE', payload });
+  });
 }
