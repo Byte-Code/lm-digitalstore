@@ -39,4 +39,6 @@ export default function initializeIdleTimer(dispatch) {
     onReachTreshold,
     onTimerReset
   );
+
+  return idleTimer;
 }

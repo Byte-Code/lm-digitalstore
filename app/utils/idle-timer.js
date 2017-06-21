@@ -48,6 +48,10 @@ class IdleTimer {
     this.interval = setInterval(this.tick, 1000);
   }
 
+  stop() {
+    clearInterval(this.interval);
+  }
+
   resetIndleTime() {
     if (this.onReset) {
       this.onReset(this.tresholdReached);
