@@ -30,7 +30,7 @@ const iconStyle = { width: 80, height: 80, margin: '0 auto' };
 
 class IdleDialog extends Component {
   static propTypes = {
-    dialogState: ImmutablePropTypes.map().isRequired
+    dialogState: ImmutablePropTypes.map.isRequired
   };
 
   render() {
@@ -42,7 +42,7 @@ class IdleDialog extends Component {
       <Dialog modal={false} open={dialogOpen} bodyStyle={bodyStyle} contentStyle={contentStyle}>
         <AlertIcon style={iconStyle} color="#339900" />
         <Text>
-          <p>Tocca lo schermo entro</p>
+          Tocca lo schermo entro
           &nbsp;<CountDown initialTime={countDownTime / 1000} />&nbsp;
           secondi per continuare la navigazione
         </Text>

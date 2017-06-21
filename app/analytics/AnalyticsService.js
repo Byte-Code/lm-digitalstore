@@ -8,6 +8,7 @@ class AnalyticsService {
     this.dataLayer = Map({});
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
+    this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
     this.setDataLayer = this.setDataLayer.bind(this);
     this.setStoreCode = this.setStoreCode.bind(this);
     this.getDataLayer = this.getDataLayer.bind(this);
@@ -26,6 +27,15 @@ class AnalyticsService {
   setCid() {
     const cid = uuid();
     this.setDataLayer('cid', uuid.valid(cid));
+  }
+
+  deleteInDataLayer(action) {
+    const map = {
+      IDLE_TIMER_COMPLETE: 'cid'
+    };
+    const actionType = action.type;
+
+    this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
   setStoreCode(action) {
