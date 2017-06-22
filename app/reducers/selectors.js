@@ -168,8 +168,8 @@ export const getNearbyStoresWithStock = createSelector(
     nearbyStores.map(s => {
       const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
       return s
-        .set('storeStock', currentStore.get('storeStock'))
-        .set('stockStatus', currentStore.get('stockStatus'));
+        .set('storeStock', currentStore ? currentStore.get('storeStock') : 0)
+        .set('stockStatus', currentStore ? currentStore.get('stockStatus') : 0);
     })
 );
 
