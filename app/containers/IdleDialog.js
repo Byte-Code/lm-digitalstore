@@ -24,7 +24,7 @@ const SubText = glamorous.p({
   textTransform: 'uppercase'
 });
 
-const bodyStyle = { padding: 85, textAlign: 'center' };
+const bodyStyle = { padding: 85, textAlign: 'center', zIndex: 400 };
 const contentStyle = { maxWidth: 'none', width: 830 };
 const iconStyle = { width: 80, height: 80, margin: '0 auto' };
 
