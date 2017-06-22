@@ -30,7 +30,7 @@ const iconStyle = { width: 80, height: 80, margin: '0 auto' };
 
 class IdleDialog extends Component {
   static propTypes = {
-    dialogState: ImmutablePropTypes.map().isRequired
+    dialogState: ImmutablePropTypes.map.isRequired
   };
 
   render() {

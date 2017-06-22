@@ -17,6 +17,7 @@ class WithWarningDialog extends Component {
   }
 
   componentWillUnmount() {
+    this.timer.stop();
     this.timer = null;
   }
 

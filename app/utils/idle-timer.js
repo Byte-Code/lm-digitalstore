@@ -29,10 +29,10 @@ class IdleTimer {
     this.idleTime = this.idleTime + 1;
     if (!this.tresholdReached && this.idleTime >= this.treshold / 1000) {
       this.tresholdReached = true;
-      const countDownTime = this.limit - this.treshold;
+      const countDownTime = this.limit;
       this.onReachTreshold(countDownTime);
     }
-    if (this.idleTime >= this.limit / 1000) {
+    if (this.idleTime >= (this.limit + this.treshold) / 1000) {
       if (this.onComplete) {
         this.onComplete();
       }
@@ -46,6 +46,10 @@ class IdleTimer {
       this.onStart();
     }
     this.interval = setInterval(this.tick, 1000);
+  }
+
+  stop() {
+    clearInterval(this.interval);
   }
 
   resetIndleTime() {
