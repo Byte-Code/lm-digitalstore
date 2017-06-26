@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import verifystoreCode from './containers/verifyStoreCode';
 import App from './containers/App';
+import WithWarningDialog from './containers/WithWarningDialog';
 import HomePage from './Pages/HomePage';
 import SplashScreenPage from './Pages/SplashScreenPage';
 import CataloguePage from './Pages/CataloguePage';
@@ -14,9 +15,11 @@ export default (
   <Route>
     <Route path="/" component={verifystoreCode(App)}>
       <IndexRoute component={SplashScreenPage} />
-      <Route path="/world" component={HomePage} />
-      <Route path="/catalogue/:categoryCode" component={CataloguePage} />
-      <Route path="/product/:productCode" component={ProductPage} />
+      <Route component={WithWarningDialog}>
+        <Route path="/world" component={HomePage} />
+        <Route path="/catalogue/:categoryCode" component={CataloguePage} />
+        <Route path="/product/:productCode" component={ProductPage} />
+      </Route>
     </Route>
 
     <Route path="/initialization" component={InitializationPage} />

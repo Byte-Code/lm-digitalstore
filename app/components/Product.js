@@ -3,48 +3,15 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
+import throttle from 'lodash/throttle';
+import inRange from 'lodash/inRange';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
 import ProductInfoBadge from './ProductInfoBadge';
 import SimilarProducts from './SimilarProducts';
+import ScrollableDiv from './ScrollableDiv';
 
-const Wrapper = glamorous.div({
-  position: 'relative'
-});
-
-const Title = glamorous.h1({
-  padding: '40px 100px 0',
-  textAlign: 'center',
-  fontSize: 48,
-  lineHeight: '70px',
-  textTransform: 'capitalize'
-});
-
-const Ref = glamorous.h3({
-  textTransform: 'uppercase',
-  fontSize: 16,
-  lineHeight: '24px',
-  textAlign: 'center',
-  marginBottom: 16
-});
-
-const SliderWrapper = glamorous.div({
-  width: '100%'
-});
-
-const PriceWrapper = glamorous.div({
-  position: 'absolute',
-  right: 30,
-  top: 234
-});
-
-const SimilarProductsWrapper = glamorous.div({
-  margin: '60px 0 0',
-  '&>div': {
-    marginBottom: 80
-  }
-});
 
 export default class Product extends Component {
   static propTypes = {
@@ -61,6 +28,18 @@ export default class Product extends Component {
   static defaultProps = {
     productInfo: Map()
   };
+
+  constructor(props) {
+    super(props);
+    this.throttleValue = 500;
+    this.onScrolling = this.onScrolling.bind(this);
+    this.setScrollValue = this.setScrollValue.bind(this);
+    this.renderAnimatedTitle = this.renderAnimatedTitle.bind(this);
+    this.getOpacity = this.getOpacity.bind(this);
+    this.state = {
+      scrollValue: 0
+    };
+  }
 
   componentDidMount() {
     const { params: { productCode }, requestFetchProduct } = this.props;
@@ -79,6 +58,31 @@ export default class Product extends Component {
   componentWillUnmount() {
     this.props.clearProductList();
   }
+
+
+  onScrolling(scrollValue) {
+    this.setScrollValue(scrollValue);
+  }
+
+  setScrollValue(scrollValue) {
+    (throttle(() => {
+      this.setState({ scrollValue });
+    }, this.throttleValue))();
+  }
+
+  getOpacity() {
+    const { scrollValue } = this.state;
+    let opacity = 1;
+
+    if (this.state.scrollValue) {
+      if (inRange(scrollValue, 1, 400)) opacity = 0.75;
+      if (inRange(scrollValue, 401, 600)) opacity = 0.5;
+      if (inRange(scrollValue, 601, 1078)) opacity = 0.25;
+      if (inRange(scrollValue, 1079, 2000)) opacity = 0;
+    }
+    return opacity;
+  }
+
   renderSimilarProducts() {
     const { similarProducts, productInfo } = this.props;
 
@@ -95,6 +99,19 @@ export default class Product extends Component {
       );
     });
   }
+
+  renderAnimatedTitle(config) {
+    const { name, code } = config;
+    const isShadowBox = this.state.scrollValue >= 1100;
+    return (
+      isShadowBox ?
+        <FixedTitleWrapper>
+          <Title>{name}</Title>
+          <Ref>{`REF. ${code}`}</Ref>
+        </FixedTitleWrapper> : <div />
+    );
+  }
+
 
   render() {
     const { productInfo, hasNearbyStores } = this.props;
@@ -122,33 +139,84 @@ export default class Product extends Component {
 
     return (
       <Wrapper>
-        <Title>{name}</Title>
-        <Ref>{`REF. ${code}`}</Ref>
-        <SliderWrapper>
-          <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
-        </SliderWrapper>
-        <ProductInfo
-          productType={productType}
-          marketingDescriptions={marketingDescriptions}
-          descriptions={descriptions}
-        />
-        <SimilarProductsWrapper>
-          {this.renderSimilarProducts()}
-        </SimilarProductsWrapper>
-        <PriceWrapper>
-          <ProductInfoBadge
-            productName={name}
-            productCode={code}
-            productSlug={slug}
-            pricingInfo={pricingInfo}
-            currentStoreStock={currentStoreStock}
-            marketingAttributes={marketingAttributes}
-            loyaltyProgram={loyaltyProgram}
-            price={price}
-            hasNearbyStores={hasNearbyStores}
+        <ScrollableDiv onScrolling={this.onScrolling}>
+          <Title>{name}</Title>
+          <Ref>{`REF. ${code}`}</Ref>
+          {this.renderAnimatedTitle({ name, code })}
+          <SliderWrapper opacity={this.getOpacity()}>
+            <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
+          </SliderWrapper>
+          <ProductInfo
+            productType={productType}
+            marketingDescriptions={marketingDescriptions}
+            descriptions={descriptions}
           />
-        </PriceWrapper>
+          <SimilarProductsWrapper>
+            {this.renderSimilarProducts()}
+          </SimilarProductsWrapper>
+          <PriceWrapper>
+            <ProductInfoBadge
+              productName={name}
+              productCode={code}
+              productSlug={slug}
+              pricingInfo={pricingInfo}
+              currentStoreStock={currentStoreStock}
+              marketingAttributes={marketingAttributes}
+              loyaltyProgram={loyaltyProgram}
+              price={price}
+              scrollValue={this.state.scrollValue}
+              hasNearbyStores={hasNearbyStores}
+            />
+          </PriceWrapper>
+        </ScrollableDiv>
       </Wrapper>
     );
   }
 }
+
+const Wrapper = glamorous.div({
+  position: 'relative'
+});
+
+const Title = glamorous.h1({
+  padding: '40px 100px 0',
+  textAlign: 'center',
+  fontSize: 48,
+  lineHeight: '70px',
+  textTransform: 'capitalize'
+});
+
+const Ref = glamorous.h3({
+  textTransform: 'uppercase',
+  fontSize: 16,
+  lineHeight: '24px',
+  textAlign: 'center',
+  marginBottom: 16
+});
+
+const SliderWrapper = glamorous.div(({ opacity }) => ({
+  width: '100%',
+  opacity
+}));
+
+const PriceWrapper = glamorous.div({
+  position: 'fixed',
+  right: '2%',
+  top: '12%'
+});
+
+const SimilarProductsWrapper = glamorous.div({
+  margin: '60px 0 0',
+  '&>div': {
+    marginBottom: 80
+  }
+});
+
+const FixedTitleWrapper = glamorous.div({
+  width: '100%',
+  backgroundColor: 'white',
+  boxShadow: '0px 6px 5px #888888',
+  zIndex: 1,
+  position: 'fixed',
+  top: '0px'
+});

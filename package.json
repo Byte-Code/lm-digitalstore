@@ -13,8 +13,8 @@
     "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",
     "hot-server": "cross-env NODE_ENV=development node --max_old_space_size=2096 -r babel-register server.js",
-    "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js --progress --profile --colors",
-    "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js --progress --profile --colors",
+    "build-main": "cross-env NODE_ENV=production node --max_old_space_size=2096 -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js --progress --profile --colors",
+    "build-renderer": "cross-env NODE_ENV=production node --max_old_space_size=2096 -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.production.js --progress --profile --colors",
     "build": "npm run build-main && npm run build-renderer",
     "start": "cross-env NODE_ENV=production electron ./app/",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./app/main.development",
@@ -203,6 +203,7 @@
     "html-loader": "^0.4.5",
     "immutable": "4.0.0-rc.2",
     "lm-remote-api": "^0.0.16",
+    "lodash": "^4.17.4",
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
     "precommit-hook": "^3.0.0",
@@ -216,11 +217,13 @@
     "react-slick": "^0.14.7",
     "recompose": "^0.23.5",
     "redux": "^3.6.0",
+    "redux-beacon": "^1.1.0",
     "redux-immutable": "^3.1.0",
     "redux-mock-store": "^1.2.3",
     "redux-saga": "^0.14.3",
     "reselect": "^3.0.1",
-    "source-map-support": "^0.4.10"
+    "source-map-support": "^0.4.10",
+    "uuid4": "^1.0.0"
   },
   "devEngines": {
     "node": ">=6.x",

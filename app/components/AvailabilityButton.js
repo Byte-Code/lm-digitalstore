@@ -6,12 +6,12 @@ import glamorous from 'glamorous';
 import AvailabilityMap from '../containers/AvailabilityMap';
 import CloseButton from './CloseButton';
 
-export const Button = glamorous.div(({ bgColor }) => ({
+export const Button = glamorous.div(({ background, notCollapse = true }) => ({
   width: '100%',
   textTransform: 'uppercase',
-  background: bgColor,
+  background,
   height: '60px',
-  display: 'flex',
+  display: notCollapse ? 'flex' : 'none',
   justifyContent: 'center',
   alignItems: 'center',
   textAlign: 'center',
@@ -26,12 +26,19 @@ const bodyStyle = { padding: '75px 0 0', background: '#333333' };
 export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
-    productCode: PropTypes.string.isRequired
+    productCode: PropTypes.string.isRequired,
+    collapse: PropTypes.bool
   };
+
+  static defaultProps = {
+    collapse: true
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      dialogOpen: false
+      dialogOpen: false,
+      display: ''
     };
   }
 
@@ -44,11 +51,11 @@ export default class AvailabilityButton extends Component {
   };
 
   render() {
-    const { productName, productCode } = this.props;
+    const { productName, productCode, collapse } = this.props;
 
     return (
-      <div>
-        <Button bgColor="#67cb33" onClick={this.handleOpen}>
+      <div >
+        <Button background="#67cb33" notCollapse={collapse} onClick={this.handleOpen}>
           verifica disponibilità in negozi vicini
         </Button>
         <Dialog
