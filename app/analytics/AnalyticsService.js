@@ -20,7 +20,7 @@ class AnalyticsService {
 
   setPageName(action) {
     const pageName = [];
-    pageName.push(utils.trimStartSlash(action.payload.path));
+    pageName.push(utils.trimStartSlash(action.payload.pathname));
     this.setDataLayer('page_name', pageName);
   }
 
