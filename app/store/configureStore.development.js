@@ -3,20 +3,13 @@ import { hashHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { Map } from 'immutable';
-import { logger } from 'redux-beacon/extensions/logger';
 import createLogger from 'redux-logger';
-import { createMiddleware } from 'redux-beacon';
-import { tealiumAnalytics } from '../../tealiumAnalytics';
-import eventsMap from '../analytics/eventsMap';
 import rootReducer from '../reducers/reducers';
 
 export const sagaMiddleware = createSagaMiddleware();
 
-
-const reduxBeaconMiddleware = createMiddleware(eventsMap, tealiumAnalytics, { logger });
-
 const actionCreators = {
-  push,
+  push
 };
 
 const customLogger = createLogger({
@@ -31,12 +24,12 @@ const router = routerMiddleware(hashHistory);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     // Options: http://extension.remotedev.io/docs/API/Arguments.html
-    actionCreators,
+    actionCreators
   }) :
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware, router, customLogger, reduxBeaconMiddleware)
+  applyMiddleware(sagaMiddleware, router, customLogger)
 );
 
 export default function configureStore(initialState? = Map()) {

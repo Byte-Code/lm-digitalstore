@@ -1,4 +1,4 @@
-function tealiumAnalytics(events) {
+export default function tealiumAnalytics(events) {
   if (typeof window === 'undefined') {
     return;
   }
@@ -15,5 +15,3 @@ function tealiumAnalytics(events) {
     }
   });
 }
-
-module.exports = { tealiumAnalytics };

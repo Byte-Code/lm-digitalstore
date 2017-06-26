@@ -1,11 +1,16 @@
 import {
-  SET_SESSION_CODE,
-  TRACK_SESSION_START } from './actionTypes';
+  SET_ANALYTICS_SESSION_CODE,
+  TRACK_ANALYTICS_SESSION_START,
+  START_ANALYTICS_SESSION } from './actionTypes';
 
-export function setSessionCode() {
-  return ({ type: SET_SESSION_CODE });
+export function setAnalyticsSessionCode() {
+  return ({ type: SET_ANALYTICS_SESSION_CODE });
 }
 
-export function trackSessionStart() {
-  return ({ type: TRACK_SESSION_START });
+export function trackAnalyticsSessionStart() {
+  return ({ type: TRACK_ANALYTICS_SESSION_START });
+}
+
+export function startAnalyticsSession() {
+  return ({ type: START_ANALYTICS_SESSION });
 }

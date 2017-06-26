@@ -1,6 +1,7 @@
 import { Map } from 'immutable';
 import uuid from 'uuid4';
 import * as utils from './AnalyticsUtils';
+import tealiumAnalytics from './tealiumAnalytics';
 
 class AnalyticsService {
 
@@ -11,16 +12,16 @@ class AnalyticsService {
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
     this.setDataLayer = this.setDataLayer.bind(this);
     this.setStoreCode = this.setStoreCode.bind(this);
-    this.getDataLayer = this.getDataLayer.bind(this);
+    this.track = this.track.bind(this);
   }
 
   setDataLayer(key, value) {
     this.dataLayer = this.dataLayer.set(key, value);
   }
 
-  setPageName(action) {
+  setPageName(path) {
     const pageName = [];
-    pageName.push(utils.trimStartSlash(action.payload.path));
+    pageName.push(utils.trimStartSlash(path));
     this.setDataLayer('page_name', pageName);
   }
 
@@ -29,24 +30,26 @@ class AnalyticsService {
     this.setDataLayer('cid', uuid.valid(cid));
   }
 
-  deleteInDataLayer(action) {
+  deleteInDataLayer(actionType) {
     const map = {
       IDLE_TIMER_COMPLETE: 'cid'
     };
-    const actionType = action.type;
-
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
-  setStoreCode(action) {
-    const { storeCode } = action;
+  setStoreCode(storeCode) {
     this.setDataLayer('navigation_store', storeCode);
   }
 
-  getDataLayer() {
-    return this.dataLayer.toJS();
-  }
+  track(eventType) {
+    tealiumAnalytics([{
+      hitType: eventType,
+      dataLayer: this.dataLayer.toJS()
+    }]);
 
+    // change with logger
+    console.log(this.dataLayer.toJS());
+  }
 }
 
 export default new AnalyticsService();
