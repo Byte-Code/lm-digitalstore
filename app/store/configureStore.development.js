@@ -6,17 +6,31 @@ import { Map } from 'immutable';
 import { logger } from 'redux-beacon/extensions/logger';
 import createLogger from 'redux-logger';
 import { createMiddleware } from 'redux-beacon';
-import { tealiumAnalytics } from '../../tealiumAnalytics';
-import eventsMap from '../analytics/eventsMap';
+import { tealiumAnalytics } from '../analytics/tealiumAnalytics';
+// import eventsMap from '../analytics/eventsMap';
 import rootReducer from '../reducers/reducers';
+import AnalyticsService from '../analytics/AnalyticsService';
+import * as actions from '../actions/actionTypes';
+
+const pageView = () => ({
+  hitType: 'view',
+  dataLayer: AnalyticsService.getDataLayer()
+});
+
+const eventsMap = {
+  '@@router/LOCATION_CHANGE': AnalyticsService.setPageName,
+  [actions.SET_ANALYTICS_SESSION_CODE]: AnalyticsService.setCid,
+  [actions.SET_STORE_CODE]: AnalyticsService.setStoreCode,
+  [actions.TRACK_ANALYTICS_SESSION_START]: pageView,
+  [actions.IDLE_TIMER_COMPLETE]: AnalyticsService.deleteInDataLayer
+};
 
 export const sagaMiddleware = createSagaMiddleware();
-
 
 const reduxBeaconMiddleware = createMiddleware(eventsMap, tealiumAnalytics, { logger });
 
 const actionCreators = {
-  push,
+  push
 };
 
 const customLogger = createLogger({
@@ -31,7 +45,7 @@ const router = routerMiddleware(hashHistory);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     // Options: http://extension.remotedev.io/docs/API/Arguments.html
-    actionCreators,
+    actionCreators
   }) :
   compose;
 /* eslint-enable no-underscore-dangle */
