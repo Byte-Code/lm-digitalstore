@@ -13,10 +13,17 @@ class AnalyticsService {
     this.setDataLayer = this.setDataLayer.bind(this);
     this.setStoreCode = this.setStoreCode.bind(this);
     this.track = this.track.bind(this);
+    this.mergeInDataLayer = this.mergeInDataLayer.bind(this);
+    this.setProduct = this.setProduct.bind(this);
+    this.setRelatedProduct = this.setRelatedProduct.bind(this);
   }
 
   setDataLayer(key, value) {
     this.dataLayer = this.dataLayer.set(key, value);
+  }
+
+  mergeInDataLayer(layer) {
+    this.dataLayer = this.dataLayer.merge(layer);
   }
 
   setPageName(path) {
@@ -39,6 +46,17 @@ class AnalyticsService {
 
   setStoreCode(storeCode) {
     this.setDataLayer('navigation_store', storeCode);
+  }
+
+  setProduct(product) {
+    const productLayer = utils.buildProductLayer(product);
+    this.mergeInDataLayer(productLayer);
+    console.log(this.dataLayer.toJS());
+  }
+
+  setRelatedProduct(products) {
+    const relatedProductsLayer = utils.buildRelatedProductsLayer(products);
+    this.mergeInDataLayer(relatedProductsLayer);
   }
 
   track(eventType) {
