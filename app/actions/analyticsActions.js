@@ -14,3 +14,7 @@ export function trackAnalyticsSessionStart() {
 export function startAnalyticsSession() {
   return ({ type: START_ANALYTICS_SESSION });
 }
+
+export function startAnalyticsProduct() {
+  return ({ type: 'START_ANALYTICS_PRODUCT' });
+}
