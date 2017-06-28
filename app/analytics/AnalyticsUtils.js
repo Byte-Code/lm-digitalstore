@@ -14,8 +14,7 @@ const productPropertiesMap = Map({
   'prod_avail_online': ['vendible'],
   'prod_avail_store': ['isClickCollectProduct'],
   'prod_gamma': ['gamma'],
-  'prod_sconto': ['price', 'selling', 'discount'],
-  'prod_bundle': ['bundleInformation', 'isBundle']
+  'prod_sconto': ['price', 'selling', 'discount']
 });
 
 
@@ -37,8 +36,8 @@ const buildCommonLayer = (product) => {
 const isProductNew = (product) => {
   const marketingAttributes = product.get('marketingAttributes');
   const loyaltyProgram = product.get('loyaltyProgram');
-  let isNew =  Map({ prod_new: false });
   let list = List();
+  let isNew =  Map({ prod_new: list.push('0') });
 
   if(marketingAttributes && loyaltyProgram) {
     const promotions = getPromotions(marketingAttributes, loyaltyProgram);
@@ -47,7 +46,7 @@ const isProductNew = (product) => {
     filteredPromotions.map( (promotion) => {
       const code = promotion.get('code');
       if(code === 'NOVITA') {
-        isNew = isNew.set('prod_new', list.push(true));
+        isNew = isNew.set('prod_new', list.push('1'));
       }
     });
   }
@@ -92,6 +91,17 @@ const getIdeapiuPoints = (product) => {
   return layer;
 };
 
+const getBundle = (product) => {
+  const isBundle = product.getIn(['bundleInformation', 'isBundle']);
+  let list = List();
+  let layer = Map({ prod_bundle: list.push('0')});
+
+  if(isBundle) {
+    layer = layer.set('prod_bundle', list.push('1'));
+  }
+  return layer;
+};
+
 
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
@@ -106,13 +116,15 @@ const buildProductLayer = ( product = {} ) => {
     const variantProperty = getVariant(product);
     const giftPoints = getGiftPoints(product);
     const ideapiuPoints = getIdeapiuPoints(product);
+    const isBundle = getBundle(product);
 
     productLayer = productLayer.merge(
       commonProperties,
       newProductProperty,
       variantProperty,
       giftPoints,
-      ideapiuPoints
+      ideapiuPoints,
+      isBundle
     );
     return productLayer;
   }
@@ -121,7 +133,7 @@ const buildProductLayer = ( product = {} ) => {
 
 const buildRelatedProductsLayer = (products) => {
   products.filter( (product, key) => {
-    console.log(product.toJS());
+    //console.log(product.toJS());
   });
 };
 
