@@ -8,7 +8,7 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
-    this.traccia = true;
+    this.firstTrack = true;
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
@@ -19,6 +19,7 @@ class AnalyticsService {
     this.setProduct = this.setProduct.bind(this);
     this.setRelatedProduct = this.setRelatedProduct.bind(this);
     this.setState = this.setState.bind(this);
+    this.clearDataLayer = this.clearDataLayer.bind(this);
   }
 
   setState(state) {
@@ -27,6 +28,16 @@ class AnalyticsService {
 
   setDataLayer(key, value) {
     this.dataLayer = this.dataLayer.set(key, value);
+  }
+
+  clearDataLayer() {
+    // eslint-disable-next-line array-callback-return
+    this.dataLayer = this.dataLayer.filter((value, key) => {
+      const validKeys = ['cid', 'navigation_store', 'page_name'];
+      if (validKeys.indexOf(key) > -1) {
+        return value;
+      }
+    });
   }
 
   mergeInDataLayer(layer) {
@@ -61,7 +72,8 @@ class AnalyticsService {
   }
 
   setRelatedProduct(products) {
-    const relatedProductsLayer = utils.buildRelatedProductsLayer(products);
+    const path = this.dataLayer.get('page_name');
+    const relatedProductsLayer = utils.buildRelatedProductsLayer(products, path);
     this.mergeInDataLayer(relatedProductsLayer);
   }
 
@@ -70,16 +82,20 @@ class AnalyticsService {
     const storeCode = this.state.get('storeCodeReducer');
     this.mergeInDataLayer(Map({ navigation_store: storeCode }));
 
-    if (this.traccia) {
+    if (this.firstTrack) {
       tealiumAnalytics([{
         hitType: eventType,
         dataLayer: this.dataLayer.toJS()
       }]);
-      this.traccia = false;
-      setTimeout(() => { this.traccia = true; }, 1000);
-    // change with logger
+      this.firstTrack = false;
+      setTimeout(() => {
+        this.firstTrack = true;
+      }, 1000);
+
       console.log(this.dataLayer.toJS());
     }
+
+    this.clearDataLayer();
   }
 }
 
