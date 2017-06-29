@@ -8,7 +8,6 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
-    this.traccia = true;
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
@@ -61,7 +60,8 @@ class AnalyticsService {
   }
 
   setRelatedProduct(products) {
-    const relatedProductsLayer = utils.buildRelatedProductsLayer(products);
+    const path = this.dataLayer.get('page_name');
+    const relatedProductsLayer = utils.buildRelatedProductsLayer(products, path);
     this.mergeInDataLayer(relatedProductsLayer);
   }
 
@@ -70,16 +70,13 @@ class AnalyticsService {
     const storeCode = this.state.get('storeCodeReducer');
     this.mergeInDataLayer(Map({ navigation_store: storeCode }));
 
-    if (this.traccia) {
-      tealiumAnalytics([{
-        hitType: eventType,
-        dataLayer: this.dataLayer.toJS()
-      }]);
-      this.traccia = false;
-      setTimeout(() => { this.traccia = true; }, 1000);
+    tealiumAnalytics([{
+      hitType: eventType,
+      dataLayer: this.dataLayer.toJS()
+    }]);
+
     // change with logger
-      console.log(this.dataLayer.toJS());
-    }
+    console.log(this.dataLayer.toJS());
   }
 }
 

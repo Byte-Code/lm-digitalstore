@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
-import * as analyticsAction from '../actions/analyticsActions';
 
 import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
@@ -15,7 +14,6 @@ export function* callFetchProduct({ productCode }) {
       yield put(productActions.successFetchProduct(productCode, result));
       yield put(productActions.requestFetchRelatedProducts(productCode));
       yield put(productActions.requestFetchStoreStock(productCode));
-      yield put(analyticsAction.startAnalyticsProduct());
     } else {
       throw new Error('Not Found Error');
     }

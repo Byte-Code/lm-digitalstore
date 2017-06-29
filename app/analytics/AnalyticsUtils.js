@@ -1,6 +1,5 @@
 /*eslint-disable */
 import { Map, List } from 'immutable';
-import trimStart from 'lodash/trimStart';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
 import * as _ from 'lodash';
 
@@ -17,17 +16,20 @@ const productPropertiesMap = Map({
   'prod_sconto': ['price', 'selling', 'discount']
 });
 
+const pushValueInList = (key, value, list) => {
+  list = list.set(key, list.get(key).push(value));
+};
+
 
 const buildCommonLayer = (product) => {
   let productDataLayer = Map({});
   let list = List();
+  const cloneMap = productPropertiesMap;
 
-  productPropertiesMap.filter( (property, key) => {
-    if(product.hasIn(property)) {
-      const propertyValue = list.push(product.getIn(property));
-      productDataLayer = productDataLayer.set(key, propertyValue);
-    }
-
+  cloneMap.filter( (property, key) => {
+    const productProperty = product.hasIn(property) ? product.getIn(property) : 'null';
+    const propertyValue = list.push(productProperty);
+    productDataLayer = productDataLayer.set(key, propertyValue);
   });
   return productDataLayer;
 
@@ -102,10 +104,31 @@ const getBundle = (product) => {
   return layer;
 };
 
+const setPosition = (listLayer = Map({}), index = 0) => {
+  if(index && listLayer.size) {
+    listLayer = pushValueInList('imp_position', index, listLayer);
+  }
+
+  return listLayer;
+};
+
+const getProdList = (product) => {
+  const mainCategory = product.get('mainCategory');
+  const mainCategoryName = product.get('mainCategoryName');
+  const prodList = mainCategoryName + '/' + mainCategory;
+  return prodList
+};
+
+const customizer = (objValue, srcValue) => {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+};
+
 
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
-const trimStartSlash = (text) => trimStart(text, '/');
+const trimStartSlash = (text) => _.trimStart(text, '/');
 
 const buildProductLayer = ( product = {} ) => {
   let productLayer = Map({});
@@ -131,10 +154,35 @@ const buildProductLayer = ( product = {} ) => {
 
 };
 
-const buildRelatedProductsLayer = (products) => {
-  products.filter( (product, key) => {
-    //console.log(product.toJS());
-  });
+const buildRelatedProductsLayer = (products = Map({}), path = '/') => {
+  let prodPositionCount = 0;
+  let positionList = List();
+  let prodList = List();
+
+  //console.log(path);
+
+  if(products.size) {
+    const listOfProductsLayer = products.map((product) => {
+      const prodPosition = positionList.push(prodPositionCount += 1);
+      const prodListList = prodList.push(getProdList(product));
+
+      let productLayer = buildCommonLayer(product);
+      //add additional properties to productLayer
+      productLayer = productLayer.set('prod_position', prodPosition);
+      productLayer = productLayer.set('prod_list', prodListList);
+      return productLayer;
+    });
+
+    const mergedlistOfProductsLayer = listOfProductsLayer.reduce((acc, productLayer) => {
+      const mergedValues = _.mergeWith(acc.toJS(), productLayer.toJS(), customizer);
+      return Map(mergedValues);
+    });
+
+    const normalizeFinalLayer = mergedlistOfProductsLayer
+                                .mapKeys(key => _.replace(key, 'prod', 'imp'));
+
+    return normalizeFinalLayer;
+  }
 };
 
 export {
