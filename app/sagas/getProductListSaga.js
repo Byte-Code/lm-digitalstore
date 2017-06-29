@@ -11,10 +11,10 @@ export function* callFetchProductList({ productIDList }) {
     const productList = yield call(apiClient.fetchProductListDisplay, productIDList.toJS());
     const result = fromJS(productList).getIn(['content', 'itemlist']).toOrderedSet();
     yield put(productListActions.successFetchProductList(result));
+    yield put(analyticsAction.startAnalyticsProduct());
   } catch (error) {
     yield put(productListActions.failureFetchProductList(error));
   }
-  yield put(analyticsAction.startAnalyticsProduct());
 }
 
 export default function* getProductListSaga() {
