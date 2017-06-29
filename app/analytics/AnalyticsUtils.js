@@ -103,7 +103,16 @@ const customizer = (objValue, srcValue) => {
 
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
-const trimStartSlash = (text) => _.trimStart(text, '/');
+const buildPageName = (path = []) => {
+  let pageName = path;
+  const splitChar = '/';
+
+  if (!_.isEmpty(path)) {
+    const trimSlash = _.trimStart(pageName, splitChar);
+    pageName = _.split(trimSlash, splitChar);
+  }
+  return pageName;
+};
 
 const buildProductLayer = (product = {}) => {
   let productLayer = Map({});
@@ -156,7 +165,7 @@ const buildRelatedProductsLayer = (products = Map({})) => {
 };
 
 export {
-  trimStartSlash,
+  buildPageName,
   buildProductLayer,
   buildRelatedProductsLayer
 };
