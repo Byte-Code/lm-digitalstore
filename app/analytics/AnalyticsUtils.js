@@ -21,18 +21,24 @@ const buildCommonLayer = (product) => {
     return acc.set(key, List().push(productProperty));
   }, Map({}));
 
-  const commonPropertiesLayerNormalized = commonPropertiesLayer.update((properties) => {
-    properties.set('prod_sconto', normalizeSconto(properties));
-    return properties;
-  });
-
-  return commonPropertiesLayerNormalized;
+  const normalizedCommonPropertiesLayer = normalizeProperties(commonPropertiesLayer);
+  return normalizedCommonPropertiesLayer;
 };
 
-const normalizeSconto = (properties = Map({})) => {
-  const sconto = properties.get('prod_sconto').get(0);
+const normalizeProperties = (layer) => {
+  let obj = layer;
+  obj = obj.set('prod_sconto', normalizeSconto(obj.get('prod_sconto')));
+  obj = obj.set('prod_avail_online', normalizeAvail(obj.get('prod_avail_online')));
+  obj = obj.set('prod_avail_store', normalizeAvail(obj.get('prod_avail_store')));
+  return obj;
+};
+
+const normalizeSconto = (value = Map({})) => {
+  const sconto = value.get(0);
   return List().push(sconto !== 'null' ? Math.round(sconto * 10) : sconto);
 };
+
+const normalizeAvail = (field = List()) => List().push(field.get(0) ? '1' : '0');
 
 const isProductNew = (product) => {
   const marketingAttributes = product.get('marketingAttributes');
