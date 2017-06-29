@@ -7,16 +7,30 @@ class AnalyticsService {
 
   constructor() {
     this.dataLayer = Map({});
+    this.state = {};
+    this.traccia = true;
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
     this.setDataLayer = this.setDataLayer.bind(this);
     this.setStoreCode = this.setStoreCode.bind(this);
     this.track = this.track.bind(this);
+    this.mergeInDataLayer = this.mergeInDataLayer.bind(this);
+    this.setProduct = this.setProduct.bind(this);
+    this.setRelatedProduct = this.setRelatedProduct.bind(this);
+    this.setState = this.setState.bind(this);
+  }
+
+  setState(state) {
+    this.state = state;
   }
 
   setDataLayer(key, value) {
     this.dataLayer = this.dataLayer.set(key, value);
+  }
+
+  mergeInDataLayer(layer) {
+    this.dataLayer = this.dataLayer.merge(layer);
   }
 
   setPageName(path) {
@@ -38,17 +52,34 @@ class AnalyticsService {
   }
 
   setStoreCode(storeCode) {
-    this.setDataLayer('navigation_store', storeCode);
+    this.mergeInDataLayer({ navigation_store: storeCode });
+  }
+
+  setProduct(product) {
+    const productLayer = utils.buildProductLayer(product);
+    this.mergeInDataLayer(productLayer);
+  }
+
+  setRelatedProduct(products) {
+    const relatedProductsLayer = utils.buildRelatedProductsLayer(products);
+    this.mergeInDataLayer(relatedProductsLayer);
   }
 
   track(eventType) {
-    tealiumAnalytics([{
-      hitType: eventType,
-      dataLayer: this.dataLayer.toJS()
-    }]);
+    // hammer
+    const storeCode = this.state.get('storeCodeReducer');
+    this.mergeInDataLayer(Map({ navigation_store: storeCode }));
 
+    if (this.traccia) {
+      tealiumAnalytics([{
+        hitType: eventType,
+        dataLayer: this.dataLayer.toJS()
+      }]);
+      this.traccia = false;
+      setTimeout(() => { this.traccia = true; }, 1000);
     // change with logger
-    console.log(this.dataLayer.toJS());
+      console.log(this.dataLayer.toJS());
+    }
   }
 }
 

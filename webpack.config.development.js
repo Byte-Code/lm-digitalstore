@@ -8,7 +8,7 @@ import webpack from 'webpack';
 import validate from 'webpack-validator';
 import merge from 'webpack-merge';
 import baseConfig from './webpack.config.base';
-import configDev from './config.dev';
+import configDev from './config.prod';
 
 const port = process.env.PORT || 3000;
 
