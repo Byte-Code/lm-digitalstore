@@ -45,9 +45,7 @@ class AnalyticsService {
   }
 
   setPageName(path) {
-    const pageName = [];
-    pageName.push(utils.trimStartSlash(path));
-    this.setDataLayer('page_name', pageName);
+    this.setDataLayer('page_name', utils.buildPageName(path));
   }
 
   setCid() {
