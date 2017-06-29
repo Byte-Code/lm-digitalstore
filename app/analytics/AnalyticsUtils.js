@@ -21,7 +21,17 @@ const buildCommonLayer = (product) => {
     return acc.set(key, List().push(productProperty));
   }, Map({}));
 
-  return commonPropertiesLayer;
+  const commonPropertiesLayerNormalized = commonPropertiesLayer.update((properties) => {
+    properties.set('prod_sconto', normalizeSconto(properties));
+    return properties;
+  });
+
+  return commonPropertiesLayerNormalized;
+};
+
+const normalizeSconto = (properties = Map({})) => {
+  const sconto = properties.get('prod_sconto').get(0);
+  return List().push(sconto !== 'null' ? Math.round(sconto * 10) : sconto);
 };
 
 const isProductNew = (product) => {
