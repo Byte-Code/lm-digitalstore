@@ -88,10 +88,10 @@ const getBundle = (product) => {
   return layer;
 };
 
-const getProdList = (product) => {
+const getProdList = (product, path) => {
   const mainCategory = product.get('mainCategory');
   const mainCategoryName = product.get('mainCategoryName');
-  return `${mainCategoryName}/${mainCategory}`;
+  return `${path[0]} > ${mainCategoryName}/${mainCategory}`;
 };
 
 const customizer = (objValue, srcValue) => {
@@ -137,13 +137,13 @@ const buildProductLayer = (product = {}) => {
   }
 };
 
-const buildRelatedProductsLayer = (products = Map({})) => {
+const buildRelatedProductsLayer = (products = Map({}), path = []) => {
   let prodPositionCount = 0;
 
   if (products.size) {
     const listOfProductsLayer = products.map((product) => {
       const prodPosition = List().push(prodPositionCount += 1);
-      const prodListList = List().push(getProdList(product));
+      const prodListList = List().push(getProdList(product, path));
 
       let productLayer = buildCommonLayer(product);
       // add additional properties to productLayer
