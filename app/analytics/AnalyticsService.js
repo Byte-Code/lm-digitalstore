@@ -13,17 +13,12 @@ class AnalyticsService {
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
     this.setDataLayer = this.setDataLayer.bind(this);
-    this.setStoreCode = this.setStoreCode.bind(this);
+    this.setNavigationStore = this.setNavigationStore.bind(this);
     this.track = this.track.bind(this);
     this.mergeInDataLayer = this.mergeInDataLayer.bind(this);
     this.setProduct = this.setProduct.bind(this);
     this.setRelatedProduct = this.setRelatedProduct.bind(this);
-    this.setState = this.setState.bind(this);
     this.clearDataLayer = this.clearDataLayer.bind(this);
-  }
-
-  setState(state) {
-    this.state = state;
   }
 
   setDataLayer(key, value) {
@@ -60,8 +55,9 @@ class AnalyticsService {
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
-  setStoreCode(storeCode) {
-    this.mergeInDataLayer({ navigation_store: storeCode });
+  setNavigationStore(storeCode) {
+    const navigationStoreLayer = utils.buildNavigationStore(storeCode);
+    this.mergeInDataLayer(navigationStoreLayer);
   }
 
   setProduct(product) {
@@ -76,10 +72,6 @@ class AnalyticsService {
   }
 
   track(eventType) {
-    // hammer
-    const storeCode = this.state.get('storeCodeReducer');
-    this.mergeInDataLayer(Map({ navigation_store: storeCode }));
-
     if (this.firstTrack) {
       tealiumAnalytics([{
         hitType: eventType,
