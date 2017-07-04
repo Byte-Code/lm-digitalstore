@@ -17,7 +17,7 @@ const productPropertiesMap = Map({
 
 const buildCommonLayer = (product) => {
   const commonPropertiesLayer = productPropertiesMap.reduce((acc, property, key) => {
-    const productProperty = product.hasIn(property) ? product.getIn(property) : 'null';
+    const productProperty = product.hasIn(property) ? product.getIn(property) : '';
     return acc.set(key, List().push(productProperty));
   }, Map({}));
 
