@@ -1,6 +1,7 @@
 import { take, race, takeEvery, call, put, select } from 'redux-saga/effects';
 import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
+import { getStoreCode } from '../reducers/selectors';
 
 export default function* analyticsSaga() {
   yield takeEvery('*', function* callAnalyticsSession() {
@@ -8,7 +9,6 @@ export default function* analyticsSaga() {
     while (true) {
       const {
         locationChange,
-        setStoreCode,
         setSessionCode,
         idleTimerComplete,
         startAnalyticsSession,
@@ -16,7 +16,6 @@ export default function* analyticsSaga() {
         setRelatedProduct,
         startAnalyticsProduct
       } = yield race({
-        setStoreCode: take('SET_STORE_CODE'),
         locationChange: take('@@router/LOCATION_CHANGE'),
         setSessionCode: take('SET_ANALYTICS_SESSION_CODE'),
         idleTimerComplete: take('IDLE_TIMER_COMPLETE'),
@@ -26,18 +25,13 @@ export default function* analyticsSaga() {
         startAnalyticsProduct: take('START_ANALYTICS_PRODUCT')
       });
 
-      const state = yield select();
-      yield call(AnalyticsService.setState, state);
-
       if (locationChange) {
         yield call(AnalyticsService.setPageName, locationChange.payload.pathname);
       }
 
-      if (setStoreCode) {
-        yield call(AnalyticsService.setStoreCode, setStoreCode.storeCode);
-      }
-
       if (setSessionCode) {
+        const storeCode = yield select(getStoreCode);
+        yield call(AnalyticsService.setNavigationStore, storeCode);
         yield call(AnalyticsService.setCid);
       }
 

@@ -1,6 +1,7 @@
 import { Map, List } from 'immutable';
 import * as _ from 'lodash';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
+import stores from '../../mocks/stores';
 
 const productPropertiesMap = Map({
   prod_id: ['code'],
@@ -116,6 +117,19 @@ const customizer = (objValue, srcValue) => {
   }
 };
 
+const buildNavigationStore = (storeCode = null) => {
+  let storeName = '';
+
+  if (storeCode) {
+    stores.forEach(store => {
+      if (store.storeCode === storeCode) {
+        storeName = store.storeName;
+      }
+    });
+  }
+
+  return Map({ navigation_store: storeName });
+};
 
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
@@ -183,6 +197,7 @@ const buildRelatedProductsLayer = (products = Map({}), path = []) => {
 export {
   buildPageName,
   buildProductLayer,
-  buildRelatedProductsLayer
+  buildRelatedProductsLayer,
+  buildNavigationStore
 };
 
