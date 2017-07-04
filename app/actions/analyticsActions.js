@@ -18,3 +18,8 @@ export function startAnalyticsSession() {
 export function startAnalyticsProduct() {
   return ({ type: 'START_ANALYTICS_PRODUCT' });
 }
+
+export function trackAnalyticsFilters() {
+  return ({ type: 'TRACK_ANALYTICS_FILTERS' });
+}
+

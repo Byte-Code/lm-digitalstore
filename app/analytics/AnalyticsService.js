@@ -9,6 +9,7 @@ class AnalyticsService {
     this.dataLayer = Map({});
     this.state = {};
     this.firstTrack = true;
+    this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
@@ -20,6 +21,8 @@ class AnalyticsService {
     this.setRelatedProduct = this.setRelatedProduct.bind(this);
     this.setState = this.setState.bind(this);
     this.clearDataLayer = this.clearDataLayer.bind(this);
+    this.setFilters = this.setFilters.bind(this);
+    this.clearFilters = this.clearFilters.bind(this);
   }
 
   setState(state) {
@@ -54,9 +57,7 @@ class AnalyticsService {
   }
 
   deleteInDataLayer(actionType) {
-    const map = {
-      IDLE_TIMER_COMPLETE: 'cid'
-    };
+    const map = { IDLE_TIMER_COMPLETE: 'cid' };
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
@@ -73,6 +74,15 @@ class AnalyticsService {
     const path = this.dataLayer.get('page_name');
     const relatedProductsLayer = utils.buildRelatedProductsLayer(products, path);
     this.mergeInDataLayer(relatedProductsLayer);
+  }
+
+  setFilters(filtersData) {
+    const filtersLayer = utils.buildActiveFilters(filtersData);
+    this.mergeInDataLayer(filtersLayer);
+  }
+
+  clearFilters(productsNumber) {
+    this.dataLayer = utils.clearFilters(this.dataLayer, productsNumber);
   }
 
   track(eventType) {

@@ -95,7 +95,13 @@ export const getItemCount = createSelector(
     filterUtils.filterCatalogue(idsByAids, idsByTempFilters, idsByTempAvailability).size
 );
 
+export const getFilteredProductsNumber = createSelector(
+  [state => state, getFiltersCategoryCode],
+  (state, categoryCode) => getItemCount(state, categoryCode)
+);
+
 // FILTERS
+
 export function getFilterMap(state) {
   return filtersSelector.getFilterMap(state.get('filtersReducer'));
 }
@@ -127,6 +133,22 @@ export function getTempFilters(state) {
 export function getTempAvailability(state) {
   return filtersSelector.getTempAvailability(state.get('filtersReducer'));
 }
+
+export function getFiltersCategoryCode(state) {
+  return filtersSelector.getCategoryCode(state.get('filtersReducer'));
+}
+
+export const getFilterInfoFromCategory = createSelector(
+  [state => state, getFiltersCategoryCode],
+  (state, categoryCode) => {
+    const categoryInfo = getCategory(state, categoryCode);
+    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
+    const filterGroup = categoryInfo
+                          .get('facetFilters')
+                          .filterNot(group => group.get('group') === 'Prezzo');
+    return { sellingAids, filterGroup };
+  }
+);
 
 // PRODUCT
 export function getProduct(state, productCode) {

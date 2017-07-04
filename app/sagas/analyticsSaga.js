@@ -1,6 +1,12 @@
 import { take, race, takeEvery, call, put, select } from 'redux-saga/effects';
 import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
+import {
+  getFilterInfoFromCategory,
+  getFilteredProductsNumber,
+  getFilterMap,
+  getFiltersCategoryCode,
+  getCatalogueProducts } from '../reducers/selectors';
 
 export default function* analyticsSaga() {
   yield takeEvery('*', function* callAnalyticsSession() {
@@ -14,7 +20,10 @@ export default function* analyticsSaga() {
         startAnalyticsSession,
         setProduct,
         setRelatedProduct,
-        startAnalyticsProduct
+        startAnalyticsProduct,
+        filters,
+        trackFilters,
+        resetFilters
       } = yield race({
         setStoreCode: take('SET_STORE_CODE'),
         locationChange: take('@@router/LOCATION_CHANGE'),
@@ -23,7 +32,17 @@ export default function* analyticsSaga() {
         startAnalyticsSession: take('START_ANALYTICS_SESSION'),
         setProduct: take('SUCCESS_FETCH_PRODUCT'),
         setRelatedProduct: take('SUCCESS_FETCH_PRODUCTLIST'),
-        startAnalyticsProduct: take('START_ANALYTICS_PRODUCT')
+        startAnalyticsProduct: take('START_ANALYTICS_PRODUCT'),
+        filters: take(
+          [
+            'TOGGLE_AID',
+            'APPLY_TEMP_FILTERS',
+            'TOGGLE_AVAILABILITY',
+            'TOGGLE_FILTER'
+          ]
+        ),
+        resetFilters: take('RESET_FILTERS'),
+        trackFilters: take('TRACK_ANALYTICS_FILTERS')
       });
 
       const state = yield select();
@@ -53,13 +72,48 @@ export default function* analyticsSaga() {
         yield call(AnalyticsService.setRelatedProduct, setRelatedProduct.result);
       }
 
+      if (filters) {
+        const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
+        const categoryCode = yield select(getFiltersCategoryCode);
+        const productList = yield getCatalogueProducts()(state, categoryCode);
+        const productsNumber = yield select(getFilteredProductsNumber);
+        const activeFilters = yield select(getFilterMap);
+
+        yield call(AnalyticsService.setFilters,
+          {
+            sellingAids,
+            filterGroup,
+            productsNumber,
+            activeFilters
+          }
+        );
+
+        yield call(AnalyticsService.setRelatedProduct, productList);
+        yield put(analyticsAction.trackAnalyticsFilters());
+      }
+
+      if (resetFilters) {
+        const productsNumber = yield select(getFilteredProductsNumber);
+        const categoryCode = yield select(getFiltersCategoryCode);
+        const productList = yield getCatalogueProducts()(state, categoryCode);
+
+        yield call(AnalyticsService.clearFilters, productsNumber);
+        yield call(AnalyticsService.setRelatedProduct, productList);
+        yield put(analyticsAction.trackAnalyticsFilters());
+      }
+
       if (startAnalyticsSession) {
         yield put(analyticsAction.setAnalyticsSessionCode());
         yield put(analyticsAction.trackAnalyticsSessionStart());
         yield call(AnalyticsService.track, 'view');
       }
 
+
       if (startAnalyticsProduct) {
+        yield call(AnalyticsService.track, 'view');
+      }
+
+      if (trackFilters) {
         yield call(AnalyticsService.track, 'view');
       }
 

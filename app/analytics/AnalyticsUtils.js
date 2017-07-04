@@ -1,4 +1,4 @@
-import { Map, List } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
 
@@ -14,6 +14,8 @@ const productPropertiesMap = Map({
   prod_gamma: ['gamma'],
   prod_sconto: ['price', 'selling', 'discount']
 });
+
+const layerMap = Map({ filter_name: List(), filter_value: List() });
 
 const buildCommonLayer = (product) => {
   const commonPropertiesLayer = productPropertiesMap.reduce((acc, property, key) => {
@@ -116,6 +118,58 @@ const customizer = (objValue, srcValue) => {
   }
 };
 
+const buildAppliedFilters = (filterGroup, appliedFilters) => {
+  const dataLayer = filterGroup.reduce((acc, group) => {
+    const groupName = group.get('group');
+    let accumulator = acc;
+
+    const activeFilters = group.get('filters').filter((filter) =>
+      appliedFilters.includes(filter.get('code'))
+    );
+
+    if (activeFilters.size) {
+      const newLayer = buildLayer(activeFilters, groupName);
+      accumulator = accumulator
+        .updateIn(['filter_name'], arr => arr.concat(newLayer.get('filter_name')))
+        .updateIn(['filter_value'], arr => arr.concat(newLayer.get('filter_value')));
+    }
+
+    return accumulator;
+  }, layerMap);
+
+  return dataLayer;
+};
+
+const buildLayer = (activeFilters = List(), groupName = '') =>
+  activeFilters.reduce((acc, activeFilter) =>
+      acc
+        .updateIn(['filter_name'], arr => arr.push(groupName))
+        .updateIn(['filter_value'], arr => arr.push(activeFilter.get('name'))),
+    layerMap
+  );
+
+const buildSellingAid = (sellingAids, currentAid) => {
+  const aidGroupName = sellingAids.get('userText');
+  const { name } = sellingAids.get('aids')
+    .filter(aid => aid.get('code') === currentAid)
+    .get(0)
+    .toJS();
+
+  return layerMap
+    .updateIn(['filter_name'], arr => arr.push(aidGroupName))
+    .updateIn(['filter_value'], arr => arr.push(name));
+};
+
+const buildFiltersDataLayer = (layerDataList = []) =>
+  layerDataList.reduce((acc, data) =>
+      acc
+        .updateIn(['filter_name'], arr => arr.concat(data.get('filter_name')))
+        .updateIn(['filter_value'], arr => arr.concat(data.get('filter_value'))),
+    layerMap);
+
+
+const addResultToLayer = (productsNumber = 0, dataLayer = Map({})) =>
+  dataLayer.set('filter_result', productsNumber > 12 ? '12' : productsNumber.toString());
 
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
@@ -153,11 +207,12 @@ const buildProductLayer = (product = {}) => {
   }
 };
 
-const buildRelatedProductsLayer = (products = Map({}), path = []) => {
+const buildRelatedProductsLayer = (products = List(), path = []) => {
+  const productList = products.size > 12 ? List(products).setSize(12) : products;
   let prodPositionCount = 0;
 
   if (products.size) {
-    const listOfProductsLayer = products.map((product) => {
+    const listOfProductsLayer = productList.map((product) => {
       const prodPosition = List().push(prodPositionCount += 1);
       const prodListList = List().push(getProdList(product, path));
 
@@ -180,9 +235,51 @@ const buildRelatedProductsLayer = (products = Map({}), path = []) => {
   }
 };
 
+const buildActiveFilters = (filtersData = {}) => {
+  const {
+    sellingAids = Map({}),
+    filterGroup = List(),
+    productsNumber = 0,
+    activeFilters = Map({}) } = filtersData;
+
+  const aid = activeFilters.get('aid');
+  const filters = activeFilters.get('filters');
+  const availability = activeFilters.get('availability');
+  let appliedFilters = layerMap;
+  let aidFilters = appliedFilters;
+  let availabilityFilters = appliedFilters;
+
+  if (aid !== '') {
+    aidFilters = buildSellingAid(sellingAids, aid);
+  }
+
+  if (!_.isEmpty(filters)) {
+    appliedFilters = buildAppliedFilters(filterGroup, filters);
+  }
+
+  if (availability) {
+    availabilityFilters = fromJS({
+      filter_name: ['disponibilità in negozio'],
+      filter_value: ['true']
+    });
+  }
+
+  const dataLayer = buildFiltersDataLayer([aidFilters, appliedFilters, availabilityFilters]);
+  const dataLayerWithResult = addResultToLayer(productsNumber, dataLayer);
+  return dataLayerWithResult;
+};
+
+const clearFilters = (dataLayer = Map({})) =>
+  dataLayer
+    .set('filter_value', List())
+    .set('filter_name', List())
+    .set('filter_result', '');
+
 export {
   buildPageName,
   buildProductLayer,
-  buildRelatedProductsLayer
+  buildRelatedProductsLayer,
+  buildActiveFilters,
+  clearFilters
 };
 
