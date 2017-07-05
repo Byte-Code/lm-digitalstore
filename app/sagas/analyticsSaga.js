@@ -47,7 +47,7 @@ export default function* analyticsSaga() {
       }
 
       if (setProduct) {
-        yield call(AnalyticsService.setProduct, setProduct.result);
+        yield call(AnalyticsService.setProduct, setProduct.result, 'detail');
       }
 
       if (setRelatedProduct) {
