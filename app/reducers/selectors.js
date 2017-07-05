@@ -11,10 +11,16 @@ import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
 import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
+import * as routeSelector from './Router/routerSelectors';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
 }
+
+export const getWorldName = createSelector(
+  [getWorld],
+  (world) => world.get('worldName')
+);
 
 export function getWeather(state) {
   return getWeatherSelector(state.get('weatherReducer'));
@@ -190,4 +196,10 @@ export const getSelectedNearbyStoreInfo = selectedStore =>
 
 export function getIdleDialog(state) {
   return getIdleDialogStatus(state.get('idleReducer'));
+}
+
+// Routing
+
+export function getCurrentPath(state) {
+  return routeSelector.getCurrentPath(state);
 }

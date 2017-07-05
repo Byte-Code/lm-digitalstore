@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hashHistory, Link } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Link } from 'react-router';
 import { Map } from 'immutable';
 import glamorous from 'glamorous';
 
@@ -46,32 +46,18 @@ const Banner = glamorous.div({
 });
 
 export default class Page extends Component {
-
-
   static propTypes = {
     forecast: ImmutablePropTypes.map.isRequired,
-    requestFetchWeather: PropTypes.func.isRequired,
-    startAnalyticsSession: PropTypes.func.isRequired
+    requestFetchWeather: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     forecast: Map()
   };
 
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
   componentDidMount() {
     this.props.requestFetchWeather();
   }
-
-  onClick() {
-    hashHistory.push('/world');
-    this.props.startAnalyticsSession();
-  }
-
 
   render() {
     const { forecast } = this.props;
@@ -81,7 +67,7 @@ export default class Page extends Component {
     }
 
     return (
-      <Link onClick={this.onClick}>
+      <Link to="/world">
         <Wrapper>
           <TopDiv>
             <Header>Accendi la tua voglia di estate</Header>

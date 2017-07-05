@@ -1,7 +1,7 @@
 import { take, race, takeEvery, call, put, select } from 'redux-saga/effects';
 import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
-import { getStoreCode } from '../reducers/selectors';
+import { getStoreCode, getWorldName, getCurrentPath } from '../reducers/selectors';
 
 export default function* analyticsSaga() {
   yield takeEvery('*', function* callAnalyticsSession() {
@@ -9,7 +9,7 @@ export default function* analyticsSaga() {
     while (true) {
       const {
         locationChange,
-        setSessionCode,
+        setSessionData,
         idleTimerComplete,
         startAnalyticsSession,
         setProduct,
@@ -17,7 +17,7 @@ export default function* analyticsSaga() {
         startAnalyticsProduct
       } = yield race({
         locationChange: take('@@router/LOCATION_CHANGE'),
-        setSessionCode: take('SET_ANALYTICS_SESSION_CODE'),
+        setSessionData: take('SUCCESS_FETCH_WORLD'),
         idleTimerComplete: take('IDLE_TIMER_COMPLETE'),
         startAnalyticsSession: take('START_ANALYTICS_SESSION'),
         setProduct: take('SUCCESS_FETCH_PRODUCT'),
@@ -29,10 +29,17 @@ export default function* analyticsSaga() {
         yield call(AnalyticsService.setPageName, locationChange.payload.pathname);
       }
 
-      if (setSessionCode) {
+      if (setSessionData) {
         const storeCode = yield select(getStoreCode);
+        const worldName = yield select(getWorldName);
+        const location = yield select(getCurrentPath);
         yield call(AnalyticsService.setNavigationStore, storeCode);
         yield call(AnalyticsService.setCid);
+        yield call(AnalyticsService.setReleaseVersion, worldName);
+
+        if (location === '/world') {
+          yield put(analyticsAction.startAnalyticsSession());
+        }
       }
 
       if (idleTimerComplete) {
