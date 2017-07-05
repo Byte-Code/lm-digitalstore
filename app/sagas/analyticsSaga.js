@@ -3,7 +3,6 @@ import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
 import {
   getFilterInfoFromCategory,
-  getFilteredProductsNumber,
   getFilterMap,
   getFiltersCategoryCode,
   getCatalogueProducts,
@@ -46,6 +45,8 @@ export default function* analyticsSaga() {
         trackFilters: take('TRACK_ANALYTICS_FILTERS')
       });
 
+      const state = yield select();
+
       if (locationChange) {
         yield call(AnalyticsService.setPageName, locationChange.payload.pathname);
       }
@@ -79,7 +80,7 @@ export default function* analyticsSaga() {
         const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
         const categoryCode = yield select(getFiltersCategoryCode);
         const productList = yield getCatalogueProducts()(state, categoryCode);
-        const productsNumber = yield select(getFilteredProductsNumber);
+        const productsNumber = productList.size;
         const activeFilters = yield select(getFilterMap);
 
         yield call(AnalyticsService.setFilters,
@@ -96,9 +97,9 @@ export default function* analyticsSaga() {
       }
 
       if (resetFilters) {
-        const productsNumber = yield select(getFilteredProductsNumber);
         const categoryCode = yield select(getFiltersCategoryCode);
         const productList = yield getCatalogueProducts()(state, categoryCode);
+        const productsNumber = productList.size;
 
         yield call(AnalyticsService.clearFilters, productsNumber);
         yield call(AnalyticsService.setRelatedProduct, productList);

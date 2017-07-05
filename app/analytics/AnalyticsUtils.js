@@ -345,11 +345,11 @@ const buildActiveFilters = (filtersData = {}) => {
   return dataLayerWithResult;
 };
 
-const clearFilters = (dataLayer = Map({})) =>
+const clearFilters = (dataLayer = Map({}), productsNumber = 0) =>
   dataLayer
     .set(LABEL.FILTER_VALUE, List())
     .set(LABEL.FILTER_NAME, List())
-    .set(LABEL.FILTER_RESULT, '');
+    .set(LABEL.FILTER_RESULT, productsNumber > 12 ? '12' : productsNumber.toString());
 
 
 const buildReleaseVersion = (worldName = '') => `${_.snakeCase(worldName)}_${appPackage.version}`;
