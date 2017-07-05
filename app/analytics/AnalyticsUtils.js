@@ -130,7 +130,7 @@ const buildNavigationStore = (storeCode = null) => {
   if (storeCode) {
     stores.forEach(store => {
       if (store.storeCode === storeCode) {
-        storeName = store.storeName;
+        storeName = `${storeCode} - ${store.storeName}`;
       }
     });
   }
