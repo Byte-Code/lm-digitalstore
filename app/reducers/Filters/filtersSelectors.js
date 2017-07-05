@@ -14,3 +14,5 @@ export const getTempAid = state => state.getIn(['temp', 'aid']);
 export const getTempFilters = state => state.getIn(['temp', 'filters']);
 
 export const getTempAvailability = state => state.getIn(['temp', 'availability']);
+
+export const getCategoryCode = state => state.getIn(['active', 'categoryCode']);
