@@ -19,6 +19,7 @@ class AnalyticsService {
     this.setProduct = this.setProduct.bind(this);
     this.setRelatedProduct = this.setRelatedProduct.bind(this);
     this.clearDataLayer = this.clearDataLayer.bind(this);
+    this.setReleaseVersion = this.setReleaseVersion.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -69,6 +70,13 @@ class AnalyticsService {
     const path = this.dataLayer.get('page_name');
     const relatedProductsLayer = utils.buildRelatedProductsLayer(products, path);
     this.mergeInDataLayer(relatedProductsLayer);
+  }
+
+  setReleaseVersion(worldName = '') {
+    if (worldName) {
+      const releseVersion = utils.buildReleaseVersion(worldName);
+      this.setDataLayer('app_release_version', releseVersion);
+    }
   }
 
   track(eventType) {

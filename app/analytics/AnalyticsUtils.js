@@ -1,5 +1,6 @@
 import { Map, List } from 'immutable';
 import * as _ from 'lodash';
+import appPackage from '../package.json';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
 import stores from '../../mocks/stores';
 
@@ -200,10 +201,15 @@ const buildRelatedProductsLayer = (products = Map({}), path = []) => {
   }
 };
 
+
+const buildReleaseVersion = (worldName = '') => `${_.snakeCase(worldName)}_${appPackage.version}`;
+
+
 export {
   buildPageName,
   buildProductLayer,
   buildRelatedProductsLayer,
-  buildNavigationStore
+  buildNavigationStore,
+  buildReleaseVersion
 };
 
