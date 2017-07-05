@@ -354,6 +354,14 @@ const clearFilters = (dataLayer = Map({}), productsNumber = 0) =>
 
 const buildReleaseVersion = (worldName = '') => `${_.snakeCase(worldName)}_${appPackage.version}`;
 
+const normalizeProductClickLayer = (productLayer = Map({}), index = 0, product = Map({}), path) =>
+  productLayer
+    .delete('prod_bundle')
+    .delete('prod_gamma')
+    .delete('prod_new')
+    .delete('prod_variant')
+    .set(LABEL.PROD_POSITION, List().push(index))
+    .set(LABEL.PROD_LIST, List().push(getProdList(product, path)));
 
 export {
   buildPageName,
@@ -362,5 +370,6 @@ export {
   buildActiveFilters,
   clearFilters,
   buildNavigationStore,
-  buildReleaseVersion
+  buildReleaseVersion,
+  normalizeProductClickLayer
 };

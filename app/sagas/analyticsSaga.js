@@ -1,6 +1,7 @@
 import { take, race, takeEvery, call, put, select } from 'redux-saga/effects';
 import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
+import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 import {
   getFilterInfoFromCategory,
   getFilterMap,
@@ -24,7 +25,9 @@ export default function* analyticsSaga() {
         startAnalyticsProduct,
         filters,
         trackFilters,
-        resetFilters
+        resetFilters,
+        productClick,
+        trackProductClick
       } = yield race({
         locationChange: take('@@router/LOCATION_CHANGE'),
         setSessionData: take('SUCCESS_FETCH_WORLD'),
@@ -42,7 +45,9 @@ export default function* analyticsSaga() {
           ]
         ),
         resetFilters: take('RESET_FILTERS'),
-        trackFilters: take('TRACK_ANALYTICS_FILTERS')
+        trackFilters: take('TRACK_ANALYTICS_FILTERS'),
+        productClick: take('SET_ANALYTICS_PRODUCT_CLICK'),
+        trackProductClick: take('TRACK_PRODUCT_CLICK')
       });
 
       const state = yield select();
@@ -69,7 +74,7 @@ export default function* analyticsSaga() {
       }
 
       if (setProduct) {
-        yield call(AnalyticsService.setProduct, setProduct.result, 'detail');
+        yield call(AnalyticsService.setProduct, setProduct.result, PROD_ACTION_DEDAIL);
       }
 
       if (setRelatedProduct) {
@@ -112,6 +117,11 @@ export default function* analyticsSaga() {
         yield call(AnalyticsService.track, 'view');
       }
 
+      if (productClick) {
+        const { product, index = 0 } = productClick.data;
+        yield call(AnalyticsService.setProduct, { product, action: PROD_CLICK, index });
+        yield put(analyticsAction.trackProductClick());
+      }
 
       if (startAnalyticsProduct) {
         yield call(AnalyticsService.track, 'view');
@@ -119,6 +129,10 @@ export default function* analyticsSaga() {
 
       if (trackFilters) {
         yield call(AnalyticsService.track, 'view');
+      }
+
+      if (trackProductClick) {
+        yield call(AnalyticsService.track, 'link');
       }
 
       // disable multiple calls https://github.com/redux-saga/redux-saga/issues/471
