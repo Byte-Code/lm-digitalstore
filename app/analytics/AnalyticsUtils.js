@@ -31,12 +31,18 @@ const normalizeProperties = (layer) => {
   obj = obj.set('prod_sconto', normalizeSconto(obj.get('prod_sconto')));
   obj = obj.set('prod_avail_online', normalizeAvail(obj.get('prod_avail_online')));
   obj = obj.set('prod_avail_store', normalizeAvail(obj.get('prod_avail_store')));
+  obj = obj.set('prod_price', normalizePrice(obj.get('prod_price')));
   return obj;
 };
 
 const normalizeSconto = (value = Map({})) => {
   const sconto = value.get(0);
-  return List().push(sconto !== 'null' ? Math.round(sconto * 10) : sconto);
+  return List().push(sconto !== '' ? Math.round(sconto * 10).toString() : sconto);
+};
+
+const normalizePrice = (value = Map({})) => {
+  const price = value.get(0);
+  return List().push(price !== '' ? price.toFixed(2) : '');
 };
 
 const normalizeAvail = (field = List()) => List().push(field.get(0) ? '1' : '0');
