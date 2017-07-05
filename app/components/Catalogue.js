@@ -58,13 +58,19 @@ export default class Catalogue extends Component {
     resetFilters: PropTypes.func.isRequired,
     initFilters: PropTypes.func.isRequired,
     toggleFiltersDialog: PropTypes.func.isRequired,
-    isDialogOpen: PropTypes.bool.isRequired
+    isDialogOpen: PropTypes.bool.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
     categoryInfo: Map(),
     products: List()
   };
+
+  constructor(prop) {
+    super(prop);
+    this.onBadgeClick = this.onBadgeClick.bind(this);
+  }
 
   componentDidMount() {
     const { params: { categoryCode }, requestFetchCategory, initFilters } = this.props;
@@ -84,10 +90,14 @@ export default class Catalogue extends Component {
     this.props.clearProductList();
   }
 
+  onBadgeClick(product, index) {
+    this.props.setAnalyticsProductClick({ product, index });
+  }
+
   renderProducts() {
     const { products } = this.props;
-    return products.map(p =>
-      <Link to={`product/${p.get('code')}`} key={p.get('code')}>
+    return products.map((p, index) =>
+      <Link onClick={() => this.onBadgeClick(p, index)} to={`product/${p.get('code')}`} key={p.get('code')}>
         <ProductBadge productInfo={p} />
       </Link>
     );

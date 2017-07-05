@@ -5,6 +5,7 @@ import { requestFetchCategory } from '../actions/categoryActions';
 import { requestFetchProducts, clearProductList } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
 import { getCatalogueProducts, getFilterMap, getCategory, getDialogStatus } from '../reducers/selectors';
+import { setAnalyticsProductClick } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
@@ -20,7 +21,8 @@ const mapDispatchToProps = {
   requestFetchCategory,
   requestFetchProducts,
   clearProductList,
-  ...filtersActions
+  ...filtersActions,
+  setAnalyticsProductClick
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalogue);

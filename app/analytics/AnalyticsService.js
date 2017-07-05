@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import uuid from 'uuid4';
 import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
+import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 
 class AnalyticsService {
 
@@ -62,8 +63,20 @@ class AnalyticsService {
     this.mergeInDataLayer(navigationStoreLayer);
   }
 
-  setProduct(product, prodAction = 'detail') {
-    const productLayer = utils.buildProductLayer(product, prodAction);
+  setProduct(data) {
+    const {
+      product = Map({}),
+      action = PROD_ACTION_DEDAIL,
+      index = 0
+      } = data;
+
+    let productLayer = utils.buildProductLayer(product, action);
+
+    if (action === PROD_CLICK) {
+      let position = index;
+      const path = this.dataLayer.get('page_name');
+      productLayer = utils.normalizeProductClickLayer(productLayer, position += 1, product, path);
+    }
     this.mergeInDataLayer(productLayer);
   }
 
@@ -98,7 +111,7 @@ class AnalyticsService {
       this.firstTrack = false;
       setTimeout(() => {
         this.firstTrack = true;
-      }, 1000);
+      }, 500);
 
       console.log(this.dataLayer.toJS());
     }
