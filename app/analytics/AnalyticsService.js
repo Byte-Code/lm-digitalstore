@@ -61,8 +61,8 @@ class AnalyticsService {
     this.mergeInDataLayer(navigationStoreLayer);
   }
 
-  setProduct(product) {
-    const productLayer = utils.buildProductLayer(product);
+  setProduct(product, prodAction = 'detail') {
+    const productLayer = utils.buildProductLayer(product, prodAction);
     this.mergeInDataLayer(productLayer);
   }
 

@@ -151,7 +151,7 @@ const buildPageName = (path = []) => {
   return pageName;
 };
 
-const buildProductLayer = (product = {}) => {
+const buildProductLayer = (product = {}, action = 'detail') => {
   let productLayer = Map({});
 
   if (!_.isEmpty(product)) {
@@ -161,6 +161,7 @@ const buildProductLayer = (product = {}) => {
     const giftPoints = getGiftPoints(product);
     const ideapiuPoints = getIdeapiuPoints(product);
     const isBundle = getBundle(product);
+    const prodAction = Map({ prod_action: action });
 
     productLayer = productLayer.merge(
       commonProperties,
@@ -168,7 +169,8 @@ const buildProductLayer = (product = {}) => {
       variantProperty,
       giftPoints,
       ideapiuPoints,
-      isBundle
+      isBundle,
+      prodAction
     );
     return productLayer;
   }
