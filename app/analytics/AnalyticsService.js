@@ -33,7 +33,7 @@ class AnalyticsService {
   clearDataLayer() {
     // eslint-disable-next-line array-callback-return
     this.dataLayer = this.dataLayer.filter((value, key) => {
-      const validKeys = ['cid', 'navigation_store', 'page_name'];
+      const validKeys = ['cid', 'navigation_store', 'page_name', 'app_release_version'];
       if (validKeys.indexOf(key) > -1) {
         return value;
       }
