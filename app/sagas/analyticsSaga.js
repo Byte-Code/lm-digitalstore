@@ -74,7 +74,7 @@ export default function* analyticsSaga() {
       }
 
       if (setProduct) {
-        yield call(AnalyticsService.setProduct, setProduct.result, PROD_ACTION_DEDAIL);
+        yield call(AnalyticsService.setProduct, { product: setProduct.result, PROD_ACTION_DEDAIL });
       }
 
       if (setRelatedProduct) {
