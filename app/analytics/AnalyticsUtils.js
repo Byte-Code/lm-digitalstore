@@ -31,7 +31,9 @@ const LABEL = {
   FILTER_VALUE: 'filter_value',
   FILTER_RESULT: 'filter_result',
   PROD_POSITION: 'prod_position',
-  PROD_LIST: 'prod_list'
+  PROD_LIST: 'prod_list',
+  PROD_GAMMA: 'prod_gamma',
+  PROD_NEW: 'prod_new',
 };
 
 const relatedProductsSize = 12;
@@ -284,7 +286,11 @@ const buildRelatedProductsLayer = (products = List(), path = []) => {
       // add additional properties to productLayer
       productLayer = productLayer.set(LABEL.PROD_POSITION, prodPosition);
       productLayer = productLayer.set(LABEL.PROD_LIST, prodListList);
-      return productLayer;
+
+      return productLayer
+        .set(LABEL.PROD_POSITION, prodPosition)
+        .set(LABEL.PROD_LIST, prodListList)
+        .delete(LABEL.PROD_GAMMA);
     });
 
     const mergedlistOfProductsLayer = listOfProductsLayer.reduce(
@@ -356,10 +362,10 @@ const buildReleaseVersion = (worldName = '') => `${_.snakeCase(worldName)}_${app
 
 const normalizeProductClickLayer = (productLayer = Map({}), index = 0, product = Map({}), path) =>
   productLayer
-    .delete('prod_bundle')
-    .delete('prod_gamma')
-    .delete('prod_new')
-    .delete('prod_variant')
+    .delete(LABEL.PROD_BUNDLE)
+    .delete(LABEL.PROD_GAMMA)
+    .delete(LABEL.PROD_NEW)
+    .delete(LABEL.PROD_VARIANT)
     .set(LABEL.PROD_POSITION, List().push(index))
     .set(LABEL.PROD_LIST, List().push(getProdList(product, path)));
 
