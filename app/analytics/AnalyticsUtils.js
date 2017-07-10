@@ -33,7 +33,7 @@ const LABEL = {
   PROD_POSITION: 'prod_position',
   PROD_LIST: 'prod_list',
   PROD_GAMMA: 'prod_gamma',
-  PROD_NEW: 'prod_new',
+  PROD_NEW: 'prod_new'
 };
 
 const relatedProductsSize = 12;
@@ -140,7 +140,8 @@ const getBundle = product => {
 const getProdList = (product, path) => {
   const mainCategory = product.get('mainCategory');
   const mainCategoryName = product.get('mainCategoryName');
-  return `${path[0]} > ${mainCategoryName}/${mainCategory}`;
+  const pageContext = getPageContext(path[0]);
+  return `${pageContext} > ${mainCategoryName}/${mainCategory}`;
 };
 
 const customizer = (objValue, srcValue) => {
@@ -232,17 +233,56 @@ const addResultToLayer = (productsNumber = 0, dataLayer = Map({})) =>
     productsNumber > 12 ? '12' : productsNumber.toString()
   );
 
+const getPageContext = (value) => {
+  const map = Map({
+    catalogue: 'gallery-prodotto',
+    product: 'scheda-prodotto'
+  });
+
+  return map.get(value);
+};
+
+const resetOldLevels = (list, start, end) => list.slice(start, end);
+
 // ---------------------   EXPORTED FUNCTIONS ------------------->
 
-const buildPageName = (path = []) => {
-  let pageName = path;
-  const splitChar = '/';
+const buildPageName = (type, data, pageName = List()) => {
+  const {
+    worldName = '',
+    pathArray = [],
+    categoryCode = '',
+    categoryName = '',
+    prodName = '',
+    prodCode = ''
+    } = data;
 
-  if (!_.isEmpty(path)) {
-    const trimSlash = _.trimStart(pageName, splitChar);
-    pageName = _.split(trimSlash, splitChar);
+  const isSessionStarting = pageName.size === 0 && type && type === 'session';
+  const isCatalogStarting = pageName.size > 1 && type && type === 'catalogue';
+  const isProductStarting = pageName.size > 1 && type && type === 'product';
+  let levels = pageName;
+
+  if (isSessionStarting) {
+    levels = levels.push(worldName).push('homepage');
   }
-  return pageName;
+
+  if (isCatalogStarting) {
+    levels = resetOldLevels(levels, 0, 1);
+    levels = levels
+      .push('prodotti')
+      .push(getPageContext(pathArray[0]))
+      .push(categoryName)
+      .push(categoryCode);
+  }
+
+  if (isProductStarting) {
+    levels = resetOldLevels(levels, 0, 5);
+    levels = levels
+      .push(prodName)
+      .push(prodCode)
+      .set(2, getPageContext(pathArray[0]));
+  }
+
+  return levels;
 };
 
 const buildProductLayer = (product = {}, action = 'detail') => {
@@ -270,7 +310,7 @@ const buildProductLayer = (product = {}, action = 'detail') => {
   }
 };
 
-const buildRelatedProductsLayer = (products = List(), path = []) => {
+const buildRelatedProductsLayer = ({ products = List(), pathArray = [] }) => {
   const productList = products.size > relatedProductsSize
     ? List(products).setSize(relatedProductsSize)
     : products;
@@ -280,7 +320,7 @@ const buildRelatedProductsLayer = (products = List(), path = []) => {
   if (products.size) {
     const listOfProductsLayer = productList.map(product => {
       const prodPosition = List().push((prodPositionCount += 1));
-      const prodListList = List().push(getProdList(product, path));
+      const prodListList = List().push(getProdList(product, pathArray));
 
       let productLayer = buildCommonLayer(product);
       // add additional properties to productLayer
@@ -360,14 +400,14 @@ const clearFilters = (dataLayer = Map({}), productsNumber = 0) =>
 
 const buildReleaseVersion = (worldName = '') => `${_.snakeCase(worldName)}_${appPackage.version}`;
 
-const normalizeProductClickLayer = (productLayer = Map({}), index = 0, product = Map({}), path) =>
+const normalizeProductClickLayer = (productLayer, index, product, pathArray) =>
   productLayer
     .delete(LABEL.PROD_BUNDLE)
     .delete(LABEL.PROD_GAMMA)
     .delete(LABEL.PROD_NEW)
     .delete(LABEL.PROD_VARIANT)
     .set(LABEL.PROD_POSITION, List().push(index))
-    .set(LABEL.PROD_LIST, List().push(getProdList(product, path)));
+    .set(LABEL.PROD_LIST, List().push(getProdList(product, pathArray)));
 
 export {
   buildPageName,
