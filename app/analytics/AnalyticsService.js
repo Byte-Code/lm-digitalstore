@@ -44,8 +44,9 @@ class AnalyticsService {
     this.dataLayer = this.dataLayer.merge(layer);
   }
 
-  setPageName(path) {
-    this.setDataLayer('page_name', utils.buildPageName(path));
+  setPageName(type, data) {
+    const pageName = this.dataLayer.get('page_name');
+    this.setDataLayer('page_name', utils.buildPageName(type, data, pageName));
   }
 
   setCid() {
@@ -67,22 +68,26 @@ class AnalyticsService {
     const {
       product = Map({}),
       action = PROD_ACTION_DEDAIL,
-      index = 0
+      index = 0,
+      pathArray
       } = data;
 
     let productLayer = utils.buildProductLayer(product, action);
 
     if (action === PROD_CLICK) {
       let position = index;
-      const path = this.dataLayer.get('page_name');
-      productLayer = utils.normalizeProductClickLayer(productLayer, position += 1, product, path);
+      productLayer = utils.normalizeProductClickLayer(
+        productLayer,
+        position += 1,
+        product,
+        pathArray
+      );
     }
     this.mergeInDataLayer(productLayer);
   }
 
-  setRelatedProduct(products) {
-    const path = this.dataLayer.get('page_name');
-    const relatedProductsLayer = utils.buildRelatedProductsLayer(products, path);
+  setRelatedProduct(data) {
+    const relatedProductsLayer = utils.buildRelatedProductsLayer(data);
     this.mergeInDataLayer(relatedProductsLayer);
   }
 
@@ -114,6 +119,7 @@ class AnalyticsService {
       }, 500);
 
       console.log(this.dataLayer.toJS());
+      console.log(JSON.stringify(this.dataLayer.toJS()));
     }
 
     this.clearDataLayer();

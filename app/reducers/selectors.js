@@ -35,6 +35,10 @@ export function getCategory(state, categoryCode) {
   return categorySelectors.getCategory(state.get('categoryReducer'), categoryCode);
 }
 
+export function getCategoryName(state, categoryCode) {
+  return getCategory(state, categoryCode).get('name');
+}
+
 export function getSellingAids(state, categoryCode) {
   return categorySelectors.getSellingAids(state.get('categoryReducer'), categoryCode);
 }
@@ -224,4 +228,8 @@ export function getIdleDialog(state) {
 
 export function getCurrentPath(state) {
   return routeSelector.getCurrentPath(state);
+}
+
+export function getRoutingData(state) {
+  return routeSelector.getRoutingData(state);
 }
