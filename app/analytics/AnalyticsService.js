@@ -119,7 +119,6 @@ class AnalyticsService {
       }, 500);
 
       console.log(this.dataLayer.toJS());
-      console.log(JSON.stringify(this.dataLayer.toJS()));
     }
 
     this.clearDataLayer();
