@@ -2,7 +2,7 @@ import { take, race, takeEvery, call, put, select } from 'redux-saga/effects';
 import * as _ from 'lodash';
 import AnalyticsService from '../analytics/AnalyticsService';
 import * as analyticsAction from '../actions/analyticsActions';
-import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
+import * as constants from '../actions/actionTypes';
 import {
   getFilterInfoFromCategory,
   getFilterMap,
@@ -10,25 +10,29 @@ import {
   getCatalogueProducts,
   getWorldName,
   getCategoryName,
-  getRoutingData } from '../reducers/selectors';
+  getRoutingData,
+  getProductReducer } from '../reducers/selectors';
+
+const analyticsEventList = [
+  constants.SUCCESS_FETCH_WORLD,
+  constants.IDLE_TIMER_COMPLETE,
+  constants.START_ANALYTICS_SESSION,
+  constants.SUCCESS_FETCH_PRODUCT,
+  constants.SUCCESS_FETCH_PRODUCTLIST,
+  constants.START_ANALYTICS_PRODUCT,
+  constants.TOGGLE_AID,
+  constants.APPLY_TEMP_FILTERS,
+  constants.TOGGLE_AVAILABILITY,
+  constants.TOGGLE_FILTER,
+  constants.RESET_FILTERS,
+  constants.TRACK_ANALYTICS_FILTERS,
+  constants.SET_ANALYTICS_PRODUCT_CLICK,
+  constants.TRACK_PRODUCT_CLICK,
+  constants.TRACK_STORE_AVAILABILITY_EVENT
+];
 
 export default function* analyticsSaga() {
-  yield takeEvery([
-    'SUCCESS_FETCH_WORLD',
-    'IDLE_TIMER_COMPLETE',
-    'START_ANALYTICS_SESSION',
-    'SUCCESS_FETCH_PRODUCT',
-    'SUCCESS_FETCH_PRODUCTLIST',
-    'START_ANALYTICS_PRODUCT',
-    'TOGGLE_AID',
-    'APPLY_TEMP_FILTERS',
-    'TOGGLE_AVAILABILITY',
-    'TOGGLE_FILTER',
-    'RESET_FILTERS',
-    'TRACK_ANALYTICS_FILTERS',
-    'SET_ANALYTICS_PRODUCT_CLICK',
-    'TRACK_PRODUCT_CLICK'
-  ], function* callAnalyticsSession() {
+  yield takeEvery(analyticsEventList, function* callAnalyticsSession() {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const {
@@ -43,49 +47,54 @@ export default function* analyticsSaga() {
         trackFilters,
         resetFilters,
         productClick,
-        trackProductClick
+        trackProductClick,
+        trackStoreAvailability
       } = yield race({
-        setSessionData: take('SUCCESS_FETCH_WORLD'),
-        idleTimerComplete: take('IDLE_TIMER_COMPLETE'),
-        startAnalyticsSession: take('START_ANALYTICS_SESSION'),
-        setProduct: take('SUCCESS_FETCH_PRODUCT'),
-        setRelatedProduct: take('SUCCESS_FETCH_PRODUCTLIST'),
-        startAnalyticsProduct: take('START_ANALYTICS_PRODUCT'),
+        setSessionData: take(constants.SUCCESS_FETCH_WORLD),
+        idleTimerComplete: take(constants.IDLE_TIMER_COMPLETE),
+        startAnalyticsSession: take(constants.START_ANALYTICS_SESSION),
+        setProduct: take(constants.SUCCESS_FETCH_PRODUCT),
+        setRelatedProduct: take(constants.SUCCESS_FETCH_PRODUCTLIST),
+        startAnalyticsProduct: take(constants.START_ANALYTICS_PRODUCT),
         filters: take(
           [
-            'TOGGLE_AID',
-            'APPLY_TEMP_FILTERS',
-            'TOGGLE_AVAILABILITY',
-            'TOGGLE_FILTER'
+            constants.TOGGLE_AID,
+            constants.APPLY_TEMP_FILTERS,
+            constants.TOGGLE_AVAILABILITY,
+            constants.TOGGLE_FILTER
           ]
         ),
-        resetFilters: take('RESET_FILTERS'),
-        trackFilters: take('TRACK_ANALYTICS_FILTERS'),
-        productClick: take('SET_ANALYTICS_PRODUCT_CLICK'),
-        trackProductClick: take('TRACK_PRODUCT_CLICK')
+        resetFilters: take(constants.RESET_FILTERS),
+        trackFilters: take(constants.TRACK_ANALYTICS_FILTERS),
+        productClick: take(constants.SET_ANALYTICS_PRODUCT_CLICK),
+        trackProductClick: take(constants.TRACK_PRODUCT_CLICK),
+        trackStoreAvailability: take(constants.TRACK_STORE_AVAILABILITY_EVENT)
       });
 
       const state = yield select();
+      const { pathArray = '' } = yield call(getPageNameData, state);
 
       if (idleTimerComplete) {
         yield call(AnalyticsService.deleteInDataLayer, idleTimerComplete.type);
       }
 
       if (setProduct) {
-        const { pathArray = '' } = yield call(getPageNameData, state);
-
         const prodCode = setProduct.result.get('code');
         const prodName = setProduct.result.get('name');
         yield call(AnalyticsService.setPageName, 'product', { prodCode, prodName, pathArray });
-        yield call(AnalyticsService.setProduct, { product: setProduct.result, PROD_ACTION_DEDAIL });
+        yield call(AnalyticsService.setProduct,
+          {
+            product: setProduct.result,
+            action: [constants.PROD_ACTION_DEDAIL]
+          }
+        );
       }
 
       if (setRelatedProduct) {
         const {
           categoryCode = '',
           categoryName = '',
-          worldName = '',
-          pathArray = '' } = yield call(getCategoryData, state);
+          worldName = '' } = yield call(getCategoryData, state);
 
         if (pathArray[0] === 'catalogue') {
           yield call(AnalyticsService.setPageName, 'catalogue', { worldName, pathArray, categoryCode, categoryName });
@@ -95,7 +104,6 @@ export default function* analyticsSaga() {
       }
 
       if (filters) {
-        const { pathArray = '' } = yield call(getPageNameData, state);
         const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
         const catCode = yield select(getFiltersCategoryCode);
         const productList = yield getCatalogueProducts()(state, catCode);
@@ -116,7 +124,6 @@ export default function* analyticsSaga() {
       }
 
       if (resetFilters) {
-        const { pathArray = '' } = yield call(getPageNameData, state);
         const catCode = yield select(getFiltersCategoryCode);
         const productList = yield getCatalogueProducts()(state, catCode);
         const productsNumber = productList.size;
@@ -133,9 +140,15 @@ export default function* analyticsSaga() {
       }
 
       if (productClick) {
-        const { pathArray = '' } = yield call(getPageNameData, state);
         const { product, index = 0 } = productClick.data;
-        yield call(AnalyticsService.setProduct, { product, action: PROD_CLICK, index, pathArray });
+        yield call(AnalyticsService.setProduct,
+          {
+            product,
+            action: [constants.PROD_CLICK],
+            index,
+            pathArray
+          }
+        );
         yield put(analyticsAction.trackProductClick());
       }
 
@@ -148,6 +161,14 @@ export default function* analyticsSaga() {
       }
 
       if (trackProductClick) {
+        yield call(AnalyticsService.track, 'link');
+      }
+
+      if (trackStoreAvailability) {
+        const { storeName = '', storeStock = 0 } = trackStoreAvailability.storeData;
+        const product = yield select(getProductReducer);
+
+        yield call(AnalyticsService.setStoreAvailability, { storeName, storeStock, product });
         yield call(AnalyticsService.track, 'link');
       }
 

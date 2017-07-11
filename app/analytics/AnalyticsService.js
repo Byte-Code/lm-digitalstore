@@ -24,6 +24,7 @@ class AnalyticsService {
     this.setReleaseVersion = this.setReleaseVersion.bind(this);
     this.setFilters = this.setFilters.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
+    this.setStoreAvailability = this.setStoreAvailability.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -105,6 +106,14 @@ class AnalyticsService {
 
   clearFilters(productsNumber) {
     this.dataLayer = utils.clearFilters(this.dataLayer, productsNumber);
+  }
+
+  setStoreAvailability({ storeName = '', storeStock = '', product = Map({}) }) {
+    const { prodCode, prodCategory } = utils.getProductProperty(product);
+    this.setDataLayer('event_type', 'product_condivisione');
+    this.setDataLayer('prod_id', prodCode);
+    this.setDataLayer('prod_category', prodCategory);
+    this.setDataLayer('event_action', `${storeName}_${storeStock}`);
   }
 
   track(eventType) {

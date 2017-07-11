@@ -177,6 +177,10 @@ export function getAllStoreStock(state, props) {
   return productSelectors.getAllStoreStock(state.get('productReducer'), props);
 }
 
+export function getProductReducer(state) {
+  return productSelectors.getProductReducer(state);
+}
+
 // STORE
 export function getStore(state) {
   return storeSelectors.getStoreInfo(state.get('storeReducer'));

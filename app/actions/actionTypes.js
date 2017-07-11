@@ -71,3 +71,4 @@ export const TRACK_PRODUCT_CLICK = 'TRACK_PRODUCT_CLICK';
 
 export const PROD_ACTION_DEDAIL = 'detail';
 export const PROD_CLICK = 'product_click';
+export const TRACK_STORE_AVAILABILITY_EVENT = 'TRACK_STORE_AVAILABILITY_EVENT';
