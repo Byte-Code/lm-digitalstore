@@ -105,7 +105,7 @@ const getGiftPoints = product => {
 
   if (giftPoints && giftPoints === 'ADDITIONAL_POINTS') {
     const points = list.push(
-      Math.round(product.getIn('loyaltyProgram', 'value') * 10)
+      Math.round(product.getIn(['loyaltyProgram', 'value']) * 10)
     );
     layer = layer.set(LABEL.PROD_PUNTI_OMAGGIO, points);
   }
@@ -113,13 +113,13 @@ const getGiftPoints = product => {
 };
 
 const getIdeapiuPoints = product => {
-  const ideapiuPoints = product.getIn(['loyaltyProgram', 'type']);
+  const ideapiuPointsType = product.getIn(['loyaltyProgram', 'type']);
   const list = List();
   let layer = Map({});
 
-  if (ideapiuPoints && ideapiuPoints === 'DISCOUNT') {
+  if (ideapiuPointsType && ideapiuPointsType === 'DISCOUNT') {
     const points = list.push(
-      Math.round(product.getIn(LABEL.PROD_IDEAPIU, 'value') * 10)
+      Math.round(product.getIn(['loyaltyProgram', 'value']) * 10)
     );
     layer = layer.set(LABEL.PROD_IDEAPIU, points);
   }
