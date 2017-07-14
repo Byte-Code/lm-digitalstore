@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 import { fromJS } from 'immutable';
@@ -95,6 +96,7 @@ const SimilarProductBadge = props => {
   const loyaltyProgram = productInfo.get('loyaltyProgram');
   const image = productInfo.get('mainImage');
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
+  const index = props.index;
 
   return (
     <Wrapper>
@@ -113,7 +115,10 @@ const SimilarProductBadge = props => {
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </PriceAndStock>
       </InfoWrapper>
-      <Link to={`/product/${code}`}>
+      <Link
+        to={`/product/${code}`}
+        onClick={() => props.setAnalyticsProductClick({ product: productInfo, index })}
+      >
         <Button>
           Dettagli Prodotto
           <ArrowIcon color="#fff" style={iconStyle} />
@@ -124,7 +129,9 @@ const SimilarProductBadge = props => {
 };
 
 SimilarProductBadge.propTypes = {
-  productInfo: ImmutablePropTypes.map.isRequired
+  productInfo: ImmutablePropTypes.map.isRequired,
+  setAnalyticsProductClick: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default SimilarProductBadge;

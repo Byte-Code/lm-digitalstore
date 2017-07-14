@@ -108,19 +108,12 @@ class AnalyticsService {
   }
 
   track(eventType) {
-    if (this.firstTrack) {
-      tealiumAnalytics([{
-        hitType: eventType,
-        dataLayer: this.dataLayer.toJS()
-      }]);
-      this.firstTrack = false;
-      setTimeout(() => {
-        this.firstTrack = true;
-      }, 500);
+    tealiumAnalytics([{
+      hitType: eventType,
+      dataLayer: this.dataLayer.toJS()
+    }]);
 
-      console.log(this.dataLayer.toJS());
-    }
-
+    console.log(this.dataLayer.toJS());
     this.clearDataLayer();
   }
 }

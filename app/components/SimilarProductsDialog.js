@@ -24,7 +24,8 @@ export default class SimilarProductsDialog extends Component {
     similarProducts: ImmutablePropTypes.list,
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
-    selectedProduct: PropTypes.string.isRequired
+    selectedProduct: PropTypes.string.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -56,10 +57,14 @@ export default class SimilarProductsDialog extends Component {
   renderProducts() {
     const { similarProducts } = this.props;
 
-    return similarProducts.map(p =>
-      <div>
-        <Slide key={p.get('code')}>
-          <SimilarProductBadge productInfo={p} />
+    return similarProducts.map((p, i) =>
+      <div key={p.get('code')}>
+        <Slide>
+          <SimilarProductBadge
+            productInfo={p}
+            setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+            index={i}
+          />
         </Slide>
       </div>
     );
