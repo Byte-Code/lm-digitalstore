@@ -21,6 +21,7 @@ export default class Product extends Component {
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired
   };
@@ -95,7 +96,12 @@ export default class Product extends Component {
     return relatedProd.map(sp => {
       const products = similarProducts.filter(p => sp.get('products').includes(p.get('code')));
       return (
-        <SimilarProducts key={sp.get('name')} similarProducts={products} title={sp.get('name')} />
+        <SimilarProducts
+          key={sp.get('name')}
+          similarProducts={products}
+          title={sp.get('name')}
+          setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+        />
       );
     });
   }

@@ -32,7 +32,8 @@ const Slider = glamorous.div({
 export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -90,6 +91,7 @@ export default class SimilarProducts extends Component {
           handleClose={this.handleClose}
           isOpen={dialogOpen}
           selectedProduct={selectedProduct}
+          setAnalyticsProductClick={this.props.setAnalyticsProductClick}
         />
       </Wrapper>
     );
