@@ -9,6 +9,10 @@ import {
   requestFetchNearbyStores
 } from '../../app/actions/storeActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   content: {
     name: 'foo',

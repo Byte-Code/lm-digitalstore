@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProductInfoBadge should render properly with AvailabilityButton when hasNearbyStores is true 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  visibility={true}
+>
   <MarketingFlag
     loyaltyProgram={Object {}}
     marketingAttributes={Object {}}
@@ -10,32 +12,42 @@ exports[`ProductInfoBadge should render properly with AvailabilityButton when ha
     price={Object {}}
     pricingInfo={Object {}}
   />
-  <glamorous(div) />
-  <glamorous(div)>
-    <Connect(StoreStockBadge)
-      currentStoreStock={Object {}}
-    />
-  </glamorous(div)>
-  <AvailabilityButton
-    productCode="foobar"
-    productName="foobar"
-  />
-  <glamorous(div) />
-  <PurchaseDialog
-    productCode="foobar"
-    productSlug="foobar"
+  <glamorous(div)
+    height="auto"
+    id="AnimatedWrapper"
   >
-    <glamorous(div)
-      background="#67cb33"
-    >
-      Acquista online
+    <glamorous(div) />
+    <glamorous(div)>
+      <Connect(StoreStockBadge)
+        currentStoreStock={Object {}}
+      />
     </glamorous(div)>
-  </PurchaseDialog>
+    <AvailabilityButton
+      collapse={true}
+      productCode="foobar"
+      productName="foobar"
+    />
+    <glamorous(div)
+      style={Object {}}
+    />
+    <PurchaseDialog
+      productCode="foobar"
+      productSlug="foobar"
+    >
+      <glamorous(div)
+        background="#67cb33"
+      >
+        Acquista online
+      </glamorous(div)>
+    </PurchaseDialog>
+  </glamorous(div)>
 </glamorous(div)>
 `;
 
 exports[`ProductInfoBadge should render properly without AvailabilityButton when hasNearbyStores is false 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  visibility={true}
+>
   <MarketingFlag
     loyaltyProgram={Object {}}
     marketingAttributes={Object {}}
@@ -44,22 +56,29 @@ exports[`ProductInfoBadge should render properly without AvailabilityButton when
     price={Object {}}
     pricingInfo={Object {}}
   />
-  <glamorous(div) />
-  <glamorous(div)>
-    <Connect(StoreStockBadge)
-      currentStoreStock={Object {}}
-    />
-  </glamorous(div)>
-  <glamorous(div) />
-  <PurchaseDialog
-    productCode="foobar"
-    productSlug="foobar"
+  <glamorous(div)
+    height="auto"
+    id="AnimatedWrapper"
   >
-    <glamorous(div)
-      background="#67cb33"
-    >
-      Acquista online
+    <glamorous(div) />
+    <glamorous(div)>
+      <Connect(StoreStockBadge)
+        currentStoreStock={Object {}}
+      />
     </glamorous(div)>
-  </PurchaseDialog>
+    <glamorous(div)
+      style={Object {}}
+    />
+    <PurchaseDialog
+      productCode="foobar"
+      productSlug="foobar"
+    >
+      <glamorous(div)
+        background="#67cb33"
+      >
+        Acquista online
+      </glamorous(div)>
+    </PurchaseDialog>
+  </glamorous(div)>
 </glamorous(div)>
 `;

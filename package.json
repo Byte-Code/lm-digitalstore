@@ -179,6 +179,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "react-test-renderer": "^15.4.2",
     "redux-logger": "^2.7.4",
+    "redux-saga-test-plan": "^2.0",
     "sinon": "^1.17.7",
     "spectron": "^3.4.1",
     "style-loader": "^0.13.1",

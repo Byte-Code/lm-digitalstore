@@ -28,6 +28,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
   >
     <glamorous(div) />
     <Link
+      onClick={[Function]}
       onlyActiveOnIndex={false}
       style={Object {}}
       to="product/1"
@@ -45,6 +46,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       />
     </Link>
     <Link
+      onClick={[Function]}
       onlyActiveOnIndex={false}
       style={Object {}}
       to="product/2"
@@ -62,6 +64,7 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
       />
     </Link>
     <Link
+      onClick={[Function]}
       onlyActiveOnIndex={false}
       style={Object {}}
       to="product/3"

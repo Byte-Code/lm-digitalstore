@@ -5,11 +5,16 @@ import { apiClient } from '../../mocks/apiMock';
 import { callFetchXSellProducts } from '../../app/sagas/getXSellProductsSaga';
 import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
+import * as analyticsAction from '../../app/actions/analyticsActions';
 
 const validResponse = [{ code: 0 }, { code: 1 }, { code: 2 }];
 const invalidResponse = [];
 const genericError = new Error('Generic Error');
 const notFoundError = new Error('Not Found Error');
+
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
 
 describe('getXSellProductsSaga', () => {
   describe("Scenario1: input is fine, doesn't throw", () => {
@@ -51,6 +56,12 @@ describe('getXSellProductsSaga', () => {
       );
     });
 
+    it('should dispatch a START_ANALYTICS_PRODUCT', () => {
+      expect(gen.next().value).toEqual(
+        put(analyticsAction.startAnalyticsProduct())
+      );
+    });
+
     it('and then nothing', () => {
       expect(gen.next().value).toBeUndefined();
     });
@@ -67,6 +78,12 @@ describe('getXSellProductsSaga', () => {
     it('should dispatch a FAILURE_FETCH_XSELLPRODUCTS action with the error message', () => {
       expect(gen.next(invalidResponse).value).toEqual(
         put(productActions.failureFetchXSellProducts(notFoundError))
+      );
+    });
+
+    it('should dispatch a START_ANALYTICS_PRODUCT', () => {
+      expect(gen.next().value).toEqual(
+        put(analyticsAction.startAnalyticsProduct())
       );
     });
 

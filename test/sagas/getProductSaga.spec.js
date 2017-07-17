@@ -5,6 +5,10 @@ import { apiClient } from '../../mocks/apiMock';
 import { callFetchProduct } from '../../app/sagas/getProductSaga';
 import * as productActions from '../../app/actions/productActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   content: {
     name: 'foo',

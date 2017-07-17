@@ -5,6 +5,10 @@ import { fetchWorld } from '../../mocks/apiMock';
 import { callFetchWorld } from '../../app/sagas/getWorldSaga';
 import { successFetchWorld, failureFetchWorld } from '../../app/actions/worldActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   data: 'someData'
 };

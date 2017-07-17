@@ -50,6 +50,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
     </glamorous(div)>
   </glamorous(div)>
   <Link
+    onClick={[Function]}
     onlyActiveOnIndex={false}
     style={Object {}}
     to="/product/code"

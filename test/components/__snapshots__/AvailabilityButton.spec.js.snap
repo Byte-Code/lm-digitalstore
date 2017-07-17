@@ -3,7 +3,8 @@
 exports[`AvailabilityButton should display a dialog when the button is clicked 1`] = `
 <div>
   <glamorous(div)
-    bgColor="#67cb33"
+    background="#67cb33"
+    notCollapse={true}
     onClick={[Function]}
   >
     verifica disponibilità in negozi vicini
@@ -45,7 +46,8 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
 exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
 <div>
   <glamorous(div)
-    bgColor="#67cb33"
+    background="#67cb33"
+    notCollapse={true}
     onClick={[Function]}
   >
     verifica disponibilità in negozi vicini
