@@ -9,6 +9,7 @@ import {
   getSelectedNearbyStoreInfo
 } from '../reducers/selectors';
 import { requestFetchNearbyStores } from '../actions/storeActions';
+import { trackStoreAvailabilityEvent } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => ({
   allNearbyStores: getNearbyStoresWithStock(state, ownProps),
@@ -18,7 +19,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const MapDispatchToProps = {
-  requestFetchNearbyStores
+  requestFetchNearbyStores,
+  trackStoreAvailabilityEvent
 };
 
 const enhance = compose(

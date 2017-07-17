@@ -1,4 +1,4 @@
-import RemoteApi from 'lm-remote-api';
+import RemoteApi from '@byte-code/lm-remote-api';
 import world from './world';
 import weather from './weather.json';
 

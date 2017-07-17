@@ -113,7 +113,7 @@ const NearbyStores = ({ nearbyStores, selectedStore, handleClick }) => {
             <NearbyStore
               key={s.get('code')}
               currentStoreInfo={s}
-              handleClick={() => handleClick(s.get('code'))}
+              handleClick={() => handleClick(s.get('code'), s.get('name'))}
               isActive={selectedStore === s.get('code')}
             />
           )}

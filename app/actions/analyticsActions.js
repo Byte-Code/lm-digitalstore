@@ -5,7 +5,8 @@ import {
   START_ANALYTICS_PRODUCT,
   TRACK_ANALYTICS_FILTERS,
   SET_ANALYTICS_PRODUCT_CLICK,
-  TRACK_PRODUCT_CLICK } from './actionTypes';
+  TRACK_PRODUCT_CLICK,
+  TRACK_STORE_AVAILABILITY_EVENT } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -35,3 +36,6 @@ export function trackProductClick() {
   return ({ type: TRACK_PRODUCT_CLICK });
 }
 
+export function trackStoreAvailabilityEvent(storeData) {
+  return ({ type: TRACK_STORE_AVAILABILITY_EVENT, storeData });
+}

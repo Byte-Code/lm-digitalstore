@@ -26,6 +26,12 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
+"@byte-code/lm-remote-api@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@byte-code/lm-remote-api/-/lm-remote-api-0.0.26.tgz#0371afc26f2908952991afface9b281505446fdb"
+  dependencies:
+    axios "0.15.3"
+
 "@types/node@^7.0.18":
   version "7.0.22"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.22.tgz#4593f4d828bdd612929478ea40c67b4f403ca255"
@@ -5044,12 +5050,6 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
-
-lm-remote-api@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/lm-remote-api/-/lm-remote-api-0.0.16.tgz#76af549f1011d207672200e10c2ddd8ab59655a9"
-  dependencies:
-    axios "0.15.3"
 
 load-json-file@^1.0.0, load-json-file@^1.1.0:
   version "1.1.0"

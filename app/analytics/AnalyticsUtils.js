@@ -33,7 +33,8 @@ const LABEL = {
   PROD_POSITION: 'prod_position',
   PROD_LIST: 'prod_list',
   PROD_GAMMA: 'prod_gamma',
-  PROD_NEW: 'prod_new'
+  PROD_NEW: 'prod_new',
+  PROD_PRICE: 'prod_price'
 };
 
 const relatedProductsSize = 12;
@@ -50,14 +51,12 @@ const buildCommonLayer = (product) => {
   return normalizedCommonPropertiesLayer;
 };
 
-const normalizeProperties = (layer) => {
-  let obj = layer;
-  obj = obj.set('prod_sconto', normalizeSconto(obj.get('prod_sconto')));
-  obj = obj.set('prod_avail_online', normalizeAvail(obj.get('prod_avail_online')));
-  obj = obj.set('prod_avail_store', normalizeAvail(obj.get('prod_avail_store')));
-  obj = obj.set('prod_price', normalizePrice(obj.get('prod_price')));
-  return obj;
-};
+const normalizeProperties = (layer) =>
+  layer
+    .set(LABEL.PROD_SCONTO, normalizeSconto(layer.get(LABEL.PROD_SCONTO)))
+    .set(LABEL.PROD_AVAIL_ONLINE, normalizeAvail(layer.get(LABEL.PROD_AVAIL_ONLINE)))
+    .set(LABEL.PROD_AVAIL_STORE, normalizeAvail(layer.get(LABEL.PROD_AVAIL_STORE)))
+    .set(LABEL.PROD_PRICE, normalizePrice(layer.get(LABEL.PROD_PRICE)));
 
 const normalizeSconto = (value = Map({})) => {
   const sconto = value.get(0);
@@ -409,6 +408,25 @@ const normalizeProductClickLayer = (productLayer, index, product, pathArray) =>
     .set(LABEL.PROD_POSITION, List().push(index))
     .set(LABEL.PROD_LIST, List().push(getProdList(product, pathArray)));
 
+const getProductProperty = (product = Map({})) => {
+  const jsonProduct = product.toJS();
+  let prodCode = 0;
+  let prodCategory = '';
+
+  Object.keys(jsonProduct).forEach(key => {
+    Object.keys(jsonProduct[key]).forEach(productProperty => {
+      if (productProperty === 'code') {
+        prodCode = jsonProduct[key][productProperty];
+      }
+
+      if (productProperty === 'mainCategoryName') {
+        prodCategory = jsonProduct[key][productProperty];
+      }
+    });
+  });
+  return { prodCode, prodCategory };
+};
+
 export {
   buildPageName,
   buildProductLayer,
@@ -417,5 +435,6 @@ export {
   clearFilters,
   buildNavigationStore,
   buildReleaseVersion,
-  normalizeProductClickLayer
+  normalizeProductClickLayer,
+  getProductProperty
 };

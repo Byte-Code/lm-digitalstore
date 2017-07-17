@@ -89,7 +89,8 @@ export default class AvailabilityMap extends Component {
     handleSlide: PropTypes.func.isRequired,
     radius: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
-    infoWindowOpen: PropTypes.bool.isRequired
+    infoWindowOpen: PropTypes.bool.isRequired,
+    trackStoreAvailabilityEvent: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -105,6 +106,14 @@ export default class AvailabilityMap extends Component {
       maxRadius: 50,
       sliderWidth: 960
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.selectedStoreInfo.equals(this.props.selectedStoreInfo)) {
+      const storeName = nextProps.selectedStoreInfo.get('name');
+      const storeStock = nextProps.selectedStoreInfo.get('storeStock');
+      this.props.trackStoreAvailabilityEvent({ storeName, storeStock });
+    }
   }
 
   getLabelPosition = radius => {
