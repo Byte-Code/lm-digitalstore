@@ -63,7 +63,9 @@ export default class ProductInfoBadge extends Component {
   componentWillUpdate(nextProps, nextState) {
     const animatedWrapper = window.document.getElementById('AnimatedWrapper');
     let shouldUpdate = false;
-    this.animatedWrapperHeight = animatedWrapper.offsetHeight;
+    if (animatedWrapper) {
+      this.animatedWrapperHeight = animatedWrapper.offsetHeight;
+    }
     if (this.animatedWrapperHeight > 1 && !this.initialHeight) {
       shouldUpdate = true;
       this.initialHeight = this.animatedWrapperHeight;
@@ -152,10 +154,8 @@ export default class ProductInfoBadge extends Component {
         <StoreStockWrapper>
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </StoreStockWrapper>
-        <AvailabilityButton
-          productName={productName}
-          productCode={productCode}
-        />
+          {hasNearbyStores &&
+          <AvailabilityButton productName={productName} productCode={productCode} />}
         <Divider style={{}} />
         <PurchaseDialog productCode={productCode} productSlug={productSlug}>
           <Button background="#67cb33">

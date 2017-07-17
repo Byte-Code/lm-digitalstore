@@ -6,6 +6,10 @@ import { callFetchRelatedProducts } from '../../app/sagas/getRelatedProductsSaga
 import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   content: [
     {

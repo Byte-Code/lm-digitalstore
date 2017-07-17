@@ -15,6 +15,10 @@ const invalidResponse = {
 const genericError = new Error('Generic Error');
 const notFoundError = new Error('Not Found Error');
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 describe('getNearbyStoresSaga', () => {
   describe("Scenario1: input is fine, doens't throw", () => {
     const input = { lat: 200, lng: 30, range: 20 };
