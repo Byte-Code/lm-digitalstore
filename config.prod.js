@@ -6,8 +6,5 @@ export default {
     storeCode: 7,
     apiKeyCore: 'wYv7iVtxEU',
     apiKeyMS: '96zoJArqvUf0'
-  },
-  analytics: {
-    debug: false
   }
 };

@@ -20,7 +20,9 @@
     <div id="root"></div>
     <script type="text/javascript"> var utag_data = { page_load: "1" } </script>
     <script type="text/javascript"> (function(a,b,c,d){
-      var env = process.env.NODE_ENV === 'development' ? 'test' : 'prod';
+      const argv = require('electron').remote.process.argv;
+      const isDebugMode = argv.indexOf('--debug');
+      var env = process.env.NODE_ENV === 'development' || isDebugMode ? 'test' : 'prod';
       a=`https://ds-tealium.leroymerlin.it/tealium/${env}/utag.js`;
       b=document;c='script';d=b.createElement(c);d.src=a;
       d.type='text/java'+c;d.async=true;
