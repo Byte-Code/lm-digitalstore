@@ -3,6 +3,7 @@ import uuid from 'uuid4';
 import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
 import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
+import { isDebugMode } from '../CommandLineOptions';
 
 class AnalyticsService {
 
@@ -122,7 +123,10 @@ class AnalyticsService {
       dataLayer: this.dataLayer.toJS()
     }]);
 
-    console.log(this.dataLayer.toJS());
+    if (isDebugMode) {
+      console.log(this.dataLayer.toJS());
+    }
+
     this.clearDataLayer();
   }
 }

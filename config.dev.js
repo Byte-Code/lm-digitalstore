@@ -6,8 +6,5 @@ export default {
     storeCode: 89,
     apiKeyCore: 'testToken',
     apiKeyMS: 'W7bWcKx6Vc'
-  },
-  analytics: {
-    debug: true
   }
 };
