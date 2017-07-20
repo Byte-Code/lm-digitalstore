@@ -8,6 +8,12 @@ import {
   failureFetchProductList
 } from '../../app/actions/productListActions';
 
+import * as analyticsAction from '../../app/actions/analyticsActions';
+
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   content: {
     itemlist: [0, 1, 2]
@@ -32,6 +38,12 @@ describe('getProductListSaga', () => {
       const transformedResult = fromJS(validResponse).getIn(['content', 'itemlist']).toOrderedSet();
       expect(gen.next(validResponse).value).toEqual(
         put(successFetchProductList(transformedResult))
+      );
+    });
+
+    it('should dispatch a START_ANALYTICS_PRODUCT', () => {
+      expect(gen.next().value).toEqual(
+        put(analyticsAction.startAnalyticsProduct())
       );
     });
 

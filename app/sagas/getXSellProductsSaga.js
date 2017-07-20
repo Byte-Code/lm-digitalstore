@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
+import * as analyticsAction from '../actions/analyticsActions';
 import { requestFetchProductList } from '../actions/productListActions';
 
 export function* callFetchXSellProducts({ productCode }) {
@@ -18,6 +19,7 @@ export function* callFetchXSellProducts({ productCode }) {
     }
   } catch (error) {
     yield put(productActions.failureFetchXSellProducts(error));
+    yield put(analyticsAction.startAnalyticsProduct());
   }
 }
 

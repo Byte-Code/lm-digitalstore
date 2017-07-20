@@ -3,7 +3,6 @@ import { hashHistory } from 'react-router';
 import { Map } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
-
 import rootReducer from '../reducers/reducers';
 
 const router = routerMiddleware(hashHistory);

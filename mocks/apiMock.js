@@ -1,6 +1,10 @@
-import RemoteApi from 'lm-remote-api';
+import RemoteApi from '@byte-code/lm-remote-api';
 import world from './world';
 import weather from './weather.json';
+import configDev from '../config.dev';
+import { isDebugMode } from '../app/CommandLineOptions';
+
+const { apiConfig } = isDebugMode ? configDev : process.env.config;
 
 export function fetchWorld() {
   return new Promise(resolve => {
@@ -13,15 +17,5 @@ export function fetchWeather() {
     process.nextTick(() => resolve(weather));
   });
 }
-const apiConfig = {
-  prod: {
-    baseUrlCore: 'https://api.leroymerlin.it/api/v1',
-    baseUrlMS: 'https://api.leroymerlin.it',
-    spaceId: 'web-prd',
-    storeCode: 7,
-    apiKeyCore: 'wYv7iVtxEU',
-    apiKeyMS: '96zoJArqvUf0'
-  }
-};
 
-export const apiClient = new RemoteApi(apiConfig.prod);
+export const apiClient = new RemoteApi(apiConfig);

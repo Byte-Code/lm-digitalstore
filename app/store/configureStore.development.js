@@ -4,16 +4,15 @@ import { routerMiddleware, push } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { Map } from 'immutable';
 import createLogger from 'redux-logger';
-
 import rootReducer from '../reducers/reducers';
 
 export const sagaMiddleware = createSagaMiddleware();
 
 const actionCreators = {
-  push,
+  push
 };
 
-const logger = createLogger({
+const customLogger = createLogger({
   level: 'info',
   collapsed: true
 });
@@ -25,12 +24,12 @@ const router = routerMiddleware(hashHistory);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
     // Options: http://extension.remotedev.io/docs/API/Arguments.html
-    actionCreators,
+    actionCreators
   }) :
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware, router, logger)
+  applyMiddleware(sagaMiddleware, router, customLogger)
 );
 
 export default function configureStore(initialState? = Map()) {

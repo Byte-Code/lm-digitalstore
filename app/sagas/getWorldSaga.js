@@ -17,3 +17,4 @@ export function* callFetchWorld() {
 export default function* getWorldSaga() {
   yield takeEvery(actionTypes.REQUEST_FETCH_WORLD, callFetchWorld);
 }
+

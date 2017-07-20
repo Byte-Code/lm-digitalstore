@@ -5,6 +5,10 @@ import { apiClient } from '../../mocks/apiMock';
 import { callFetchStoreStock } from '../../app/sagas/getStoreStockSaga';
 import * as productActions from '../../app/actions/productActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   data: 'someData'
 };

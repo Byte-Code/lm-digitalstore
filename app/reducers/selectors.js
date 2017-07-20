@@ -4,16 +4,23 @@ import { List } from 'immutable';
 import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
+import getIdleDialogStatus from './Idle/idleSelectors';
 import * as categorySelectors from './Category/categorySelectors';
 import * as catalogueSelectors from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
 import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
+import * as routeSelector from './Router/routerSelectors';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
 }
+
+export const getWorldName = createSelector(
+  [getWorld],
+  (world) => world.get('worldName')
+);
 
 export function getWeather(state) {
   return getWeatherSelector(state.get('weatherReducer'));
@@ -26,6 +33,10 @@ export function getStoreCode(state) {
 // CATEGORY
 export function getCategory(state, categoryCode) {
   return categorySelectors.getCategory(state.get('categoryReducer'), categoryCode);
+}
+
+export function getCategoryName(state, categoryCode) {
+  return getCategory(state, categoryCode).get('name');
 }
 
 export function getSellingAids(state, categoryCode) {
@@ -94,7 +105,13 @@ export const getItemCount = createSelector(
     filterUtils.filterCatalogue(idsByAids, idsByTempFilters, idsByTempAvailability).size
 );
 
+export const getFilteredProductsNumber = createSelector(
+  [state => state, getFiltersCategoryCode],
+  (state, categoryCode) => getItemCount(state, categoryCode)
+);
+
 // FILTERS
+
 export function getFilterMap(state) {
   return filtersSelector.getFilterMap(state.get('filtersReducer'));
 }
@@ -127,6 +144,22 @@ export function getTempAvailability(state) {
   return filtersSelector.getTempAvailability(state.get('filtersReducer'));
 }
 
+export function getFiltersCategoryCode(state) {
+  return filtersSelector.getCategoryCode(state.get('filtersReducer'));
+}
+
+export const getFilterInfoFromCategory = createSelector(
+  [state => state, getFiltersCategoryCode],
+  (state, categoryCode) => {
+    const categoryInfo = getCategory(state, categoryCode);
+    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
+    const filterGroup = categoryInfo
+                          .get('facetFilters')
+                          .filterNot(group => group.get('group') === 'Prezzo');
+    return { sellingAids, filterGroup };
+  }
+);
+
 // PRODUCT
 export function getProduct(state, productCode) {
   return productSelectors.getProduct(state.get('productReducer'), productCode);
@@ -142,6 +175,10 @@ export const getSimilarProductsIds = createSelector(getProduct, product => {
 
 export function getAllStoreStock(state, props) {
   return productSelectors.getAllStoreStock(state.get('productReducer'), props);
+}
+
+export function getProductReducer(state) {
+  return productSelectors.getProductReducer(state);
 }
 
 // STORE
@@ -167,8 +204,8 @@ export const getNearbyStoresWithStock = createSelector(
     nearbyStores.map(s => {
       const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
       return s
-        .set('storeStock', currentStore.get('storeStock'))
-        .set('stockStatus', currentStore.get('stockStatus'));
+        .set('storeStock', currentStore ? currentStore.get('storeStock') : 0)
+        .set('stockStatus', currentStore ? currentStore.get('stockStatus') : 0);
     })
 );
 
@@ -185,4 +222,18 @@ export const getSelectedNearbyStoreInfo = selectedStore =>
     nearbyStoreStock.find(ns => ns.get('code') === selectedStore)
   );
 
-// export const getSelectedStoreInfo = createSelector
+// Idle
+
+export function getIdleDialog(state) {
+  return getIdleDialogStatus(state.get('idleReducer'));
+}
+
+// Routing
+
+export function getCurrentPath(state) {
+  return routeSelector.getCurrentPath(state);
+}
+
+export function getRoutingData(state) {
+  return routeSelector.getRoutingData(state);
+}

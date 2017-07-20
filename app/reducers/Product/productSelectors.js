@@ -11,3 +11,7 @@ export const getAllStoreStock = createSelector([getProduct], productInfo => {
   }
   return List();
 });
+
+export function getProductReducer(state) {
+  return state.get('productReducer');
+}

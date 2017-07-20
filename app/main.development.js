@@ -119,7 +119,10 @@ app.on('ready', async () => {
     mainWindow = null;
   });
 
-  if (process.env.NODE_ENV === 'development') {
+  // indexOf doesn't work, change with a check method
+  const isDevToolMode = process.argv[1] === '--dev-tool' || process.argv[2] === '--dev-tool';
+
+  if (isDevToolMode || process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
     mainWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;

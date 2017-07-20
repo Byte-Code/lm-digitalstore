@@ -10,6 +10,10 @@ import {
 } from '../../app/actions/categoryActions';
 import { requestFetchProductList } from '../../app/actions/productListActions';
 
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 const validResponse = {
   content: {
     orderedProducts: [{ code: '0' }, { code: '1' }, { code: '2' }]

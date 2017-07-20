@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import validate from 'webpack-validator';
 import merge from 'webpack-merge';
 import baseConfig from './webpack.config.base';
+import configDev from './config.prod';
 
 const port = process.env.PORT || 3000;
 
@@ -78,7 +79,10 @@ export default validate(merge(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        config: JSON.stringify(configDev)
+      }
     })
   ],
 

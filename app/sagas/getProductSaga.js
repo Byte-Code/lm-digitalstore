@@ -6,6 +6,7 @@ import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
 import { isValidResponse } from '../utils/utils';
 
+
 export function* callFetchProduct({ productCode }) {
   try {
     const product = yield call(apiClient.fetchProductDisplay, productCode);
