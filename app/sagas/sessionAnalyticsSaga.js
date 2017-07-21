@@ -1,8 +1,8 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { call, takeEvery, select } from 'redux-saga/effects';
 import { getPageNameData } from './analyticsSaga.utility';
 import AnalyticsService from '../analytics/AnalyticsService';
 import { getStoreCode } from '../reducers/selectors';
-import * as analyticsAction from '../actions/analyticsActions';
+// import * as analyticsAction from '../actions/analyticsActions';
 
 export function* setAnalyticsSession() {
   const {
@@ -14,10 +14,16 @@ export function* setAnalyticsSession() {
 
   if (pathArray[0] === 'world') {
     yield call(AnalyticsService.setPageName, 'session', { worldName, pathArray });
-    yield call(AnalyticsService.setNavigationStore, storeCode);
-    yield call(AnalyticsService.setCid);
-    yield call(AnalyticsService.setReleaseVersion, worldName);
-    yield put(analyticsAction.startAnalyticsSession());
+    // yield call(AnalyticsService.setNavigationStore, storeCode).;
+
+    AnalyticsService.setNavigationStore(storeCode)
+      .then(() => {
+        AnalyticsService.setCid();
+        AnalyticsService.setReleaseVersion(worldName);
+        AnalyticsService.track('view');
+        return '';
+      })
+      .catch(e => console.log(e));
   }
 }
 

@@ -62,8 +62,13 @@ class AnalyticsService {
   }
 
   setNavigationStore(storeCode) {
-    const navigationStoreLayer = utils.buildNavigationStore(storeCode);
-    this.mergeInDataLayer(navigationStoreLayer);
+    return new Promise((resolve) => {
+      utils.buildNavigationStore(storeCode)
+        .then(storeLayer => {
+          this.mergeInDataLayer(storeLayer);
+          return resolve();
+        }).catch(e => console.log(e));
+    });
   }
 
   setProduct(data) {

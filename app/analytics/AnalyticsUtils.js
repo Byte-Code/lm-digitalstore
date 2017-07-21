@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import appPackage from '../package.json';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
 import stores from '../../mocks/stores';
+import { apiClient } from '../../mocks/apiMock';
 
 const productPropertiesMap = Map({
   prod_id: ['code'],
@@ -149,19 +150,30 @@ const customizer = (objValue, srcValue) => {
   }
 };
 
-const buildNavigationStore = (storeCode = null) => {
-  let storeName = '';
+const buildNavigationStore = (storeCode = null) =>
+  new Promise((resolve) => {
+    let storeName = '';
 
-  if (storeCode) {
-    stores.forEach(store => {
-      if (store.storeCode === storeCode) {
-        storeName = `${storeCode} - ${store.storeName}`;
-      }
-    });
-  }
+    if (storeCode) {
+      stores.forEach(store => {
+        if (store.storeCode === storeCode) {
+          storeName = `${storeCode} - ${store.storeName}`;
+          return resolve(Map({ navigation_store: storeName }));
+        }
+      });
+    }
 
-  return Map({ navigation_store: storeName });
-};
+    if (!storeName) {
+      apiClient.storeCode = storeCode;
+      apiClient
+        .fetchStore()
+        .then(store => {
+          storeName = `${store.content.code} - ${store.content.name}`;
+          return resolve(Map({ navigation_store: storeName }));
+        })
+        .catch(e => console.log(e));
+    }
+  });
 
 const buildAppliedFilters = (filterGroup, appliedFilters) => {
   const dataLayer = filterGroup.reduce((acc, group) => {
