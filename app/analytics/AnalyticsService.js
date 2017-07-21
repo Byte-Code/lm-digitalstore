@@ -123,7 +123,7 @@ class AnalyticsService {
       dataLayer: this.dataLayer.toJS()
     }]);
 
-    if (isDebugMode) {
+    if (isDebugMode || process.env.NODE_ENV === 'development') {
       console.log(this.dataLayer.toJS());
     }
 
