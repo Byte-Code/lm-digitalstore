@@ -120,7 +120,7 @@ app.on('ready', async () => {
   });
 
   // indexOf doesn't work, change with a check method
-  const isDevToolMode = process.argv[1] === '--dev-tool' || process.argv[2] === '--dev-tool';
+  const isDevToolMode = process.argv.indexOf('--dev-tool') > 0;
 
   if (isDevToolMode || process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
