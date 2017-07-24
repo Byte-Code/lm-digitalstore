@@ -10,6 +10,7 @@ import storeCodeReducer from './StoreCode/storeCodeReducer';
 import storeReducer from './Store/storeReducer';
 import filtersReducer from './Filters/filtersReducer';
 import idleReducer from './Idle/idleReducer';
+import activeStores from './ActiveStores/activeStoresReducer';
 
 const rootReducer = combineReducers({
   worldReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   storeReducer,
   filtersReducer,
   idleReducer,
-  routing
+  routing,
+  activeStores
 });
 
 export default rootReducer;

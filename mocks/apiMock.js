@@ -18,4 +18,5 @@ export function fetchWeather() {
   });
 }
 
+console.log(process.env.config);
 export const apiClient = new RemoteApi(apiConfig);

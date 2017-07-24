@@ -61,8 +61,8 @@ class AnalyticsService {
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
-  setNavigationStore(storeCode) {
-    const navigationStoreLayer = utils.buildNavigationStore(storeCode);
+  setNavigationStore(navigationStore) {
+    const navigationStoreLayer = utils.buildNavigationStore(navigationStore);
     this.mergeInDataLayer(navigationStoreLayer);
   }
 
