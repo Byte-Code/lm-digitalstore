@@ -19,7 +19,7 @@ const productPropertiesMap = Map({
 
 const layerMap = Map({ filter_name: List(), filter_value: List() });
 
-const LABEL = {
+export const LABEL = {
   PROD_SCONTO: 'prod_sconto',
   PROD_AVAIL_ONLINE: 'prod_avail_online',
   PROD_AVAIL_STORE: 'prod_avail_store',
@@ -408,7 +408,7 @@ const normalizeProductClickLayer = (productLayer, index, product, pathArray) =>
     .set(LABEL.PROD_POSITION, List().push(index))
     .set(LABEL.PROD_LIST, List().push(getProdList(product, pathArray)));
 
-const getProductProperty = (product = Map({})) => {
+const getCurrentProductCodeAndCategory = (product = Map({})) => {
   const jsonProduct = product.toJS();
   let prodCode = 0;
   let prodCategory = '';
@@ -436,5 +436,5 @@ export {
   buildNavigationStore,
   buildReleaseVersion,
   normalizeProductClickLayer,
-  getProductProperty
+  getCurrentProductCodeAndCategory
 };

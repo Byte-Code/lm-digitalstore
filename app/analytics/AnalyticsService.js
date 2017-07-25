@@ -110,11 +110,14 @@ class AnalyticsService {
   }
 
   setStoreAvailability({ storeName = '', storeStock = '', product = Map({}) }) {
-    const { prodCode, prodCategory } = utils.getProductProperty(product);
-    this.setDataLayer('event_type', 'product_condivisione');
-    this.setDataLayer('prod_id', prodCode);
-    this.setDataLayer('prod_category', prodCategory);
-    this.setDataLayer('event_action', `${storeName}_${storeStock}`);
+    const { prodCode, prodCategory } = utils.getCurrentProductCodeAndCategory(product);
+
+    if (prodCode && prodCategory) {
+      this.setDataLayer('event_type', 'product_condivisione');
+      this.setDataLayer('prod_id', prodCode);
+      this.setDataLayer('prod_category', prodCategory);
+      this.setDataLayer('event_action', `${storeName}_${storeStock}`);
+    }
   }
 
   track(eventType) {

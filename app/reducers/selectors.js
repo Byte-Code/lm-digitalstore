@@ -89,8 +89,9 @@ export const getCatalogueProductsIds = createSelector(
     filterUtils.filterCatalogue(idsByAids, idsByFilters, idsByAvailability)
 );
 
-export const getCatalogueProducts = () =>
-  createSelector([getProductList, getCatalogueProductsIds], (productList, idsToShow) =>
+export const getCatalogueProducts = () => createSelector(
+  [getProductList, getCatalogueProductsIds],
+  (productList, idsToShow) =>
     productList.filter(p => idsToShow.contains(p.get('code'))).toList()
   );
 

@@ -1,7 +1,7 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
-import * as _ from 'lodash';
+import { getPageNameData } from './analyticsSaga.utility';
 import AnalyticsService from '../analytics/AnalyticsService';
-import { getStoreCode, getWorldName, getRoutingData } from '../reducers/selectors';
+import { getStoreCode } from '../reducers/selectors';
 import * as analyticsAction from '../actions/analyticsActions';
 
 export function* setAnalyticsSession() {
@@ -10,6 +10,7 @@ export function* setAnalyticsSession() {
     pathArray = '' } = yield call(getPageNameData);
 
   const storeCode = yield select(getStoreCode);
+
 
   if (pathArray[0] === 'world') {
     yield call(AnalyticsService.setPageName, 'session', { worldName, pathArray });
@@ -20,15 +21,6 @@ export function* setAnalyticsSession() {
   }
 }
 
-export default function* sessionAnalyticsSaga() {
+export function* sessionAnalyticsSaga() {
   yield takeEvery('SUCCESS_FETCH_WORLD', setAnalyticsSession);
 }
-
-function* getPageNameData() {
-  const worldName = yield select(getWorldName);
-  const routingData = yield select(getRoutingData);
-  const path = _.trimStart(routingData.get('pathname'), '/');
-  const pathArray = _.split(path, '/');
-  return { worldName, pathArray };
-}
-
