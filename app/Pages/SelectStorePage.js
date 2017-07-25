@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import glamorous from 'glamorous';
 import RaisedButton from 'material-ui/RaisedButton';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import Page from '../components/Page';
 import { setStoreCode } from '../actions/storeActions';
-import stores from '../../mocks/stores';
+import { getSelectStoreList } from '../reducers/selectors';
 
 const Title = glamorous.h1({
   paddingTop: '120px',
@@ -36,7 +37,8 @@ const confirmButtonStyle = { width: 300, height: 50, color: '#fff' };
 
 class SelectStorePage extends Component {
   static propTypes = {
-    setStoreCode: PropTypes.func.isRequired
+    setStoreCode: PropTypes.func.isRequired,
+    stores: ImmutablePropTypes.list.isRequired
   };
 
   state = {
@@ -53,14 +55,14 @@ class SelectStorePage extends Component {
         </Title>
         <Wrapper>
           <Buttons>
-            {stores.map(store => (
+            {this.props.stores.map(store => (
               <RaisedButton
-                key={store.storeCode}
-                onTouchTap={() => this.handleChange(store.storeCode)}
+                key={store.get('code')}
+                onTouchTap={() => this.handleChange(store.get('code'))}
                 style={storeButtonStyle}
-                primary={this.state.storeCode === store.storeCode}
+                primary={this.state.storeCode === store.get('code')}
               >
-                {store.storeName}
+                {store.get('name')}
               </RaisedButton>
             ))}
           </Buttons>
@@ -83,4 +85,8 @@ class SelectStorePage extends Component {
   }
 }
 
-export default connect(null, { setStoreCode })(SelectStorePage);
+export default connect(
+  (state) => ({
+    stores: getSelectStoreList(state)
+  }),
+  { setStoreCode })(SelectStorePage);

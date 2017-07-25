@@ -61,14 +61,9 @@ class AnalyticsService {
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
-  setNavigationStore(storeCode) {
-    return new Promise((resolve) => {
-      utils.buildNavigationStore(storeCode)
-        .then(storeLayer => {
-          this.mergeInDataLayer(storeLayer);
-          return resolve();
-        }).catch(e => console.log(e));
-    });
+  setNavigationStore(navigationStore) {
+    const navigationStoreLayer = utils.buildNavigationStore(navigationStore);
+    this.mergeInDataLayer(navigationStoreLayer);
   }
 
   setProduct(data) {

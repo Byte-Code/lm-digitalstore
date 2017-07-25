@@ -13,6 +13,7 @@ import getNearbyStoresSaga from './getNearbyStoresSaga';
 import routingSaga from './routingSaga';
 import { analyticsSaga } from './analyticsSaga';
 import { sessionAnalyticsSaga } from './sessionAnalyticsSaga';
+import getAllActiveStoreSaga from './getAllActiveStoreSaga';
 
 export default function* root() {
   yield [
@@ -28,6 +29,7 @@ export default function* root() {
     fork(getNearbyStoresSaga),
     fork(routingSaga),
     fork(analyticsSaga),
-    fork(sessionAnalyticsSaga)
+    fork(sessionAnalyticsSaga),
+    fork(getAllActiveStoreSaga)
   ];
 }

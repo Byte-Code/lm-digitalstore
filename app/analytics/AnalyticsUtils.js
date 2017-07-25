@@ -2,8 +2,6 @@ import { Map, List, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import appPackage from '../package.json';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
-import stores from '../../mocks/stores';
-import { apiClient } from '../../mocks/apiMock';
 
 const productPropertiesMap = Map({
   prod_id: ['code'],
@@ -150,30 +148,17 @@ const customizer = (objValue, srcValue) => {
   }
 };
 
-const buildNavigationStore = (storeCode = null) =>
-  new Promise((resolve) => {
-    let storeName = '';
+const buildNavigationStore = (navigationStore = Map()) => {
+  let storeName = '';
 
-    if (storeCode) {
-      stores.forEach(store => {
-        if (store.storeCode === storeCode) {
-          storeName = `${storeCode} - ${store.storeName}`;
-          return resolve(Map({ navigation_store: storeName }));
-        }
-      });
-    }
+  if (navigationStore.size > 0) {
+    const storeN = navigationStore.get('name');
+    const storeCode = navigationStore.get('code');
+    storeName = `${storeCode} - ${storeN}`;
+  }
 
-    if (!storeName) {
-      apiClient.storeCode = storeCode;
-      apiClient
-        .fetchStore()
-        .then(store => {
-          storeName = `${store.content.code} - ${store.content.name}`;
-          return resolve(Map({ navigation_store: storeName }));
-        })
-        .catch(e => console.log(e));
-    }
-  });
+  return Map({ navigation_store: storeName });
+};
 
 const buildAppliedFilters = (filterGroup, appliedFilters) => {
   const dataLayer = filterGroup.reduce((acc, group) => {
