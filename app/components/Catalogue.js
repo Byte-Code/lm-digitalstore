@@ -9,41 +9,6 @@ import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
-const FakeMarginDiv = glamorous.div({
-  height: '100%',
-  width: '40px'
-});
-
-const Header = glamorous.div({
-  width: '100%',
-  height: '184px',
-  background: '#f7f7f7',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  '&>h1': {
-    fontSize: '48px'
-  }
-});
-
-const ProductSlider = glamorous.div(({ opacity = false }) => ({
-  marginTop: '5%',
-  display: 'flex',
-  overflowX: 'auto',
-  flexFlow: 'column wrap',
-  alignContent: 'flex-start',
-  height: '1246px',
-  opacity: opacity ? 0.17 : 1,
-  '&>a': {
-    width: '405px',
-    height: '593px',
-    marginRight: '20px',
-    '&:nth-child(odd)': {
-      marginBottom: '60px'
-    }
-  }
-}));
-
 export default class Catalogue extends Component {
   static propTypes = {
     params: PropTypes.shape({ categoryCode: PropTypes.string.isRequired }).isRequired,
@@ -59,7 +24,8 @@ export default class Catalogue extends Component {
     initFilters: PropTypes.func.isRequired,
     toggleFiltersDialog: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired,
+    resetTempFilters: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -112,7 +78,8 @@ export default class Catalogue extends Component {
       toggleAvailability,
       toggleFilter,
       toggleFiltersDialog,
-      isDialogOpen
+      isDialogOpen,
+      resetTempFilters
     } = this.props;
 
     if (categoryInfo.isEmpty()) {
@@ -139,6 +106,7 @@ export default class Catalogue extends Component {
           toggleAvailability={toggleAvailability}
           toggleFiltersDialog={toggleFiltersDialog}
           isDialogOpen={isDialogOpen}
+          resetTempFilters={resetTempFilters}
         />
         <ProductSlider opacity={isDialogOpen}>
           <FakeMarginDiv />
@@ -149,3 +117,37 @@ export default class Catalogue extends Component {
     );
   }
 }
+
+const FakeMarginDiv = glamorous.div({
+  height: '100%',
+  width: '40px'
+});
+
+const Header = glamorous.div({
+  width: '100%',
+  height: '184px',
+  background: '#f7f7f7',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '&>h1': {
+    fontSize: '48px'
+  }
+});
+
+const ProductSlider = glamorous.div(({ opacity = false }) => ({
+  marginTop: '5%',
+  display: 'flex',
+  overflowX: 'auto',
+  flexFlow: 'column wrap',
+  height: '1246px',
+  opacity: opacity ? 0.17 : 1,
+  '&>a': {
+    width: '405px',
+    height: '593px',
+    marginRight: '20px',
+    '&:nth-child(odd)': {
+      marginBottom: '60px'
+    }
+  }
+}));
