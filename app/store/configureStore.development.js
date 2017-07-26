@@ -1,10 +1,16 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { createMiddleware } from 'redux-beacon';
+import { GoogleAnalytics } from 'redux-beacon/targets/google-analytics';
 import { hashHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { Map } from 'immutable';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers/reducers';
+import { eventsMap } from '../analytics/eventsMap';
+
+
+const beaconmiddleware = createMiddleware(eventsMap, GoogleAnalytics);
 
 export const sagaMiddleware = createSagaMiddleware();
 
@@ -29,7 +35,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(sagaMiddleware, router, customLogger)
+  applyMiddleware(sagaMiddleware, router, customLogger, beaconmiddleware)
 );
 
 export default function configureStore(initialState? = Map()) {
