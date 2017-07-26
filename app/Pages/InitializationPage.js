@@ -6,7 +6,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import glamorous from 'glamorous';
 
 import Page from '../components/Page';
-import { setStoreCode } from '../actions/storeActions';
+import { setStoreCode, requestAllActiveStores } from '../actions/storeActions';
 import getIpAddresses from '../utils/get-ip-addresses';
 import { isWhitelisted, getStoreCodeFromIpAddress } from '../utils/store-code-utils';
 
@@ -38,6 +38,7 @@ class InitializationPage extends Component {
   }
 
   componentDidMount() {
+    this.props.requestAllActiveStores();
     this.startIpCheck();
   }
 
@@ -86,7 +87,8 @@ class InitializationPage extends Component {
 
 InitializationPage.propTypes = {
   setStoreCode: PropTypes.func.isRequired,
+  requestAllActiveStores: PropTypes.func.isRequired,
   replace: PropTypes.func.isRequired
 };
 
-export default connect(null, { replace, setStoreCode })(InitializationPage);
+export default connect(null, { replace, setStoreCode, requestAllActiveStores })(InitializationPage);

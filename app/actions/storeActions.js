@@ -23,3 +23,15 @@ export function successFetchNearbyStores(result) {
 export function failureFetchNearbyStores(error) {
   return { type: actions.FAILURE_FETCH_NEARBYSTORES, error };
 }
+
+export function requestAllActiveStores() {
+  return { type: actions.REQUEST_ALL_ACTIVE_STORES };
+}
+
+export function successFetchAllActiveStores(result) {
+  return { type: actions.SUCCESS_FETCH_ALL_ACTIVE_STORES, result };
+}
+
+export function failureFetchAllActiveStores(error) {
+  return { type: actions.FAILURE_FETCH_ALL_ACTIVE_STORES, error };
+}

@@ -3,7 +3,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { setAnalyticsSession } from '../../app/sagas/sessionAnalyticsSaga';
 import { START_ANALYTICS_SESSION } from '../../app/actions/actionTypes';
 import { getPageNameData } from '../../app/sagas/analyticsSaga.utility';
-import { getStoreCode } from '../../app/reducers/selectors';
+import { getStore } from '../../app/reducers/selectors';
 import AnaliticsService from '../../app/analytics/AnalyticsService';
 
 jest.mock('../../app/CommandLineOptions', () => ({
@@ -20,7 +20,7 @@ describe('Test Analytics calls with SUCCESS_FETCH_WORLD event', () => {
     inWorldPageTest = expectSaga(setAnalyticsSession)
       .provide([
         [m.call.fn(getPageNameData, ''), getPageNameDataReturnValue],
-        [m.select.selector(getStoreCode), '12']
+        [m.select.selector(getStore), {}]
       ])
       .call.fn(AnaliticsService.setPageName)
       .call.fn(AnaliticsService.setNavigationStore)
@@ -36,7 +36,7 @@ describe('Test Analytics calls with SUCCESS_FETCH_WORLD event', () => {
     notInWorldPageTest = expectSaga(setAnalyticsSession)
       .provide([
         [m.call.fn(getPageNameData, ''), getPageNameDataReturnValue],
-        [m.select.selector(getStoreCode), '12']
+        [m.select.selector(getStore), {}]
       ])
       .not.call.fn(AnaliticsService.setPageName)
       .not.call.fn(AnaliticsService.setNavigationStore)

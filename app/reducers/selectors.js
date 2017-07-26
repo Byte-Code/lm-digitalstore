@@ -12,6 +12,7 @@ import * as storeSelectors from './Store/storeSelectors';
 import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
 import * as routeSelector from './Router/routerSelectors';
+import * as activeStoresSelector from './ActiveStores/activeStoresSelectors';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
@@ -222,6 +223,9 @@ export const getSelectedNearbyStoreInfo = selectedStore =>
   createSelector([getNearbyStoresWithStock], nearbyStoreStock =>
     nearbyStoreStock.find(ns => ns.get('code') === selectedStore)
   );
+
+export const getSelectStoreList = state =>
+  activeStoresSelector.getSelectStoreList(state.get('activeStores'));
 
 // Idle
 
