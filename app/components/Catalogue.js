@@ -31,7 +31,6 @@ const ProductSlider = glamorous.div(({ opacity = false }) => ({
   display: 'flex',
   overflowX: 'auto',
   flexFlow: 'column wrap',
-  alignContent: 'flex-start',
   height: '1246px',
   opacity: opacity ? 0.17 : 1,
   '&>a': {
@@ -58,6 +57,7 @@ export default class Catalogue extends Component {
     resetFilters: PropTypes.func.isRequired,
     initFilters: PropTypes.func.isRequired,
     toggleFiltersDialog: PropTypes.func.isRequired,
+    resetTempFilters: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired
   };
@@ -112,7 +112,8 @@ export default class Catalogue extends Component {
       toggleAvailability,
       toggleFilter,
       toggleFiltersDialog,
-      isDialogOpen
+      isDialogOpen,
+      resetTempFilters
     } = this.props;
 
     if (categoryInfo.isEmpty()) {
@@ -139,6 +140,7 @@ export default class Catalogue extends Component {
           toggleAvailability={toggleAvailability}
           toggleFiltersDialog={toggleFiltersDialog}
           isDialogOpen={isDialogOpen}
+          resetTempFilters={resetTempFilters}
         />
         <ProductSlider opacity={isDialogOpen}>
           <FakeMarginDiv />
