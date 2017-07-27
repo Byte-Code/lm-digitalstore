@@ -3,6 +3,7 @@
  */
 
 import path from 'path';
+import webpack from 'webpack';
 import { dependencies as externals } from './app/package.json';
 
 export default {
@@ -46,10 +47,16 @@ export default {
    */
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.html', '.mp4'],
-    mainFields: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    mainFields: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    modules: [
+      path.join(__dirname, 'app'),
+      'node_modules'
+    ]
   },
 
-  plugins: [],
+  plugins: [
+    new webpack.NamedModulesPlugin()
+  ],
 
   externals: Object.keys(externals || {})
 };

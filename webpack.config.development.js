@@ -6,6 +6,7 @@
 
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import configDev from './config.dev';
 
@@ -26,6 +27,24 @@ export default merge.smart(baseConfig, {
 
   module: {
     rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            plugins: [
+              // Here, we include babel plugins that are only required for the
+              // renderer process. The 'transform-*' plugins must be included
+              // before react-hot-loader/babel
+              'transform-class-properties',
+              'transform-es2015-classes',
+              'react-hot-loader/babel'
+            ],
+          }
+        }
+      },
       {
         test: /\.global\.css$/,
         use: [
@@ -138,11 +157,8 @@ export default merge.smart(baseConfig, {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            mimetype: 'image/svg+xml',
-          }
+          loader: 'svg-url-loader',
+          options: {}
         }
       },
       // Common Image Formats
@@ -165,7 +181,7 @@ export default merge.smart(baseConfig, {
      * code by enabling this plugin.
      * https://github.com/webpack/docs/wiki/list-of-plugins#noerrorsplugin
      */
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
 
     /**
      * Create global constants which can be configured at compile time.
@@ -181,6 +197,14 @@ export default merge.smart(baseConfig, {
         NODE_ENV: JSON.stringify('development'),
         config: JSON.stringify(configDev)
       }
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    }),
+
+    new ExtractTextPlugin({
+      filename: '[name].css'
     })
   ],
 
