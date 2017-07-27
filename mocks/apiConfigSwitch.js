@@ -2,7 +2,8 @@ import configDev from '../config.dev';
 import configStage from '../config.stage';
 import { isDebugMode, isStageMode } from '../app/CommandLineOptions';
 
-const getApiConfig = () => {
+// eslint-disable-next-line
+export const getApiConfig = () => {
   let apiConfig = process.env.config;
 
   if (isDebugMode) {
@@ -15,5 +16,3 @@ const getApiConfig = () => {
 
   return apiConfig;
 };
-
-module.export = { getApiConfig };
