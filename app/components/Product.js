@@ -33,13 +33,14 @@ export default class Product extends Component {
   constructor(props) {
     super(props);
     this.throttleValue = 500;
+    this.initialState = { scrollValue: 0, opacity: 1 };
     this.onScrolling = this.onScrolling.bind(this);
     this.setScrollValue = this.setScrollValue.bind(this);
     this.renderAnimatedTitle = this.renderAnimatedTitle.bind(this);
-    this.getOpacity = this.getOpacity.bind(this);
-    this.state = {
-      scrollValue: 0
-    };
+    this.setOpacity = this.setOpacity.bind(this);
+    this.setOpacityValue = this.setOpacityValue.bind(this);
+    this.resetAnimationValue = this.resetAnimationValue.bind(this);
+    this.state = this.initialState;
   }
 
   componentDidMount() {
@@ -53,6 +54,7 @@ export default class Product extends Component {
 
     if (prevProductCode !== productCode) {
       requestFetchProduct(productCode);
+      this.resetAnimationValue();
     }
   }
 
@@ -63,6 +65,7 @@ export default class Product extends Component {
 
   onScrolling(scrollValue) {
     this.setScrollValue(scrollValue);
+    this.setOpacity();
   }
 
   setScrollValue(scrollValue) {
@@ -71,9 +74,15 @@ export default class Product extends Component {
     }, this.throttleValue))();
   }
 
-  getOpacity() {
+  setOpacityValue(opacity) {
+    (throttle(() => {
+      this.setState({ opacity });
+    }, this.throttleValue))();
+  }
+
+  setOpacity() {
     const { scrollValue } = this.state;
-    let opacity = 1;
+    let { opacity } = this.state;
 
     if (this.state.scrollValue) {
       if (inRange(scrollValue, 1, 400)) opacity = 0.75;
@@ -81,7 +90,11 @@ export default class Product extends Component {
       if (inRange(scrollValue, 601, 1078)) opacity = 0.25;
       if (inRange(scrollValue, 1079, 2000)) opacity = 0;
     }
-    return opacity;
+    this.setOpacityValue(opacity);
+  }
+
+  resetAnimationValue() {
+    this.setState(this.initialState);
   }
 
   renderSimilarProducts() {
@@ -149,7 +162,7 @@ export default class Product extends Component {
           <Title>{name}</Title>
           <Ref>{`REF. ${code}`}</Ref>
           {this.renderAnimatedTitle({ name, code })}
-          <SliderWrapper opacity={this.getOpacity()}>
+          <SliderWrapper opacity={this.state.opacity}>
             <ImageSlider imageIDList={imageIDList} imageOptions={imageOptions} alt={name} />
           </SliderWrapper>
           <ProductInfo
