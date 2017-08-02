@@ -2,6 +2,7 @@ import { Map, List, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import appPackage from '../package.json';
 import { getPromotions, filterPromotions } from '../utils/marketingUtils';
+import { LABEL } from './AnalyticsConstants';
 
 const productPropertiesMap = Map({
   prod_id: ['code'],
@@ -17,24 +18,6 @@ const productPropertiesMap = Map({
 });
 
 const layerMap = Map({ filter_name: List(), filter_value: List() });
-
-const LABEL = {
-  PROD_SCONTO: 'prod_sconto',
-  PROD_AVAIL_ONLINE: 'prod_avail_online',
-  PROD_AVAIL_STORE: 'prod_avail_store',
-  PROD_VARIANT: 'prod_variant',
-  PROD_PUNTI_OMAGGIO: 'prod_puntiomaggio',
-  PROD_IDEAPIU: 'prod_idepiu',
-  PROD_BUNDLE: 'prod_bundle',
-  FILTER_NAME: 'filter_name',
-  FILTER_VALUE: 'filter_value',
-  FILTER_RESULT: 'filter_result',
-  PROD_POSITION: 'prod_position',
-  PROD_LIST: 'prod_list',
-  PROD_GAMMA: 'prod_gamma',
-  PROD_NEW: 'prod_new',
-  PROD_PRICE: 'prod_price'
-};
 
 const relatedProductsSize = 12;
 
