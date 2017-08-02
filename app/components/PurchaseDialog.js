@@ -66,7 +66,11 @@ export default class PurchaseDialog extends Component {
 
   render() {
     const { children, productCode, productSlug } = this.props;
-    const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p`;
+    const UTM_SOURCE = 'utm_source=digitalstore';
+    const UTM_MEDIUM = 'utm_medium=digitalstore';
+    const UTM_CAMPAIGN = 'utm_campaign=digitalstore';
+    const UTMS = `${UTM_SOURCE}&${UTM_MEDIUM}&${UTM_CAMPAIGN}`;
+    const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p?${UTMS}`;
 
     return (
       <Div onClick={this.handleOpen}>
