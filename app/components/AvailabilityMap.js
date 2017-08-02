@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
-import { meters2ScreenPixels } from 'google-map-react/utils';
+// import { meters2ScreenPixels } from 'google-map-react/utils';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Slider from 'material-ui/Slider';
 import { List, Map } from 'immutable';
@@ -88,7 +88,8 @@ export default class AvailabilityMap extends Component {
     handleChange: PropTypes.func.isRequired,
     handleSlide: PropTypes.func.isRequired,
     radius: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
+    // zoom: PropTypes.number.isRequired,
+    initialZoom: PropTypes.number.isRequired,
     infoWindowOpen: PropTypes.bool.isRequired,
     trackStoreAvailabilityEvent: PropTypes.func.isRequired
   };
@@ -101,7 +102,6 @@ export default class AvailabilityMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialZoom: 11,
       minRadius: 2,
       maxRadius: 50,
       sliderWidth: 960
@@ -171,20 +171,21 @@ export default class AvailabilityMap extends Component {
       homeStore,
       nearbyStoresWithProductInStock,
       radius,
-      zoom,
+      // zoom,
       selectedStore,
       selectStore,
       handleChange,
-      handleSlide
+      handleSlide,
+      initialZoom
     } = this.props;
-    const { minRadius, maxRadius, initialZoom } = this.state;
+    // const { minRadius, maxRadius } = this.state;
     const homeStoreName = homeStore.get('name');
     const lat = homeStore.getIn(['gpsInformation', 'x']);
     const lng = homeStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
-    const diameter = radius * 1000 * 2;
+    // const diameter = radius * 1000 * 2;
     const labelPosition = this.getLabelPosition(radius);
-    const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
+    // const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
 
     return (
       <Wrapper>
@@ -193,26 +194,26 @@ export default class AvailabilityMap extends Component {
         <Div padding="0 20px 40px" position="relative">
           <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${homeStoreName}`}</SliderTitle>
           <Slider
-            min={minRadius}
-            max={maxRadius}
-            value={radius}
-            onChange={handleSlide}
+            min={9}
+            max={13}
+            value={initialZoom}
+            onChange={(e, v) => handleSlide(e, v, initialZoom)}
             color="#67cb33"
             sliderStyle={sliderStyle}
           />
-          <Radius left={labelPosition}>{`${radius} km`}</Radius>
+          <Radius left={labelPosition}>{`${initialZoom} zoom`}</Radius>
         </Div>
         <MapWrapper>
           <GoogleMapReact
             center={center}
-            defaultZoom={initialZoom}
             fullscreenControl={false}
             options={mapOptions}
             onChange={handleChange}
+            zoom={initialZoom}
           >
             {this.renderMarkers()}
             {this.renderInfoWindow()}
-            <Circle lat={lat} lng={lng} width={w} height={h} />
+            <Circle lat={lat} lng={lng} width={930} height={930} />
           </GoogleMapReact>
           <ControlsOverlay />
         </MapWrapper>
