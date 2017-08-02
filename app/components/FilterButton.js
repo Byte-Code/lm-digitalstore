@@ -11,6 +11,7 @@ const ApplyButton = glamorous.div(({ fontFamily, fontSize, textDecoration, isAct
   background: isActive ? '#339900' : '#e4e4e4',
   cursor: isActive ? 'pointer' : 'not-allowed',
   marginTop: '22px',
+  marginBottom: '27px',
   alignSelf: 'center',
   '&>p': {
     color: '#fff',
