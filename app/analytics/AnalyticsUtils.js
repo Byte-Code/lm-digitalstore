@@ -1,7 +1,7 @@
 import { Map, List, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import appPackage from '../package.json';
-import { getPromotions, filterPromotions } from '../utils/marketingUtils';
+import { getPromotions, buildPromotionMap } from '../utils/marketingUtils';
 import { LABEL } from './AnalyticsConstants';
 
 const productPropertiesMap = Map({
@@ -59,7 +59,7 @@ const isProductNew = product => {
 
   if (marketingAttributes && loyaltyProgram) {
     const promotions = getPromotions(marketingAttributes, loyaltyProgram);
-    const filteredPromotions = filterPromotions(promotions);
+    const filteredPromotions = buildPromotionMap({ promotions });
     const isNew = filteredPromotions.reduce(
       (acc, promotion) => promotion.get('code') === 'NOVITA',
       false

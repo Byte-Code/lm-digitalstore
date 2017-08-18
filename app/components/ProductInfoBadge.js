@@ -143,11 +143,34 @@ export default class ProductInfoBadge extends Component {
       hasNearbyStores
     } = this.props;
 
+    const MarketingFlagStyle = {
+      wrapperStyle: {
+        display: 'flex',
+        justifyContent: 'space-between'
+      },
+      topLeftStyle: {
+        '&>img': {
+          marginTop: '-13px',
+          marginLeft: '-14px'
+        },
+        '&>#novita_badge': {
+          marginTop: '-9px',
+          marginLeft: '-8px'
+        }
+      },
+      topRightStyle: {
+
+      }
+    };
+
     const height = this.getAnimatedWrapperHeight();
+
+    const promotionCode = price.getIn(['selling', 'promotion']);
+    const marketingPriceProps = { marketingAttributes, loyaltyProgram, promotionCode };
 
     return (
       <Wrapper visibility={this.state.visibility}>
-        <MarketingFlag marketingAttributes={marketingAttributes} loyaltyProgram={loyaltyProgram} />
+        <MarketingFlag {...marketingPriceProps} {...MarketingFlagStyle} />
         <PriceBadge pricingInfo={pricingInfo} price={price} />
         <AnimatedWrapper id="AnimatedWrapper" height={height}>
         <Divider />

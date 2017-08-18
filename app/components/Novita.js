@@ -36,7 +36,7 @@ const Text = glamorous.span({
 
 export default function Icon() {
   return (
-    <Wrapper>
+    <Wrapper id="novita_badge">
       <TopLabel />
       <Text>NOVITÀ</Text>
     </Wrapper>
