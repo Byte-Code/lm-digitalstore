@@ -173,7 +173,11 @@ export default class Catalogue extends Component {
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
     const activeAid = filterMap.get('aid');
-    const swipeableConfig = { flickThreshold: 1.6, preventDefaultTouchmoveEvent: true };
+    const swipeableConfig = {
+      flickThreshold: 1.6,
+      preventDefaultTouchmoveEvent: true,
+      delta: 50
+    };
 
     return (
       <div>
