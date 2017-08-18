@@ -49,7 +49,8 @@ export default class Catalogue extends Component {
     this.getChunks = this.getChunks.bind(this);
     this.state = {
       currentChunkIndex: 0,
-      appendChunkIndex: 1
+      appendChunkIndex: 1,
+      swipedCount: 0
     };
   }
 
@@ -101,26 +102,27 @@ export default class Catalogue extends Component {
   }
 
   onLeftSwipe() {
-    let { currentChunkIndex, appendChunkIndex } = this.state;
-
+    let { currentChunkIndex, appendChunkIndex, swipedCount } = this.state;
     if (appendChunkIndex < this.productsChunk.size - 1) {
       const currentIndex = currentChunkIndex += 1;
       const appendIndex = appendChunkIndex += 1;
       this.setState({
         currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
+        appendChunkIndex: appendIndex,
+        swipedCount: swipedCount += 1
       });
     }
   }
 
   onRightSwipe() {
-    let { currentChunkIndex, appendChunkIndex } = this.state;
+    let { currentChunkIndex, appendChunkIndex, swipedCount } = this.state;
     if (currentChunkIndex > 0) {
       const currentIndex = currentChunkIndex -= 1;
       const appendIndex = appendChunkIndex -= 1;
       this.setState({
         currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
+        appendChunkIndex: appendIndex,
+        swipedCount: swipedCount -= 1
       });
     }
   }
@@ -195,7 +197,9 @@ export default class Catalogue extends Component {
           onSwipingRight={this.onRightSwipe}
         >
           <ProductSlider opacity={isDialogOpen}>
+            {this.state.swipedCount === 0 ? <FakeMarginDiv /> : <div /> }
             {this.renderProducts()}
+            <FakeMarginDiv />
           </ProductSlider>
         </Swipeable>
       </div>
@@ -203,10 +207,10 @@ export default class Catalogue extends Component {
   }
 }
 
-/* const FakeMarginDiv = glamorous.div({
+const FakeMarginDiv = glamorous.div({
   height: '100%',
   width: '40px'
-}); */
+});
 
 const Header = glamorous.div({
   width: '100%',
