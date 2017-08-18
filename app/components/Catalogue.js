@@ -173,6 +173,7 @@ export default class Catalogue extends Component {
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
     const activeAid = filterMap.get('aid');
+    const swipeableConfig = { flickThreshold: 1.6, preventDefaultTouchmoveEvent: true };
 
     return (
       <div>
@@ -192,6 +193,7 @@ export default class Catalogue extends Component {
         <Swipeable
           onSwipingLeft={this.onLeftSwipe}
           onSwipingRight={this.onRightSwipe}
+          {...swipeableConfig}
         >
           <ProductSlider opacity={isDialogOpen}>
             {this.renderProducts()}
