@@ -132,15 +132,13 @@ export default class Catalogue extends Component {
       const currentChunk = this.productsChunk.getIn([currentChunkIndex]);
       const appendChunk = this.productsChunk.getIn([appendChunkIndex]);
 
-      chunks = currentChunk.concat(appendChunk);
+      chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
     }
     return chunks;
   }
 
   chunkerizeProductList(productList) {
-    if (!this.productsChunk.size) {
-      this.productsChunk = fromJS(_.chunk(productList.toJS(), this.chunkSize));
-    }
+    this.productsChunk = fromJS(_.chunk(productList.toJS(), this.chunkSize));
   }
 
   renderProducts() {
