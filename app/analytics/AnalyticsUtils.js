@@ -289,12 +289,12 @@ const buildProductLayer = (product = {}, action = 'detail') => {
   }
 };
 
-const buildRelatedProductsLayer = ({ products = List(), pathArray = [] }) => {
+const buildRelatedProductsLayer = ({ products = List(), pathArray = [], positionIndex = 0 }) => {
   const productList = products.size > relatedProductsSize
     ? List(products).setSize(relatedProductsSize)
     : products;
 
-  let prodPositionCount = 0;
+  let prodPositionCount = positionIndex;
 
   if (products.size) {
     const listOfProductsLayer = productList.map(product => {
