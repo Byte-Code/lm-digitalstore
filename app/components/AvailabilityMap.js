@@ -72,7 +72,13 @@ const ControlsOverlay = glamorous.div({
 });
 
 const sliderStyle = { marginBottom: 24 };
-const mapOptions = { fullscreenControl: false, maxZoom: 17, minZoom: 8, zoomControl: false };
+const mapOptions = {
+  gestureHandling: 'none',
+  fullscreenControl: false,
+  maxZoom: 17,
+  minZoom: 8,
+  zoomControl: false
+};
 
 export default class AvailabilityMap extends Component {
   static propTypes = {
