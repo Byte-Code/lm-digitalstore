@@ -78,7 +78,7 @@ export default class Catalogue extends Component {
 
     if (componentReceiveProduct || chunkHasChanged) {
       const currentChunk = this.getChunks().setSize(this.chunkSize);
-      const indexForProdPosition = this.chunkSize * this.state.currentChunkIndex;
+      const positionIndex = this.chunkSize * this.state.currentChunkIndex;
       // this.props.trackCatalogueProductsChunk(currentChunk, indexForProdPosition);
       // Can't use redux-saga https://stackoverflow.com/questions/45435094/redux-saga-takeevery-miss-catch-event
       const path = _.trimStart(this.props.routingData.get('pathname'), '/');
@@ -86,7 +86,7 @@ export default class Catalogue extends Component {
       AnalyticsService.setRelatedProduct({
         products: currentChunk,
         pathArray,
-        indexForProdPosition
+        positionIndex
       });
       AnalyticsService.track('view');
     }
@@ -206,11 +206,6 @@ export default class Catalogue extends Component {
   }
 }
 
-/* const FakeMarginDiv = glamorous.div({
-  height: '100%',
-  width: '40px'
-}); */
-
 const Header = glamorous.div({
   width: '100%',
   height: '184px',
@@ -226,7 +221,7 @@ const Header = glamorous.div({
 const ProductSlider = glamorous.div(({ opacity = false }) => ({
   marginTop: '5%',
   display: 'flex',
-  overflowX: 'auto',
+  overflowX: 'hidden',
   flexFlow: 'column wrap',
   alignContent: 'flex-start',
   height: '1246px',
@@ -240,3 +235,4 @@ const ProductSlider = glamorous.div(({ opacity = false }) => ({
     }
   }
 }));
+

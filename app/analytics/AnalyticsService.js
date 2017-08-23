@@ -90,7 +90,6 @@ class AnalyticsService {
 
   setRelatedProduct(data) {
     const relatedProductsLayer = utils.buildRelatedProductsLayer(data);
-    console.log(relatedProductsLayer.toJS());
     this.mergeInDataLayer(relatedProductsLayer);
   }
 
