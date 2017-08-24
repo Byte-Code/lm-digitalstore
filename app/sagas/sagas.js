@@ -14,6 +14,7 @@ import routingSaga from './routingSaga';
 import { analyticsSaga } from './analyticsSaga';
 import { sessionAnalyticsSaga } from './sessionAnalyticsSaga';
 import getAllActiveStoreSaga from './getAllActiveStoreSaga';
+import pingIdentitySaga from './pingIdentitySaga';
 
 export default function* root() {
   yield [
@@ -30,6 +31,7 @@ export default function* root() {
     fork(routingSaga),
     fork(analyticsSaga),
     fork(sessionAnalyticsSaga),
-    fork(getAllActiveStoreSaga)
+    fork(getAllActiveStoreSaga),
+    fork(pingIdentitySaga)
   ];
 }
