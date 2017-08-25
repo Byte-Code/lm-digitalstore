@@ -3,12 +3,10 @@ import { getPageNameData } from './analyticsSaga.utility';
 import AnalyticsService from '../analytics/AnalyticsService';
 import { getStore } from '../reducers/selectors';
 import * as analyticsAction from '../actions/analyticsActions';
+import { manageScript } from '../services/LuckyOrange';
 
 export function* setAnalyticsSession() {
-  const {
-    worldName = '',
-    pathArray = '' } = yield call(getPageNameData);
-
+  const { worldName = '', pathArray = '' } = yield call(getPageNameData);
   const store = yield select(getStore);
 
   if (pathArray[0] === 'world') {
@@ -17,6 +15,7 @@ export function* setAnalyticsSession() {
     yield call(AnalyticsService.setCid);
     yield call(AnalyticsService.setReleaseVersion, worldName);
     yield put(analyticsAction.startAnalyticsSession());
+    yield call(manageScript);
   }
 }
 

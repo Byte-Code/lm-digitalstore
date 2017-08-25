@@ -11,6 +11,7 @@ import {
   getProductReducer,
 } from '../reducers/selectors';
 import { getPageNameData, getCategoryData } from './analyticsSaga.utility';
+import { pushCustomTag, events } from '../services/LuckyOrange';
 
 export function* analyticsSaga() {
   yield takeEvery(analyticsEventList, callAnalyticsSession);
@@ -150,6 +151,7 @@ export function* callAnalyticsSession() {
         pathArray
       });
       yield put(analyticsAction.trackProductClick());
+      pushCustomTag({ customTag: `${events.PRODUCT_CLICK} - code: ${product.get('code')}` });
     }
 
     if (startAnalyticsProduct) {
