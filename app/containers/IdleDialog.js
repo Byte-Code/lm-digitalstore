@@ -9,21 +9,6 @@ import glamorous from 'glamorous';
 import { getIdleDialog } from '../reducers/selectors';
 import CountDown from '../components/CountDown';
 
-const Text = glamorous.h1({
-  fontSize: 54,
-  lineHeight: '70px',
-  fontFamily: 'LeroyMerlinSans Bold',
-  color: '#333333',
-  margin: '48px 0'
-});
-
-const SubText = glamorous.p({
-  fontSize: 22,
-  lineHeight: '32px',
-  color: '#67cb33',
-  textTransform: 'uppercase'
-});
-
 const bodyStyle = { padding: 85, textAlign: 'center', zIndex: 400 };
 const contentStyle = { maxWidth: 'none', width: 830 };
 const iconStyle = { width: 80, height: 80, margin: '0 auto' };
@@ -41,11 +26,9 @@ class IdleDialog extends Component {
     return (
       <Dialog modal={false} open={dialogOpen} bodyStyle={bodyStyle} contentStyle={contentStyle}>
         <AlertIcon style={iconStyle} color="#339900" />
-        <Text>
-          Tocca lo schermo entro
-          &nbsp;<CountDown initialTime={countDownTime / 1000} />&nbsp;
-          secondi per continuare la navigazione
-        </Text>
+        <Text>Tocca lo schermo entro</Text>
+        <Text><CountDown initialTime={countDownTime / 1000} /></Text>
+        <Text>secondi per continuare la navigazione</Text>
         <SubText>La sessione sta per scadere per inattività</SubText>
       </Dialog>
     );
@@ -57,3 +40,18 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {})(IdleDialog);
+
+const Text = glamorous.h1({
+  fontSize: 54,
+  lineHeight: '70px',
+  fontFamily: 'LeroyMerlinSans Bold',
+  color: '#333333',
+  margin: '20px 0'
+});
+
+const SubText = glamorous.p({
+  fontSize: 22,
+  lineHeight: '32px',
+  color: '#67cb33',
+  textTransform: 'uppercase'
+});
