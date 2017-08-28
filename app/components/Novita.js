@@ -3,8 +3,7 @@ import glamorous from 'glamorous';
 
 const Wrapper = glamorous.div({
   height: 60,
-  position: 'relative',
-  zIndex: 2
+  position: 'relative'
 });
 
 const TopLabel = glamorous.div({
