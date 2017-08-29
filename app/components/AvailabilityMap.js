@@ -11,75 +11,6 @@ import Marker from './Marker';
 import InfoWindow from './InfoWindow';
 import NearbyStores from './NearbyStores';
 
-const Wrapper = glamorous.div({
-  display: 'flex',
-  flexDirection: 'column',
-  color: '#fff'
-});
-
-const MapWrapper = glamorous.div({
-  width: '100%',
-  height: '930px',
-  position: 'relative'
-});
-
-const Title = glamorous.h1({
-  fontSize: '48px',
-  textAlign: 'center',
-  lineHeight: '70px'
-});
-
-const SliderTitle = glamorous.p({
-  fontSize: '16px',
-  color: '#e4e4e4',
-  fontFamily: 'LeroyMerlinSans Italic'
-});
-
-const ProductInfo = glamorous.h3({
-  fontSize: '14px',
-  textAlign: 'center',
-  textTransform: 'capitalize',
-  marginBottom: '66px'
-});
-
-const Circle = glamorous.div(({ height, width }) => ({
-  boxSizing: 'content-box',
-  border: '5px dotted #67cb33',
-  transform: 'translate(-50%, -50%)',
-  borderRadius: '50%',
-  boxShadow: '0 0 0 9999999px rgba(0, 0, 0, 0.3)',
-  pointerEvents: 'none',
-  height,
-  width
-}));
-
-const Radius = glamorous.div(({ left }) => ({
-  fontSize: '16px',
-  color: '#67cb33',
-  margin: '0 auto 24px',
-  textAlign: 'center',
-  fontFamily: 'LeroyMerlinSans Light-Italic',
-  position: 'absolute',
-  left,
-  top: 75
-}));
-
-const ControlsOverlay = glamorous.div({
-  height: 30,
-  position: 'absolute',
-  bottom: 0,
-  width: '100%'
-});
-
-const sliderStyle = { marginBottom: 24 };
-const mapOptions = {
-  gestureHandling: 'none',
-  fullscreenControl: false,
-  maxZoom: 17,
-  minZoom: 8,
-  zoomControl: false
-};
-
 export default class AvailabilityMap extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
@@ -94,8 +25,7 @@ export default class AvailabilityMap extends Component {
     handleChange: PropTypes.func.isRequired,
     handleSlide: PropTypes.func.isRequired,
     radius: PropTypes.number.isRequired,
-    // zoom: PropTypes.number.isRequired,
-    initialZoom: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
     infoWindowOpen: PropTypes.bool.isRequired,
     trackStoreAvailabilityEvent: PropTypes.func.isRequired
   };
@@ -177,14 +107,13 @@ export default class AvailabilityMap extends Component {
       homeStore,
       nearbyStoresWithProductInStock,
       radius,
-      // zoom,
+      zoom,
       selectedStore,
       selectStore,
       handleChange,
       handleSlide,
-      initialZoom
     } = this.props;
-    // const { minRadius, maxRadius } = this.state;
+    const { minRadius, maxRadius } = this.state;
     const homeStoreName = homeStore.get('name');
     const lat = homeStore.getIn(['gpsInformation', 'x']);
     const lng = homeStore.getIn(['gpsInformation', 'y']);
@@ -200,14 +129,15 @@ export default class AvailabilityMap extends Component {
         <Div padding="0 20px 40px" position="relative">
           <SliderTitle >{`Seleziona il raggio di distanza dal negozio di ${homeStoreName}`}</SliderTitle>
           <Slider
-            min={9}
-            max={13}
-            value={initialZoom}
-            onChange={(e, v) => handleSlide(e, v, initialZoom)}
+            min={minRadius}
+            max={maxRadius}
+            value={radius}
+            onChange={handleSlide}
             color="#67cb33"
             sliderStyle={sliderStyle}
+            step={10}
           />
-          <Radius left={labelPosition}>{`${initialZoom} zoom`}</Radius>
+          <Radius left={labelPosition}>{`${radius} km`}</Radius>
         </Div>
         <MapWrapper>
           <GoogleMapReact
@@ -215,7 +145,7 @@ export default class AvailabilityMap extends Component {
             fullscreenControl={false}
             options={mapOptions}
             onChange={handleChange}
-            zoom={initialZoom}
+            zoom={zoom}
           >
             {this.renderMarkers()}
             {this.renderInfoWindow()}
@@ -232,3 +162,72 @@ export default class AvailabilityMap extends Component {
     );
   }
 }
+
+const Wrapper = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  color: '#fff'
+});
+
+const MapWrapper = glamorous.div({
+  width: '100%',
+  height: '930px',
+  position: 'relative'
+});
+
+const Title = glamorous.h1({
+  fontSize: '48px',
+  textAlign: 'center',
+  lineHeight: '70px'
+});
+
+const SliderTitle = glamorous.p({
+  fontSize: '16px',
+  color: '#e4e4e4',
+  fontFamily: 'LeroyMerlinSans Italic'
+});
+
+const ProductInfo = glamorous.h3({
+  fontSize: '14px',
+  textAlign: 'center',
+  textTransform: 'capitalize',
+  marginBottom: '66px'
+});
+
+const Circle = glamorous.div(({ height, width }) => ({
+  boxSizing: 'content-box',
+  border: '5px dotted #67cb33',
+  transform: 'translate(-50%, -50%)',
+  borderRadius: '50%',
+  boxShadow: '0 0 0 9999999px rgba(0, 0, 0, 0.3)',
+  pointerEvents: 'none',
+  height,
+  width
+}));
+
+const Radius = glamorous.div(({ left }) => ({
+  fontSize: '16px',
+  color: '#67cb33',
+  margin: '0 auto 24px',
+  textAlign: 'center',
+  fontFamily: 'LeroyMerlinSans Light-Italic',
+  position: 'absolute',
+  left,
+  top: 75
+}));
+
+const ControlsOverlay = glamorous.div({
+  height: 30,
+  position: 'absolute',
+  bottom: 0,
+  width: '100%'
+});
+
+const sliderStyle = { marginBottom: 24 };
+const mapOptions = {
+  gestureHandling: 'none',
+  fullscreenControl: false,
+  maxZoom: 17,
+  minZoom: 8,
+  zoomControl: false
+};

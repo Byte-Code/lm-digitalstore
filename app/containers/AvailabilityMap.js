@@ -24,10 +24,18 @@ const MapDispatchToProps = {
   trackStoreAvailabilityEvent
 };
 
+const mapKmZoom = {
+  2: 13,
+  12: 12,
+  22: 11,
+  32: 11,
+  42: 10,
+  50: 9
+};
+
 const enhance = compose(
   withState('radius', 'setRadius', 25),
   withState('zoom', 'setZoom', 11),
-  withState('initialZoom', 'setInitialZoom', 11),
   withState('selectedStore', 'setSelectedStore', ''),
   withState('infoWindowOpen', 'setInfoWindow', false),
   withHandlers({
@@ -38,9 +46,9 @@ const enhance = compose(
     handleChange: ({ setZoom }) => (e) => {
       setZoom(e.zoom);
     },
-    handleSlide: ({ setRadius, setInfoWindow, setInitialZoom }) => (e, v) => {
+    handleSlide: ({ setRadius, setInfoWindow, setZoom }) => (e, v) => {
       const value = round(v);
-      setInitialZoom(value);
+      setZoom(mapKmZoom[value]);
       setInfoWindow(false, () => setRadius(v));
     }
   }),
