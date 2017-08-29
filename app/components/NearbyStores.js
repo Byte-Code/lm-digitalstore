@@ -5,61 +5,6 @@ import { List } from 'immutable';
 import glamorous, { Div } from 'glamorous';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 
-const iconStyle = {
-  height: 55,
-  width: 55,
-  cursor: 'pointer',
-  marginRight: 15,
-  marginLeft: 5
-};
-
-const Wrapper = glamorous.div(({ backgroundColor }) => ({
-  width: 344,
-  height: 108,
-  display: 'flex',
-  backgroundColor
-}));
-
-const Info = glamorous.p(({ fontSize, color }) => ({
-  fontSize: fontSize || 20,
-  color: color || '#fff',
-  lineHeight: '20px'
-}));
-
-const StoreInfo = glamorous.div({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  padding: '7px 0 11px'
-});
-
-const WhiteBg = glamorous.div({
-  position: 'absolute',
-  height: 25,
-  width: 20,
-  zIndex: -1,
-  top: 9,
-  left: 22,
-  backgroundColor: '#fff'
-});
-
-const StoreList = glamorous.div({
-  overflowX: 'auto',
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  height: 150
-});
-
-const Label = glamorous.p({
-  fontSize: 16,
-  color: '#e4e4e4',
-  display: 'flex',
-  alignItems: 'center',
-  margin: '0 20px',
-  width: 120
-});
-
 const NearbyStore = ({ currentStoreInfo, handleClick, isActive }) => {
   const name = currentStoreInfo.get('name');
   const street = currentStoreInfo.getIn(['address', 'street']);
@@ -132,5 +77,60 @@ NearbyStores.propTypes = {
 NearbyStores.defaultProps = {
   nearbyStores: List()
 };
+
+const iconStyle = {
+  height: 55,
+  width: 55,
+  cursor: 'pointer',
+  marginRight: 15,
+  marginLeft: 5
+};
+
+const Wrapper = glamorous.div(({ backgroundColor }) => ({
+  width: 344,
+  height: 108,
+  display: 'flex',
+  backgroundColor
+}));
+
+const Info = glamorous.p(({ fontSize, color }) => ({
+  fontSize: fontSize || 20,
+  color: color || '#fff',
+  lineHeight: '20px'
+}));
+
+const StoreInfo = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '7px 0 11px'
+});
+
+const WhiteBg = glamorous.div({
+  position: 'absolute',
+  height: 25,
+  width: 20,
+  zIndex: -1,
+  top: 9,
+  left: 22,
+  backgroundColor: '#fff'
+});
+
+const StoreList = glamorous.div({
+  overflowX: 'auto',
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  height: 150
+});
+
+const Label = glamorous.p({
+  fontSize: 16,
+  color: '#e4e4e4',
+  display: 'flex',
+  alignItems: 'center',
+  margin: '0 20px',
+  width: 120
+});
 
 export default NearbyStores;
