@@ -58,7 +58,9 @@ const Wrapper = glamorous.div(props => props.wrapperStyle);
 const TopRight = glamorous.div(props => {
   const hasTopLeft = props.topLeft.get('code');
   if (!hasTopLeft && Object.keys(props.topRightStyle).length > 0) {
-    Object.assign(props.topRightStyle['&>img'], { marginTop: '20px !important' });
+    if (props.topRightStyle['&>img']) {
+      Object.assign(props.topRightStyle['&>img'], { marginTop: '20px !important' });
+    }
   }
   return props.topRightStyle;
 });

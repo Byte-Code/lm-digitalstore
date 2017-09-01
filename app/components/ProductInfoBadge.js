@@ -159,7 +159,9 @@ export default class ProductInfoBadge extends Component {
         }
       },
       topRightStyle: {
-
+        '&>div': {
+          marginRight: '0px'
+        }
       }
     };
 
