@@ -4,66 +4,13 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous, { Div } from 'glamorous';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
-
-const iconStyle = {
-  height: 55,
-  width: 55,
-  cursor: 'pointer',
-  marginRight: 15,
-  marginLeft: 5
-};
-
-const Wrapper = glamorous.div(({ backgroundColor }) => ({
-  width: 344,
-  height: 108,
-  display: 'flex',
-  backgroundColor
-}));
-
-const Info = glamorous.p(({ fontSize, color }) => ({
-  fontSize: fontSize || 20,
-  color: color || '#fff',
-  lineHeight: '20px'
-}));
-
-const StoreInfo = glamorous.div({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  padding: '7px 0 11px'
-});
-
-const WhiteBg = glamorous.div({
-  position: 'absolute',
-  height: 25,
-  width: 20,
-  zIndex: -1,
-  top: 9,
-  left: 22,
-  backgroundColor: '#fff'
-});
-
-const StoreList = glamorous.div({
-  overflowX: 'auto',
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  height: 150
-});
-
-const Label = glamorous.p({
-  fontSize: 16,
-  color: '#e4e4e4',
-  display: 'flex',
-  alignItems: 'center',
-  margin: '0 20px',
-  width: 120
-});
+import Slider from 'react-slick';
 
 const NearbyStore = ({ currentStoreInfo, handleClick, isActive }) => {
   const name = currentStoreInfo.get('name');
   const street = currentStoreInfo.getIn(['address', 'street']);
-  const streetNumber = currentStoreInfo.getIn(['address', 'streetNumber']) || '';
+  const streetNumber =
+    currentStoreInfo.getIn(['address', 'streetNumber']) || '';
   const zip = currentStoreInfo.getIn(['address', 'zipCode']);
   const city = currentStoreInfo.getIn(['address', 'city']);
   const province = currentStoreInfo.getIn(['address', 'state']);
@@ -94,30 +41,47 @@ const NearbyStore = ({ currentStoreInfo, handleClick, isActive }) => {
 NearbyStore.propTypes = {
   currentStoreInfo: ImmutablePropTypes.map.isRequired,
   handleClick: PropTypes.func.isRequired,
-  isActive: PropTypes.bool.isRequired
+  isActive: PropTypes.bool.isRequired,
 };
+
+const renderStores = (nearbyStores, selectedStore, handleClick) =>
+  nearbyStores.map(s =>
+    <div key={s.get('code')}>
+      <NearbyStore
+        currentStoreInfo={s}
+        handleClick={() => handleClick(s.get('code'), s.get('name'))}
+        isActive={selectedStore === s.get('code')}
+      />
+    </div>
+  );
 
 const NearbyStores = ({ nearbyStores, selectedStore, handleClick }) => {
   if (nearbyStores.isEmpty()) {
     return <StoreList />;
   }
 
+  const sliderConfig = {
+    slideToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    arrow: false,
+    vertical: false,
+    variableWidth: true,
+    focusOnSelect: true,
+    autoplay: false,
+    infinite: false,
+    centerMode: false
+  };
+
   return (
-    <Div display="flex" width={1000}>
+    <Div display="flex">
       <Label>
         {`Disponibile in ${nearbyStores.size} negozi limitrofi`}
       </Label>
-      <StoreList>
-        <Div display="flex">
-          {nearbyStores.map(s =>
-            <NearbyStore
-              key={s.get('code')}
-              currentStoreInfo={s}
-              handleClick={() => handleClick(s.get('code'), s.get('name'))}
-              isActive={selectedStore === s.get('code')}
-            />
-          )}
-        </Div>
+      <StoreList id="store-list">
+        <Slider {...sliderConfig}>
+          {renderStores(nearbyStores, selectedStore, handleClick)}
+        </Slider>
       </StoreList>
     </Div>
   );
@@ -126,11 +90,66 @@ const NearbyStores = ({ nearbyStores, selectedStore, handleClick }) => {
 NearbyStores.propTypes = {
   nearbyStores: ImmutablePropTypes.list,
   selectedStore: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
 };
 
 NearbyStores.defaultProps = {
-  nearbyStores: List()
+  nearbyStores: List(),
 };
+
+const iconStyle = {
+  height: 55,
+  width: 55,
+  cursor: 'pointer',
+  marginRight: 15,
+  marginLeft: 5,
+};
+
+const Wrapper = glamorous.div(({ backgroundColor }) => ({
+  width: 344,
+  height: 108,
+  display: 'flex',
+  backgroundColor,
+}));
+
+const Info = glamorous.p(({ fontSize, color }) => ({
+  fontSize: fontSize || 20,
+  color: color || '#fff',
+  lineHeight: '20px',
+}));
+
+const StoreInfo = glamorous.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '7px 0 11px',
+});
+
+const WhiteBg = glamorous.div({
+  position: 'absolute',
+  height: 25,
+  width: 20,
+  zIndex: -1,
+  top: 9,
+  left: 22,
+  backgroundColor: '#fff',
+});
+
+const StoreList = glamorous.div({
+  overflowX: 'auto',
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  height: 150
+});
+
+const Label = glamorous.p({
+  fontSize: 16,
+  color: '#e4e4e4',
+  display: 'flex',
+  alignItems: 'center',
+  margin: '0 20px',
+  width: 120,
+});
 
 export default NearbyStores;
