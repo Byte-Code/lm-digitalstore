@@ -32,6 +32,10 @@ const Quantity = glamorous.p({
   textAlign: 'right'
 });
 
+const Wrapper = glamorous.div({
+  marginTop: '15px'
+});
+
 export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map.isRequired,
@@ -48,7 +52,7 @@ export default class PriceBadge extends Component {
     const sellingUnit = pricingInfo.get('sellingUnit');
 
     return (
-      <div>
+      <Wrapper>
         {isDiscounted &&
           <Discount>
             <span>-{Math.round(discount)} %</span>
@@ -58,7 +62,7 @@ export default class PriceBadge extends Component {
           {formatPrice(grossPrice)} €
         </MainPrice>
         <Quantity>{`${sellingCapacity} ${sellingUnit} / ${sellingUnit}`}</Quantity>
-      </div>
+      </Wrapper>
     );
   }
 }

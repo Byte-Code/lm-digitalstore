@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Novita should render properly 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  id="novita_badge"
+>
   <glamorous(div) />
   <glamorous(span)>
     NOVITÀ

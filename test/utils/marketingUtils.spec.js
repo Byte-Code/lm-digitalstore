@@ -1,5 +1,5 @@
-import { Map, List, fromJS } from 'immutable';
-import { getPromotions, filterPromotions } from '../../app/utils/marketingUtils';
+import { Map, fromJS } from 'immutable';
+import { getPromotions, buildPromotionMap, marketingLabel } from '../../app/utils/marketingUtils';
 
 const futureDate = '2020-10-14T00:00:00.000Z';
 
@@ -60,41 +60,137 @@ describe('getPromotions', () => {
   });
 });
 
-describe('filterPromotions', () => {
-  it('should return an empty List if no promotions are active', () => {
-    const activeMarketing = Map();
-    const result = List();
-    expect(filterPromotions(activeMarketing)).toEqual(result);
+describe('buildPromotionMap', () => {
+  it('should output topLeft: Novita - topRight: null', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.novita]);
+    const topLeft = { code: marketingLabel.novita };
+    checkPromotionMapExpect({ promotions, topLeft });
   });
 
-  it('should ignore NOVITA if PREZZOGIU is active', () => {
-    const activeMarketing = fromJS({ PREZZO_GIU: true, NOVITA: true });
-    const result = fromJS([{ code: 'PREZZO_GIU' }]);
-    expect(filterPromotions(activeMarketing)).toEqual(result);
+  it('should output topLeft: PREZZO_GIU - topRight: null', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.prezzoGiu]);
+    const topLeft = { code: marketingLabel.prezzoGiu };
+    checkPromotionMapExpect({ promotions, topLeft });
   });
 
-  it('should ignore NOVITA if DESTOCK is active', () => {
-    const activeMarketing = fromJS({ DESTOCK: true, NOVITA: true });
-    const result = fromJS([{ code: 'DESTOCK' }]);
-    expect(filterPromotions(activeMarketing)).toEqual(result);
+  it('should output topLeft: null - topRight: blackFriday', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.blackFriday]);
+    const topRight = { code: marketingLabel.blackFriday };
+    checkPromotionMapExpect({ promotions, topRight });
   });
 
-  it('should keep track of IDEAPIU value', () => {
-    const activeMarketing = fromJS({ PREZZO_GIU: true, NOVITA: true, IDEAPIU: 10 });
-    const result = fromJS([{ code: 'PREZZO_GIU' }, { code: 'IDEAPIU', value: 10 }]);
-    expect(filterPromotions(activeMarketing)).toEqual(result);
+  it('should output PROMO_WEB topLeft: null - topRight: PROMO_WEB without promotionalCode', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.promoWeb]);
+    const topRight = { code: marketingLabel.promoWeb };
+    checkPromotionMapExpect({ promotions, topRight });
   });
 
-  it('should never have more than 2 elements', () => {
-    const activeMarketing = fromJS({
-      PREZZO_GIU: true,
-      NOVITA: true,
-      PROMO_WEB: true,
-      PREZZO_VINCENTE: true,
-      IDEAPIU: 10
-    });
-    const result = fromJS([{ code: 'PREZZO_GIU' }, { code: 'PROMO_WEB' }]);
-    expect(filterPromotions(activeMarketing)).toEqual(result);
-    expect(filterPromotions(activeMarketing).size).toBeLessThanOrEqual(2);
+  it('should output topLeft: null - topRight: null with promotionalCode', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.promoWeb]);
+    const promotionCode = '2';
+    checkPromotionMapExpect({ promotions, promotionCode });
+  });
+
+  it('should output topLeft: null - topRight: DESTOCK with promotionalCode', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.destock]);
+    const topRight = { code: marketingLabel.destock };
+    checkPromotionMapExpect({ promotions, topRight });
+  });
+
+  it('should output topLeft: null - topRight: DESTOCK with also PREZZO_VINCENTE', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.destock, marketingLabel.prezzoVincente]);
+    const topRight = { code: marketingLabel.destock };
+    checkPromotionMapExpect({ promotions, topRight });
+  });
+
+  it('should output ' +
+    'topLeft: PREZZO_GIU - topRight: PREZZO_VINCENTE ' +
+    'with PREZZO_STOCK and NOVITA', () => {
+    const promotions = buildPromotionAttrs([
+      marketingLabel.prezzoVincente,
+      marketingLabel.prezzoStock,
+      marketingLabel.novita,
+      marketingLabel.prezzoGiu
+    ]);
+    const topRight = { code: marketingLabel.prezzoVincente };
+    const topLeft = { code: marketingLabel.prezzoGiu };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
+  });
+
+  it('should output topLeft: NOVITA - topRight: PREZZO_STOCK with also PREZZO_VINCENTE', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.prezzoVincente, marketingLabel.novita]);
+    const topRight = { code: marketingLabel.prezzoVincente };
+    const topLeft = { code: marketingLabel.novita };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
+  });
+
+  it('should output topLeft: NOVITA - topRight: IDEAPIU with also PREZZO_VINCENTE', () => {
+    const promotions = buildPromotionAttrs([marketingLabel.ideaPiu, marketingLabel.novita]);
+    const topRight = { code: marketingLabel.ideaPiu, value: true };
+    const topLeft = { code: marketingLabel.novita };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
+  });
+
+  it('should output topLeft: PREZZO_GIU - topRight: BLACK_FRIDAY with all promotions', () => {
+    const promotions = buildPromotionAttrs([
+      marketingLabel.ideaPiu,
+      marketingLabel.novita,
+      marketingLabel.prezzoGiu,
+      marketingLabel.blackFriday,
+      marketingLabel.promoWeb,
+      marketingLabel.destock,
+      marketingLabel.prezzoVincente,
+      marketingLabel.prezzoStock
+    ]);
+    const topRight = { code: marketingLabel.blackFriday };
+    const topLeft = { code: marketingLabel.prezzoGiu };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
+  });
+
+  it('should output topLeft: NOVITA - topRight: PROMO_WEB ' +
+    'with all promotions except BLACK_FRIDAY && PREZZO_GIU && PREZZO_STOCK', () => {
+    const promotions = buildPromotionAttrs([
+      marketingLabel.ideaPiu,
+      marketingLabel.novita,
+      marketingLabel.promoWeb,
+      marketingLabel.destock,
+      marketingLabel.prezzoVincente
+    ]);
+    const topRight = { code: marketingLabel.promoWeb };
+    const topLeft = { code: marketingLabel.novita };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
+  });
+
+  it('should output topLeft: null - topRight: PROMO_WEB ' +
+    'with all promotions except BLACK_FRIDAY && PREZZO_GIU', () => {
+    const promotions = buildPromotionAttrs([
+      marketingLabel.ideaPiu,
+      marketingLabel.novita,
+      marketingLabel.promoWeb,
+      marketingLabel.destock,
+      marketingLabel.prezzoVincente,
+      marketingLabel.prezzoStock
+    ]);
+    const topRight = { code: marketingLabel.promoWeb };
+    const topLeft = { code: null };
+    checkPromotionMapExpect({ promotions, topRight, topLeft });
   });
 });
+
+const buildPromotionAttrs = promotions => {
+  const map = {};
+  promotions.forEach(promotion => {
+    map[promotion] = true;
+  });
+  return fromJS(map);
+};
+
+const checkPromotionMapExpect = ({
+  promotions,
+  promotionCode = '0',
+  topLeft = { code: null },
+  topRight = { code: null }
+  }) => expect(buildPromotionMap({ promotions, promotionCode })).toEqual(
+  fromJS({ topLeft, topRight }
+  )
+);
