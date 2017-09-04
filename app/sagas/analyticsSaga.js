@@ -26,7 +26,7 @@ export function* callAnalyticsSession() {
       idleTimerComplete,
       startAnalyticsSession,
       setProduct,
-      setRelatedProduct,
+      setRelatedProductInCatalogue,
       startAnalyticsProduct,
       filters,
       trackFilters,
@@ -39,7 +39,7 @@ export function* callAnalyticsSession() {
       idleTimerComplete: take(constants.IDLE_TIMER_COMPLETE),
       startAnalyticsSession: take(constants.START_ANALYTICS_SESSION),
       setProduct: take(constants.SUCCESS_FETCH_PRODUCT),
-      setRelatedProduct: take(constants.SUCCESS_FETCH_PRODUCTLIST),
+      setRelatedProductInCatalogue: take(constants.TRACK_CATALOGUE_PRODUCTS_CHUNK),
       startAnalyticsProduct: take(constants.START_ANALYTICS_PRODUCT),
       filters: take([
         constants.TOGGLE_AID,
@@ -77,7 +77,7 @@ export function* callAnalyticsSession() {
       yield put(analyticsAction.successSetProductInDataLayer());
     }
 
-    if (setRelatedProduct) {
+    if (setRelatedProductInCatalogue) {
       const {
         categoryCode = '',
         categoryName = '',
@@ -91,11 +91,14 @@ export function* callAnalyticsSession() {
           categoryCode,
           categoryName
         });
-        yield put(analyticsAction.successSetPageName());
+
+        /* yield put(analyticsAction.successSetPageName());
+        const { products, positionIndex } = setRelatedProductInCatalogue;
+        const params = { products, pathArray, positionIndex };
+        yield call(AnalyticsService.setRelatedProduct, params);
+        yield put(analyticsAction.successSetRelatedProductInDataLayer());
+        yield call(AnalyticsService.track, 'view'); */
       }
-      const params = { products: setRelatedProduct.result, pathArray };
-      yield call(AnalyticsService.setRelatedProduct, params);
-      yield put(analyticsAction.successSetRelatedProductInDataLayer());
     }
 
     if (filters) {
@@ -150,8 +153,10 @@ export function* callAnalyticsSession() {
     }
 
     if (startAnalyticsProduct) {
-      yield call(AnalyticsService.track, 'view');
-      yield put(analyticsAction.successStartAnalyticsProduct());
+      if (pathArray[0] !== 'catalogue') {
+        yield call(AnalyticsService.track, 'view');
+        yield put(analyticsAction.successStartAnalyticsProduct());
+      }
     }
 
     if (trackFilters) {
