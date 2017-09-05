@@ -31,8 +31,6 @@ export function* callAnalyticsSession() {
       filters,
       trackFilters,
       resetFilters,
-      productClick,
-      trackProductClick,
       trackStoreAvailability
     } = yield race({
       setSessionData: take(constants.SUCCESS_FETCH_WORLD),
@@ -49,8 +47,6 @@ export function* callAnalyticsSession() {
       ]),
       resetFilters: take(constants.RESET_FILTERS),
       trackFilters: take(constants.TRACK_ANALYTICS_FILTERS),
-      productClick: take(constants.SET_ANALYTICS_PRODUCT_CLICK),
-      trackProductClick: take(constants.TRACK_PRODUCT_CLICK),
       trackStoreAvailability: take(constants.TRACK_STORE_AVAILABILITY_EVENT)
     });
 
@@ -91,13 +87,6 @@ export function* callAnalyticsSession() {
           categoryCode,
           categoryName
         });
-
-        /* yield put(analyticsAction.successSetPageName());
-        const { products, positionIndex } = setRelatedProductInCatalogue;
-        const params = { products, pathArray, positionIndex };
-        yield call(AnalyticsService.setRelatedProduct, params);
-        yield put(analyticsAction.successSetRelatedProductInDataLayer());
-        yield call(AnalyticsService.track, 'view'); */
       }
     }
 
@@ -141,17 +130,6 @@ export function* callAnalyticsSession() {
       yield put(analyticsAction.successStartAnalyticsSession());
     }
 
-    if (productClick) {
-      const { product, index = 0 } = productClick.data;
-      yield call(AnalyticsService.setProduct, {
-        product,
-        action: [constants.PROD_CLICK],
-        index,
-        pathArray
-      });
-      yield put(analyticsAction.trackProductClick());
-    }
-
     if (startAnalyticsProduct) {
       if (pathArray[0] !== 'catalogue') {
         yield call(AnalyticsService.track, 'view');
@@ -162,12 +140,6 @@ export function* callAnalyticsSession() {
     if (trackFilters) {
       yield call(AnalyticsService.track, 'view');
       yield put(analyticsAction.successTrackFilters());
-    }
-
-    if (trackProductClick) {
-      yield call(AnalyticsService.track, 'link');
-      yield put(analyticsAction.successTrackProductClick());
-      yield call(AnalyticsService.setTraccia, true);
     }
 
     if (trackStoreAvailability) {
