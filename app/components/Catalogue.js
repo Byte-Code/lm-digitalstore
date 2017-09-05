@@ -174,7 +174,7 @@ export default class Catalogue extends Component {
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
     const activeAid = filterMap.get('aid');
     const swipeableConfig = {
-      flickThreshold: 1.6,
+      flickThreshold: 0.6,
       preventDefaultTouchmoveEvent: true,
       delta: 50
     };
