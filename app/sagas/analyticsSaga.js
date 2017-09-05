@@ -167,6 +167,7 @@ export function* callAnalyticsSession() {
     if (trackProductClick) {
       yield call(AnalyticsService.track, 'link');
       yield put(analyticsAction.successTrackProductClick());
+      yield call(AnalyticsService.setTraccia, true);
     }
 
     if (trackStoreAvailability) {

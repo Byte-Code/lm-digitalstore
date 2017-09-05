@@ -30,7 +30,7 @@ export default class Catalogue extends Component {
     resetTempFilters: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
-    // trackCatalogueProductsChunk: PropTypes.func.isRequired
+    trackCatalogueProductsChunk: PropTypes.func.isRequired,
     routingData: ImmutablePropTypes.map.isRequired
   };
 
@@ -80,7 +80,7 @@ export default class Catalogue extends Component {
     if (componentReceiveProduct || chunkHasChanged) {
       const currentChunk = this.getChunks().setSize(this.chunkSize);
       const positionIndex = this.chunkSize * this.state.currentChunkIndex;
-      // this.props.trackCatalogueProductsChunk(currentChunk, indexForProdPosition);
+      this.props.trackCatalogueProductsChunk();
       // Can't use redux-saga https://stackoverflow.com/questions/45435094/redux-saga-takeevery-miss-catch-event
       const path = _.trimStart(this.props.routingData.get('pathname'), '/');
       const pathArray = _.split(path, '/');
@@ -89,7 +89,7 @@ export default class Catalogue extends Component {
         pathArray,
         positionIndex
       });
-      AnalyticsService.track('view');
+      setTimeout(() => AnalyticsService.track('view'), 500);
     }
   }
 

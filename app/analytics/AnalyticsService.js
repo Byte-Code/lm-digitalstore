@@ -12,6 +12,7 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
+    this.traccia = true;
     this.firstTrack = true;
     this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
@@ -28,6 +29,7 @@ class AnalyticsService {
     this.setFilters = this.setFilters.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.setStoreAvailability = this.setStoreAvailability.bind(this);
+    this.setTraccia = this.setTraccia.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -120,17 +122,24 @@ class AnalyticsService {
     this.setDataLayer(LABEL.EVENT_ACTION, `${storeName}_${storeStock}`);
   }
 
+  setTraccia(value) {
+    this.traccia = value;
+  }
+
   track(eventType) {
-    tealiumAnalytics([{
-      hitType: eventType,
-      dataLayer: this.dataLayer.toJS()
-    }]);
+    if (this.traccia) {
+      tealiumAnalytics([{
+        hitType: eventType,
+        dataLayer: this.dataLayer.toJS()
+      }]);
 
-    if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
-      console.log(this.dataLayer.toJS());
+      if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
+        console.log(this.dataLayer.toJS());
+      }
+      this.clearDataLayer();
+      this.traccia = false;
+      setTimeout(() => { this.traccia = true; }, 1000);
     }
-
-    this.clearDataLayer();
   }
 }
 
