@@ -138,7 +138,7 @@ class AnalyticsService {
       }
       this.clearDataLayer();
       this.traccia = false;
-      setTimeout(() => { this.traccia = true; }, 1000);
+      setTimeout(() => { this.traccia = true; }, 500);
     }
   }
 }
