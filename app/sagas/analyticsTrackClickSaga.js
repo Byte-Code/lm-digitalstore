@@ -14,7 +14,7 @@ export function* setProductClick(action) {
   const { product, index = 0 } = action.data;
   yield call(AnalyticsService.setProduct, {
     product,
-    action: [PROD_CLICK],
+    action: PROD_CLICK,
     index,
     pathArray
   });

@@ -90,6 +90,7 @@ class AnalyticsService {
         pathArray
       );
     }
+
     this.mergeInDataLayer(productLayer);
   }
 
