@@ -57,14 +57,27 @@ export default class AvailabilityMap extends Component {
     return (radius - minRadius) * sliderWidth / (maxRadius - minRadius); // eslint-disable-line
   };
 
+  getSliderIndex = (nearbyStores, pinCode) => {
+    let index = '';
+    // eslint-disable-next-line array-callback-return
+    nearbyStores.map((s, i) => {
+      if (pinCode === s.get('code')) {
+        index = i;
+      }
+    });
+    return index;
+  };
+
   renderMarkers() {
-    const { allNearbyStores, homeStore, selectStore, closeInfoWindow } = this.props;
+    const { allNearbyStores, homeStore, selectStore, closeInfoWindow,
+      nearbyStoresWithProductInStock } = this.props;
     return allNearbyStores.map(s => {
       const isAvailable = s.get('storeStock') > 0;
       const code = s.get('code');
       const lat = s.get('latitude');
       const lng = s.get('longitude');
       const isCurrentStore = homeStore.get('code') === code;
+      const sliderIndex = this.getSliderIndex(nearbyStoresWithProductInStock, code);
 
       return (
         <Marker
@@ -76,6 +89,7 @@ export default class AvailabilityMap extends Component {
           handleClick={() => {
             selectStore(code);
             closeInfoWindow();
+            this.slick.slickGoTo(sliderIndex);
           }}
           isAvailable={isAvailable}
         />
@@ -160,6 +174,8 @@ export default class AvailabilityMap extends Component {
           nearbyStores={nearbyStoresWithProductInStock}
           selectedStore={selectedStore}
           handleClick={selectStore}
+          // eslint-disable-next-line no-return-assign
+          slick={el => this.slick = el}
         />
       </Wrapper>
     );
