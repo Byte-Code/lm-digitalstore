@@ -56,7 +56,8 @@ class NearbyStores extends React.Component {
       dots: false,
       arrow: false,
       vertical: false,
-      variableWidth: true
+      variableWidth: true,
+      infinite: false
     };
 
     return (
