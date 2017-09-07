@@ -13,8 +13,8 @@ import sdraio from '../app/assets/11_SdraioLettini.jpg';
 import texture from '../app/assets/texture.png';
 
 const world = {
-  worldName: 'Giardino e Terrazzo',
-  title: 'Scopri le soluzioni per Giardino e Terrazzo',
+  worldName: 'Comfort',
+  title: 'Scopri le soluzioni per Comfort',
   trailingImage: footer,
   banner: {
     text: 'Scopri le funzioni del Digital Store',
@@ -22,49 +22,49 @@ const world = {
   },
   families: [
     {
-      familyName: 'Tavoli',
+      familyName: 'Stufe a Pellet',
       image: tavoli,
-      categoryCode: 'CAT656'
+      categoryCode: 'CAT283'
     },
     {
-      familyName: 'Gazebo',
+      familyName: 'Stufe a Legna',
       image: gazebo,
-      categoryCode: 'CAT944'
+      categoryCode: 'CAT282'
     },
     {
-      familyName: 'Sedie e Poltrone',
+      familyName: 'Stufe a petrolio',
       image: sedie,
-      categoryCode: 'CAT657'
+      categoryCode: 'CAT280'
     },
     {
-      familyName: 'Panchine',
+      familyName: 'Stufe Elettriche',
       image: panchine,
-      categoryCode: 'CAT945'
+      categoryCode: 'CAT290'
     },
     {
-      familyName: 'Dondoli e Amache',
+      familyName: 'Stufe a Bioetanolo',
       image: dondoli,
-      categoryCode: 'CAT659'
+      categoryCode: 'CAT792'
     },
     {
-      familyName: 'Ombrelloni e Basi',
+      familyName: 'Stufe a Gas',
       image: ombrelloni,
-      categoryCode: 'CAT660'
+      categoryCode: 'CAT281'
     },
     {
-      familyName: 'Set di tavoli e sedie',
+      familyName: 'Termoarredi',
       image: tavoliSedie,
-      categoryCode: 'CAT655'
+      categoryCode: 'CAT52'
     },
     {
-      familyName: 'Sdraio e Lettini',
+      familyName: 'Radiatori',
       image: sdraio,
-      categoryCode: 'CAT658'
+      categoryCode: 'CAT286'
     },
     {
-      familyName: 'Pergole',
+      familyName: 'Pompe di Calore',
       image: pergole,
-      categoryCode: 'CAT676'
+      categoryCode: 'CAT4214'
     },
     {
       familyName: 'Carport',
