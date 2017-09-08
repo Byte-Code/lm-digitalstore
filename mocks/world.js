@@ -14,6 +14,7 @@ import texture from '../app/assets/texture.png';
 
 const world = {
   worldName: 'Comfort',
+  worldTemplate: 'comfort',
   title: 'Scopri le soluzioni per Comfort',
   trailingImage: footer,
   banner: {
