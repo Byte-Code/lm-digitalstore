@@ -7,6 +7,32 @@ exports[`ProductInfoBadge should render properly with AvailabilityButton when ha
   <MarketingFlag
     loyaltyProgram={Object {}}
     marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>#novita_badge": Object {
+          "marginLeft": "-8px",
+          "marginTop": "-9px",
+        },
+        "&>img": Object {
+          "marginLeft": "-14px",
+          "marginTop": "-13px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>div": Object {
+          "marginRight": "0px",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "display": "flex",
+        "justifyContent": "space-between",
+      }
+    }
   />
   <PriceBadge
     price={Object {}}
@@ -51,6 +77,32 @@ exports[`ProductInfoBadge should render properly without AvailabilityButton when
   <MarketingFlag
     loyaltyProgram={Object {}}
     marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>#novita_badge": Object {
+          "marginLeft": "-8px",
+          "marginTop": "-9px",
+        },
+        "&>img": Object {
+          "marginLeft": "-14px",
+          "marginTop": "-13px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>div": Object {
+          "marginRight": "0px",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "display": "flex",
+        "justifyContent": "space-between",
+      }
+    }
   />
   <PriceBadge
     price={Object {}}

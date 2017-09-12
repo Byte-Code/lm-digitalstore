@@ -28,13 +28,6 @@ exports[`ActiveFilters should call handleOpen when showMore filter is clicked 1`
       Visualizza altri filtri
     </p>
   </glamorous(glamorous(div))>
-  <glamorous(div)
-    onClick={[Function]}
-  >
-    <p>
-      Reset filtri
-    </p>
-  </glamorous(div)>
 </glamorous(div)>
 `;
 
@@ -48,13 +41,6 @@ exports[`ActiveFilters should call toggleAvailability when a availability filter
       Disponibile
     </p>
   </glamorous(div)>
-  <glamorous(div)
-    onClick={[Function]}
-  >
-    <p>
-      Reset filtri
-    </p>
-  </glamorous(div)>
 </glamorous(div)>
 `;
 
@@ -65,13 +51,6 @@ exports[`ActiveFilters should call toggleFilter when a filter is clicked 1`] = `
     onClick={[Function]}
   >
     <p />
-  </glamorous(div)>
-  <glamorous(div)
-    onClick={[Function]}
-  >
-    <p>
-      Reset filtri
-    </p>
   </glamorous(div)>
 </glamorous(div)>
 `;
@@ -100,13 +79,6 @@ exports[`ActiveFilters should render any filters 1`] = `
   >
     <p>
       Disponibile
-    </p>
-  </glamorous(div)>
-  <glamorous(div)
-    onClick={[Function]}
-  >
-    <p>
-      Reset filtri
     </p>
   </glamorous(div)>
 </glamorous(div)>

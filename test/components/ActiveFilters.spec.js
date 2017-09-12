@@ -2,11 +2,10 @@ import React from 'react';
 import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
 
-import ActiveFilters, { OtherFilters, ResetButton } from '../../app/components/ActiveFilters';
+import ActiveFilters, { OtherFilters } from '../../app/components/ActiveFilters';
 import Filter from '../../app/components/Filter';
 
 describe('ActiveFilters', () => {
-  const resetFilters = () => {};
   const toggleFilter = () => {};
   const toggleAvailability = () => {};
   const handleOpen = () => {};
@@ -36,7 +35,6 @@ describe('ActiveFilters', () => {
       <ActiveFilters
         filterMap={filterMap}
         filterGroups={filterGroups}
-        resetFilters={resetFilters}
         toggleFilter={toggleFilter}
         toggleAvailability={toggleAvailability}
         handleOpen={handleOpen}
@@ -54,33 +52,12 @@ describe('ActiveFilters', () => {
       <ActiveFilters
         filterMap={filterMap}
         filterGroups={filterGroups}
-        resetFilters={resetFilters}
         toggleFilter={toggleFilter}
         toggleAvailability={toggleAvailability}
         handleOpen={handleOpen}
       />
     );
     expect(result).toMatchSnapshot();
-  });
-
-  it('should call reset filters when reset button is clicked', () => {
-    const filterMap = fromJS({
-      filters: ['filter0'],
-      availability: true
-    });
-    const resetFiltersMock = jest.fn();
-    const result = shallow(
-      <ActiveFilters
-        filterMap={filterMap}
-        filterGroups={filterGroups}
-        resetFilters={resetFiltersMock}
-        toggleFilter={toggleFilter}
-        toggleAvailability={toggleAvailability}
-        handleOpen={handleOpen}
-      />
-    );
-    result.find(ResetButton).simulate('click');
-    expect(resetFiltersMock).toHaveBeenCalled();
   });
 
   it('should call toggleFilter when a filter is clicked', () => {
@@ -93,7 +70,6 @@ describe('ActiveFilters', () => {
       <ActiveFilters
         filterMap={filterMap}
         filterGroups={filterGroups}
-        resetFilters={resetFilters}
         toggleFilter={toggleFilterMock}
         toggleAvailability={toggleAvailability}
         handleOpen={handleOpen}
@@ -114,7 +90,6 @@ describe('ActiveFilters', () => {
       <ActiveFilters
         filterMap={filterMap}
         filterGroups={filterGroups}
-        resetFilters={resetFilters}
         toggleFilter={toggleFilter}
         toggleAvailability={toggleAvailabilityMock}
         handleOpen={handleOpen}
@@ -135,7 +110,6 @@ describe('ActiveFilters', () => {
       <ActiveFilters
         filterMap={filterMap}
         filterGroups={filterGroups}
-        resetFilters={resetFilters}
         toggleFilter={toggleFilter}
         toggleAvailability={toggleAvailability}
         handleOpen={handleOpenMock}

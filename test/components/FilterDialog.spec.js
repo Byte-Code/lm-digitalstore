@@ -49,7 +49,7 @@ const result = shallow(
 
 describe('FilterDialog', () => {
   it('should call handleClose when the button is clicked', () => {
-    result.find('#close-filterDialog').simulate('click');
+    result.instance().applyAndClose();
     expect(handleClose).toHaveBeenCalled();
   });
 
@@ -62,12 +62,6 @@ describe('FilterDialog', () => {
   it('should call toggleTempAvailability availability is toggled', () => {
     result.find(Toggle).simulate('toggle');
     expect(toggleTempAvailability).toHaveBeenCalled();
-    expect(result).toMatchSnapshot();
-  });
-
-  it('should reset filter when reset button is clicked', () => {
-    result.find('#reset-filterDialog').simulate('click');
-    expect(resetTempFilters).toHaveBeenCalled();
     expect(result).toMatchSnapshot();
   });
 });
