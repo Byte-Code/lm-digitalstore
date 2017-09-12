@@ -20,6 +20,11 @@ const categoryInfo = fromJS({
 const router = { location: {} };
 const filterMap = Map();
 
+jest.mock('../../app/analytics/AnalyticsService');
+jest.mock('../../app/CommandLineOptions', () => ({
+  isDebugMode: jest.fn()
+}));
+
 describe('catalogue', () => {
   it('should render null when categoryInfo is empty or undefined', () => {
     const result = shallow(
@@ -110,7 +115,7 @@ describe('catalogue', () => {
         toggleFiltersDialog={() => {}}
       />
     );
-    const nextProps = { params: { categoryCode: 'CAT456' } };
+    const nextProps = { params: { categoryCode: 'CAT456' }, products: List() };
     result.setProps(nextProps);
     expect(initFilters).toHaveBeenCalled();
     expect(requestFetchCategory).toHaveBeenCalledWith('CAT456');

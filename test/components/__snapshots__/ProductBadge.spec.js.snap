@@ -4,6 +4,33 @@ exports[`ProductBadge should display the available overlay if product is in stoc
 <glamorous(div)
   onClick={[Function]}
 >
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
     alt="name"
     fixBrightColor={false}
@@ -15,10 +42,6 @@ exports[`ProductBadge should display the available overlay if product is in stoc
       }
     }
     zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={true}
-    isNew={false}
   />
   <glamorous(div)>
     name
@@ -54,6 +77,33 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
 <glamorous(div)
   onClick={[Function]}
 >
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
     alt="name"
     fixBrightColor={false}
@@ -65,10 +115,6 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
       }
     }
     zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={true}
-    isNew={false}
   />
   <glamorous(div)>
     name
@@ -104,6 +150,33 @@ exports[`ProductBadge should not display the available overlay if product is not
 <glamorous(div)
   onClick={[Function]}
 >
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
     alt="name"
     fixBrightColor={false}
@@ -115,10 +188,6 @@ exports[`ProductBadge should not display the available overlay if product is not
       }
     }
     zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={false}
-    isNew={false}
   />
   <glamorous(div)>
     name
@@ -144,6 +213,33 @@ exports[`ProductBadge should not display the discount if product is not discount
 <glamorous(div)
   onClick={[Function]}
 >
+  <MarketingFlag
+    loyaltyProgram={Object {}}
+    marketingAttributes={Object {}}
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
     alt="name"
     fixBrightColor={false}
@@ -155,10 +251,6 @@ exports[`ProductBadge should not display the discount if product is not discount
       }
     }
     zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={false}
-    isNew={false}
   />
   <glamorous(div)>
     name

@@ -69,7 +69,6 @@ describe('AvailabilityMap', () => {
 
   it('should initialize with the right interal state', () => {
     const expectedState = {
-      initialZoom: 11,
       minRadius: 2,
       maxRadius: 50,
       sliderWidth: 960
