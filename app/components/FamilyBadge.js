@@ -48,6 +48,8 @@ export default class FamilyBadge extends Component {
         return { height: 235, width: 235 };
       case 'horizontal':
         return { height: 235, width: 490 };
+      case 'horizontal-big':
+        return { height: 235, width: 745 };
       default:
         return { height: 235, width: 490 };
     }
