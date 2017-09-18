@@ -25,7 +25,7 @@ export default class Home extends Component {
   render() {
     const { world } = this.props;
     const props = { world };
-    const template = world.get('worldTemplate');
+    const template = world.get('worldName');
     return template ? templates[template](props) : null;
   }
 }

@@ -1,20 +1,19 @@
-import footer from '../app/assets/00_Footer.png';
-import tavoliSedie from '../app/assets/01_TavoliSedie.png';
-import carport from '../app/assets/02_Carport.jpg';
-import panchine from '../app/assets/03_Panchine.jpg';
-import sedie from '../app/assets/04_SediePoltrone.jpg';
-import tavoli from '../app/assets/05_Tavoli.jpg';
-import dondoli from '../app/assets/06_DondoliAmache.jpg';
-import pergole from '../app/assets/07_Pergole.jpg';
-import divisori from '../app/assets/08_DivisoriGiardino.png';
-import ombrelloni from '../app/assets/09_OmbrelloniBasi.jpg';
-import gazebo from '../app/assets/10_Gazebo.jpg';
-import sdraio from '../app/assets/11_SdraioLettini.jpg';
-import texture from '../app/assets/texture.png';
+import footer from '../app/assets/giardinoImg/00_Footer.png';
+import texture from '../app/assets/giardinoImg/texture.png';
+import stufePellet from '../app/assets/comfortImg/stufePellet.png';
+import stufePetrolio from '../app/assets/comfortImg/stufePetrolio.png';
+import stufeGas from '../app/assets/comfortImg/stufeGas.png';
+import stufeLegna from '../app/assets/comfortImg/stufeLegna.png';
+import stufeBioetanolo from '../app/assets/comfortImg/stufeBioetanolo.png';
+import stufeElettiche from '../app/assets/comfortImg/stufeElettriche.png';
+import pelletLegnaCombustibili from '../app/assets/comfortImg/pelletLegnaCombustibili.png';
+import pompeCalore from '../app/assets/comfortImg/pompeCalore.png';
+import radiatori from '../app/assets/comfortImg/radiatori.png';
+import caldaieScaldabagni from '../app/assets/comfortImg/caldaieScaldabagni.png';
+import termoarredi from '../app/assets/comfortImg/termoarredi.png';
 
 const world = {
   worldName: 'Comfort',
-  worldTemplate: 'comfort',
   title: 'Scopri le soluzioni per Comfort',
   trailingImage: footer,
   banner: {
@@ -23,59 +22,59 @@ const world = {
   },
   families: [
     {
-      familyName: 'Stufe a Pellet',
-      image: tavoli,
+      familyName: 'Stufe e Inserti a Pellet',
+      image: stufePellet,
       categoryCode: 'CAT283'
     },
     {
-      familyName: 'Stufe a Legna',
-      image: gazebo,
-      categoryCode: 'CAT282'
-    },
-    {
-      familyName: 'Stufe a petrolio',
-      image: sedie,
+      familyName: 'Stufe a Petrolio',
+      image: stufePetrolio,
       categoryCode: 'CAT280'
     },
     {
-      familyName: 'Stufe Elettriche',
-      image: panchine,
-      categoryCode: 'CAT290'
-    },
-    {
-      familyName: 'Stufe a Bioetanolo',
-      image: dondoli,
-      categoryCode: 'CAT792'
-    },
-    {
       familyName: 'Stufe a Gas',
-      image: ombrelloni,
+      image: stufeGas,
       categoryCode: 'CAT281'
     },
     {
-      familyName: 'Termoarredi',
-      image: tavoliSedie,
-      categoryCode: 'CAT52'
+      familyName: 'Stufe e Inserti a Legna',
+      image: stufeLegna,
+      categoryCode: 'CAT282'
     },
     {
-      familyName: 'Radiatori',
-      image: sdraio,
-      categoryCode: 'CAT286'
+      familyName: 'Stufe e Caminetti a Bioetanolo',
+      image: stufeBioetanolo,
+      categoryCode: 'CAT792'
     },
     {
-      familyName: 'Pompe di Calore',
-      image: pergole,
-      categoryCode: 'CAT4214'
+      familyName: 'Stufe Elettriche',
+      image: stufeElettiche,
+      categoryCode: 'CAT290'
     },
     {
-      familyName: 'Carport',
-      image: carport,
+      familyName: 'Pellet, Legna, Petrolio e Bioetanolo',
+      image: pelletLegnaCombustibili,
       categoryCode: 'CAT4231'
     },
     {
-      familyName: 'Divisori Giardino',
-      image: divisori,
-      categoryCode: 'CAT4097'
+      familyName: 'Climatizzatori',
+      image: pompeCalore,
+      categoryCode: 'CAT4214'
+    },
+    {
+      familyName: 'Radiatori',
+      image: radiatori,
+      categoryCode: 'CAT4231'
+    },
+    {
+      familyName: 'Caldaie e Scaldabagni',
+      image: caldaieScaldabagni,
+      categoryCode: 'CAT4231'
+    },
+    {
+      familyName: 'Termoarredi',
+      image: termoarredi,
+      categoryCode: 'CAT4231'
     }
   ]
 };
