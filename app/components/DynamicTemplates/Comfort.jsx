@@ -15,6 +15,8 @@ export default function Comfort({ world = null }) {
     const bannerText = world.getIn(['banner', 'text']);
     const bannerImg = world.getIn(['banner', 'image']);
     const trailingImage = world.get('trailingImage');
+    const title = world.get('title');
+    const suffix = world.get('titleSuffix');
 
     return (
       <Wrapper>
@@ -23,8 +25,8 @@ export default function Comfort({ world = null }) {
         </Logo>
         <WorldTitle>
           <h1>
-             le soluzioni Leroy Merlin per
-            <span>&nbsp;{worldName}</span>
+            {title}
+            <span>&nbsp;{suffix}</span>
           </h1>
         </WorldTitle>
         <GridWrapper>

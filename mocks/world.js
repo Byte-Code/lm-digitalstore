@@ -1,5 +1,5 @@
-import footer from '../app/assets/giardinoImg/00_Footer.png';
-import texture from '../app/assets/giardinoImg/texture.png';
+import footer from '../app/assets/comfortImg/footer.png';
+import texture from '../app/assets/comfortImg/texture.png';
 import stufePellet from '../app/assets/comfortImg/stufePellet.png';
 import stufePetrolio from '../app/assets/comfortImg/stufePetrolio.png';
 import stufeGas from '../app/assets/comfortImg/stufeGas.png';
@@ -14,7 +14,8 @@ import termoarredi from '../app/assets/comfortImg/termoarredi.png';
 
 const world = {
   worldName: 'Comfort',
-  title: 'Scopri le soluzioni per Comfort',
+  title: 'Esplora le soluzioni per',
+  titleSuffix: 'Stufe, climatizzatori e idraulica',
   trailingImage: footer,
   banner: {
     text: 'Scopri le funzioni del Digital Store',
