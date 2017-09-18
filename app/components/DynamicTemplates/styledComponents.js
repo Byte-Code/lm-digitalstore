@@ -50,7 +50,7 @@ export const Banner = glamorous.div(({ url = '/' }) => ({
 
 export const TrailingImage = glamorous.img({
   width: '100%',
-  height: '100px'
+  height: '100%'
 });
 
 export const WorldTitle = glamorous.section({
