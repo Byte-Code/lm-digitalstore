@@ -15,8 +15,7 @@ import {
   SUCCESS_START_ANALYTICS_PRODUCT,
   SUCCESS_TRACK_FILTERS,
   SUCCESS_TRACK_PRODUCT_CLICK,
-  SUCCESS_TRACK_AVAILABILITY_BUTTON,
-  TRACK_CATALOGUE_PRODUCTS_CHUNK } from './actionTypes';
+  SUCCESS_TRACK_AVAILABILITY_BUTTON } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -84,8 +83,4 @@ export function successTrackProductClick() {
 
 export function successTrackAvailabilityButton() {
   return ({ type: SUCCESS_TRACK_AVAILABILITY_BUTTON });
-}
-
-export function trackCatalogueProductsChunk() {
-  return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK });
 }

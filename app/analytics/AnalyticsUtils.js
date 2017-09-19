@@ -125,7 +125,7 @@ const getProdList = (product, path) => {
   return `${pageContext} > ${mainCategoryName}/${mainCategory}`;
 };
 
-const mergeSameKeyValue = (objValue, srcValue) => {
+const customizer = (objValue, srcValue) => {
   if (_.isArray(objValue)) {
     return objValue.concat(srcValue);
   }
@@ -289,12 +289,12 @@ const buildProductLayer = (product = {}, action = 'detail') => {
   }
 };
 
-const buildRelatedProductsLayer = ({ products = List(), pathArray = [], positionIndex = 0 }) => {
+const buildRelatedProductsLayer = ({ products = List(), pathArray = [] }) => {
   const productList = products.size > relatedProductsSize
     ? List(products).setSize(relatedProductsSize)
     : products;
 
-  let prodPositionCount = positionIndex;
+  let prodPositionCount = 0;
 
   if (products.size) {
     const listOfProductsLayer = productList.map(product => {
@@ -302,17 +302,23 @@ const buildRelatedProductsLayer = ({ products = List(), pathArray = [], position
       const prodListList = List().push(getProdList(product, pathArray));
 
       let productLayer = buildCommonLayer(product);
-      // add or remove additional properties to productLayer
+      // add additional properties to productLayer
       productLayer = productLayer.set(LABEL.PROD_POSITION, prodPosition);
       productLayer = productLayer.set(LABEL.PROD_LIST, prodListList);
-      productLayer = productLayer.delete(LABEL.PROD_GAMMA);
 
-      return productLayer;
+      return productLayer
+        .set(LABEL.PROD_POSITION, prodPosition)
+        .set(LABEL.PROD_LIST, prodListList)
+        .delete(LABEL.PROD_GAMMA);
     });
 
     const mergedlistOfProductsLayer = listOfProductsLayer.reduce(
       (acc, productLayer) => {
-        const mergedValues = _.mergeWith(acc.toJS(), productLayer.toJS(), mergeSameKeyValue);
+        const mergedValues = _.mergeWith(
+          acc.toJS(),
+          productLayer.toJS(),
+          customizer
+        );
         return Map(mergedValues);
       }
     );
