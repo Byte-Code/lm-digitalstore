@@ -25,7 +25,7 @@ const world = {
     {
       familyName: 'Stufe e Inserti a Pellet',
       image: stufePellet,
-      categoryCode: 'CAT283'
+      categoryCode: 'CAT4278'
     },
     {
       familyName: 'Stufe a Petrolio',
@@ -55,7 +55,7 @@ const world = {
     {
       familyName: 'Pellet, Legna, Petrolio e Bioetanolo',
       image: pelletLegnaCombustibili,
-      categoryCode: 'CAT4231'
+      categoryCode: 'CAT4275'
     },
     {
       familyName: 'Climatizzatori',
@@ -65,17 +65,17 @@ const world = {
     {
       familyName: 'Radiatori',
       image: radiatori,
-      categoryCode: 'CAT4231'
+      categoryCode: 'CAT286'
     },
     {
       familyName: 'Caldaie e Scaldabagni',
       image: caldaieScaldabagni,
-      categoryCode: 'CAT4231'
+      categoryCode: 'CAT4276'
     },
     {
       familyName: 'Termoarredi',
       image: termoarredi,
-      categoryCode: 'CAT4231'
+      categoryCode: 'CAT52'
     }
   ]
 };
