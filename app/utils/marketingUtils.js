@@ -1,4 +1,15 @@
-import { Map, List, fromJS } from 'immutable';
+import { Map } from 'immutable';
+
+export const marketingLabel = {
+  prezzoGiu: 'PREZZO_GIU',
+  novita: 'NOVITA',
+  blackFriday: 'BLACK_FRIDAY',
+  promoWeb: 'PROMO_WEB',
+  destock: 'DESTOCK',
+  prezzoVincente: 'PREZZO_VINCENTE',
+  prezzoStock: 'PREZZO_STOCK',
+  ideaPiu: 'IDEAPIU'
+};
 
 export function isFutureDate(stringDate) {
   return new Date().getTime() < new Date(stringDate).getTime();
@@ -33,24 +44,58 @@ export function getPromotions(marketingAttributes, loyaltyProgram) {
   return activeMarketing;
 }
 
-export function filterPromotions(activeMarketing) {
-  let list = List();
-  if (activeMarketing.get('PREZZO_GIU')) {
-    list = list.push(fromJS({ code: 'PREZZO_GIU' }));
-  } else if (activeMarketing.get('NOVITA')) {
-    list = list.push(fromJS({ code: 'NOVITA' }));
+const buildMarketingTopLeft = ({ promotions = Map() }) => {
+  const hasPrezzoGiu = promotions.has(marketingLabel.prezzoGiu);
+  const hasNovita = promotions.has(marketingLabel.novita);
+  const hasPrezzoStock = promotions.has(marketingLabel.prezzoStock);
+  let promotion = new Map({ code: null });
+
+  if (hasPrezzoGiu) {
+    promotion = promotion.set('code', marketingLabel.prezzoGiu);
+  } else if (hasNovita && !hasPrezzoStock) {
+    promotion = promotion.set('code', marketingLabel.novita);
   }
-  if (activeMarketing.get('PROMO_WEB')) {
-    list = list.push(fromJS({ code: 'PROMO_WEB' }));
-  } else if (activeMarketing.get('DESTOCK')) {
-    list = list.filterNot(f => f.get('code') === 'NOVITA');
-    list = list.push(fromJS({ code: 'DESTOCK' }));
-  } else if (activeMarketing.get('PREZZO_VINCENTE')) {
-    list = list.push(fromJS({ code: 'PREZZO_VINCENTE' }));
-  } else if (activeMarketing.get('PREZZO_STOCK')) {
-    list = list.push(fromJS({ code: 'PREZZO_STOCK' }));
-  } else if (activeMarketing.get('IDEAPIU')) {
-    list = list.push(fromJS({ code: 'IDEAPIU', value: activeMarketing.get('IDEAPIU') }));
+  return promotion;
+};
+
+const buildMarketingTopRight = ({ promotions = Map(), promotionCode = '0' }) => {
+  const hasBlackFriday = promotions.has(marketingLabel.blackFriday);
+  const hasPromoWeb = promotions.has(marketingLabel.promoWeb);
+  const hasDestock = promotions.has(marketingLabel.destock);
+  const hasPrezzoVincente = promotions.has(marketingLabel.prezzoVincente);
+  const hasPrezzoStock = promotions.has(marketingLabel.prezzoStock);
+  const ideaPiu = promotions.get(marketingLabel.ideaPiu);
+  const promoCodeToNumber = Number.parseInt(promotionCode);
+  let promotion = new Map({ code: null });
+
+  if (hasBlackFriday) {
+    promotion = promotion.set('code', marketingLabel.blackFriday);
+  } else if (hasPromoWeb && !(promoCodeToNumber === 2)) {
+    promotion = promotion.set('code', marketingLabel.promoWeb);
+  } else if (hasDestock) {
+    promotion = promotion.set('code', marketingLabel.destock);
+  } else if (hasPrezzoVincente) {
+    promotion = promotion.set('code', marketingLabel.prezzoVincente);
+  } else if (hasPrezzoStock) {
+    promotion = promotion.set('code', marketingLabel.prezzoStock);
+  } else if (ideaPiu) {
+    promotion = promotion.set('code', marketingLabel.ideaPiu);
+    promotion = promotion.set('value', ideaPiu);
   }
-  return list;
+  return promotion;
+};
+
+export function buildPromotionMap(attrs) {
+  let marketingMap = new Map();
+
+  marketingMap = marketingMap.set('topLeft', buildMarketingTopLeft(attrs));
+  marketingMap = marketingMap.set('topRight', buildMarketingTopRight(attrs));
+  return marketingMap;
+}
+
+export function getMarketingProps(product) {
+  const marketingAttributes = product.get('marketingAttributes');
+  const loyaltyProgram = product.get('loyaltyProgram');
+  const promotionCode = product.getIn(['price', 'selling', 'promotion']);
+  return { marketingAttributes, loyaltyProgram, promotionCode };
 }

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PriceBadge should also render the discount when it is active 1`] = `
-<div>
+<glamorous(div)>
   <glamorous(div)>
     <span>
       -
@@ -22,11 +22,11 @@ exports[`PriceBadge should also render the discount when it is active 1`] = `
   <glamorous(p)>
     unit unit / unit
   </glamorous(p)>
-</div>
+</glamorous(div)>
 `;
 
 exports[`PriceBadge should only render the price if no discount is active 1`] = `
-<div>
+<glamorous(div)>
   <glamorous(p)>
     10,00
      €
@@ -34,5 +34,5 @@ exports[`PriceBadge should only render the price if no discount is active 1`] = 
   <glamorous(p)>
     unit unit / unit
   </glamorous(p)>
-</div>
+</glamorous(div)>
 `;

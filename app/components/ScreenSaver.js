@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import video from '../../app/assets/videos/video-splash.mp4';
+import video from '../../app/assets/videos/DS_Splash02.mp4';
 import styles from './styles.css';
 
 export default class ScreenSaver extends Component {

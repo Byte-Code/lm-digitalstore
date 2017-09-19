@@ -1,7 +1,8 @@
 import { Map, List, fromJS } from 'immutable';
 import * as _ from 'lodash';
 import appPackage from '../package.json';
-import { getPromotions, filterPromotions } from '../utils/marketingUtils';
+import { getPromotions, buildPromotionMap } from '../utils/marketingUtils';
+import { LABEL } from './AnalyticsConstants';
 
 const productPropertiesMap = Map({
   prod_id: ['code'],
@@ -17,24 +18,6 @@ const productPropertiesMap = Map({
 });
 
 const layerMap = Map({ filter_name: List(), filter_value: List() });
-
-const LABEL = {
-  PROD_SCONTO: 'prod_sconto',
-  PROD_AVAIL_ONLINE: 'prod_avail_online',
-  PROD_AVAIL_STORE: 'prod_avail_store',
-  PROD_VARIANT: 'prod_variant',
-  PROD_PUNTI_OMAGGIO: 'prod_puntiomaggio',
-  PROD_IDEAPIU: 'prod_idepiu',
-  PROD_BUNDLE: 'prod_bundle',
-  FILTER_NAME: 'filter_name',
-  FILTER_VALUE: 'filter_value',
-  FILTER_RESULT: 'filter_result',
-  PROD_POSITION: 'prod_position',
-  PROD_LIST: 'prod_list',
-  PROD_GAMMA: 'prod_gamma',
-  PROD_NEW: 'prod_new',
-  PROD_PRICE: 'prod_price'
-};
 
 const relatedProductsSize = 12;
 
@@ -76,7 +59,7 @@ const isProductNew = product => {
 
   if (marketingAttributes && loyaltyProgram) {
     const promotions = getPromotions(marketingAttributes, loyaltyProgram);
-    const filteredPromotions = filterPromotions(promotions);
+    const filteredPromotions = buildPromotionMap({ promotions });
     const isNew = filteredPromotions.reduce(
       (acc, promotion) => promotion.get('code') === 'NOVITA',
       false
@@ -142,7 +125,7 @@ const getProdList = (product, path) => {
   return `${pageContext} > ${mainCategoryName}/${mainCategory}`;
 };
 
-const customizer = (objValue, srcValue) => {
+const mergeSameKeyValue = (objValue, srcValue) => {
   if (_.isArray(objValue)) {
     return objValue.concat(srcValue);
   }
@@ -306,12 +289,12 @@ const buildProductLayer = (product = {}, action = 'detail') => {
   }
 };
 
-const buildRelatedProductsLayer = ({ products = List(), pathArray = [] }) => {
+const buildRelatedProductsLayer = ({ products = List(), pathArray = [], positionIndex = 0 }) => {
   const productList = products.size > relatedProductsSize
     ? List(products).setSize(relatedProductsSize)
     : products;
 
-  let prodPositionCount = 0;
+  let prodPositionCount = positionIndex;
 
   if (products.size) {
     const listOfProductsLayer = productList.map(product => {
@@ -319,23 +302,17 @@ const buildRelatedProductsLayer = ({ products = List(), pathArray = [] }) => {
       const prodListList = List().push(getProdList(product, pathArray));
 
       let productLayer = buildCommonLayer(product);
-      // add additional properties to productLayer
+      // add or remove additional properties to productLayer
       productLayer = productLayer.set(LABEL.PROD_POSITION, prodPosition);
       productLayer = productLayer.set(LABEL.PROD_LIST, prodListList);
+      productLayer = productLayer.delete(LABEL.PROD_GAMMA);
 
-      return productLayer
-        .set(LABEL.PROD_POSITION, prodPosition)
-        .set(LABEL.PROD_LIST, prodListList)
-        .delete(LABEL.PROD_GAMMA);
+      return productLayer;
     });
 
     const mergedlistOfProductsLayer = listOfProductsLayer.reduce(
       (acc, productLayer) => {
-        const mergedValues = _.mergeWith(
-          acc.toJS(),
-          productLayer.toJS(),
-          customizer
-        );
+        const mergedValues = _.mergeWith(acc.toJS(), productLayer.toJS(), mergeSameKeyValue);
         return Map(mergedValues);
       }
     );

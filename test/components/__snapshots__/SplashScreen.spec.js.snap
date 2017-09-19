@@ -8,14 +8,6 @@ exports[`SplashScreen should otherwise render properly 1`] = `
 >
   <glamorous(div)>
     <glamorous(div)>
-      <glamorous(h1)>
-        Accendi la tua voglia di estate
-      </glamorous(h1)>
-      <glamorous(div)>
-        Entra nel mondo giardino
-      </glamorous(div)>
-    </glamorous(div)>
-    <glamorous(div)>
       <ScreenSaver />
     </glamorous(div)>
   </glamorous(div)>

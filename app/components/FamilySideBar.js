@@ -44,7 +44,7 @@ const FamilyName = glamorous.div({
     paddingLeft: '10px',
     paddingRight: '35px',
     fontFamily: 'LeroyMerlinSans Bold',
-    fontSize: '20px',
+    fontSize: '15px',
     lineHeight: '22px'
   }
 });

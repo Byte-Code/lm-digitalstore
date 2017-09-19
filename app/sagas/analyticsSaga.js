@@ -26,20 +26,18 @@ export function* callAnalyticsSession() {
       idleTimerComplete,
       startAnalyticsSession,
       setProduct,
-      setRelatedProduct,
+      setRelatedProductInCatalogue,
       startAnalyticsProduct,
       filters,
       trackFilters,
       resetFilters,
-      productClick,
-      trackProductClick,
       trackStoreAvailability
     } = yield race({
       setSessionData: take(constants.SUCCESS_FETCH_WORLD),
       idleTimerComplete: take(constants.IDLE_TIMER_COMPLETE),
       startAnalyticsSession: take(constants.START_ANALYTICS_SESSION),
       setProduct: take(constants.SUCCESS_FETCH_PRODUCT),
-      setRelatedProduct: take(constants.SUCCESS_FETCH_PRODUCTLIST),
+      setRelatedProductInCatalogue: take(constants.TRACK_CATALOGUE_PRODUCTS_CHUNK),
       startAnalyticsProduct: take(constants.START_ANALYTICS_PRODUCT),
       filters: take([
         constants.TOGGLE_AID,
@@ -49,8 +47,6 @@ export function* callAnalyticsSession() {
       ]),
       resetFilters: take(constants.RESET_FILTERS),
       trackFilters: take(constants.TRACK_ANALYTICS_FILTERS),
-      productClick: take(constants.SET_ANALYTICS_PRODUCT_CLICK),
-      trackProductClick: take(constants.TRACK_PRODUCT_CLICK),
       trackStoreAvailability: take(constants.TRACK_STORE_AVAILABILITY_EVENT)
     });
 
@@ -77,7 +73,7 @@ export function* callAnalyticsSession() {
       yield put(analyticsAction.successSetProductInDataLayer());
     }
 
-    if (setRelatedProduct) {
+    if (setRelatedProductInCatalogue) {
       const {
         categoryCode = '',
         categoryName = '',
@@ -91,11 +87,7 @@ export function* callAnalyticsSession() {
           categoryCode,
           categoryName
         });
-        yield put(analyticsAction.successSetPageName());
       }
-      const params = { products: setRelatedProduct.result, pathArray };
-      yield call(AnalyticsService.setRelatedProduct, params);
-      yield put(analyticsAction.successSetRelatedProductInDataLayer());
     }
 
     if (filters) {
@@ -138,30 +130,16 @@ export function* callAnalyticsSession() {
       yield put(analyticsAction.successStartAnalyticsSession());
     }
 
-    if (productClick) {
-      const { product, index = 0 } = productClick.data;
-      yield call(AnalyticsService.setProduct, {
-        product,
-        action: [constants.PROD_CLICK],
-        index,
-        pathArray
-      });
-      yield put(analyticsAction.trackProductClick());
-    }
-
     if (startAnalyticsProduct) {
-      yield call(AnalyticsService.track, 'view');
-      yield put(analyticsAction.successStartAnalyticsProduct());
+      if (pathArray[0] !== 'catalogue') {
+        yield call(AnalyticsService.track, 'view');
+        yield put(analyticsAction.successStartAnalyticsProduct());
+      }
     }
 
     if (trackFilters) {
       yield call(AnalyticsService.track, 'view');
       yield put(analyticsAction.successTrackFilters());
-    }
-
-    if (trackProductClick) {
-      yield call(AnalyticsService.track, 'link');
-      yield put(analyticsAction.successTrackProductClick());
     }
 
     if (trackStoreAvailability) {

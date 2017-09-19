@@ -49,7 +49,7 @@ exports[`PurchaseDialog should initially render with a closed dialog 1`] = `
         fgColor="#000000"
         level="L"
         size={200}
-        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
+        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p?utm_source=digitalstore&utm_medium=digitalstore&utm_campaign=digitalstore"
       />
     </glamorous(div)>
   </Dialog>
@@ -105,7 +105,7 @@ exports[`PurchaseDialog should open the dialog once clicked 1`] = `
         fgColor="#000000"
         level="L"
         size={200}
-        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p"
+        value="https://www.leroymerlin.it/catalogo/SLUG123-PROD123-p?utm_source=digitalstore&utm_medium=digitalstore&utm_campaign=digitalstore"
       />
     </glamorous(div)>
   </Dialog>
