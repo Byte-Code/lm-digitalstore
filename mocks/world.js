@@ -60,7 +60,7 @@ const world = {
     {
       familyName: 'Climatizzatori',
       image: pompeCalore,
-      categoryCode: 'CAT4214'
+      categoryCode: 'CAT3219'
     },
     {
       familyName: 'Radiatori',
