@@ -2,16 +2,47 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
-import { Map, List, fromJS } from 'immutable';
+import { Map, List } from 'immutable';
 import glamorous from 'glamorous';
-import Swipeable from 'react-swipeable';
-import * as _ from 'lodash';
-import AnalyticsService from '../analytics/AnalyticsService';
+import world from '../../mocks/world';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
+const FakeMarginDiv = glamorous.div({
+  height: '100%',
+  width: '40px'
+});
+
+const Header = glamorous.div({
+  width: '100%',
+  height: '184px',
+  background: '#f7f7f7',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '&>h1': {
+    fontSize: '48px'
+  }
+});
+
+const ProductSlider = glamorous.div(({ opacity = false }) => ({
+  marginTop: '5%',
+  display: 'flex',
+  overflowX: 'auto',
+  flexFlow: 'column wrap',
+  height: '1246px',
+  opacity: opacity ? 0.17 : 1,
+  '&>a': {
+    width: '405px',
+    height: '593px',
+    marginRight: '20px',
+    '&:nth-child(odd)': {
+      marginBottom: '60px'
+    }
+  }
+}));
 
 export default class Catalogue extends Component {
   static propTypes = {
@@ -29,9 +60,7 @@ export default class Catalogue extends Component {
     toggleFiltersDialog: PropTypes.func.isRequired,
     resetTempFilters: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired,
-    trackCatalogueProductsChunk: PropTypes.func.isRequired,
-    routingData: ImmutablePropTypes.map.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -41,55 +70,21 @@ export default class Catalogue extends Component {
 
   constructor(prop) {
     super(prop);
-    this.chunkSize = 4;
-    this.productsChunk = List();
     this.onBadgeClick = this.onBadgeClick.bind(this);
-    this.onLeftSwipe = this.onLeftSwipe.bind(this);
-    this.onRightSwipe = this.onRightSwipe.bind(this);
-    this.chunkerizeProductList = this.chunkerizeProductList.bind(this);
-    this.getChunks = this.getChunks.bind(this);
-    this.state = {
-      currentChunkIndex: 0,
-      appendChunkIndex: 1
-    };
+    this.getTitle = this.getTitle.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { params: { categoryCode }, requestFetchCategory, initFilters } = this.props;
     initFilters();
     requestFetchCategory(categoryCode);
   }
-
 
   componentWillReceiveProps(nextProps) {
     const { params: { categoryCode }, requestFetchCategory, initFilters } = nextProps;
     if (categoryCode !== this.props.params.categoryCode) {
       initFilters();
       requestFetchCategory(categoryCode);
-    }
-
-    if (nextProps.products.size > 0) {
-      this.chunkerizeProductList(nextProps.products);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const chunkHasChanged = prevState !== this.state;
-    const componentReceiveProduct = !prevProps.products.size > 0 && this.props.products.size > 0;
-
-    if (componentReceiveProduct || chunkHasChanged) {
-      const currentChunk = this.getChunks().setSize(this.chunkSize);
-      const positionIndex = this.chunkSize * this.state.currentChunkIndex;
-      this.props.trackCatalogueProductsChunk();
-      // Can't use redux-saga https://stackoverflow.com/questions/45435094/redux-saga-takeevery-miss-catch-event
-      const path = _.trimStart(this.props.routingData.get('pathname'), '/');
-      const pathArray = _.split(path, '/');
-      AnalyticsService.setRelatedProduct({
-        products: currentChunk,
-        pathArray,
-        positionIndex
-      });
-      setTimeout(() => AnalyticsService.track('view'), 500);
     }
   }
 
@@ -101,56 +96,23 @@ export default class Catalogue extends Component {
     this.props.setAnalyticsProductClick({ product, index });
   }
 
-  onLeftSwipe() {
-    let { currentChunkIndex, appendChunkIndex } = this.state;
-    if (appendChunkIndex < this.productsChunk.size - 1) {
-      const currentIndex = currentChunkIndex += 1;
-      const appendIndex = appendChunkIndex += 1;
-      this.setState({
-        currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
+
+  //eslint-disable-next-line
+  getTitle(catCode = 0) {
+    let title = 'NO Title';
+
+    if (catCode) {
+      world.families.forEach((family) => {
+        if (family.categoryCode === catCode) {
+          title = family.familyName;
+        }
       });
     }
-  }
-
-  onRightSwipe() {
-    let { currentChunkIndex, appendChunkIndex } = this.state;
-    if (currentChunkIndex > 0) {
-      const currentIndex = currentChunkIndex -= 1;
-      const appendIndex = appendChunkIndex -= 1;
-      this.setState({
-        currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
-      });
-    }
-  }
-
-  getChunks() {
-    let chunks = List();
-
-    if (this.productsChunk.size > 0) {
-      const { currentChunkIndex, appendChunkIndex } = this.state;
-      const isProductListFiltered = this.props.filterMap.get('filters').size > 0;
-      let currentChunk = this.productsChunk.getIn([currentChunkIndex]);
-      let appendChunk = this.productsChunk.getIn([appendChunkIndex]);
-
-      if (isProductListFiltered) {
-        currentChunk = this.productsChunk.getIn([0]);
-        appendChunk = this.productsChunk.getIn([1]);
-      }
-
-      chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
-    }
-    // eslint-disable-next-line
-    return chunks ? chunks : List();
-  }
-
-  chunkerizeProductList(productList) {
-    this.productsChunk = fromJS(_.chunk(productList.toJS(), this.chunkSize));
+    return title;
   }
 
   renderProducts() {
-    const products = this.getChunks();
+    const { products } = this.props;
     return products.map((p, index) =>
       <Link onClick={() => this.onBadgeClick(p, index)} to={`product/${p.get('code')}`} key={p.get('code')}>
         <ProductBadge productInfo={p} />
@@ -175,21 +137,16 @@ export default class Catalogue extends Component {
       return null;
     }
 
-    const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
     const activeAid = filterMap.get('aid');
-    const swipeableConfig = {
-      flickThreshold: 0.6,
-      preventDefaultTouchmoveEvent: true,
-      delta: 50
-    };
+    const catCode = categoryInfo.get('code');
 
     return (
       <div>
         <Header>
-          <h1>{catName}</h1>
+          <h1>{this.getTitle(catCode)}</h1>
         </Header>
         <SellingAidsBadge sellingAids={sellingAids} onToggle={toggleAid} activeAid={activeAid} />
         <FilterBar
@@ -202,47 +159,12 @@ export default class Catalogue extends Component {
           isDialogOpen={isDialogOpen}
           resetTempFilters={resetTempFilters}
         />
-        <Swipeable
-          onSwipingLeft={this.onLeftSwipe}
-          onSwipingRight={this.onRightSwipe}
-          {...swipeableConfig}
-        >
-          <ProductSlider opacity={isDialogOpen}>
-            {this.renderProducts()}
-          </ProductSlider>
-        </Swipeable>
+        <ProductSlider opacity={isDialogOpen}>
+          <FakeMarginDiv />
+          {this.renderProducts()}
+          <FakeMarginDiv />
+        </ProductSlider>
       </div>
     );
   }
 }
-
-const Header = glamorous.div({
-  width: '100%',
-  height: '184px',
-  background: '#f7f7f7',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  '&>h1': {
-    fontSize: '48px'
-  }
-});
-
-const ProductSlider = glamorous.div(({ opacity = false }) => ({
-  marginTop: '5%',
-  display: 'flex',
-  overflowX: 'hidden',
-  flexFlow: 'column wrap',
-  alignContent: 'flex-start',
-  height: '1246px',
-  opacity: opacity ? 0.17 : 1,
-  '&>a': {
-    width: '405px',
-    height: '593px',
-    marginRight: '20px',
-    '&:nth-child(odd)': {
-      marginBottom: '60px'
-    }
-  }
-}));
-
