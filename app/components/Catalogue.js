@@ -130,12 +130,19 @@ export default class Catalogue extends Component {
 
     if (this.productsChunk.size > 0) {
       const { currentChunkIndex, appendChunkIndex } = this.state;
-      const currentChunk = this.productsChunk.getIn([currentChunkIndex]);
-      const appendChunk = this.productsChunk.getIn([appendChunkIndex]);
+      const isProductListFiltered = this.props.filterMap.get('filters').size > 0;
+      let currentChunk = this.productsChunk.getIn([currentChunkIndex]);
+      let appendChunk = this.productsChunk.getIn([appendChunkIndex]);
+
+      if (isProductListFiltered) {
+        currentChunk = this.productsChunk.getIn([0]);
+        appendChunk = this.productsChunk.getIn([1]);
+      }
 
       chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
     }
-    return chunks;
+    // eslint-disable-next-line
+    return chunks ? chunks : List();
   }
 
   chunkerizeProductList(productList) {
