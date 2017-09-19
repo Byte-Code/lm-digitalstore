@@ -12,6 +12,11 @@ import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
 
+const initialState = {
+  currentChunkIndex: 0,
+  appendChunkIndex: 1
+};
+
 
 export default class Catalogue extends Component {
   static propTypes = {
@@ -48,10 +53,7 @@ export default class Catalogue extends Component {
     this.onRightSwipe = this.onRightSwipe.bind(this);
     this.chunkerizeProductList = this.chunkerizeProductList.bind(this);
     this.getChunks = this.getChunks.bind(this);
-    this.state = {
-      currentChunkIndex: 0,
-      appendChunkIndex: 1
-    };
+    this.state = initialState;
   }
 
   componentWillMount() {
@@ -70,6 +72,14 @@ export default class Catalogue extends Component {
 
     if (nextProps.products.size > 0) {
       this.chunkerizeProductList(nextProps.products);
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    const filtersChange = !nextProps.filterMap.equals(this.props.filterMap);
+    const isProductListFiltered = nextProps.filterMap.get('filters').size > 0;
+    if (isProductListFiltered && filtersChange) {
+      this.setState(initialState);
     }
   }
 
@@ -130,14 +140,8 @@ export default class Catalogue extends Component {
 
     if (this.productsChunk.size > 0) {
       const { currentChunkIndex, appendChunkIndex } = this.state;
-      const isProductListFiltered = this.props.filterMap.get('filters').size > 0;
-      let currentChunk = this.productsChunk.getIn([currentChunkIndex]);
-      let appendChunk = this.productsChunk.getIn([appendChunkIndex]);
-
-      if (isProductListFiltered) {
-        currentChunk = this.productsChunk.getIn([0]);
-        appendChunk = this.productsChunk.getIn([1]);
-      }
+      const currentChunk = this.productsChunk.getIn([currentChunkIndex]);
+      const appendChunk = this.productsChunk.getIn([appendChunkIndex]);
 
       chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
     }
