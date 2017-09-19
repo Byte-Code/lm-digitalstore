@@ -115,7 +115,13 @@ describe('catalogue', () => {
         toggleFiltersDialog={() => {}}
       />
     );
-    const nextProps = { params: { categoryCode: 'CAT456' }, products: List() };
+    const nextProps = {
+      params: {
+        categoryCode: 'CAT456'
+      },
+      products: List(),
+      filterMap: Map({ filters: List() })
+    };
     result.setProps(nextProps);
     expect(initFilters).toHaveBeenCalled();
     expect(requestFetchCategory).toHaveBeenCalledWith('CAT456');
