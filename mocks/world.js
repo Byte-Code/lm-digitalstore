@@ -40,7 +40,7 @@ const world = {
     {
       familyName: 'Stufe e Inserti a Legna',
       image: stufeLegna,
-      categoryCode: 'CAT282'
+      categoryCode: 'CAT4277'
     },
     {
       familyName: 'Stufe e Caminetti a Bioetanolo',
@@ -60,7 +60,7 @@ const world = {
     {
       familyName: 'Climatizzatori',
       image: pompeCalore,
-      categoryCode: 'CAT4214'
+      categoryCode: 'CAT3219'
     },
     {
       familyName: 'Radiatori',
