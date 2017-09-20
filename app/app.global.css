@@ -206,3 +206,23 @@ li.slick-active button:before {
 .similarDialog > div > div {
   max-height: none !important;
 }
+
+@keyframes mymove {
+  from {margin-left: 1100px}
+  to {margin-left: 0px}
+}
+
+@keyframes mymove1 {
+  from {margin-left: 1100px}
+  to {margin-left: 0px}
+}
+
+@keyframes mymoveRight {
+  from {right: 1100px}
+  to {right: 0px}
+}
+
+@keyframes mymoveRight1 {
+  from {right: 1100px}
+  to {right: 0px}
+}
