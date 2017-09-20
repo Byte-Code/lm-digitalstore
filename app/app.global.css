@@ -226,3 +226,12 @@ li.slick-active button:before {
   from {right: 1100px}
   to {right: 0px}
 }
+
+.thermometer::before {
+  content: url(./assets/icon_mondocomfort.svg);
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
