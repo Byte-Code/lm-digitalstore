@@ -122,6 +122,7 @@ export default class Catalogue extends Component {
   onLeftSwipe() {
     let { currentChunkIndex, appendChunkIndex } = this.state;
     if (appendChunkIndex <= this.productsChunk.size - 1) {
+      this.flagOnSwipeRight = true;
       const currentIndex = currentChunkIndex += 1;
       const appendIndex = appendChunkIndex += 1;
       this.setState({
@@ -129,6 +130,8 @@ export default class Catalogue extends Component {
         appendChunkIndex: appendIndex,
         swipe: 'left'
       });
+      //eslint-disable-next-line
+      setTimeout(() => this.flagOnSwipeRight = false, 100);
     }
   }
 
@@ -199,7 +202,7 @@ export default class Catalogue extends Component {
       toggleFiltersDialog,
       isDialogOpen,
       resetTempFilters
-    } = this.props;
+      } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
