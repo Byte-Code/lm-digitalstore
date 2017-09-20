@@ -77,7 +77,7 @@ export default class FamilySideBar extends Component {
 
     return families.map(fam => {
       const familyName = fam.get('familyName');
-      const image = fam.get('image');
+      const image = fam.get('imageSidebar') || fam.get('image');
       const categoryCode = fam.get('categoryCode');
 
       return (
