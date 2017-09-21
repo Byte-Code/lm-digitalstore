@@ -57,6 +57,7 @@ export default class Catalogue extends Component {
     this.getChunks = this.getChunks.bind(this);
     this.state = initialState;
     this.flagOnSwipeRight = false;
+    this.timeout = 1000;
   }
 
   componentWillMount() {
@@ -121,7 +122,7 @@ export default class Catalogue extends Component {
 
   onLeftSwipe() {
     let { currentChunkIndex, appendChunkIndex } = this.state;
-    if (appendChunkIndex <= this.productsChunk.size - 1) {
+    if (appendChunkIndex <= this.productsChunk.size - 1 && !this.flagOnSwipeRight) {
       this.flagOnSwipeRight = true;
       const currentIndex = currentChunkIndex += 1;
       const appendIndex = appendChunkIndex += 1;
@@ -131,7 +132,7 @@ export default class Catalogue extends Component {
         swipe: 'left'
       });
       //eslint-disable-next-line
-      setTimeout(() => this.flagOnSwipeRight = false, 100);
+      setTimeout(() => this.flagOnSwipeRight = false, this.timeout);
     }
   }
 
@@ -147,7 +148,7 @@ export default class Catalogue extends Component {
         swipe: 'right'
       });
       //eslint-disable-next-line
-      setTimeout(() => this.flagOnSwipeRight = false, 100);
+      setTimeout(() => this.flagOnSwipeRight = false, this.timeout);
     }
   }
 
