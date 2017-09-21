@@ -1,7 +1,6 @@
 import footer from '../app/assets/comfortImg/footer.png';
 import texture from '../app/assets/comfortImg/texture.png';
 import stufePellet from '../app/assets/comfortImg/stufePellet.png';
-import stufePetrolio from '../app/assets/comfortImg/stufePetrolio.png';
 import stufeGas from '../app/assets/comfortImg/stufeGas.png';
 import stufeLegna from '../app/assets/comfortImg/stufeLegna.png';
 import stufeBioetanolo from '../app/assets/comfortImg/stufeBioetanolo.png';
@@ -36,7 +35,7 @@ const world = {
     },
     {
       familyName: 'Stufe a Petrolio',
-      image: stufePetrolio,
+      image: stufePetrolioSquare,
       imageSidebar: stufePetrolioSquare,
       categoryCode: 'CAT280'
     },
