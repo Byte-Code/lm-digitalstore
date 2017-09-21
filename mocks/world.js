@@ -1,7 +1,6 @@
 import footer from '../app/assets/comfortImg/footer.png';
 import texture from '../app/assets/comfortImg/texture.png';
 import stufePellet from '../app/assets/comfortImg/stufePellet.png';
-import stufePetrolio from '../app/assets/comfortImg/stufePetrolio.png';
 import stufeGas from '../app/assets/comfortImg/stufeGas.png';
 import stufeLegna from '../app/assets/comfortImg/stufeLegna.png';
 import stufeBioetanolo from '../app/assets/comfortImg/stufeBioetanolo.png';
@@ -11,6 +10,12 @@ import pompeCalore from '../app/assets/comfortImg/pompeCalore.png';
 import radiatori from '../app/assets/comfortImg/radiatori.png';
 import caldaieScaldabagni from '../app/assets/comfortImg/caldaieScaldabagni.png';
 import termoarredi from '../app/assets/comfortImg/termoarredi.png';
+import caldaieScaldabagniSquare from '../app/assets/comfortImg/square/caldaieScaldabagni_square.png';
+import stufePetrolioSquare from '../app/assets/comfortImg/square/stufePetrolio_square.jpg';
+import pelletLegnaCombustibiliSquare from '../app/assets/comfortImg/square/pelletLegnaCombustibili_square.png';
+import stufeLegnaSquare from '../app/assets/comfortImg/square/stufeLegna_square.png';
+import stufePelletSquare from '../app/assets/comfortImg/square/stufePellet_square.png';
+
 
 const world = {
   worldName: 'Comfort',
@@ -25,11 +30,13 @@ const world = {
     {
       familyName: 'Stufe e Inserti a Pellet',
       image: stufePellet,
+      imageSidebar: stufePelletSquare,
       categoryCode: 'CAT4278'
     },
     {
       familyName: 'Stufe a Petrolio',
-      image: stufePetrolio,
+      image: stufePetrolioSquare,
+      imageSidebar: stufePetrolioSquare,
       categoryCode: 'CAT280'
     },
     {
@@ -40,7 +47,8 @@ const world = {
     {
       familyName: 'Stufe e Inserti a Legna',
       image: stufeLegna,
-      categoryCode: 'CAT282'
+      imageSidebar: stufeLegnaSquare,
+      categoryCode: 'CAT4277'
     },
     {
       familyName: 'Stufe e Caminetti a Bioetanolo',
@@ -55,12 +63,13 @@ const world = {
     {
       familyName: 'Pellet, Legna, Petrolio e Bioetanolo',
       image: pelletLegnaCombustibili,
+      imageSidebar: pelletLegnaCombustibiliSquare,
       categoryCode: 'CAT4275'
     },
     {
       familyName: 'Climatizzatori',
       image: pompeCalore,
-      categoryCode: 'CAT4214'
+      categoryCode: 'CAT3219'
     },
     {
       familyName: 'Radiatori',
@@ -70,6 +79,7 @@ const world = {
     {
       familyName: 'Caldaie e Scaldabagni',
       image: caldaieScaldabagni,
+      imageSidebar: caldaieScaldabagniSquare,
       categoryCode: 'CAT4276'
     },
     {

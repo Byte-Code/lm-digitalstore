@@ -9,7 +9,7 @@ import { formatPrice } from '../utils/utils';
 import MarketingFlag from '../components/MarketingFlag';
 import { getMarketingProps } from '../utils/marketingUtils';
 
-const ProductBadge = ({ productInfo, handleClick }) => {
+const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection }) => {
   if (productInfo.isEmpty()) {
     return null;
   }
@@ -44,7 +44,7 @@ const ProductBadge = ({ productInfo, handleClick }) => {
   const marketingPriceProps = getMarketingProps(productInfo);
 
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper animated={animated} animatedDirection={animatedDirection} onClick={handleClick}>
       <MarketingFlag {...marketingPriceProps} {...MarketingFlagStyle} />
       <Image imageID={imageID} imageOptions={imageOptions} alt={name} />
       <Name>{name}</Name>
@@ -65,17 +65,25 @@ const ProductBadge = ({ productInfo, handleClick }) => {
 
 ProductBadge.propTypes = {
   productInfo: ImmutablePropTypes.map,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  animated: PropTypes.bool,
+  animatedDirection: PropTypes.string
 };
 
 ProductBadge.defaultProps = {
   productInfo: Map(),
-  handleClick: () => null
+  handleClick: () => null,
+  animated: false,
+  animatedDirection: 'left'
 };
 
 export default ProductBadge;
 
-const Wrapper = glamorous.div({
+/* eslint-disable */
+const Wrapper = glamorous.div(({ animated, animatedDirection }) => ({
+  animation: animatedDirection === 'left'
+    ? animated ?  'mymove 1s' : 'mymove1 1s'
+    : animated ?  'mymoveRight 1s' : 'mymoveRight1 1s',
   height: 593,
   width: 405,
   display: 'flex',
@@ -95,7 +103,8 @@ const Wrapper = glamorous.div({
     height: 405,
     width: 405
   }
-});
+}));
+/* eslint-enable */
 
 const Name = glamorous.div({
   lineHeight: '32px',

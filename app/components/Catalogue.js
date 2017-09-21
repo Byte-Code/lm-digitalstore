@@ -7,10 +7,17 @@ import glamorous from 'glamorous';
 import Swipeable from 'react-swipeable';
 import * as _ from 'lodash';
 import AnalyticsService from '../analytics/AnalyticsService';
+import world from '../../mocks/world';
 
 import ProductBadge from './ProductBadge';
 import SellingAidsBadge from './SellingAidsBadge';
 import FilterBar from './FilterBar';
+
+const initialState = {
+  currentChunkIndex: 0,
+  appendChunkIndex: 1,
+  swipe: 'left'
+};
 
 
 export default class Catalogue extends Component {
@@ -48,10 +55,9 @@ export default class Catalogue extends Component {
     this.onRightSwipe = this.onRightSwipe.bind(this);
     this.chunkerizeProductList = this.chunkerizeProductList.bind(this);
     this.getChunks = this.getChunks.bind(this);
-    this.state = {
-      currentChunkIndex: 0,
-      appendChunkIndex: 1
-    };
+    this.state = initialState;
+    this.flagOnSwipeRight = false;
+    this.timeout = 1000;
   }
 
   componentWillMount() {
@@ -73,11 +79,24 @@ export default class Catalogue extends Component {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    const filtersChange = !nextProps.filterMap.get('filters').equals(
+      this.props.filterMap.get('filters')
+    );
+    const isProductListFiltered = nextProps.filterMap.get('filters').size > 0;
+    if (isProductListFiltered && filtersChange) {
+      this.setState(initialState);
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const chunkHasChanged = prevState !== this.state;
     const componentReceiveProduct = !prevProps.products.size > 0 && this.props.products.size > 0;
+    const filtersChange = !prevProps.filterMap.get('filters').equals(
+      this.props.filterMap.get('filters')
+    );
 
-    if (componentReceiveProduct || chunkHasChanged) {
+    if ((componentReceiveProduct || chunkHasChanged) && !filtersChange) {
       const currentChunk = this.getChunks().setSize(this.chunkSize);
       const positionIndex = this.chunkSize * this.state.currentChunkIndex;
       this.props.trackCatalogueProductsChunk();
@@ -103,26 +122,47 @@ export default class Catalogue extends Component {
 
   onLeftSwipe() {
     let { currentChunkIndex, appendChunkIndex } = this.state;
-    if (appendChunkIndex < this.productsChunk.size - 1) {
+    if (appendChunkIndex <= this.productsChunk.size - 1 && !this.flagOnSwipeRight) {
+      this.flagOnSwipeRight = true;
       const currentIndex = currentChunkIndex += 1;
       const appendIndex = appendChunkIndex += 1;
       this.setState({
         currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
+        appendChunkIndex: appendIndex,
+        swipe: 'left'
       });
+      //eslint-disable-next-line
+      setTimeout(() => this.flagOnSwipeRight = false, this.timeout);
     }
   }
 
   onRightSwipe() {
     let { currentChunkIndex, appendChunkIndex } = this.state;
-    if (currentChunkIndex > 0) {
+    if (currentChunkIndex > 0 && !this.flagOnSwipeRight) {
       const currentIndex = currentChunkIndex -= 1;
       const appendIndex = appendChunkIndex -= 1;
+      this.flagOnSwipeRight = true;
       this.setState({
         currentChunkIndex: currentIndex,
-        appendChunkIndex: appendIndex
+        appendChunkIndex: appendIndex,
+        swipe: 'right'
+      });
+      //eslint-disable-next-line
+      setTimeout(() => this.flagOnSwipeRight = false, this.timeout);
+    }
+  }
+
+  // eslint-disable-next-line
+  getCategoryName(catCode = null) {
+    let description = 'No Title';
+    if (catCode) {
+      world.families.forEach((family) => {
+        if (family.categoryCode === catCode) {
+          description = family.familyName;
+        }
       });
     }
+    return description;
   }
 
   getChunks() {
@@ -130,14 +170,8 @@ export default class Catalogue extends Component {
 
     if (this.productsChunk.size > 0) {
       const { currentChunkIndex, appendChunkIndex } = this.state;
-      const isProductListFiltered = this.props.filterMap.get('filters').size > 0;
-      let currentChunk = this.productsChunk.getIn([currentChunkIndex]);
-      let appendChunk = this.productsChunk.getIn([appendChunkIndex]);
-
-      if (isProductListFiltered) {
-        currentChunk = this.productsChunk.getIn([0]);
-        appendChunk = this.productsChunk.getIn([1]);
-      }
+      const currentChunk = this.productsChunk.getIn([currentChunkIndex]);
+      const appendChunk = this.productsChunk.getIn([appendChunkIndex]);
 
       chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
     }
@@ -153,7 +187,7 @@ export default class Catalogue extends Component {
     const products = this.getChunks();
     return products.map((p, index) =>
       <Link onClick={() => this.onBadgeClick(p, index)} to={`product/${p.get('code')}`} key={p.get('code')}>
-        <ProductBadge productInfo={p} />
+        <ProductBadge productInfo={p} animated={index < 4} animatedDirection={this.state.swipe} />
       </Link>
     );
   }
@@ -169,27 +203,27 @@ export default class Catalogue extends Component {
       toggleFiltersDialog,
       isDialogOpen,
       resetTempFilters
-    } = this.props;
+      } = this.props;
 
     if (categoryInfo.isEmpty()) {
       return null;
     }
 
-    const catName = categoryInfo.get('name');
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
     const facetFilters = categoryInfo.get('facetFilters') || List();
     const filterGroups = facetFilters.filterNot(g => g.get('group') === 'Prezzo');
+    const categoryCode = categoryInfo.get('code');
     const activeAid = filterMap.get('aid');
     const swipeableConfig = {
-      flickThreshold: 0.6,
+      flickThreshold: 0.3,
       preventDefaultTouchmoveEvent: true,
-      delta: 50
+      delta: 40
     };
 
     return (
       <div>
         <Header>
-          <h1>{catName}</h1>
+          <h1>{this.getCategoryName(categoryCode)}</h1>
         </Header>
         <SellingAidsBadge sellingAids={sellingAids} onToggle={toggleAid} activeAid={activeAid} />
         <FilterBar
