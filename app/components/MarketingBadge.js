@@ -35,7 +35,9 @@ const Label = glamorous.p({
 });
 
 const IdeaWrapper = glamorous.div({
-  position: 'relative'
+  position: 'relative',
+  marginTop: '10px',
+  marginRight: '15px'
 });
 
 export const PrezzoGiu = ({ src }) => <Badge height="100px" width="100px" src={src} />;

@@ -4,11 +4,53 @@ exports[`MarketingFlag should render an empty div when no promotions are active 
 <MarketingFlag
   loyaltyProgram={Object {}}
   marketingAttributes={Object {}}
+  promotionCode="0"
+  topLeftStyle={Object {}}
+  topRightStyle={Object {}}
+  wrapperStyle={Object {}}
 >
-  <glamorous(div)>
+  <glamorous(div)
+    wrapperStyle={Object {}}
+  >
     <div
-      className="css-c7um26"
-    />
+      className="css-nil"
+    >
+      <glamorous(div)
+        topLeftStyle={Object {}}
+      >
+        <div
+          className="css-nil"
+        >
+          <MarketingBadge
+            promotion={
+              Object {
+                "code": null,
+              }
+            }
+          />
+        </div>
+      </glamorous(div)>
+      <glamorous(div)
+        topLeft={
+          Object {
+            "code": null,
+          }
+        }
+        topRightStyle={Object {}}
+      >
+        <div
+          className="css-nil"
+        >
+          <MarketingBadge
+            promotion={
+              Object {
+                "code": null,
+              }
+            }
+          />
+        </div>
+      </glamorous(div)>
+    </div>
   </glamorous(div)>
 </MarketingFlag>
 `;
@@ -28,49 +70,83 @@ exports[`MarketingFlag should render properly when promotions are active 1`] = `
       "specialBadgeCodePeriodEndDate": "2020-10-14T00:00:00.000Z",
     }
   }
+  promotionCode="0"
+  topLeftStyle={Object {}}
+  topRightStyle={Object {}}
+  wrapperStyle={Object {}}
 >
-  <glamorous(div)>
+  <glamorous(div)
+    wrapperStyle={Object {}}
+  >
     <div
-      className="css-c7um26"
+      className="css-nil"
     >
-      <MarketingBadge
-        promotion={
+      <glamorous(div)
+        topLeftStyle={Object {}}
+      >
+        <div
+          className="css-nil"
+        >
+          <MarketingBadge
+            promotion={
+              Object {
+                "code": null,
+              }
+            }
+          />
+        </div>
+      </glamorous(div)>
+      <glamorous(div)
+        topLeft={
           Object {
-            "code": "IDEAPIU",
-            "value": 10,
+            "code": null,
           }
         }
+        topRightStyle={Object {}}
       >
-        <Component
-          src="test-file-stub"
-          value={10}
+        <div
+          className="css-nil"
         >
-          <glamorous(div)>
-            <div
-              className="css-13azwyo"
+          <MarketingBadge
+            promotion={
+              Object {
+                "code": "IDEAPIU",
+                "value": 10,
+              }
+            }
+          >
+            <Component
+              src="test-file-stub"
+              value={10}
             >
-              <glamorous(img)
-                height="50px"
-                mBottom="18px"
-                src="test-file-stub"
-                width="100px"
-              >
-                <img
-                  className="css-1mc4zot"
-                  src="test-file-stub"
-                />
-              </glamorous(img)>
-              <glamorous(p)>
-                <p
-                  className="css-178lsms"
+              <glamorous(div)>
+                <div
+                  className="css-1xayo1t"
                 >
-                  -10% IDEAPIÚ
-                </p>
-              </glamorous(p)>
-            </div>
-          </glamorous(div)>
-        </Component>
-      </MarketingBadge>
+                  <glamorous(img)
+                    height="50px"
+                    mBottom="18px"
+                    src="test-file-stub"
+                    width="100px"
+                  >
+                    <img
+                      className="css-1mc4zot"
+                      src="test-file-stub"
+                    />
+                  </glamorous(img)>
+                  <glamorous(p)>
+                    <p
+                      className="css-178lsms"
+                    >
+                      -10% IDEAPIÚ
+                    </p>
+                  </glamorous(p)>
+                </div>
+              </glamorous(div)>
+            </Component>
+          </MarketingBadge>
+        </div>
+      </glamorous(div)>
     </div>
   </glamorous(div)>
 </MarketingFlag>

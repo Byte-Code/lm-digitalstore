@@ -38,7 +38,7 @@ exports[`MarketingBadge should render IDEAPIU 1`] = `
   >
     <glamorous(div)>
       <div
-        className="css-13azwyo"
+        className="css-1xayo1t"
       >
         <glamorous(img)
           height="50px"
@@ -73,9 +73,12 @@ exports[`MarketingBadge should render NOVITA 1`] = `
   }
 >
   <Icon>
-    <glamorous(div)>
+    <glamorous(div)
+      id="novita_badge"
+    >
       <div
-        className="css-1gfp3u5"
+        className="css-85wdij"
+        id="novita_badge"
       >
         <glamorous(div)>
           <div

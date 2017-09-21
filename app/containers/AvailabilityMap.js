@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, withState, withHandlers } from 'recompose';
+import round from 'lodash/round';
 
 import AvailabilityMap from '../components/AvailabilityMap';
 import {
@@ -23,6 +24,15 @@ const MapDispatchToProps = {
   trackStoreAvailabilityEvent
 };
 
+const mapKmZoom = {
+  2: 13,
+  12: 12,
+  22: 11,
+  32: 11,
+  42: 10,
+  50: 9
+};
+
 const enhance = compose(
   withState('radius', 'setRadius', 25),
   withState('zoom', 'setZoom', 11),
@@ -33,10 +43,12 @@ const enhance = compose(
       setSelectedStore(value, () => setInfoWindow(true));
     },
     closeInfoWindow: ({ setInfoWindow }) => () => setInfoWindow(false),
-    handleChange: ({ setZoom }) => e => {
+    handleChange: ({ setZoom }) => (e) => {
       setZoom(e.zoom);
     },
-    handleSlide: ({ setRadius, setInfoWindow }) => (e, v) => {
+    handleSlide: ({ setRadius, setInfoWindow, setZoom }) => (e, v) => {
+      const value = round(v);
+      setZoom(mapKmZoom[value]);
       setInfoWindow(false, () => setRadius(v));
     }
   }),

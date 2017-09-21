@@ -4,12 +4,15 @@ import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
 import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 import { isAnalyticsLogMode } from '../CommandLineOptions';
+import { LABEL, PRODUCT_DISPONIBILITA } from './AnalyticsConstants';
+
 
 class AnalyticsService {
 
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
+    this.traccia = true;
     this.firstTrack = true;
     this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
@@ -26,6 +29,7 @@ class AnalyticsService {
     this.setFilters = this.setFilters.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.setStoreAvailability = this.setStoreAvailability.bind(this);
+    this.setTraccia = this.setTraccia.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -35,7 +39,8 @@ class AnalyticsService {
   clearDataLayer() {
     // eslint-disable-next-line array-callback-return
     this.dataLayer = this.dataLayer.filter((value, key) => {
-      const validKeys = ['cid', 'navigation_store', 'page_name', 'app_release_version'];
+      const validKeys = [LABEL.CID, LABEL.NAVIGATION_STORE, LABEL.PAGE_NAME,
+        LABEL.APP_RELEASE_VERSION];
       if (validKeys.indexOf(key) > -1) {
         return value;
       }
@@ -47,17 +52,17 @@ class AnalyticsService {
   }
 
   setPageName(type, data) {
-    const pageName = this.dataLayer.get('page_name');
-    this.setDataLayer('page_name', utils.buildPageName(type, data, pageName));
+    const pageName = this.dataLayer.get(LABEL.PAGE_NAME);
+    this.setDataLayer(LABEL.PAGE_NAME, utils.buildPageName(type, data, pageName));
   }
 
   setCid() {
     const cid = uuid();
-    this.setDataLayer('cid', uuid.valid(cid));
+    this.setDataLayer(LABEL.CID, uuid.valid(cid));
   }
 
   deleteInDataLayer(actionType) {
-    const map = { IDLE_TIMER_COMPLETE: 'cid' };
+    const map = { IDLE_TIMER_COMPLETE: LABEL.CID };
     this.dataLayer = this.dataLayer.delete(map[actionType]);
   }
 
@@ -85,6 +90,7 @@ class AnalyticsService {
         pathArray
       );
     }
+
     this.mergeInDataLayer(productLayer);
   }
 
@@ -96,7 +102,7 @@ class AnalyticsService {
   setReleaseVersion(worldName = '') {
     if (worldName) {
       const releseVersion = utils.buildReleaseVersion(worldName);
-      this.setDataLayer('app_release_version', releseVersion);
+      this.setDataLayer(LABEL.APP_RELEASE_VERSION, releseVersion);
     }
   }
 
@@ -111,23 +117,30 @@ class AnalyticsService {
 
   setStoreAvailability({ storeName = '', storeStock = '', product = Map({}) }) {
     const { prodCode, prodCategory } = utils.getProductProperty(product);
-    this.setDataLayer('event_type', 'product_condivisione');
-    this.setDataLayer('prod_id', prodCode);
-    this.setDataLayer('prod_category', prodCategory);
-    this.setDataLayer('event_action', `${storeName}_${storeStock}`);
+    this.setDataLayer(LABEL.EVENT_TYPE, PRODUCT_DISPONIBILITA);
+    this.setDataLayer(LABEL.PROD_ID, prodCode);
+    this.setDataLayer(LABEL.PROD_CATEGORY, prodCategory);
+    this.setDataLayer(LABEL.EVENT_ACTION, `${storeName}_${storeStock}`);
+  }
+
+  setTraccia(value) {
+    this.traccia = value;
   }
 
   track(eventType) {
-    tealiumAnalytics([{
-      hitType: eventType,
-      dataLayer: this.dataLayer.toJS()
-    }]);
+    if (this.traccia) {
+      tealiumAnalytics([{
+        hitType: eventType,
+        dataLayer: this.dataLayer.toJS()
+      }]);
 
-    if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
-      console.log(this.dataLayer.toJS());
+      if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
+        console.log(this.dataLayer.toJS());
+      }
+      this.clearDataLayer();
+      this.traccia = false;
+      setTimeout(() => { this.traccia = true; }, 500);
     }
-
-    this.clearDataLayer();
   }
 }
 

@@ -38,6 +38,17 @@ exports[`filterBar should initially render properly when dialog is closed 1`] = 
       disabled={false}
       initiallyOpen={false}
       insetChildren={false}
+      leftIcon={
+        <ContentAddCircleOutline
+          color="#fff"
+          style={
+            Object {
+              "height": 30,
+              "width": 30,
+            }
+          }
+        />
+      }
       nestedItems={
         Array [
           <Connect(FilterDialog)
@@ -61,19 +72,9 @@ exports[`filterBar should initially render properly when dialog is closed 1`] = 
       onTouchEnd={[Function]}
       onTouchStart={[Function]}
       open={false}
-      primaryText="Piú filtri"
+      primaryText="Più filtri"
       primaryTogglesNestedList={false}
-      rightIcon={
-        <ContentAddCircleOutline
-          color="#fff"
-          style={
-            Object {
-              "height": 30,
-              "width": 30,
-            }
-          }
-        />
-      }
+      rightIcon={<glamorous.Div />}
       secondaryTextLines={1}
       style={
         Object {
@@ -82,6 +83,9 @@ exports[`filterBar should initially render properly when dialog is closed 1`] = 
       }
     />
   </List>
+  <Connect(ResetButton)
+    resetActiveFilters={[Function]}
+  />
 </glamorous(div)>
 `;
 
@@ -123,6 +127,17 @@ exports[`filterBar should initially render properly when dialog is open 1`] = `
       disabled={false}
       initiallyOpen={false}
       insetChildren={false}
+      leftIcon={
+        <ContentRemoveCircleOutline
+          color="#fff"
+          style={
+            Object {
+              "height": 30,
+              "width": 30,
+            }
+          }
+        />
+      }
       nestedItems={
         Array [
           <Connect(FilterDialog)
@@ -146,19 +161,9 @@ exports[`filterBar should initially render properly when dialog is open 1`] = `
       onTouchEnd={[Function]}
       onTouchStart={[Function]}
       open={true}
-      primaryText="Piú filtri"
+      primaryText="Chiudi filtri"
       primaryTogglesNestedList={false}
-      rightIcon={
-        <ContentRemoveCircleOutline
-          color="#fff"
-          style={
-            Object {
-              "height": 30,
-              "width": 30,
-            }
-          }
-        />
-      }
+      rightIcon={<glamorous.Div />}
       secondaryTextLines={1}
       style={
         Object {
@@ -167,6 +172,9 @@ exports[`filterBar should initially render properly when dialog is open 1`] = `
       }
     />
   </List>
+  <Connect(ResetButton)
+    resetActiveFilters={[Function]}
+  />
 </glamorous(div)>
 `;
 

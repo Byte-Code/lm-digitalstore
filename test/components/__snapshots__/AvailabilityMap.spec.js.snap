@@ -29,7 +29,7 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
           "marginBottom": 24,
         }
       }
-      step={0.01}
+      step={10}
       style={Object {}}
       value={25}
     />
@@ -39,7 +39,9 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
       25 km
     </glamorous(div)>
   </glamorous.Div>
-  <glamorous(div)>
+  <glamorous(div)
+    id="map"
+  >
     <GoogleMap
       center={
         Object {
@@ -48,7 +50,6 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
         }
       }
       debounced={true}
-      defaultZoom={11}
       distanceToMouse={[Function]}
       fullscreenControl={false}
       googleMapLoader={[Function]}
@@ -58,6 +59,7 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
       options={
         Object {
           "fullscreenControl": false,
+          "gestureHandling": "none",
           "maxZoom": 17,
           "minZoom": 8,
           "zoomControl": false,
@@ -73,6 +75,7 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
         }
       }
       yesIWantToUseGoogleMapApiInternals={false}
+      zoom={11}
     >
       <Marker
         code="123"
@@ -91,10 +94,10 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
         lng={123213}
       />
       <glamorous(div)
-        height={2004.7071044425247}
+        height={930}
         lat={12311}
         lng={123213}
-        width={2003.1846677660942}
+        width={930}
       />
     </GoogleMap>
     <glamorous(div) />
@@ -132,6 +135,7 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
       ]
     }
     selectedStore=""
+    slick={[Function]}
   />
 </glamorous(div)>
 `;

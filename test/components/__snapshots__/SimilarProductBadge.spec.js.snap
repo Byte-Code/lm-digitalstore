@@ -28,6 +28,10 @@ exports[`SimilarProductBadge should render properly 1`] = `
       <MarketingFlag
         loyaltyProgram={Object {}}
         marketingAttributes={Object {}}
+        promotionCode="0"
+        topLeftStyle={Object {}}
+        topRightStyle={Object {}}
+        wrapperStyle={Object {}}
       />
       <PriceBadge
         price={

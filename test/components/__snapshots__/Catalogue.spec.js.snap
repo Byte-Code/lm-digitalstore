@@ -23,65 +23,19 @@ exports[`catalogue should render properly when categoryInfo is not empty 1`] = `
     toggleFilter={[Function]}
     toggleFiltersDialog={[Function]}
   />
-  <glamorous(div)
-    opacity={true}
+  <Swipeable
+    delta={50}
+    disabled={false}
+    flickThreshold={0.6}
+    nodeName="div"
+    onSwipingLeft={[Function]}
+    onSwipingRight={[Function]}
+    preventDefaultTouchmoveEvent={true}
+    stopPropagation={false}
   >
-    <glamorous(div) />
-    <Link
-      onClick={[Function]}
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="product/1"
-    >
-      <ProductBadge
-        handleClick={[Function]}
-        productInfo={
-          Object {
-            "code": 1,
-            "mainImage": "image1",
-            "marketingAttributes": Object {},
-            "name": "product1",
-          }
-        }
-      />
-    </Link>
-    <Link
-      onClick={[Function]}
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="product/2"
-    >
-      <ProductBadge
-        handleClick={[Function]}
-        productInfo={
-          Object {
-            "code": 2,
-            "mainImage": "image2",
-            "marketingAttributes": Object {},
-            "name": "product2",
-          }
-        }
-      />
-    </Link>
-    <Link
-      onClick={[Function]}
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="product/3"
-    >
-      <ProductBadge
-        handleClick={[Function]}
-        productInfo={
-          Object {
-            "code": 3,
-            "mainImage": "image3",
-            "marketingAttributes": Object {},
-            "name": "product3",
-          }
-        }
-      />
-    </Link>
-    <glamorous(div) />
-  </glamorous(div)>
+    <glamorous(div)
+      opacity={true}
+    />
+  </Swipeable>
 </div>
 `;

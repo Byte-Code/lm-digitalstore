@@ -117,42 +117,11 @@ describe('Test one by one all race conditions', () => {
 
   describe('TRACK_ANALYTICS_FILTERS events', () => {
     const returnRaceValue = { keyRace: 'trackFilters' };
-
     it('should PUT SUCCESS_TRACK_FILTERS at the End', () =>
       expectSaga(callAnalyticsSession)
         .provide(new DefaultProvider(returnRaceValue).getProvider())
         .call.fn(AnalyticsService.track)
         .put({ type: action.SUCCESS_TRACK_FILTERS })
-        .run());
-  });
-
-  describe('TRACK_PRODUCT_CLICK event', () => {
-    const returnRaceValue = { keyRace: 'trackProductClick' };
-
-    it('should PUT SUCCESS_TRACK_PRODUCT_CLICK at the End', () =>
-      expectSaga(callAnalyticsSession)
-        .provide(new DefaultProvider(returnRaceValue).getProvider())
-        .call.fn(AnalyticsService.track)
-        .put({ type: action.SUCCESS_TRACK_PRODUCT_CLICK })
-        .run());
-  });
-
-  describe('SET_ANALYTICS_PRODUCT_CLICK event', () => {
-    const returnRaceValue = {
-      keyRace: 'productClick',
-      dataRace: {
-        data: {
-          product: 'product',
-          index: 1
-        }
-      }
-    };
-
-    it('should PUT TRACK_PRODUCT_CLICK at the End', () =>
-      expectSaga(callAnalyticsSession)
-        .provide(new DefaultProvider(returnRaceValue).getProvider())
-        .call.fn(AnalyticsService.setProduct)
-        .put({ type: action.TRACK_PRODUCT_CLICK })
         .run());
   });
 

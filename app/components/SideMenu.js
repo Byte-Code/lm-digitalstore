@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import glamorous from 'glamorous';
 import Drawer from 'material-ui/Drawer';
 
-import FlowerIcon from 'material-ui/svg-icons/maps/local-florist';
 import FamilySideBar from '../containers/FamilySideBar';
+import world from '../../mocks/world';
 
 export const Button = glamorous.div(({ isVisible = false, left = 0 }) => ({
   width: '90px',
@@ -34,7 +34,6 @@ const Column = glamorous.div(({ background, boxShadow = 'none', width = 'auto' }
   overflow: 'auto'
 }));
 
-const iconStyle = { height: 50, width: 50 };
 const drawerContainerStyle = { background: 'transparent', boxShadow: 'none', display: 'flex' };
 
 export default class SideMenu extends Component {
@@ -55,8 +54,8 @@ export default class SideMenu extends Component {
     return (
       <div>
         <Button onClick={this.toggleMenu} isVisible={!open}>
-          <FlowerIcon color="#fff" style={iconStyle} />
-          <p>Giardino & Terrazzo</p>
+          <span className="thermometer" />
+          <p>{world.worldName}</p>
         </Button>
         <Drawer
           docked={false}
@@ -75,8 +74,8 @@ export default class SideMenu extends Component {
           </Column>
           <Column background="transparent">
             <Button onClick={this.toggleMenu} left="275px" isVisible={open}>
-              <FlowerIcon color="#fff" style={iconStyle} />
-              <p>Giardino & Terrazzo</p>
+              <span className="thermometer" />
+              <p>{world.worldName}</p>
             </Button>
           </Column>
         </Drawer>
