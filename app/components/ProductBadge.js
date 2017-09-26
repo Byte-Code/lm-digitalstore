@@ -82,8 +82,8 @@ export default ProductBadge;
 /* eslint-disable */
 const Wrapper = glamorous.div(({ animated, animatedDirection }) => ({
   animation: animatedDirection === 'left'
-    ? animated ?  'mymove 1s' : 'mymove1 1s'
-    : animated ?  'mymoveRight 1s' : 'mymoveRight1 1s',
+    ? animated ?  'mymove 0.5s' : 'mymove1 0.5s'
+    : animated ?  'mymoveRight 0.8s' : 'mymoveRight1 0.8s',
   height: 593,
   width: 405,
   display: 'flex',

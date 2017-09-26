@@ -208,12 +208,12 @@ li.slick-active button:before {
 }
 
 @keyframes mymove {
-  from {margin-left: 1100px}
+  from {margin-left: 800px}
   to {margin-left: 0px}
 }
 
 @keyframes mymove1 {
-  from {margin-left: 1100px}
+  from {margin-left: 800px}
   to {margin-left: 0px}
 }
 
