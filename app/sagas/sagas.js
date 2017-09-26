@@ -15,6 +15,7 @@ import { analyticsSaga } from './analyticsSaga';
 import { sessionAnalyticsSaga } from './sessionAnalyticsSaga';
 import getAllActiveStoreSaga from './getAllActiveStoreSaga';
 import { analyticsTrackClickSaga } from './analyticsTrackClickSaga';
+import analyticsFilterSaga from './analyticsFilterSaga';
 
 
 export default function* root() {
@@ -33,6 +34,7 @@ export default function* root() {
     fork(analyticsSaga),
     fork(sessionAnalyticsSaga),
     fork(getAllActiveStoreSaga),
-    fork(analyticsTrackClickSaga)
+    fork(analyticsTrackClickSaga),
+    fork(analyticsFilterSaga)
   ];
 }

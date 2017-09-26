@@ -92,12 +92,9 @@ export default class Catalogue extends Component {
   componentDidUpdate(prevProps, prevState) {
     const chunkHasChanged = prevState !== this.state;
     const componentReceiveProduct = !prevProps.products.size > 0 && this.props.products.size > 0;
-    const filtersChange = !prevProps.filterMap.get('filters').equals(
-      this.props.filterMap.get('filters')
-    );
-
-    if ((componentReceiveProduct || chunkHasChanged) && !filtersChange) {
-      const currentChunk = this.getChunks().setSize(this.chunkSize);
+    const hasFilters = prevProps.filterMap.get('filters').size > 0;
+    if ((componentReceiveProduct || chunkHasChanged) && !hasFilters) {
+      const currentChunk = this.getCurrentChunk();
       const positionIndex = this.chunkSize * this.state.currentChunkIndex;
       this.props.trackCatalogueProductsChunk();
       // Can't use redux-saga https://stackoverflow.com/questions/45435094/redux-saga-takeevery-miss-catch-event
@@ -177,6 +174,13 @@ export default class Catalogue extends Component {
     }
     // eslint-disable-next-line
     return chunks ? chunks : List();
+  }
+
+  getCurrentChunk() {
+    const currentChunksSize = this.getChunks().size;
+    return currentChunksSize > this.chunkSize
+      ? this.getChunks().setSize(this.chunkSize)
+      : this.getChunks().setSize(currentChunksSize);
   }
 
   chunkerizeProductList(productList) {

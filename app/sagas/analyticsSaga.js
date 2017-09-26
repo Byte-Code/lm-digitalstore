@@ -4,8 +4,6 @@ import * as analyticsAction from '../actions/analyticsActions';
 import * as constants from '../actions/actionTypes';
 import analyticsEventList from '../analytics/AnalyticsEventList';
 import {
-  getFilterInfoFromCategory,
-  getFilterMap,
   getFiltersCategoryCode,
   getCatalogueProducts,
   getProductReducer,
@@ -28,7 +26,6 @@ export function* callAnalyticsSession() {
       setProduct,
       setRelatedProductInCatalogue,
       startAnalyticsProduct,
-      filters,
       trackFilters,
       resetFilters,
       trackStoreAvailability
@@ -39,12 +36,6 @@ export function* callAnalyticsSession() {
       setProduct: take(constants.SUCCESS_FETCH_PRODUCT),
       setRelatedProductInCatalogue: take(constants.TRACK_CATALOGUE_PRODUCTS_CHUNK),
       startAnalyticsProduct: take(constants.START_ANALYTICS_PRODUCT),
-      filters: take([
-        constants.TOGGLE_AID,
-        constants.APPLY_TEMP_FILTERS,
-        constants.TOGGLE_AVAILABILITY,
-        constants.TOGGLE_FILTER
-      ]),
       resetFilters: take(constants.RESET_FILTERS),
       trackFilters: take(constants.TRACK_ANALYTICS_FILTERS),
       trackStoreAvailability: take(constants.TRACK_STORE_AVAILABILITY_EVENT)
@@ -90,7 +81,7 @@ export function* callAnalyticsSession() {
       }
     }
 
-    if (filters) {
+/*    if (filters) {
       const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
       const catCode = yield select(getFiltersCategoryCode);
       const productList = yield call(getCatalogueProducts(), state, catCode);
@@ -110,7 +101,7 @@ export function* callAnalyticsSession() {
         pathArray
       });
       yield put(analyticsAction.trackAnalyticsFilters());
-    }
+    } */
 
     if (resetFilters) {
       const catCode = yield select(getFiltersCategoryCode);
