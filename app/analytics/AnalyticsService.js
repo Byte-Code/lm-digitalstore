@@ -128,19 +128,16 @@ class AnalyticsService {
   }
 
   track(eventType) {
-    if (this.traccia) {
-      tealiumAnalytics([{
-        hitType: eventType,
-        dataLayer: this.dataLayer.toJS()
-      }]);
+    tealiumAnalytics([{
+      hitType: eventType,
+      dataLayer: this.dataLayer.toJS()
+    }]);
 
-      if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
-        console.log(this.dataLayer.toJS());
-      }
-      this.clearDataLayer();
-      this.traccia = false;
-      setTimeout(() => { this.traccia = true; }, 500);
+    if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
+      console.log(this.dataLayer.toJS());
     }
+    this.clearDataLayer();
+    this.traccia = false;
   }
 }
 
