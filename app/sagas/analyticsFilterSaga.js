@@ -9,7 +9,7 @@ import {
 import { getPageNameData } from './analyticsSaga.utility';
 import * as analyticsAction from '../actions/analyticsActions';
 import { TOGGLE_AID, APPLY_TEMP_FILTERS, TOGGLE_AVAILABILITY,
-  TOGGLE_FILTER } from '../actions/actionTypes';
+  TOGGLE_FILTER, RESET_FILTERS } from '../actions/actionTypes';
 
 function* applyFilterActions() {
   const state = yield select();
@@ -35,6 +35,21 @@ function* applyFilterActions() {
   yield put(analyticsAction.trackAnalyticsFilters());
 }
 
+function* resetFilter() {
+  const state = yield select();
+  const { pathArray = '' } = yield call(getPageNameData, state);
+  const catCode = yield select(getFiltersCategoryCode);
+  const productList = yield getCatalogueProducts()(state, catCode);
+  const productsNumber = productList.size;
+
+  yield call(AnalyticsService.clearFilters, productsNumber);
+  yield call(AnalyticsService.setRelatedProduct, {
+    products: productList,
+    pathArray
+  });
+  yield put(analyticsAction.trackAnalyticsFilters());
+}
+
 export default function* analyticsFilterSaga() {
   yield takeEvery([
     TOGGLE_AID,
@@ -42,4 +57,6 @@ export default function* analyticsFilterSaga() {
     TOGGLE_AVAILABILITY,
     TOGGLE_FILTER
   ], applyFilterActions);
+
+  yield takeEvery(RESET_FILTERS, resetFilter);
 }

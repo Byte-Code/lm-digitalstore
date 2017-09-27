@@ -92,8 +92,11 @@ export default class Catalogue extends Component {
   componentDidUpdate(prevProps, prevState) {
     const chunkHasChanged = prevState !== this.state;
     const componentReceiveProduct = !prevProps.products.size > 0 && this.props.products.size > 0;
-    const hasFilters = prevProps.filterMap.get('filters').size > 0;
-    if ((componentReceiveProduct || chunkHasChanged) && !hasFilters) {
+    const filtersChange = !prevProps.filterMap.get('filters').equals(
+      this.props.filterMap.get('filters')
+    );
+
+    if ((componentReceiveProduct || chunkHasChanged) && !filtersChange) {
       const currentChunk = this.getCurrentChunk();
       const positionIndex = this.chunkSize * this.state.currentChunkIndex;
       this.props.trackCatalogueProductsChunk();

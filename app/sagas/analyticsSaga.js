@@ -4,8 +4,6 @@ import * as analyticsAction from '../actions/analyticsActions';
 import * as constants from '../actions/actionTypes';
 import analyticsEventList from '../analytics/AnalyticsEventList';
 import {
-  getFiltersCategoryCode,
-  getCatalogueProducts,
   getProductReducer,
 } from '../reducers/selectors';
 import { getPageNameData, getCategoryData } from './analyticsSaga.utility';
@@ -27,7 +25,6 @@ export function* callAnalyticsSession() {
       setRelatedProductInCatalogue,
       startAnalyticsProduct,
       trackFilters,
-      resetFilters,
       trackStoreAvailability
     } = yield race({
       setSessionData: take(constants.SUCCESS_FETCH_WORLD),
@@ -36,7 +33,6 @@ export function* callAnalyticsSession() {
       setProduct: take(constants.SUCCESS_FETCH_PRODUCT),
       setRelatedProductInCatalogue: take(constants.TRACK_CATALOGUE_PRODUCTS_CHUNK),
       startAnalyticsProduct: take(constants.START_ANALYTICS_PRODUCT),
-      resetFilters: take(constants.RESET_FILTERS),
       trackFilters: take(constants.TRACK_ANALYTICS_FILTERS),
       trackStoreAvailability: take(constants.TRACK_STORE_AVAILABILITY_EVENT)
     });
@@ -79,41 +75,6 @@ export function* callAnalyticsSession() {
           categoryName
         });
       }
-    }
-
-/*    if (filters) {
-      const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
-      const catCode = yield select(getFiltersCategoryCode);
-      const productList = yield call(getCatalogueProducts(), state, catCode);
-      const productsNumber = productList.size;
-      const activeFilters = yield select(getFilterMap);
-
-
-      yield call(AnalyticsService.setFilters, {
-        sellingAids,
-        filterGroup,
-        productsNumber,
-        activeFilters
-      });
-
-      yield call(AnalyticsService.setRelatedProduct, {
-        products: productList,
-        pathArray
-      });
-      yield put(analyticsAction.trackAnalyticsFilters());
-    } */
-
-    if (resetFilters) {
-      const catCode = yield select(getFiltersCategoryCode);
-      const productList = yield getCatalogueProducts()(state, catCode);
-      const productsNumber = productList.size;
-
-      yield call(AnalyticsService.clearFilters, productsNumber);
-      yield call(AnalyticsService.setRelatedProduct, {
-        products: productList,
-        pathArray
-      });
-      yield put(analyticsAction.trackAnalyticsFilters());
     }
 
     if (startAnalyticsSession) {
