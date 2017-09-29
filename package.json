@@ -192,7 +192,7 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
-    "@byte-code/lm-remote-api": "0.0.33",
+    "@byte-code/lm-remote-api": "0.0.38",
     "cloudinary-core": "^2.2.1",
     "electron-debug": "^1.1.0",
     "electron-log": "^2.0.2",
