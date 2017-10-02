@@ -1,4 +1,5 @@
 import { Range } from 'immutable';
+import world from '../../mocks/world';
 
 export function titleFormatter(text) {
   return text.charAt(0) + text.slice(1).toLowerCase();
@@ -38,4 +39,16 @@ export function getStockLabel(stock, stockStatus) {
     default:
       return 'Prodotto non disponibile';
   }
+}
+
+export function getCategoryName(catCode = null) {
+  let description = 'No Title';
+  if (catCode) {
+    world.families.forEach((family) => {
+      if (family.categoryCode === catCode) {
+        description = family.familyName;
+      }
+    });
+  }
+  return description;
 }

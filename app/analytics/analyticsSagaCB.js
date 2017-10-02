@@ -11,12 +11,12 @@ import * as analyticsAction from '../actions/analyticsActions';
 import { PROD_CLICK, PROD_ACTION_DEDAIL } from '../actions/actionTypes';
 
 export function* applyFilterActions() {
+  const maxChunkLenght = 4;
   const state = yield select();
-  const { pathArray = '' } = yield call(getPageNameData, state);
   const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
   const catCode = yield select(getFiltersCategoryCode);
   const productList = yield call(getCatalogueProducts(), state, catCode);
-  const productsNumber = productList.size;
+  const productsNumber = productList.size > maxChunkLenght ? maxChunkLenght : productList.size;
   const activeFilters = yield select(getFilterMap);
 
 
@@ -26,27 +26,15 @@ export function* applyFilterActions() {
     productsNumber,
     activeFilters
   });
-
-  yield call(AnalyticsService.setRelatedProduct, {
-    products: productList,
-    pathArray
-  });
-  yield put(analyticsAction.trackAnalyticsFilters());
 }
 
 export function* resetFilter() {
   const state = yield select();
-  const { pathArray = '' } = yield call(getPageNameData, state);
   const catCode = yield select(getFiltersCategoryCode);
   const productList = yield getCatalogueProducts()(state, catCode);
   const productsNumber = productList.size;
 
   yield call(AnalyticsService.clearFilters, productsNumber);
-  yield call(AnalyticsService.setRelatedProduct, {
-    products: productList,
-    pathArray
-  });
-  yield put(analyticsAction.trackAnalyticsFilters());
 }
 
 export function* setProductClick(action) {
@@ -54,6 +42,7 @@ export function* setProductClick(action) {
   const { pathArray = '' } = yield call(getPageNameData, state);
 
   const { product, index = 0 } = action.data;
+  yield call(AnalyticsService.clearDataLayer);
   yield call(AnalyticsService.setProduct, {
     product,
     action: PROD_CLICK,
@@ -64,7 +53,6 @@ export function* setProductClick(action) {
 }
 
 export function* trackProductClick() {
-  yield call(AnalyticsService.setTraccia, true);
   yield call(AnalyticsService.track, 'link');
   yield put(analyticsAction.successTrackProductClick());
 }
@@ -86,7 +74,7 @@ export function* setAnalyticsSession() {
 }
 
 export function* idleTimerComplete() {
-  yield call(AnalyticsService.deleteInDataLayer, idleTimerComplete.type);
+  yield call(AnalyticsService.clearDataLayer);
   yield put(analyticsAction.successDeleteInDataLayer());
 }
 
@@ -108,7 +96,7 @@ export function* setProduct(action) {
   yield put(analyticsAction.successSetProductInDataLayer());
 }
 
-export function* setRelatedProductInCatalogue() {
+export function* trackChunkInCatalogue(action) {
   const state = yield select();
   const { pathArray = '' } = yield call(getPageNameData, state);
   const {
@@ -117,14 +105,22 @@ export function* setRelatedProductInCatalogue() {
     worldName = '',
     } = yield call(getCategoryData, state);
 
-  if (pathArray[0] === 'catalogue') {
-    yield call(AnalyticsService.setPageName, 'catalogue', {
-      worldName,
-      pathArray,
-      categoryCode,
-      categoryName
-    });
-  }
+  const { products, positionIndex } = action.data;
+
+  yield call(AnalyticsService.setPageName, 'catalogue', {
+    worldName,
+    pathArray,
+    categoryCode,
+    categoryName
+  });
+
+  yield call(AnalyticsService.setRelatedProduct, {
+    products,
+    pathArray,
+    positionIndex
+  });
+
+  yield call(AnalyticsService.track, 'view', false);
 }
 
 export function* startAnalyticsSession() {
@@ -137,10 +133,34 @@ export function* startAnalyticsProduct() {
   const { pathArray = '' } = yield call(getPageNameData, state);
 
   if (pathArray[0] !== 'catalogue') {
-    console.log('ciao');
     yield call(AnalyticsService.track, 'view');
     yield put(analyticsAction.successStartAnalyticsProduct());
   }
+}
+
+export function* setRelatedProducts(action) {
+  const state = yield select();
+  const { pathArray = '' } = yield call(getPageNameData, state);
+  const {
+    categoryCode = '',
+    categoryName = '',
+    worldName = '',
+    } = yield call(getCategoryData, state);
+
+
+  if (pathArray[0] === 'catalogue') {
+    yield call(AnalyticsService.setPageName, 'catalogue', {
+      worldName,
+      pathArray,
+      categoryCode,
+      categoryName
+    });
+    yield put(analyticsAction.successSetPageName());
+  }
+
+  const params = { products: action.result, pathArray };
+  yield call(AnalyticsService.setRelatedProduct, params);
+  yield put(analyticsAction.successSetRelatedProductInDataLayer());
 }
 
 export function* trackFilters() {
@@ -148,11 +168,11 @@ export function* trackFilters() {
   yield put(analyticsAction.successTrackFilters());
 }
 
-export function* trackStoreAvailability() {
+export function* trackStoreAvailability(action) {
   const {
     storeName = '',
     storeStock = 0,
-    } = trackStoreAvailability.storeData;
+    } = action.storeData;
   const product = yield select(getProductReducer);
 
   yield call(AnalyticsService.setStoreAvailability, {

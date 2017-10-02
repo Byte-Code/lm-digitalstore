@@ -1,30 +1,26 @@
+/* eslint-disable */
 import { connect } from 'react-redux';
 
 import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { requestFetchProducts, clearProductList } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
-import {
-  getCatalogueProducts, getFilterMap, getCategory, getDialogStatus,
-  getRoutingData } from '../reducers/selectors';
+import { getCatalogueProducts, getFilterMap, getDialogStatus} from '../reducers/selectors';
 import { setAnalyticsProductClick, trackCatalogueProductsChunk } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
   return {
-    categoryInfo: getCategory(state, categoryCode),
-    products: getCatalogueProducts()(state, categoryCode),
+    categoryCode,
     filterMap: getFilterMap(state),
-    isDialogOpen: getDialogStatus(state),
-    routingData: getRoutingData(state)
+    products: getCatalogueProducts()(state, categoryCode),
+    isDialogOpen: getDialogStatus(state)
   };
 };
 
 const mapDispatchToProps = {
   requestFetchCategory,
-  requestFetchProducts,
   clearProductList,
-  ...filtersActions,
   setAnalyticsProductClick,
   trackCatalogueProductsChunk
 };
