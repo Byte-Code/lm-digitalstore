@@ -7,7 +7,7 @@ import * as productActions from '../actions/productActions';
 
 export function* callFetchStoreStock({ productCode }) {
   try {
-    const storeStock = yield call(apiClient.fetchAllStoreStock, productCode);
+    const storeStock = yield call(apiClient.fetchAllStoreStock_v2, productCode);
     const result = fromJS(storeStock);
     yield put(productActions.successFetchStoreStock(productCode, result));
   } catch (error) {
