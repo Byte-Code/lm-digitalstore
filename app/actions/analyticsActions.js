@@ -86,6 +86,6 @@ export function successTrackAvailabilityButton() {
   return ({ type: SUCCESS_TRACK_AVAILABILITY_BUTTON });
 }
 
-export function trackCatalogueProductsChunk() {
-  return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK });
+export function trackCatalogueProductsChunk(data) {
+  return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK, data });
 }

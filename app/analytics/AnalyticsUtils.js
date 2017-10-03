@@ -235,12 +235,14 @@ const buildPageName = (type, data, pageName = List()) => {
     prodCode = ''
     } = data;
 
-  const isSessionStarting = pageName.size === 0 && type && type === 'session';
+  const isSessionStarting = type && type === 'session';
   const isCatalogStarting = pageName.size > 1 && type && type === 'catalogue';
   const isProductStarting = pageName.size > 1 && type && type === 'product';
   let levels = pageName;
 
+
   if (isSessionStarting) {
+    levels = levels.clear();
     levels = levels.push(worldName).push('homepage');
   }
 
