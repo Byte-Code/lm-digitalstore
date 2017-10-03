@@ -1,30 +1,45 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous, { Div } from 'glamorous';
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import RemoveIcon from 'material-ui/svg-icons/content/remove-circle-outline';
 import { List, ListItem } from 'material-ui/List';
+import { Map } from 'immutable';
 import ResetButton from './ResetButton';
+import * as filtersActions from '../actions/filtersActions';
+import {
+  getFilterMap,
+  getDialogStatus,
+  getCategory,
+} from '../reducers/selectors';
 
 import FilterDialog from '../containers/FilterDialog';
 import ActiveFilters from './ActiveFilters';
+import SellingAidsBadge from './SellingAidsBadge';
 
-export default class FilterBar extends Component {
+class FilterBar extends Component {
   static propTypes = {
-    filterGroups: ImmutablePropTypes.list.isRequired,
     resetFilters: PropTypes.func.isRequired,
     toggleFilter: PropTypes.func.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired,
     toggleAvailability: PropTypes.func.isRequired,
     toggleFiltersDialog: PropTypes.func.isRequired,
     resetTempFilters: PropTypes.func.isRequired,
-    isDialogOpen: PropTypes.bool.isRequired
+    toggleAid: PropTypes.func.isRequired,
+    initFilters: PropTypes.func.isRequired,
+    isDialogOpen: PropTypes.bool.isRequired,
+    categoryInfo: ImmutablePropTypes.map.isRequired
   };
 
   constructor(props) {
     super(props);
     this.toggleIcon = this.toggleIcon.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.initFilters();
   }
 
   toggleIcon() {
@@ -41,48 +56,81 @@ export default class FilterBar extends Component {
 
   render() {
     const {
-      filterGroups, filterMap, resetFilters, toggleFilter,
-      toggleAvailability, toggleFiltersDialog, isDialogOpen, resetTempFilters } = this.props;
+      categoryInfo,
+      filterMap,
+      resetFilters,
+      toggleFilter,
+      toggleAvailability,
+      toggleFiltersDialog,
+      isDialogOpen,
+      resetTempFilters,
+      toggleAid,
+    } = this.props;
 
-    if (filterGroups.isEmpty()) {
-      return null;
-    }
+    const facetFilters = categoryInfo.get('facetFilters') || List();
+    const filterGroups = facetFilters.filterNot(
+      g => g.get('group') === 'Prezzo'
+    );
+    const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]) || Map();
+    const activeAid = filterMap.get('aid');
 
     return (
-      <Wrapper id="filtersListWrapper">
-        <List id="filtersList" style={filterListStyle}>
-          <ActiveFiltersWrapper id="activeFiltersWrapper">
-            <ActiveFilters
-              filterMap={filterMap}
-              filterGroups={filterGroups}
-              resetFilters={resetFilters}
-              toggleFilter={toggleFilter}
-              toggleAvailability={toggleAvailability}
-              handleOpen={toggleFiltersDialog}
-            />
-          </ActiveFiltersWrapper>
-          <ListItem
-            onClick={toggleFiltersDialog}
-            open={isDialogOpen}
-            primaryText={this.togglePrimaryText()}
-            style={ListItemStyle}
-            leftIcon={this.toggleIcon()}
-            rightIcon={<Div />}
-            nestedItems={[
-              <FilterDialog
-                key="FilterDialog"
-                filterGroups={this.props.filterGroups}
-                handleClose={toggleFiltersDialog}
-                categoryCode={filterMap.get('categoryCode')}
+      <div>
+        <SellingAidsBadge
+          sellingAids={sellingAids}
+          onToggle={toggleAid}
+          activeAid={activeAid}
+        />
+        <Wrapper id="filtersListWrapper">
+          <List id="filtersList" style={filterListStyle}>
+            <ActiveFiltersWrapper id="activeFiltersWrapper">
+              <ActiveFilters
+                filterMap={filterMap}
+                filterGroups={filterGroups}
+                resetFilters={resetFilters}
+                toggleFilter={toggleFilter}
+                toggleAvailability={toggleAvailability}
+                handleOpen={toggleFiltersDialog}
               />
-            ]}
+            </ActiveFiltersWrapper>
+            <ListItem
+              onClick={toggleFiltersDialog}
+              open={isDialogOpen}
+              primaryText={this.togglePrimaryText()}
+              style={ListItemStyle}
+              leftIcon={this.toggleIcon()}
+              rightIcon={<Div />}
+              nestedItems={[
+                <FilterDialog
+                  key="FilterDialog"
+                  filterGroups={filterGroups}
+                  handleClose={toggleFiltersDialog}
+                  categoryCode={filterMap.get('categoryCode')}
+                />
+              ]}
+            />
+          </List>
+          <ResetButton
+            resetTempFilters={resetTempFilters}
+            resetActiveFilters={resetFilters}
           />
-        </List>
-        <ResetButton resetTempFilters={resetTempFilters} resetActiveFilters={resetFilters} />
-      </Wrapper>
+        </Wrapper>
+      </div>
     );
   }
 }
+
+export default connect(
+  (state, ownProps) => {
+    const { categoryCode } = ownProps;
+    return {
+      filterMap: getFilterMap(state),
+      isDialogOpen: getDialogStatus(state),
+      categoryInfo: getCategory(state, categoryCode)
+    };
+  },
+  { ...filtersActions }
+)(FilterBar);
 
 const Wrapper = glamorous.div({
   display: 'flex',
@@ -114,4 +162,3 @@ const labels = {
   moreFilters: 'Più filtri',
   lessFilters: 'Chiudi filtri'
 };
-
