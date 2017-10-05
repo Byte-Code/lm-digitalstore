@@ -27,7 +27,9 @@ export default class AvailabilityMap extends Component {
     radius: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
     infoWindowOpen: PropTypes.bool.isRequired,
-    trackStoreAvailabilityEvent: PropTypes.func.isRequired
+    trackStoreAvailabilityEvent: PropTypes.func.isRequired,
+    requestRealTimeStock: PropTypes.func.isRequired,
+    storesStock: ImmutablePropTypes.list.isRequired
   };
 
   static defaultProps = {
@@ -98,7 +100,8 @@ export default class AvailabilityMap extends Component {
   }
 
   renderInfoWindow() {
-    const { selectedStoreInfo, selectedStore, infoWindowOpen, closeInfoWindow } = this.props;
+    const { selectedStoreInfo, selectedStore, infoWindowOpen,
+      closeInfoWindow, requestRealTimeStock, storesStock } = this.props;
 
     if (!infoWindowOpen || !selectedStore) {
       return null;
@@ -113,6 +116,9 @@ export default class AvailabilityMap extends Component {
         lng={lng}
         handleClick={closeInfoWindow}
         selectedStoreInfo={selectedStoreInfo}
+        requestRealTimeStock={requestRealTimeStock}
+        productCode={this.props.productCode}
+        storesStock={storesStock}
       />
     );
   }
@@ -129,7 +135,7 @@ export default class AvailabilityMap extends Component {
       selectStore,
       handleChange,
       handleSlide,
-    } = this.props;
+      } = this.props;
     const { minRadius, maxRadius } = this.state;
     const homeStoreName = homeStore.get('name');
     const lat = homeStore.getIn(['gpsInformation', 'x']);
@@ -174,8 +180,7 @@ export default class AvailabilityMap extends Component {
           nearbyStores={nearbyStoresWithProductInStock}
           selectedStore={selectedStore}
           handleClick={selectStore}
-          // eslint-disable-next-line no-return-assign
-          slick={el => this.slick = el}
+          slick={el => this.slick = el} // eslint-disable-line no-return-assign
         />
       </Wrapper>
     );

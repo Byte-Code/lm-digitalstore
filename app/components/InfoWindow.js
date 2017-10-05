@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import BlockIcon from 'material-ui/svg-icons/navigation/close';
 import glamorous from 'glamorous';
@@ -9,8 +10,12 @@ import { getStockLabel } from '../utils/utils';
 export default class InfoWindow extends React.Component {
   static propTypes = {
     selectedStoreInfo: ImmutablePropTypes.map.isRequired,
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
+    requestRealTimeStock: PropTypes.func.isRequired,
+    storesStock: ImmutablePropTypes.list.isRequired,
+    productCode: PropTypes.string.isRequired
   };
+
 
   static getOffsets(element) {
     return {
@@ -21,6 +26,7 @@ export default class InfoWindow extends React.Component {
 
   constructor(props) {
     super(props);
+    this.stockNumber = 0;
     this.state = {
       top: -230,
       borderBottom: '0px',
@@ -28,11 +34,40 @@ export default class InfoWindow extends React.Component {
       arrowTop: 'initial'
     };
     this.computePosition = this.computePosition.bind(this);
+    this.getStockInfoFromList = this.getStockInfoFromList.bind(this);
+  }
+
+  componentWillMount() {
+    const storesStockList = this.props.storesStock;
+    const storeCode = this.props.selectedStoreInfo.get('code');
+    const productCodes = this.props.productCode;
+    const stockInfo = this.getStockInfoFromList({
+      storesStockList,
+      productCode: productCodes,
+      storeCode
+    });
+
+    if (stockInfo.size === 0) {
+      this.props.requestRealTimeStock({ storeCode, productCodes });
+    } else {
+      this.stockNumber = stockInfo.get(0).get('storeStock');
+    }
   }
 
   componentDidMount() {
     setTimeout(this.computePosition, 10);
   }
+
+  getStockInfoFromList =({ storesStockList, productCode, storeCode }) => {
+    let stockNumber = List();
+
+    if (storesStockList.size > 0) {
+      stockNumber = storesStockList.filter(storeStock =>
+        storeStock.get('productCode') === productCode && storeStock.get('storeCode') === storeCode
+      );
+    }
+    return stockNumber;
+  };
 
   computePosition() {
     const pin = document.getElementById('pin');
@@ -64,10 +99,9 @@ export default class InfoWindow extends React.Component {
     const { selectedStoreInfo, handleClick } = this.props;
     const { top, borderBottom, borderTop, arrowTop, left } = this.state;
     const name = selectedStoreInfo.get('name');
-    const availability = selectedStoreInfo.get('storeStock');
     const stockStatus = selectedStoreInfo.get('stockStatus');
-    const isAvailable = availability > 0;
-    const label = getStockLabel(availability, stockStatus);
+    const isAvailable = this.stockNumber > 0;
+    const label = getStockLabel(this.stockNumber, stockStatus);
     const street = selectedStoreInfo.getIn(['address', 'street']);
     const streetNumber = selectedStoreInfo.getIn(['address', 'streetNumber']) || '';
     const zip = selectedStoreInfo.getIn(['address', 'zipCode']);

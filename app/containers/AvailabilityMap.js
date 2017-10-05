@@ -7,21 +7,25 @@ import {
   getNearbyStoresWithStock,
   getStore,
   getNearbyStoresWithProductInStock,
-  getSelectedNearbyStoreInfo
+  getSelectedNearbyStoreInfo,
+  getStoresStock
 } from '../reducers/selectors';
 import { requestFetchNearbyStores } from '../actions/storeActions';
+import { requestRealTimeStock } from '../actions/realTimeStockAction';
 import { trackStoreAvailabilityEvent } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => ({
   allNearbyStores: getNearbyStoresWithStock(state, ownProps),
   nearbyStoresWithProductInStock: getNearbyStoresWithProductInStock(state, ownProps),
   selectedStoreInfo: getSelectedNearbyStoreInfo(ownProps.selectedStore)(state, ownProps),
-  homeStore: getStore(state)
+  homeStore: getStore(state),
+  storesStock: getStoresStock(state)
 });
 
 const MapDispatchToProps = {
   requestFetchNearbyStores,
-  trackStoreAvailabilityEvent
+  trackStoreAvailabilityEvent,
+  requestRealTimeStock
 };
 
 const mapKmZoom = {

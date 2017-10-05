@@ -4,6 +4,7 @@ import Product from '../components/Product';
 import { requestFetchProduct } from '../actions/productActions';
 import { clearProductList } from '../actions/productListActions';
 import { setAnalyticsProductClick } from '../actions/analyticsActions';
+import { clearRealTimeStock } from '../actions/realTimeStockAction';
 import { getProduct, getSimilarProducts, hasNearbyStores } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +19,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {
   requestFetchProduct,
   clearProductList,
-  setAnalyticsProductClick
+  setAnalyticsProductClick,
+  clearRealTimeStock
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -21,6 +21,7 @@ export default class Product extends Component {
     productInfo: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
+    clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired
@@ -59,6 +60,7 @@ export default class Product extends Component {
   }
 
   componentWillUnmount() {
+    this.props.clearRealTimeStock();
     this.props.clearProductList();
   }
 
