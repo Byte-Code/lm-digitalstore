@@ -1,43 +1,12 @@
 import React, { Component } from 'react';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 import PropTypes from 'prop-types';
-import QRCode from 'qrcode.react';
-import glamorous, { Div } from 'glamorous';
 import Dialog from 'material-ui/Dialog';
+import glamorous, { Div } from 'glamorous';
 
+import { QrCode } from './PurchaseTabs';
 import CloseButton from './CloseButton';
-
-const Header = glamorous.div({
-  display: 'flex',
-  justifyContent: 'center',
-  marginBottom: '114px',
-  '&>p': {
-    fontSize: '14px',
-    textAlign: 'center',
-    color: '#67cb33',
-    borderBottom: '2px solid #67cb33',
-    paddingBottom: '9px',
-    textTransform: 'uppercase'
-  }
-});
-
-const Title = glamorous.h1({
-  fontSize: '48px',
-  textAlign: 'center',
-  marginBottom: '13px'
-});
-
-const Subtitle = glamorous.p({
-  fontSize: '14px',
-  fontFamily: 'LeroyMerlinSans Light-Italic',
-  textAlign: 'center',
-  marginBottom: '57px'
-});
-
-const Content = glamorous.div({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-});
 
 const contentStyle = { width: '100%' };
 const bodyStyle = { padding: 75, background: '#fff' };
@@ -52,48 +21,65 @@ export default class PurchaseDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      slideIndex: 0
     };
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
+  toggleOpen = () => {
+    this.setState({ open: !this.state.open });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleTabChange = (value) => {
+    this.setState({ slideIndex: value });
   };
 
   render() {
     const { children, productCode, productSlug } = this.props;
+    const { open, slideIndex } = this.state;
     const UTM_SOURCE = 'utm_source=digitalstore';
     const UTM_MEDIUM = 'utm_medium=digitalstore';
     const UTM_CAMPAIGN = 'utm_campaign=digitalstore';
     const UTMS = `${UTM_SOURCE}&${UTM_MEDIUM}&${UTM_CAMPAIGN}`;
     const url = `https://www.leroymerlin.it/catalogo/${productSlug}-${productCode}-p?${UTMS}`;
+    const dialogConfig = { open, contentStyle, bodyStyle, modal: false };
+    const tabStyle = {
+      tabItemContainerStyle: {
+        backgroundColor: 'white'
+      },
+      inkBarStyle: {
+        background: '#67cb33'
+      }
+    };
+    const tabsStyle = {
+      buttonStyle: {
+        color: '#67cb33'
+      }
+    };
 
     return (
-      <Div onClick={this.handleOpen}>
+      <Div onClick={this.toggleOpen}>
         {children}
-        <Dialog
-          modal={false}
-          open={this.state.open}
-          contentStyle={contentStyle}
-          bodyStyle={bodyStyle}
-        >
-          <CloseButton handleClick={this.handleClose} backgroundColor="#fff" />
-          <Header>
-            <p>genera qr-code</p>
-          </Header>
-          <Title>Inquadra il QR-Code</Title>
-          <Subtitle>
-            Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.
-          </Subtitle>
-          <Content>
-            <QRCode value={url} size={200} />
-          </Content>
+        <Dialog {...dialogConfig}>
+          <CloseButton handleClick={this.toggleOpen} backgroundColor="#fff" />
+          <Tabs onChange={this.handleTabChange} value={slideIndex} {...tabStyle} >
+            <Tab label="INVIA VIA SMS" value={0} {...tabsStyle} />
+            <Tab label="INVIA VIA EMAIL" value={1} {...tabsStyle} />
+            <Tab label="GENERA QR-CODE" value={2} {...tabsStyle} />
+          </Tabs>
+          <TabsWrapper>
+            <SwipeableViews index={slideIndex} onChangeIndex={this.handleChange} >
+              <div>1</div>
+              <div>2</div>
+              <QrCode url={url} />
+            </SwipeableViews>
+          </TabsWrapper>
         </Dialog>
       </Div>
     );
   }
 }
+
+const TabsWrapper = glamorous.div({
+  marginTop: '10%'
+});
