@@ -4,13 +4,9 @@ import glamorous, { Div } from 'glamorous';
 import QRCode from 'qrcode.react';
 import LogoLM from '../assets/logo.png';
 
-export const QrCode = ({url}) => {
+export const QRCodeContent = ({url}) => {
   return (
      <Div>
-       <Title>Inquadra il QR-Code</Title>
-       <Subtitle>
-         Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.
-       </Subtitle>
        <Content>
          <LogoWrapper src={LogoLM} alt={"logoQR"} />
          <QRCode value={url} size={200} fgColor={'#67cb33'} />
@@ -19,7 +15,7 @@ export const QrCode = ({url}) => {
   )
 };
 
-QrCode.propTypes = {
+QRCodeContent.propTypes = {
   url: PropTypes.string.isRequired
 };
 
@@ -35,19 +31,6 @@ const LogoWrapper = glamorous.img(({src, alt}) => ({
   left: '28%',
   background: 'white'
 }));
-
-const Title = glamorous.h1({
-  fontSize: '48px',
-  textAlign: 'center',
-  marginBottom: '13px'
-});
-
-const Subtitle = glamorous.p({
-  fontSize: '14px',
-  fontFamily: 'LeroyMerlinSans Light-Italic',
-  textAlign: 'center',
-  marginBottom: '57px'
-});
 
 const Content = glamorous.div({
   display: 'flex',

@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import glamorous, { Div } from 'glamorous';
 
-import { QrCode } from './PurchaseTabs';
+import HOTabContainer from './HOTabContainer';
+import { QRCodeContent } from './QRCodeContent';
+import SendContent from './SendContent';
 import CloseButton from './CloseButton';
 
 const contentStyle = { width: '100%' };
@@ -24,6 +26,16 @@ export default class PurchaseDialog extends Component {
       open: false,
       slideIndex: 0
     };
+    this.TabsLabels = {
+      qr: {
+        title: 'Inquadra il QR-Code',
+        subTitle: 'Ti si aprirà il link alla scheda prodotto direttamente sul tuo smartphone.'
+      },
+      sms: {
+        title: 'Inserisci il tuo numero di telefono',
+        subTitle: 'Ti invieremo un link alla pagina del prodotto'
+      }
+    };
   }
 
   toggleOpen = () => {
@@ -37,6 +49,16 @@ export default class PurchaseDialog extends Component {
   render() {
     const { children, productCode, productSlug } = this.props;
     const { open, slideIndex } = this.state;
+    const {
+      qr: {
+        title: qrTitle,
+        subTitle: qrSubtitle
+        },
+      sms: {
+        title: smsTitle,
+        subTitle: smsSubtitle
+        }
+      } = this.TabsLabels;
     const UTM_SOURCE = 'utm_source=digitalstore';
     const UTM_MEDIUM = 'utm_medium=digitalstore';
     const UTM_CAMPAIGN = 'utm_campaign=digitalstore';
@@ -70,8 +92,16 @@ export default class PurchaseDialog extends Component {
           <TabsWrapper>
             <SwipeableViews index={slideIndex} onChangeIndex={this.handleChange} >
               <div>1</div>
-              <div>2</div>
-              <QrCode url={url} />
+              <HOTabContainer
+                title={smsTitle}
+                subTitle={smsSubtitle}
+                titleStyle={{ fontSize: '40px' }}
+              >
+                <SendContent onClick={() => console.log('ciao')} />
+              </HOTabContainer>
+              <HOTabContainer title={qrTitle} subTitle={qrSubtitle} >
+                <QRCodeContent url={url} />
+              </HOTabContainer>
             </SwipeableViews>
           </TabsWrapper>
         </Dialog>
