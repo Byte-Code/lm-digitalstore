@@ -1,14 +1,13 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import { REQUEST_EMAIL_PURCHASE, REQUEST_SMS_PURCHASE } from '../actions/actionTypes';
 import * as purchaseAction from '../actions/purchaseActions';
 
 function* callSendEmail({ email }) {
   try {
-    const result = yield call(setTimeout(() => email, 2000));
-    if (result) {
+    if (email) {
       yield put(purchaseAction.successEmailPurchase());
     } else {
-      yield put(purchaseAction.failureEmailPurchase, result);
+      yield put(purchaseAction.failureEmailPurchase());
     }
   } catch (error) {
     yield put(purchaseAction.failureEmailPurchase(error));
@@ -18,9 +17,9 @@ function* callSendEmail({ email }) {
 function* callSendsms({ sms }) {
   try {
     if (sms) {
-      yield put(purchaseAction.successSmsPurchase(sms));
+      yield put(purchaseAction.successSmsPurchase());
     } else {
-      yield put(purchaseAction.failureSmsPurchase);
+      yield put(purchaseAction.failureSmsPurchase());
     }
   } catch (error) {
     yield put(purchaseAction.failureSmsPurchase(error));
