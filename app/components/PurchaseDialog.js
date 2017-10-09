@@ -21,9 +21,9 @@ class PurchaseDialog extends Component {
     productCode: PropTypes.string.isRequired,
     productSlug: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    // requestEmailPurchase: PropTypes.func.isRequired,
+    requestEmailPurchase: PropTypes.func.isRequired,
     requestSmsPurchase: PropTypes.func.isRequired,
-    // emailSendingStatus: PropTypes.bool.isRequired,
+    emailSendingStatus: PropTypes.bool.isRequired,
     smsSendingStatus: PropTypes.bool.isRequired
   };
 
@@ -40,6 +40,10 @@ class PurchaseDialog extends Component {
       },
       sms: {
         title: 'Inserisci il tuo numero di telefono',
+        subTitle: 'Ti invieremo un link alla pagina del prodotto'
+      },
+      email: {
+        title: 'Inserisci il tuo indirizzo email',
         subTitle: 'Ti invieremo un link alla pagina del prodotto'
       }
     };
@@ -64,6 +68,10 @@ class PurchaseDialog extends Component {
       sms: {
         title: smsTitle,
         subTitle: smsSubtitle
+        },
+      email: {
+        title: emailTitle,
+        subTitle: emailSubtitle
         }
       } = this.TabsLabels;
     const UTM_SOURCE = 'utm_source=digitalstore';
@@ -98,7 +106,6 @@ class PurchaseDialog extends Component {
           </Tabs>
           <TabsWrapper>
             <SwipeableViews index={slideIndex} onChangeIndex={this.handleChange} >
-              <div>1</div>
               <HOTabContainer
                 title={smsTitle}
                 subTitle={smsSubtitle}
@@ -107,6 +114,16 @@ class PurchaseDialog extends Component {
                 <SendContent
                   onSubmit={this.props.requestSmsPurchase}
                   sending={this.props.smsSendingStatus}
+                />
+              </HOTabContainer>
+              <HOTabContainer
+                title={emailTitle}
+                subTitle={emailSubtitle}
+              >
+                <SendContent
+                  onSubmit={this.props.requestEmailPurchase}
+                  sending={this.props.emailSendingStatus}
+                  fieldText={'username@email.com'}
                 />
               </HOTabContainer>
               <HOTabContainer title={qrTitle} subTitle={qrSubtitle} >
