@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import glamorous, { Div } from 'glamorous';
+import { requestEmailPurchase, requestSmsPurchase } from '../actions/purchaseActions';
+import { getEmailSendingStatus, getSmsSendingStatus } from '../reducers/selectors';
 
 import HOTabContainer from './HOTabContainer';
 import { QRCodeContent } from './QRCodeContent';
@@ -13,11 +16,15 @@ import CloseButton from './CloseButton';
 const contentStyle = { width: '100%' };
 const bodyStyle = { padding: 75, background: '#fff' };
 
-export default class PurchaseDialog extends Component {
+class PurchaseDialog extends Component {
   static propTypes = {
     productCode: PropTypes.string.isRequired,
     productSlug: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    // requestEmailPurchase: PropTypes.func.isRequired,
+    requestSmsPurchase: PropTypes.func.isRequired,
+    // emailSendingStatus: PropTypes.bool.isRequired,
+    smsSendingStatus: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -97,7 +104,10 @@ export default class PurchaseDialog extends Component {
                 subTitle={smsSubtitle}
                 titleStyle={{ fontSize: '40px' }}
               >
-                <SendContent onClick={() => console.log('ciao')} />
+                <SendContent
+                  onSubmit={this.props.requestSmsPurchase}
+                  sending={this.props.smsSendingStatus}
+                />
               </HOTabContainer>
               <HOTabContainer title={qrTitle} subTitle={qrSubtitle} >
                 <QRCodeContent url={url} />
@@ -109,6 +119,14 @@ export default class PurchaseDialog extends Component {
     );
   }
 }
+
+export default connect(
+  (state) => ({
+    emailSendingStatus: getEmailSendingStatus(state),
+    smsSendingStatus: getSmsSendingStatus(state)
+  }),
+  { requestEmailPurchase, requestSmsPurchase }
+)(PurchaseDialog);
 
 const TabsWrapper = glamorous.div({
   marginTop: '10%'

@@ -29,7 +29,7 @@ export default class SendContent extends Component {
   }
 
   render() {
-    const { buttonLabel, buttonStyle, sending, fieldText } = this.props;
+    const { buttonLabel, buttonStyle, sending, fieldText, onSubmit } = this.props;
     const { inputValue } = this.state;
     return (
       <Content>
@@ -47,6 +47,7 @@ export default class SendContent extends Component {
           labelColor="#67cb33"
           backgroundColor="black"
           disabled={sending || !inputValue}
+          onClick={() => onSubmit(inputValue)}
         />
       </Content>
     );
@@ -57,7 +58,7 @@ SendContent.propTypes = {
   buttonLabel: PropTypes.string,
   buttonStyle: stylePropType,
   sending: PropTypes.bool,
-  // onSending: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   fieldText: PropTypes.string
 };
 

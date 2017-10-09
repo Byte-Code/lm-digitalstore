@@ -13,6 +13,7 @@ import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
 import * as routeSelector from './Router/routerSelectors';
 import * as activeStoresSelector from './ActiveStores/activeStoresSelectors';
+import getSendingStatus from './Purchase/purchaseSelector';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
@@ -241,4 +242,13 @@ export function getCurrentPath(state) {
 
 export function getRoutingData(state) {
   return routeSelector.getRoutingData(state);
+}
+
+// Purchase
+export function getEmailSendingStatus(state) {
+  return getSendingStatus(state.getIn(['purchaseReducer', 'email']));
+}
+
+export function getSmsSendingStatus(state) {
+  return getSendingStatus(state.getIn(['purchaseReducer', 'sms']));
 }
