@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import glamorous, { Div } from 'glamorous';
+import * as validators from '../utils/inputValidators';
 import { requestEmailPurchase, requestSmsPurchase } from '../actions/purchaseActions';
 import { getEmailSendingStatus, getSmsSendingStatus } from '../reducers/selectors';
 
@@ -114,6 +115,7 @@ class PurchaseDialog extends Component {
                 <SendContent
                   onSubmit={this.props.requestSmsPurchase}
                   sending={this.props.smsSendingStatus}
+                  validator={validators.number}
                 />
               </HOTabContainer>
               <HOTabContainer
@@ -124,6 +126,7 @@ class PurchaseDialog extends Component {
                   onSubmit={this.props.requestEmailPurchase}
                   sending={this.props.emailSendingStatus}
                   fieldText={'username@email.com'}
+                  validator={validators.email}
                 />
               </HOTabContainer>
               <HOTabContainer title={qrTitle} subTitle={qrSubtitle} >

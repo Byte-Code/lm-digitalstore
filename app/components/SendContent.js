@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { fromJS } from 'immutable';
 import PropTypes from 'prop-types';
 import { RaisedButton, TextField } from 'material-ui';
 import stylePropType from 'react-style-proptype';
 import glamorous from 'glamorous';
 
-import { fromJS } from 'immutable';
-
 export default class SendContent extends Component {
   constructor(props) {
     super(props);
-    this.state = { inputValue: '' };
+    this.state = { inputValue: '', error: null };
     this.onChange = this.onChange.bind(this);
+    this.checkBeforeSending = this.checkBeforeSending.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -25,12 +25,26 @@ export default class SendContent extends Component {
   }
 
   onChange(e) {
-    this.setState({ inputValue: e.target.value });
+    this.setState({
+      inputValue: e.target.value,
+      error: null
+    });
+  }
+
+  checkBeforeSending() {
+    const { inputValue } = this.state;
+    const inputError =
+      !inputValue.match(this.props.validator)
+      && 'Il valore inserito non è nel formato corretto';
+
+    return inputError
+      ? this.setState({ error: inputError })
+      : this.props.onSubmit(inputValue);
   }
 
   render() {
-    const { buttonLabel, buttonStyle, sending, fieldText, onSubmit } = this.props;
-    const { inputValue } = this.state;
+    const { buttonLabel, buttonStyle, sending, fieldText } = this.props;
+    const { inputValue, error } = this.state;
     return (
       <Content>
         <TextField
@@ -40,14 +54,15 @@ export default class SendContent extends Component {
           underlineFocusStyle={{ borderColor: '#67cb33' }}
           disabled={sending}
           onChange={this.onChange}
+          errorText={error}
         />
         <RaisedButton
           label={buttonLabel}
           style={buttonStyle}
           labelColor="#67cb33"
           backgroundColor="black"
-          disabled={sending || !inputValue}
-          onClick={() => onSubmit(inputValue)}
+          disabled={Boolean(error) || sending || !inputValue}
+          onClick={this.checkBeforeSending}
         />
       </Content>
     );
@@ -59,7 +74,8 @@ SendContent.propTypes = {
   buttonStyle: stylePropType,
   sending: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
-  fieldText: PropTypes.string
+  fieldText: PropTypes.string,
+  validator: PropTypes.string
 };
 
 SendContent.defaultProps = {
@@ -68,7 +84,8 @@ SendContent.defaultProps = {
   buttonStyle: {
     width: '200px'
   },
-  fieldText: '000 - 00000000'
+  fieldText: '000 - 00000000',
+  validator: ''
 };
 
 const Content = glamorous.div({
