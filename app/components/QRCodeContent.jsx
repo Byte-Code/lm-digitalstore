@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import glamorous, { Div } from 'glamorous';
+import glamorous from 'glamorous';
 import QRCode from 'qrcode.react';
-import LogoLM from '../assets/logo.png';
 
 export const QRCodeContent = ({url}) => {
   return (
-     <Div>
+     <div>
        <Content>
-         <LogoWrapper src={LogoLM} alt={"logoQR"} />
+         <LogoWrapper src={require('../assets/logo.png')} alt={"logoQR"} />
          <QRCode value={url} size={200} fgColor={'#67cb33'} />
        </Content>
-     </Div>
+     </div>
   )
 };
 
