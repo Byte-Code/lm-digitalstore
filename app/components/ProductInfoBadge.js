@@ -9,6 +9,8 @@ import AvailabilityButton from './AvailabilityButton';
 import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
 import PurchaseDialog from '../components/PurchaseDialog';
+import ShippingCostsButton from './ShippingCostsButton';
+
 
 export default class ProductInfoBadge extends Component {
   static propTypes = {
@@ -169,6 +171,7 @@ export default class ProductInfoBadge extends Component {
 
     const promotionCode = price.getIn(['selling', 'promotion']);
     const marketingPriceProps = { marketingAttributes, loyaltyProgram, promotionCode };
+    const shippingCostProductData = { name: productName, code: productCode};
 
     return (
       <Wrapper visibility={this.state.visibility}>
@@ -187,6 +190,7 @@ export default class ProductInfoBadge extends Component {
             Acquista online
           </Button>
         </PurchaseDialog>
+          <ShippingCostsButton productInfo={shippingCostProductData}/>
         </AnimatedWrapper>
       </Wrapper>
     );
