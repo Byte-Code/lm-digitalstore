@@ -235,3 +235,9 @@ li.slick-active button:before {
   margin-left: 30px;
   margin-bottom: 5px;
 }
+
+.truck {
+  content: url(./assets/truck-icon.svg);
+  width: 33px;
+  height: 50px;
+}
