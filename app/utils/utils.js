@@ -52,3 +52,23 @@ export function getCategoryName(catCode = null) {
   }
   return description;
 }
+
+export function getProductAvailability(productInfo) {
+  const labels = {
+    4: 'Disponibile in Negozio',
+    0: 'Out-of-Stock',
+    1: 'In riassortimento',
+    2: 'Disponibile su ordinazione'
+
+  };
+  const kioskStock = productInfo.getIn(['kioskStock', 'data', 'storeStock']);
+  let label = '';
+
+  if (kioskStock > 0) {
+    label = labels['4'];
+  } else {
+    const vendibility = productInfo.getIn(['price', 'data', 'selling', 'vendibility']);
+    label = labels[vendibility];
+  }
+  return label;
+}

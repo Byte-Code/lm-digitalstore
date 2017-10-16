@@ -6,7 +6,7 @@ import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
 import getIdleDialogStatus from './Idle/idleSelectors';
 import * as categorySelectors from './Category/categorySelectors';
-import * as catalogueSelectors from './Catalogue/catalogueSelectors';
+import productList from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
 import * as productSelectors from './Product/productSelectors';
@@ -55,7 +55,7 @@ export function getOrderedProducts(state, categoryCode) {
 
 // CATALOGUE
 export function getProductList(state) {
-  return catalogueSelectors.getProductList(state.get('catalogueReducer'));
+  return productList(state.get('catalogueReducer'));
 }
 
 export const getIdsByAids = createSelector(
@@ -93,13 +93,13 @@ export const getCatalogueProductsIds = createSelector(
 
 export const getCatalogueProducts = () => createSelector(
   [getProductList, getCatalogueProductsIds],
-  (productList, idsToShow) =>
-    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+  (_productList, idsToShow) =>
+    _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
 );
 
 export const getSimilarProducts = () =>
-  createSelector([getProductList, getSimilarProductsIds], (productList, idsToShow) =>
-    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+  createSelector([getProductList, getSimilarProductsIds], (_productList, idsToShow) =>
+    _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
   );
 
 export const getItemCount = createSelector(
