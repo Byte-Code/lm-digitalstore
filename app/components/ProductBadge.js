@@ -5,7 +5,7 @@ import { Map } from 'immutable';
 import glamorous from 'glamorous';
 
 import Image from './Image';
-import { formatPrice } from '../utils/utils';
+import { formatPrice, getProductAvailability } from '../utils/utils';
 import MarketingFlag from '../components/MarketingFlag';
 import { getMarketingProps } from '../utils/marketingUtils';
 
@@ -13,14 +13,13 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection })
   if (productInfo.isEmpty()) {
     return null;
   }
-  const imageID = productInfo.get('mainImage');
+  const imageID = productInfo.getIn(['basicInfo', 'data', 'mainImage']);
   const imageOptions = { width: 405, height: 405 };
-  const name = productInfo.get('name');
-  const grossPrice = productInfo.getIn(['price', 'selling', 'gross']);
-  const listPrice = productInfo.getIn(['price', 'selling', 'list']);
+  const name = productInfo.getIn(['basicInfo', 'data', 'name']);
+  const grossPrice = productInfo.getIn(['price', 'data', 'selling', 'gross']);
+  const listPrice = productInfo.getIn(['price', 'data', 'selling', 'list']);
   const isDiscounted = listPrice && true && listPrice - grossPrice > 1;
-  const discount = productInfo.getIn(['price', 'selling', 'discount']);
-  const isInStock = productInfo.get('storeStock') > 0;
+  const discount = productInfo.getIn(['price', 'data', 'selling', 'discount']);
 
   const MarketingFlagStyle = {
     wrapperStyle: {
@@ -55,10 +54,9 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection })
         </Price>
         {listPrice && <Price discounted>{formatPrice(grossPrice)} €</Price>}
       </PriceWrapper>
-      {isInStock &&
-        <Available>
-          <p>Disponibile in Negozio</p>
-        </Available>}
+      <Available>
+        <p>{getProductAvailability(productInfo)}</p>
+      </Available>
     </Wrapper>
   );
 };

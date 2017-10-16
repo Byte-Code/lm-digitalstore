@@ -1,5 +1,3 @@
-/* eslint-disable */
-export function getProductList(state) {
+export default function productList(state) {
   return state;
 }
-/* eslint-disable */
