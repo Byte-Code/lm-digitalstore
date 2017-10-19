@@ -21,6 +21,10 @@ export function isValidResponse(response) {
   return response.status === 'OK';
 }
 
+export function isValidProductResponse(response) {
+  return response.basicInfo.status === 'FOUND' && response.price.status === 'FOUND';
+}
+
 // TODO test these functions
 export function getStockLabel(stock, stockStatus) {
   if (stock > 0) {

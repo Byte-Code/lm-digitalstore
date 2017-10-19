@@ -4,7 +4,7 @@ import { SECCESS_REALTIME_STOCK, CREAR_REALTIME_STOCK } from '../../actions/acti
 export default function realTimeStockReducer(state = List(), action) {
   switch (action.type) {
     case SECCESS_REALTIME_STOCK:
-      return state.push(action.result);
+      return action.result;
     case CREAR_REALTIME_STOCK:
       return List();
     default:
