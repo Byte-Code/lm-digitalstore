@@ -43,9 +43,11 @@ export default class SimilarProductsDialog extends Component {
     /* eslint-disable */
     this.props.similarProducts.map((product) =>
       apiClient.fetchRealTimeStock(this.props.storeCode, { productCodes: product.get('code') })
-        .then((result) =>
+        .then((result) => {
+        if (result.stock) {
           this.productsStock[result.stock[0].productCode] = result.stock[0].storeStock
-        )
+        }
+        })
         .catch(err => console.log(err))
     );
     /* eslint-enable */

@@ -83,6 +83,8 @@ const iconStyle = { height: 32, width: 37, marginLeft: 10 };
 
 const SimilarProductBadge = props => {
   const { productInfo, stock } = props;
+  console.log('stock');
+  console.log(stock);
   const name = productInfo.getIn(['basicInfo', 'data', 'name']);
   const code = productInfo.getIn(['basicInfo', 'data', 'code']);
   const description = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'shortDescription']);
@@ -133,7 +135,7 @@ SimilarProductBadge.propTypes = {
   productInfo: ImmutablePropTypes.map.isRequired,
   setAnalyticsProductClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  stock: PropTypes.num
+  stock: PropTypes.number.isRequired
 };
 
 SimilarProductBadge.defaultProps = {

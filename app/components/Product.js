@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map, fromJS, List } from 'immutable';
+import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
 import throttle from 'lodash/throttle';
 import inRange from 'lodash/inRange';
@@ -25,13 +25,13 @@ export default class Product extends Component {
     setAnalyticsProductClick: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired,
-    storeStock: ImmutablePropTypes.list,
+    storeStock: ImmutablePropTypes.map,
     storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
     productInfo: Map(),
-    storeStock: List()
+    storeStock: Map()
   };
 
   constructor(props) {
