@@ -82,19 +82,20 @@ const Button = glamorous.div({
 const iconStyle = { height: 32, width: 37, marginLeft: 10 };
 
 const SimilarProductBadge = props => {
-  const { productInfo } = props;
-  const name = productInfo.get('name');
-  const code = productInfo.get('code');
-  const description = productInfo.getIn(['productDetail', 'shortDescription']);
-  const price = productInfo.getIn(['price', 'selling']);
-  const pricingInfo = productInfo.get('pricingInformations');
+  const { productInfo, stock } = props;
+  const name = productInfo.getIn(['basicInfo', 'data', 'name']);
+  const code = productInfo.getIn(['basicInfo', 'data', 'code']);
+  const description = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'shortDescription']);
+  const price = productInfo.getIn(['price', 'data', 'selling']);
+  const priceGross = productInfo.getIn(['price', 'data', 'gross']);
+  const pricingInfo = productInfo.getIn(['basicInfo', 'data', 'pricingInformations']);
   const currentStoreStock = fromJS({
-    storeStock: productInfo.get('storeStock'),
-    stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
+    storeStock: stock,
+    stockStatus: productInfo.getIn(['basicInfo', 'data', 'productStockInfo', 'vendibilityValue'])
   });
-  const marketingAttributes = productInfo.get('marketingAttributes');
-  const loyaltyProgram = productInfo.get('loyaltyProgram');
-  const image = productInfo.get('mainImage');
+  const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
+  const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+  const image = productInfo.getIn(['basicInfo', 'data', 'mainImage']);
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
   const index = props.index;
 
@@ -110,7 +111,7 @@ const SimilarProductBadge = props => {
             marketingAttributes={marketingAttributes}
             loyaltyProgram={loyaltyProgram}
           />
-          <PriceBadge pricingInfo={pricingInfo} price={price} />
+          <PriceBadge pricingInfo={pricingInfo} price={price || priceGross} />
           <Divider />
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </PriceAndStock>
@@ -131,7 +132,13 @@ const SimilarProductBadge = props => {
 SimilarProductBadge.propTypes = {
   productInfo: ImmutablePropTypes.map.isRequired,
   setAnalyticsProductClick: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  stock: PropTypes.num
 };
+
+SimilarProductBadge.defaultProps = {
+  stock: 0
+};
+
 
 export default SimilarProductBadge;

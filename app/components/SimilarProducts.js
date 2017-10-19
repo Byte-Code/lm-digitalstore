@@ -33,7 +33,8 @@ export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
     title: PropTypes.string.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired,
+    storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -72,7 +73,7 @@ export default class SimilarProducts extends Component {
   }
 
   render() {
-    const { similarProducts, title } = this.props;
+    const { similarProducts, title, storeCode } = this.props;
     if (similarProducts.isEmpty()) {
       return null;
     }
@@ -92,6 +93,7 @@ export default class SimilarProducts extends Component {
           isOpen={dialogOpen}
           selectedProduct={selectedProduct}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+          storeCode={storeCode}
         />
       </Wrapper>
     );

@@ -5,14 +5,17 @@ import { requestFetchProduct } from '../actions/productActions';
 import { clearProductList } from '../actions/productListActions';
 import { setAnalyticsProductClick } from '../actions/analyticsActions';
 import { clearRealTimeStock } from '../actions/realTimeStockAction';
-import { getProduct, getSimilarProducts, hasNearbyStores } from '../reducers/selectors';
+import { getProduct, getSimilarProducts, hasNearbyStores,
+  getStoresStock, getStoreCode } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { productCode } } = ownProps;
   return {
     productInfo: getProduct(state, { productCode }),
     similarProducts: getSimilarProducts()(state, { productCode }),
-    hasNearbyStores: hasNearbyStores(state)
+    hasNearbyStores: hasNearbyStores(state),
+    storeStock: getStoresStock(state),
+    storeCode: getStoreCode(state)
   };
 };
 
