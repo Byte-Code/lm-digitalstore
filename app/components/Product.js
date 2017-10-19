@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Map, fromJS } from 'immutable';
+import { Map, fromJS, List } from 'immutable';
 import glamorous from 'glamorous';
 import throttle from 'lodash/throttle';
 import inRange from 'lodash/inRange';
@@ -24,11 +24,14 @@ export default class Product extends Component {
     clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
-    hasNearbyStores: PropTypes.bool.isRequired
+    hasNearbyStores: PropTypes.bool.isRequired,
+    storeStock: ImmutablePropTypes.list,
+    storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
-    productInfo: Map()
+    productInfo: Map(),
+    storeStock: List()
   };
 
   constructor(props) {
@@ -100,7 +103,7 @@ export default class Product extends Component {
   }
 
   renderSimilarProducts() {
-    const { similarProducts, productInfo } = this.props;
+    const { similarProducts, productInfo, storeCode } = this.props;
 
     if (similarProducts.isEmpty()) {
       return null;
@@ -116,6 +119,7 @@ export default class Product extends Component {
           similarProducts={products}
           title={sp.get('name')}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+          storeCode={storeCode}
         />
       );
     });
@@ -135,27 +139,29 @@ export default class Product extends Component {
 
 
   render() {
-    const { productInfo, hasNearbyStores } = this.props;
+    const { productInfo, hasNearbyStores, storeStock } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
     }
 
-    const name = productInfo.get('name');
-    const code = productInfo.get('code');
-    const slug = productInfo.get('slug');
-    const productType = productInfo.getIn(['productDetail', 'descriptionType']);
-    const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
-    const marketingAttributes = productInfo.get('marketingAttributes');
-    const loyaltyProgram = productInfo.get('loyaltyProgram');
-    const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
-    const price = productInfo.getIn(['price', 'selling']);
-    const pricingInfo = productInfo.get('pricingInformations');
+    const name = productInfo.getIn(['basicInfo', 'data', 'name']);
+    const code = productInfo.getIn(['basicInfo', 'data', 'code']);
+    const slug = productInfo.getIn(['basicInfo', 'data', 'slug']);
+    const productType = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptionType']);
+    const marketingDescriptions = productInfo.getIn(
+      ['basicInfo', 'data', 'productDetail', 'marketingDescriptions']
+    );
+    const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
+    const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+    const descriptions = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptions']);
+    const price = productInfo.getIn(['price', 'data', 'selling']);
+    const pricingInfo = productInfo.getIn(['basicInfo', 'data', 'pricingInformations']);
     const currentStoreStock = fromJS({
-      storeStock: productInfo.get('storeStock'),
+      storeStock: storeStock.get('storeStock'),
       stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
     });
-    const imageIDList = productInfo.get('images');
+    const imageIDList = productInfo.getIn(['basicInfo', 'data', 'images']);
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
 
     return (

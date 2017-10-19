@@ -5,6 +5,7 @@ import { List } from 'immutable';
 import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
 import glamorous from 'glamorous';
+import { apiClient } from '../../mocks/apiMock';
 
 import SimilarProductBadge from './SimilarProductBadge';
 import CloseButton from './CloseButton';
@@ -25,12 +26,30 @@ export default class SimilarProductsDialog extends Component {
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     selectedProduct: PropTypes.string.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired,
+    storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
     similarProducts: List()
   };
+
+  constructor(props) {
+    super(props);
+    this.productsStock = {};
+  }
+
+  componentWillMount() {
+    /* eslint-disable */
+    this.props.similarProducts.map((product) =>
+      apiClient.fetchRealTimeStock(this.props.storeCode, { productCodes: product.get('code') })
+        .then((result) =>
+          this.productsStock[result.stock[0].productCode] = result.stock[0].storeStock
+        )
+        .catch(err => console.log(err))
+    );
+    /* eslint-enable */
+  }
 
   // HACK this fixes a bug with slick
   componentDidUpdate() {
@@ -57,17 +76,19 @@ export default class SimilarProductsDialog extends Component {
   renderProducts() {
     const { similarProducts } = this.props;
 
-    return similarProducts.map((p, i) =>
-      <div key={p.get('code')}>
+    return similarProducts.map((p, i) => {
+      const stock = this.productsStock[p.get('code')];
+      return (<div key={p.get('code')}>
         <Slide>
           <SimilarProductBadge
             productInfo={p}
             setAnalyticsProductClick={this.props.setAnalyticsProductClick}
             index={i}
+            stock={stock}
           />
         </Slide>
-      </div>
-    );
+      </div>);
+    });
   }
 
   render() {
