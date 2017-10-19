@@ -78,7 +78,8 @@ export default class Catalogue2 extends Component {
   }
 
   onBadgeClick(product, index) {
-    this.props.setAnalyticsProductClick({ product, index });
+    const position = (this.state.currentChunkIndex * this.chunkSize) + index + 1;
+    this.props.setAnalyticsProductClick({ product, index: position });
   }
 
   onLeftSwipe() {
