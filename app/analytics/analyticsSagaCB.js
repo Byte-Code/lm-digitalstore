@@ -79,8 +79,8 @@ export function* idleTimerComplete() {
 }
 
 export function* setProduct(action) {
-  const prodCode = action.result.get('code');
-  const prodName = action.result.get('name');
+  const prodCode = action.result.getIn(['basicInfo', 'data', 'code']);
+  const prodName = action.result.getIn(['basicInfo', 'data', 'name']);
   const state = yield select();
   const { pathArray = '' } = yield call(getPageNameData, state);
 
