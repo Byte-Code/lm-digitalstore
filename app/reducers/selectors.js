@@ -97,8 +97,9 @@ export const getCatalogueProducts = () => createSelector(
     _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
 );
 
-export const getSimilarProducts = () =>
-  createSelector([getProductList, getSimilarProductsIds], (_productList, idsToShow) =>
+export const getSimilarProducts = () => createSelector(
+  [getProductList, getSimilarProductsIds],
+    (_productList, idsToShow) =>
     _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
   );
 
@@ -197,9 +198,23 @@ export function getNearbyStores(state, props) {
   return storeSelectors.getNearbyStores(state.get('storeReducer'), props);
 }
 
-export function hasNearbyStores(state) {
-  return storeSelectors.hasNearbyStores(state.get('storeReducer'));
+export function getNearbyStoresCodes(state) {
+  return state.getIn(['storeReducer', 'nearbyStores'])
+    .reduce((accumulator, store) =>
+      accumulator.push(store.get('code')),
+      List());
 }
+
+export const hasNearbyStores = productCode => createSelector(
+  [getRealTimeStock, getStoreCode],
+  (realTimeStocks, storeCode) => {
+    if (realTimeStocks.size > 0) {
+      const listWithoutCurrentStore = realTimeStocks.deleteIn([productCode, storeCode]);
+      const withStockList = listWithoutCurrentStore.filter((stock) => stock > 1);
+      return withStockList.size > 0;
+    }
+  }
+);
 
 export const getNearbyStoresWithStock = createSelector(
   [getNearbyStores, getAllStoreStock],
@@ -247,6 +262,6 @@ export function getRoutingData(state) {
 
 // RealTimeStock
 
-export function getStoresStock(state) {
+export function getRealTimeStock(state) {
   return storesStock(state.get('realTimeStockReducer'));
 }

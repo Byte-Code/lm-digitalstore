@@ -15,7 +15,7 @@ export function hasNearbyStores(state) {
   return false;
 }
 
-export function getNearbyStores(state, { radius }) {
+export function getNearbyStores(state, { radius = 1000 }) {
   if (state.get('nearbyStores')) {
     return state.get('nearbyStores').filter(ns => ns.get('distance') <= radius);
   }

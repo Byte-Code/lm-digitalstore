@@ -5,19 +5,19 @@ import {
   successFetchRealTimeStock,
   failureFetchRealTimeStock
 } from '../actions/realTimeStockAction';
+import normalizeRealTimeData from '../utils/realTimeResponseNormalizer';
 
 import { REQUEST_REALTIME_STOCK } from '../actions/actionTypes';
 
 
 export function* callFetchRealTimeStock(action) {
   try {
-    const { productCodes, storeCode } = action.data;
+    const { productCodes, storeCodes, type } = action.data;
     const stocks = yield call(
-      apiClient.fetchRealTimeStock, storeCode, { productCodes }
+      apiClient.fetchRealTimeStock, { storeCodes, productCodes }
     );
-    const { productCode, storeStock } = stocks.stock[0];
-    const successData = fromJS({ storeCode, productCode, storeStock });
-    yield put(successFetchRealTimeStock(successData));
+    const normalized = yield call(normalizeRealTimeData, fromJS(stocks));
+    yield put(successFetchRealTimeStock(type, normalized));
   } catch (error) {
     yield put(failureFetchRealTimeStock(error));
   }
