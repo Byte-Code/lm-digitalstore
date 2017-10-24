@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     productInfo: getProduct(state, { productCode }),
     similarProducts: getSimilarProducts()(state, { productCode }),
-    hasNearbyStores: hasNearbyStores(state),
+    hasNearbyStores: hasNearbyStores(productCode)(state),
     mainStoreStock: getCurrentProductStock(productCode)(state),
     storeCode: getStoreCode(state),
     similarProductStocks: getSimilarProductStock(state)

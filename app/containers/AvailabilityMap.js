@@ -4,28 +4,26 @@ import round from 'lodash/round';
 
 import AvailabilityMap from '../components/AvailabilityMap';
 import {
-  getNearbyStoresWithStock,
   getStore,
-  getNearbyStoresWithProductInStock,
+  getNearByWithStock,
   getSelectedNearbyStoreInfo,
-  getStoresStock
+  getNearbyStores,
+  getMainStock
 } from '../reducers/selectors';
 import { requestFetchNearbyStores } from '../actions/storeActions';
-import { requestRealTimeStock } from '../actions/realTimeStockAction';
 import { trackStoreAvailabilityEvent } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  allNearbyStores: getNearbyStoresWithStock(state, ownProps),
-  nearbyStoresWithProductInStock: getNearbyStoresWithProductInStock(state, ownProps),
+  allNearbyStores: getNearbyStores(state, ownProps),
+  nearbyStoresWithProductInStock: getNearByWithStock(ownProps)(state, ownProps),
   selectedStoreInfo: getSelectedNearbyStoreInfo(ownProps.selectedStore)(state, ownProps),
   homeStore: getStore(state),
-  storesStock: getStoresStock(state)
+  stocks: getMainStock(state)
 });
 
 const MapDispatchToProps = {
   requestFetchNearbyStores,
-  trackStoreAvailabilityEvent,
-  requestRealTimeStock
+  trackStoreAvailabilityEvent
 };
 
 const mapKmZoom = {

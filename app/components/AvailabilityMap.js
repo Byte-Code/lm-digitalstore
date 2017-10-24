@@ -28,13 +28,13 @@ export default class AvailabilityMap extends Component {
     zoom: PropTypes.number.isRequired,
     infoWindowOpen: PropTypes.bool.isRequired,
     trackStoreAvailabilityEvent: PropTypes.func.isRequired,
-    requestRealTimeStock: PropTypes.func.isRequired,
-    storesStock: ImmutablePropTypes.list.isRequired
+    stocks: ImmutablePropTypes.map
   };
 
   static defaultProps = {
     allNearbyStores: List(),
-    selectedStoreInfo: Map()
+    selectedStoreInfo: Map(),
+    stocks: Map()
   };
 
   constructor(props) {
@@ -49,7 +49,9 @@ export default class AvailabilityMap extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.selectedStoreInfo.equals(this.props.selectedStoreInfo)) {
       const storeName = nextProps.selectedStoreInfo.get('name');
-      const storeStock = nextProps.selectedStoreInfo.get('storeStock');
+      const storeCode = nextProps.selectedStoreInfo.get('code');
+      const productCode = this.props.productCode;
+      const storeStock = this.props.stocks.getIn([storeCode, productCode]);
       this.props.trackStoreAvailabilityEvent({ storeName, storeStock });
     }
   }
@@ -72,11 +74,11 @@ export default class AvailabilityMap extends Component {
 
   renderMarkers() {
     const { allNearbyStores, homeStore, selectStore, closeInfoWindow,
-      nearbyStoresWithProductInStock } = this.props;
+      nearbyStoresWithProductInStock, stocks, productCode } = this.props;
     return allNearbyStores.map(s => {
-      const isAvailable = s.get('storeStock') > 0;
       const code = s.get('code');
       const lat = s.get('latitude');
+      const isAvailable = stocks.getIn([code, productCode]) > 0;
       const lng = s.get('longitude');
       const isCurrentStore = homeStore.get('code') === code;
       const sliderIndex = this.getSliderIndex(nearbyStoresWithProductInStock, code);
@@ -101,7 +103,7 @@ export default class AvailabilityMap extends Component {
 
   renderInfoWindow() {
     const { selectedStoreInfo, selectedStore, infoWindowOpen,
-      closeInfoWindow, requestRealTimeStock, storesStock } = this.props;
+      closeInfoWindow, stocks, productCode } = this.props;
 
     if (!infoWindowOpen || !selectedStore) {
       return null;
@@ -109,6 +111,7 @@ export default class AvailabilityMap extends Component {
 
     const lat = selectedStoreInfo.get('latitude');
     const lng = selectedStoreInfo.get('longitude');
+    const stockValue = stocks.getIn([selectedStoreInfo.get('code'), productCode]);
 
     return (
       <InfoWindow
@@ -116,9 +119,7 @@ export default class AvailabilityMap extends Component {
         lng={lng}
         handleClick={closeInfoWindow}
         selectedStoreInfo={selectedStoreInfo}
-        requestRealTimeStock={requestRealTimeStock}
-        productCode={this.props.productCode}
-        storesStock={storesStock}
+        storesStock={stockValue}
       />
     );
   }
