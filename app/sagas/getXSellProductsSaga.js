@@ -1,11 +1,13 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
+import * as realTimeStock from '../actions/realTimeStockAction';
 import * as productActions from '../actions/productActions';
 import * as analyticsAction from '../actions/analyticsActions';
 import { requestFetchProductList } from '../actions/productListActions';
+import { getStoreCode } from '../reducers/selectors';
 
 export function* callFetchXSellProducts({ productCode }) {
   try {
@@ -15,6 +17,13 @@ export function* callFetchXSellProducts({ productCode }) {
       throw new Error('Not Found Error');
     } else {
       yield put(productActions.successFetchXSellProducts(productCode, result));
+
+      const storeCode = yield select(getStoreCode);
+      yield put(realTimeStock.requestRealTimeStock({
+        storeCodes: storeCode,
+        productCodes: result.toJS().join(','),
+        type: 'related'
+      }));
       yield put(requestFetchProductList(result));
     }
   } catch (error) {

@@ -9,7 +9,7 @@ import { formatPrice, getProductAvailability } from '../utils/utils';
 import MarketingFlag from '../components/MarketingFlag';
 import { getMarketingProps } from '../utils/marketingUtils';
 
-const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection }) => {
+const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection, stock }) => {
   if (productInfo.isEmpty()) {
     return null;
   }
@@ -55,7 +55,7 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection })
         {listPrice && <Price discounted>{formatPrice(grossPrice)} €</Price>}
       </PriceWrapper>
       <Available>
-        <p>{getProductAvailability(productInfo)}</p>
+        <p>{getProductAvailability(productInfo, stock)}</p>
       </Available>
     </Wrapper>
   );
@@ -65,14 +65,16 @@ ProductBadge.propTypes = {
   productInfo: ImmutablePropTypes.map,
   handleClick: PropTypes.func,
   animated: PropTypes.bool,
-  animatedDirection: PropTypes.string
+  animatedDirection: PropTypes.string,
+  stock: PropTypes.number
 };
 
 ProductBadge.defaultProps = {
   productInfo: Map(),
   handleClick: () => null,
   animated: false,
-  animatedDirection: 'left'
+  animatedDirection: 'left',
+  stock: 0
 };
 
 export default ProductBadge;

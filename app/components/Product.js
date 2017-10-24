@@ -19,19 +19,22 @@ export default class Product extends Component {
       productCode: PropTypes.string.isRequired
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
+    similarProductStocks: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
     clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired,
-    storeStock: ImmutablePropTypes.map,
+    mainStoreStock: PropTypes.number.isRequired,
     storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
     productInfo: Map(),
-    storeStock: Map()
+    storeStock: Map(),
+    similarProductStocks: Map(),
+    mainStoreStock: 0
   };
 
   constructor(props) {
@@ -103,7 +106,8 @@ export default class Product extends Component {
   }
 
   renderSimilarProducts() {
-    const { similarProducts, productInfo, storeCode } = this.props;
+    const { similarProducts, productInfo,
+      storeCode, similarProductStocks } = this.props;
 
     if (similarProducts.isEmpty()) {
       return null;
@@ -120,6 +124,7 @@ export default class Product extends Component {
           title={sp.get('name')}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
           storeCode={storeCode}
+          stocks={similarProductStocks}
         />
       );
     });
@@ -139,7 +144,7 @@ export default class Product extends Component {
 
 
   render() {
-    const { productInfo, hasNearbyStores, storeStock } = this.props;
+    const { productInfo, hasNearbyStores, mainStoreStock } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -157,12 +162,16 @@ export default class Product extends Component {
     const descriptions = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptions']);
     const price = productInfo.getIn(['price', 'data', 'selling']);
     const pricingInfo = productInfo.getIn(['basicInfo', 'data', 'pricingInformations']);
-    const currentStoreStock = fromJS({
-      storeStock: storeStock.get('storeStock'),
-      stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
-    });
     const imageIDList = productInfo.getIn(['basicInfo', 'data', 'images']);
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
+    let currentStoreStock = fromJS({});
+
+    if (mainStoreStock) {
+      currentStoreStock = fromJS({
+        storeStock: mainStoreStock,
+        stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
+      });
+    }
 
     return (
       <Wrapper>

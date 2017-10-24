@@ -9,8 +9,8 @@ export function requestRealTimeStock(data = {}) {
   return ({ type: REQUEST_REALTIME_STOCK, data });
 }
 
-export function successFetchRealTimeStock(result) {
-  return ({ type: SECCESS_REALTIME_STOCK, result });
+export function successFetchRealTimeStock(tipo, result) {
+  return ({ type: SECCESS_REALTIME_STOCK, tipo, result });
 }
 
 export function failureFetchRealTimeStock() {

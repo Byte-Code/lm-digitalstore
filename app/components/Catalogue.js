@@ -5,7 +5,7 @@ import glamorous from 'glamorous';
 import Swipeable from 'react-swipeable';
 import chunk from 'lodash/chunk';
 import { Link } from 'react-router';
-import { List, fromJS } from 'immutable';
+import { List, fromJS, Map } from 'immutable';
 import { getCategoryName } from '../utils/utils';
 
 import ProductBadge from './ProductBadge';
@@ -20,11 +20,13 @@ export default class Catalogue2 extends Component {
     trackCatalogueProductsChunk: PropTypes.func.isRequired,
     products: ImmutablePropTypes.list,
     isDialogOpen: PropTypes.bool.isRequired,
-    filterMap: ImmutablePropTypes.map.isRequired
+    filterMap: ImmutablePropTypes.map.isRequired,
+    catalogueStocks: ImmutablePropTypes.map
   };
 
   static defaultProps = {
-    products: List()
+    products: List(),
+    catalogueStocks: Map()
   };
 
   constructor(props) {
@@ -191,7 +193,12 @@ export default class Catalogue2 extends Component {
         onClick={() => this.onBadgeClick(p, index)}
         to={`product/${p.get('code')}`} key={p.get('code')}
       >
-        <ProductBadge productInfo={p} animated={index < 4} animatedDirection={this.state.swipe} />
+        <ProductBadge
+          productInfo={p}
+          animated={index < 4}
+          animatedDirection={this.state.swipe}
+          stock={this.props.catalogueStocks.get(p.get('code'))}
+        />
       </Link>
     );
   }

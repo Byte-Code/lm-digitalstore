@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
 import glamorous from 'glamorous';
-import { apiClient } from '../../mocks/apiMock';
 
 import SimilarProductBadge from './SimilarProductBadge';
 import CloseButton from './CloseButton';
@@ -27,31 +26,14 @@ export default class SimilarProductsDialog extends Component {
     handleClose: PropTypes.func.isRequired,
     selectedProduct: PropTypes.string.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
-    storeCode: PropTypes.string.isRequired
+    storeCode: PropTypes.string.isRequired,
+    stocks: ImmutablePropTypes.map
   };
 
   static defaultProps = {
-    similarProducts: List()
+    similarProducts: List(),
+    stocks: Map()
   };
-
-  constructor(props) {
-    super(props);
-    this.productsStock = {};
-  }
-
-  componentWillMount() {
-    /* eslint-disable */
-    this.props.similarProducts.map((product) =>
-      apiClient.fetchRealTimeStock(this.props.storeCode, { productCodes: product.get('code') })
-        .then((result) => {
-        if (result.stock) {
-          this.productsStock[result.stock[0].productCode] = result.stock[0].storeStock
-        }
-        })
-        .catch(err => console.log(err))
-    );
-    /* eslint-enable */
-  }
 
   // HACK this fixes a bug with slick
   componentDidUpdate() {
@@ -76,10 +58,10 @@ export default class SimilarProductsDialog extends Component {
   }
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, storeCode, stocks } = this.props;
 
     return similarProducts.map((p, i) => {
-      const stock = this.productsStock[p.get('code')];
+      const stock = stocks.getIn([storeCode, p.get('code')]);
       return (<div key={p.get('code')}>
         <Slide>
           <SimilarProductBadge

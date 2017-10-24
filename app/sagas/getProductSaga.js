@@ -6,7 +6,7 @@ import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
 import * as realTimeStock from '../actions/realTimeStockAction';
 import { isValidProductResponse } from '../utils/utils';
-import { getStoreCode } from '../reducers/selectors';
+import { getNearbyStoresCodes } from '../reducers/selectors';
 
 
 export function* callFetchProduct({ productCode }) {
@@ -17,8 +17,12 @@ export function* callFetchProduct({ productCode }) {
       { views: ['basicInfo', 'price', 'kioskStock'].join(',') });
     if (isValidProductResponse(product)) {
       yield put(productActions.successFetchProduct(productCode, fromJS(product)));
-      const storeCode = yield select(getStoreCode);
-      yield put(realTimeStock.requestRealTimeStock({ storeCode, productCodes: productCode }));
+      const nearByCodesList = yield select(getNearbyStoresCodes);
+      yield put(realTimeStock.requestRealTimeStock({
+        storeCodes: nearByCodesList.toJS().join(','),
+        productCodes: productCode,
+        type: 'main'
+      }));
       yield put(productActions.requestFetchRelatedProducts(productCode));
       yield put(productActions.requestFetchStoreStock(productCode));
     } else {

@@ -5,7 +5,8 @@ import Catalogue from '../components/Catalogue';
 import { requestFetchCategory } from '../actions/categoryActions';
 import { requestFetchProducts, clearProductList } from '../actions/productListActions';
 import * as filtersActions from '../actions/filtersActions';
-import { getCatalogueProducts, getFilterMap, getDialogStatus} from '../reducers/selectors';
+import { getCatalogueProducts, getFilterMap,
+  getDialogStatus, getCatalogueStocks } from '../reducers/selectors';
 import { setAnalyticsProductClick, trackCatalogueProductsChunk } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
     categoryCode,
     filterMap: getFilterMap(state),
     products: getCatalogueProducts()(state, categoryCode),
-    isDialogOpen: getDialogStatus(state)
+    isDialogOpen: getDialogStatus(state),
+    catalogueStocks: getCatalogueStocks(state)
   };
 };
 

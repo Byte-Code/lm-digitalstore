@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import glamorous from 'glamorous';
 
 import ProductBadge from './ProductBadge';
@@ -32,13 +32,15 @@ const Slider = glamorous.div({
 export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
+    stocks: ImmutablePropTypes.map,
     title: PropTypes.string.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
     storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
-    similarProducts: List()
+    similarProducts: List(),
+    stocks: Map()
   };
 
   constructor(props) {
@@ -61,19 +63,20 @@ export default class SimilarProducts extends Component {
   };
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, stocks, storeCode } = this.props;
 
     return similarProducts.map(p => (
       <ProductBadge
         key={p.get('code')}
         productInfo={p}
         handleClick={() => this.handleOpen(p.get('code'))}
+        stock={stocks.getIn([storeCode, p.get('code')])}
       />
     ));
   }
 
   render() {
-    const { similarProducts, title, storeCode } = this.props;
+    const { similarProducts, title, storeCode, stocks } = this.props;
     if (similarProducts.isEmpty()) {
       return null;
     }
@@ -94,6 +97,7 @@ export default class SimilarProducts extends Component {
           selectedProduct={selectedProduct}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
           storeCode={storeCode}
+          stocks={stocks}
         />
       </Wrapper>
     );
