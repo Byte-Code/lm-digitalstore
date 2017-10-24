@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 
 import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
@@ -205,11 +205,11 @@ export function getNearbyStoresCodes(state) {
       List());
 }
 
-export const hasNearbyStores = productCode => createSelector(
-  [getRealTimeStock, getStoreCode],
-  (realTimeStocks, storeCode) => {
-    if (realTimeStocks.size > 0) {
-      const listWithoutCurrentStore = realTimeStocks.deleteIn([productCode, storeCode]);
+export const hasNearbyStores = createSelector(
+  [getMainStock, getStoreCode],
+  (mainStock, storeCode) => {
+    if (mainStock) {
+      const listWithoutCurrentStore = mainStock.deleteIn([storeCode]);
       const withStockList = listWithoutCurrentStore.filter((stock) => stock > 1);
       return withStockList.size > 0;
     }
@@ -265,3 +265,30 @@ export function getRoutingData(state) {
 export function getRealTimeStock(state) {
   return storesStock(state.get('realTimeStockReducer'));
 }
+
+export function getMainStock(state) {
+  return getRealTimeStock(state).get('main') || Map();
+}
+
+export function getCatalogueStock(state) {
+  return getRealTimeStock(state).get('catalogue') || Map();
+}
+
+export const getCurrentProductStock = productCode => createSelector(
+  [getCatalogueStock, getStoreCode],
+  (catalogueStock, currentStore) => {
+    if (catalogueStock) {
+      return catalogueStock.getIn([currentStore, productCode]);
+    }
+  }
+);
+
+export function getSimilarProductStock(state) {
+  return getRealTimeStock(state).get('related') || Map();
+}
+
+export const getCatalogueStocks = createSelector(
+  [getCatalogueStock, getStoreCode],
+  (stocks, storeCode) =>
+    stocks.get(storeCode)
+);
