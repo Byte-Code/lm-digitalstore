@@ -12,6 +12,7 @@ import filtersReducer from './Filters/filtersReducer';
 import idleReducer from './Idle/idleReducer';
 import activeStores from './ActiveStores/activeStoresReducer';
 import realTimeStockReducer from './RealTimeStock/realTimeStockReducer';
+import galleryReducer from './Gallery/galleryReducer';
 
 const rootReducer = combineReducers({
   worldReducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   idleReducer,
   routing,
   activeStores,
-  realTimeStockReducer
+  realTimeStockReducer,
+  galleryReducer
 });
 
 export default rootReducer;

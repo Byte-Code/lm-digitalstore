@@ -12,6 +12,7 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
+    this.timeout = true;
     this.firstTrack = true;
     this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
@@ -122,17 +123,20 @@ class AnalyticsService {
   }
 
   track(eventType, clear = true) {
-    tealiumAnalytics([{
-      hitType: eventType,
-      dataLayer: this.dataLayer.toJS()
-    }]);
+    if (this.timeout) {
+      tealiumAnalytics([{
+        hitType: eventType,
+        dataLayer: this.dataLayer.toJS()
+      }]);
 
-    if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
-      console.log(this.dataLayer.toJS());
-    }
+      if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
+        console.log(this.dataLayer.toJS());
+      }
 
-    if (clear) {
-      this.clearDataLayer();
+      if (clear) {
+        this.clearDataLayer();
+      }
+      setTimeout(() => { this.timeout = true; }, 500);
     }
   }
 }

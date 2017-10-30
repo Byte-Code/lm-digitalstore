@@ -16,7 +16,8 @@ import {
   SUCCESS_TRACK_FILTERS,
   SUCCESS_TRACK_PRODUCT_CLICK,
   SUCCESS_TRACK_AVAILABILITY_BUTTON,
-  TRACK_CATALOGUE_PRODUCTS_CHUNK } from './actionTypes';
+  TRACK_CATALOGUE_PRODUCTS_CHUNK,
+  APPLY_FILTERS_IN_DATALAYER } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -88,4 +89,8 @@ export function successTrackAvailabilityButton() {
 
 export function trackCatalogueProductsChunk(data) {
   return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK, data });
+}
+
+export function applyFilterInDataLayer() {
+  return ({ type: APPLY_FILTERS_IN_DATALAYER });
 }

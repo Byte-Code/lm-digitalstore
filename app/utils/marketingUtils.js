@@ -58,20 +58,16 @@ const buildMarketingTopLeft = ({ promotions = Map() }) => {
   return promotion;
 };
 
-const buildMarketingTopRight = ({ promotions = Map(), promotionCode = '0' }) => {
+const buildMarketingTopRight = ({ promotions = Map() }) => {
   const hasBlackFriday = promotions.has(marketingLabel.blackFriday);
-  const hasPromoWeb = promotions.has(marketingLabel.promoWeb);
   const hasDestock = promotions.has(marketingLabel.destock);
   const hasPrezzoVincente = promotions.has(marketingLabel.prezzoVincente);
   const hasPrezzoStock = promotions.has(marketingLabel.prezzoStock);
   const ideaPiu = promotions.get(marketingLabel.ideaPiu);
-  const promoCodeToNumber = Number.parseInt(promotionCode);
   let promotion = new Map({ code: null });
 
   if (hasBlackFriday) {
     promotion = promotion.set('code', marketingLabel.blackFriday);
-  } else if (hasPromoWeb && !(promoCodeToNumber === 2)) {
-    promotion = promotion.set('code', marketingLabel.promoWeb);
   } else if (hasDestock) {
     promotion = promotion.set('code', marketingLabel.destock);
   } else if (hasPrezzoVincente) {
@@ -96,6 +92,5 @@ export function buildPromotionMap(attrs) {
 export function getMarketingProps(product) {
   const marketingAttributes = product.getIn(['basicInfo', 'data', 'marketingAttributes']);
   const loyaltyProgram = product.getIn(['basicInfo', 'data', 'loyaltyProgram']);
-  const promotionCode = product.getIn(['price', 'data', 'selling', 'promotion']);
-  return { marketingAttributes, loyaltyProgram, promotionCode };
+  return { marketingAttributes, loyaltyProgram };
 }

@@ -5,8 +5,10 @@ import * as sagaCB from '../analytics/analyticsSagaCB';
 export default function* analyticsSaga() {
   yield takeEvery(
     [
-      constants.TOGGLE_AID, constants.APPLY_TEMP_FILTERS,
-      constants.TOGGLE_AVAILABILITY, constants.TOGGLE_FILTER
+      constants.TOGGLE_AID,
+      constants.APPLY_TEMP_FILTERS,
+      constants.TOGGLE_AVAILABILITY,
+      constants.TOGGLE_FILTER
     ],
     sagaCB.applyFilterActions
   );
@@ -23,4 +25,6 @@ export default function* analyticsSaga() {
   yield takeEvery(constants.TRACK_ANALYTICS_FILTERS, sagaCB.trackFilters);
   yield takeEvery(constants.TRACK_STORE_AVAILABILITY_EVENT, sagaCB.trackStoreAvailability);
   yield takeEvery(constants.SUCCESS_FETCH_PRODUCTLIST, sagaCB.setRelatedProducts);
+  yield takeEvery(constants.APPLY_FILTERS_IN_DATALAYER, sagaCB.applyFilterActions);
+  yield takeEvery(constants.CLEAR_PRODUCT_LIST, sagaCB.clearDataLayer);
 }

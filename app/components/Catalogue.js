@@ -7,21 +7,26 @@ import chunk from 'lodash/chunk';
 import { Link } from 'react-router';
 import { List, fromJS, Map } from 'immutable';
 import { getCategoryName } from '../utils/utils';
+import { getPreviousPath } from '../utils/RouterChangeListener';
 
 import ProductBadge from './ProductBadge';
 import FilterBar from './FilterBar';
 
-export default class Catalogue2 extends Component {
+export default class Catalogue extends Component {
   static propTypes = {
     categoryCode: PropTypes.string.isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
+    saveGalleryIndex: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired,
     trackCatalogueProductsChunk: PropTypes.func.isRequired,
     products: ImmutablePropTypes.list,
     isDialogOpen: PropTypes.bool.isRequired,
     filterMap: ImmutablePropTypes.map.isRequired,
-    catalogueStocks: ImmutablePropTypes.map
+    catalogueStocks: ImmutablePropTypes.map,
+    chunkIndex: PropTypes.number.isRequired,
+    applyFilterInDataLayer: PropTypes.func.isRequired,
+    initFilters: PropTypes.func.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -47,6 +52,7 @@ export default class Catalogue2 extends Component {
     this.checkCategoryChange = this.checkCategoryChange.bind(this);
     this.checkAnalyticsConditionAndTrack = this.checkAnalyticsConditionAndTrack.bind(this);
     this.filtersHaveChanged = this.filtersHaveChanged.bind(this);
+    this.trackChunk = this.trackChunk.bind(this);
     this.state = initialState;
   }
 
@@ -57,10 +63,26 @@ export default class Catalogue2 extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.products.size > 0) {
+      const landingFromProductPage = getPreviousPath().startsWith('/product');
       this.chunkerizeProductList(nextProps.products);
+
       if (!this.state.currentChunk) {
-        this.updateCurrentChunkInState();
-        this.trackCurrentChunk();
+        const { applyFilterInDataLayer, initFilters, chunkIndex } = this.props;
+
+        if (landingFromProductPage) {
+          applyFilterInDataLayer();
+        } else {
+          initFilters();
+        }
+
+        if (chunkIndex > 0 && landingFromProductPage) {
+          this.setChunkPosition(chunkIndex, chunkIndex + 1);
+          this.updateCurrentChunkInState();
+          this.trackChunk(chunkIndex);
+        } else {
+          this.updateCurrentChunkInState();
+          this.trackCurrentChunk();
+        }
       }
     }
 
@@ -77,6 +99,7 @@ export default class Catalogue2 extends Component {
 
   componentWillUnmount() {
     this.props.clearProductList();
+    this.props.saveGalleryIndex(this.state.currentChunkIndex);
   }
 
   onBadgeClick(product, index) {
@@ -119,7 +142,7 @@ export default class Catalogue2 extends Component {
         currentChunk = this.productsChunk.getIn([currentChunkIndex]);
         appendChunk = this.productsChunk.getIn([appendChunkIndex]);
       } else {
-        this.setState({ currentChunkIndex: 0, appendChunkIndex: 1 });
+        this.setChunkPosition(0, 1);
       }
 
       chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
@@ -182,7 +205,7 @@ export default class Catalogue2 extends Component {
     const positionIndex = this.chunkSize * index;
 
     this.props.trackCatalogueProductsChunk({
-      products: this.productsChunk.get(0),
+      products: this.productsChunk.get(index),
       positionIndex
     });
   }
@@ -210,8 +233,6 @@ export default class Catalogue2 extends Component {
       return null;
     }
 
-    const chunks = this.getChunks();
-
     return (
       <div>
         <Header>
@@ -224,7 +245,7 @@ export default class Catalogue2 extends Component {
           {...swipeableConfig}
         >
           <ProductSlider opacity={isDialogOpen}>
-            {this.renderProducts(chunks)}
+            {this.renderProducts(this.getChunks())}
           </ProductSlider>
         </Swipeable>
       </div>
