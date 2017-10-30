@@ -56,14 +56,18 @@ export default class PriceBadge extends Component {
     const sellingCapacity = pricingInfo.get('sellingCapacity') || 1;
     const sellingUnit = pricingInfo.get('sellingUnit');
     const toDate = price.get('to');
-    const label = `FINO AL ${toDate.substring(6, 8)}/${toDate.substring(4, 6)}`;
+    let until = null;
+
+    if (toDate) {
+      until = `FINO AL ${toDate.substring(6, 8)}/${toDate.substring(4, 6)}`;
+    }
 
     return (
       <Wrapper>
         {isDiscounted &&
           <Discount>
             <span>-{Math.round(discount)} %</span>
-            <span>{label}</span>
+            {until && <span>{until}</span>}
             <span>{formatPrice(listPrice)}€</span>
           </Discount>}
         <MainPrice isDiscounted={isDiscounted}>
