@@ -1,5 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Immutable from 'immutable';
+import immutableDevtools from 'immutable-devtools';
 import { Provider } from 'react-redux';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -7,12 +9,17 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ThemeProvider } from 'glamorous';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { startRouterChangeListener } from './utils/RouterChangeListener';
 
 import configureStore, { sagaMiddleware } from './store/configureStore';
 import Light from './assets/LM_Font/LeroyMerlinSansOfficeLight-Italic.ttf';
 import routes from './routes';
 import rootSaga from './sagas/sagas';
 import './app.global.css';
+
+if (process.env.NODE_ENV === 'development') {
+  immutableDevtools(Immutable);
+}
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store, {
@@ -40,6 +47,8 @@ const theme = {
     src: `url(${Light})`
   }
 };
+
+startRouterChangeListener();
 
 render(
   <Provider store={store}>

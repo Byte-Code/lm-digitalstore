@@ -28,7 +28,6 @@ class FilterBar extends Component {
     toggleFiltersDialog: PropTypes.func.isRequired,
     resetTempFilters: PropTypes.func.isRequired,
     toggleAid: PropTypes.func.isRequired,
-    initFilters: PropTypes.func.isRequired,
     isDialogOpen: PropTypes.bool.isRequired,
     categoryInfo: ImmutablePropTypes.map.isRequired
   };
@@ -36,10 +35,6 @@ class FilterBar extends Component {
   constructor(props) {
     super(props);
     this.toggleIcon = this.toggleIcon.bind(this);
-  }
-
-  componentWillUnmount() {
-    this.props.initFilters();
   }
 
   toggleIcon() {

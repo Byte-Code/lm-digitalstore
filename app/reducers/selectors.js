@@ -14,6 +14,7 @@ import * as filtersSelector from './Filters/filtersSelectors';
 import * as routeSelector from './Router/routerSelectors';
 import * as activeStoresSelector from './ActiveStores/activeStoresSelectors';
 import storesStock from './RealTimeStock/realTimeStockSelector';
+import getGallery from './Gallery/gallerySelector';
 
 export function getWorld(state) {
   return getWorldSelector(state.get('worldReducer'));
@@ -291,3 +292,7 @@ export const getNearByWithStock = props => createSelector(
     stocks.getIn([store.get('code'), props.productCode]) > 0
     && store.get('code') !== storeCode
 ));
+
+export function getGalleryIndex(state) {
+  return getGallery(state.get('galleryReducer').get('index'));
+}
