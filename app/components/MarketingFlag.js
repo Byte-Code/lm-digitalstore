@@ -10,7 +10,6 @@ export default class MarketingFlag extends Component {
   static propTypes = {
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired,
-    promotionCode: PropTypes.string,
     wrapperStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     topLeftStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     topRightStyle: PropTypes.object // eslint-disable-line react/forbid-prop-types
@@ -25,9 +24,9 @@ export default class MarketingFlag extends Component {
 
   renderBadges() {
     const { marketingAttributes, loyaltyProgram,
-      wrapperStyle, topLeftStyle, topRightStyle, promotionCode } = this.props;
+      wrapperStyle, topLeftStyle, topRightStyle } = this.props;
     const promotions = getPromotions(marketingAttributes, loyaltyProgram);
-    const promotionMap = buildPromotionMap({ promotions, promotionCode });
+    const promotionMap = buildPromotionMap({ promotions });
     const topRight = promotionMap.get('topRight');
     const topLeft = promotionMap.get('topLeft');
 
