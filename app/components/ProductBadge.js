@@ -119,7 +119,7 @@ const PriceWrapper = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
   marginTop: 'auto',
-  marginBottom: 20,
+  marginBottom: 42,
   width: '100%',
   justifyContent: 'center',
   '&>p': {
