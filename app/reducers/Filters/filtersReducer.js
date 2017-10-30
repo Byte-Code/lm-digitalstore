@@ -47,10 +47,9 @@ export default function filtersReducer(state = initialState, action) {
       return state.setIn(['temp', 'availability'], !state.getIn(['temp', 'availability']));
     case actionTypes.APPLY_TEMP_FILTERS:
       return state.set('active', state.get('temp'));
-    case actionTypes.INIT_FILTERS:
-      return initialState;
     case actionTypes.INIT_TEMP_FILTERS:
       return state.set('temp', state.get('active'));
+    case actionTypes.INIT_FILTERS:
     case actionTypes.RESET_FILTERS:
       return state.set('active', resetFilters(state.get('active')));
     case actionTypes.RESET_TEMP_FILTERS:

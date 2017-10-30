@@ -10,22 +10,30 @@ import { getProductReducer,
 import * as analyticsAction from '../actions/analyticsActions';
 import { PROD_CLICK, PROD_ACTION_DEDAIL } from '../actions/actionTypes';
 
+const appliedFilters = (activeFilters) =>
+  activeFilters.get('filters').size > 0
+  || activeFilters.get('availability')
+  || activeFilters.get('aid') !== '';
+
+
 export function* applyFilterActions() {
-  const maxChunkLenght = 4;
-  const state = yield select();
-  const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
-  const catCode = yield select(getFiltersCategoryCode);
-  const productList = yield call(getCatalogueProducts(), state, catCode);
-  const productsNumber = productList.size > maxChunkLenght ? maxChunkLenght : productList.size;
   const activeFilters = yield select(getFilterMap);
 
+  if (appliedFilters(activeFilters)) {
+    const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
+    const maxChunkLenght = 4;
+    const state = yield select();
+    const catCode = yield select(getFiltersCategoryCode);
+    const productList = yield call(getCatalogueProducts(), state, catCode);
+    const productsNumber = productList.size > maxChunkLenght ? maxChunkLenght : productList.size;
 
-  yield call(AnalyticsService.setFilters, {
-    sellingAids,
-    filterGroup,
-    productsNumber,
-    activeFilters
-  });
+    yield call(AnalyticsService.setFilters, {
+      sellingAids,
+      filterGroup,
+      productsNumber,
+      activeFilters
+    });
+  }
 }
 
 export function* resetFilter() {
@@ -182,4 +190,8 @@ export function* trackStoreAvailability(action) {
   });
   yield call(AnalyticsService.track, 'link');
   yield put(analyticsAction.successTrackAvailabilityButton());
+}
+
+export function* clearDataLayer() {
+  yield call(AnalyticsService.clearDataLayer);
 }
