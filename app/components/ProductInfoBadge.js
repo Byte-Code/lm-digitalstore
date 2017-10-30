@@ -169,8 +169,7 @@ export default class ProductInfoBadge extends Component {
 
     const height = this.getAnimatedWrapperHeight();
 
-    const promotionCode = price.getIn(['selling', 'promotion']);
-    const marketingPriceProps = { marketingAttributes, loyaltyProgram, promotionCode };
+    const marketingPriceProps = { marketingAttributes, loyaltyProgram };
     const shippingCostProductData = { name: productName, code: productCode};
 
     return (

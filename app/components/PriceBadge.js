@@ -9,13 +9,18 @@ export const Discount = glamorous.div({
   width: '100%',
   justifyContent: 'space-between',
   fontSize: '16px',
-  marginBottom: '5px',
+  marginBottom: '15px',
   '&>span': {
     '&:first-child': {
       color: '#cc0000'
     },
-    color: '#000',
-    textDecoration: 'line-through'
+    '&:last-child': {
+      color: '#000',
+      textDecoration: 'line-through'
+    },
+    fontSize: '14px',
+    fontWeight: 300,
+    color: '#333333'
   }
 });
 
@@ -50,12 +55,15 @@ export default class PriceBadge extends Component {
     const discount = price.get('discount');
     const sellingCapacity = pricingInfo.get('sellingCapacity') || 1;
     const sellingUnit = pricingInfo.get('sellingUnit');
+    const toDate = price.get('to');
+    const label = `FINO AL ${toDate.substring(6, 8)}/${toDate.substring(4, 6)}`;
 
     return (
       <Wrapper>
         {isDiscounted &&
           <Discount>
             <span>-{Math.round(discount)} %</span>
+            <span>{label}</span>
             <span>{formatPrice(listPrice)}€</span>
           </Discount>}
         <MainPrice isDiscounted={isDiscounted}>
