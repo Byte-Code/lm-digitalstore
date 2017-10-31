@@ -29,6 +29,7 @@ class AnalyticsService {
     this.setFilters = this.setFilters.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.setStoreAvailability = this.setStoreAvailability.bind(this);
+    this.deleteFilters = this.deleteFilters.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -112,6 +113,13 @@ class AnalyticsService {
 
   clearFilters(productsNumber) {
     this.dataLayer = utils.clearFilters(this.dataLayer, productsNumber);
+  }
+
+  deleteFilters() {
+    this.dataLayer = this.dataLayer
+      .delete('filter_name')
+      .delete('filter_result')
+      .delete('filter_value');
   }
 
   setStoreAvailability({ storeName = '', storeStock = '', product = Map({}) }) {

@@ -195,3 +195,7 @@ export function* trackStoreAvailability(action) {
 export function* clearDataLayer() {
   yield call(AnalyticsService.clearDataLayer);
 }
+
+export function* deleteFilters() {
+  yield call(AnalyticsService.deleteFilters);
+}

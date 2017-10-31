@@ -39,7 +39,8 @@ export function getCategory(state, categoryCode) {
 }
 
 export function getCategoryName(state, categoryCode) {
-  return getCategory(state, categoryCode).get('name');
+  const category = getCategory(state, categoryCode);
+  return category ? category.get('name') : Map();
 }
 
 export function getSellingAids(state, categoryCode) {
@@ -267,10 +268,10 @@ export function getCatalogueStock(state) {
 }
 
 export const getCurrentProductStock = productCode => createSelector(
-  [getCatalogueStock, getStoreCode],
-  (catalogueStock, currentStore) => {
-    if (catalogueStock) {
-      return catalogueStock.getIn([currentStore, productCode]);
+  [getMainStock, getStoreCode],
+  (mainStock, currentStore) => {
+    if (mainStock) {
+      return mainStock.getIn([currentStore, productCode]);
     }
   }
 );

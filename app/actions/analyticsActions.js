@@ -17,7 +17,8 @@ import {
   SUCCESS_TRACK_PRODUCT_CLICK,
   SUCCESS_TRACK_AVAILABILITY_BUTTON,
   TRACK_CATALOGUE_PRODUCTS_CHUNK,
-  APPLY_FILTERS_IN_DATALAYER } from './actionTypes';
+  APPLY_FILTERS_IN_DATALAYER,
+  DELETE_FILTERS } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -93,4 +94,8 @@ export function trackCatalogueProductsChunk(data) {
 
 export function applyFilterInDataLayer() {
   return ({ type: APPLY_FILTERS_IN_DATALAYER });
+}
+
+export function deleteFilters() {
+  return ({ type: DELETE_FILTERS });
 }

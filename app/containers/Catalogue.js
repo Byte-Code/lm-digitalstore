@@ -10,7 +10,8 @@ import { getCatalogueProducts, getFilterMap,
   getDialogStatus, getCatalogueStocks, getGalleryIndex } from '../reducers/selectors';
 import { setAnalyticsProductClick,
   trackCatalogueProductsChunk,
-  applyFilterInDataLayer } from '../actions/analyticsActions';
+  applyFilterInDataLayer,
+  deleteFilters } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => {
   const { params: { categoryCode } } = ownProps;
@@ -31,7 +32,8 @@ const mapDispatchToProps = {
   trackCatalogueProductsChunk,
   saveGalleryIndex,
   applyFilterInDataLayer,
-  initFilters
+  initFilters,
+  deleteFilters
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalogue);

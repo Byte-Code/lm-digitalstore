@@ -27,4 +27,5 @@ export default function* analyticsSaga() {
   yield takeEvery(constants.SUCCESS_FETCH_PRODUCTLIST, sagaCB.setRelatedProducts);
   yield takeEvery(constants.APPLY_FILTERS_IN_DATALAYER, sagaCB.applyFilterActions);
   yield takeEvery(constants.CLEAR_PRODUCT_LIST, sagaCB.clearDataLayer);
+  yield takeEvery(constants.DELETE_FILTERS, sagaCB.deleteFilters);
 }

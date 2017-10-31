@@ -26,6 +26,7 @@ export default class Catalogue extends Component {
     chunkIndex: PropTypes.number.isRequired,
     applyFilterInDataLayer: PropTypes.func.isRequired,
     initFilters: PropTypes.func.isRequired,
+    deleteFilters: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
@@ -166,9 +167,10 @@ export default class Catalogue extends Component {
   checkAnalyticsConditionAndTrack({ nextProps, nextState }) {
     const filtersHaveChanged = this.filtersHaveChanged(nextProps);
     const currentChunkChanged = nextState.currentChunkIndex !== this.state.currentChunkIndex;
+    const notCategoryChange = nextProps.categoryCode === nextProps.filterMap.get('categoryCode');
     const swipe = Math.abs(nextState.currentChunkIndex - this.state.currentChunkIndex) === 1;
 
-    if (filtersHaveChanged) {
+    if (filtersHaveChanged && notCategoryChange) {
       this.trackChunk();
     }
 
@@ -181,6 +183,8 @@ export default class Catalogue extends Component {
   checkCategoryChange({ nextProps }) {
     if (nextProps.categoryCode !== this.props.categoryCode) {
       this.props.requestFetchCategory(this.props.categoryCode);
+      this.props.initFilters();
+      this.props.deleteFilters();
     }
   }
 

@@ -38,11 +38,9 @@ export default class ProductInfoBadge extends Component {
 
   constructor(props) {
     super(props);
-    this.isPositionFixed = false;
     this.visibilityValue = 870;
     this.allVisible = true;
     this.visibilityTreshold = 300;
-    this.isCollapsed = false;
     this.animatedWrapperHeight = 0;
     this.initialHeight = 0;
     this.onScrolling = this.onScrolling.bind(this);
