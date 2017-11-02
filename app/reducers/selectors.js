@@ -71,9 +71,11 @@ export const getIdsByFilters = createSelector(
 );
 
 export const getIdsByAvailability = createSelector(
-  [getOrderedProducts, getActiveAvailability],
-  (orderedProducts, activeAvailability) =>
-    filterUtils.filterProductsByAvailability(orderedProducts, activeAvailability)
+  [getOrderedProducts, getActiveAvailability, getCatalogueStock, getStoreCode],
+  (orderedProducts, activeAvailability, catalogueStock, storeCode) =>
+    filterUtils.filterProductsByAvailability(
+      orderedProducts, activeAvailability, catalogueStock.get(storeCode)
+    )
 );
 
 export const getIdsByTempFilters = createSelector(
@@ -82,9 +84,11 @@ export const getIdsByTempFilters = createSelector(
 );
 
 export const getIdsByTempAvailability = createSelector(
-  [getOrderedProducts, getTempAvailability],
-  (orderedProducts, tempAvailability) =>
-    filterUtils.filterProductsByAvailability(orderedProducts, tempAvailability)
+  [getOrderedProducts, getTempAvailability, getCatalogueStock, getStoreCode],
+  (orderedProducts, tempAvailability, catalogStock, storeCode) =>
+    filterUtils.filterProductsByAvailability(
+      orderedProducts, tempAvailability, catalogStock.get(storeCode)
+    )
 );
 
 export const getCatalogueProductsIds = createSelector(
