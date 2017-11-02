@@ -57,7 +57,7 @@ export function filterProducts(filterGroups, activeFilters) {
 export function filterProductsByAvailability(productList, activeAvailability, catalogueStock) {
   if (isValidList(productList)) {
     let products = productList;
-    if (activeAvailability) {
+    if (activeAvailability && catalogueStock) {
       products = productList.filter(p =>
       catalogueStock.find((stock, code) => code === p.get('code')) > 0
       );
