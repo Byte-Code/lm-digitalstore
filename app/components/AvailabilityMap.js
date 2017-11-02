@@ -39,11 +39,13 @@ export default class AvailabilityMap extends Component {
 
   constructor(props) {
     super(props);
+    this.updateNearByList = false;
     this.state = {
       minRadius: 2,
       maxRadius: 50,
       sliderWidth: 960
     };
+    this.nearByClick = this.nearByClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,27 +63,20 @@ export default class AvailabilityMap extends Component {
     return (radius - minRadius) * sliderWidth / (maxRadius - minRadius); // eslint-disable-line
   };
 
-  getSliderIndex = (nearbyStores, pinCode) => {
-    let index = '';
-    // eslint-disable-next-line array-callback-return
-    nearbyStores.map((s, i) => {
-      if (pinCode === s.get('code')) {
-        index = i;
-      }
-    });
-    return index;
-  };
+  nearByClick(event) {
+    this.props.selectStore(event);
+    this.updateNearByList = true;
+  }
 
   renderMarkers() {
     const { allNearbyStores, homeStore, selectStore, closeInfoWindow,
-      nearbyStoresWithProductInStock, stocks, productCode } = this.props;
+      stocks, productCode } = this.props;
     return allNearbyStores.map(s => {
       const code = s.get('code');
       const lat = s.get('latitude');
       const isAvailable = stocks.getIn([code, productCode]) > 0;
       const lng = s.get('longitude');
       const isCurrentStore = homeStore.get('code') === code;
-      const sliderIndex = this.getSliderIndex(nearbyStoresWithProductInStock, code);
 
       return (
         <Marker
@@ -93,7 +88,7 @@ export default class AvailabilityMap extends Component {
           handleClick={() => {
             selectStore(code);
             closeInfoWindow();
-            this.slick.slickGoTo(sliderIndex);
+            this.updateNearByList = false;
           }}
           isAvailable={isAvailable}
         />
@@ -133,7 +128,6 @@ export default class AvailabilityMap extends Component {
       radius,
       zoom,
       selectedStore,
-      selectStore,
       handleChange,
       handleSlide,
       } = this.props;
@@ -142,9 +136,7 @@ export default class AvailabilityMap extends Component {
     const lat = homeStore.getIn(['gpsInformation', 'x']);
     const lng = homeStore.getIn(['gpsInformation', 'y']);
     const center = { lat, lng };
-    // const diameter = radius * 1000 * 2;
     const labelPosition = this.getLabelPosition(radius);
-    // const { w, h } = meters2ScreenPixels(diameter, { lat, lng }, zoom);
 
     return (
       <Wrapper>
@@ -180,8 +172,8 @@ export default class AvailabilityMap extends Component {
         <NearbyStores
           nearbyStores={nearbyStoresWithProductInStock}
           selectedStore={selectedStore}
-          handleClick={selectStore}
-          slick={el => this.slick = el} // eslint-disable-line no-return-assign
+          handleClick={this.nearByClick}
+          updateNearByList={this.updateNearByList}
         />
       </Wrapper>
     );
