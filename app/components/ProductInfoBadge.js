@@ -89,7 +89,7 @@ export default class ProductInfoBadge extends Component {
 
   getHeight() {
     const isFirstRender = !this.initialHeight;
-    let height = isFirstRender ? 'auto' : this.initialHeight;
+    let height = isFirstRender ? '310px' : this.initialHeight;
 
     if (!this.allVisible) {
       height = '0px';
