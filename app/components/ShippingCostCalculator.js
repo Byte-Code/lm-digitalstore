@@ -194,6 +194,6 @@ const labels = {
   buttonLabel: 'Calcola la consegna',
   backButtonLabel: 'Torna alla pagina prodotto',
   explore: 'Esplora le tipologie di consegna',
-  footer: 'Ti ricordiamo che il prezzo è indicativo e potrebbe cambiarea seconda della quantità e dell\' indirizzo di consegna.',
+  footer: 'Ti ricordiamo che il prezzo è indicativo e potrebbe cambiare a seconda della quantità e dell\' indirizzo di consegna.',
   change: 'Modifica dati'
 };
