@@ -5,7 +5,7 @@ export const LABEL = {
   PROD_AVAIL_STORE: 'prod_avail_store',
   PROD_VARIANT: 'prod_variant',
   PROD_PUNTI_OMAGGIO: 'prod_puntiomaggio',
-  PROD_IDEAPIU: 'prod_idepiu',
+  PROD_IDEAPIU: 'prod_ideapiu',
   PROD_BUNDLE: 'prod_bundle',
   FILTER_NAME: 'filter_name',
   FILTER_VALUE: 'filter_value',
