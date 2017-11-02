@@ -70,10 +70,6 @@ body {
   -webkit-user-select: none;
 }
 
-.slick-slide.slick-active {
-  background-color: #4a4a4a;
-}
-
 ol, ul {
 	list-style: none;
 }
