@@ -99,7 +99,7 @@ export function* setProduct(action) {
   });
   yield call(AnalyticsService.setProduct, {
     product: action.result,
-    action: [PROD_ACTION_DEDAIL]
+    action: PROD_ACTION_DEDAIL
   });
   yield put(analyticsAction.successSetProductInDataLayer());
 }
