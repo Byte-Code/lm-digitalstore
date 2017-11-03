@@ -4,7 +4,7 @@ import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
 import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 import { isAnalyticsLogMode } from '../CommandLineOptions';
-import { LABEL, PRODUCT_DISPONIBILITA } from './AnalyticsConstants';
+import { LABEL, PRODUCT_DISPONIBILITA, PRODUCT_ACQUISTA } from './AnalyticsConstants';
 
 
 class AnalyticsService {
@@ -30,6 +30,7 @@ class AnalyticsService {
     this.clearFilters = this.clearFilters.bind(this);
     this.setStoreAvailability = this.setStoreAvailability.bind(this);
     this.deleteFilters = this.deleteFilters.bind(this);
+    this.setPurchase = this.setPurchase.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -128,6 +129,14 @@ class AnalyticsService {
     this.setDataLayer(LABEL.PROD_ID, prodCode);
     this.setDataLayer(LABEL.PROD_CATEGORY, prodCategory);
     this.setDataLayer(LABEL.EVENT_ACTION, `${storeName}_${storeStock}`);
+  }
+
+  setPurchase(product) {
+    const { prodCode, prodCategory } = utils.getProductProperty(product);
+    this.setDataLayer(LABEL.EVENT_TYPE, PRODUCT_ACQUISTA);
+    this.setDataLayer(LABEL.PROD_ID, prodCode);
+    this.setDataLayer(LABEL.PROD_CATEGORY, prodCategory);
+    this.setDataLayer(LABEL.EVENT_ACTION, 'qrcode');
   }
 
   track(eventType, clear = true) {

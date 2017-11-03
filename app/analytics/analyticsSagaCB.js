@@ -192,6 +192,12 @@ export function* trackStoreAvailability(action) {
   yield put(analyticsAction.successTrackAvailabilityButton());
 }
 
+export function* trackPurchaseEvent() {
+  const product = yield select(getProductReducer);
+  yield call(AnalyticsService.setPurchase, product);
+  yield call(AnalyticsService.track, 'link');
+}
+
 export function* clearDataLayer() {
   yield call(AnalyticsService.clearDataLayer);
 }

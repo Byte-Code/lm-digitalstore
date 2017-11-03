@@ -140,7 +140,8 @@ export default class ProductInfoBadge extends Component {
       productSlug,
       marketingAttributes,
       loyaltyProgram,
-      hasNearbyStores
+      hasNearbyStores,
+      trackPurchaseEvent
     } = this.props;
 
     const MarketingFlagStyle = {
@@ -182,7 +183,7 @@ export default class ProductInfoBadge extends Component {
           <AvailabilityButton productName={productName} productCode={productCode} />
         <Divider style={{}} />
         <PurchaseDialog productCode={productCode} productSlug={productSlug}>
-          <Button background="#67cb33">
+          <Button background="#67cb33" onClick={trackPurchaseEvent}>
             Acquista online
           </Button>
         </PurchaseDialog>

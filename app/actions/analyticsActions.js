@@ -18,7 +18,8 @@ import {
   SUCCESS_TRACK_AVAILABILITY_BUTTON,
   TRACK_CATALOGUE_PRODUCTS_CHUNK,
   APPLY_FILTERS_IN_DATALAYER,
-  DELETE_FILTERS } from './actionTypes';
+  DELETE_FILTERS,
+  TRACK_PURCHASE_EVENT } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -98,4 +99,8 @@ export function applyFilterInDataLayer() {
 
 export function deleteFilters() {
   return ({ type: DELETE_FILTERS });
+}
+
+export function trackPurchaseEvent() {
+  return ({ type: TRACK_PURCHASE_EVENT });
 }
