@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Product from '../components/Product';
 import { requestFetchProduct } from '../actions/productActions';
 import { clearProductList } from '../actions/productListActions';
-import { setAnalyticsProductClick } from '../actions/analyticsActions';
+import { setAnalyticsProductClick, trackPurchaseEvent } from '../actions/analyticsActions';
 import { clearRealTimeStock } from '../actions/realTimeStockAction';
 import { getProduct, getSimilarProducts, hasNearbyStores, getCurrentProductStock,
   getStoreCode, getSimilarProductStock } from '../reducers/selectors';
@@ -24,7 +24,8 @@ const mapDispatchToProps = {
   requestFetchProduct,
   clearProductList,
   setAnalyticsProductClick,
-  clearRealTimeStock
+  clearRealTimeStock,
+  trackPurchaseEvent
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -24,6 +24,7 @@ export default class Product extends Component {
     clearProductList: PropTypes.func.isRequired,
     clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
+    trackPurchaseEvent: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired,
     mainStoreStock: PropTypes.number.isRequired,
@@ -144,7 +145,7 @@ export default class Product extends Component {
 
 
   render() {
-    const { productInfo, hasNearbyStores, mainStoreStock } = this.props;
+    const { productInfo, hasNearbyStores, mainStoreStock, trackPurchaseEvent } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -202,6 +203,7 @@ export default class Product extends Component {
               price={price}
               scrollValue={this.state.scrollValue}
               hasNearbyStores={hasNearbyStores}
+              trackPurchaseEvent={trackPurchaseEvent}
             />
           </PriceWrapper>
         </ScrollableDiv>

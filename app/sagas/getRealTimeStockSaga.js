@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 import { apiClient } from '../../mocks/apiMock';
 import {
@@ -24,5 +24,5 @@ export function* callFetchRealTimeStock(action) {
 }
 
 export default function* getRealTimeStock() {
-  yield takeLatest(REQUEST_REALTIME_STOCK, callFetchRealTimeStock);
+  yield takeEvery(REQUEST_REALTIME_STOCK, callFetchRealTimeStock);
 }

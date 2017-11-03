@@ -104,7 +104,7 @@ export default class Catalogue extends Component {
   }
 
   onBadgeClick(product, index) {
-    const position = (this.state.currentChunkIndex * this.chunkSize) + index + 1;
+    const position = (this.state.currentChunkIndex * this.chunkSize) + index;
     this.props.setAnalyticsProductClick({ product, index: position });
   }
 

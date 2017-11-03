@@ -99,7 +99,7 @@ export function* setProduct(action) {
   });
   yield call(AnalyticsService.setProduct, {
     product: action.result,
-    action: [PROD_ACTION_DEDAIL]
+    action: PROD_ACTION_DEDAIL
   });
   yield put(analyticsAction.successSetProductInDataLayer());
 }
@@ -190,6 +190,12 @@ export function* trackStoreAvailability(action) {
   });
   yield call(AnalyticsService.track, 'link');
   yield put(analyticsAction.successTrackAvailabilityButton());
+}
+
+export function* trackPurchaseEvent() {
+  const product = yield select(getProductReducer);
+  yield call(AnalyticsService.setPurchase, product);
+  yield call(AnalyticsService.track, 'link');
 }
 
 export function* clearDataLayer() {

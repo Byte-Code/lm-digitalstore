@@ -6,8 +6,8 @@ const getStockObj = (stocks) =>
     Map());
 
 export default function normalizeRealTimeData(data) {
-  return data.reduce((acc, store) => acc.set(
-    store.get('storeCode'),
-    getStockObj(store.get('stock'))
-  ), Map());
+  return data.reduce((acc, store) =>
+    acc.set(store.get('storeCode'), getStockObj(store.get('stock'))),
+    Map()
+  );
 }
