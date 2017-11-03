@@ -96,15 +96,13 @@ const getGiftPoints = product => {
 const getIdeapiuPoints = product => {
   const ideapiuPointsType = product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'type']);
   const list = List();
-  let layer = Map({});
+  const layer = Map({});
+  let points = 0;
 
   if (ideapiuPointsType && ideapiuPointsType === 'DISCOUNT') {
-    const points = list.push(
-      Math.round(product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'value']) * 10)
-    );
-    layer = layer.set(LABEL.PROD_IDEAPIU, points);
+    points = Math.round(product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'value']) * 10);
   }
-  return layer;
+  return layer.set(LABEL.PROD_IDEAPIU, list.push(points));
 };
 
 const getBundle = product => {
