@@ -19,7 +19,9 @@ import {
   TRACK_CATALOGUE_PRODUCTS_CHUNK,
   APPLY_FILTERS_IN_DATALAYER,
   DELETE_FILTERS,
-  TRACK_PURCHASE_EVENT } from './actionTypes';
+  TRACK_PURCHASE_EVENT,
+  TRACK_OPEN_OVERLAY,
+  TRACK_SWIPE_OVERLAY } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -103,4 +105,12 @@ export function deleteFilters() {
 
 export function trackPurchaseEvent() {
   return ({ type: TRACK_PURCHASE_EVENT });
+}
+
+export function analyticsOpenOverlay(code) {
+  return ({ type: TRACK_OPEN_OVERLAY, code });
+}
+
+export function analyticsSwipeOverlay(code) {
+  return ({ type: TRACK_SWIPE_OVERLAY, code });
 }

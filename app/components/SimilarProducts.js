@@ -35,6 +35,8 @@ export default class SimilarProducts extends Component {
     stocks: ImmutablePropTypes.map,
     title: PropTypes.string.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
+    analyticsOpenOverlay: PropTypes.func.isRequired,
+    analyticsSwipeOverlay: PropTypes.func.isRequired,
     storeCode: PropTypes.string.isRequired
   };
 
@@ -51,7 +53,8 @@ export default class SimilarProducts extends Component {
     };
   }
 
-  handleOpen = product => {
+  handleOpen = (product) => {
+    this.props.analyticsOpenOverlay(product);
     this.setState({
       selectedProduct: product,
       dialogOpen: true
@@ -76,7 +79,7 @@ export default class SimilarProducts extends Component {
   }
 
   render() {
-    const { similarProducts, title, storeCode, stocks } = this.props;
+    const { similarProducts, title, storeCode, stocks, analyticsSwipeOverlay } = this.props;
     if (similarProducts.isEmpty()) {
       return null;
     }
@@ -98,6 +101,7 @@ export default class SimilarProducts extends Component {
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
           storeCode={storeCode}
           stocks={stocks}
+          analyticsSwipeOverlay={analyticsSwipeOverlay}
         />
       </Wrapper>
     );

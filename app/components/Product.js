@@ -24,6 +24,8 @@ export default class Product extends Component {
     clearProductList: PropTypes.func.isRequired,
     clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
+    analyticsOpenOverlay: PropTypes.func.isRequired,
+    analyticsSwipeOverlay: PropTypes.func.isRequired,
     trackPurchaseEvent: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
     hasNearbyStores: PropTypes.bool.isRequired,
@@ -126,6 +128,8 @@ export default class Product extends Component {
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
           storeCode={storeCode}
           stocks={similarProductStocks}
+          analyticsOpenOverlay={this.props.analyticsOpenOverlay}
+          analyticsSwipeOverlay={this.props.analyticsSwipeOverlay}
         />
       );
     });

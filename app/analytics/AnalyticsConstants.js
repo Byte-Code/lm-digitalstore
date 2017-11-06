@@ -1,5 +1,7 @@
 export const PRODUCT_DISPONIBILITA = 'product_disponibilità';
 export const PRODUCT_ACQUISTA = 'product_acquista';
+export const APRI_OVERLAY = 'product_apri_overlay';
+export const SWIPE_OVERLAY = 'product_scorri_overlay';
 export const LABEL = {
   PROD_SCONTO: 'prod_sconto',
   PROD_AVAIL_ONLINE: 'prod_avail_online',
@@ -23,5 +25,6 @@ export const LABEL = {
   NAVIGATION_STORE: 'navigation_store',
   APP_RELEASE_VERSION: 'app_release_version',
   EVENT_TYPE: 'event_type',
-  EVENT_ACTION: 'event_action'
+  EVENT_ACTION: 'event_action',
+  EVENT_LABEL: 'event_label'
 };
