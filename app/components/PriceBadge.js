@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
+import { Map } from 'immutable';
 
 import { formatPrice } from '../utils/utils';
 
@@ -43,8 +44,13 @@ const Wrapper = glamorous.div({
 
 export default class PriceBadge extends Component {
   static propTypes = {
-    pricingInfo: ImmutablePropTypes.map.isRequired,
-    price: ImmutablePropTypes.map.isRequired
+    pricingInfo: ImmutablePropTypes.map,
+    price: ImmutablePropTypes.map
+  };
+
+  static defaultProps = {
+    pricingInfo: Map(),
+    price: Map()
   };
 
   render() {
