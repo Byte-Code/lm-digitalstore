@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
+import { Dialog, FlatButton } from 'material-ui';
 import glamorous from 'glamorous';
 
 import AvailabilityMap from '../containers/AvailabilityMap';
@@ -27,11 +27,11 @@ export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    collapse: PropTypes.bool
+    hasNearByStores: PropTypes.bool
   };
 
   static defaultProps = {
-    collapse: true
+    hasNearByStores: true
   };
 
   constructor(props) {
@@ -51,13 +51,18 @@ export default class AvailabilityButton extends Component {
   };
 
   render() {
-    const { productName, productCode, collapse } = this.props;
+    const { productName, productCode, hasNearByStores } = this.props;
 
     return (
       <div >
-        <Button background="#67cb33" notCollapse={collapse} onClick={this.handleOpen}>
-          verifica disponibilità in negozi vicini
-        </Button>
+        <FlatButton
+          backgroundColor={hasNearByStores ? '#67cb33' : '#C8C8C8'}
+          label={'verifica disponibilità in negozi vicini'}
+          onClick={this.handleOpen}
+          disabled={!hasNearByStores}
+          labelStyle={{ color: '#fff', fontSize: '16px' }}
+          style={{ height: '70px' }}
+        />
         <Dialog
           modal={false}
           open={this.state.dialogOpen}
