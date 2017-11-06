@@ -30,4 +30,5 @@ export default function* analyticsSaga() {
   yield takeEvery(constants.DELETE_FILTERS, sagaCB.deleteFilters);
   yield takeEvery(constants.TRACK_PURCHASE_EVENT, sagaCB.trackPurchaseEvent);
   yield takeEvery(constants.TRACK_OPEN_OVERLAY, sagaCB.trackOpenOverlay);
+  yield takeEvery(constants.TRACK_SWIPE_OVERLAY, sagaCB.trackSwipeOverlay);
 }

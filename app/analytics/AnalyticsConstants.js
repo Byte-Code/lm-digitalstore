@@ -1,6 +1,7 @@
 export const PRODUCT_DISPONIBILITA = 'product_disponibilità';
 export const PRODUCT_ACQUISTA = 'product_acquista';
 export const APRI_OVERLAY = 'product_apri_overlay';
+export const SWIPE_OVERLAY = 'product_scorri_overlay';
 export const LABEL = {
   PROD_SCONTO: 'prod_sconto',
   PROD_AVAIL_ONLINE: 'prod_avail_online',

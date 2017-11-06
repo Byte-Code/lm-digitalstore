@@ -6,7 +6,9 @@ import { getProductReducer,
   getFilterMap,
   getFiltersCategoryCode,
   getCatalogueProducts,
-  getStore } from '../reducers/selectors';
+  getStore,
+  getStoreCode,
+  getMainStock } from '../reducers/selectors';
 import * as analyticsAction from '../actions/analyticsActions';
 import { PROD_CLICK, PROD_ACTION_DEDAIL } from '../actions/actionTypes';
 
@@ -200,8 +202,15 @@ export function* trackPurchaseEvent() {
 
 export function* trackOpenOverlay(action) {
   const productCode = action.code;
-  const product = yield select(getProductReducer);
-  yield call(AnalyticsService.openOverlay, productCode, product);
+  const { code, categoryName } = yield commonEvent();
+  yield call(AnalyticsService.openOverlay, { productCode, code, categoryName });
+  yield call(AnalyticsService.track, 'link');
+}
+
+export function* trackSwipeOverlay(action) {
+  const productCode = action.code;
+  const { code, categoryName } = yield commonEvent();
+  yield call(AnalyticsService.swipeOverlay, { productCode, code, categoryName });
   yield call(AnalyticsService.track, 'link');
 }
 
@@ -211,4 +220,15 @@ export function* clearDataLayer() {
 
 export function* deleteFilters() {
   yield call(AnalyticsService.deleteFilters);
+}
+
+function* commonEvent() {
+  const storeCode = yield select(getStoreCode);
+  const mainProducts = yield select(getMainStock);
+  const mainProduct = yield mainProducts.get(storeCode);
+  const mainProductCode = mainProduct.keySeq().toArray();
+  const products = yield select(getProductReducer);
+  const code = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'code']);
+  const categoryName = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'mainCategoryName']);
+  return { code, categoryName };
 }

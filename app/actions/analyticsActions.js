@@ -20,7 +20,8 @@ import {
   APPLY_FILTERS_IN_DATALAYER,
   DELETE_FILTERS,
   TRACK_PURCHASE_EVENT,
-  TRACK_OPEN_OVERLAY } from './actionTypes';
+  TRACK_OPEN_OVERLAY,
+  TRACK_SWIPE_OVERLAY } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -108,4 +109,8 @@ export function trackPurchaseEvent() {
 
 export function analyticsOpenOverlay(code) {
   return ({ type: TRACK_OPEN_OVERLAY, code });
+}
+
+export function analyticsSwipeOverlay(code) {
+  return ({ type: TRACK_SWIPE_OVERLAY, code });
 }
