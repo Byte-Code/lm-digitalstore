@@ -29,4 +29,5 @@ export default function* analyticsSaga() {
   yield takeEvery(constants.CLEAR_PRODUCT_LIST, sagaCB.clearDataLayer);
   yield takeEvery(constants.DELETE_FILTERS, sagaCB.deleteFilters);
   yield takeEvery(constants.TRACK_PURCHASE_EVENT, sagaCB.trackPurchaseEvent);
+  yield takeEvery(constants.TRACK_OPEN_OVERLAY, sagaCB.trackOpenOverlay);
 }

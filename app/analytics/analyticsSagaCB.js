@@ -198,6 +198,13 @@ export function* trackPurchaseEvent() {
   yield call(AnalyticsService.track, 'link');
 }
 
+export function* trackOpenOverlay(action) {
+  const productCode = action.code;
+  const product = yield select(getProductReducer);
+  yield call(AnalyticsService.openOverlay, productCode, product);
+  yield call(AnalyticsService.track, 'link');
+}
+
 export function* clearDataLayer() {
   yield call(AnalyticsService.clearDataLayer);
 }
