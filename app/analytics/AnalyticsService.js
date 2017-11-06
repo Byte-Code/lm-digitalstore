@@ -141,6 +141,8 @@ class AnalyticsService {
 
   track(eventType, clear = true) {
     if (this.timeout) {
+      this.timeout = false;
+
       tealiumAnalytics([{
         hitType: eventType,
         dataLayer: this.dataLayer.toJS()
