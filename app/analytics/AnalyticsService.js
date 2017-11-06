@@ -4,7 +4,8 @@ import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
 import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 import { isAnalyticsLogMode } from '../CommandLineOptions';
-import { LABEL, PRODUCT_DISPONIBILITA, PRODUCT_ACQUISTA, APRI_OVERLAY } from './AnalyticsConstants';
+import { LABEL, PRODUCT_DISPONIBILITA, PRODUCT_ACQUISTA,
+  APRI_OVERLAY, SWIPE_OVERLAY } from './AnalyticsConstants';
 
 
 class AnalyticsService {
@@ -12,7 +13,6 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
-    this.timeout = true;
     this.firstTrack = true;
     this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
@@ -32,6 +32,7 @@ class AnalyticsService {
     this.deleteFilters = this.deleteFilters.bind(this);
     this.setPurchase = this.setPurchase.bind(this);
     this.openOverlay = this.openOverlay.bind(this);
+    this.swipeOverlay = this.swipeOverlay.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -140,31 +141,32 @@ class AnalyticsService {
     this.setDataLayer(LABEL.EVENT_ACTION, 'qrcode');
   }
 
-  openOverlay(productCode, product) {
-    const { prodCode, prodCategory } = utils.getProductProperty(product);
+  openOverlay({ productCode, code, categoryName }) {
     this.setDataLayer(LABEL.EVENT_TYPE, APRI_OVERLAY);
-    this.setDataLayer(LABEL.PROD_ID, prodCode);
-    this.setDataLayer(LABEL.PROD_CATEGORY, prodCategory);
+    this.setDataLayer(LABEL.PROD_ID, code);
+    this.setDataLayer(LABEL.PROD_CATEGORY, categoryName);
+    this.setDataLayer(LABEL.EVENT_LABEL, productCode);
+  }
+
+  swipeOverlay({ productCode, code, categoryName }) {
+    this.setDataLayer(LABEL.EVENT_TYPE, SWIPE_OVERLAY);
+    this.setDataLayer(LABEL.PROD_ID, code);
+    this.setDataLayer(LABEL.PROD_CATEGORY, categoryName);
     this.setDataLayer(LABEL.EVENT_LABEL, productCode);
   }
 
   track(eventType, clear = true) {
-    if (this.timeout) {
-      this.timeout = false;
+    tealiumAnalytics([{
+      hitType: eventType,
+      dataLayer: this.dataLayer.toJS()
+    }]);
 
-      tealiumAnalytics([{
-        hitType: eventType,
-        dataLayer: this.dataLayer.toJS()
-      }]);
+    if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
+      console.log(this.dataLayer.toJS());
+    }
 
-      if (isAnalyticsLogMode || process.env.NODE_ENV === 'development') {
-        console.log(this.dataLayer.toJS());
-      }
-
-      if (clear) {
-        this.clearDataLayer();
-      }
-      setTimeout(() => { this.timeout = true; }, 500);
+    if (clear) {
+      this.clearDataLayer();
     }
   }
 }
