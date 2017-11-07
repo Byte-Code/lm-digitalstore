@@ -54,6 +54,7 @@ export default class Catalogue extends Component {
     this.checkAnalyticsConditionAndTrack = this.checkAnalyticsConditionAndTrack.bind(this);
     this.filtersHaveChanged = this.filtersHaveChanged.bind(this);
     this.trackChunk = this.trackChunk.bind(this);
+    this.initializeCurrentChunk = this.initializeCurrentChunk.bind(this);
     this.state = initialState;
   }
 
@@ -63,6 +64,8 @@ export default class Catalogue extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const categoryHasChanged = nextProps.categoryCode !== this.props.categoryCode;
+
     if (nextProps.products.size > 0) {
       const landingFromProductPage = getPreviousPath().startsWith('/product');
       this.chunkerizeProductList(nextProps.products);
@@ -85,6 +88,10 @@ export default class Catalogue extends Component {
           this.trackCurrentChunk();
         }
       }
+    }
+
+    if (categoryHasChanged) {
+      this.initializeCurrentChunk();
     }
 
     if (this.filtersHaveChanged(nextProps)) {
@@ -156,6 +163,10 @@ export default class Catalogue extends Component {
     return currentChunksSize > this.chunkSize
       ? this.getChunks().setSize(this.chunkSize)
       : this.getChunks().setSize(currentChunksSize);
+  }
+
+  initializeCurrentChunk() {
+    this.setState({ currentChunk: null });
   }
 
   filtersHaveChanged(nextProps) {
