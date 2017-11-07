@@ -2,6 +2,19 @@ export const PRODUCT_DISPONIBILITA = 'product_disponibilità';
 export const PRODUCT_ACQUISTA = 'product_acquista';
 export const APRI_OVERLAY = 'product_apri_overlay';
 export const SWIPE_OVERLAY = 'product_scorri_overlay';
+
+export const EVENT_TYPES = {
+  PRODUCT_ACQUISTA: 'PRODUCT_ACQUISTA',
+  APRI_OVERLAY: 'APRI_OVERLAY',
+  SWIPE_OVERLAY: 'SWIPE_OVERLAY'
+};
+
+export const EVENTS = {
+  PRODUCT_ACQUISTA,
+  APRI_OVERLAY,
+  SWIPE_OVERLAY
+};
+
 export const LABEL = {
   PROD_SCONTO: 'prod_sconto',
   PROD_AVAIL_ONLINE: 'prod_avail_online',

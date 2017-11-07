@@ -11,6 +11,7 @@ import { getProductReducer,
   getMainStock } from '../reducers/selectors';
 import * as analyticsAction from '../actions/analyticsActions';
 import { PROD_CLICK, PROD_ACTION_DEDAIL } from '../actions/actionTypes';
+import { EVENT_TYPES } from '../analytics/AnalyticsConstants';
 
 const appliedFilters = (activeFilters) =>
   activeFilters.get('filters').size > 0
@@ -178,40 +179,36 @@ export function* trackFilters() {
   yield put(analyticsAction.successTrackFilters());
 }
 
-export function* trackStoreAvailability(action) {
-  const {
-    storeName = '',
-    storeStock = 0,
-    } = action.storeData;
-  const product = yield select(getProductReducer);
-
-  yield call(AnalyticsService.setStoreAvailability, {
-    storeName,
-    storeStock,
-    product
-  });
-  yield call(AnalyticsService.track, 'link');
-  yield put(analyticsAction.successTrackAvailabilityButton());
-}
-
 export function* trackPurchaseEvent() {
-  const product = yield select(getProductReducer);
-  yield call(AnalyticsService.setPurchase, product);
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.PRODUCT_ACQUISTA, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
   yield call(AnalyticsService.track, 'link');
 }
 
 export function* trackOpenOverlay(action) {
   const productCode = action.code;
-  const { code, categoryName } = yield commonEvent();
-  yield call(AnalyticsService.openOverlay, { productCode, code, categoryName });
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.APRI_OVERLAY, productCode, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
   yield call(AnalyticsService.track, 'link');
 }
 
 export function* trackSwipeOverlay(action) {
   const productCode = action.code;
-  const { code, categoryName } = yield commonEvent();
-  yield call(AnalyticsService.swipeOverlay, { productCode, code, categoryName });
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.SWIPE_OVERLAY, productCode, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
   yield call(AnalyticsService.track, 'link');
+}
+
+export function* trackStoreAvailability(action) {
+  const { storeName = '', storeStock = 0 } = action.storeData;
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { storeName, storeStock, code, categoryName };
+  yield call(AnalyticsService.setStoreAvailability, payload);
+  yield call(AnalyticsService.track, 'link');
+  yield put(analyticsAction.successTrackAvailabilityButton());
 }
 
 export function* clearDataLayer() {
@@ -222,7 +219,7 @@ export function* deleteFilters() {
   yield call(AnalyticsService.deleteFilters);
 }
 
-function* commonEvent() {
+function* getCommonEventProperties() {
   const storeCode = yield select(getStoreCode);
   const mainProducts = yield select(getMainStock);
   const mainProduct = yield mainProducts.get(storeCode);
