@@ -92,10 +92,6 @@ export default class Catalogue extends Component {
 
     if (categoryHasChanged) {
       this.initializeCurrentChunk();
-
-      if (this.filtersHaveChanged(nextProps)) {
-        this.trackChunk();
-      }
     }
 
     if (this.filtersHaveChanged(nextProps)) {
