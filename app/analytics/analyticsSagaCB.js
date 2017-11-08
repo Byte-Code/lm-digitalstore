@@ -223,9 +223,12 @@ function* getCommonEventProperties() {
   const storeCode = yield select(getStoreCode);
   const mainProducts = yield select(getMainStock);
   const mainProduct = yield mainProducts.get(storeCode);
-  const mainProductCode = mainProduct.keySeq().toArray();
-  const products = yield select(getProductReducer);
-  const code = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'code']);
-  const categoryName = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'mainCategoryName']);
-  return { code, categoryName };
+  if (mainProduct) {
+    const mainProductCode = mainProduct.keySeq().toArray();
+    const products = yield select(getProductReducer);
+    const code = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'code']);
+    const categoryName = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'mainCategoryName']);
+    return { code, categoryName };
+  }
+  return { code: '0', categoryName: '' };
 }
