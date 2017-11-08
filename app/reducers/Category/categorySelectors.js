@@ -15,7 +15,3 @@ export function getFilters(state, categoryCode) {
 export function getOrderedProducts(state, categoryCode) {
   return state.getIn([categoryCode, 'orderedProducts']) || List();
 }
-
-export function getCategoryCode(state) {
-  return state.get('categoryCode' || List());
-}
