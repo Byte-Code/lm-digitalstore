@@ -10,7 +10,7 @@ export function filterCatalogue(idsByAids, idsByFilters, idsByAvailability) {
   if (idsByAids) {
     toIntersect = toIntersect.push(idsByAids);
   }
-  if (idsByFilters) {
+  if (idsByFilters && idsByFilters.size > 1) {
     toIntersect = toIntersect.push(idsByFilters);
   }
   return Set.intersect(toIntersect.toJS());
