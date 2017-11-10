@@ -13,6 +13,7 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection, s
   if (productInfo.isEmpty()) {
     return null;
   }
+
   const imageID = productInfo.getIn(['basicInfo', 'data', 'mainImage']);
   const imageOptions = { width: 405, height: 405 };
   const name = productInfo.getIn(['basicInfo', 'data', 'name']);

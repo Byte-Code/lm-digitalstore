@@ -2,13 +2,31 @@
 
 exports[`AvailabilityButton should display a dialog when the button is clicked 1`] = `
 <div>
-  <glamorous(div)
-    background="#67cb33"
-    notCollapse={true}
+  <FlatButton
+    backgroundColor="#67cb33"
+    disabled={false}
+    fullWidth={false}
+    label="verifica disponibilità in negozi vicini"
+    labelPosition="after"
+    labelStyle={
+      Object {
+        "color": "#fff",
+        "fontSize": "16px",
+      }
+    }
     onClick={[Function]}
-  >
-    verifica disponibilità in negozi vicini
-  </glamorous(div)>
+    onKeyboardFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}
+    primary={false}
+    secondary={false}
+    style={
+      Object {
+        "height": "70px",
+      }
+    }
+  />
   <Dialog
     autoDetectWindowHeight={true}
     autoScrollBodyContent={false}
@@ -45,13 +63,31 @@ exports[`AvailabilityButton should display a dialog when the button is clicked 1
 
 exports[`AvailabilityButton should render properly with a closed dialog 1`] = `
 <div>
-  <glamorous(div)
-    background="#67cb33"
-    notCollapse={true}
+  <FlatButton
+    backgroundColor="#67cb33"
+    disabled={false}
+    fullWidth={false}
+    label="verifica disponibilità in negozi vicini"
+    labelPosition="after"
+    labelStyle={
+      Object {
+        "color": "#fff",
+        "fontSize": "16px",
+      }
+    }
     onClick={[Function]}
-  >
-    verifica disponibilità in negozi vicini
-  </glamorous(div)>
+    onKeyboardFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}
+    primary={false}
+    secondary={false}
+    style={
+      Object {
+        "height": "70px",
+      }
+    }
+  />
   <Dialog
     autoDetectWindowHeight={true}
     autoScrollBodyContent={false}

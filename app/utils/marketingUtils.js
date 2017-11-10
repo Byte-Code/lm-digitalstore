@@ -4,7 +4,6 @@ export const marketingLabel = {
   prezzoGiu: 'PREZZO_GIU',
   novita: 'NOVITA',
   blackFriday: 'BLACK_FRIDAY',
-  promoWeb: 'PROMO_WEB',
   destock: 'DESTOCK',
   prezzoVincente: 'PREZZO_VINCENTE',
   prezzoStock: 'PREZZO_STOCK',

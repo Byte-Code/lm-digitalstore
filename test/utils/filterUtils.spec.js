@@ -118,32 +118,38 @@ describe('filterProducts', () => {
 });
 
 describe('filterByAvailability', () => {
-  it('should return a set containing only the available productsID when productsList is defined and availability is active', () => {
+  it('should return a set containing only the available productsID in catalogueStock and availability is active', () => {
     const productList = fromJS([
-      { code: '0', storeStock: 2 },
-      { code: '1', storeStock: 0 },
-      { code: '2', storeStock: 0 },
-      { code: '3', storeStock: 4 }
+      { code: '0' },
+      { code: '1' },
+      { code: '2' },
+      { code: '3' }
     ]);
+    const catalogueStock = fromJS({ 0: 2, 1: 3, 2: 0, 3: 0 });
     const activeAvailability = true;
-    const result = Set(['0', '3']);
-    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability)).toEqual(
-      result
-    );
+    const result = Set(['0', '1']);
+    expect(filterUtils.filterProductsByAvailability(
+      productList,
+      activeAvailability,
+      catalogueStock)
+    ).toEqual(result);
   });
 
   it('should return a set with all the productsID when productsList is defined and availability is false', () => {
     const productList = fromJS([
-      { code: '0', storeStock: 2 },
-      { code: '1', storeStock: 0 },
-      { code: '2', storeStock: 0 },
-      { code: '3', storeStock: 4 }
+      { code: '0' },
+      { code: '1' },
+      { code: '2' },
+      { code: '3' }
     ]);
+    const catalogueStock = fromJS({ 0: 2, 1: 3, 2: 0, 3: 0 });
     const activeAvailability = false;
     const result = Set(['0', '1', '2', '3']);
-    expect(filterUtils.filterProductsByAvailability(productList, activeAvailability)).toEqual(
-      result
-    );
+    expect(filterUtils.filterProductsByAvailability(
+      productList,
+      activeAvailability,
+      catalogueStock
+    )).toEqual(result);
   });
 
   it('should return an empty Set when productList is undefined', () => {

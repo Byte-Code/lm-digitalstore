@@ -1,8 +1,9 @@
 import React from 'react';
 import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
+import { FlatButton } from 'material-ui';
 
-import AvailabilityButton, { Button } from '../../app/components/AvailabilityButton';
+import AvailabilityButton from '../../app/components/AvailabilityButton';
 
 describe('AvailabilityButton', () => {
   const productName = 'abc';
@@ -30,7 +31,7 @@ describe('AvailabilityButton', () => {
         allStoreStock={allStoreStock}
       />
     );
-    result.find(Button).simulate('click');
+    result.find(FlatButton).simulate('click');
     expect(result.state('dialogOpen')).toBe(true);
     expect(result).toMatchSnapshot();
   });

@@ -79,12 +79,6 @@ describe('buildPromotionMap', () => {
     checkPromotionMapExpect({ promotions, topRight });
   });
 
-  it('should output PROMO_WEB topLeft: null - topRight: PROMO_WEB without promotionalCode', () => {
-    const promotions = buildPromotionAttrs([marketingLabel.promoWeb]);
-    const topRight = { code: marketingLabel.promoWeb };
-    checkPromotionMapExpect({ promotions, topRight });
-  });
-
   it('should output topLeft: null - topRight: null with promotionalCode', () => {
     const promotions = buildPromotionAttrs([marketingLabel.promoWeb]);
     const promotionCode = '2';
@@ -146,35 +140,6 @@ describe('buildPromotionMap', () => {
     const topLeft = { code: marketingLabel.prezzoGiu };
     checkPromotionMapExpect({ promotions, topRight, topLeft });
   });
-
-  it('should output topLeft: NOVITA - topRight: PROMO_WEB ' +
-    'with all promotions except BLACK_FRIDAY && PREZZO_GIU && PREZZO_STOCK', () => {
-    const promotions = buildPromotionAttrs([
-      marketingLabel.ideaPiu,
-      marketingLabel.novita,
-      marketingLabel.promoWeb,
-      marketingLabel.destock,
-      marketingLabel.prezzoVincente
-    ]);
-    const topRight = { code: marketingLabel.promoWeb };
-    const topLeft = { code: marketingLabel.novita };
-    checkPromotionMapExpect({ promotions, topRight, topLeft });
-  });
-
-  it('should output topLeft: null - topRight: PROMO_WEB ' +
-    'with all promotions except BLACK_FRIDAY && PREZZO_GIU', () => {
-    const promotions = buildPromotionAttrs([
-      marketingLabel.ideaPiu,
-      marketingLabel.novita,
-      marketingLabel.promoWeb,
-      marketingLabel.destock,
-      marketingLabel.prezzoVincente,
-      marketingLabel.prezzoStock
-    ]);
-    const topRight = { code: marketingLabel.promoWeb };
-    const topLeft = { code: null };
-    checkPromotionMapExpect({ promotions, topRight, topLeft });
-  });
 });
 
 const buildPromotionAttrs = promotions => {
@@ -190,7 +155,6 @@ const checkPromotionMapExpect = ({
   promotionCode = '0',
   topLeft = { code: null },
   topRight = { code: null }
-  }) => expect(buildPromotionMap({ promotions, promotionCode })).toEqual(
-  fromJS({ topLeft, topRight }
-  )
+  }) => expect(buildPromotionMap({ promotions, promotionCode }))
+  .toEqual(fromJS({ topLeft, topRight })
 );
