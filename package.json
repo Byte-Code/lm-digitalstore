@@ -210,6 +210,7 @@
     "moment": "^2.18.0",
     "precommit-hook": "^3.0.0",
     "qrcode.react": "^0.7.0",
+    "quagga": "^0.12.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-hot-loader": "3.0.0-beta.6",

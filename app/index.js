@@ -17,6 +17,7 @@ import routes from './routes';
 import rootSaga from './sagas/sagas';
 import './app.global.css';
 
+
 if (process.env.NODE_ENV === 'development') {
   immutableDevtools(Immutable);
 }
