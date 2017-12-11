@@ -66,7 +66,7 @@ class NearbyStores extends React.Component {
 }
 
 const renderStores = (nearbyStores, selectedStore, handleClick, updateNearByList) => {
-  const stores = !updateNearByList
+  const stores = updateNearByList
     ? setSelectedStoreToTop({ nearbyStores, selectedStore })
     : nearbyStores;
 
