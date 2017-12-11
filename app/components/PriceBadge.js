@@ -42,6 +42,10 @@ const Wrapper = glamorous.div({
   marginTop: '15px'
 });
 
+const Untill = glamorous.div({
+  marginBottom: '3%'
+});
+
 export default class PriceBadge extends Component {
   static propTypes = {
     pricingInfo: ImmutablePropTypes.map,
@@ -73,9 +77,11 @@ export default class PriceBadge extends Component {
         {isDiscounted &&
           <Discount>
             <span>-{Math.round(discount)} %</span>
-            {until && <span>{until}</span>}
             <span>{formatPrice(listPrice)}€</span>
           </Discount>}
+        <Untill>
+          {until && <span>{until}</span>}
+        </Untill>
         <MainPrice isDiscounted={isDiscounted}>
           {formatPrice(grossPrice)} €
         </MainPrice>
