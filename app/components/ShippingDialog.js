@@ -33,4 +33,4 @@ ShippingDialog.propTypes = {
 };
 
 const contentStyle = { width: 1000, height: 1420 };
-const bodyStyle = { padding: '75px 0 0', background: '#333333' };
+const bodyStyle = { padding: '75px 0 0', background: '#333333', overflowY: '0' };
