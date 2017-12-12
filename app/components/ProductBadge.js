@@ -98,7 +98,7 @@ const Wrapper = glamorous.div(({ animated, animatedDirection }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '0 33px'
+
   },
   '&>img': {
     height: 405,
@@ -119,23 +119,20 @@ const Name = glamorous.div({
 const PriceWrapper = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: 'auto',
-  marginBottom: 42,
   width: '100%',
   justifyContent: 'center',
-  '&>p': {
-    marginBottom: 10
-  },
+  marginTop: '5%',
   '&>div:nth-child(3)': {
     marginLeft: 20
   }
 });
 
-const Price = glamorous.div(({ discounted, isBarred }) => ({
+const Price = glamorous.p(({ discounted, isBarred }) => ({
   fontSize: 20,
   lineHeight: '24px',
   color: discounted ? '#cc0000' : '#000',
-  textDecoration: isBarred ? 'line-through' : 'none'
+  textDecoration: isBarred ? 'line-through' : 'none',
+  marginLeft: '3%'
 }));
 
 export const Discount = glamorous.p({
