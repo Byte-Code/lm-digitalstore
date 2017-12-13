@@ -19,7 +19,7 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection, s
   const name = productInfo.getIn(['basicInfo', 'data', 'name']);
   const grossPrice = productInfo.getIn(['price', 'data', 'selling', 'gross']);
   const listPrice = productInfo.getIn(['price', 'data', 'selling', 'list']);
-  const isDiscounted = listPrice && true && listPrice - grossPrice > 1;
+  const isDiscounted = listPrice && listPrice - grossPrice > 1;
   const discount = productInfo.getIn(['price', 'data', 'selling', 'discount']);
 
   const MarketingFlagStyle = {
