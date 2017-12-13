@@ -11,17 +11,28 @@ export default class ShippingCostCalculator extends Component {
   constructor(props) {
     super(props);
     this.spinValue = 0;
+    this.spinBoxName = 'SpinBoxNumber';
     this.onCalculateClick = this.onCalculateClick.bind(this);
     this.fetchShippingCost = this.fetchShippingCost.bind(this);
     this.renderCalculateShippingCost = this.renderCalculateShippingCost.bind(this);
     this.resetShippingCost = this.resetShippingCost.bind(this);
+    this.preventCopyPaste = this.preventCopyPaste.bind(this);
     this.state = { shippingCost: [] };
   }
 
+  componentDidMount() {
+    this.preventCopyPaste();
+  }
+
+
   onCalculateClick() {
-    const value = parseInt(document.getElementById('SpinBoxNumber').value);
+    const value = parseInt(document.getElementById(this.spinBoxName).value);
     this.spinValue = value;
     this.fetchShippingCost({ code: this.props.code, quantity: value });
+  }
+
+  preventCopyPaste() {
+    document.getElementById(this.spinBoxName).onpaste = (e) => e.preventDefault();
   }
 
   fetchShippingCost({ code, quantity }) {
