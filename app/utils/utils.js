@@ -60,7 +60,7 @@ export function getCategoryName(catCode = null) {
 export function getProductAvailability(productInfo, stock) {
   const labels = {
     4: 'Disponibile in Negozio',
-    0: 'Out-of-Stock',
+    0: 'Prodotto non disponibile',
     1: 'In riassortimento',
     2: 'Disponibile su ordinazione'
 
