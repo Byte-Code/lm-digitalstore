@@ -36,7 +36,7 @@ const mapKmZoom = {
 };
 
 const enhance = compose(
-  withState('radius', 'setRadius', 25),
+  withState('radius', 'setRadius', 22),
   withState('zoom', 'setZoom', 11),
   withState('selectedStore', 'setSelectedStore', ''),
   withState('infoWindowOpen', 'setInfoWindow', false),
