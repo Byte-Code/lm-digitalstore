@@ -71,7 +71,14 @@ export function getProductAvailability(productInfo, stock) {
     label = labels['4'];
   } else {
     const vendibility = productInfo.getIn(['price', 'data', 'selling', 'vendibility']);
-    label = labels[vendibility];
+
+    if (vendibility === 2) {
+      label = labels['2'];
+    } if (vendibility === 0) {
+      label = labels['1'];
+    } else {
+      label = labels[vendibility];
+    }
   }
   return label;
 }
