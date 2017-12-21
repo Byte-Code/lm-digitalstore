@@ -80,7 +80,7 @@ export default class PriceBadge extends Component {
             <span>{formatPrice(listPrice)}€</span>
           </Discount>}
         <Untill>
-          {until && <span>{until}</span>}
+          {until && isDiscounted && <span>{until}</span>}
         </Untill>
         <MainPrice isDiscounted={isDiscounted}>
           {formatPrice(grossPrice)} €

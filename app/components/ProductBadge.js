@@ -53,7 +53,7 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection, s
         <Price isBarred={isDiscounted}>
           {formatPrice(listPrice) || formatPrice(grossPrice)} €
         </Price>
-        {listPrice && <Price discounted>{formatPrice(grossPrice)} €</Price>}
+        {isDiscounted && <Price discounted>{formatPrice(grossPrice)} €</Price>}
       </PriceWrapper>
       <Available>
         <p>{getProductAvailability(productInfo, stock)}</p>
