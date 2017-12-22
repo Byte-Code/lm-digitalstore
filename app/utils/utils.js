@@ -1,4 +1,4 @@
-import { Range } from 'immutable';
+import { Range, List } from 'immutable';
 import world from '../../mocks/world';
 
 export function titleFormatter(text) {
@@ -43,6 +43,10 @@ export function getStockLabel(stock, stockStatus) {
     default:
       return 'Prodotto non disponibile';
   }
+}
+
+export function getStockStatus(storeCode = 0, allStoreStock = List()) {
+  return allStoreStock.find(storeStock => storeStock.get('storeCode') === storeCode).get('stockStatus');
 }
 
 export function getCategoryName(catCode = null) {

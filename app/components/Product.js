@@ -5,6 +5,7 @@ import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
 import throttle from 'lodash/throttle';
 import inRange from 'lodash/inRange';
+import { getStockStatus } from '../utils/utils';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
@@ -148,7 +149,7 @@ export default class Product extends Component {
 
 
   render() {
-    const { productInfo, mainStoreStock, trackPurchaseEvent } = this.props;
+    const { productInfo, mainStoreStock, trackPurchaseEvent, storeCode } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
@@ -170,10 +171,10 @@ export default class Product extends Component {
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
     let currentStoreStock = fromJS({});
 
-    if (mainStoreStock) {
+    if (productInfo.get('allStoreStock')) {
       currentStoreStock = fromJS({
         storeStock: mainStoreStock,
-        stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
+        stockStatus: getStockStatus(storeCode, productInfo.get('allStoreStock'))
       });
     }
 
