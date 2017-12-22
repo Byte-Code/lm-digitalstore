@@ -211,17 +211,6 @@ export function getNearbyStoresCodes(state) {
       List());
 }
 
-export const hasNearbyStores = productCode => createSelector(
-  [getMainStock, getStoreCode],
-  (mainStock, storeCode) => {
-    if (mainStock) {
-      const listWithoutCurrentStore = mainStock.deleteIn([storeCode]);
-      const withStockList = listWithoutCurrentStore.filter((stock) => stock.get(productCode) > 0);
-      return withStockList.size > 0;
-    }
-  }
-);
-
 export const getNearbyStoresWithStock = createSelector(
   [getNearbyStores, getAllStoreStock],
   (nearbyStores, allStoreStock) =>

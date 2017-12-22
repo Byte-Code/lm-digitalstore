@@ -22,7 +22,6 @@ export default class ProductInfoBadge extends Component {
     productSlug: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired,
-    hasNearbyStores: PropTypes.bool.isRequired,
     /*eslint-disable */
     scrollValue: PropTypes.number
     /*eslint-disable */
@@ -140,7 +139,6 @@ export default class ProductInfoBadge extends Component {
       productSlug,
       marketingAttributes,
       loyaltyProgram,
-      hasNearbyStores,
       trackPurchaseEvent
     } = this.props;
 
@@ -183,7 +181,6 @@ export default class ProductInfoBadge extends Component {
           <AvailabilityButton
             productName={productName}
             productCode={productCode}
-            hasNearByStores={hasNearbyStores}
           />
         <Divider style={{}} />
         <PurchaseDialog productCode={productCode} productSlug={productSlug}>

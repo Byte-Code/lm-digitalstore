@@ -6,7 +6,7 @@ import { clearProductList } from '../actions/productListActions';
 import { setAnalyticsProductClick, trackPurchaseEvent,
   analyticsOpenOverlay, analyticsSwipeOverlay } from '../actions/analyticsActions';
 import { clearRealTimeStock } from '../actions/realTimeStockAction';
-import { getProduct, getSimilarProducts, hasNearbyStores, getCurrentProductStock,
+import { getProduct, getSimilarProducts, getCurrentProductStock,
   getStoreCode, getSimilarProductStock } from '../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +14,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     productInfo: getProduct(state, { productCode }),
     similarProducts: getSimilarProducts()(state, { productCode }),
-    hasNearbyStores: hasNearbyStores(productCode)(state),
     mainStoreStock: getCurrentProductStock(productCode)(state),
     storeCode: getStoreCode(state),
     similarProductStocks: getSimilarProductStock(state)

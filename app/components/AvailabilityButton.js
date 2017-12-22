@@ -12,7 +12,6 @@ export default class AvailabilityButton extends Component {
   static propTypes = {
     productName: PropTypes.string.isRequired,
     productCode: PropTypes.string.isRequired,
-    hasNearByStores: PropTypes.bool
   };
 
   static defaultProps = {
@@ -36,15 +35,14 @@ export default class AvailabilityButton extends Component {
   };
 
   render() {
-    const { productName, productCode, hasNearByStores } = this.props;
+    const { productName, productCode } = this.props;
 
     return (
       <div >
         <FlatButton
-          backgroundColor={hasNearByStores ? '#67cb33' : '#C8C8C8'}
+          backgroundColor={'#67cb33'}
           label={'verifica disponibilità in negozi vicini'}
           onClick={this.handleOpen}
-          disabled={!hasNearByStores}
           labelStyle={{ color: '#fff', fontSize: '16px' }}
           style={{ height: '70px' }}
         />
