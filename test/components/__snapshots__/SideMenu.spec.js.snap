@@ -6,17 +6,11 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
     isVisible={true}
     onClick={[Function]}
   >
-    <MapsLocalFlorist
-      color="#fff"
-      style={
-        Object {
-          "height": 50,
-          "width": 50,
-        }
-      }
+    <span
+      className="thermometer"
     />
     <p>
-      Giardino & Terrazzo
+      Comfort
     </p>
   </glamorous(div)>
   <Drawer
@@ -27,7 +21,7 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
         "display": "flex",
       }
     }
-    disableSwipeToOpen={false}
+    disableSwipeToOpen={true}
     docked={false}
     onRequestChange={[Function]}
     open={false}
@@ -53,17 +47,11 @@ exports[`SideMenu should close again once the second button is clicked 1`] = `
         left="275px"
         onClick={[Function]}
       >
-        <MapsLocalFlorist
-          color="#fff"
-          style={
-            Object {
-              "height": 50,
-              "width": 50,
-            }
-          }
+        <span
+          className="thermometer"
         />
         <p>
-          Giardino & Terrazzo
+          Comfort
         </p>
       </glamorous(div)>
     </glamorous(div)>
@@ -77,17 +65,11 @@ exports[`SideMenu should initially render closed 1`] = `
     isVisible={true}
     onClick={[Function]}
   >
-    <MapsLocalFlorist
-      color="#fff"
-      style={
-        Object {
-          "height": 50,
-          "width": 50,
-        }
-      }
+    <span
+      className="thermometer"
     />
     <p>
-      Giardino & Terrazzo
+      Comfort
     </p>
   </glamorous(div)>
   <Drawer
@@ -98,7 +80,7 @@ exports[`SideMenu should initially render closed 1`] = `
         "display": "flex",
       }
     }
-    disableSwipeToOpen={false}
+    disableSwipeToOpen={true}
     docked={false}
     onRequestChange={[Function]}
     open={false}
@@ -124,17 +106,11 @@ exports[`SideMenu should initially render closed 1`] = `
         left="275px"
         onClick={[Function]}
       >
-        <MapsLocalFlorist
-          color="#fff"
-          style={
-            Object {
-              "height": 50,
-              "width": 50,
-            }
-          }
+        <span
+          className="thermometer"
         />
         <p>
-          Giardino & Terrazzo
+          Comfort
         </p>
       </glamorous(div)>
     </glamorous(div)>
@@ -148,17 +124,11 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
     isVisible={false}
     onClick={[Function]}
   >
-    <MapsLocalFlorist
-      color="#fff"
-      style={
-        Object {
-          "height": 50,
-          "width": 50,
-        }
-      }
+    <span
+      className="thermometer"
     />
     <p>
-      Giardino & Terrazzo
+      Comfort
     </p>
   </glamorous(div)>
   <Drawer
@@ -169,7 +139,7 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
         "display": "flex",
       }
     }
-    disableSwipeToOpen={false}
+    disableSwipeToOpen={true}
     docked={false}
     onRequestChange={[Function]}
     open={true}
@@ -195,17 +165,11 @@ exports[`SideMenu should open once the first button is clicked 1`] = `
         left="275px"
         onClick={[Function]}
       >
-        <MapsLocalFlorist
-          color="#fff"
-          style={
-            Object {
-              "height": 50,
-              "width": 50,
-            }
-          }
+        <span
+          className="thermometer"
         />
         <p>
-          Giardino & Terrazzo
+          Comfort
         </p>
       </glamorous(div)>
     </glamorous(div)>

@@ -10,7 +10,7 @@ export function filterCatalogue(idsByAids, idsByFilters, idsByAvailability) {
   if (idsByAids) {
     toIntersect = toIntersect.push(idsByAids);
   }
-  if (idsByFilters) {
+  if (idsByFilters && idsByFilters.size > 1) {
     toIntersect = toIntersect.push(idsByFilters);
   }
   return Set.intersect(toIntersect.toJS());
@@ -54,11 +54,13 @@ export function filterProducts(filterGroups, activeFilters) {
 }
 
 // AVAILABILITY
-export function filterProductsByAvailability(productList, activeAvailability) {
+export function filterProductsByAvailability(productList, activeAvailability, catalogueStock) {
   if (isValidList(productList)) {
     let products = productList;
-    if (activeAvailability) {
-      products = productList.filter(p => p.get('storeStock') > 0);
+    if (activeAvailability && catalogueStock) {
+      products = productList.filter(p =>
+      catalogueStock.find((stock, code) => code === p.get('code')) > 0
+      );
     }
     return products.map(p => p.get('code')).toSet();
   }

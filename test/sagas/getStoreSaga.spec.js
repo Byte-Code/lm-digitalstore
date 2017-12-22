@@ -48,7 +48,7 @@ describe('getStoreSaga', () => {
     });
 
     it('should dispatch a REQUEST_FETCH_NEARBYSTORES with the coordinates and a set radius of 50', () => {
-      expect(gen.next().value).toEqual(put(requestFetchNearbyStores(1, 2, 50)));
+      expect(gen.next().value).toEqual(put(requestFetchNearbyStores(1, 2, 65)));
     });
 
     it('and then nothing', () => {

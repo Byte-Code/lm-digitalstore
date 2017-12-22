@@ -1,18 +1,28 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
 import * as productActions from '../actions/productActions';
-import { isValidResponse } from '../utils/utils';
+import * as realTimeStock from '../actions/realTimeStockAction';
+import { isValidProductResponse } from '../utils/utils';
+import { getNearbyStoresCodes } from '../reducers/selectors';
 
 
 export function* callFetchProduct({ productCode }) {
   try {
-    const product = yield call(apiClient.fetchProductDisplay, productCode);
-    if (isValidResponse(product)) {
-      const result = fromJS(product).get('content');
-      yield put(productActions.successFetchProduct(productCode, result));
+    const product = yield call(
+      apiClient.fetchProduct,
+      productCode,
+      { views: ['basicInfo', 'price', 'kioskStock'].join(',') });
+    if (isValidProductResponse(product)) {
+      yield put(productActions.successFetchProduct(productCode, fromJS(product)));
+      const nearByCodesList = yield select(getNearbyStoresCodes);
+      yield put(realTimeStock.requestRealTimeStock({
+        storeCodes: nearByCodesList.toJS().join(','),
+        productCodes: productCode,
+        type: 'main'
+      }));
       yield put(productActions.requestFetchRelatedProducts(productCode));
       yield put(productActions.requestFetchStoreStock(productCode));
     } else {

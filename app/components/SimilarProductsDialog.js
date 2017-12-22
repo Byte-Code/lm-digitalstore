@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
 import Dialog from 'material-ui/Dialog';
 import Slick from 'react-slick';
 import glamorous from 'glamorous';
@@ -25,18 +25,36 @@ export default class SimilarProductsDialog extends Component {
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
     selectedProduct: PropTypes.string.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired,
+    analyticsSwipeOverlay: PropTypes.func.isRequired,
+    storeCode: PropTypes.string.isRequired,
+    stocks: ImmutablePropTypes.map
   };
 
   static defaultProps = {
-    similarProducts: List()
+    similarProducts: List(),
+    stocks: Map()
   };
+
+  constructor(props) {
+    super(props);
+    this.onSwipe = this.onSwipe.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !fromJS(this.props).equals(fromJS(nextProps));
+  }
 
   // HACK this fixes a bug with slick
   componentDidUpdate() {
     window.requestAnimationFrame(() => {
       window.dispatchEvent(new Event('resize'));
     });
+  }
+
+  onSwipe(e) {
+    const code = this.props.similarProducts.get(e).get('code');
+    this.props.analyticsSwipeOverlay(code);
   }
 
   initializeSlick() {
@@ -50,24 +68,27 @@ export default class SimilarProductsDialog extends Component {
       dots: false,
       initialSlide: selectedIndex,
       infinite: false,
-      variableWidth: true
+      variableWidth: true,
+      afterChange: this.onSwipe
     };
   }
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, storeCode, stocks } = this.props;
 
-    return similarProducts.map((p, i) =>
-      <div key={p.get('code')}>
+    return similarProducts.map((p, i) => {
+      const stock = stocks.getIn([storeCode, p.get('code')]);
+      return (<div key={p.get('code')}>
         <Slide>
           <SimilarProductBadge
             productInfo={p}
             setAnalyticsProductClick={this.props.setAnalyticsProductClick}
             index={i}
+            stock={stock}
           />
         </Slide>
-      </div>
-    );
+      </div>);
+    });
   }
 
   render() {
@@ -88,7 +109,7 @@ export default class SimilarProductsDialog extends Component {
         bodyStyle={bodyStyle}
       >
         <CloseButton handleClick={handleClose} top={-250} />
-        <Slick {...settings}>
+        <Slick {...settings} id="slick">
           {this.renderProducts()}
         </Slick>
       </Dialog>

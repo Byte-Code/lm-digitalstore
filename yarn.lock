@@ -26,11 +26,12 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
-"@byte-code/lm-remote-api@0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@byte-code/lm-remote-api/-/lm-remote-api-0.0.33.tgz#2312144933da6bcdce6c33416b303cc154b480d5"
+"@byte-code/lm-remote-api@0.0.46":
+  version "0.0.46"
+  resolved "https://registry.yarnpkg.com/@byte-code/lm-remote-api/-/lm-remote-api-0.0.46.tgz#2f4d5944fa42594b49f23f69c2d470b999de7d13"
   dependencies:
     axios "0.15.3"
+    querystring "^0.2.0"
 
 "@types/node@^7.0.18":
   version "7.0.39"
@@ -4113,6 +4114,10 @@ ieee754@^1.1.4:
 ignore@^3.2.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.3.tgz#432352e57accd87ab3110e82d3fea0e47812156d"
+
+immutable-devtools@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/immutable-devtools/-/immutable-devtools-0.0.7.tgz#da0fbdd860c3a8a598967fc544bb0329ec3ad26e"
 
 immutable@4.0.0-rc.2:
   version "4.0.0-rc.2"

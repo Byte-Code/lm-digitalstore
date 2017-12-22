@@ -4,19 +4,21 @@ import round from 'lodash/round';
 
 import AvailabilityMap from '../components/AvailabilityMap';
 import {
-  getNearbyStoresWithStock,
   getStore,
-  getNearbyStoresWithProductInStock,
-  getSelectedNearbyStoreInfo
+  getNearByWithStock,
+  getSelectedNearbyStoreInfo,
+  getNearbyStores,
+  getMainStock
 } from '../reducers/selectors';
 import { requestFetchNearbyStores } from '../actions/storeActions';
 import { trackStoreAvailabilityEvent } from '../actions/analyticsActions';
 
 const mapStateToProps = (state, ownProps) => ({
-  allNearbyStores: getNearbyStoresWithStock(state, ownProps),
-  nearbyStoresWithProductInStock: getNearbyStoresWithProductInStock(state, ownProps),
+  allNearbyStores: getNearbyStores(state, ownProps),
+  nearbyStoresWithProductInStock: getNearByWithStock(ownProps)(state, ownProps),
   selectedStoreInfo: getSelectedNearbyStoreInfo(ownProps.selectedStore)(state, ownProps),
-  homeStore: getStore(state)
+  homeStore: getStore(state),
+  stocks: getMainStock(state)
 });
 
 const MapDispatchToProps = {
@@ -34,7 +36,7 @@ const mapKmZoom = {
 };
 
 const enhance = compose(
-  withState('radius', 'setRadius', 25),
+  withState('radius', 'setRadius', 22),
   withState('zoom', 'setZoom', 11),
   withState('selectedStore', 'setSelectedStore', ''),
   withState('infoWindowOpen', 'setInfoWindow', false),

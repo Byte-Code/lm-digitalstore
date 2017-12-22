@@ -1,4 +1,5 @@
-import { Range } from 'immutable';
+import { Range, List } from 'immutable';
+import world from '../../mocks/world';
 
 export function titleFormatter(text) {
   return text.charAt(0) + text.slice(1).toLowerCase();
@@ -20,6 +21,10 @@ export function isValidResponse(response) {
   return response.status === 'OK';
 }
 
+export function isValidProductResponse(response) {
+  return response.basicInfo.status === 'FOUND' && response.price.status === 'FOUND';
+}
+
 // TODO test these functions
 export function getStockLabel(stock, stockStatus) {
   if (stock > 0) {
@@ -38,4 +43,46 @@ export function getStockLabel(stock, stockStatus) {
     default:
       return 'Prodotto non disponibile';
   }
+}
+
+export function getStockStatus(storeCode = 0, allStoreStock = List()) {
+  return allStoreStock.find(storeStock => storeStock.get('storeCode') === storeCode).get('stockStatus');
+}
+
+export function getCategoryName(catCode = null) {
+  let description = 'No Title';
+  if (catCode) {
+    world.families.forEach((family) => {
+      if (family.categoryCode === catCode) {
+        description = family.familyName;
+      }
+    });
+  }
+  return description;
+}
+
+export function getProductAvailability(productInfo, stock) {
+  const labels = {
+    4: 'Disponibile in Negozio',
+    0: 'Prodotto non disponibile',
+    1: 'In riassortimento',
+    2: 'Disponibile su ordinazione'
+
+  };
+  let label = '';
+
+  if (stock > 0) {
+    label = labels['4'];
+  } else {
+    const vendibility = productInfo.getIn(['price', 'data', 'selling', 'vendibility']);
+
+    if (vendibility === 2) {
+      label = labels['2'];
+    } if (vendibility === 0) {
+      label = labels['1'];
+    } else {
+      label = labels[vendibility];
+    }
+  }
+  return label;
 }

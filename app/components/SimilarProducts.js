@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import glamorous from 'glamorous';
 
 import ProductBadge from './ProductBadge';
@@ -32,12 +32,17 @@ const Slider = glamorous.div({
 export default class SimilarProducts extends Component {
   static propTypes = {
     similarProducts: ImmutablePropTypes.list,
+    stocks: ImmutablePropTypes.map,
     title: PropTypes.string.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired
+    setAnalyticsProductClick: PropTypes.func.isRequired,
+    analyticsOpenOverlay: PropTypes.func.isRequired,
+    analyticsSwipeOverlay: PropTypes.func.isRequired,
+    storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
-    similarProducts: List()
+    similarProducts: List(),
+    stocks: Map()
   };
 
   constructor(props) {
@@ -48,7 +53,8 @@ export default class SimilarProducts extends Component {
     };
   }
 
-  handleOpen = product => {
+  handleOpen = (product) => {
+    this.props.analyticsOpenOverlay(product);
     this.setState({
       selectedProduct: product,
       dialogOpen: true
@@ -60,19 +66,20 @@ export default class SimilarProducts extends Component {
   };
 
   renderProducts() {
-    const { similarProducts } = this.props;
+    const { similarProducts, stocks, storeCode } = this.props;
 
     return similarProducts.map(p => (
       <ProductBadge
         key={p.get('code')}
         productInfo={p}
         handleClick={() => this.handleOpen(p.get('code'))}
+        stock={stocks.getIn([storeCode, p.get('code')])}
       />
     ));
   }
 
   render() {
-    const { similarProducts, title } = this.props;
+    const { similarProducts, title, storeCode, stocks, analyticsSwipeOverlay } = this.props;
     if (similarProducts.isEmpty()) {
       return null;
     }
@@ -92,6 +99,9 @@ export default class SimilarProducts extends Component {
           isOpen={dialogOpen}
           selectedProduct={selectedProduct}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+          storeCode={storeCode}
+          stocks={stocks}
+          analyticsSwipeOverlay={analyticsSwipeOverlay}
         />
       </Wrapper>
     );

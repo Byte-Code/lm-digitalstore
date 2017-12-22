@@ -98,9 +98,20 @@ describe('filtersReducer', () => {
     expect(reducer(initialState, actions.toggleAvailability())).toEqual(expectedResult);
   });
 
-  it('should return initialState in case of INIT_FILTERS', () => {
-    const state = fromJS({ content: 'any' });
-    expect(reducer(state, actions.initFilters())).toEqual(initialState);
+  it('should reset the filters except from categoryCode in case of INIT_FILTERS', () => {
+    const state = fromJS({
+      availability: true,
+      filters: ['filter0'],
+      aid: 'aid0',
+      categoryCode: 'cat123'
+    });
+    const expectedResult = fromJS({
+      availability: false,
+      filters: [],
+      aid: '',
+      categoryCode: 'cat123'
+    });
+    expect(resetFilters(state)).toEqual(expectedResult);
   });
 
   it('should set state.temp to state.active in case of INIT_TEMP_FILTERS', () => {

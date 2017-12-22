@@ -170,6 +170,7 @@
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.26.0",
     "identity-obj-proxy": "^3.0.0",
+    "immutable-devtools": "^0.0.7",
     "jest": "^19.0.2",
     "jsdom": "^9.9.1",
     "json-loader": "^0.5.4",
@@ -192,7 +193,7 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
-    "@byte-code/lm-remote-api": "0.0.33",
+    "@byte-code/lm-remote-api": "0.0.46",
     "cloudinary-core": "^2.2.1",
     "electron-debug": "^1.1.0",
     "electron-log": "^2.0.2",

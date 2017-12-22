@@ -1,10 +1,12 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { fromJS, List } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
 import { callFetchRelatedProducts } from '../../app/sagas/getRelatedProductsSaga';
 import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
+import { getStoreCode } from '../../app/reducers/selectors';
+import * as realTimeStock from '../../app/actions/realTimeStockAction';
 
 jest.mock('../../app/CommandLineOptions', () => ({
   isDebugMode: jest.fn()
@@ -39,6 +41,27 @@ describe('getRelatedProductsSaga', () => {
       const transformedResult = fromJS(validResponse).getIn(['content', 0, 'RelatedProducts']);
       expect(gen.next(validResponse).value).toEqual(
         put(productActions.successFetchRelatedProducts(input.productCode, transformedResult))
+      );
+    });
+
+    it('should select the sore code', () => {
+      expect(gen.next().value).toEqual(select(getStoreCode));
+    });
+
+    it('should put REQUEST_REAL_TIME_STOCK', () => {
+      const storeCode = '7';
+      const productIDList = fromJS(validResponse)
+        .getIn(['content', 0, 'RelatedProducts'])
+        .reduce((acc, val) => acc.push(val.get('products')), List())
+        .flatten()
+        .toSet()
+        .toList();
+      expect(gen.next(storeCode).value).toEqual(
+        put(realTimeStock.requestRealTimeStock({
+          storeCodes: storeCode,
+          productCodes: productIDList.toJS().join(','),
+          type: 'related'
+        }))
       );
     });
 

@@ -30,9 +30,11 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
     top={-250}
   />
   <Slider
+    afterChange={[Function]}
     arrows={false}
     centerMode={true}
     dots={false}
+    id="slick"
     infinite={false}
     initialSlide={0}
     variableWidth={true}
@@ -46,6 +48,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
               "code": "product0",
             }
           }
+          stock={0}
         />
       </glamorous(div)>
     </div>
@@ -58,6 +61,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
               "code": "product1",
             }
           }
+          stock={0}
         />
       </glamorous(div)>
     </div>
@@ -70,6 +74,7 @@ exports[`SimilarProductsDialog should otherwise render a list of similarProducts
               "code": "product2",
             }
           }
+          stock={0}
         />
       </glamorous(div)>
     </div>

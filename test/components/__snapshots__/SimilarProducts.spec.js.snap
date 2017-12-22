@@ -9,28 +9,37 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
   </glamorous(div)>
   <glamorous(div)>
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product0",
         }
       }
+      stock={0}
     />
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product1",
         }
       }
+      stock={0}
     />
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product2",
         }
       }
+      stock={0}
     />
   </glamorous(div)>
   <SimilarProductsDialog
@@ -50,6 +59,7 @@ exports[`SimilarProducts should have an inital state with dialog closed 1`] = `
         },
       ]
     }
+    stocks={Object {}}
   />
 </glamorous(div)>
 `;
@@ -63,28 +73,37 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
   </glamorous(div)>
   <glamorous(div)>
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product0",
         }
       }
+      stock={0}
     />
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product1",
         }
       }
+      stock={0}
     />
     <ProductBadge
+      animated={false}
+      animatedDirection="left"
       handleClick={[Function]}
       productInfo={
         Object {
           "code": "product2",
         }
       }
+      stock={0}
     />
   </glamorous(div)>
   <SimilarProductsDialog
@@ -104,6 +123,7 @@ exports[`SimilarProducts should otherwise render a list of similarProducts 1`] =
         },
       ]
     }
+    stocks={Object {}}
   />
 </glamorous(div)>
 `;

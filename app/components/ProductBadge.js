@@ -5,22 +5,22 @@ import { Map } from 'immutable';
 import glamorous from 'glamorous';
 
 import Image from './Image';
-import { formatPrice } from '../utils/utils';
+import { formatPrice, getProductAvailability } from '../utils/utils';
 import MarketingFlag from '../components/MarketingFlag';
 import { getMarketingProps } from '../utils/marketingUtils';
 
-const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection }) => {
+const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection, stock }) => {
   if (productInfo.isEmpty()) {
     return null;
   }
-  const imageID = productInfo.get('mainImage');
+
+  const imageID = productInfo.getIn(['basicInfo', 'data', 'mainImage']);
   const imageOptions = { width: 405, height: 405 };
-  const name = productInfo.get('name');
-  const grossPrice = productInfo.getIn(['price', 'selling', 'gross']);
-  const listPrice = productInfo.getIn(['price', 'selling', 'list']);
-  const isDiscounted = listPrice && true && listPrice - grossPrice > 1;
-  const discount = productInfo.getIn(['price', 'selling', 'discount']);
-  const isInStock = productInfo.get('storeStock') > 0;
+  const name = productInfo.getIn(['basicInfo', 'data', 'name']);
+  const grossPrice = productInfo.getIn(['price', 'data', 'selling', 'gross']);
+  const listPrice = productInfo.getIn(['price', 'data', 'selling', 'list']);
+  const isDiscounted = listPrice && listPrice - grossPrice > 1;
+  const discount = productInfo.getIn(['price', 'data', 'selling', 'discount']);
 
   const MarketingFlagStyle = {
     wrapperStyle: {
@@ -53,12 +53,11 @@ const ProductBadge = ({ productInfo, handleClick, animated, animatedDirection })
         <Price isBarred={isDiscounted}>
           {formatPrice(listPrice) || formatPrice(grossPrice)} €
         </Price>
-        {listPrice && <Price discounted>{formatPrice(grossPrice)} €</Price>}
+        {isDiscounted && <Price discounted>{formatPrice(grossPrice)} €</Price>}
       </PriceWrapper>
-      {isInStock &&
-        <Available>
-          <p>Disponibile in Negozio</p>
-        </Available>}
+      <Available>
+        <p>{getProductAvailability(productInfo, stock)}</p>
+      </Available>
     </Wrapper>
   );
 };
@@ -67,14 +66,16 @@ ProductBadge.propTypes = {
   productInfo: ImmutablePropTypes.map,
   handleClick: PropTypes.func,
   animated: PropTypes.bool,
-  animatedDirection: PropTypes.string
+  animatedDirection: PropTypes.string,
+  stock: PropTypes.number
 };
 
 ProductBadge.defaultProps = {
   productInfo: Map(),
   handleClick: () => null,
   animated: false,
-  animatedDirection: 'left'
+  animatedDirection: 'left',
+  stock: 0
 };
 
 export default ProductBadge;
@@ -82,8 +83,8 @@ export default ProductBadge;
 /* eslint-disable */
 const Wrapper = glamorous.div(({ animated, animatedDirection }) => ({
   animation: animatedDirection === 'left'
-    ? animated ?  'mymove 1s' : 'mymove1 1s'
-    : animated ?  'mymoveRight 1s' : 'mymoveRight1 1s',
+    ? animated ?  'mymove 0.5s' : 'mymove1 0.5s'
+    : animated ?  'mymoveRight 0.8s' : 'mymoveRight1 0.8s',
   height: 593,
   width: 405,
   display: 'flex',
@@ -97,7 +98,7 @@ const Wrapper = glamorous.div(({ animated, animatedDirection }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '0 33px'
+
   },
   '&>img': {
     height: 405,
@@ -118,23 +119,20 @@ const Name = glamorous.div({
 const PriceWrapper = glamorous.div({
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: 'auto',
-  marginBottom: 20,
   width: '100%',
   justifyContent: 'center',
-  '&>p': {
-    marginBottom: 10
-  },
+  marginTop: '5%',
   '&>div:nth-child(3)': {
     marginLeft: 20
   }
 });
 
-const Price = glamorous.div(({ discounted, isBarred }) => ({
+const Price = glamorous.p(({ discounted, isBarred }) => ({
   fontSize: 20,
   lineHeight: '24px',
   color: discounted ? '#cc0000' : '#000',
-  textDecoration: isBarred ? 'line-through' : 'none'
+  textDecoration: isBarred ? 'line-through' : 'none',
+  marginLeft: '3%'
 }));
 
 export const Discount = glamorous.p({

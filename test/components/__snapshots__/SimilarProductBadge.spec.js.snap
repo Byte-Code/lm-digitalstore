@@ -2,17 +2,13 @@
 
 exports[`SimilarProductBadge should render properly 1`] = `
 <glamorous(div)>
-  <glamorous(h1)>
-    name
-  </glamorous(h1)>
+  <glamorous(h1) />
   <glamorous(h3)>
     REF. 
-    code
   </glamorous(h3)>
   <Image
     alt="alt"
     fixBrightColor={true}
-    imageID="mainImage"
     imageOptions={
       Object {
         "crop": "fit",
@@ -26,28 +22,21 @@ exports[`SimilarProductBadge should render properly 1`] = `
     <glamorous(p) />
     <glamorous(div)>
       <MarketingFlag
-        loyaltyProgram={Object {}}
-        marketingAttributes={Object {}}
         promotionCode="0"
         topLeftStyle={Object {}}
         topRightStyle={Object {}}
         wrapperStyle={Object {}}
       />
       <PriceBadge
-        price={
-          Object {
-            "gross": 15,
-            "list": 15,
-          }
-        }
+        price={Object {}}
         pricingInfo={Object {}}
       />
       <glamorous(div) />
       <Connect(StoreStockBadge)
         currentStoreStock={
           Object {
-            "stockStatus": "none",
-            "storeStock": 10,
+            "stockStatus": undefined,
+            "storeStock": 0,
           }
         }
       />
@@ -57,7 +46,7 @@ exports[`SimilarProductBadge should render properly 1`] = `
     onClick={[Function]}
     onlyActiveOnIndex={false}
     style={Object {}}
-    to="/product/code"
+    to="/product/undefined"
   >
     <glamorous(div)>
       Dettagli Prodotto

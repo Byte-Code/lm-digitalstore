@@ -174,21 +174,7 @@ exports[`MarketingBadge should render PROMO_WEB 1`] = `
       "code": "PROMO_WEB",
     }
   }
->
-  <Component
-    src="test-file-stub"
-  >
-    <glamorous(img)
-      src="test-file-stub"
-      width="100px"
-    >
-      <img
-        className="css-1bfg59v"
-        src="test-file-stub"
-      />
-    </glamorous(img)>
-  </Component>
-</MarketingBadge>
+/>
 `;
 
 exports[`MarketingBadge should render null if no promotion is provided 1`] = `
