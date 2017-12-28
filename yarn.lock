@@ -26,9 +26,9 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
-"@byte-code/lm-remote-api@0.0.46":
-  version "0.0.46"
-  resolved "https://registry.yarnpkg.com/@byte-code/lm-remote-api/-/lm-remote-api-0.0.46.tgz#2f4d5944fa42594b49f23f69c2d470b999de7d13"
+"@byte-code/lm-remote-api@0.0.47":
+  version "0.0.47"
+  resolved "https://registry.yarnpkg.com/@byte-code/lm-remote-api/-/lm-remote-api-0.0.47.tgz#6351628d2fa7fb00bf3fb13bbe71ea6b9258ac05"
   dependencies:
     axios "0.15.3"
     querystring "^0.2.0"
