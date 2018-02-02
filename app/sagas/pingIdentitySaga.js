@@ -3,6 +3,7 @@ import { START_ANALYTICS_SESSION, SUCCESS_FETCH_STORE } from '../actions/actionT
 import { isDebugMode, isStageMode } from '../CommandLineOptions';
 import { getStore } from '../reducers/selectors';
 import getIpAddresses from '../utils/get-ip-addresses';
+import getHostName from '../utils/get-hostname'
 import appPackage from '../package.json';
 import PingIdentityService from '../pingIdentity/PingIdentityService';
 
@@ -29,6 +30,7 @@ const getEnv = () => {
 };
 
 function* initializePingIdentity() {
+  PingIdentityService.hostName = yield call(getHostName);
   PingIdentityService.ipAddress = yield call(getIpAddresses);
   PingIdentityService.store = yield select(getStore);
   PingIdentityService.processEnvType = yield call(getEnv);
