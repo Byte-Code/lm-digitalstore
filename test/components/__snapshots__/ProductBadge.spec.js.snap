@@ -48,18 +48,18 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
       5
        %
     </glamorous(p)>
-    <glamorous(div)
+    <glamorous(p)
       isBarred={true}
     >
       15,00
        €
-    </glamorous(div)>
-    <glamorous(div)
+    </glamorous(p)>
+    <glamorous(p)
       discounted={true}
     >
       10,00
        €
-    </glamorous(div)>
+    </glamorous(p)>
   </glamorous(div)>
   <glamorous(div)>
     <p />
@@ -110,9 +110,9 @@ exports[`ProductBadge should not display the discount if product is not discount
   />
   <glamorous(div) />
   <glamorous(div)>
-    <glamorous(div)>
+    <glamorous(p)>
        €
-    </glamorous(div)>
+    </glamorous(p)>
   </glamorous(div)>
   <glamorous(div)>
     <p />

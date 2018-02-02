@@ -13,6 +13,7 @@ import ProductBadge from './ProductBadge';
 import FilterBar from './FilterBar';
 
 export default class Catalogue extends Component {
+
   static propTypes = {
     categoryCode: PropTypes.string.isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
@@ -171,8 +172,8 @@ export default class Catalogue extends Component {
 
   filtersHaveChanged(nextProps) {
     return !(nextProps.filterMap.get('filters').equals(this.props.filterMap.get('filters')))
-    || !(nextProps.filterMap.get('availability') === this.props.filterMap.get('availability'))
-    || !(nextProps.filterMap.get('aid') === this.props.filterMap.get('aid'));
+      || !(nextProps.filterMap.get('availability') === this.props.filterMap.get('availability'))
+      || !(nextProps.filterMap.get('aid') === this.props.filterMap.get('aid'));
   }
 
   checkAnalyticsConditionAndTrack({ nextProps, nextState }) {
