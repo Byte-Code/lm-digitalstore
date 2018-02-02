@@ -6,6 +6,14 @@ import mountWithStore from '../../app/utils/testingUtils';
 import Home from '../../app/components/Home';
 import World from '../../mocks/world';
 
+// eslint-disable-next-line arrow-body-style
+jest.mock('../../app/components/DynamicTemplates', () => {
+  return {
+    Comfort: () => <div>1</div>
+  };
+});
+
+
 describe('Home', () => {
   const requestFetchWorld = jest.fn();
 

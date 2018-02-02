@@ -1,6 +1,6 @@
 import configDev from '../config.dev';
 import configStage from '../config.stage';
-import { isDebugMode, isStageMode } from '../app/CommandLineOptions';
+import { isDebugMode, isStageMode, isStageCatalog } from '../app/CommandLineOptions';
 
 // eslint-disable-next-line
 export const getApiConfig = () => {
@@ -12,6 +12,10 @@ export const getApiConfig = () => {
 
   if (isStageMode) {
     apiConfig = configStage;
+  }
+
+  if (isStageCatalog) {
+    apiConfig.apiConfig.spaceId = 'web-stg';
   }
 
   return apiConfig;

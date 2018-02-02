@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`InfoWindow should render properly 1`] = `
-<glamorous(div)>
+<glamorous(div)
+  id="pin"
+  top={-230}
+>
   <NavigationClose
     fill="#333333"
     onTouchTap={[Function]}
@@ -38,6 +41,10 @@ exports[`InfoWindow should render properly 1`] = `
   >
     Prodotto non disponibile
   </glamorous(div)>
-  <glamorous(div) />
+  <glamorous(div)
+    arrowTop="initial"
+    borderBottom="0px"
+    borderTop="14px solid #fff"
+  />
 </glamorous(div)>
 `;

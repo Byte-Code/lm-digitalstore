@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { fromJS, Map } from 'immutable';
 
-import ProductBadge, { Discount, Available } from '../../app/components/ProductBadge';
+import ProductBadge, { Discount } from '../../app/components/ProductBadge';
 
 const productInfo = fromJS({
   name: 'name',
@@ -34,14 +34,15 @@ const productInfo = fromJS({
   ]
 });
 const discountedPrice = fromJS({
-  selling: {
-    list: 15,
-    gross: 10,
-    discount: 5
+  data: {
+    selling: {
+      list: 15,
+      gross: 10,
+      discount: 5
+    }
   }
 });
 const productInfoDiscounted = productInfo.set('price', discountedPrice);
-const productInfoNotAvailable = productInfo.set('storeStock', 0);
 const handleClick = jest.fn();
 const emptyProductInfo = Map();
 
@@ -75,28 +76,6 @@ describe('ProductBadge', () => {
       />
     );
     expect(result.find(Discount)).toHaveLength(1);
-    expect(result).toMatchSnapshot();
-  });
-
-  it('should display the available overlay if product is in stock', () => {
-    const result = shallow(
-      <ProductBadge
-        handleClick={handleClick}
-        productInfo={productInfoDiscounted}
-      />
-    );
-    expect(result.find(Available)).toHaveLength(1);
-    expect(result).toMatchSnapshot();
-  });
-
-  it('should not display the available overlay if product is not in stock', () => {
-    const result = shallow(
-      <ProductBadge
-        handleClick={handleClick}
-        productInfo={productInfoNotAvailable}
-      />
-    );
-    expect(result.find(Available)).toHaveLength(0);
     expect(result).toMatchSnapshot();
   });
 });

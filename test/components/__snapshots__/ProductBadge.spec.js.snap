@@ -1,63 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProductBadge should display the available overlay if product is in stock 1`] = `
-<glamorous(div)
-  onClick={[Function]}
->
-  <Image
-    alt="name"
-    fixBrightColor={false}
-    imageID="mainImage"
-    imageOptions={
-      Object {
-        "height": 405,
-        "width": 405,
-      }
-    }
-    zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={true}
-    isNew={false}
-  />
-  <glamorous(div)>
-    name
-  </glamorous(div)>
-  <glamorous(div)>
-    <glamorous(p)>
-      -
-      5
-       %
-    </glamorous(p)>
-    <glamorous(div)
-      isBarred={true}
-    >
-      15,00
-       €
-    </glamorous(div)>
-    <glamorous(div)
-      discounted={true}
-    >
-      10,00
-       €
-    </glamorous(div)>
-  </glamorous(div)>
-  <glamorous(div)>
-    <p>
-      Disponibile in Negozio
-    </p>
-  </glamorous(div)>
-</glamorous(div)>
-`;
-
 exports[`ProductBadge should display the discount if product is discounted 1`] = `
 <glamorous(div)
+  animated={false}
+  animatedDirection="left"
   onClick={[Function]}
 >
+  <MarketingFlag
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
-    alt="name"
     fixBrightColor={false}
-    imageID="mainImage"
     imageOptions={
       Object {
         "height": 405,
@@ -66,13 +41,7 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
     }
     zoomable={false}
   />
-  <MarketingCorner
-    isDiscounted={true}
-    isNew={false}
-  />
-  <glamorous(div)>
-    name
-  </glamorous(div)>
+  <glamorous(div) />
   <glamorous(div)>
     <glamorous(p)>
       -
@@ -93,61 +62,44 @@ exports[`ProductBadge should display the discount if product is discounted 1`] =
     </glamorous(div)>
   </glamorous(div)>
   <glamorous(div)>
-    <p>
-      Disponibile in Negozio
-    </p>
-  </glamorous(div)>
-</glamorous(div)>
-`;
-
-exports[`ProductBadge should not display the available overlay if product is not in stock 1`] = `
-<glamorous(div)
-  onClick={[Function]}
->
-  <Image
-    alt="name"
-    fixBrightColor={false}
-    imageID="mainImage"
-    imageOptions={
-      Object {
-        "height": 405,
-        "width": 405,
-      }
-    }
-    zoomable={false}
-  />
-  <MarketingCorner
-    isDiscounted={false}
-    isNew={false}
-  />
-  <glamorous(div)>
-    name
-  </glamorous(div)>
-  <glamorous(div)>
-    <glamorous(div)
-      isBarred={false}
-    >
-      15,00
-       €
-    </glamorous(div)>
-    <glamorous(div)
-      discounted={true}
-    >
-      15,00
-       €
-    </glamorous(div)>
+    <p />
   </glamorous(div)>
 </glamorous(div)>
 `;
 
 exports[`ProductBadge should not display the discount if product is not discounted 1`] = `
 <glamorous(div)
+  animated={false}
+  animatedDirection="left"
   onClick={[Function]}
 >
+  <MarketingFlag
+    promotionCode="0"
+    topLeftStyle={
+      Object {
+        "&>img": Object {
+          "marginLeft": "-5px !important",
+          "marginTop": "-4px",
+        },
+      }
+    }
+    topRightStyle={
+      Object {
+        "&>img": Object {
+          "marginRight": "12px !important",
+        },
+      }
+    }
+    wrapperStyle={
+      Object {
+        "justifyContent": "space-between !important",
+        "padding": "0px !important",
+        "position": "absolute",
+      }
+    }
+  />
   <Image
-    alt="name"
     fixBrightColor={false}
-    imageID="mainImage"
     imageOptions={
       Object {
         "height": 405,
@@ -156,31 +108,14 @@ exports[`ProductBadge should not display the discount if product is not discount
     }
     zoomable={false}
   />
-  <MarketingCorner
-    isDiscounted={false}
-    isNew={false}
-  />
+  <glamorous(div) />
   <glamorous(div)>
-    name
-  </glamorous(div)>
-  <glamorous(div)>
-    <glamorous(div)
-      isBarred={false}
-    >
-      15,00
-       €
-    </glamorous(div)>
-    <glamorous(div)
-      discounted={true}
-    >
-      15,00
+    <glamorous(div)>
        €
     </glamorous(div)>
   </glamorous(div)>
   <glamorous(div)>
-    <p>
-      Disponibile in Negozio
-    </p>
+    <p />
   </glamorous(div)>
 </glamorous(div)>
 `;

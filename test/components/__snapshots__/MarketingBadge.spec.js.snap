@@ -38,7 +38,7 @@ exports[`MarketingBadge should render IDEAPIU 1`] = `
   >
     <glamorous(div)>
       <div
-        className="css-13azwyo"
+        className="css-1xayo1t"
       >
         <glamorous(img)
           height="50px"
@@ -73,9 +73,12 @@ exports[`MarketingBadge should render NOVITA 1`] = `
   }
 >
   <Icon>
-    <glamorous(div)>
+    <glamorous(div)
+      id="novita_badge"
+    >
       <div
-        className="css-1gfp3u5"
+        className="css-85wdij"
+        id="novita_badge"
       >
         <glamorous(div)>
           <div
@@ -171,21 +174,7 @@ exports[`MarketingBadge should render PROMO_WEB 1`] = `
       "code": "PROMO_WEB",
     }
   }
->
-  <Component
-    src="test-file-stub"
-  >
-    <glamorous(img)
-      src="test-file-stub"
-      width="100px"
-    >
-      <img
-        className="css-1bfg59v"
-        src="test-file-stub"
-      />
-    </glamorous(img)>
-  </Component>
-</MarketingBadge>
+/>
 `;
 
 exports[`MarketingBadge should render null if no promotion is provided 1`] = `

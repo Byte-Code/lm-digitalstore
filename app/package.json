@@ -1,14 +1,15 @@
 {
   "name": "LMDigitalStoreApp",
   "productName": "LM Digital Store App",
-  "version": "2.8.0",
+  "version": "4.0.0",
   "description": "Electron application demo for Leroy Merlin",
   "main": "./main.js",
   "author": {
-    "name": "Byte-Code S.p.A.",
+    "name": "Byte-Code S.p.a.",
     "email": "info@byte-code.com",
     "url": "https://www.byte-code.com"
   },
   "license": "MIT",
   "dependencies": {}
 }
+

@@ -33,6 +33,7 @@ class IdleDialog extends Component {
     dialogState: ImmutablePropTypes.map.isRequired
   };
 
+  /* eslint-disable */
   render() {
     const { dialogState } = this.props;
     const dialogOpen = dialogState.get('dialogOpen');
@@ -41,15 +42,16 @@ class IdleDialog extends Component {
     return (
       <Dialog modal={false} open={dialogOpen} bodyStyle={bodyStyle} contentStyle={contentStyle}>
         <AlertIcon style={iconStyle} color="#339900" />
+        <Text>Tocca lo schermo entro<br></br><CountDown initialTime={countDownTime / 1000} />
+        </Text>
         <Text>
-          Tocca lo schermo entro
-          &nbsp;<CountDown initialTime={countDownTime / 1000} />&nbsp;
           secondi per continuare la navigazione
         </Text>
         <SubText>La sessione sta per scadere per inattività</SubText>
       </Dialog>
     );
   }
+  /* eslint-enable */
 }
 
 const mapStateToProps = state => ({

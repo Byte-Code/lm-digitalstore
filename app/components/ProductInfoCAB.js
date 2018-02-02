@@ -101,8 +101,8 @@ export default class ProductInfoCAB extends Component {
       <Column key={block.get('title')}>
         <Section fontSize="18px" lineHeight="28px">
           <Title fontSize="20px">{titleFormatter(block.get('title'))}</Title>
-          {block
-            .get('customerChooses')
+          {block.get('customerChooses')
+          && block.get('customerChooses')
             .map(c => <p key={c.get('description')}>{c.get('description')}</p>)}
         </Section>
         <Divider />

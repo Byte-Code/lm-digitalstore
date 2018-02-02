@@ -5,6 +5,104 @@ import { List } from 'immutable';
 import glamorous, { Div } from 'glamorous';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
 
+const resetScrollLeft = () => {
+  document.getElementById('store-list').scrollLeft = 0;
+};
+
+const NearbyStore = ({ currentStoreInfo, handleClick, active }) => {
+  const name = currentStoreInfo.get('name');
+  const street = currentStoreInfo.getIn(['address', 'street']);
+  const streetNumber =
+    currentStoreInfo.getIn(['address', 'streetNumber']) || '';
+  const zip = currentStoreInfo.getIn(['address', 'zipCode']);
+  const city = currentStoreInfo.getIn(['address', 'city']);
+  const province = currentStoreInfo.getIn(['address', 'state']);
+  const distance = currentStoreInfo.get('distance');
+  const formattedDistance = Math.floor(distance);
+
+  return (
+    <Wrapper onClick={handleClick} active={active}>
+      <Div position="relative" zIndex={1} alignSelf="center">
+        <PlaceIcon style={iconStyle} color="#67cb33" />
+        <WhiteBg />
+      </Div>
+      <StoreInfo>
+        <div>
+          <Info color="#58c527">{`A ${formattedDistance} km`}</Info>
+          <Info>{`${province} - ${name}`}</Info>
+        </div>
+        <div>
+          <Info fontSize={16}>{`${street} ${streetNumber}`}</Info>
+          <Info fontSize={16}>{`${zip} - ${city}, (${province})`}</Info>
+        </div>
+      </StoreInfo>
+    </Wrapper>
+  );
+};
+
+NearbyStore.propTypes = {
+  currentStoreInfo: ImmutablePropTypes.map.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired
+};
+
+class NearbyStores extends React.Component {
+
+  render() {
+    const { nearbyStores, selectedStore, handleClick, updateNearByList } = this.props;
+    setTimeout(resetScrollLeft, 100);
+
+    return (
+      <Div display="flex">
+        <Label>
+          {`Disponibile in ${nearbyStores.size} negozi limitrofi`}
+        </Label>
+        <StoreList id="store-list">
+          {renderStores(nearbyStores, selectedStore, handleClick, updateNearByList)}
+        </StoreList>
+      </Div>
+    );
+  }
+}
+
+const renderStores = (nearbyStores, selectedStore, handleClick, updateNearByList) => {
+  const stores = updateNearByList
+    ? setSelectedStoreToTop({ nearbyStores, selectedStore })
+    : nearbyStores;
+
+  return stores.map(s =>
+    <div key={s.get('code')}>
+      <NearbyStore
+        currentStoreInfo={s}
+        handleClick={() => handleClick(s.get('code'), s.get('name'))}
+        active={selectedStore === s.get('code')}
+      />
+    </div>
+  );
+};
+
+const setSelectedStoreToTop = ({ nearbyStores = List(), selectedStore = 0 }) => {
+  const index = nearbyStores.findIndex((store) => store.get('code') === selectedStore);
+
+  if (index >= 0) {
+    const store = nearbyStores.get(index);
+    const mapWithoutSelectedStore = nearbyStores.delete(index);
+    return mapWithoutSelectedStore.unshift(store);
+  }
+  return nearbyStores;
+};
+
+NearbyStores.propTypes = {
+  nearbyStores: ImmutablePropTypes.list,
+  selectedStore: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  updateNearByList: PropTypes.bool.isRequired
+};
+
+NearbyStores.defaultProps = {
+  nearbyStores: List()
+};
+
 const iconStyle = {
   height: 55,
   width: 55,
@@ -13,11 +111,11 @@ const iconStyle = {
   marginLeft: 5
 };
 
-const Wrapper = glamorous.div(({ backgroundColor }) => ({
+const Wrapper = glamorous.div(({ active }) => ({
   width: 344,
   height: 108,
   display: 'flex',
-  backgroundColor
+  backgroundColor: active ? '#4a4a4a' : 'none'
 }));
 
 const Info = glamorous.p(({ fontSize, color }) => ({
@@ -59,78 +157,5 @@ const Label = glamorous.p({
   margin: '0 20px',
   width: 120
 });
-
-const NearbyStore = ({ currentStoreInfo, handleClick, isActive }) => {
-  const name = currentStoreInfo.get('name');
-  const street = currentStoreInfo.getIn(['address', 'street']);
-  const streetNumber = currentStoreInfo.getIn(['address', 'streetNumber']) || '';
-  const zip = currentStoreInfo.getIn(['address', 'zipCode']);
-  const city = currentStoreInfo.getIn(['address', 'city']);
-  const province = currentStoreInfo.getIn(['address', 'state']);
-  const distance = currentStoreInfo.get('distance');
-  const formattedDistance = Math.floor(distance);
-  const backgroundColor = isActive ? '#4a4a4a' : 'transparent';
-
-  return (
-    <Wrapper onClick={handleClick} backgroundColor={backgroundColor}>
-      <Div position="relative" zIndex={1} alignSelf="center">
-        <PlaceIcon style={iconStyle} color="#67cb33" />
-        <WhiteBg />
-      </Div>
-      <StoreInfo>
-        <div>
-          <Info color="#58c527">{`A ${formattedDistance} km`}</Info>
-          <Info>{`${province} - ${name}`}</Info>
-        </div>
-        <div>
-          <Info fontSize={16}>{`${street} ${streetNumber}`}</Info>
-          <Info fontSize={16}>{`${zip} - ${city}, (${province})`}</Info>
-        </div>
-      </StoreInfo>
-    </Wrapper>
-  );
-};
-
-NearbyStore.propTypes = {
-  currentStoreInfo: ImmutablePropTypes.map.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  isActive: PropTypes.bool.isRequired
-};
-
-const NearbyStores = ({ nearbyStores, selectedStore, handleClick }) => {
-  if (nearbyStores.isEmpty()) {
-    return <StoreList />;
-  }
-
-  return (
-    <Div display="flex" width={1000}>
-      <Label>
-        {`Disponibile in ${nearbyStores.size} negozi limitrofi`}
-      </Label>
-      <StoreList>
-        <Div display="flex">
-          {nearbyStores.map(s =>
-            <NearbyStore
-              key={s.get('code')}
-              currentStoreInfo={s}
-              handleClick={() => handleClick(s.get('code'), s.get('name'))}
-              isActive={selectedStore === s.get('code')}
-            />
-          )}
-        </Div>
-      </StoreList>
-    </Div>
-  );
-};
-
-NearbyStores.propTypes = {
-  nearbyStores: ImmutablePropTypes.list,
-  selectedStore: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
-};
-
-NearbyStores.defaultProps = {
-  nearbyStores: List()
-};
 
 export default NearbyStores;

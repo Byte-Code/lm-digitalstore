@@ -69,6 +69,7 @@ body {
   /* Disable text selection, or your app will feel like a web page */
   -webkit-user-select: none;
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -200,4 +201,39 @@ li.slick-active button:before {
 
 .similarDialog > div > div {
   max-height: none !important;
+}
+
+@keyframes mymove {
+  from {margin-left: 800px}
+  to {margin-left: 0px}
+}
+
+@keyframes mymove1 {
+  from {margin-left: 800px}
+  to {margin-left: 0px}
+}
+
+@keyframes mymoveRight {
+  from {right: 1100px}
+  to {right: 0px}
+}
+
+@keyframes mymoveRight1 {
+  from {right: 1100px}
+  to {right: 0px}
+}
+
+.thermometer::before {
+  content: url(./assets/icon_mondocomfort.svg);
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
+
+.truck {
+  content: url(./assets/truck-icon.svg);
+  width: 33px;
+  height: 50px;
 }

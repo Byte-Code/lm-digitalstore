@@ -35,7 +35,9 @@ const Label = glamorous.p({
 });
 
 const IdeaWrapper = glamorous.div({
-  position: 'relative'
+  position: 'relative',
+  marginTop: '10px',
+  marginRight: '15px'
 });
 
 export const PrezzoGiu = ({ src }) => <Badge height="100px" width="100px" src={src} />;
@@ -61,8 +63,6 @@ const MarketingBadge = ({ promotion }) => {
       return <PrezzoGiu src={PrezzoGiuBadge} />;
     case 'NOVITA':
       return <Novita />;
-    case 'PROMO_WEB':
-      return <PromoWeb src={PromoWebBadge} />;
     case 'DESTOCK':
       return <Destock src={DestockBadge} />;
     case 'PREZZO_STOCK':

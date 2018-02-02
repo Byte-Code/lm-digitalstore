@@ -11,9 +11,9 @@ import getProductListSaga from './getProductListSaga';
 import getStoreSaga from './getStoreSaga';
 import getNearbyStoresSaga from './getNearbyStoresSaga';
 import routingSaga from './routingSaga';
-import { analyticsSaga } from './analyticsSaga';
-import { sessionAnalyticsSaga } from './sessionAnalyticsSaga';
 import getAllActiveStoreSaga from './getAllActiveStoreSaga';
+import analyticsSaga from './analyticsSaga';
+import getRealTimeStock from './getRealTimeStockSaga';
 import pingIdentitySaga from './pingIdentitySaga';
 
 export default function* root() {
@@ -29,9 +29,9 @@ export default function* root() {
     fork(getStoreSaga),
     fork(getNearbyStoresSaga),
     fork(routingSaga),
-    fork(analyticsSaga),
-    fork(sessionAnalyticsSaga),
     fork(getAllActiveStoreSaga),
+    fork(analyticsSaga),
+    fork(getRealTimeStock),
     fork(pingIdentitySaga)
   ];
 }

@@ -16,7 +16,12 @@ import {
   SUCCESS_TRACK_FILTERS,
   SUCCESS_TRACK_PRODUCT_CLICK,
   SUCCESS_TRACK_AVAILABILITY_BUTTON,
-  TRACK_CATALOGUE_PRODUCTS_CHUNK } from './actionTypes';
+  TRACK_CATALOGUE_PRODUCTS_CHUNK,
+  APPLY_FILTERS_IN_DATALAYER,
+  DELETE_FILTERS,
+  TRACK_PURCHASE_EVENT,
+  TRACK_OPEN_OVERLAY,
+  TRACK_SWIPE_OVERLAY } from './actionTypes';
 
 export function setAnalyticsSessionCode() {
   return ({ type: SET_ANALYTICS_SESSION_CODE });
@@ -86,6 +91,26 @@ export function successTrackAvailabilityButton() {
   return ({ type: SUCCESS_TRACK_AVAILABILITY_BUTTON });
 }
 
-export function trackCatalogueProductsChunk(products, positionIndex) {
-  return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK, products, positionIndex });
+export function trackCatalogueProductsChunk(data) {
+  return ({ type: TRACK_CATALOGUE_PRODUCTS_CHUNK, data });
+}
+
+export function applyFilterInDataLayer() {
+  return ({ type: APPLY_FILTERS_IN_DATALAYER });
+}
+
+export function deleteFilters() {
+  return ({ type: DELETE_FILTERS });
+}
+
+export function trackPurchaseEvent() {
+  return ({ type: TRACK_PURCHASE_EVENT });
+}
+
+export function analyticsOpenOverlay(code) {
+  return ({ type: TRACK_OPEN_OVERLAY, code });
+}
+
+export function analyticsSwipeOverlay(code) {
+  return ({ type: TRACK_SWIPE_OVERLAY, code });
 }

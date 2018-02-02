@@ -14,35 +14,11 @@ const Wrapper = glamorous.div({
   flexWrap: 'wrap'
 });
 
-const TopDiv = glamorous.div({
-  width: '100%'
-});
-
 const BottomDiv = glamorous.div({
   width: '100%',
   alignSelf: 'flex-end',
   display: 'flex',
   flexDirection: 'column'
-});
-
-const Header = glamorous.h1({
-  padding: '101px 295px 60px 40px',
-  lineHeight: '1.07',
-  fontFamily: 'LeroyMerlinSans Bold',
-  color: '#fff',
-  fontSize: '120px'
-});
-
-const Banner = glamorous.div({
-  background: '#67cb33',
-  width: '700px',
-  height: '85px',
-  color: '#fff',
-  fontFamily: 'LeroyMerlinSans Light-Italic',
-  fontSize: '48px',
-  display: 'flex',
-  alignItems: 'center',
-  paddingLeft: '40px'
 });
 
 export default class Page extends Component {
@@ -69,10 +45,6 @@ export default class Page extends Component {
     return (
       <Link to="/world">
         <Wrapper>
-          <TopDiv>
-            <Header>Accendi la tua voglia di estate</Header>
-            <Banner>Entra nel mondo giardino</Banner>
-          </TopDiv>
           <BottomDiv>
             <ScreenSaver />
           </BottomDiv>
