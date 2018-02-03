@@ -32,7 +32,7 @@ const mapKmZoom = {
   22: 11,
   32: 11,
   42: 10,
-  50: 9
+  50: 10
 };
 
 const enhance = compose(
