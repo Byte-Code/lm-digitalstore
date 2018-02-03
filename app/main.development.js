@@ -94,8 +94,12 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
-  // comment this line before pre-release
-  if (process.env.NODE_ENV === 'production') {
+  // set true this line before pre-release
+  const disableAutoUpdate = false;
+
+  const isProductionEnv = process.env.NODE_ENV === 'production';
+
+  if (isProductionEnv && !disableAutoUpdate) {
     autoUpdater.checkForUpdates();
   }
 
