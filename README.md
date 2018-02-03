@@ -78,7 +78,7 @@ $ yarn package -- --[option]
 
 **First, set GH_TOKEN as ENV variable.**
 
-Upgrade version, then run:
+Upgrade version in the file app/package.json commit and then run:
 
 ```bash
 $ yarn release
