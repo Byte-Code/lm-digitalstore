@@ -13,6 +13,7 @@ exports[`PriceBadge should also render the discount when it is active 1`] = `
       €
     </span>
   </glamorous(div)>
+  <glamorous(div) />
   <glamorous(p)
     isDiscounted={true}
   >
@@ -27,6 +28,7 @@ exports[`PriceBadge should also render the discount when it is active 1`] = `
 
 exports[`PriceBadge should only render the price if no discount is active 1`] = `
 <glamorous(div)>
+  <glamorous(div) />
   <glamorous(p)>
     10,00
      €

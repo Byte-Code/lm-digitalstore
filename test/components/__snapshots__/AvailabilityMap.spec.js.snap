@@ -135,7 +135,7 @@ exports[`AvailabilityMap should initialize with the right interal state 1`] = `
       ]
     }
     selectedStore=""
-    slick={[Function]}
+    updateNearByList={false}
   />
 </glamorous(div)>
 `;

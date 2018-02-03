@@ -9,6 +9,8 @@ import AvailabilityButton from './AvailabilityButton';
 import PriceBadge from './PriceBadge';
 import StoreStockBadge from '../containers/StoreStockBadge';
 import PurchaseDialog from '../components/PurchaseDialog';
+import ShippingCostsButton from './ShippingCostsButton';
+
 
 export default class ProductInfoBadge extends Component {
   static propTypes = {
@@ -20,7 +22,6 @@ export default class ProductInfoBadge extends Component {
     productSlug: PropTypes.string.isRequired,
     marketingAttributes: ImmutablePropTypes.map.isRequired,
     loyaltyProgram: ImmutablePropTypes.map.isRequired,
-    hasNearbyStores: PropTypes.bool.isRequired,
     /*eslint-disable */
     scrollValue: PropTypes.number
     /*eslint-disable */
@@ -36,11 +37,9 @@ export default class ProductInfoBadge extends Component {
 
   constructor(props) {
     super(props);
-    this.isPositionFixed = false;
     this.visibilityValue = 870;
     this.allVisible = true;
     this.visibilityTreshold = 300;
-    this.isCollapsed = false;
     this.animatedWrapperHeight = 0;
     this.initialHeight = 0;
     this.onScrolling = this.onScrolling.bind(this);
@@ -89,7 +88,7 @@ export default class ProductInfoBadge extends Component {
 
   getHeight() {
     const isFirstRender = !this.initialHeight;
-    let height = isFirstRender ? 'auto' : this.initialHeight;
+    let height = isFirstRender ? '310px' : this.initialHeight;
 
     if (!this.allVisible) {
       height = '0px';
@@ -140,7 +139,7 @@ export default class ProductInfoBadge extends Component {
       productSlug,
       marketingAttributes,
       loyaltyProgram,
-      hasNearbyStores
+      trackPurchaseEvent
     } = this.props;
 
     const MarketingFlagStyle = {
@@ -167,8 +166,8 @@ export default class ProductInfoBadge extends Component {
 
     const height = this.getAnimatedWrapperHeight();
 
-    const promotionCode = price.getIn(['selling', 'promotion']);
-    const marketingPriceProps = { marketingAttributes, loyaltyProgram, promotionCode };
+    const marketingPriceProps = { marketingAttributes, loyaltyProgram };
+    const shippingCostProductData = { name: productName, code: productCode};
 
     return (
       <Wrapper visibility={this.state.visibility}>
@@ -179,14 +178,17 @@ export default class ProductInfoBadge extends Component {
         <StoreStockWrapper>
           <StoreStockBadge currentStoreStock={currentStoreStock} />
         </StoreStockWrapper>
-          {hasNearbyStores &&
-          <AvailabilityButton productName={productName} productCode={productCode} />}
+          <AvailabilityButton
+            productName={productName}
+            productCode={productCode}
+          />
         <Divider style={{}} />
         <PurchaseDialog productCode={productCode} productSlug={productSlug}>
-          <Button background="#67cb33">
+          <Button background="#67cb33" onClick={trackPurchaseEvent}>
             Acquista online
           </Button>
         </PurchaseDialog>
+          <ShippingCostsButton productInfo={shippingCostProductData}/>
         </AnimatedWrapper>
       </Wrapper>
     );

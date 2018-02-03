@@ -5,16 +5,16 @@ import { getPromotions, buildPromotionMap } from '../utils/marketingUtils';
 import { LABEL } from './AnalyticsConstants';
 
 const productPropertiesMap = Map({
-  prod_id: ['code'],
-  prod_name: ['name'],
-  prod_brand: ['brand', 'name'],
-  prod_category: ['mainCategoryName'],
-  prod_univers: ['mainCategoryRooms', '0'],
-  prod_price: ['price', 'selling', 'gross'],
-  prod_avail_online: ['vendible'],
-  prod_avail_store: ['isClickCollectProduct'],
-  prod_gamma: ['gamma'],
-  prod_sconto: ['price', 'selling', 'discount']
+  prod_id: ['basicInfo', 'data', 'code'],
+  prod_name: ['basicInfo', 'data', 'name'],
+  prod_brand: ['basicInfo', 'data', 'brand', 'name'],
+  prod_category: ['basicInfo', 'data', 'mainCategoryName'],
+  prod_univers: ['basicInfo', 'data', 'mainCategoryRooms', '0'],
+  prod_price: ['price', 'data', 'selling', 'gross'],
+  prod_avail_online: ['basicInfo', 'data', 'vendible'],
+  prod_avail_store: ['basicInfo', 'data', 'isClickCollectProduct'],
+  prod_gamma: ['basicInfo', 'data', 'gamma'],
+  prod_sconto: ['price', 'data', 'selling', 'discount']
 });
 
 const layerMap = Map({ filter_name: List(), filter_value: List() });
@@ -54,8 +54,8 @@ const normalizeAvail = (field = List()) =>
   List().push(field.get(0) ? '1' : '0');
 
 const isProductNew = product => {
-  const marketingAttributes = product.get('marketingAttributes');
-  const loyaltyProgram = product.get('loyaltyProgram');
+  const marketingAttributes = product.getIn(['basicInfo', 'data', 'marketingAttributes']);
+  const loyaltyProgram = product.getIn(['basicInfo', 'data', 'loyaltyProgram']);
 
   if (marketingAttributes && loyaltyProgram) {
     const promotions = getPromotions(marketingAttributes, loyaltyProgram);
@@ -71,7 +71,7 @@ const isProductNew = product => {
 };
 
 const getVariant = product => {
-  const masterProductCode = product.get('masterProductCode');
+  const masterProductCode = product.getIn(['basicInfo', 'data', 'masterProductCode']);
   const value = masterProductCode
     ? `${product.get('code')}_${masterProductCode}`
     : 'master';
@@ -80,13 +80,13 @@ const getVariant = product => {
 };
 
 const getGiftPoints = product => {
-  const giftPoints = product.getIn(['loyaltyProgram', 'type']);
+  const giftPoints = product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'type']);
   const list = List();
   let layer = Map({});
 
   if (giftPoints && giftPoints === 'ADDITIONAL_POINTS') {
     const points = list.push(
-      Math.round(product.getIn(['loyaltyProgram', 'value']) * 10)
+      Math.round(product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'value']) * 10)
     );
     layer = layer.set(LABEL.PROD_PUNTI_OMAGGIO, points);
   }
@@ -94,21 +94,19 @@ const getGiftPoints = product => {
 };
 
 const getIdeapiuPoints = product => {
-  const ideapiuPointsType = product.getIn(['loyaltyProgram', 'type']);
+  const ideapiuPointsType = product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'type']);
   const list = List();
-  let layer = Map({});
+  const layer = Map({});
+  let points = 0;
 
   if (ideapiuPointsType && ideapiuPointsType === 'DISCOUNT') {
-    const points = list.push(
-      Math.round(product.getIn(['loyaltyProgram', 'value']) * 10)
-    );
-    layer = layer.set(LABEL.PROD_IDEAPIU, points);
+    points = Math.round(product.getIn(['basicInfo', 'data', 'loyaltyProgram', 'value']) * 10);
   }
-  return layer;
+  return layer.set(LABEL.PROD_IDEAPIU, list.push(points));
 };
 
 const getBundle = product => {
-  const isBundle = product.getIn(['bundleInformation', 'isBundle']);
+  const isBundle = product.getIn(['basicInfo', 'data', 'bundleInformation', 'isBundle']);
   const list = List();
   let layer = Map({ prod_bundle: list.push('0') });
 
@@ -119,8 +117,8 @@ const getBundle = product => {
 };
 
 const getProdList = (product, path) => {
-  const mainCategory = product.get('mainCategory');
-  const mainCategoryName = product.get('mainCategoryName');
+  const mainCategory = product.getIn(['basicInfo', 'data', 'mainCategory']);
+  const mainCategoryName = product.getIn(['basicInfo', 'data', 'mainCategoryName']);
   const pageContext = getPageContext(path[0]);
   return `${pageContext} > ${mainCategoryName}/${mainCategory}`;
 };
@@ -391,12 +389,9 @@ const getProductProperty = (product = Map({})) => {
 
   Object.keys(jsonProduct).forEach(key => {
     Object.keys(jsonProduct[key]).forEach(productProperty => {
-      if (productProperty === 'code') {
-        prodCode = jsonProduct[key][productProperty];
-      }
-
-      if (productProperty === 'mainCategoryName') {
-        prodCategory = jsonProduct[key][productProperty];
+      if (productProperty === 'basicInfo') {
+        prodCode = jsonProduct[key][productProperty].data.code;
+        prodCategory = jsonProduct[key][productProperty].data.mainCategoryName;
       }
     });
   });

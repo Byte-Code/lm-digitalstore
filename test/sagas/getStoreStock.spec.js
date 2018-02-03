@@ -20,7 +20,7 @@ describe('getStoreStockSaga', () => {
     const gen = callFetchStoreStock(input);
 
     it('should call the api first', () => {
-      expect(gen.next().value).toEqual(call(apiClient.fetchAllStoreStock, input.productCode));
+      expect(gen.next().value).toEqual(call(apiClient.fetchAllStoreStock_v2, input.productCode));
     });
 
     it('should dispatch a SUCCESS_FETCH_STORESTOCK action with the result', () => {
@@ -40,7 +40,7 @@ describe('getStoreStockSaga', () => {
     const gen = callFetchStoreStock(input);
 
     it('should call the api first', () => {
-      expect(gen.next().value).toEqual(call(apiClient.fetchAllStoreStock, input.productCode));
+      expect(gen.next().value).toEqual(call(apiClient.fetchAllStoreStock_v2, input.productCode));
     });
 
     it('should dispatch a FAILURE_FETCH_STORESTOCK action with the error message', () => {

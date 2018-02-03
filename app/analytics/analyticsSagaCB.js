@@ -6,26 +6,37 @@ import { getProductReducer,
   getFilterMap,
   getFiltersCategoryCode,
   getCatalogueProducts,
-  getStore } from '../reducers/selectors';
+  getStore,
+  getStoreCode,
+  getMainStock } from '../reducers/selectors';
 import * as analyticsAction from '../actions/analyticsActions';
 import { PROD_CLICK, PROD_ACTION_DEDAIL } from '../actions/actionTypes';
+import { EVENT_TYPES } from '../analytics/AnalyticsConstants';
+
+const appliedFilters = (activeFilters) =>
+  activeFilters.get('filters').size > 0
+  || activeFilters.get('availability')
+  || activeFilters.get('aid') !== '';
+
 
 export function* applyFilterActions() {
-  const maxChunkLenght = 4;
-  const state = yield select();
-  const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
-  const catCode = yield select(getFiltersCategoryCode);
-  const productList = yield call(getCatalogueProducts(), state, catCode);
-  const productsNumber = productList.size > maxChunkLenght ? maxChunkLenght : productList.size;
   const activeFilters = yield select(getFilterMap);
 
+  if (appliedFilters(activeFilters)) {
+    const { sellingAids, filterGroup } = yield select(getFilterInfoFromCategory);
+    const maxChunkLenght = 4;
+    const state = yield select();
+    const catCode = yield select(getFiltersCategoryCode);
+    const productList = yield call(getCatalogueProducts(), state, catCode);
+    const productsNumber = productList.size > maxChunkLenght ? maxChunkLenght : productList.size;
 
-  yield call(AnalyticsService.setFilters, {
-    sellingAids,
-    filterGroup,
-    productsNumber,
-    activeFilters
-  });
+    yield call(AnalyticsService.setFilters, {
+      sellingAids,
+      filterGroup,
+      productsNumber,
+      activeFilters
+    });
+  }
 }
 
 export function* resetFilter() {
@@ -79,8 +90,8 @@ export function* idleTimerComplete() {
 }
 
 export function* setProduct(action) {
-  const prodCode = action.result.get('code');
-  const prodName = action.result.get('name');
+  const prodCode = action.result.getIn(['basicInfo', 'data', 'code']);
+  const prodName = action.result.getIn(['basicInfo', 'data', 'name']);
   const state = yield select();
   const { pathArray = '' } = yield call(getPageNameData, state);
 
@@ -91,7 +102,7 @@ export function* setProduct(action) {
   });
   yield call(AnalyticsService.setProduct, {
     product: action.result,
-    action: [PROD_ACTION_DEDAIL]
+    action: PROD_ACTION_DEDAIL
   });
   yield put(analyticsAction.successSetProductInDataLayer());
 }
@@ -168,18 +179,56 @@ export function* trackFilters() {
   yield put(analyticsAction.successTrackFilters());
 }
 
-export function* trackStoreAvailability(action) {
-  const {
-    storeName = '',
-    storeStock = 0,
-    } = action.storeData;
-  const product = yield select(getProductReducer);
+export function* trackPurchaseEvent() {
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.PRODUCT_ACQUISTA, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
+  yield call(AnalyticsService.track, 'link');
+}
 
-  yield call(AnalyticsService.setStoreAvailability, {
-    storeName,
-    storeStock,
-    product
-  });
+export function* trackOpenOverlay(action) {
+  const productCode = action.code;
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.APRI_OVERLAY, productCode, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
+  yield call(AnalyticsService.track, 'link');
+}
+
+export function* trackSwipeOverlay(action) {
+  const productCode = action.code;
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { type: EVENT_TYPES.SWIPE_OVERLAY, productCode, code, categoryName };
+  yield call(AnalyticsService.setEvent, payload);
+  yield call(AnalyticsService.track, 'link');
+}
+
+export function* trackStoreAvailability(action) {
+  const { storeName = '', storeStock = 0 } = action.storeData;
+  const { code, categoryName } = yield getCommonEventProperties();
+  const payload = { storeName, storeStock, code, categoryName };
+  yield call(AnalyticsService.setStoreAvailability, payload);
   yield call(AnalyticsService.track, 'link');
   yield put(analyticsAction.successTrackAvailabilityButton());
+}
+
+export function* clearDataLayer() {
+  yield call(AnalyticsService.clearDataLayer);
+}
+
+export function* deleteFilters() {
+  yield call(AnalyticsService.deleteFilters);
+}
+
+function* getCommonEventProperties() {
+  const storeCode = yield select(getStoreCode);
+  const mainProducts = yield select(getMainStock);
+  const mainProduct = yield mainProducts.get(storeCode);
+  if (mainProduct) {
+    const mainProductCode = mainProduct.keySeq().toArray();
+    const products = yield select(getProductReducer);
+    const code = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'code']);
+    const categoryName = products.get(mainProductCode[0]).getIn(['basicInfo', 'data', 'mainCategoryName']);
+    return { code, categoryName };
+  }
+  return { code: '0', categoryName: '' };
 }

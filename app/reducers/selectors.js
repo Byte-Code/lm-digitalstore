@@ -1,18 +1,20 @@
 import { createSelector } from 'reselect';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 
 import * as filterUtils from '../utils/filterUtils';
 import getWorldSelector from './World/worldSelectors';
 import getWeatherSelector from './Weather/weatherSelectors';
 import getIdleDialogStatus from './Idle/idleSelectors';
 import * as categorySelectors from './Category/categorySelectors';
-import * as catalogueSelectors from './Catalogue/catalogueSelectors';
+import productList from './Catalogue/catalogueSelectors';
 import * as storeCodeSelectors from './StoreCode/storeCodeSelectors';
 import * as storeSelectors from './Store/storeSelectors';
 import * as productSelectors from './Product/productSelectors';
 import * as filtersSelector from './Filters/filtersSelectors';
 import * as routeSelector from './Router/routerSelectors';
 import * as activeStoresSelector from './ActiveStores/activeStoresSelectors';
+import storesStock from './RealTimeStock/realTimeStockSelector';
+import getGallery from './Gallery/gallerySelector';
 import getSendingStatus from './Purchase/purchaseSelector';
 
 export function getWorld(state) {
@@ -38,7 +40,8 @@ export function getCategory(state, categoryCode) {
 }
 
 export function getCategoryName(state, categoryCode) {
-  return getCategory(state, categoryCode).get('name');
+  const category = getCategory(state, categoryCode);
+  return category ? category.get('name') : Map();
 }
 
 export function getSellingAids(state, categoryCode) {
@@ -55,7 +58,7 @@ export function getOrderedProducts(state, categoryCode) {
 
 // CATALOGUE
 export function getProductList(state) {
-  return catalogueSelectors.getProductList(state.get('catalogueReducer'));
+  return productList(state.get('catalogueReducer'));
 }
 
 export const getIdsByAids = createSelector(
@@ -69,9 +72,11 @@ export const getIdsByFilters = createSelector(
 );
 
 export const getIdsByAvailability = createSelector(
-  [getOrderedProducts, getActiveAvailability],
-  (orderedProducts, activeAvailability) =>
-    filterUtils.filterProductsByAvailability(orderedProducts, activeAvailability)
+  [getOrderedProducts, getActiveAvailability, getCatalogueStock, getStoreCode],
+  (orderedProducts, activeAvailability, catalogueStock, storeCode) =>
+    filterUtils.filterProductsByAvailability(
+      orderedProducts, activeAvailability, catalogueStock.get(storeCode)
+    )
 );
 
 export const getIdsByTempFilters = createSelector(
@@ -80,9 +85,11 @@ export const getIdsByTempFilters = createSelector(
 );
 
 export const getIdsByTempAvailability = createSelector(
-  [getOrderedProducts, getTempAvailability],
-  (orderedProducts, tempAvailability) =>
-    filterUtils.filterProductsByAvailability(orderedProducts, tempAvailability)
+  [getOrderedProducts, getTempAvailability, getCatalogueStock, getStoreCode],
+  (orderedProducts, tempAvailability, catalogStock, storeCode) =>
+    filterUtils.filterProductsByAvailability(
+      orderedProducts, tempAvailability, catalogStock.get(storeCode)
+    )
 );
 
 export const getCatalogueProductsIds = createSelector(
@@ -93,13 +100,14 @@ export const getCatalogueProductsIds = createSelector(
 
 export const getCatalogueProducts = () => createSelector(
   [getProductList, getCatalogueProductsIds],
-  (productList, idsToShow) =>
-    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
-  );
+  (_productList, idsToShow) =>
+    _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+);
 
-export const getSimilarProducts = () =>
-  createSelector([getProductList, getSimilarProductsIds], (productList, idsToShow) =>
-    productList.filter(p => idsToShow.contains(p.get('code'))).toList()
+export const getSimilarProducts = () => createSelector(
+  [getProductList, getSimilarProductsIds],
+    (_productList, idsToShow) =>
+    _productList.filter(p => idsToShow.contains(p.get('code'))).toList()
   );
 
 export const getItemCount = createSelector(
@@ -157,8 +165,8 @@ export const getFilterInfoFromCategory = createSelector(
     const categoryInfo = getCategory(state, categoryCode);
     const sellingAids = categoryInfo.getIn(['sellingAidsProducts', 0]);
     const filterGroup = categoryInfo
-                          .get('facetFilters')
-                          .filterNot(group => group.get('group') === 'Prezzo');
+      .get('facetFilters')
+      .filterNot(group => group.get('group') === 'Prezzo');
     return { sellingAids, filterGroup };
   }
 );
@@ -197,8 +205,11 @@ export function getNearbyStores(state, props) {
   return storeSelectors.getNearbyStores(state.get('storeReducer'), props);
 }
 
-export function hasNearbyStores(state) {
-  return storeSelectors.hasNearbyStores(state.get('storeReducer'));
+export function getNearbyStoresCodes(state) {
+  return state.getIn(['storeReducer', 'nearbyStores'])
+    .reduce((accumulator, store) =>
+      accumulator.push(store.get('code')),
+      List());
 }
 
 export const getNearbyStoresWithStock = createSelector(
@@ -207,17 +218,9 @@ export const getNearbyStoresWithStock = createSelector(
     nearbyStores.map(s => {
       const currentStore = allStoreStock.find(ns => ns.get('storeCode') === s.get('code'));
       return s
-        .set('storeStock', currentStore ? currentStore.get('storeStock') : 0)
+        .set('storeStock', currentStore ? currentStore.get('kioskStock') : 0)
         .set('stockStatus', currentStore ? currentStore.get('stockStatus') : 0);
     })
-);
-
-export const getNearbyStoresWithProductInStock = createSelector(
-  [getNearbyStoresWithStock, getStore],
-  (nearbyStoreStock, currentStore) =>
-    nearbyStoreStock.filterNot(
-      s => s.get('storeStock') <= 0 || s.get('code') === currentStore.get('code')
-    )
 );
 
 export const getSelectedNearbyStoreInfo = selectedStore =>
@@ -242,6 +245,51 @@ export function getCurrentPath(state) {
 
 export function getRoutingData(state) {
   return routeSelector.getRoutingData(state);
+}
+
+// RealTimeStock
+
+export function getRealTimeStock(state) {
+  return storesStock(state.get('realTimeStockReducer'));
+}
+
+export function getMainStock(state) {
+  return getRealTimeStock(state).get('main') || Map();
+}
+
+export function getCatalogueStock(state) {
+  return getRealTimeStock(state).get('catalogue') || Map();
+}
+
+export const getCurrentProductStock = productCode => createSelector(
+  [getMainStock, getStoreCode],
+  (mainStock, currentStore) => {
+    if (mainStock) {
+      return mainStock.getIn([currentStore, productCode]);
+    }
+  }
+);
+
+export function getSimilarProductStock(state) {
+  return getRealTimeStock(state).get('related') || Map();
+}
+
+export const getCatalogueStocks = createSelector(
+  [getCatalogueStock, getStoreCode],
+  (stocks, storeCode) =>
+    stocks.get(storeCode)
+);
+
+export const getNearByWithStock = props => createSelector(
+  [getNearbyStores, getMainStock, getStoreCode],
+  (nearByStores, stocks, storeCode) =>
+    nearByStores.filter((store) =>
+    stocks.getIn([store.get('code'), props.productCode]) > 0
+    && store.get('code') !== storeCode
+));
+
+export function getGalleryIndex(state) {
+  return getGallery(state.get('galleryReducer').get('index'));
 }
 
 // Purchase

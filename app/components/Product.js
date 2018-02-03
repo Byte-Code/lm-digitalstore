@@ -5,6 +5,7 @@ import { Map, fromJS } from 'immutable';
 import glamorous from 'glamorous';
 import throttle from 'lodash/throttle';
 import inRange from 'lodash/inRange';
+import { getStockStatus } from '../utils/utils';
 
 import ImageSlider from './ImageSlider';
 import ProductInfo from './ProductInfo';
@@ -19,15 +20,24 @@ export default class Product extends Component {
       productCode: PropTypes.string.isRequired
     }).isRequired,
     productInfo: ImmutablePropTypes.map,
+    similarProductStocks: ImmutablePropTypes.map,
     requestFetchProduct: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
+    clearRealTimeStock: PropTypes.func.isRequired,
     setAnalyticsProductClick: PropTypes.func.isRequired,
+    analyticsOpenOverlay: PropTypes.func.isRequired,
+    analyticsSwipeOverlay: PropTypes.func.isRequired,
+    trackPurchaseEvent: PropTypes.func.isRequired,
     similarProducts: ImmutablePropTypes.list.isRequired,
-    hasNearbyStores: PropTypes.bool.isRequired
+    mainStoreStock: PropTypes.number.isRequired,
+    storeCode: PropTypes.string.isRequired
   };
 
   static defaultProps = {
-    productInfo: Map()
+    productInfo: Map(),
+    storeStock: Map(),
+    similarProductStocks: Map(),
+    mainStoreStock: 0
   };
 
   constructor(props) {
@@ -59,6 +69,7 @@ export default class Product extends Component {
   }
 
   componentWillUnmount() {
+    this.props.clearRealTimeStock();
     this.props.clearProductList();
   }
 
@@ -98,7 +109,8 @@ export default class Product extends Component {
   }
 
   renderSimilarProducts() {
-    const { similarProducts, productInfo } = this.props;
+    const { similarProducts, productInfo,
+      storeCode, similarProductStocks } = this.props;
 
     if (similarProducts.isEmpty()) {
       return null;
@@ -114,6 +126,10 @@ export default class Product extends Component {
           similarProducts={products}
           title={sp.get('name')}
           setAnalyticsProductClick={this.props.setAnalyticsProductClick}
+          storeCode={storeCode}
+          stocks={similarProductStocks}
+          analyticsOpenOverlay={this.props.analyticsOpenOverlay}
+          analyticsSwipeOverlay={this.props.analyticsSwipeOverlay}
         />
       );
     });
@@ -133,28 +149,34 @@ export default class Product extends Component {
 
 
   render() {
-    const { productInfo, hasNearbyStores } = this.props;
+    const { productInfo, mainStoreStock, trackPurchaseEvent, storeCode } = this.props;
 
     if (productInfo.isEmpty()) {
       return null;
     }
 
-    const name = productInfo.get('name');
-    const code = productInfo.get('code');
-    const slug = productInfo.get('slug');
-    const productType = productInfo.getIn(['productDetail', 'descriptionType']);
-    const marketingDescriptions = productInfo.getIn(['productDetail', 'marketingDescriptions']);
-    const marketingAttributes = productInfo.get('marketingAttributes');
-    const loyaltyProgram = productInfo.get('loyaltyProgram');
-    const descriptions = productInfo.getIn(['productDetail', 'descriptions']);
-    const price = productInfo.getIn(['price', 'selling']);
-    const pricingInfo = productInfo.get('pricingInformations');
-    const currentStoreStock = fromJS({
-      storeStock: productInfo.get('storeStock'),
-      stockStatus: productInfo.getIn(['productStockInfo', 'vendibilityValue'])
-    });
-    const imageIDList = productInfo.get('images');
+    const name = productInfo.getIn(['basicInfo', 'data', 'name']);
+    const code = productInfo.getIn(['basicInfo', 'data', 'code']);
+    const slug = productInfo.getIn(['basicInfo', 'data', 'slug']);
+    const productType = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptionType']);
+    const marketingDescriptions = productInfo.getIn(
+      ['basicInfo', 'data', 'productDetail', 'marketingDescriptions']
+    );
+    const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
+    const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+    const descriptions = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptions']);
+    const price = productInfo.getIn(['price', 'data', 'selling']);
+    const pricingInfo = productInfo.getIn(['basicInfo', 'data', 'pricingInformations']);
+    const imageIDList = productInfo.getIn(['basicInfo', 'data', 'images']);
     const imageOptions = { width: 1080, height: 1080, crop: 'fit' };
+    let currentStoreStock = fromJS({});
+
+    if (productInfo.get('allStoreStock')) {
+      currentStoreStock = fromJS({
+        storeStock: mainStoreStock,
+        stockStatus: getStockStatus(storeCode, productInfo.get('allStoreStock'))
+      });
+    }
 
     return (
       <Wrapper>
@@ -184,7 +206,7 @@ export default class Product extends Component {
               loyaltyProgram={loyaltyProgram}
               price={price}
               scrollValue={this.state.scrollValue}
-              hasNearbyStores={hasNearbyStores}
+              trackPurchaseEvent={trackPurchaseEvent}
             />
           </PriceWrapper>
         </ScrollableDiv>

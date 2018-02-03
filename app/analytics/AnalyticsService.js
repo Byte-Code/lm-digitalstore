@@ -4,7 +4,7 @@ import * as utils from './AnalyticsUtils';
 import tealiumAnalytics from './tealiumAnalytics';
 import { PROD_ACTION_DEDAIL, PROD_CLICK } from '../actions/actionTypes';
 import { isAnalyticsLogMode } from '../CommandLineOptions';
-import { LABEL, PRODUCT_DISPONIBILITA } from './AnalyticsConstants';
+import { LABEL, EVENTS, PRODUCT_DISPONIBILITA } from './AnalyticsConstants';
 
 
 class AnalyticsService {
@@ -12,8 +12,6 @@ class AnalyticsService {
   constructor() {
     this.dataLayer = Map({});
     this.state = {};
-    this.firstTrack = true;
-    this.aidFilterTemp = Map({});
     this.setPageName = this.setPageName.bind(this);
     this.setCid = this.setCid.bind(this);
     this.deleteInDataLayer = this.deleteInDataLayer.bind(this);
@@ -28,6 +26,8 @@ class AnalyticsService {
     this.setFilters = this.setFilters.bind(this);
     this.clearFilters = this.clearFilters.bind(this);
     this.setStoreAvailability = this.setStoreAvailability.bind(this);
+    this.deleteFilters = this.deleteFilters.bind(this);
+    this.setEvent = this.setEvent.bind(this);
   }
 
   setDataLayer(key, value) {
@@ -113,12 +113,31 @@ class AnalyticsService {
     this.dataLayer = utils.clearFilters(this.dataLayer, productsNumber);
   }
 
-  setStoreAvailability({ storeName = '', storeStock = '', product = Map({}) }) {
-    const { prodCode, prodCategory } = utils.getProductProperty(product);
+  deleteFilters() {
+    this.dataLayer = this.dataLayer
+      .delete('filter_name')
+      .delete('filter_result')
+      .delete('filter_value');
+  }
+
+  setStoreAvailability({ storeName = '', storeStock = '', code, categoryName }) {
     this.setDataLayer(LABEL.EVENT_TYPE, PRODUCT_DISPONIBILITA);
-    this.setDataLayer(LABEL.PROD_ID, prodCode);
-    this.setDataLayer(LABEL.PROD_CATEGORY, prodCategory);
+    this.setDataLayer(LABEL.PROD_ID, code);
+    this.setDataLayer(LABEL.PROD_CATEGORY, categoryName);
     this.setDataLayer(LABEL.EVENT_ACTION, `${storeName}_${storeStock}`);
+  }
+
+  setEvent(payload = {}) {
+    const { type, productCode, code, categoryName } = payload;
+    this.setDataLayer(LABEL.EVENT_TYPE, EVENTS[type]);
+    this.setDataLayer(LABEL.PROD_ID, code);
+    this.setDataLayer(LABEL.PROD_CATEGORY, categoryName);
+
+    if (productCode) {
+      this.setDataLayer(LABEL.EVENT_LABEL, productCode);
+    } else {
+      this.setDataLayer(LABEL.EVENT_ACTION, 'qrcode');
+    }
   }
 
   track(eventType, clear = true) {

@@ -70,10 +70,6 @@ body {
   -webkit-user-select: none;
 }
 
-.slick-slide.slick-active {
-  background-color: #4a4a4a;
-}
-
 ol, ul {
 	list-style: none;
 }
@@ -234,4 +230,10 @@ li.slick-active button:before {
   height: 50px;
   margin-left: 30px;
   margin-bottom: 5px;
+}
+
+.truck {
+  content: url(./assets/truck-icon.svg);
+  width: 33px;
+  height: 50px;
 }

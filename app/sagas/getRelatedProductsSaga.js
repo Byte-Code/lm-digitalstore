@@ -1,10 +1,12 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { fromJS, List } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
 import * as actionTypes from '../actions/actionTypes';
+import * as realTimeStock from '../actions/realTimeStockAction';
 import * as productActions from '../actions/productActions';
 import { requestFetchProductList } from '../actions/productListActions';
+import { getStoreCode } from '../reducers/selectors';
 
 export function* callFetchRelatedProducts({ productCode }) {
   try {
@@ -19,6 +21,12 @@ export function* callFetchRelatedProducts({ productCode }) {
         .flatten()
         .toSet()
         .toList();
+      const storeCode = yield select(getStoreCode);
+      yield put(realTimeStock.requestRealTimeStock({
+        storeCodes: storeCode,
+        productCodes: productIDList.toJS().join(','),
+        type: 'related'
+      }));
       yield put(requestFetchProductList(productIDList));
     }
   } catch (error) {

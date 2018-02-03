@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { fromJS } from 'immutable';
 
 import { apiClient } from '../../mocks/apiMock';
@@ -6,6 +6,8 @@ import { callFetchXSellProducts } from '../../app/sagas/getXSellProductsSaga';
 import { requestFetchProductList } from '../../app/actions/productListActions';
 import * as productActions from '../../app/actions/productActions';
 import * as analyticsAction from '../../app/actions/analyticsActions';
+import { getStoreCode } from '../../app/reducers/selectors';
+import * as realTimeStock from '../../app/actions/realTimeStockAction';
 
 const validResponse = [{ code: 0 }, { code: 1 }, { code: 2 }];
 const invalidResponse = [];
@@ -29,6 +31,22 @@ describe('getXSellProductsSaga', () => {
       const transformedResult = fromJS(validResponse).map(p => p.get('code')).take(5);
       expect(gen.next(validResponse).value).toEqual(
         put(productActions.successFetchXSellProducts(input.productCode, transformedResult))
+      );
+    });
+
+    it('should select the store code', () => {
+      expect(gen.next().value).toEqual(select(getStoreCode));
+    });
+
+    it('should put a REQUEST_REALTIME_STOCK', () => {
+      const storeCode = '7';
+      const idList = fromJS(validResponse).map(p => p.get('code')).take(5);
+      expect(gen.next(storeCode).value).toEqual(
+        put(realTimeStock.requestRealTimeStock({
+          storeCodes: storeCode,
+          productCodes: idList.toJS().join(','),
+          type: 'related'
+        }))
       );
     });
 

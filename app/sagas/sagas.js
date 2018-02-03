@@ -13,6 +13,8 @@ import getNearbyStoresSaga from './getNearbyStoresSaga';
 import routingSaga from './routingSaga';
 import getAllActiveStoreSaga from './getAllActiveStoreSaga';
 import analyticsSaga from './analyticsSaga';
+import getRealTimeStock from './getRealTimeStockSaga';
+import pingIdentitySaga from './pingIdentitySaga';
 import purchase from './purchaseSaga';
 
 export default function* root() {
@@ -30,6 +32,8 @@ export default function* root() {
     fork(routingSaga),
     fork(getAllActiveStoreSaga),
     fork(analyticsSaga),
+    fork(getRealTimeStock),
+    fork(pingIdentitySaga),
     fork(purchase)
   ];
 }

@@ -11,6 +11,8 @@ import storeReducer from './Store/storeReducer';
 import filtersReducer from './Filters/filtersReducer';
 import idleReducer from './Idle/idleReducer';
 import activeStores from './ActiveStores/activeStoresReducer';
+import realTimeStockReducer from './RealTimeStock/realTimeStockReducer';
+import galleryReducer from './Gallery/galleryReducer';
 import purchaseReducer from './Purchase/purchaseReducer';
 
 const rootReducer = combineReducers({
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   idleReducer,
   routing,
   activeStores,
+  realTimeStockReducer,
+  galleryReducer,
   purchaseReducer
 });
 

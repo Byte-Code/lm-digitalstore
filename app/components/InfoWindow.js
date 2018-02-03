@@ -9,8 +9,10 @@ import { getStockLabel } from '../utils/utils';
 export default class InfoWindow extends React.Component {
   static propTypes = {
     selectedStoreInfo: ImmutablePropTypes.map.isRequired,
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
+    storesStock: PropTypes.number.isRequired
   };
+
 
   static getOffsets(element) {
     return {
@@ -61,13 +63,12 @@ export default class InfoWindow extends React.Component {
   }
 
   render() {
-    const { selectedStoreInfo, handleClick } = this.props;
+    const { selectedStoreInfo, handleClick, storesStock } = this.props;
     const { top, borderBottom, borderTop, arrowTop, left } = this.state;
     const name = selectedStoreInfo.get('name');
-    const availability = selectedStoreInfo.get('storeStock');
     const stockStatus = selectedStoreInfo.get('stockStatus');
-    const isAvailable = availability > 0;
-    const label = getStockLabel(availability, stockStatus);
+    const isAvailable = storesStock > 0;
+    const label = getStockLabel(storesStock, stockStatus);
     const street = selectedStoreInfo.getIn(['address', 'street']);
     const streetNumber = selectedStoreInfo.getIn(['address', 'streetNumber']) || '';
     const zip = selectedStoreInfo.getIn(['address', 'zipCode']);

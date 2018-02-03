@@ -4,9 +4,12 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
 import glamorous, { Div } from 'glamorous';
 import PlaceIcon from 'material-ui/svg-icons/maps/place';
-import Slider from 'react-slick';
 
-const NearbyStore = ({ currentStoreInfo, handleClick }) => {
+const resetScrollLeft = () => {
+  document.getElementById('store-list').scrollLeft = 0;
+};
+
+const NearbyStore = ({ currentStoreInfo, handleClick, active }) => {
   const name = currentStoreInfo.get('name');
   const street = currentStoreInfo.getIn(['address', 'street']);
   const streetNumber =
@@ -18,7 +21,7 @@ const NearbyStore = ({ currentStoreInfo, handleClick }) => {
   const formattedDistance = Math.floor(distance);
 
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper onClick={handleClick} active={active}>
       <Div position="relative" zIndex={1} alignSelf="center">
         <PlaceIcon style={iconStyle} color="#67cb33" />
         <WhiteBg />
@@ -39,26 +42,15 @@ const NearbyStore = ({ currentStoreInfo, handleClick }) => {
 
 NearbyStore.propTypes = {
   currentStoreInfo: ImmutablePropTypes.map.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired
 };
 
 class NearbyStores extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return !nextProps.nearbyStores.equals(this.props.nearbyStores);
-  }
 
   render() {
-    const { nearbyStores, selectedStore, handleClick, slick } = this.props;
-
-    const sliderConfig = {
-      slideToShow: 3,
-      slidesToScroll: 1,
-      dots: false,
-      arrow: false,
-      vertical: false,
-      variableWidth: true,
-      infinite: false
-    };
+    const { nearbyStores, selectedStore, handleClick, updateNearByList } = this.props;
+    setTimeout(resetScrollLeft, 100);
 
     return (
       <Div display="flex">
@@ -66,30 +58,45 @@ class NearbyStores extends React.Component {
           {`Disponibile in ${nearbyStores.size} negozi limitrofi`}
         </Label>
         <StoreList id="store-list">
-          <Slider {...sliderConfig} ref={slick}>
-            {renderStores(nearbyStores, selectedStore, handleClick)}
-          </Slider>
+          {renderStores(nearbyStores, selectedStore, handleClick, updateNearByList)}
         </StoreList>
       </Div>
     );
   }
 }
 
-const renderStores = (nearbyStores, selectedStore, handleClick) =>
-  nearbyStores.map(s =>
+const renderStores = (nearbyStores, selectedStore, handleClick, updateNearByList) => {
+  const stores = updateNearByList
+    ? setSelectedStoreToTop({ nearbyStores, selectedStore })
+    : nearbyStores;
+
+  return stores.map(s =>
     <div key={s.get('code')}>
       <NearbyStore
         currentStoreInfo={s}
         handleClick={() => handleClick(s.get('code'), s.get('name'))}
+        active={selectedStore === s.get('code')}
       />
     </div>
   );
+};
+
+const setSelectedStoreToTop = ({ nearbyStores = List(), selectedStore = 0 }) => {
+  const index = nearbyStores.findIndex((store) => store.get('code') === selectedStore);
+
+  if (index >= 0) {
+    const store = nearbyStores.get(index);
+    const mapWithoutSelectedStore = nearbyStores.delete(index);
+    return mapWithoutSelectedStore.unshift(store);
+  }
+  return nearbyStores;
+};
 
 NearbyStores.propTypes = {
   nearbyStores: ImmutablePropTypes.list,
   selectedStore: PropTypes.string.isRequired,
   handleClick: PropTypes.func.isRequired,
-  slick: PropTypes.func.isRequired
+  updateNearByList: PropTypes.bool.isRequired
 };
 
 NearbyStores.defaultProps = {
@@ -104,11 +111,12 @@ const iconStyle = {
   marginLeft: 5
 };
 
-const Wrapper = glamorous.div({
+const Wrapper = glamorous.div(({ active }) => ({
   width: 344,
   height: 108,
-  display: 'flex'
-});
+  display: 'flex',
+  backgroundColor: active ? '#4a4a4a' : 'none'
+}));
 
 const Info = glamorous.p(({ fontSize, color }) => ({
   fontSize: fontSize || 20,

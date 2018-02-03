@@ -5,26 +5,35 @@ import glamorous from 'glamorous';
 import Swipeable from 'react-swipeable';
 import chunk from 'lodash/chunk';
 import { Link } from 'react-router';
-import { List, fromJS } from 'immutable';
+import { List, fromJS, Map } from 'immutable';
 import { getCategoryName } from '../utils/utils';
+import { getPreviousPath } from '../utils/RouterChangeListener';
 
 import ProductBadge from './ProductBadge';
 import FilterBar from './FilterBar';
 
-export default class Catalogue2 extends Component {
+export default class Catalogue extends Component {
+
   static propTypes = {
     categoryCode: PropTypes.string.isRequired,
     requestFetchCategory: PropTypes.func.isRequired,
+    saveGalleryIndex: PropTypes.func.isRequired,
     clearProductList: PropTypes.func.isRequired,
-    setAnalyticsProductClick: PropTypes.func.isRequired,
     trackCatalogueProductsChunk: PropTypes.func.isRequired,
     products: ImmutablePropTypes.list,
     isDialogOpen: PropTypes.bool.isRequired,
-    filterMap: ImmutablePropTypes.map.isRequired
+    filterMap: ImmutablePropTypes.map.isRequired,
+    catalogueStocks: ImmutablePropTypes.map,
+    chunkIndex: PropTypes.number.isRequired,
+    applyFilterInDataLayer: PropTypes.func.isRequired,
+    initFilters: PropTypes.func.isRequired,
+    deleteFilters: PropTypes.func.isRequired,
+    setAnalyticsProductClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    products: List()
+    products: List(),
+    catalogueStocks: Map()
   };
 
   constructor(props) {
@@ -45,6 +54,8 @@ export default class Catalogue2 extends Component {
     this.checkCategoryChange = this.checkCategoryChange.bind(this);
     this.checkAnalyticsConditionAndTrack = this.checkAnalyticsConditionAndTrack.bind(this);
     this.filtersHaveChanged = this.filtersHaveChanged.bind(this);
+    this.trackChunk = this.trackChunk.bind(this);
+    this.initializeCurrentChunk = this.initializeCurrentChunk.bind(this);
     this.state = initialState;
   }
 
@@ -54,12 +65,34 @@ export default class Catalogue2 extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const categoryHasChanged = nextProps.categoryCode !== this.props.categoryCode;
+
     if (nextProps.products.size > 0) {
+      const landingFromProductPage = getPreviousPath().startsWith('/product');
       this.chunkerizeProductList(nextProps.products);
+
       if (!this.state.currentChunk) {
-        this.updateCurrentChunkInState();
-        this.trackCurrentChunk();
+        const { applyFilterInDataLayer, initFilters, chunkIndex } = this.props;
+
+        if (landingFromProductPage) {
+          applyFilterInDataLayer();
+        } else {
+          initFilters();
+        }
+
+        if (chunkIndex > 0 && landingFromProductPage) {
+          this.setChunkPosition(chunkIndex, chunkIndex + 1);
+          this.updateCurrentChunkInState();
+          this.trackChunk(chunkIndex);
+        } else {
+          this.updateCurrentChunkInState();
+          this.trackCurrentChunk();
+        }
       }
+    }
+
+    if (categoryHasChanged) {
+      this.initializeCurrentChunk();
     }
 
     if (this.filtersHaveChanged(nextProps)) {
@@ -75,10 +108,12 @@ export default class Catalogue2 extends Component {
 
   componentWillUnmount() {
     this.props.clearProductList();
+    this.props.saveGalleryIndex(this.state.currentChunkIndex);
   }
 
   onBadgeClick(product, index) {
-    this.props.setAnalyticsProductClick({ product, index });
+    const position = (this.state.currentChunkIndex * this.chunkSize) + index;
+    this.props.setAnalyticsProductClick({ product, index: position });
   }
 
   onLeftSwipe() {
@@ -116,7 +151,7 @@ export default class Catalogue2 extends Component {
         currentChunk = this.productsChunk.getIn([currentChunkIndex]);
         appendChunk = this.productsChunk.getIn([appendChunkIndex]);
       } else {
-        this.setState({ currentChunkIndex: 0, appendChunkIndex: 1 });
+        this.setChunkPosition(0, 1);
       }
 
       chunks = appendChunk ? currentChunk.concat(appendChunk) : currentChunk;
@@ -131,18 +166,23 @@ export default class Catalogue2 extends Component {
       : this.getChunks().setSize(currentChunksSize);
   }
 
+  initializeCurrentChunk() {
+    this.setState({ currentChunk: null });
+  }
+
   filtersHaveChanged(nextProps) {
     return !(nextProps.filterMap.get('filters').equals(this.props.filterMap.get('filters')))
-    || !(nextProps.filterMap.get('availability') === this.props.filterMap.get('availability'))
-    || !(nextProps.filterMap.get('aid') === this.props.filterMap.get('aid'));
+      || !(nextProps.filterMap.get('availability') === this.props.filterMap.get('availability'))
+      || !(nextProps.filterMap.get('aid') === this.props.filterMap.get('aid'));
   }
 
   checkAnalyticsConditionAndTrack({ nextProps, nextState }) {
     const filtersHaveChanged = this.filtersHaveChanged(nextProps);
     const currentChunkChanged = nextState.currentChunkIndex !== this.state.currentChunkIndex;
+    const notCategoryChange = nextProps.categoryCode === nextProps.filterMap.get('categoryCode');
     const swipe = Math.abs(nextState.currentChunkIndex - this.state.currentChunkIndex) === 1;
 
-    if (filtersHaveChanged) {
+    if (filtersHaveChanged && notCategoryChange) {
       this.trackChunk();
     }
 
@@ -155,6 +195,8 @@ export default class Catalogue2 extends Component {
   checkCategoryChange({ nextProps }) {
     if (nextProps.categoryCode !== this.props.categoryCode) {
       this.props.requestFetchCategory(this.props.categoryCode);
+      this.props.initFilters();
+      this.props.deleteFilters();
     }
   }
 
@@ -179,7 +221,7 @@ export default class Catalogue2 extends Component {
     const positionIndex = this.chunkSize * index;
 
     this.props.trackCatalogueProductsChunk({
-      products: this.productsChunk.get(0),
+      products: this.productsChunk.get(index),
       positionIndex
     });
   }
@@ -190,7 +232,12 @@ export default class Catalogue2 extends Component {
         onClick={() => this.onBadgeClick(p, index)}
         to={`product/${p.get('code')}`} key={p.get('code')}
       >
-        <ProductBadge productInfo={p} animated={index < 4} animatedDirection={this.state.swipe} />
+        <ProductBadge
+          productInfo={p}
+          animated={index < 4}
+          animatedDirection={this.state.swipe}
+          stock={this.props.catalogueStocks.get(p.get('code'))}
+        />
       </Link>
     );
   }
@@ -201,8 +248,6 @@ export default class Catalogue2 extends Component {
     if (!products.size > 0) {
       return null;
     }
-
-    const chunks = this.getChunks();
 
     return (
       <div>
@@ -216,7 +261,7 @@ export default class Catalogue2 extends Component {
           {...swipeableConfig}
         >
           <ProductSlider opacity={isDialogOpen}>
-            {this.renderProducts(chunks)}
+            {this.renderProducts(this.getChunks())}
           </ProductSlider>
         </Swipeable>
       </div>
