@@ -19,8 +19,8 @@ import video from '../app/assets/videos/DS_Splash02.mp4';
 
 const world = {
   worldName: 'Comfort',
-  worldTemplateName : 'Comfort',
-  screenSaverVideo : video,
+  worldTemplateName: 'Comfort',
+  screenSaverVideo: video,
   title: 'Esplora le soluzioni per',
   titleSuffix: 'Stufe, climatizzatori e idraulica',
   trailingImage: footer,

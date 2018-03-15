@@ -15,8 +15,8 @@ import video from '../app/assets/videos/video-splash.mp4';
 
 const world = {
   worldName: 'Giardino e Terrazzo',
-  worldTemplateName : 'Giardino',
-  screenSaverVideo : video,
+  worldTemplateName: 'Giardino',
+  screenSaverVideo: video,
   title: 'Scopri le soluzioni per Giardino e Terrazzo',
   trailingImage: footer,
   banner: {

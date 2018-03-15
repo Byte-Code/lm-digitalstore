@@ -1,10 +1,10 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styles from './styles.css';
-import PropTypes from 'prop-types';
 
 export default class ScreenSaver extends Component {
   static propTypes = {
-    video: PropTypes.any ,
+    video: PropTypes.String.isRequired,
   };
 
   render() {
