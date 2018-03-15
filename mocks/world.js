@@ -1,4 +1,9 @@
 import giardino from './giardinoWorld';
 import comfort from './comfortWorld';
 
-export default comfort;
+const availableWorlds = {
+  giardino,
+  comfort
+};
+
+export default availableWorlds.giardino;
