@@ -4,7 +4,7 @@ import styles from './styles.css';
 
 export default class ScreenSaver extends Component {
   static propTypes = {
-    video: PropTypes.String.isRequired,
+    video: PropTypes.string.isRequired,
   };
 
   render() {
