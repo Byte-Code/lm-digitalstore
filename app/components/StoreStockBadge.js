@@ -24,8 +24,8 @@ const Availability = glamorous.div({
   }
 });
 
-const checkIconStyle = { width: 40, height: 45 };
-const blockIconStyle = { width: 50, height: 50 };
+const checkIconStyle = { width: 40, height: 40 };
+const blockIconStyle = { width: 40, height: 40 };
 
 function getStockIcon(stock, stockStatus) {
   if (stock > 0) {
