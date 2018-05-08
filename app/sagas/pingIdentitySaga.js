@@ -3,7 +3,7 @@ import { START_ANALYTICS_SESSION, SUCCESS_FETCH_STORE } from '../actions/actionT
 import { isDebugMode, isStageMode } from '../CommandLineOptions';
 import { getStore } from '../reducers/selectors';
 import getIpAddresses from '../utils/get-ip-addresses';
-import getHostName from '../utils/get-hostname'
+import getHostName from '../utils/get-hostname';
 import appPackage from '../package.json';
 import PingIdentityService from '../pingIdentity/PingIdentityService';
 

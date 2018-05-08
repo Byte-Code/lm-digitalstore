@@ -1,4 +1,4 @@
-import { postHeartbeat } from '../../mocks/apiMock'
+import { postHeartbeat } from '../../mocks/apiMock';
 
 class PingIdentityService {
   constructor() {
@@ -23,7 +23,7 @@ class PingIdentityService {
   }
 
   set store(store) {
-    const { code} = store.toJS();
+    const { code } = store.toJS();
     if (code) {
       this._store = code;
     }
@@ -49,21 +49,19 @@ class PingIdentityService {
     const { _hostName, _ipAddress, _store, _processEnvType, _version, _usersSessionCount } = this;
 
     const payLoad = {
-      "storeId" : _store,
-      "environment" : _processEnvType,
-      "hostName" : _hostName,
-      "sessionCount" : _usersSessionCount,
-      "version" : _version,
-      "ipAddress" : _ipAddress
+      storeId: _store,
+      environment: _processEnvType,
+      hostName: _hostName,
+      sessionCount: _usersSessionCount,
+      version: _version,
+      ipAddress: _ipAddress
     };
 
     postHeartbeat(payLoad);
   }
 
 
-
-
-startIdentityDaemon() {
+  startIdentityDaemon() {
     setInterval(this.ping, this.interval);
   }
 }

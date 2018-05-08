@@ -5,6 +5,8 @@ import Drawer from 'material-ui/Drawer';
 import FamilySideBar from '../containers/FamilySideBar';
 import world from '../../mocks/world';
 
+import SideMenuIcons from './SideMenuIcons';
+
 export const Button = glamorous.div(({ isVisible = false, left = 0 }) => ({
   width: '90px',
   height: '120px',
@@ -36,6 +38,7 @@ const Column = glamorous.div(({ background, boxShadow = 'none', width = 'auto' }
 
 const drawerContainerStyle = { background: 'transparent', boxShadow: 'none', display: 'flex' };
 
+
 export default class SideMenu extends Component {
   static propTypes = {};
 
@@ -49,12 +52,13 @@ export default class SideMenu extends Component {
   };
 
   render() {
+    const Icon = SideMenuIcons[world.worldTemplateName];
     const { open } = this.state;
 
     return (
       <div>
         <Button onClick={this.toggleMenu} isVisible={!open}>
-          <span className="thermometer" />
+          <Icon />
           <p>{world.worldName}</p>
         </Button>
         <Drawer
@@ -75,7 +79,7 @@ export default class SideMenu extends Component {
           </Column>
           <Column background="transparent">
             <Button onClick={this.toggleMenu} left="275px" isVisible={open}>
-              <span className="thermometer" />
+              <Icon />
               <p>{world.worldName}</p>
             </Button>
           </Column>

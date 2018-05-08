@@ -24,7 +24,9 @@ const BottomDiv = glamorous.div({
 export default class Page extends Component {
   static propTypes = {
     forecast: ImmutablePropTypes.map.isRequired,
-    requestFetchWeather: PropTypes.func.isRequired
+    world: ImmutablePropTypes.map.isRequired,
+    requestFetchWeather: PropTypes.func.isRequired,
+    requestFetchWorld: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -33,10 +35,11 @@ export default class Page extends Component {
 
   componentDidMount() {
     this.props.requestFetchWeather();
+    this.props.requestFetchWorld();
   }
 
   render() {
-    const { forecast } = this.props;
+    const { forecast, world } = this.props;
 
     if (forecast.isEmpty()) {
       return null;
@@ -46,7 +49,7 @@ export default class Page extends Component {
       <Link to="/world">
         <Wrapper>
           <BottomDiv>
-            <ScreenSaver />
+            <ScreenSaver video={world.get('screenSaverVideo')} />
           </BottomDiv>
         </Wrapper>
       </Link>
