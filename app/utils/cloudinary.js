@@ -11,12 +11,12 @@ export default function getUrl(imageId, options = {}) {
           ? imageId.substr(1)
           : imageId;
 
-  const url = cl.url(cleanImageId, {
+  const pngImageId = `${cleanImageId}.png`;
+
+  return cl.url(pngImageId, {
     crop: 'pad',
     default_image: 'no_image_available',
     flags: 'progressive',
     ...options,
   });
-
-  return url;
 }
