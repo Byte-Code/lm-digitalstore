@@ -4,12 +4,16 @@ import { shallow } from 'enzyme';
 
 import mountWithStore from '../../app/utils/testingUtils';
 import Home from '../../app/components/Home';
-import World from '../../mocks/world';
+
+const dummyWorld = {
+  worldName: 'The Best World',
+  worldTemplateName: 'BestWorld',
+};
 
 // eslint-disable-next-line arrow-body-style
 jest.mock('../../app/components/DynamicTemplates', () => {
   return {
-    Comfort: () => <div>1</div>
+    BestWorld: () => <div>1</div>
   };
 });
 
@@ -31,7 +35,7 @@ describe('Home', () => {
   it('should render properly if world is not empty', () => {
     const result = shallow(
       <Home
-        world={fromJS(World)}
+        world={fromJS(dummyWorld)}
         requestFetchWorld={requestFetchWorld}
       />
     );
@@ -41,7 +45,7 @@ describe('Home', () => {
   it('should call requestFetchWorld after mount', () => {
     mountWithStore(
       <Home
-        world={fromJS(World)}
+        world={fromJS(dummyWorld)}
         requestFetchWorld={requestFetchWorld}
       />
     );

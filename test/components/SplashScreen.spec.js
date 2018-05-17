@@ -4,16 +4,16 @@ import { Map, fromJS } from 'immutable';
 
 import SplashScreen from '../../app/components/SplashScreen';
 
-const emptyForecast = Map();
-const forecast = fromJS({ key: 'exists' });
-const requestFetchWeather = jest.fn();
+const world = fromJS({ screenSaverVideo: 'theVideoUrl' });
+const requestFetchWorld = jest.fn();
+
 
 describe('SplashScreen', () => {
-  it('should return null when forecast is empty', () => {
+  it('should return null when world is null is empty', () => {
     const result = shallow(
       <SplashScreen
-        forecast={emptyForecast}
-        requestFetchWeather={requestFetchWeather}
+        requestFetchWorld={requestFetchWorld}
+        world={Map()}
       />
     );
     expect(result).toMatchSnapshot();
@@ -22,20 +22,20 @@ describe('SplashScreen', () => {
   it('should otherwise render properly', () => {
     const result = shallow(
       <SplashScreen
-        forecast={forecast}
-        requestFetchWeather={requestFetchWeather}
+        world={world}
+        requestFetchWorld={requestFetchWorld}
       />
     );
     expect(result).toMatchSnapshot();
   });
 
-  it('should call requestFetchWeather after mounting', () => {
+  it('should call requestFetchWorld after mounting', () => {
     mount(
       <SplashScreen
-        forecast={forecast}
-        requestFetchWeather={requestFetchWeather}
+        world={world}
+        requestFetchWorld={requestFetchWorld}
       />
     );
-    expect(requestFetchWeather).toHaveBeenCalled();
+    expect(requestFetchWorld).toHaveBeenCalled();
   });
 });
