@@ -8,7 +8,6 @@ exports[`ScreenSaver should render properly 1`] = `
   muted={true}
 >
   <source
-    src="test-file-stub"
     type="video/mp4"
   />
 </video>

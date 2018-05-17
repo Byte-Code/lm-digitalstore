@@ -6,7 +6,7 @@ exports[`should render properly 1`] = `
     color="#58c527"
     style={
       Object {
-        "height": 45,
+        "height": 40,
         "width": 40,
       }
     }
