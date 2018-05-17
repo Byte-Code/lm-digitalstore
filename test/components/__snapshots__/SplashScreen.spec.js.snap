@@ -8,10 +8,12 @@ exports[`SplashScreen should otherwise render properly 1`] = `
 >
   <glamorous(div)>
     <glamorous(div)>
-      <ScreenSaver />
+      <ScreenSaver
+        video="theVideoUrl"
+      />
     </glamorous(div)>
   </glamorous(div)>
 </Link>
 `;
 
-exports[`SplashScreen should return null when forecast is empty 1`] = `null`;
+exports[`SplashScreen should return null when world is null is empty 1`] = `null`;

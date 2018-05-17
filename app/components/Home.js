@@ -24,9 +24,10 @@ export default class Home extends Component {
 
   render() {
     const { world } = this.props;
-    const props = { world };
+    const templateProps = { world };
     const template = world.get('worldTemplateName');
-    return template ? templates[template](props) : null;
+    const templateFunction = template ? templates[template] : null;
+    return templateFunction ? templateFunction(templateProps) : null;
   }
 }
 
