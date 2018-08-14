@@ -11,7 +11,7 @@ import ombrelloni from '../app/assets/giardinoImg/09_OmbrelloniBasi.jpg';
 import gazebo from '../app/assets/giardinoImg/10_Gazebo.jpg';
 import sdraio from '../app/assets/giardinoImg/11_SdraioLettini.jpg';
 import texture from '../app/assets/giardinoImg/texture.png';
-import video from '../app/assets/videos/DS_Splash_Giardino2018-01.mp4';
+import video from '../app/assets/videos/DS_Splash_Giardino2018-02.mp4';
 
 const world = {
   worldName: 'Giardino e Terrazzo',
