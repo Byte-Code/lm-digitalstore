@@ -6,4 +6,4 @@ const availableWorlds = {
   comfort
 };
 
-export default availableWorlds.giardino;
+export default availableWorlds.comfort;
