@@ -4,7 +4,8 @@ export default function tealiumAnalytics(events) {
   }
 
   if (typeof window.utag !== 'object') {
-    throw new Error('window.utag is not defined');
+    console.error('window.utag does not exists');
+    return;
   }
 
   events.forEach((event) => {
