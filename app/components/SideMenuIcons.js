@@ -11,5 +11,6 @@ const Comfort = () => <span className="thermometer" />;
 
 export default {
   Giardino,
+  Giardino2019: Giardino,
   Comfort
 };
