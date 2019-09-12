@@ -162,8 +162,10 @@ export default class Product extends Component {
     const marketingDescriptions = productInfo.getIn(
       ['basicInfo', 'data', 'productDetail', 'marketingDescriptions']
     );
-    const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
-    const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+    // const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
+    const marketingAttributes = productInfo.getIn(['priceBadge', 'data', 'badges']);
+    // const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+    const loyaltyProgram = productInfo.getIn(['priceBadge', 'data', 'loyaltyPoints']);
     const descriptions = productInfo.getIn(['basicInfo', 'data', 'productDetail', 'descriptions']);
     const price = productInfo.getIn(['price', 'data', 'selling']);
     const pricingInfo = productInfo.getIn(['basicInfo', 'data', 'pricingInformations']);

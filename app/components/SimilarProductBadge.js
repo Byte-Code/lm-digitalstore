@@ -93,8 +93,10 @@ const SimilarProductBadge = props => {
     storeStock: stock,
     stockStatus: productInfo.getIn(['basicInfo', 'data', 'productStockInfo', 'vendibilityValue'])
   });
-  const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
-  const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+  // const marketingAttributes = productInfo.getIn(['basicInfo', 'data', 'marketingAttributes']);
+  const marketingAttributes = productInfo.getIn(['priceBadge', 'data', 'badges']);
+  // const loyaltyProgram = productInfo.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+  const loyaltyProgram = productInfo.getIn(['priceBadge', 'data', 'loyaltyPoints']);
   const image = productInfo.getIn(['basicInfo', 'data', 'mainImage']);
   const imageOptions = { width: 830, height: 830, crop: 'fit' };
   const index = props.index;

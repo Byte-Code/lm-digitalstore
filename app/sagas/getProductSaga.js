@@ -14,7 +14,7 @@ export function* callFetchProduct({ productCode }) {
     const product = yield call(
       apiClient.fetchProduct,
       productCode,
-      { views: ['basicInfo', 'price', 'kioskStock'].join(',') });
+      { views: ['basicInfo', 'price', 'priceBadge', 'kioskStock'].join(',') });
     if (isValidProductResponse(product)) {
       yield put(productActions.successFetchProduct(productCode, fromJS(product)));
       const nearByCodesList = yield select(getNearbyStoresCodes);
