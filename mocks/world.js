@@ -8,4 +8,4 @@ const availableWorlds = {
   giardino2019
 };
 
-export default availableWorlds.giardino2019;
+export default availableWorlds.comfort;

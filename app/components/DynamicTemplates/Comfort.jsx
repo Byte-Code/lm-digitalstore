@@ -1,7 +1,7 @@
 import React from 'react';
 import HelpIcon from 'material-ui/svg-icons/action/help-outline';
 import TutorialButton from '../TutorialButton';
-import {Wrapper, Logo, WorldTitle, GridWrapper, iconStyle,Row, DoubleVertical, TrailingImage,
+import { Wrapper, Logo, WorldTitle, GridWrapper, iconStyle, Row, TrailingImage,
   Banner } from './styledComponents';
 
 import FamilyBadge from '../FamilyBadge';
@@ -10,7 +10,6 @@ import LogoLM from '../../assets/logo.png';
 
 export default function Comfort({ world = null }) {
   if (world) {
-    const worldName = world.get('worldName');
     const families = world.get('families');
     const bannerText = world.getIn(['banner', 'text']);
     const bannerImg = world.getIn(['banner', 'image']);
@@ -21,7 +20,7 @@ export default function Comfort({ world = null }) {
     return (
       <Wrapper>
         <Logo>
-          <img src={LogoLM} alt="logo"/>
+          <img src={LogoLM} alt="logo" />
         </Logo>
         <WorldTitle>
           <h1>
@@ -41,13 +40,15 @@ export default function Comfort({ world = null }) {
             <FamilyBadge family={families.get(5)} size="square-small"/>
           </Row>
           <Row>
-            <FamilyBadge family={families.get(6)} size="horizontal-big"/>
+            <FamilyBadge family={families.get(6)} size="square-small"/>
             <FamilyBadge family={families.get(7)} size="square-small"/>
+            <FamilyBadge family={families.get(8)} size="square-small"/>
+            <FamilyBadge family={families.get(9)} size="square-small"/>
           </Row>
           <Row>
-            <FamilyBadge family={families.get(8)} size="square-small"/>
-            <FamilyBadge family={families.get(9)} size="horizontal"/>
             <FamilyBadge family={families.get(10)} size="square-small"/>
+            <FamilyBadge family={families.get(11)} size="horizontal"/>
+            <FamilyBadge family={families.get(12)} size="square-small"/>
           </Row>
           <TutorialButton>
             <Banner url={bannerImg}>
