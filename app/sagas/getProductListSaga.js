@@ -13,7 +13,7 @@ export function* callFetchProductList({ productIDList }) {
   try {
     const productList = yield call(apiClient.fetchListProduct, {
       productCodes: productIDList.toJS().join(','),
-      views: ['basicInfo', 'price', 'kioskStock'].join(',')
+      views: ['basicInfo', 'price', 'priceBadge', 'kioskStock'].join(',')
     });
     const result = fromJS(productList).get('productsList').toOrderedSet();
     yield put(productListActions.successFetchProductList(result));

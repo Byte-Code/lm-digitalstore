@@ -27,7 +27,7 @@ const NameWrapper = glamorous.div({
 const FamilyName = glamorous.div({
   height: '28px',
   fontFamily: 'LeroyMerlinSans Bold',
-  fontSize: '20px',
+  fontSize: '15px',
   lineHeight: '1.4',
   textTransform: 'uppercase'
 });

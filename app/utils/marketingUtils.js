@@ -89,7 +89,9 @@ export function buildPromotionMap(attrs) {
 }
 
 export function getMarketingProps(product) {
-  const marketingAttributes = product.getIn(['basicInfo', 'data', 'marketingAttributes']);
-  const loyaltyProgram = product.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+  // const marketingAttributes = product.getIn(['basicInfo', 'data', 'marketingAttributes']);
+  const marketingAttributes = product.getIn(['priceBadge', 'data', 'badges']);
+  // const loyaltyProgram = product.getIn(['basicInfo', 'data', 'loyaltyProgram']);
+  const loyaltyProgram = product.getIn(['priceBadge', 'data', 'loyaltyPoints']);
   return { marketingAttributes, loyaltyProgram };
 }
