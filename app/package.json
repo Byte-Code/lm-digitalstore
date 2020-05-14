@@ -1,7 +1,7 @@
 {
   "name": "LMDigitalStoreApp",
   "productName": "LM Digital Store App",
-  "version": "4.0.20",
+  "version": "4.0.21",
   "description": "Leroy Merlin Digital Store",
   "main": "./main.js",
   "author": {
