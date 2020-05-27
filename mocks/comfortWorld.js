@@ -4,7 +4,6 @@ import stufePellet from '../app/assets/comfortImg/stufePellet.png';
 import stufeGas from '../app/assets/comfortImg/stufeGas.png';
 import stufeLegna from '../app/assets/comfortImg/stufeLegna.png';
 import stufeBioetanolo from '../app/assets/comfortImg/stufeBioetanolo.png';
-import stufeElettiche from '../app/assets/comfortImg/stufeElettriche.png';
 import pompeCalore from '../app/assets/comfortImg/pompeCalore.png';
 import radiatori from '../app/assets/comfortImg/radiatori.png';
 import caldaieScaldabagni from '../app/assets/comfortImg/caldaieScaldabagni.png';
