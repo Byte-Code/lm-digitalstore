@@ -1,5 +1,4 @@
 import RemoteApi from '@byte-code/lm-remote-api';
-import axios from 'axios';
 
 import world from './world';
 import weather from './weather.json';
@@ -20,12 +19,7 @@ export function fetchWeather() {
 }
 
 export function postHeartbeat(payload) {
-  const httpClient = axios.create();
-
-  httpClient.post(apiConfig.heartBeatServiceUrl, payload)
-    .catch((err) => {
-      console.log(`Error while posting heartbeat ${err}`);
-    });
+  console.log(payload);
 }
 
 export const apiClient = new RemoteApi(apiConfig);
