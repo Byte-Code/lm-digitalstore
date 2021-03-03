@@ -13,6 +13,7 @@ export default {
   Giardino,
   Giardino2019: Giardino,
   Giardino2020: Giardino,
+  Giardino2021: Giardino,
   Comfort,
   Comfort2020: Comfort
 };
